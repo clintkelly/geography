@@ -1,0 +1,46 @@
+import type { Question } from '../content/types';
+import type { Rng } from './rng';
+
+export interface PickContext {
+  /** Asked this expedition, oldest first. */
+  asked: readonly string[];
+  /** Asked in recent expeditions. */
+  recent: readonly string[];
+  locationId: string;
+}
+
+/**
+ * Chooses the next question. Each rule relaxes in turn, so a small pool yields
+ * a tracked repeat rather than failing to start.
+ */
+export function pickQuestion(pool: readonly Question[], ctx: PickContext, rng: Rng): Question {
+  const byId = new Map(pool.map((q) => [q.id, q]));
+  const askedSet = new Set(ctx.asked);
+  const recentSet = new Set(ctx.recent);
+  const spaced = new Set(ctx.asked.slice(-2).map((id) => byId.get(id)?.objectiveId));
+
+  const fresh = pool.filter((q) => !askedSet.has(q.id));
+  const tiers = [
+    fresh.filter((q) => !spaced.has(q.objectiveId) && !recentSet.has(q.id)),
+    fresh.filter((q) => !spaced.has(q.objectiveId)),
+    fresh,
+    pool.filter((q) => !spaced.has(q.objectiveId)),
+    pool,
+  ];
+  const tier = tiers.find((t) => t.length > 0);
+  if (!tier) throw new Error('Question pool is empty');
+
+  const wantLocal = rng.next() < 0.5;
+  const local = tier.filter((q) => q.locationId === ctx.locationId);
+  const source = wantLocal && local.length > 0 ? local : tier;
+  return rng.shuffle(source)[0] as Question;
+}
+
+/** Fixes option order for a turn. Answers are matched by stable option id, never by position. */
+export function presentQuestion(q: Question, rng: Rng): Question {
+  return { ...q, options: rng.shuffle(q.options) };
+}
+
+export function isCorrect(q: Question, optionId: string): boolean {
+  return q.acceptedId === optionId;
+}

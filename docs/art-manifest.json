@@ -1,0 +1,20 @@
+{
+  "tool": "PixelLab create_image_pixen, seed 42, black outline for sprites",
+  "style": "128x128 creatures facing the opponent, 64x64 souvenirs, 480x192 backdrops",
+  "promptTemplate": "Original friendly fantasy creature, <subject>. Distinctive readable silhouette. Three-quarter battle pose. Crisp pixel art, restrained colors, top-left lighting, no text, no logo.",
+  "assets": {
+    "slatepaw": { "role": "starter, style reference", "jobId": "a9c0f1bd-cc51-437b-b829-f9f053dd3eef", "subject": "small mountain creature with a round body, layered slate plates, a mossy tuft, bright amber eyes" },
+    "brinefin": { "role": "opponent", "jobId": "d30921d8-fa5a-4456-afb6-32d98fb644b5", "subject": "small coastal fish-lizard, round body, teal scales, sail-like fin" },
+    "thistlehop": { "role": "opponent", "jobId": "57f50625-9862-49ea-8dd8-1ae197a0c505", "subject": "small woodland rabbit-like hopper, purple thistle spikes, leaf ears" },
+    "cindermite": { "role": "opponent", "jobId": "fdc4148e-fcbc-488c-b967-232622741013", "subject": "small grumpy ember beetle, cracked rocky shell, glowing orange seams" },
+    "cragmaw": { "role": "guardian", "jobId": "9f565a6c-5329-4842-b339-0b7d4435ac56", "subject": "large ancient horned mountain beast, boulder body, granite plates, mossy mane" },
+    "backdrop-coast": { "role": "backdrop", "jobId": "c3c5bd00-eb97-478f-a2c2-d072836135a4", "subject": "green coastal hills, blue sea on the horizon" },
+    "backdrop-mountain": { "role": "backdrop", "jobId": "f04e8141-13a8-4e47-bf53-33a8e5027e71", "subject": "rocky mountain pass at dusk, peaks, pine trees" },
+    "compass": { "role": "souvenir", "jobId": "96b4d00b-822a-4d7c-a293-102f7fade192", "subject": "carved wooden compass, brass needle" },
+    "shell": { "role": "souvenir", "jobId": "83ca1909-1ec0-4e4d-b4e1-c15182cf371b", "subject": "patterned spiral sea shell, cream and coral" },
+    "lantern": { "role": "souvenir", "jobId": "198a59bc-5993-441c-9694-77f835bc7d1d", "subject": "tiny brass lantern with warm glow" },
+    "feather": { "role": "souvenir", "jobId": "585d6428-30a9-4093-be1d-3aa55eb095ce", "subject": "long blue-grey storm feather" },
+    "stone": { "role": "souvenir", "jobId": "6340b459-8d69-45e6-9301-10ad47c83cdd", "subject": "smooth oval river stone with a white band" },
+    "map-scrap": { "role": "souvenir", "jobId": "ecb7285b-6144-40b1-b0bc-8e0265110cfb", "subject": "torn parchment map scrap, dotted route, small red X" }
+  }
+}
