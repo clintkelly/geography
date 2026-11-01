@@ -67,6 +67,7 @@ Does a child enjoy a complete expedition and want to return on a later day? And 
 | Collection | Journal of creatures, souvenirs, and State Cards |
 | Learning | Review scheduling, per-difficulty familiarity, study cards |
 | Parent view | Content and difficulty limits, accuracy, review needs, backups |
+| Sound | About 15 short original effects, with mute and volume per profile |
 | Persistence | Autosave, resume, schema migration, export and import |
 
 **Outside MVP:** free walking, tile collisions, interiors, NPC dialogue trees, authored multi-stage mysteries, breeding, trading, type-effectiveness charts, multiple active creatures, equippable loot, permanent shops, live AI-generated questions, an in-app content editor, cloud accounts, multiplayer, co-op, leaderboards, and mobile packaging.
@@ -330,6 +331,24 @@ Evolved forms should start from the previous stage as a reference image, so they
 
 State Card illustrations must show general subjects such as landscapes, animals, or industries. Avoid real logos, state seals, and copyrighted characters, and check that any depicted landmark looks reasonably right.
 
+### Sound
+
+Use short original sound effects, generated with ElevenLabs during development and stored in the repo as small audio files. The game plays them locally, with no network call or API key in the browser.
+
+| Group | Sounds |
+| --- | --- |
+| Answers | Correct, not yet |
+| Battle | Attack, Guard, Special, hit, block, win, retreat |
+| Rewards | State Card earned, creature befriended, evolution, level up |
+| Interface | Button click, spending points, travel |
+
+- Keep most effects under about one second, because a Standard trail plays them many times. Rewards can run a little longer.
+- The wrong-answer sound is soft and neutral, never a buzzer.
+- Provide mute and volume, saved per profile. Sound starts only after a user interaction, and no information is conveyed by sound alone.
+- Do not imitate Pokémon sounds. Record prompts and accepted files in `docs/sound-manifest.json`.
+- Background music is deferred until the children ask for it.
+- Sound never affects game logic, and a missing or blocked audio file must not interrupt play.
+
 ## 11 Implementation direction
 
 Use TypeScript, React, Vite, plain HTML/CSS and SVG, and IndexedDB behind a small save interface. No backend, game engine, or live AI service.
@@ -395,6 +414,7 @@ Each milestone ends with the children playing it. Their reaction may reorder the
 24. A battle takes at least 3 correct answers at every companion stage.
 25. Exhausting new species produces honestly labeled Rival Hunts.
 26. Clues identify one valid answer, and nothing in the interface leaks the target.
+27. Mute and volume persist per profile, and a missing or blocked sound never interrupts play.
 
 ## 15 Playtest questions
 

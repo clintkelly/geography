@@ -84,8 +84,9 @@ Validator additions for §8: same-state cities exclude the capital, no option li
 | 6 | Difficulty on questions: Scout, Ranger, Expert, plus a choice on the outing card and a click-the-state input type | `questions.ts`, `Battle.tsx` | M |
 | 7 | Parent difficulty limits, in a minimal settings screen | `ui/` | S |
 | 8 | Basic export to a JSON file, so real saves have a backup before later migrations | `persistence/`, `ui/` | S |
+| 9 | Sound: `playSound(id)` wrapper, mute and volume per profile, first effects, and a dev page that plays each one | new `ui/sound.ts`, `public/sfx` | S |
 
-Tests: migration from a real v1 save, profile isolation (1), same-state options (10), no two correct answers (11), nickname status (12), and map click accuracy after zoom (8).
+Tests: migration from a real v1 save, sound settings per profile and a failed sound not interrupting play (27), profile isolation (1), same-state options (10), no two correct answers (11), nickname status (12), and map click accuracy after zoom (8).
 
 Decision for the migration: Milestone 1 data goes to one child's profile, whichever the parent picks once. Don't duplicate it.
 
@@ -163,6 +164,10 @@ The clock enters learning only through the `now` argument. "Calendar days" use t
 
 Generation cost isn't a constraint. Jobs are limited to 8 concurrent, so batches need waiting. Evolved forms are the riskiest art, so try one full species before generating the set.
 
+## Sound budget
+
+Connect the ElevenLabs hosted MCP server, then confirm that it offers a sound effects tool. If not, fall back to the older local server. Generate one or two effects first and check the credit cost before making the full set of about 15. Sound IDs live in the UI layer, triggered from state changes after the save, so effects never touch engine rules. Claude can't hear the results, so a person approves them on the dev page.
+
 ## Testing
 
 | Layer | Tool | Covers |
@@ -192,6 +197,7 @@ Before starting a milestone, add its §14 acceptance items as named tests. Autom
 
 ## Decisions already made
 
+- **Sound effects are pre-generated files**, not live API calls. Background music is deferred.
 - **Creatures stay original** (§1).
 - **Trail Points are per-expedition**, not a persistent currency, so a bad run can't hurt the next one.
 - **Reward is the creature you hunted**, so every expedition has one clear goal.
