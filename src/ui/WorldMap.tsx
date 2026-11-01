@@ -141,7 +141,7 @@ export function Dot({ at, scale, onClick, tone = 'default', id }: { at: [number,
   return (
     <g className={`dot dot-${tone}`} data-place={id} onClick={onClick}>
       <circle cx={x} cy={y} r={11 * scale} className="marker-hit" />
-      <circle cx={x} cy={y} r={4.5 * scale} className="dot-mark" />
+      <circle cx={x} cy={y} r={(tone === 'cursor' ? 7 : 4.5) * scale} className="dot-mark" />
     </g>
   );
 }
