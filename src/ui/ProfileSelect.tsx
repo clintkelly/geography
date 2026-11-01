@@ -14,7 +14,7 @@ export function ProfileSelect({ household, onPick }: { household: Household; onP
           <button key={s.profile.id} type="button" className="profile-card" onClick={() => onPick(s.profile.id)}>
             <Sprite id={s.profile.avatarId} size={128} />
             <strong>{s.profile.displayName}</strong>
-            <span className="muted">{s.completedExpeditions} expeditions · {s.souvenirIds.length} souvenirs{s.expedition ? ' · trip in progress' : ''}</span>
+            <span className="muted">{s.completedExpeditions} expeditions · {s.companions.length} creatures{s.expedition ? ' · trip in progress' : ''}</span>
             <Key k={i + 1} />
           </button>
         ))}

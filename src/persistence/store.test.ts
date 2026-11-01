@@ -1,13 +1,13 @@
 import { IDBFactory } from 'fake-indexeddb';
 import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
-import { newSave, reduce, SCHEMA_VERSION, type SaveData } from '../engine/game';
-import { exportBackup, freshHousehold, migrateV1, openHousehold, parseBackup } from './household';
-import { indexedDbStore, UnsupportedSaveError } from './store';
+import { DEFAULT_SETTINGS, newSave, reduce, SCHEMA_VERSION, type SaveData } from '../engine/game';
+import { exportBackup, freshHousehold, migrateV1, migrateV2Save, openHousehold, parseBackup, type V2Save } from './household';
+import { indexedDbStore, UnsupportedSaveError, type Household } from './store';
 
 let n = 0;
 const env = () => ({ seed: 5, makeId: () => `id-${++n}` });
-const START = { type: 'start', regionId: 'us-west', difficulty: 'scout' } as const;
+const startCmd = (s: SaveData) => ({ type: 'start', offerId: s.offers[0]!.id, regionId: 'us-west', difficulty: 'scout', trail: 'standard' }) as const;
 
 const v1Save = {
   schemaVersion: 1,
@@ -53,7 +53,7 @@ describe('household', () => {
     const store = indexedDbStore(new IDBFactory());
     const h = await openHousehold(store, PACK, env());
     const [a, b] = h.meta.profileIds as [string, string];
-    await store.saveProfile(reduce(h.profiles[a] as SaveData, START, PACK, 0));
+    await store.saveProfile(reduce(h.profiles[a] as SaveData, startCmd(h.profiles[a] as SaveData), PACK, 0));
     const loaded = await store.load();
     expect(loaded!.profiles[a]!.expedition).not.toBeNull();
     expect(loaded!.profiles[b]).toEqual(h.profiles[b]);
@@ -64,7 +64,8 @@ describe('household', () => {
     const store = indexedDbStore(factory);
     const h = await openHousehold(store, PACK, env());
     let s = h.profiles[h.meta.profileIds[0]!]!;
-    s = reduce(s, START, PACK, 0);
+    s = reduce(s, startCmd(s), PACK, 0);
+    s = reduce(s, { type: 'depart' }, PACK, 0);
     s = reduce(s, { type: 'guess', locationId: s.expedition!.targetId }, PACK, 0);
     s = reduce(s, { type: 'enterEncounter' }, PACK, 0);
     await store.saveProfile(s);
@@ -91,7 +92,7 @@ describe('v1 migration', () => {
     for (const s of [a, b]) {
       expect(s.souvenirIds).toEqual(['compass', 'shell']);
       expect(s.completedExpeditions).toBe(2);
-      expect(s.companion.bondXp).toBe(10);
+      expect(s.companions[0]!.bondXp).toBe(10);
       expect(s.attempts).toHaveLength(1);
       expect(s.schemaVersion).toBe(SCHEMA_VERSION);
     }
@@ -100,16 +101,13 @@ describe('v1 migration', () => {
   it('keeps the copies independent', () => {
     const [a, b] = saves() as [SaveData, SaveData];
     expect(a.profile.id).not.toBe(b.profile.id);
-    expect(a.companion.instanceId).not.toBe(b.companion.instanceId);
+    expect(a.companions[0]!.instanceId).not.toBe(b.companions[0]!.instanceId);
     expect(a.souvenirIds).not.toBe(b.souvenirIds);
     expect(a.rngState).not.toBe(b.rngState);
   });
 
-  it('ends an unfinished expedition and offers a souvenir not yet owned', () => {
-    for (const s of saves()) {
-      expect(s.expedition).toBeNull();
-      expect(s.offer.reward.kind === 'souvenir' && s.souvenirIds.includes(s.offer.reward.souvenirId)).toBe(false);
-    }
+  it('ends an unfinished expedition', () => {
+    for (const s of saves()) expect(s.expedition).toBeNull();
   });
 
   it('runs on first open and keeps the original save', async () => {
@@ -132,7 +130,7 @@ describe('backup', () => {
 
   it('round-trips progress, including the pre-upgrade save', () => {
     const text = exportBackup(h, v1Save, 0);
-    expect(parseBackup(text)).toEqual(h);
+    expect(parseBackup(text, PACK)).toEqual(h);
     expect(JSON.parse(text).preUpgradeSave).toEqual(v1Save);
   });
 
@@ -142,16 +140,56 @@ describe('backup', () => {
     ['a future version', JSON.stringify({ format: 'atlaswild-backup', household: { meta: { schemaVersion: 99, profileIds: [] }, profiles: {} } })],
     ['a missing profile', JSON.stringify({ format: 'atlaswild-backup', household: { meta: { schemaVersion: SCHEMA_VERSION, profileIds: ['x'] }, profiles: {} } })],
   ])('rejects %s', (_name, text) => {
-    expect(() => parseBackup(text)).toThrow(UnsupportedSaveError);
+    expect(() => parseBackup(text, PACK)).toThrow(UnsupportedSaveError);
   });
 
   it('a rejected restore leaves the saves alone; a good one replaces them all', async () => {
     const store = indexedDbStore(new IDBFactory());
     const original = await openHousehold(store, PACK, env());
     const replacement = freshHousehold(PACK, env());
-    await store.replace(parseBackup(exportBackup(replacement, null, 0)));
+    await store.replace(parseBackup(exportBackup(replacement, null, 0), PACK));
     expect(Object.keys((await store.load())!.profiles).sort()).toEqual(Object.keys(replacement.profiles).sort());
     expect(Object.keys((await store.load())!.profiles)).not.toContain(original.meta.profileIds[0]);
+  });
+});
+
+const v2Save = (id: string): V2Save => ({
+  ...structuredClone(newSave(PACK, 3, id)),
+  schemaVersion: 2,
+  companion: { instanceId: `${id}-companion-1`, speciesId: 'slatepaw', bondXp: 30 },
+  souvenirIds: ['compass'],
+  completedExpeditions: 4,
+  settings: { ...DEFAULT_SETTINGS, muted: true, maxDifficulty: 'ranger' },
+} as unknown as V2Save);
+
+describe('v2 migration', () => {
+  const v2Household = () => ({ meta: { schemaVersion: 2, profileIds: ['a', 'b'], activeProfileId: 'a' }, profiles: { a: v2Save('a'), b: v2Save('b') } }) as unknown as Household;
+
+  it('keeps what each child earned and their settings', () => {
+    const s = migrateV2Save(v2Save('a'), PACK);
+    expect(s.schemaVersion).toBe(SCHEMA_VERSION);
+    expect(s.companions).toEqual([{ instanceId: 'a-companion-1', speciesId: 'slatepaw', bondXp: 30 }]);
+    expect(s.activeCompanionId).toBe('a-companion-1');
+    expect(s.souvenirIds).toEqual(['compass']);
+    expect(s.completedExpeditions).toBe(4);
+    expect(s.settings).toMatchObject({ muted: true, maxDifficulty: 'ranger', lastTrail: 'standard' });
+    expect(s.offers.length).toBeGreaterThan(0);
+  });
+
+  it('upgrades on open and keeps a copy of the old saves', async () => {
+    const store = indexedDbStore(new IDBFactory());
+    const old = v2Household();
+    await store.replace(old);
+    const h = await openHousehold(store, PACK, env());
+    expect(h.meta).toMatchObject({ schemaVersion: SCHEMA_VERSION, activeProfileId: 'a' });
+    expect(h.profiles.a!.companions).toHaveLength(1);
+    expect(await store.loadPreUpgrade(2)).toEqual(old);
+    expect(await openHousehold(store, PACK, env())).toEqual(h);
+  });
+
+  it('restores a backup made on version 2', () => {
+    const text = JSON.stringify({ format: 'atlaswild-backup', household: v2Household() });
+    expect(parseBackup(text, PACK).profiles.b!.companions[0]!.bondXp).toBe(30);
   });
 });
 

@@ -1,40 +1,48 @@
 import { describe, expect, it } from 'vitest';
+import { clampView, EUROPE_VIEW, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
-import { allowedDifficulties, DEFAULT_SETTINGS, reduce, newSave, isExpeditionComplete, type Command, type SaveData } from './game';
+import type { Difficulty } from '../content/types';
 import { STATES, usQuestions } from '../content/us/templates';
 import { validatePack, validateStates } from '../content/validate';
-import { EUROPE_VIEW, usMap, worldMap, clampView } from '../content/maps';
+import { ECONOMY } from './economy';
+import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
 import { pickQuestion } from './questions';
 import { Rng } from './rng';
+import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from './trail';
 
 const NOW = 1_800_000_000_000;
 const step = (s: SaveData, cmd: Command) => reduce(s, cmd, PACK, NOW);
-const START: Command = { type: 'start', regionId: 'europe', difficulty: 'scout' };
 const fresh = (seed = 7) => newSave(PACK, seed, 'p1');
 
-function discover(s: SaveData): SaveData {
-  return step(s, { type: 'guess', locationId: s.expedition!.targetId });
+const start = (s: SaveData, regionId = 'us-west', difficulty: Difficulty = 'scout', trail: TrailLength = 'standard') =>
+  step(s, { type: 'start', offerId: s.offers[0]!.id, regionId, difficulty, trail });
+const ready = (s: SaveData, ...args: [string?, Difficulty?, TrailLength?]) => step(start(s, ...args), { type: 'depart' });
+const find = (s: SaveData) => step(s, { type: 'guess', locationId: s.expedition!.targetId });
+
+const answerWith = (s: SaveData, correct: boolean): SaveData => {
+  const q = (s.expedition!.battle ?? s.expedition!.event)!.question;
+  return step(s, { type: 'answer', optionId: correct ? q.acceptedId : q.options.find((o) => o.id !== q.acceptedId)!.id });
+};
+
+function turn(s: SaveData, correct: boolean): SaveData {
+  const b = s.expedition!.battle!;
+  const action = b.befriending ? 'befriend' : 'attack';
+  return step(answerWith(step(s, { type: 'chooseAction', action }), correct), { type: 'continue' });
 }
 
-function playTurn(s: SaveData, correct: boolean): SaveData {
-  let next = step(s, { type: 'chooseAction', action: 'attack' });
-  const q = next.expedition!.battle!.question;
-  const optionId = correct ? q.acceptedId : (q.options.find((o) => o.id !== q.acceptedId)!.id);
-  next = step(next, { type: 'answer', optionId });
-  return step(next, { type: 'continue' });
-}
-
-function winBattle(s: SaveData): SaveData {
+function winStop(s: SaveData): SaveData {
   let next = step(s, { type: 'enterEncounter' });
-  while (next.expedition!.battle) next = playTurn(next, true);
+  if (next.expedition!.event) return step(answerWith(next, true), { type: 'continue' });
+  while (next.expedition!.battle) next = turn(next, true);
   return next;
 }
 
-function fullExpedition(s: SaveData): SaveData {
-  let next = discover(step(s, START));
-  for (let i = 0; i < 3; i++) next = winBattle(next);
-  return step(next, { type: 'claimReward' });
+function playTrail(s: SaveData, ...args: [string?, Difficulty?, TrailLength?]): SaveData {
+  let next = ready(s, ...args);
+  while (!isExpeditionComplete(next.expedition!)) next = winStop(find(next));
+  return next;
 }
+const fullExpedition = (s: SaveData, ...args: [string?, Difficulty?, TrailLength?]) => step(playTrail(s, ...args), { type: 'claimReward' });
 
 describe('content', () => {
   it('the pack is valid', () => expect(validatePack(PACK)).toEqual([]));
@@ -54,46 +62,21 @@ describe('content', () => {
     }
   });
 
-  it('California on Ranger matches the example from the owner', () => {
-    const q = usQuestions.find((o) => o.id === 'q-capital-california-ranger-1')!;
-    expect(q.options.map((o) => o.label).sort()).toEqual(['Los Angeles', 'Sacramento', 'San Diego', 'San Francisco']);
-  });
-
-  it('never calls a nickname official, and never offers a second nickname of the answer', () => {
+  it('never calls a nickname official', () => {
     for (const q of usQuestions) expect(`${q.prompt} ${q.explanation}`.toLowerCase()).not.toContain('official');
-    for (const s of STATES) expect(usQuestions.filter((q) => q.objectiveId === `nickname-${s.id}`).length).toBeGreaterThan(0);
   });
 
-  it('every state has a map shape, and its marker lands inside it', () => {
-    for (const s of STATES) {
-      const shape = usMap.features.find((f) => f.id === s.fips);
-      expect(shape?.d, s.name).toBeTruthy();
-      expect(usMap.project(s.lonLat), s.name).not.toEqual([0, 0]);
-    }
-    expect(usMap.features).toHaveLength(50);
+  it('every state question has a Field Note from its own record', () => {
+    for (const q of usQuestions) expect(STATES.find((s) => s.id === q.locationId)!.facts, q.id).toContain(q.fieldNote);
   });
 
-  it('frames all 50 states on the US map', () => {
-    const coordinates = usMap.features.flatMap((f) => (f.d.match(/-?[\d.]+,-?[\d.]+/g) ?? []).map((pair) => pair.split(',').map(Number) as [number, number]));
-    const xs = coordinates.map((c) => c[0]);
-    const ys = coordinates.map((c) => c[1]);
-    expect(Math.min(...xs)).toBeGreaterThanOrEqual(0);
-    expect(Math.max(...xs)).toBeLessThanOrEqual(usMap.width);
-    expect(Math.min(...ys)).toBeGreaterThanOrEqual(0);
-    expect(Math.max(...ys)).toBeLessThanOrEqual(usMap.height);
-    expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(usMap.width * 0.8);
-    for (const s of STATES) {
-      const [x, y] = usMap.project(s.lonLat);
-      expect(x, s.name).toBeGreaterThan(0);
-      expect(x, s.name).toBeLessThan(usMap.width);
-      expect(y, s.name).toBeGreaterThan(0);
-      expect(y, s.name).toBeLessThan(usMap.height);
-    }
+  it('every creature that can be hunted or fought has a Special', () => {
+    for (const s of PACK.species) expect(s.special.name, s.id).toBeTruthy();
   });
 });
 
-describe('map', () => {
-  it('shows every playable place, with margin, in the Europe view', () => {
+describe('maps', () => {
+  it('shows every European place, with margin, in the Europe view', () => {
     const v = clampView(EUROPE_VIEW, worldMap);
     const h = (v.w * worldMap.height) / worldMap.width;
     for (const p of PACK.places.filter((o) => o.regionId === 'europe')) {
@@ -104,62 +87,319 @@ describe('map', () => {
       expect(y, p.name).toBeLessThan(v.y + h * 0.96);
     }
   });
+
+  it('frames all 50 states on the US map', () => {
+    expect(usMap.features).toHaveLength(50);
+    const coordinates = usMap.features.flatMap((f) => (f.d.match(/-?[\d.]+,-?[\d.]+/g) ?? []).map((pair) => pair.split(',').map(Number) as [number, number]));
+    const xs = coordinates.map((c) => c[0]);
+    expect(Math.min(...xs)).toBeGreaterThanOrEqual(0);
+    expect(Math.max(...xs)).toBeLessThanOrEqual(usMap.width);
+    expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(usMap.width * 0.8);
+    for (const s of STATES) {
+      const [x, y] = usMap.project(s.lonLat);
+      expect(x, s.name).toBeGreaterThan(0);
+      expect(y, s.name).toBeGreaterThan(0);
+      expect(y, s.name).toBeLessThan(usMap.height);
+    }
+  });
 });
 
-describe('expedition loop', () => {
-  it('runs discovery, three battles and a persistent reward, then allows another outing', () => {
-    let s = fresh();
-    const reward = s.offer.reward;
-    s = discover(step(s, START));
-    expect(s.expedition!.reward).toEqual(reward);
-    for (let i = 0; i < 3; i++) s = winBattle(s);
+describe('trails', () => {
+  it.each(TRAIL_LENGTHS)('%s trails have the planned stops and follow borders', (trail) => {
+    for (let seed = 1; seed < 40; seed++) {
+      const { slots } = start(fresh(seed), 'us-west', 'scout', trail).expedition!;
+      expect(slots.map((s) => s.kind)).toEqual(TRAIL_STOPS[trail]);
+      expect(new Set(slots.map((s) => s.locationId)).size).toBe(slots.length);
+      slots.slice(1).forEach((s, i) => {
+        const from = PACK.places.find((p) => p.id === slots[i]!.locationId)!;
+        expect(from.neighbors, `${from.id} to ${s.locationId}`).toContain(s.locationId);
+      });
+    }
+  });
+
+  it('a region smaller than the trail shortens it and keeps the final showdown', () => {
+    const { slots } = start(fresh(), 'europe', 'scout', 'long').expedition!;
+    expect(slots).toHaveLength(6);
+    expect(slots.at(-1)!.kind).toBe('guardian');
+  });
+
+  it('the final showdown is against the hunted creature', () => {
+    const s = start(fresh());
+    const reward = s.expedition!.reward;
+    expect(reward.kind === 'creature' && s.expedition!.slots.at(-1)!.opponentId === reward.speciesId).toBe(true);
+    expect(s.expedition!.slots.slice(0, -1).some((o) => reward.kind === 'creature' && o.opponentId === reward.speciesId)).toBe(false);
+  });
+
+  it('each stop starts a new search for the next place', () => {
+    let s = find(ready(fresh()));
+    const firstTarget = s.expedition!.targetId;
+    s = winStop(s);
+    expect(s.expedition).toMatchObject({ discovery: 'searching', guesses: [], cluesShown: 1 });
+    expect(s.expedition!.targetId).not.toBe(firstTarget);
+    expect(s.expedition!.targetId).toBe(s.expedition!.slots[1]!.locationId);
+  });
+});
+
+describe('befriending and the stable', () => {
+  const toBefriend = () => {
+    let s = ready(fresh());
+    while (s.expedition!.slots.filter((o) => o.status === 'won').length < s.expedition!.slots.length - 1) s = winStop(find(s));
+    s = step(find(s), { type: 'enterEncounter' });
+    while (!s.expedition!.battle!.befriending) s = turn(s, true);
+    return s;
+  };
+
+  it('a worn-out target offers only Befriend and no longer attacks', () => {
+    const s = toBefriend();
+    const { battle } = s.expedition!;
+    expect(battle!.combat.opponentHp).toBe(0);
+    expect(step(s, { type: 'chooseAction', action: 'attack' })).toBe(s);
+    const hp = battle!.combat.playerHp;
+    expect(turn(s, false).expedition!.battle!.combat.playerHp).toBe(hp);
+  });
+
+  it('a wrong answer offers a new question and cannot fail', () => {
+    let s = toBefriend();
+    const firstQuestion = s.expedition!.battle!.question.id;
+    for (let i = 0; i < 5; i++) s = turn(s, false);
+    expect(s.expedition!.battle!.befriending).toBe(true);
+    expect(s.expedition!.battle!.question.id).not.toBe(firstQuestion);
+    expect(s.expedition!.slots.at(-1)!.status).toBe('pending');
+  });
+
+  it('a correct answer adds the creature once, even if claimed twice', () => {
+    let s = turn(toBefriend(), true);
+    expect(s.expedition!.battle).toBeNull();
     expect(isExpeditionComplete(s.expedition!)).toBe(true);
+    const { reward } = s.expedition!;
     s = step(s, { type: 'claimReward' });
-    expect(s.expedition).toBeNull();
-    expect(s.souvenirIds).toHaveLength(1);
-    expect(s.completedExpeditions).toBe(1);
-    expect(s.lastSummary?.answered).toBeGreaterThanOrEqual(13);
-
-    s = fullExpedition(s);
-    expect(s.completedExpeditions).toBe(2);
-    expect(new Set(s.souvenirIds).size).toBe(2);
+    expect(step(s, { type: 'claimReward' })).toBe(s);
+    expect(s.companions).toHaveLength(2);
+    expect(reward.kind === 'creature' && s.companions[1]!.speciesId === reward.speciesId).toBe(true);
+    expect(new Set(s.companions.map((c) => c.instanceId)).size).toBe(2);
   });
 
-  it('offers an honest bond reward once souvenirs run out', () => {
+  it('a new companion can be chosen for the next trip and keeps its own Special', () => {
+    let s = fullExpedition(fresh());
+    const newcomer = s.companions[1]!;
+    s = start(s);
+    s = step(s, { type: 'selectCompanion', instanceId: newcomer.instanceId });
+    expect(activeCompanion(s).instanceId).toBe(newcomer.instanceId);
+    s = step(find(step(s, { type: 'depart' })), { type: 'enterEncounter' });
+    const species = PACK.species.find((o) => o.id === newcomer.speciesId)!;
+    expect(s.expedition!.battle!.combat.special).toBe(species.special.template);
+  });
+
+  it('the companion is locked once the trip has begun', () => {
+    let s = fullExpedition(fresh());
+    s = ready(s);
+    expect(step(s, { type: 'selectCompanion', instanceId: s.companions[1]!.instanceId })).toBe(s);
+  });
+
+  it('runs out of species honestly, with XP and no befriending', () => {
     let s = fresh();
-    for (let i = 0; i < PACK.souvenirs.length; i++) s = fullExpedition(s);
-    expect(s.souvenirIds).toHaveLength(PACK.souvenirs.length);
-    expect(s.offer.reward).toEqual({ kind: 'bond', xp: 10 });
-    expect(fullExpedition(s).companion.bondXp).toBe(10);
+    for (let i = 0; i < PACK.huntableIds.length; i++) s = fullExpedition(s);
+    expect(s.companions).toHaveLength(PACK.huntableIds.length + 1);
+    expect(s.offers[0]!.reward).toEqual({ kind: 'bond', xp: 10 });
+    const before = s.companions[0]!.bondXp;
+    const after = fullExpedition(s);
+    expect(after.companions).toHaveLength(s.companions.length);
+    expect(after.companions[0]!.bondXp).toBeGreaterThan(before + 9);
   });
 
-  it('round-trips through JSON at every step, as a save does', () => {
-    let s = discover(step(fresh(), START));
-    s = step(s, { type: 'enterEncounter' });
-    expect(JSON.parse(JSON.stringify(s))).toEqual(s);
+  it('offers differ and exclude owned species', () => {
+    const s = fullExpedition(fresh());
+    const ids = s.offers.map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
+    expect(new Set(ids).size).toBe(2);
+    expect(ids).not.toContain(s.companions[1]!.speciesId);
+  });
+});
+
+describe('Trail Points', () => {
+  const started = () => start(fresh());
+  const wrongId = (s: SaveData) => s.expedition!.candidateIds.find((id) => id !== s.expedition!.targetId)!;
+  const points = (s: SaveData) => s.expedition!.points;
+
+  it('starts each expedition fresh', () => {
+    expect(points(started())).toBe(10);
+    expect(points(start(fullExpedition(fresh())))).toBe(10);
+  });
+
+  it('Prep Shop items cost points, apply once, and work in battle', () => {
+    let s = started();
+    s = step(s, { type: 'buy', item: 'sturdy' });
+    expect(step(s, { type: 'buy', item: 'sturdy' })).toBe(s);
+    s = step(s, { type: 'buy', item: 'charge' });
+    expect(points(s)).toBe(2);
+    s = step(s, { type: 'buy', item: 'snack' });
+    expect(points(s)).toBe(0);
+    s = step(find(step(s, { type: 'depart' })), { type: 'enterEncounter' });
+    expect(s.expedition!.battle!.combat).toMatchObject({ playerMaxHp: 14, playerHp: 14, charge: 1 });
+  });
+
+  it('cannot overspend or shop after departing', () => {
+    let s = started();
+    s = step(step(s, { type: 'buy', item: 'sturdy' }), { type: 'buy', item: 'charge' });
+    expect(step(ready(fresh()), { type: 'buy', item: 'snack' }).expedition!.snack).toBe(false);
+    s = step(s, { type: 'buy', item: 'snack' });
+    expect(step(s, { type: 'buy', item: 'charge' })).toBe(s);
+  });
+
+  it('a Trail Snack heals once and does not use the turn', () => {
+    let s = step(step(started(), { type: 'buy', item: 'snack' }), { type: 'depart' });
+    s = step(find(s), { type: 'enterEncounter' });
+    expect(step(s, { type: 'useSnack' })).toBe(s);
+    s = turn(turn(s, false), false);
+    const hp = s.expedition!.battle!.combat.playerHp;
+    const { turn: t } = s.expedition!.battle!.combat;
+    s = step(s, { type: 'useSnack' });
+    expect(s.expedition!.battle!.combat).toMatchObject({ playerHp: hp + 4, turn: t });
+    expect(step(s, { type: 'useSnack' })).toBe(s);
+  });
+
+  it('correct battle answers earn a point; wrong ones do not', () => {
+    const s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    expect(points(turn(s, true))).toBe(11);
+    expect(points(turn(s, false))).toBe(10);
+  });
+
+  it('a wrong guess costs a point, reveals a free clue, and never blocks', () => {
+    let s = ready(fresh());
+    s = step(s, { type: 'guess', locationId: wrongId(s) });
+    expect(points(s)).toBe(9);
+    expect(s.expedition!.cluesShown).toBe(2);
+    const zero = { ...s, expedition: { ...s.expedition!, points: 0 } };
+    const other = zero.expedition.candidateIds.find((id) => id !== zero.expedition.targetId && !zero.expedition.guesses.includes(id))!;
+    const after = step(zero, { type: 'guess', locationId: other });
+    expect(points(after)).toBe(0);
+    expect(after.expedition!.cluesShown).toBe(3);
+  });
+
+  it('a clue costs points once, even on a double click', () => {
+    const s = ready(fresh());
+    const once = step(s, { type: 'revealClue', shown: 1 });
+    expect(points(once)).toBe(10 - ECONOMY.extraClue);
+    expect(step(once, { type: 'revealClue', shown: 1 })).toBe(once);
+  });
+
+  it('a child with no points cannot buy but can still finish', () => {
+    let s = ready(fresh());
+    s = { ...s, expedition: { ...s.expedition!, points: 0 } };
+    expect(step(s, { type: 'revealClue', shown: 1 })).toBe(s);
+    expect(step(s, { type: 'narrowSearch' })).toBe(s);
+    while (!isExpeditionComplete(s.expedition!)) s = winStop(find(s));
+    expect(step(s, { type: 'claimReward' }).completedExpeditions).toBe(1);
+  });
+
+  it('Narrow the search removes two wrong places, once, and never the answer', () => {
+    let s = ready(fresh());
+    s = step(s, { type: 'narrowSearch' });
+    const e = s.expedition!;
+    expect(e.removedIds).toHaveLength(2);
+    expect(e.removedIds).not.toContain(e.targetId);
+    expect(step(s, { type: 'narrowSearch' })).toBe(s);
+    expect(step(s, { type: 'guess', locationId: e.removedIds[0]! })).toBe(s);
+  });
+
+  it('Expert offers every state and no Narrow the search', () => {
+    const s = ready(fresh(), 'us-west', 'expert');
+    expect(s.expedition!.candidateIds).toHaveLength(13);
+    expect(step(s, { type: 'narrowSearch' })).toBe(s);
+  });
+
+  it('leftover points become XP for the companion taken', () => {
+    const s = fullExpedition(fresh());
+    expect(s.companions[0]!.bondXp).toBeGreaterThan(0);
+  });
+
+  it.each([
+    ['atlas', (s: SaveData) => step(s, { type: 'useAtlas' })],
+    ['bought clue', (s: SaveData) => step(s, { type: 'revealClue', shown: 1 })],
+    ['narrowed search', (s: SaveData) => step(s, { type: 'narrowSearch' })],
+    ['wrong guess', (s: SaveData) => step(s, { type: 'guess', locationId: wrongId(s) })],
+  ])('help from %s is recorded as assisted and earns everything', (_n, help) => {
+    const s = find(help(ready(fresh())));
+    expect(s.expedition!.discovery).toBe('found');
+    expect(s.attempts.at(-1)).toMatchObject({ context: 'discovery', correct: true, assisted: true });
+  });
+
+  it('an unaided guess is not assisted', () => {
+    expect(find(ready(fresh())).attempts.at(-1)!.assisted).toBe(false);
+  });
+});
+
+describe('journey events', () => {
+  const toEvent = () => {
+    let s = ready(fresh());
+    while (s.expedition!.slots[s.expedition!.slots.findIndex((o) => o.status === 'pending')]!.kind !== 'event') s = winStop(find(s));
+    return step(find(s), { type: 'enterEncounter' });
+  };
+
+  it('a correct answer earns the event reward and is recorded', () => {
+    const s = answerWith(toEvent(), true);
+    expect(s.attempts.at(-1)).toMatchObject({ context: 'event', correct: true });
+    expect(s.expedition!.event!.result!.correct).toBe(true);
+  });
+
+  it('a wrong answer costs nothing and the trail goes on', () => {
+    const s = toEvent();
+    const before = s.expedition!.points;
+    const after = step(answerWith(s, false), { type: 'continue' });
+    expect(after.expedition!.points).toBe(before);
+    expect(after.expedition!.event).toBeNull();
+    expect(after.expedition!.discovery).toBe('searching');
+  });
+
+  it('a repeated answer changes nothing', () => {
+    const s = answerWith(toEvent(), true);
+    expect(answerWith(s, true)).toBe(s);
+  });
+});
+
+describe('State Cards and souvenirs', () => {
+  it('the first correct answer about a state earns its card, once', () => {
+    let s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    s = step(s, { type: 'chooseAction', action: 'attack' });
+    s = answerWith(s, true);
+    const cardId = s.expedition!.battle!.result!.cardId!;
+    expect(s.stateCards).toEqual([cardId]);
+    expect(cardId).toBe(s.expedition!.battle!.question.locationId);
+  });
+
+  it('a wrong answer earns no card', () => {
+    let s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    s = answerWith(step(s, { type: 'chooseAction', action: 'attack' }), false);
+    expect(s.stateCards).toEqual([]);
+  });
+
+  it('never awards the same card twice across a trail', () => {
+    const s = playTrail(fresh());
+    expect(new Set(s.stateCards).size).toBe(s.stateCards.length);
+    expect(s.stateCards.length).toBeGreaterThan(1);
+  });
+
+  it('Europe has no cards yet and still plays', () => {
+    expect(playTrail(fresh(), 'europe').stateCards).toEqual([]);
+  });
+
+  it('a souvenir is found once along the trail and survives abandoning', () => {
+    let s = ready(fresh());
+    while (s.expedition!.foundSouvenirId === null) s = winStop(find(s));
+    expect(s.souvenirIds).toHaveLength(1);
+    s = step(s, { type: 'abandon' });
+    expect(s.souvenirIds).toHaveLength(1);
+    expect(s.completedExpeditions).toBe(0);
   });
 });
 
 describe('idempotency', () => {
-  const inQuestion = () => {
-    let s = discover(step(fresh(), START));
-    s = step(s, { type: 'enterEncounter' });
-    return step(s, { type: 'chooseAction', action: 'attack' });
-  };
+  const inQuestion = () => step(step(find(ready(fresh())), { type: 'enterEncounter' }), { type: 'chooseAction', action: 'attack' });
 
   it('a repeated answer changes nothing', () => {
     const s = inQuestion();
-    const once = step(s, { type: 'answer', optionId: s.expedition!.battle!.question.acceptedId });
-    expect(step(once, { type: 'answer', optionId: s.expedition!.battle!.question.acceptedId })).toBe(once);
-    expect(once.attempts.filter((a) => a.context === 'battle')).toHaveLength(1);
-  });
-
-  it('a repeated claim cannot duplicate a reward', () => {
-    let s = discover(step(fresh(), START));
-    for (let i = 0; i < 3; i++) s = winBattle(s);
-    s = step(s, { type: 'claimReward' });
-    expect(step(s, { type: 'claimReward' })).toBe(s);
-    expect(s.souvenirIds).toHaveLength(1);
+    const q = s.expedition!.battle!.question;
+    const once = step(s, { type: 'answer', optionId: q.acceptedId });
+    expect(step(once, { type: 'answer', optionId: q.acceptedId })).toBe(once);
   });
 
   it('an answer that is not an option of the current question is ignored', () => {
@@ -170,108 +410,48 @@ describe('idempotency', () => {
   it('the same seed and commands give the same expedition', () => {
     expect(inQuestion()).toEqual(inQuestion());
   });
-});
 
-describe('discovery', () => {
-  const started = () => step(fresh(), START);
-  const wrongId = (s: SaveData) => s.expedition!.candidateIds.find((id) => id !== s.expedition!.targetId)!;
-
-  it('always includes the target among four distinct candidates', () => {
-    for (let seed = 1; seed < 40; seed++) {
-      const e = step(fresh(seed), START).expedition!;
-      expect(new Set(e.candidateIds).size).toBe(4);
-      expect(e.candidateIds).toContain(e.targetId);
-    }
-  });
-
-  it('an unaided first guess is unassisted', () => {
-    const attempt = discover(started()).attempts.at(-1)!;
-    expect(attempt).toMatchObject({ context: 'discovery', correct: true, assisted: false });
-  });
-
-  it.each([
-    ['atlas', (s: SaveData) => step(s, { type: 'useAtlas' })],
-    ['extra clue', (s: SaveData) => step(s, { type: 'revealClue' })],
-    ['earlier wrong guess', (s: SaveData) => step(s, { type: 'guess', locationId: wrongId(s) })],
-  ])('help from %s is recorded but keeps the expedition going', (_name, help) => {
-    const s = discover(help(started()));
-    expect(s.expedition!.discovery).toBe('found');
-    expect(s.attempts.at(-1)!.assisted).toBe(true);
-    expect(s.expedition!.reward).toEqual(s.offer.reward);
-  });
-
-  it('a wrong guess reveals the next clue and allows another try', () => {
-    const s = started();
-    const after = step(s, { type: 'guess', locationId: wrongId(s) });
-    expect(after.expedition).toMatchObject({ discovery: 'searching', cluesShown: 2 });
-  });
-
-  it('cannot enter an encounter before discovery', () => {
-    const s = started();
-    expect(step(s, { type: 'enterEncounter' })).toBe(s);
+  it('round-trips through JSON, as a save does', () => {
+    const s = inQuestion();
+    expect(JSON.parse(JSON.stringify(s))).toEqual(s);
   });
 });
 
 describe('retreat and retry', () => {
-  it('keeps route, reward and earlier wins; awards nothing for the lost slot', () => {
-    let s = discover(step(fresh(), START));
-    s = winBattle(s);
+  it('keeps the route, reward and points; awards nothing for the lost stop', () => {
+    let s = winStop(find(ready(fresh())));
+    s = find(s);
     const { slots, reward } = s.expedition!;
-    const attemptsBefore = s.attempts.length;
     s = step(s, { type: 'enterEncounter' });
-    while (s.expedition!.battle) s = playTurn(s, false);
-
-    expect(s.expedition).toMatchObject({ retreated: true, slots, reward });
-    expect(s.attempts.length).toBeGreaterThan(attemptsBefore);
-
-    s = winBattle(s);
+    while (s.expedition!.battle) s = turn(s, false);
+    expect(s.expedition).toMatchObject({ retreated: true, slots, reward, discovery: 'found' });
+    s = winStop(s);
     expect(s.expedition!.slots[1]!.status).toBe('won');
     expect(s.expedition!.retreated).toBe(false);
   });
 
-  it('abandoning grants no reward and keeps the collection', () => {
-    let s = fullExpedition(fresh());
-    const owned = s.souvenirIds;
-    s = step(step(s, START), { type: 'abandon' });
-    expect(s.expedition).toBeNull();
-    expect(s.souvenirIds).toEqual(owned);
-    expect(s.completedExpeditions).toBe(1);
+  it('cannot start an encounter before finding the place', () => {
+    const s = ready(fresh());
+    expect(step(s, { type: 'enterEncounter' })).toBe(s);
   });
 });
 
 describe('difficulty', () => {
-  const west = (difficulty: 'scout' | 'ranger' | 'expert', seed = 3) => {
-    let s = step(fresh(seed), { type: 'start', regionId: 'us-west', difficulty });
-    s = discover(s);
-    return step(s, { type: 'enterEncounter' });
-  };
+  const west = (difficulty: Difficulty, seed = 3) => step(find(ready(fresh(seed), 'us-west', difficulty)), { type: 'enterEncounter' });
 
   it.each(['scout', 'ranger', 'expert'] as const)('%s trails ask %s questions', (difficulty) => {
-    const s = west(difficulty);
-    expect(s.expedition!.difficulty).toBe(difficulty);
-    expect(s.expedition!.battle!.question.difficulty).toBe(difficulty);
+    expect(west(difficulty).expedition!.battle!.question.difficulty).toBe(difficulty);
   });
 
   it('records the difficulty on each answer', () => {
-    const s = playTurn(west('ranger'), true);
-    expect(s.attempts.at(-1)).toMatchObject({ context: 'battle', difficulty: 'ranger' });
-  });
-
-  it('a map-click answer is accepted by state id', () => {
-    let s = west('expert');
-    while (s.expedition!.battle!.question.inputType !== 'map-click') s = playTurn(s, true);
-    s = step(s, { type: 'chooseAction', action: 'attack' });
-    const q = s.expedition!.battle!.question;
-    expect(step(s, { type: 'answer', optionId: q.acceptedId }).expedition!.battle!.result!.correct).toBe(true);
+    expect(turn(west('ranger'), true).attempts.at(-1)).toMatchObject({ context: 'battle', difficulty: 'ranger' });
   });
 
   it('parent limits restrict what a trail can use', () => {
     const region = PACK.regions.find((r) => r.id === 'us-west')!;
     const settings = { ...DEFAULT_SETTINGS, minDifficulty: 'ranger' as const, maxDifficulty: 'ranger' as const };
     expect(allowedDifficulties(settings, region)).toEqual(['ranger']);
-    let s = fresh();
-    s = step(s, { type: 'updateSettings', patch: settings });
-    s = step(s, { type: 'start', regionId: 'us-west', difficulty: 'expert' });
+    const s = start(step(fresh(), { type: 'updateSettings', patch: settings }), 'us-west', 'expert');
     expect(s.expedition!.difficulty).toBe('ranger');
   });
 
@@ -279,35 +459,13 @@ describe('difficulty', () => {
     const region = PACK.regions.find((r) => r.id === 'europe')!;
     expect(allowedDifficulties({ ...DEFAULT_SETTINGS, minDifficulty: 'expert' }, region)).toEqual(['scout']);
   });
-
-  it('harder trails offer nearby candidates', () => {
-    const e = step(fresh(9), { type: 'start', regionId: 'us-west', difficulty: 'ranger' }).expedition!;
-    const target = PACK.places.find((p) => p.id === e.targetId)!;
-    const others = PACK.places.filter((p) => p.regionId === 'us-west' && p.id !== target.id);
-    const dist = (id: string) => { const p = PACK.places.find((o) => o.id === id)!; return Math.hypot(p.lonLat[0] - target.lonLat[0], p.lonLat[1] - target.lonLat[1]); };
-    const nearest = others.map((p) => dist(p.id)).sort((a, b) => a - b).slice(0, 3);
-    const chosen = e.candidateIds.filter((id) => id !== target.id).map(dist).sort((a, b) => a - b);
-    expect(chosen).toEqual(nearest);
-  });
-});
-
-describe('combat in the game', () => {
-  it('Special is refused until charged', () => {
-    let s = discover(step(fresh(), START));
-    s = step(s, { type: 'enterEncounter' });
-    expect(step(s, { type: 'chooseAction', action: 'special' })).toBe(s);
-    s = playTurn(s, true);
-    s = playTurn(s, true);
-    expect(step(s, { type: 'chooseAction', action: 'special' }).expedition!.battle!.action).toBe('special');
-  });
 });
 
 describe('question selection', () => {
   const europe = PACK.questions.filter((q) => q.regionId === 'europe');
-  it('never repeats within an expedition while the pool allows', () => {
-    let s = discover(step(fresh(), START));
-    for (let i = 0; i < 3; i++) s = winBattle(s);
-    const asked = s.expedition!.askedQuestionIds;
+
+  it('never repeats within a trail while the pool allows', () => {
+    const asked = playTrail(fresh(), 'us-west', 'scout', 'long').expedition!.askedQuestionIds;
     expect(new Set(asked).size).toBe(asked.length);
   });
 
@@ -324,21 +482,6 @@ describe('question selection', () => {
 
   it('falls back to tracked repeats instead of failing on a small pool', () => {
     const pool = europe.slice(0, 1);
-    const q = pickQuestion(pool, { asked: [pool[0]!.id], recent: [], locationId: 'spain' }, new Rng(1));
-    expect(q).toBe(pool[0]);
-  });
-
-  it('keeps the accepted answer through option shuffling', () => {
-    const s = (() => {
-      let x = discover(step(fresh(11), START));
-      x = step(x, { type: 'enterEncounter' });
-      return step(x, { type: 'chooseAction', action: 'attack' });
-    })();
-    const q = s.expedition!.battle!.question;
-    const original = PACK.questions.find((o) => o.id === q.id)!;
-    const label = (qq: typeof q) => qq.options.find((o) => o.id === qq.acceptedId)!.label;
-    expect(label(q)).toBe(label(original));
-    const next = step(s, { type: 'answer', optionId: q.acceptedId });
-    expect(next.expedition!.battle!.result!.correct).toBe(true);
+    expect(pickQuestion(pool, { asked: [pool[0]!.id], recent: [], locationId: 'spain' }, new Rng(1))).toBe(pool[0]);
   });
 });

@@ -1,11 +1,17 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type { Species } from '../content/types';
 import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
-import type { Battle as BattleState, Command, Expedition, SaveData } from '../engine/game';
-import { Sprite } from './art';
-import { mapFor, place, species } from './content';
+import { SNACK_HEAL } from '../engine/economy';
+import { activeCompanion, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
+import { poseUrl } from './art';
+import { turnFrames, type Frame, type Motion, type Pose } from './battleAnimation';
+import { place, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
+import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
-import { Marker, WorldMap, type Highlight } from './WorldMap';
+import { TrailBar } from './TrailBar';
+
+const POSES: Pose[] = ['idle', 'attack', 'guard', 'special', 'hit'];
 
 function Hp({ label, hp, max }: { label: string; hp: number; max: number }) {
   return (
@@ -22,75 +28,88 @@ function specialText(c: CombatState): string {
   return '2 damage, block 4';
 }
 
+/** The sprite sits inside a moving wrapper, so mirroring and motion don't fight over `transform`. */
+function Actor({ creature, pose, motion, side }: { creature: Species; pose: Pose; motion?: Motion | undefined; side: 'player' | 'opponent' }) {
+  const faces = side === 'player' ? 'right' : 'left';
+  return (
+    <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}`} data-pose={pose}>
+      <img src={poseUrl(creature, pose)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
+    </div>
+  );
+}
+
 export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: BattleState; save: SaveData; dispatch: (c: Command) => void }) {
   const slot = e.slots[battle.slotIndex];
-  const [fx, setFx] = useState(false);
-  const turnKey = `${battle.combat.turn}-${battle.phase}`;
-  const lastTurn = useRef(turnKey);
+  const companion = species(activeCompanion(save).speciesId);
+  const opponent = species(slot?.opponentId ?? '');
+  const [frame, setFrame] = useState<Frame | null>(null);
+  const answered = battle.result ? `${e.answered}` : '';
+  const lastTurn = useRef(answered);
 
   useEffect(() => {
-    if (lastTurn.current === turnKey) return;
-    lastTurn.current = turnKey;
-    if (battle.phase !== 'feedback') return;
+    for (const c of [companion, opponent]) for (const pose of POSES) new Image().src = poseUrl(c, pose);
+  }, [companion, opponent]);
+
+  useEffect(() => {
+    // A reload shows the saved feedback without replaying the animation.
+    if (lastTurn.current === answered) return;
+    lastTurn.current = answered;
+    if (!battle.result) return;
     const { outcome } = battle.combat;
-    playSound(outcome === 'victory' ? 'win' : outcome === 'retreat' ? 'retreat' : battle.result?.correct ? 'correct' : 'not-yet');
-    setFx(true);
-    const t = setTimeout(() => setFx(false), 300);
-    return () => clearTimeout(t);
-  }, [turnKey]); // eslint-disable-line
+    const action = battle.action ?? 'attack';
+    const frames = turnFrames(action, battle.result.correct, battle.result.events, action !== 'befriend' && outcome !== 'victory');
+    const timers = frames.map((f) => setTimeout(() => {
+      setFrame(f);
+      f.sounds?.forEach((id) => playSound(id));
+    }, f.at));
+    const end = frames.at(-1)?.at ?? 0;
+    timers.push(setTimeout(() => {
+      if (outcome === 'victory' && action !== 'befriend') playSound('win');
+      if (outcome === 'retreat') playSound('retreat');
+    }, end));
+    timers.push(setTimeout(() => setFrame(null), end + 100));
+    return () => {
+      timers.forEach(clearTimeout);
+      setFrame(null);
+    };
+  }, [answered]); // eslint-disable-line
 
   const { combat, question: q, result } = battle;
-  const choose = (action: CombatAction) => dispatch({ type: 'chooseAction', action });
-  const answerWith = (optionId: string) => dispatch({ type: 'answer', optionId });
+  const choose = (action: CombatAction | 'befriend') => dispatch({ type: 'chooseAction', action });
+  const onAnswer = useCallback((optionId: string) => dispatch({ type: 'answer', optionId }), [dispatch]);
   const special = canUse(combat, 'special');
+  const snackReady = e.snack && combat.playerHp < combat.playerMaxHp;
 
-  const onFeatureClick = useMemo(() => (featureId: string) => {
-    const hit = q.options.find((o) => o.featureId === featureId);
-    if (hit && !result) answerWith(hit.id);
-  }, [q, result]); // eslint-disable-line
-
-  const clickHighlights = useMemo(() => {
-    const map: Record<string, Highlight> = {};
-    if (q.inputType !== 'map-click') return map;
-    for (const o of q.options) if (o.featureId) map[o.featureId] = 'selectable';
-    if (result) {
-      const feature = (id: string) => q.options.find((o) => o.id === id)?.featureId ?? '';
-      map[feature(result.optionId)] = 'wrong';
-      map[feature(q.acceptedId)] = 'correct';
-    }
-    return map;
-  }, [q, result]);
-
-  // Bound per phase: answers exist only while a question is open, so a stale key can't reach the next one.
   const keys: Record<string, () => void> = {};
   if (battle.phase === 'choose') {
-    Object.assign(keys, { a: () => choose('attack'), enter: () => choose('attack'), g: () => choose('guard') });
-    if (special) keys.s = () => choose('special');
+    if (battle.befriending) Object.assign(keys, { b: () => choose('befriend'), enter: () => choose('befriend') });
+    else {
+      Object.assign(keys, { a: () => choose('attack'), enter: () => choose('attack'), g: () => choose('guard') });
+      if (special) keys.s = () => choose('special');
+      if (snackReady) keys.h = () => dispatch({ type: 'useSnack' });
+    }
   }
-  if (battle.phase === 'question' && q.inputType !== 'map-click') q.options.forEach((o, i) => { keys[String(i + 1)] = () => answerWith(o.id); });
-  if (battle.phase === 'feedback') keys.enter = () => dispatch({ type: 'continue' });
   useKeys(keys);
 
   if (!slot) return null;
-
-  const companion = species(save.companion.speciesId);
-  const opponent = species(slot.opponentId);
   const backdrop = slot.kind === 'guardian' ? 'backdrop-mountain' : 'backdrop-coast';
-  const map = mapFor(e.regionId);
-  const accepted = q.options.find((o) => o.id === q.acceptedId)?.label;
-
   const events = result?.events;
   const log = events && [
     events.damageDealt > 0 && `${companion.displayName} dealt ${events.damageDealt} damage.`,
     events.healed > 0 && `${companion.displayName} healed ${events.healed}.`,
     events.blocked > 0 && `Blocked ${events.blocked} damage.`,
     events.damageTaken > 0 && `${opponent.displayName} dealt ${events.damageTaken} damage.`,
-    combat.outcome === 'victory' && `${opponent.displayName} is impressed and steps aside!`,
+    battle.befriended && `${opponent.displayName} wants to be your friend!`,
+    battle.action === 'befriend' && !result?.correct && `${opponent.displayName} is still deciding. Try another question.`,
+    battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'pending' && `${opponent.displayName} is worn out and watching you closely.`,
+    battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'won' && `${opponent.displayName} is impressed and steps aside!`,
     combat.outcome === 'retreat' && `${companion.displayName} retreats safely to the trail.`,
+    slot.kind === 'regular' && slot.status === 'won' && e.foundSouvenirId && e.slots.filter((s) => s.kind === 'regular' && s.status === 'won').length === 2 && `You found something on the trail: ${souvenir(e.foundSouvenirId)?.displayName}!`,
   ].filter(Boolean).join(' ');
 
   return (
     <div className="battle">
+      <TrailBar e={e} />
       <section className={`scene ${backdrop}`}>
         <div className="scene-hud">
           <div>
@@ -103,68 +122,38 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           <Hp label={opponent.displayName} hp={combat.opponentHp} max={combat.opponentMaxHp} />
         </div>
         <div className="scene-floor">
-          <Sprite id={companion.artId} size={128} className={fx && (events?.damageTaken ?? 0) > 0 ? 'hit' : fx && result?.correct ? 'lunge-right' : ''} />
-          {battle.phase !== 'feedback' && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
-          <Sprite id={opponent.artId} size={128} className={fx && result?.correct ? 'hit' : ''} />
+          <Actor creature={companion} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} />
+          {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
+          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={frame?.opponentMotion} />
         </div>
       </section>
 
-      <section className="panel question">
-        {battle.phase === 'choose' && (
+      {battle.phase === 'choose' && (
+        <section className="panel question">
           <div className="actions">
             <p className="muted">{place(slot.locationId).name} · Local questions and expedition review</p>
-            <div className="action-row">
-              <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack} damage, +1 charge</small></button>
-              <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
-              <button type="button" className="big" disabled={!special} onClick={() => choose('special')}>{companion.special?.name ?? 'Special'} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
-            </div>
+            {battle.befriending ? (
+              <>
+                <p className="learn">{opponent.displayName} is worn out. Answer a question to befriend it!</p>
+                <button type="button" className="primary big" onClick={() => choose('befriend')}>Befriend <Key k="B" /></button>
+              </>
+            ) : (
+              <>
+                <div className="action-row">
+                  <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack} damage, +1 charge</small></button>
+                  <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
+                  <button type="button" className="big" disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
+                </div>
+                {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
+              </>
+            )}
           </div>
-        )}
+        </section>
+      )}
 
-        {battle.phase !== 'choose' && (
-          <>
-            <h2>{q.prompt}</h2>
-            {q.inputType === 'map-marker' && (
-              <WorldMap key={q.id} map={map} label="Map with four numbered markers" interactive={false}>
-                {(scale) => q.options.map((o, i) => (
-                  <Marker
-                    key={o.id}
-                    at={map.project(o.lonLat ?? [0, 0])}
-                    scale={scale}
-                    label={String(i + 1)}
-                    tone={result ? (o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'default') : 'default'}
-                    {...(result ? {} : { onClick: () => answerWith(o.id) })}
-                  />
-                ))}
-              </WorldMap>
-            )}
-            {q.inputType === 'map-click' && (
-              <WorldMap key={q.id} map={map} label="Blank map. Click a state." highlights={clickHighlights} onFeatureClick={onFeatureClick} />
-            )}
-            {q.inputType !== 'map-click' && (
-              <div className="options">
-                {q.options.map((o, i) => {
-                  const marker = q.inputType === 'map-marker';
-                  const state = !result ? '' : o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'dim';
-                  return (
-                    <button key={o.id} type="button" className={`option ${state}`} disabled={!!result} onClick={() => answerWith(o.id)}>
-                      <Key k={i + 1} /><span className="option-label">{marker && !result ? `Marker ${i + 1}` : marker ? `${i + 1}: ${o.label}` : o.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </>
-        )}
-
-        {result && (
-          <div className={`feedback ${result.correct ? 'good' : 'notyet'}`} role="status">
-            <p><strong>{result.correct ? 'Correct!' : `Not yet. The answer is ${accepted}.`}</strong> {q.explanation}</p>
-            <p className="muted">{log}</p>
-            <button type="button" className="primary" autoFocus onClick={() => dispatch({ type: 'continue' })}>Continue <Key k="Enter" /></button>
-          </div>
-        )}
-      </section>
+      {battle.phase !== 'choose' && (
+        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} log={log} />
+      )}
       <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave expedition</button>
     </div>
   );

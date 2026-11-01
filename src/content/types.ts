@@ -22,6 +22,8 @@ export interface Question {
   difficulty: Difficulty;
   regionId: string;
   sourceUrl: string;
+  /** Shown large after a correct answer, to be remembered. */
+  fieldNote?: string;
   /** Destination this question is local to, if any. */
   locationId?: string;
 }
@@ -42,6 +44,8 @@ export interface Place {
   regionId: string;
   lonLat: readonly [number, number];
   atlas: string[];
+  /** Connected places. Without this, trails use the nearest places. */
+  neighbors?: readonly string[];
 }
 
 export interface Region {
@@ -61,8 +65,19 @@ export interface Species {
   displayName: string;
   artId: string;
   flavor: string;
-  /** Companions only. */
-  special?: Special;
+  special: Special;
+  /** The way the art faces, so a companion can be mirrored to face its opponent. */
+  facing: 'left' | 'right';
+}
+
+/** A collectible card for one place. */
+export interface StateCard {
+  placeId: string;
+  name: string;
+  artId: string;
+  subtitle: string;
+  capital: string;
+  facts: string[];
 }
 
 export interface Souvenir {
@@ -80,7 +95,9 @@ export interface Pack {
   places: readonly Place[];
   species: readonly Species[];
   souvenirs: readonly Souvenir[];
+  cards: readonly StateCard[];
   starterSpeciesId: string;
+  /** Species that can be hunted and befriended. */
+  huntableIds: readonly string[];
   regularOpponentIds: readonly string[];
-  guardianIds: readonly string[];
 }

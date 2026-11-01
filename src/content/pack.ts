@@ -1,5 +1,5 @@
 import type { Clue, Pack, Place, Question, QuestionOption } from './types';
-import { usClues, usPlaces, usQuestions } from './us/templates';
+import { usCards, usClues, usPlaces, usQuestions } from './us/templates';
 
 const wiki = (page: string) => `https://en.wikipedia.org/wiki/${page}`;
 
@@ -81,6 +81,7 @@ function markerQuestion(p: Place): Question {
     options: [p, ...nearby].map((o) => ({ id: o.id, label: o.name, lonLat: o.lonLat })),
     acceptedId: p.id,
     explanation: `${p.name}: ${p.atlas[1] as string}.`,
+    fieldNote: p.atlas[2] as string,
     difficulty: 'scout',
     regionId: 'europe',
     sourceUrl: wiki(p.name.replaceAll(' ', '_')),
@@ -111,7 +112,7 @@ const worldBasics: Question[] = [
 ];
 
 export const PACK: Pack = {
-  version: 'west-and-europe-1',
+  version: 'west-and-europe-2',
   regions: [
     { id: 'us-west', label: 'American West', mapId: 'us', difficulties: ['scout', 'ranger', 'expert'] },
     { id: 'europe', label: 'Europe', mapId: 'world', difficulties: ['scout'] },
@@ -120,11 +121,12 @@ export const PACK: Pack = {
   clues: [...usClues, ...clues],
   places: [...usPlaces, ...places],
   species: [
-    { id: 'slatepaw', displayName: 'Slatepaw', artId: 'slatepaw', flavor: 'A round little mountain-dweller with mossy shoulders.', special: { name: 'Landslide', template: 'strong' } },
-    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', flavor: 'It chases waves along the shore and hates to lose.' },
-    { id: 'thistlehop', displayName: 'Thistlehop', artId: 'thistlehop', flavor: 'It bounds through the woods, all prickles and mischief.' },
-    { id: 'cindermite', displayName: 'Cindermite', artId: 'cindermite', flavor: 'A warm, grumpy creature that naps in sun-baked rocks.' },
-    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', flavor: 'The great guardian of the high passes.' },
+    { id: 'slatepaw', displayName: 'Slatepaw', artId: 'slatepaw', facing: 'right', flavor: 'A round little mountain-dweller with mossy shoulders.', special: { name: 'Landslide', template: 'strong' } },
+    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', facing: 'left', flavor: 'It chases waves along the shore and hates to lose.', special: { name: 'Tide Pool', template: 'heal' } },
+    { id: 'thistlehop', displayName: 'Thistlehop', artId: 'thistlehop', facing: 'left', flavor: 'It bounds through the woods, all prickles and mischief.', special: { name: 'Bramble Wall', template: 'protect' } },
+    { id: 'cindermite', displayName: 'Cindermite', artId: 'cindermite', facing: 'left', flavor: 'A warm, grumpy creature that naps in sun-baked rocks.', special: { name: 'Ember Burst', template: 'strong' } },
+    { id: 'sandwhisk', displayName: 'Sandwhisk', artId: 'sandwhisk', facing: 'left', flavor: 'It listens for lizards with enormous ears and never stops moving.', special: { name: 'Dust Devil', template: 'protect' } },
+    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', facing: 'left', flavor: 'The great guardian of the high passes.', special: { name: 'Rockfall', template: 'strong' } },
   ],
   souvenirs: [
     { id: 'compass', displayName: 'Carved Compass', artId: 'compass', flavor: 'Its needle always seems to be pointing somewhere exciting.' },
@@ -134,7 +136,8 @@ export const PACK: Pack = {
     { id: 'stone', displayName: 'River Stone', artId: 'stone', flavor: 'Worn smooth by a very long journey.' },
     { id: 'map-scrap', displayName: 'Old Map Scrap', artId: 'map-scrap', flavor: 'Part of a map nobody has finished yet.' },
   ],
+  cards: usCards,
   starterSpeciesId: 'slatepaw',
-  regularOpponentIds: ['brinefin', 'thistlehop', 'cindermite'],
-  guardianIds: ['cragmaw'],
+  huntableIds: ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk', 'cragmaw'],
+  regularOpponentIds: ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk'],
 };

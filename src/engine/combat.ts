@@ -50,6 +50,11 @@ export function enemyIntent(state: CombatState): number {
   return state.enemyPattern[(state.turn - 1) % state.enemyPattern.length] ?? 0;
 }
 
+/** A free action: it heals without using the turn. */
+export function heal(state: CombatState, amount: number): CombatState {
+  return { ...state, playerHp: Math.min(state.playerMaxHp, state.playerHp + amount) };
+}
+
 export function canUse(state: CombatState, action: CombatAction): boolean {
   return state.outcome === 'active' && (action !== 'special' || state.charge >= SPECIAL_COST);
 }

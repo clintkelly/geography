@@ -25,7 +25,7 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
   const max = DIFFICULTIES.indexOf(settings.maxDifficulty);
 
   const download = async () => {
-    const text = exportBackup(household, await store.loadLegacy(), Date.now());
+    const text = exportBackup(household, await store.loadLegacy(), Date.now(), await store.loadPreUpgrade(2));
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
     link.download = `atlaswild-backup-${new Date().toISOString().slice(0, 10)}.json`;
@@ -37,7 +37,7 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
   const onFile = async (f: File | undefined) => {
     if (!f) return;
     try {
-      const parsed = parseBackup(await f.text());
+      const parsed = parseBackup(await f.text(), PACK);
       const names = Object.values(parsed.profiles).map((p) => `${p.profile.displayName} (${p.completedExpeditions} expeditions)`).join(', ');
       if (window.confirm(`Replace all current progress with this backup?\n\n${names}`)) restore(parsed);
       else setMessage('Restore canceled. Nothing changed.');

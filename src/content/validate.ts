@@ -31,10 +31,18 @@ export function validatePack(pack: Pack): string[] {
   const regionIds = new Set(pack.regions.map((r) => r.id));
   for (const p of pack.places) if (!regionIds.has(p.regionId)) problems.push(`${p.id}: unknown region`);
   const speciesIds = new Set(pack.species.map((s) => s.id));
-  for (const id of [pack.starterSpeciesId, ...pack.regularOpponentIds, ...pack.guardianIds]) {
+  for (const id of [pack.starterSpeciesId, ...pack.regularOpponentIds]) {
     if (!speciesIds.has(id)) problems.push(`unknown species ${id}`);
   }
-  if (!pack.species.find((s) => s.id === pack.starterSpeciesId)?.special) problems.push('starter needs a Special');
+  for (const id of pack.huntableIds) if (!speciesIds.has(id)) problems.push(`unknown huntable species ${id}`);
+  for (const p of pack.places) {
+    for (const n of p.neighbors ?? []) {
+      const other = pack.places.find((o) => o.id === n);
+      if (!other) problems.push(`${p.id}: unknown neighbor ${n}`);
+      else if (!other.neighbors?.includes(p.id)) problems.push(`${p.id}: neighbor ${n} does not list it back`);
+    }
+  }
+  for (const c of pack.cards) if (!pack.places.some((p) => p.id === c.placeId)) problems.push(`card for unknown place ${c.placeId}`);
   return problems;
 }
 

@@ -1,4 +1,4 @@
-import type { Clue, Difficulty, Place, Question, QuestionOption } from '../types';
+import type { Clue, Difficulty, Place, Question, QuestionOption, StateCard } from '../types';
 import records from './west.json';
 
 export interface StateRecord {
@@ -14,6 +14,8 @@ export interface StateRecord {
   /** Only 'official' with a checked source. Questions never call a nickname official. */
   nickname: { text: string; status: 'official' | 'unverified'; others: string[] };
   facts: string[];
+  /** Bordering states, plus the usual flight for Alaska and Hawaii. */
+  neighbors: string[];
 }
 
 export const REGION_ID = 'us-west';
@@ -69,6 +71,8 @@ function questionsFor(s: StateRecord): Question[] {
     regionId: REGION_ID,
     locationId: s.id,
     sourceUrl: wiki(s),
+    // Different questions about a state rotate through its facts.
+    fieldNote: s.facts[(objective.length + n) % s.facts.length],
     ...answer,
   });
 
@@ -106,7 +110,16 @@ export const usPlaces: Place[] = STATES.map((s) => ({
   featureId: s.fips,
   regionId: REGION_ID,
   lonLat: s.lonLat,
+  neighbors: s.neighbors,
   atlas: [`Capital: ${s.capital}`, `Known as the ${s.nickname.text}`, `Cities: ${s.sameStateCities.join(', ')}`, ...s.facts],
+}));
+export const usCards: StateCard[] = STATES.map((s) => ({
+  placeId: s.id,
+  name: s.name,
+  artId: `card-${s.id}`,
+  subtitle: `The ${s.nickname.text}`,
+  capital: s.capital,
+  facts: s.facts,
 }));
 export const usQuestions = STATES.flatMap(questionsFor);
 export const usClues = STATES.flatMap(cluesFor);

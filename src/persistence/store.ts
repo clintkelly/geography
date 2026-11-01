@@ -19,6 +19,9 @@ export interface SaveStore {
   saveMeta(meta: HouseholdMeta): Promise<void>;
   /** Replaces the whole household in one transaction. */
   replace(household: Household): Promise<void>;
+  /** Keeps an untouched copy of a save from before an upgrade. */
+  keepPreUpgrade(version: number, data: unknown): Promise<void>;
+  loadPreUpgrade(version: number): Promise<unknown>;
 }
 
 export class UnsupportedSaveError extends Error {}
@@ -39,7 +42,8 @@ function open(factory: IDBFactory): Promise<IDBDatabase> {
 }
 
 function assertSupported(version: number) {
-  if (version !== SCHEMA_VERSION) {
+  // Older versions are upgraded by openHousehold; only the future is unreadable.
+  if (version > SCHEMA_VERSION) {
     throw new UnsupportedSaveError(`Save uses schema ${version}; this version of the game reads ${SCHEMA_VERSION}.`);
   }
 }
@@ -82,6 +86,8 @@ export function indexedDbStore(factory: IDBFactory = indexedDB): SaveStore {
       return { meta, profiles };
     },
     loadLegacy: () => get(LEGACY_KEY),
+    keepPreUpgrade: (version, data) => write((s) => s.put(data, `pre-upgrade-v${version}`)),
+    loadPreUpgrade: (version) => get(`pre-upgrade-v${version}`),
     saveProfile: (save) => write((s) => s.put(save, profileKey(save.profile.id))),
     saveMeta: (meta) => write((s) => s.put(meta, META_KEY)),
     async replace(household) {

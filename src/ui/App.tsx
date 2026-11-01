@@ -5,6 +5,8 @@ import { Battle } from './Battle';
 import { Camp } from './Camp';
 import { Discovery } from './Discovery';
 import { ProfileSelect } from './ProfileSelect';
+import { Event } from './Event';
+import { Prep } from './Prep';
 import { ExpeditionComplete, Route } from './Route';
 import { Settings } from './Settings';
 import { Sprite } from './art';
@@ -30,6 +32,8 @@ export function App() {
   if (!save) body = <ProfileSelect household={household} onPick={setActiveProfile} />;
   else if (settingsOpen) body = <Settings save={save} household={household} store={store} dispatch={dispatch} restore={(h) => { setSettingsOpen(false); restore(h); }} onClose={() => setSettingsOpen(false)} />;
   else if (!e) body = <Camp save={save} dispatch={dispatch} onSwitch={() => setActiveProfile(null)} onSettings={() => setSettingsOpen(true)} />;
+  else if (!e.prepared) body = <Prep e={e} save={save} dispatch={dispatch} />;
+  else if (e.event) body = <Event key={e.event.id} e={e} event={e.event} dispatch={dispatch} />;
   else if (e.discovery === 'searching') body = <Discovery key={e.id} e={e} dispatch={dispatch} />;
   else if (e.battle) body = <Battle key={e.battle.id} e={e} battle={e.battle} save={save} dispatch={dispatch} />;
   else if (isExpeditionComplete(e)) body = <ExpeditionComplete e={e} dispatch={dispatch} />;

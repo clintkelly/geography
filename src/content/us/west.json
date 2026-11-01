@@ -1,15 +1,417 @@
 [
- {"id":"alaska","name":"Alaska","postal":"AK","fips":"02","lonLat":[-152,64],"capital":"Juneau","sameStateCities":["Anchorage","Fairbanks","Sitka"],"largestCity":"Anchorage","nickname":{"text":"Last Frontier","status":"unverified","others":[]},"facts":["Alaska is the largest US state by area.","Denali, in Alaska, is the tallest mountain in North America."]},
- {"id":"arizona","name":"Arizona","postal":"AZ","fips":"04","lonLat":[-111.7,34.3],"capital":"Phoenix","sameStateCities":["Tucson","Mesa","Flagstaff"],"largestCity":"Phoenix","nickname":{"text":"Grand Canyon State","status":"unverified","others":[]},"facts":["The Grand Canyon, in northern Arizona, was carved by the Colorado River.","Saguaro cacti in Arizona's Sonoran Desert can grow over 40 feet tall."]},
- {"id":"california","name":"California","postal":"CA","fips":"06","lonLat":[-119.6,37.2],"capital":"Sacramento","sameStateCities":["Los Angeles","San Francisco","San Diego"],"largestCity":"Los Angeles","nickname":{"text":"Golden State","status":"official","others":[]},"facts":["California has more people than any other US state.","Coast redwoods in California are the tallest trees in the world."]},
- {"id":"colorado","name":"Colorado","postal":"CO","fips":"08","lonLat":[-105.5,39],"capital":"Denver","sameStateCities":["Aurora","Colorado Springs","Boulder"],"largestCity":"Denver","nickname":{"text":"Centennial State","status":"unverified","others":[]},"facts":["Colorado joined the US in 1876, 100 years after the Declaration of Independence.","Denver is called the Mile High City because it sits about one mile above sea level."]},
- {"id":"hawaii","name":"Hawaii","postal":"HI","fips":"15","lonLat":[-155.5,19.7],"capital":"Honolulu","sameStateCities":["Hilo","Kailua","Kahului"],"largestCity":"Honolulu","nickname":{"text":"Aloha State","status":"unverified","others":[]},"facts":["Hawaii is the only US state made up entirely of islands.","Hawaii's islands were built by volcanoes, and Kilauea is one of the most active on Earth."]},
- {"id":"idaho","name":"Idaho","postal":"ID","fips":"16","lonLat":[-114.5,44.4],"capital":"Boise","sameStateCities":["Pocatello","Idaho Falls","Coeur d'Alene"],"largestCity":"Boise","nickname":{"text":"Gem State","status":"unverified","others":[]},"facts":["Idaho grows more potatoes than any other state.","Hells Canyon, on the Idaho-Oregon border, is the deepest river gorge in North America."]},
- {"id":"montana","name":"Montana","postal":"MT","fips":"30","lonLat":[-109.6,47],"capital":"Helena","sameStateCities":["Billings","Missoula","Bozeman"],"largestCity":"Billings","nickname":{"text":"Treasure State","status":"unverified","others":["Big Sky Country"]},"facts":["Montana's Treasure State nickname comes from its gold and silver mines.","Part of Yellowstone National Park is in Montana."]},
- {"id":"nevada","name":"Nevada","postal":"NV","fips":"32","lonLat":[-116.6,39.3],"capital":"Carson City","sameStateCities":["Las Vegas","Reno","Henderson"],"largestCity":"Las Vegas","nickname":{"text":"Silver State","status":"unverified","others":["Sagebrush State","Battle Born State"]},"facts":["Nevada became a state during the Civil War, which is why its flag says Battle Born.","Hoover Dam stands on the Colorado River at the Nevada-Arizona border."]},
- {"id":"new-mexico","name":"New Mexico","postal":"NM","fips":"35","lonLat":[-106,34.4],"capital":"Santa Fe","sameStateCities":["Albuquerque","Las Cruces","Roswell"],"largestCity":"Albuquerque","nickname":{"text":"Land of Enchantment","status":"unverified","others":[]},"facts":["Santa Fe is the highest state capital in the US, at about 7,000 feet.","Carlsbad Caverns in New Mexico has a huge underground chamber called the Big Room."]},
- {"id":"oregon","name":"Oregon","postal":"OR","fips":"41","lonLat":[-120.5,43.9],"capital":"Salem","sameStateCities":["Portland","Eugene","Bend"],"largestCity":"Portland","nickname":{"text":"Beaver State","status":"unverified","others":[]},"facts":["Crater Lake in Oregon is the deepest lake in the United States.","The American beaver is Oregon's state animal."]},
- {"id":"utah","name":"Utah","postal":"UT","fips":"49","lonLat":[-111.7,39.3],"capital":"Salt Lake City","sameStateCities":["Provo","Ogden","St. George"],"largestCity":"Salt Lake City","nickname":{"text":"Beehive State","status":"unverified","others":[]},"facts":["Utah has five national parks.","The Great Salt Lake is the largest salt lake in the Western Hemisphere."]},
- {"id":"washington","name":"Washington","postal":"WA","fips":"53","lonLat":[-120.4,47.4],"capital":"Olympia","sameStateCities":["Seattle","Spokane","Tacoma"],"largestCity":"Seattle","nickname":{"text":"Evergreen State","status":"unverified","others":[]},"facts":["Washington is the only state named after a US president.","Mount Rainier is the tallest mountain in Washington."]},
- {"id":"wyoming","name":"Wyoming","postal":"WY","fips":"56","lonLat":[-107.5,43],"capital":"Cheyenne","sameStateCities":["Casper","Laramie","Jackson"],"largestCity":"Cheyenne","nickname":{"text":"Equality State","status":"unverified","others":["Cowboy State"]},"facts":["Yellowstone, mostly in Wyoming, became the world's first national park in 1872.","Wyoming gave women the right to vote in 1869, long before the rest of the country."]}
+{
+"id": "alaska",
+"name": "Alaska",
+"postal": "AK",
+"fips": "02",
+"lonLat": [
+-152,
+64
+],
+"capital": "Juneau",
+"sameStateCities": [
+"Anchorage",
+"Fairbanks",
+"Sitka"
+],
+"largestCity": "Anchorage",
+"nickname": {
+"text": "Last Frontier",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Alaska is the largest US state by area.",
+"Denali, in Alaska, is the tallest mountain in North America."
+],
+"neighbors": [
+"washington"
+]
+},
+{
+"id": "arizona",
+"name": "Arizona",
+"postal": "AZ",
+"fips": "04",
+"lonLat": [
+-111.7,
+34.3
+],
+"capital": "Phoenix",
+"sameStateCities": [
+"Tucson",
+"Mesa",
+"Flagstaff"
+],
+"largestCity": "Phoenix",
+"nickname": {
+"text": "Grand Canyon State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"The Grand Canyon, in northern Arizona, was carved by the Colorado River.",
+"Saguaro cacti in Arizona's Sonoran Desert can grow over 40 feet tall."
+],
+"neighbors": [
+"california",
+"nevada",
+"utah",
+"new-mexico"
+]
+},
+{
+"id": "california",
+"name": "California",
+"postal": "CA",
+"fips": "06",
+"lonLat": [
+-119.6,
+37.2
+],
+"capital": "Sacramento",
+"sameStateCities": [
+"Los Angeles",
+"San Francisco",
+"San Diego"
+],
+"largestCity": "Los Angeles",
+"nickname": {
+"text": "Golden State",
+"status": "official",
+"others": []
+},
+"facts": [
+"California has more people than any other US state.",
+"Coast redwoods in California are the tallest trees in the world."
+],
+"neighbors": [
+"oregon",
+"nevada",
+"arizona",
+"hawaii"
+]
+},
+{
+"id": "colorado",
+"name": "Colorado",
+"postal": "CO",
+"fips": "08",
+"lonLat": [
+-105.5,
+39
+],
+"capital": "Denver",
+"sameStateCities": [
+"Aurora",
+"Colorado Springs",
+"Boulder"
+],
+"largestCity": "Denver",
+"nickname": {
+"text": "Centennial State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Colorado joined the US in 1876, 100 years after the Declaration of Independence.",
+"Denver is called the Mile High City because it sits about one mile above sea level."
+],
+"neighbors": [
+"wyoming",
+"utah",
+"new-mexico"
+]
+},
+{
+"id": "hawaii",
+"name": "Hawaii",
+"postal": "HI",
+"fips": "15",
+"lonLat": [
+-155.5,
+19.7
+],
+"capital": "Honolulu",
+"sameStateCities": [
+"Hilo",
+"Kailua",
+"Kahului"
+],
+"largestCity": "Honolulu",
+"nickname": {
+"text": "Aloha State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Hawaii is the only US state made up entirely of islands.",
+"Hawaii's islands were built by volcanoes, and Kilauea is one of the most active on Earth."
+],
+"neighbors": [
+"california"
+]
+},
+{
+"id": "idaho",
+"name": "Idaho",
+"postal": "ID",
+"fips": "16",
+"lonLat": [
+-114.5,
+44.4
+],
+"capital": "Boise",
+"sameStateCities": [
+"Pocatello",
+"Idaho Falls",
+"Coeur d'Alene"
+],
+"largestCity": "Boise",
+"nickname": {
+"text": "Gem State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Idaho grows more potatoes than any other state.",
+"Hells Canyon, on the Idaho-Oregon border, is the deepest river gorge in North America."
+],
+"neighbors": [
+"washington",
+"oregon",
+"nevada",
+"utah",
+"wyoming",
+"montana"
+]
+},
+{
+"id": "montana",
+"name": "Montana",
+"postal": "MT",
+"fips": "30",
+"lonLat": [
+-109.6,
+47
+],
+"capital": "Helena",
+"sameStateCities": [
+"Billings",
+"Missoula",
+"Bozeman"
+],
+"largestCity": "Billings",
+"nickname": {
+"text": "Treasure State",
+"status": "unverified",
+"others": [
+"Big Sky Country"
+]
+},
+"facts": [
+"Montana's Treasure State nickname comes from its gold and silver mines.",
+"Part of Yellowstone National Park is in Montana."
+],
+"neighbors": [
+"idaho",
+"wyoming"
+]
+},
+{
+"id": "nevada",
+"name": "Nevada",
+"postal": "NV",
+"fips": "32",
+"lonLat": [
+-116.6,
+39.3
+],
+"capital": "Carson City",
+"sameStateCities": [
+"Las Vegas",
+"Reno",
+"Henderson"
+],
+"largestCity": "Las Vegas",
+"nickname": {
+"text": "Silver State",
+"status": "unverified",
+"others": [
+"Sagebrush State",
+"Battle Born State"
+]
+},
+"facts": [
+"Nevada became a state during the Civil War, which is why its flag says Battle Born.",
+"Hoover Dam stands on the Colorado River at the Nevada-Arizona border."
+],
+"neighbors": [
+"oregon",
+"idaho",
+"utah",
+"arizona",
+"california"
+]
+},
+{
+"id": "new-mexico",
+"name": "New Mexico",
+"postal": "NM",
+"fips": "35",
+"lonLat": [
+-106,
+34.4
+],
+"capital": "Santa Fe",
+"sameStateCities": [
+"Albuquerque",
+"Las Cruces",
+"Roswell"
+],
+"largestCity": "Albuquerque",
+"nickname": {
+"text": "Land of Enchantment",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Santa Fe is the highest state capital in the US, at about 7,000 feet.",
+"Carlsbad Caverns in New Mexico has a huge underground chamber called the Big Room."
+],
+"neighbors": [
+"arizona",
+"colorado"
+]
+},
+{
+"id": "oregon",
+"name": "Oregon",
+"postal": "OR",
+"fips": "41",
+"lonLat": [
+-120.5,
+43.9
+],
+"capital": "Salem",
+"sameStateCities": [
+"Portland",
+"Eugene",
+"Bend"
+],
+"largestCity": "Portland",
+"nickname": {
+"text": "Beaver State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Crater Lake in Oregon is the deepest lake in the United States.",
+"The American beaver is Oregon's state animal."
+],
+"neighbors": [
+"washington",
+"idaho",
+"nevada",
+"california"
+]
+},
+{
+"id": "utah",
+"name": "Utah",
+"postal": "UT",
+"fips": "49",
+"lonLat": [
+-111.7,
+39.3
+],
+"capital": "Salt Lake City",
+"sameStateCities": [
+"Provo",
+"Ogden",
+"St. George"
+],
+"largestCity": "Salt Lake City",
+"nickname": {
+"text": "Beehive State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Utah has five national parks.",
+"The Great Salt Lake is the largest salt lake in the Western Hemisphere."
+],
+"neighbors": [
+"idaho",
+"wyoming",
+"colorado",
+"arizona",
+"nevada"
+]
+},
+{
+"id": "washington",
+"name": "Washington",
+"postal": "WA",
+"fips": "53",
+"lonLat": [
+-120.4,
+47.4
+],
+"capital": "Olympia",
+"sameStateCities": [
+"Seattle",
+"Spokane",
+"Tacoma"
+],
+"largestCity": "Seattle",
+"nickname": {
+"text": "Evergreen State",
+"status": "unverified",
+"others": []
+},
+"facts": [
+"Washington is the only state named after a US president.",
+"Mount Rainier is the tallest mountain in Washington."
+],
+"neighbors": [
+"oregon",
+"idaho",
+"alaska"
+]
+},
+{
+"id": "wyoming",
+"name": "Wyoming",
+"postal": "WY",
+"fips": "56",
+"lonLat": [
+-107.5,
+43
+],
+"capital": "Cheyenne",
+"sameStateCities": [
+"Casper",
+"Laramie",
+"Jackson"
+],
+"largestCity": "Cheyenne",
+"nickname": {
+"text": "Equality State",
+"status": "unverified",
+"others": [
+"Cowboy State"
+]
+},
+"facts": [
+"Yellowstone, mostly in Wyoming, became the world's first national park in 1872.",
+"Wyoming gave women the right to vote in 1869, long before the rest of the country."
+],
+"neighbors": [
+"montana",
+"idaho",
+"utah",
+"colorado"
+]
+}
 ]
