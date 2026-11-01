@@ -1,69 +1,29 @@
-import { geoNaturalEarth1, geoPath, type GeoPermissibleObjects } from 'd3-geo';
 import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type WheelEvent } from 'react';
-import { feature } from 'topojson-client';
+import { clampView, type MapDef, type View } from '../content/maps';
 import { useKeys } from './keys';
-import type { GeometryCollection, Topology } from 'topojson-specification';
-import topology from 'world-atlas/countries-50m.json';
 
-const WIDTH = 960;
-const HEIGHT = 500;
-
-const projection = geoNaturalEarth1().fitSize([WIDTH, HEIGHT], { type: 'Sphere' });
-const pathOf = geoPath(projection);
-
-const topo = topology as unknown as Topology<{ countries: GeometryCollection<{ name: string }> }>;
-const countries = feature(topo, topo.objects.countries).features.map((f) => ({
-  id: String(f.id),
-  d: pathOf(f as GeoPermissibleObjects) ?? '',
-}));
-
-export function project(lonLat: readonly [number, number]): [number, number] {
-  return projection([lonLat[0], lonLat[1]]) ?? [0, 0];
-}
-
-export interface View {
-  x: number;
-  y: number;
-  w: number;
-}
-
-const WORLD: View = { x: 0, y: 0, w: WIDTH };
-/** Fits Europe from Iberia to the Aegean and north past Britain, padded to the map's aspect ratio. */
-export const EUROPE: View = (() => {
-  const corners = [[-13, 35], [-13, 59], [30, 35], [30, 59], [8, 35], [8, 59]].map((c) => project(c as [number, number]));
-  const xs = corners.map((c) => c[0]);
-  const ys = corners.map((c) => c[1]);
-  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  const w = Math.max(x1 - x0, ((y1 - y0) * WIDTH) / HEIGHT);
-  return { x: (x0 + x1 - w) / 2, y: (y0 + y1 - (w * HEIGHT) / WIDTH) / 2, w };
-})();
-
-export const clampView = (v: View): View => {
-  const w = Math.min(WIDTH, Math.max(70, v.w));
-  const h = (w * HEIGHT) / WIDTH;
-  return { w, x: Math.min(WIDTH - w, Math.max(0, v.x)), y: Math.min(HEIGHT - h, Math.max(0, v.y)) };
-};
+export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable';
 
 interface Props {
-  highlights?: Record<string, 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas'>;
-  onCountryClick?: (isoNumeric: string) => void;
-  initialView?: View;
-  /** Overlays receive the current scale so markers stay a constant on-screen size when zoomed. */
+  map: MapDef;
+  highlights?: Record<string, Highlight>;
+  onFeatureClick?: (featureId: string) => void;
+  /** Overlays receive the scale, so markers stay a constant on-screen size when zoomed. */
   children?: (scale: number) => ReactNode;
   label: string;
   interactive?: boolean;
 }
 
-export function WorldMap({ highlights = {}, onCountryClick, initialView = EUROPE, children, label, interactive = true }: Props) {
-  const [view, setView] = useState<View>(() => clampView(initialView));
-  const svg = useRef<SVGSVGElement>(null);
+export function WorldMap({ map, highlights = {}, onFeatureClick, children, label, interactive = true }: Props) {
+  const home = (map.presets[0] as { view: View }).view;
+  const [view, setView] = useState<View>(() => clampView(home, map));
   const drag = useRef<{ x: number; y: number; view: View; moved: boolean } | null>(null);
-  const height = (view.w * HEIGHT) / WIDTH;
-  const scale = view.w / WIDTH;
+  const ratio = map.height / map.width;
+  const scale = view.w / map.width;
 
   const shapes = useMemo(
     () =>
-      countries.map((c, i) => {
+      map.features.map((c, i) => {
         const h = highlights[c.id];
         return (
           <path
@@ -71,22 +31,21 @@ export function WorldMap({ highlights = {}, onCountryClick, initialView = EUROPE
             d={c.d}
             className={`land${h ? ` land-${h}` : ''}`}
             onClick={() => {
-              if (!drag.current?.moved) onCountryClick?.(c.id);
+              if (!drag.current?.moved) onFeatureClick?.(c.id);
             }}
           />
         );
       }),
-    [highlights, onCountryClick],
+    [map, highlights, onFeatureClick],
   );
 
   const zoom = (factor: number, cx = 0.5, cy = 0.5) =>
     setView((v) => {
-      const w = Math.min(WIDTH, Math.max(70, v.w * factor));
-      const h = (v.w * HEIGHT) / WIDTH;
-      return clampView({ w, x: v.x + (v.w - w) * cx, y: v.y + (h - (w * HEIGHT) / WIDTH) * cy });
+      const w = Math.min(map.width, Math.max(70, v.w * factor));
+      return clampView({ w, x: v.x + (v.w - w) * cx, y: v.y + (v.w - w) * ratio * cy }, map);
     });
 
-  const pan = (dx: number, dy: number) => setView((v) => clampView({ ...v, x: v.x + dx * v.w, y: v.y + dy * v.w }));
+  const pan = (dx: number, dy: number) => setView((v) => clampView({ ...v, x: v.x + dx * v.w, y: v.y + dy * v.w }, map));
   useKeys(
     interactive
       ? {
@@ -119,21 +78,21 @@ export function WorldMap({ highlights = {}, onCountryClick, initialView = EUROPE
     if (Math.hypot(dx, dy) > 5) d.moved = true;
     if (!d.moved) return;
     const units = d.view.w / e.currentTarget.getBoundingClientRect().width;
-    setView(clampView({ ...d.view, x: d.view.x - dx * units, y: d.view.y - dy * units }));
+    setView(clampView({ ...d.view, x: d.view.x - dx * units, y: d.view.y - dy * units }, map));
   };
 
   return (
     <div className="map">
       <svg
-        ref={svg}
         role="img"
         aria-label={label}
-        viewBox={`${view.x} ${view.y} ${view.w} ${height}`}
+        viewBox={`${view.x} ${view.y} ${view.w} ${view.w * ratio}`}
+        style={{ aspectRatio: `${map.width} / ${map.height}` }}
         onWheel={onWheel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
       >
-        <rect x={0} y={0} width={WIDTH} height={HEIGHT} className="sea" />
+        <rect x={0} y={0} width={map.width} height={map.height} className="sea" />
         {shapes}
         {children?.(scale)}
       </svg>
@@ -141,22 +100,23 @@ export function WorldMap({ highlights = {}, onCountryClick, initialView = EUROPE
         <div className="map-controls">
           <button type="button" aria-label="Zoom in" onClick={() => zoom(0.7)}>+</button>
           <button type="button" aria-label="Zoom out" onClick={() => zoom(1.4)}>−</button>
-          <button type="button" onClick={() => setView(clampView(EUROPE))}>Europe</button>
-          <button type="button" onClick={() => setView(WORLD)}>World</button>
+          {map.presets.map((p) => (
+            <button key={p.label} type="button" onClick={() => setView(clampView(p.view, map))}>{p.label}</button>
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-export function Marker({ lonLat, scale, label, onClick, tone = 'default' }: {
-  lonLat: readonly [number, number];
+export function Marker({ at, scale, label, onClick, tone = 'default' }: {
+  at: [number, number];
   scale: number;
   label: string;
   onClick?: () => void;
   tone?: 'default' | 'done' | 'current' | 'correct' | 'wrong';
 }) {
-  const [x, y] = project(lonLat);
+  const [x, y] = at;
   const r = 15 * scale;
   return (
     <g className={`marker marker-${tone}`} onClick={onClick}>

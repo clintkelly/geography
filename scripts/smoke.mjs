@@ -17,14 +17,42 @@ const save = () => page.evaluate(() => new Promise((resolve, reject) => {
   const open = indexedDB.open('atlaswild', 1);
   open.onerror = () => reject(open.error);
   open.onsuccess = () => {
-    const get = open.result.transaction('saves').objectStore('saves').get('household');
-    get.onsuccess = () => { open.result.close(); resolve(get.result); };
+    const store = open.result.transaction('saves').objectStore('saves');
+    const meta = store.get('meta');
+    meta.onsuccess = () => {
+      const get = store.get(`profile:${meta.result.activeProfileId}`);
+      get.onsuccess = () => { open.result.close(); resolve(get.result); };
+    };
   };
 }));
 const shot = async (name) => { if (shots) await page.screenshot({ path: `${shots}/${name}.png`, fullPage: true }); };
 const click = (name) => page.getByRole('button', { name, exact: true }).click();
 
+// Upgrade: an old save, written before the app first opens, reaches both children.
+await page.goto('http://localhost:5199/art/slatepaw.png');
+await page.evaluate(() => new Promise((resolve, reject) => {
+  const open = indexedDB.open('atlaswild', 1);
+  open.onupgradeneeded = () => open.result.createObjectStore('saves');
+  open.onerror = () => reject(open.error);
+  open.onsuccess = () => {
+    const tx = open.result.transaction('saves', 'readwrite');
+    tx.objectStore('saves').put({
+      schemaVersion: 1, contentVersion: 'old',
+      profile: { id: 'old', displayName: 'Explorer', avatarId: 'explorer' },
+      companion: { instanceId: 'old-1', speciesId: 'slatepaw', bondXp: 0 },
+      souvenirIds: ['compass'], completedExpeditions: 1, nextId: 30, rngState: 77,
+      offer: { id: 'o', reward: { kind: 'souvenir', souvenirId: 'shell' } },
+      expedition: null, attempts: [], recentQuestionIds: [], appliedRewardIds: ['e1'], lastSummary: null,
+    }, 'household');
+    tx.oncomplete = () => { open.result.close(); resolve(); };
+  };
+}));
 await page.goto('http://localhost:5199/');
+const profileButton = (name) => page.getByRole('button', { name: new RegExp(name) });
+await profileButton('Explorer 1').waitFor();
+assert.equal(await page.getByText('1 expeditions').count(), 2, 'both children received the old save');
+await shot('0-profiles');
+await profileButton('Explorer 1').click();
 await page.getByRole('button', { name: 'Start expedition' }).waitFor();
 await shot('1-camp');
 await click('Start expedition');
@@ -53,7 +81,7 @@ let reloaded = false;
 for (let encounter = 0; encounter < 3; encounter++) {
   await click('Begin encounter');
   while (true) {
-    await click('Attack');
+    await page.getByRole('button', { name: /^Attack/ }).click();
     await page.locator('.option').first().waitFor();
     const before = await save();
     const b = before.expedition.battle;
@@ -97,8 +125,8 @@ await shot('8-camp-after');
 await page.reload();
 await page.getByRole('button', { name: 'Start expedition' }).waitFor();
 const final = await save();
-assert.equal(final.completedExpeditions, 1);
-assert.equal(final.souvenirIds.length, 1);
+assert.equal(final.completedExpeditions, 2);
+assert.equal(final.souvenirIds.length, 2);
 
 // Second expedition, keyboard only.
 const key = (k) => page.keyboard.press(k);
@@ -130,15 +158,87 @@ for (let done = 0; done < 3; done++) {
     await page.getByRole('button', { name: 'Continue' }).waitFor();
     await key('Enter');
     await page.getByRole('button', { name: 'Continue' }).waitFor({ state: 'detached' });
-    await page.getByRole('button', { name: /Attack|Begin encounter|Claim reward/ }).waitFor();
+    await page.getByRole('button', { name: /Attack|Begin encounter|Try again|Claim reward/ }).waitFor();
     if (!(await page.getByRole('button', { name: 'Attack' }).isVisible())) break;
   }
 }
 await page.getByText('Expedition complete!').waitFor();
 await key('Enter');
 await page.getByText('Welcome back to camp!').waitFor();
-assert.equal((await save()).completedExpeditions, 2, 'keyboard-only expedition completes');
+assert.equal((await save()).completedExpeditions, 3, 'keyboard-only expedition completes');
 
+
+// Isolation: the other child sees none of that progress.
+await key('p');
+await profileButton('Explorer 2').waitFor();
+await shot('8b-profiles-after');
+await key('2');
+await page.getByRole('button', { name: 'Start expedition' }).waitFor();
+assert.equal((await save()).completedExpeditions, 1, 'Explorer 2 keeps his own count');
+
+// Expert: Guard and Special by key, and a click-the-state question.
+await page.getByRole('button', { name: /Expert/ }).click();
+await key('Enter');
+await page.getByText('Where was it seen?').waitFor();
+e = (await save()).expedition;
+assert.equal(e.difficulty, 'expert');
+await shot('10-us-discovery');
+await key(String(e.candidateIds.indexOf(e.targetId) + 1));
+await page.getByRole('button', { name: 'Begin encounter' }).waitFor();
+await key('Enter');
+await page.getByRole('button', { name: 'Attack' }).waitFor();
+
+let guarded = false;
+let clicked = false;
+let specialled = false;
+for (let turns = 0; turns < 40 && !(clicked && specialled); turns++) {
+  const button = await page.getByRole('button', { name: /Attack|Begin encounter|Try again|Claim reward/ }).first().textContent();
+  if (/Begin|Try again/.test(button)) { await key('Enter'); await page.getByRole('button', { name: 'Attack' }).waitFor(); continue; }
+  if (/Claim/.test(button)) break;
+  const charge = (await save()).expedition.battle.combat.charge;
+  if (charge === 2) { await shot('11-special-ready'); await key('s'); specialled = true; }
+  else if (!guarded) { await key('g'); guarded = true; }
+  else await key('a');
+  await page.locator('.question h2').waitFor();
+  const b = (await save()).expedition.battle;
+  assert.notEqual(b.action, undefined);
+  if (b.question.inputType === 'map-click') {
+    await shot('12-map-click');
+    // Clicks a selectable shape; any of them is a valid submission for this check.
+    await page.locator('.question .map path.land-selectable').first().dispatchEvent('click');
+    clicked = true;
+  } else {
+    await key(String(b.question.options.findIndex((o) => o.id === b.question.acceptedId) + 1));
+  }
+  await page.getByRole('button', { name: 'Continue' }).waitFor();
+  const r = (await save()).expedition?.battle?.result;
+  if (b.question.inputType === 'map-click') assert.equal(typeof r?.correct, 'boolean', 'a map click submits an answer');
+  await shot('13-feedback');
+  await key('Enter');
+  await page.getByRole('button', { name: 'Continue' }).waitFor({ state: 'detached' });
+  await page.getByRole('button', { name: /Attack|Begin encounter|Try again|Claim reward/ }).first().waitFor();
+}
+assert.ok(specialled, 'Special reached by key');
+assert.ok(guarded, 'Guard reached by key');
+await page.getByRole('button', { name: 'Leave expedition' }).focus().catch(() => undefined);
+if (await page.getByRole('button', { name: 'Leave expedition' }).count()) await key('Enter');
+await page.getByRole('button', { name: 'Start expedition' }).waitFor();
+
+// Backup and restore: restoring brings Explorer 2's old count back after more play.
+await key('o');
+await page.getByRole('heading', { name: /Settings for Explorer 2/ }).waitFor();
+await shot('14-settings');
+const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Download backup' }).click()]);
+const backupPath = await download.path();
+await page.locator('input[type=file]').setInputFiles({ name: 'bad.json', mimeType: 'application/json', buffer: Buffer.from('{}') });
+await page.getByText(/Nothing changed/).waitFor();
+await page.getByLabel('Name').fill('Renamed');
+page.once('dialog', (d) => d.accept());
+await page.locator('input[type=file]').setInputFiles(backupPath);
+await profileButton('Explorer 2').waitFor();
+assert.equal(await page.getByRole('button', { name: /Renamed/ }).count(), 0, 'restore replaced the rename');
+await key('1');
+await page.getByRole('button', { name: 'Start expedition' }).waitFor();
 await key('Enter');
 await page.getByText('Where was it seen?').waitFor();
 

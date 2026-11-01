@@ -34,13 +34,13 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 button:disabled { cursor: default; opacity: 0.75; }
 button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
-button.big { font-size: 1.3rem; padding: 14px 44px; }
+button.big { font-size: 1.15rem; }
 button.link { border: 0; background: none; color: var(--muted); text-decoration: underline; padding: 6px; min-height: 0; }
 
 .sprite { image-rendering: pixelated; display: block; }
 .sprite.flip { transform: scaleX(-1); }
 .camp-hero { display: flex; gap: 20px; align-items: center; }
-.offer { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.offer { display: flex; gap: 16px; align-items: center; justify-content: space-between; }
 .offer > div:first-child { flex: 1 1 280px; }
 .reward-preview { margin: 0.5em 0; }
 .summary { background: var(--good); }
@@ -62,10 +62,14 @@ button.link { border: 0; background: none; color: var(--muted); text-decoration:
 .encounter-card { display: flex; gap: 12px; align-items: center; margin: 10px 0; }
 
 .map { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
-.map svg { display: block; width: 100%; height: auto; aspect-ratio: 960 / 500; touch-action: none; cursor: grab; user-select: none; }
+.map svg { display: block; width: 100%; height: auto; touch-action: none; cursor: grab; user-select: none; }
 .sea { fill: var(--sea); }
 .land { fill: var(--land); stroke: var(--land-edge); stroke-width: 0.25; vector-effect: non-scaling-stroke; }
 .land-candidate { fill: var(--candidate); cursor: pointer; }
+.land-selectable { cursor: pointer; }
+.land-selectable:hover { fill: #d6c9a4; }
+.land-correct { fill: #7cc58a; }
+.land-wrong { fill: #eaa56c; }
 .land-atlas { fill: #d98a4b; }
 .land-ruledOut { fill: #cfc7b4; }
 .land-route { fill: var(--route); }
@@ -105,6 +109,22 @@ button.link { border: 0; background: none; color: var(--muted); text-decoration:
 .feedback.notyet { background: var(--notyet); }
 .complete { display: grid; justify-items: center; text-align: center; gap: 6px; padding: 32px; }
 
+button:disabled:not(.option) small { opacity: 0.8; }
+.action-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+.action-row small { display: block; font-size: 0.72rem; font-weight: 400; }
+button.big { padding: 12px 14px; }
+.charge { display: flex; align-items: center; gap: 4px; background: rgba(255, 253, 247, 0.92); border-radius: 6px; padding: 2px 8px; margin-top: 4px; font-size: 0.8rem; width: fit-content; }
+.pip { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--ink); }
+.pip.on { background: var(--candidate); }
+.who { display: flex; align-items: center; gap: 8px; }
+.topbar-button { min-height: 28px; padding: 2px 10px; font-size: 0.8rem; }
+.profiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.profile-card { display: grid; justify-items: center; gap: 4px; padding: 20px; background: var(--panel); }
+.picker { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+.picker button[aria-pressed='true'] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.field { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+.field input:not([type]), .field select { font: inherit; padding: 6px 8px; }
+.back { justify-self: start; }
 kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; padding: 3px 5px; margin: 0 4px; border-radius: 4px; border: 1px solid currentColor; opacity: 0.65; vertical-align: 0.1em; }
 .option kbd { margin-left: 0; }
 .option-label { vertical-align: middle; }

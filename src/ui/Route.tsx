@@ -1,19 +1,20 @@
 import { useMemo } from 'react';
 import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
 import { Sprite } from './art';
-import { place, rewardLabel, species } from './content';
+import { mapFor, place, rewardLabel, species } from './content';
 import { Key, useKeys } from './keys';
-import { Marker, project, WorldMap } from './WorldMap';
+import { Marker, WorldMap } from './WorldMap';
 
 export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
   useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });
   const index = currentSlotIndex(e);
   const slot = e.slots[index];
-  const highlights = useMemo(() => Object.fromEntries(e.slots.map((s) => [place(s.locationId).isoNumeric, 'route' as const])), [e.slots]);
+  const highlights = useMemo(() => Object.fromEntries(e.slots.map((s) => [place(s.locationId).featureId, 'route' as const])), [e.slots]);
   if (!slot) return null;
   const opponent = species(slot.opponentId);
   const stops = e.slots.map((s) => place(s.locationId));
-  const line = stops.map((p) => project(p.lonLat).join(',')).join(' ');
+  const map = mapFor(e.regionId);
+  const line = stops.map((p) => map.project(p.lonLat).join(',')).join(' ');
 
   return (
     <div className="discovery">
@@ -35,12 +36,12 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
         <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : 'Begin encounter'} <Key k="Enter" /></button>
       </section>
       <section className="discovery-map">
-        <WorldMap label={`Route map. Next stop: ${place(slot.locationId).name}`} highlights={highlights}>
+        <WorldMap map={map} label={`Route map. Next stop: ${place(slot.locationId).name}`} highlights={highlights}>
           {(scale) => (
             <>
               <polyline points={line} className="route-line" strokeWidth={2.5 * scale} strokeDasharray={`${6 * scale} ${5 * scale}`} />
               {e.slots.map((s, i) => (
-                <Marker key={s.locationId} lonLat={place(s.locationId).lonLat} scale={scale} label={s.status === 'won' ? '✓' : String(i + 1)} tone={s.status === 'won' ? 'done' : i === index ? 'current' : 'default'} />
+                <Marker key={s.locationId} at={map.project(place(s.locationId).lonLat)} scale={scale} label={s.status === 'won' ? '✓' : String(i + 1)} tone={s.status === 'won' ? 'done' : i === index ? 'current' : 'default'} />
               ))}
             </>
           )}

@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PACK } from '../content/pack';
-import { newSave, reduce, type Command, type SaveData } from '../engine/game';
-import type { SaveStore } from '../persistence/store';
+import { reduce, type Command, type SaveData } from '../engine/game';
+import { openHousehold } from '../persistence/household';
+import type { Household, SaveStore } from '../persistence/store';
 
 export interface GameHandle {
+  household: Household | null;
   save: SaveData | null;
-  /** Fatal load problem; the game does not start, and the stored save is left untouched. */
+  /** Fatal load problem; the game does not start, and stored data is left untouched. */
   loadError: string | null;
   saveFailed: boolean;
   dispatch: (cmd: Command) => void;
+  setActiveProfile: (id: string | null) => void;
+  restore: (household: Household) => void;
 }
 
 /**
@@ -17,40 +21,32 @@ export interface GameHandle {
  * before it is rendered, so animations always show a turn that is already safe.
  */
 export function useGame(store: SaveStore): GameHandle {
-  const [save, setSave] = useState<SaveData | null>(null);
+  const [household, setHousehold] = useState<Household | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
-  const latest = useRef<SaveData | null>(null);
+  const latest = useRef<Household | null>(null);
   const queue = useRef<Promise<void>>(Promise.resolve());
 
-  const commit = useCallback(
-    (next: SaveData) => {
-      latest.current = next;
-      queue.current = queue.current.then(async () => {
-        try {
-          await store.save(next);
-          setSaveFailed(false);
-        } catch {
-          setSaveFailed(true);
-        }
-        setSave(next);
-      });
-    },
-    [store],
-  );
+  const commit = useCallback((next: Household, write: () => Promise<void>) => {
+    latest.current = next;
+    queue.current = queue.current.then(async () => {
+      try {
+        await write();
+        setSaveFailed(false);
+      } catch {
+        setSaveFailed(true);
+      }
+      setHousehold(next);
+    });
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
-    store
-      .load()
-      .then((loaded) => {
+    openHousehold(store, PACK, { seed: Math.floor(Math.random() * 0x7fffffff), makeId: () => crypto.randomUUID() })
+      .then((opened) => {
         if (cancelled) return;
-        if (loaded) {
-          latest.current = loaded;
-          setSave(loaded);
-        } else {
-          commit(newSave(PACK, Math.floor(Math.random() * 0x7fffffff), crypto.randomUUID()));
-        }
+        latest.current = opened;
+        setHousehold(opened);
       })
       .catch((err: unknown) => {
         if (!cancelled) setLoadError(err instanceof Error ? err.message : 'The save could not be read.');
@@ -58,17 +54,33 @@ export function useGame(store: SaveStore): GameHandle {
     return () => {
       cancelled = true;
     };
-  }, [store, commit]);
+  }, [store]);
 
   const dispatch = useCallback(
     (cmd: Command) => {
       const current = latest.current;
-      if (!current) return;
-      const next = reduce(current, cmd, PACK, Date.now());
-      if (next !== current) commit(next);
+      const id = current?.meta.activeProfileId;
+      const save = id ? current?.profiles[id] : undefined;
+      if (!current || !id || !save) return;
+      const nextSave = reduce(save, cmd, PACK, Date.now());
+      if (nextSave === save) return;
+      commit({ ...current, profiles: { ...current.profiles, [id]: nextSave } }, () => store.saveProfile(nextSave));
     },
-    [commit],
+    [commit, store],
   );
 
-  return { save, loadError, saveFailed, dispatch };
+  const setActiveProfile = useCallback(
+    (id: string | null) => {
+      const current = latest.current;
+      if (!current || current.meta.activeProfileId === id) return;
+      const meta = { ...current.meta, activeProfileId: id };
+      commit({ ...current, meta }, () => store.saveMeta(meta));
+    },
+    [commit, store],
+  );
+
+  const restore = useCallback((next: Household) => commit(next, () => store.replace(next)), [commit, store]);
+
+  const id = household?.meta.activeProfileId;
+  return { household, save: id ? (household?.profiles[id] ?? null) : null, loadError, saveFailed, dispatch, setActiveProfile, restore };
 }

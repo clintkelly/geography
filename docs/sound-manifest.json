@@ -1,0 +1,11 @@
+{
+  "tool": "ElevenLabs eleven_text_to_sound_v2",
+  "flowId": "cB2Od1oGTTYZVwVgiH0s",
+  "sounds": {
+    "correct": { "generationId": "g3mVAds15rSZrTbDbCUE", "prompt": "Very short bright cheerful two-note marimba chime for a correct answer in a children's adventure game, clean, no voice, under one second" },
+    "not-yet": { "generationId": "X15525h5ukQiOMBnb1IX", "prompt": "Very short soft gentle low wooden tap, neutral and kind, not a buzzer, not negative, children's game, no voice, under one second" },
+    "win": { "generationId": "wPu407JqPFCckp0Phgpv", "prompt": "Short triumphant rising three-note marimba and bell fanfare for winning a battle in a children's adventure game, no voice, about one second" },
+    "retreat": { "generationId": "S3Yjh9ZczxLBS3qHcOer", "prompt": "Short soft descending two-note woodblock, calm and gentle retreat, not sad, children's adventure game, no voice, under one second" },
+    "card": { "generationId": "Yr6DSNrb4vYTFkRuhfcN", "prompt": "Short sparkling magical shimmer with a soft paper card flip, reward sound for a children's adventure game, no voice, about one second" }
+  }
+}

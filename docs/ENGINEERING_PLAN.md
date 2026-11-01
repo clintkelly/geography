@@ -7,8 +7,8 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | Milestone | State |
 | --- | --- |
 | 1. Core loop | Done; the children enjoyed it |
-| 2. Foundations: backup, profiles, combat choices, US data, difficulty | Next |
-| 3. The Hunt: trails, points, Field Notes | Not started |
+| 2. Foundations: backup, profiles, combat choices, US data, difficulty | Built; awaiting fact review and a playtest |
+| 3. The Hunt: trails, points, Field Notes | Next |
 | 4. Growth: full stable, levels, evolution | Not started |
 | 5. Learning and parent tools | Not started |
 | 6. Polish and playtest | Not started |
@@ -58,21 +58,17 @@ interface StateRecord {
   capital: string;
   sameStateCities: string[];  // real, kid-familiar, never the capital
   largestCity: string;
-  nickname: { text: string; status: 'official' | 'customary'; sourceUrl: string; others: string[] };
-  neighbors: string[];
-  region: 'west' | 'midwest' | 'south' | 'northeast';
-  facts: { id: string; text: string; sourceUrl: string }[];
-  cardArtId: string;
-  reviewed: boolean;
+  nickname: { text: string; status: 'official' | 'unverified'; others: string[] };
+  facts: string[];
 }
 ```
 
-- `content/us/states/*.json` holds one file per region, so review happens in batches.
+- `content/us/west.json` holds the first region; other regions follow as their own files, so review happens in batches.
 - `content/us/templates.ts` turns records into `Question` objects at load time, with stable IDs such as `q-capital-california-ranger-1`.
 - The existing `Question` shape and `pickQuestion` keep working, so combat and saves need no knowledge of templates.
 - Distractors are chosen deterministically per template and difficulty, and the validator runs over every generated question.
 
-Validator additions for §8: same-state cities exclude the capital, no option list has two correct answers, neighbors are symmetric, every fact has a source, `official` nicknames have a source, and unreviewed records can't enter an active pack.
+Validator rules for §8: same-state cities exclude the capital, the largest city is offered, and every option list has one answer. Still to add with Field Notes in Milestone 3: per-fact sources, neighbor data for trail adjacency, and a `reviewed` gate. Nearby wrong answers currently come from the distance between states, which works without neighbor data.
 
 ## Milestone 2: Foundations
 
@@ -93,7 +89,7 @@ Task 1 ships first and on its own, so real saves are protected before any migrat
 
 Tests: backup round trip and rejected bad files (13), migration from a real v1 save (14), profile isolation (1), §6 as a table-driven combat test (3), keyboard bindings for Guard and Special (28), same-state options (10), no two correct answers (11), nickname status (12), map click accuracy after zoom (8), and sound settings per profile with a failed sound not interrupting play (27).
 
-Decision for the migration: Milestone 1 data goes to one child's profile, whichever the parent picks once. Don't duplicate it.
+Decision for the migration: both children get a full copy of the Milestone 1 save, because they played it together. The original v1 record stays in IndexedDB and is included in backups.
 
 **Exit:** both children play on Western states at a difficulty of their choice, make real choices in combat, and have a backup of their saves.
 
@@ -172,6 +168,8 @@ The clock enters learning only through the `now` argument. "Calendar days" use t
 Generation cost isn't a constraint. Jobs are limited to 8 concurrent, so batches need waiting. Evolved forms are the riskiest art, so try one full species before generating the set.
 
 ## Sound budget
+
+First set: five effects in `public/sfx`, listed in `docs/sound-manifest.json`, about 0.3 cents per take (4 takes per request). ElevenLabs ignores length requests and often pads silence, so measure each take's waveform and set its stop point in `ui/sound.ts`. Some takes are nearly silent. A person approves them at `?sounds`.
 
 Connect the ElevenLabs hosted MCP server, then confirm that it offers a sound effects tool. If not, fall back to the older local server. Generate one or two effects first and check the credit cost before making the full set of about 15. Sound IDs live in the UI layer, triggered from state changes after the save, so effects never touch engine rules. Claude can't hear the results, so a person approves them on the dev page.
 

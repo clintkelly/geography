@@ -1,18 +1,18 @@
-import type { Pack, Question } from '../content/types';
-import { resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
+import { DIFFICULTIES, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
+import { canUse, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { Rng } from './rng';
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export const BOND_BONUS_XP = 10;
 const RECENT_QUESTION_LIMIT = 12;
 
-/** Milestone 1 balance. See docs/ENGINEERING_PLAN.md: softer than the PRD's until Guard and Special exist. */
 export const BALANCE = {
   playerMaxHp: 12,
+  playerAttack: 3,
   regularHp: 10,
   guardianHp: 14,
-  enemyPattern: [1, 2, 2],
+  enemyPattern: [2, 2, 4],
   regularMaxTurns: 8,
   guardianMaxTurns: 10,
 } as const;
@@ -50,6 +50,8 @@ export interface Battle {
 
 export interface Expedition {
   id: string;
+  regionId: string;
+  difficulty: Difficulty;
   rngState: number;
   reward: Reward;
   targetId: string;
@@ -80,6 +82,7 @@ export interface Attempt {
   assisted: boolean;
   expeditionId: string;
   battleId?: string;
+  difficulty?: Difficulty;
 }
 
 export interface Summary {
@@ -90,6 +93,26 @@ export interface Summary {
   discoveryAssisted: boolean;
 }
 
+export interface Settings {
+  minDifficulty: Difficulty;
+  maxDifficulty: Difficulty;
+  lastDifficulty: Difficulty;
+  lastRegionId: string;
+  muted: boolean;
+  /** 0 to 1. */
+  volume: number;
+}
+
+export const DEFAULT_SETTINGS: Settings = {
+  minDifficulty: 'scout',
+  maxDifficulty: 'expert',
+  lastDifficulty: 'scout',
+  lastRegionId: 'us-west',
+  muted: false,
+  volume: 0.7,
+};
+
+/** A saved game for one child. */
 export interface SaveData {
   schemaVersion: number;
   contentVersion: string;
@@ -105,10 +128,11 @@ export interface SaveData {
   recentQuestionIds: string[];
   appliedRewardIds: string[];
   lastSummary: Summary | null;
+  settings: Settings;
 }
 
 export type Command =
-  | { type: 'start' }
+  | { type: 'start'; regionId: string; difficulty: Difficulty }
   | { type: 'revealClue' }
   | { type: 'useAtlas' }
   | { type: 'guess'; locationId: string }
@@ -118,7 +142,9 @@ export type Command =
   | { type: 'continue' }
   | { type: 'claimReward' }
   | { type: 'abandon' }
-  | { type: 'dismissSummary' };
+  | { type: 'dismissSummary' }
+  | { type: 'updateSettings'; patch: Partial<Settings> }
+  | { type: 'updateProfile'; patch: Partial<Pick<SaveData['profile'], 'displayName' | 'avatarId'>> };
 
 export function currentSlotIndex(e: Expedition): number {
   return e.slots.findIndex((s) => s.status === 'pending');
@@ -135,11 +161,31 @@ function makeOffer(save: SaveData, pack: Pack, rng: Rng, owned: readonly string[
   return { offer: { id: `offer-${save.nextId}`, reward }, nextId: save.nextId + 1 };
 }
 
-export function newSave(pack: Pack, seed: number, profileId: string): SaveData {
+/** Difficulties a child may pick in a region, within the parent's limits. */
+export function allowedDifficulties(settings: Settings, region: Region): Difficulty[] {
+  const low = DIFFICULTIES.indexOf(settings.minDifficulty);
+  const high = DIFFICULTIES.indexOf(settings.maxDifficulty);
+  const allowed = region.difficulties.filter((d) => DIFFICULTIES.indexOf(d) >= low && DIFFICULTIES.indexOf(d) <= high);
+  // A region without a matching tier still has to be playable.
+  return allowed.length > 0 ? allowed : [region.difficulties[0] as Difficulty];
+}
+
+function questionPool(pack: Pack, e: Pick<Expedition, 'regionId' | 'difficulty'>): Question[] {
+  const region = pack.questions.filter((q) => q.regionId === e.regionId);
+  const tier = region.filter((q) => q.difficulty === e.difficulty);
+  return tier.length > 0 ? tier : region;
+}
+
+function nearestFirst(places: readonly Place[], target: Place): Place[] {
+  const d = (p: Place) => Math.hypot(p.lonLat[0] - target.lonLat[0], p.lonLat[1] - target.lonLat[1]);
+  return [...places].sort((a, b) => d(a) - d(b));
+}
+
+export function newSave(pack: Pack, seed: number, profileId: string, displayName = 'Explorer', avatarId = 'slatepaw'): SaveData {
   const base: SaveData = {
     schemaVersion: SCHEMA_VERSION,
     contentVersion: pack.version,
-    profile: { id: profileId, displayName: 'Explorer', avatarId: 'explorer' },
+    profile: { id: profileId, displayName, avatarId },
     companion: { instanceId: `${profileId}-companion-1`, speciesId: pack.starterSpeciesId, bondXp: 0 },
     souvenirIds: [],
     completedExpeditions: 0,
@@ -151,6 +197,7 @@ export function newSave(pack: Pack, seed: number, profileId: string): SaveData {
     recentQuestionIds: [],
     appliedRewardIds: [],
     lastSummary: null,
+    settings: DEFAULT_SETTINGS,
   };
   return refreshOffer(base, pack);
 }
@@ -161,14 +208,21 @@ function refreshOffer(save: SaveData, pack: Pack): SaveData {
   return { ...save, offer, nextId, rngState: rng.state };
 }
 
-function startExpedition(save: SaveData, pack: Pack): SaveData {
+function startExpedition(save: SaveData, pack: Pack, regionId: string, requested: Difficulty): SaveData {
+  const region = pack.regions.find((r) => r.id === regionId);
+  if (!region) return save;
+  const allowed = allowedDifficulties(save.settings, region);
+  const difficulty = allowed.includes(requested) ? requested : (allowed[0] as Difficulty);
+
   const rng = new Rng(save.rngState);
   const id = `expedition-${save.nextId}`;
-  const places = rng.shuffle(pack.places.filter((p) => pack.clues.some((c) => c.targetId === p.id)));
+  const places = rng.shuffle(pack.places.filter((p) => p.regionId === regionId && pack.clues.some((c) => c.targetId === p.id)));
   const target = places[0];
-  if (!target) throw new Error('No discoverable places in pack');
+  if (!target) throw new Error(`No discoverable places in ${regionId}`);
 
-  const candidateIds = rng.shuffle(places.slice(0, 4).map((p) => p.id));
+  // Harder trails offer neighboring places, which are easier to confuse.
+  const others = difficulty === 'scout' ? places.slice(1) : nearestFirst(places.slice(1), target);
+  const candidateIds = rng.shuffle([target, ...others.slice(0, 3)].map((p) => p.id));
   const clueIds = rng.shuffle(pack.clues.filter((c) => c.targetId === target.id)).map((c) => c.id);
   const regulars = rng.shuffle(pack.regularOpponentIds);
   const guardian = rng.shuffle(pack.guardianIds)[0] as string;
@@ -181,6 +235,8 @@ function startExpedition(save: SaveData, pack: Pack): SaveData {
 
   const expedition: Expedition = {
     id,
+    regionId,
+    difficulty,
     rngState: rng.next() * 0x7fffffff,
     reward: save.offer.reward,
     targetId: target.id,
@@ -198,12 +254,19 @@ function startExpedition(save: SaveData, pack: Pack): SaveData {
     answered: 0,
     correct: 0,
   };
-  return { ...save, expedition, lastSummary: null, nextId: save.nextId + 1, rngState: rng.state };
+  return {
+    ...save,
+    expedition,
+    lastSummary: null,
+    nextId: save.nextId + 1,
+    rngState: rng.state,
+    settings: { ...save.settings, lastDifficulty: difficulty, lastRegionId: regionId },
+  };
 }
 
 function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack): { e: Expedition; question: Question } {
   const rng = new Rng(e.rngState);
-  const picked = pickQuestion(pack.questions, { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
+  const picked = pickQuestion(questionPool(pack, e), { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
   const question = presentQuestion(picked, rng);
   return { e: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id] }, question };
 }
@@ -218,6 +281,8 @@ function enterEncounter(save: SaveData, pack: Pack): SaveData {
   const guardian = slot.kind === 'guardian';
   const combat = startCombat({
     playerMaxHp: BALANCE.playerMaxHp,
+    playerAttack: BALANCE.playerAttack,
+    special: pack.species.find((s) => s.id === save.companion.speciesId)?.special?.template ?? 'strong',
     opponentMaxHp: guardian ? BALANCE.guardianHp : BALANCE.regularHp,
     enemyPattern: BALANCE.enemyPattern,
     maxTurns: guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns,
@@ -247,6 +312,7 @@ function answer(save: SaveData, optionId: string, now: number): SaveData {
     assisted: false,
     expeditionId: e.id,
     battleId: b.id,
+    difficulty: e.difficulty,
   };
   // The answer, slot win and battle state commit together in this one save.
   const slots = e.slots.map((s, i) => (i === b.slotIndex && combat.outcome === 'victory' ? { ...s, status: 'won' as const } : s));
@@ -342,7 +408,7 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
   const e = save.expedition;
   switch (cmd.type) {
     case 'start':
-      return e ? save : startExpedition(save, pack);
+      return e ? save : startExpedition(save, pack, cmd.regionId, cmd.difficulty);
     case 'revealClue':
       if (!e || e.discovery !== 'searching' || e.cluesShown >= e.clueIds.length) return save;
       return { ...save, expedition: { ...e, cluesShown: e.cluesShown + 1 } };
@@ -354,7 +420,7 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'enterEncounter':
       return enterEncounter(save, pack);
     case 'chooseAction':
-      if (!e?.battle || e.battle.phase !== 'choose') return save;
+      if (!e?.battle || e.battle.phase !== 'choose' || !canUse(e.battle.combat, cmd.action)) return save;
       return { ...save, expedition: { ...e, battle: { ...e.battle, phase: 'question', action: cmd.action } } };
     case 'answer':
       return answer(save, cmd.optionId, now);
@@ -367,5 +433,9 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       return refreshOffer({ ...save, expedition: null, recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT) }, pack);
     case 'dismissSummary':
       return save.lastSummary ? { ...save, lastSummary: null } : save;
+    case 'updateSettings':
+      return { ...save, settings: { ...save.settings, ...cmd.patch } };
+    case 'updateProfile':
+      return { ...save, profile: { ...save.profile, ...cmd.patch } };
   }
 }

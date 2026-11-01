@@ -1,20 +1,26 @@
+export type Difficulty = 'scout' | 'ranger' | 'expert';
+export const DIFFICULTIES: readonly Difficulty[] = ['scout', 'ranger', 'expert'];
+
 export interface QuestionOption {
   id: string;
   label: string;
   /** Present for map-marker options; places the marker. */
   lonLat?: readonly [number, number];
+  /** Present for map-click options; the map feature that selects this option. */
+  featureId?: string;
 }
 
 export interface Question {
   id: string;
   version: number;
   objectiveId: string;
-  inputType: 'choice' | 'map-marker';
+  inputType: 'choice' | 'map-marker' | 'map-click';
   prompt: string;
   options: QuestionOption[];
   acceptedId: string;
   explanation: string;
-  difficulty: 'foundation' | 'challenge';
+  difficulty: Difficulty;
+  regionId: string;
   sourceUrl: string;
   /** Destination this question is local to, if any. */
   locationId?: string;
@@ -32,9 +38,22 @@ export interface Clue {
 export interface Place {
   id: string;
   name: string;
-  isoNumeric: string;
+  featureId: string;
+  regionId: string;
   lonLat: readonly [number, number];
   atlas: string[];
+}
+
+export interface Region {
+  id: string;
+  label: string;
+  mapId: 'world' | 'us';
+  difficulties: readonly Difficulty[];
+}
+
+export interface Special {
+  name: string;
+  template: 'strong' | 'heal' | 'protect';
 }
 
 export interface Species {
@@ -42,6 +61,8 @@ export interface Species {
   displayName: string;
   artId: string;
   flavor: string;
+  /** Companions only. */
+  special?: Special;
 }
 
 export interface Souvenir {
@@ -53,6 +74,7 @@ export interface Souvenir {
 
 export interface Pack {
   version: string;
+  regions: readonly Region[];
   questions: readonly Question[];
   clues: readonly Clue[];
   places: readonly Place[];

@@ -254,7 +254,7 @@ Every state has one reviewed record, and questions are generated from it by temp
 | Field Note facts | 3 or more kid-friendly facts |
 | Source URLs | One for each fact |
 
-The game calls these "nicknames." Most state nicknames aren't official: Florida's "Sunshine State" is official, while New York's "Empire State" is customary. Record the status and never claim a nickname is official unless a source says so. Nicknames are separate from state mottos. Where several nicknames exist, use the best-known one as the answer, and never offer another nickname of the same state as a wrong option.
+The game calls these "nicknames." Most state nicknames aren't official: Florida's "Sunshine State" is, while New York's "Empire State" is customary. Record the status, or mark it unverified, and never claim a nickname is official unless a source says so. Nicknames are separate from state mottos. Where several nicknames exist, use the best-known one as the answer, and never offer another nickname of the same state as a wrong option.
 
 Other interesting facts, such as state birds and flowers, are candidates for later templates.
 

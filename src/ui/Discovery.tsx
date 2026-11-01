@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { PACK } from '../content/pack';
 import type { Command, Expedition } from '../engine/game';
-import { place } from './content';
+import { mapFor, place } from './content';
 import { Key, useKeys } from './keys';
-import { Marker, WorldMap } from './WorldMap';
+import { Marker, WorldMap, type Highlight } from './WorldMap';
 
 export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
   const [atlasOpen, setAtlasOpen] = useState(false);
@@ -11,18 +11,19 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
 
   const clues = e.clueIds.slice(0, e.cluesShown).map((id) => PACK.clues.find((c) => c.id === id));
   const lastGuess = e.guesses.at(-1);
+  const map_ = mapFor(e.regionId);
 
   const candidates = e.candidateIds.map((id, i) => ({ id, number: i + 1, place: place(id), ruledOut: e.guesses.includes(id) }));
   const highlights = useMemo(() => {
-    const map: Record<string, 'candidate' | 'ruledOut' | 'atlas'> = {};
-    for (const c of candidates) map[c.place.isoNumeric] = c.ruledOut ? 'ruledOut' : 'candidate';
-    if (atlasPlace) map[place(atlasPlace).isoNumeric] = 'atlas';
+    const map: Record<string, Highlight> = {};
+    for (const c of candidates) map[c.place.featureId] = c.ruledOut ? 'ruledOut' : 'candidate';
+    if (atlasPlace) map[place(atlasPlace).featureId] = 'atlas';
     return map;
   }, [e.guesses, atlasPlace]); // eslint-disable-line
 
   const guess = (locationId: string) => dispatch({ type: 'guess', locationId });
-  const onCountryClick = useMemo(() => (iso: string) => {
-    const hit = e.candidateIds.find((id) => place(id).isoNumeric === iso);
+  const onFeatureClick = useMemo(() => (id: string) => {
+    const hit = e.candidateIds.find((c) => place(c).featureId === id);
     if (hit) dispatch({ type: 'guess', locationId: hit });
   }, [e.candidateIds, dispatch]);
 
@@ -65,9 +66,9 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
       </section>
 
       <section className="discovery-map">
-        <WorldMap label="World map with four numbered places to choose from" highlights={highlights} onCountryClick={onCountryClick}>
+        <WorldMap map={map_} label="Map with four numbered places to choose from" highlights={highlights} onFeatureClick={onFeatureClick}>
           {(scale) => candidates.filter((c) => !c.ruledOut).map((c) => (
-            <Marker key={c.id} lonLat={c.place.lonLat} scale={scale} label={String(c.number)} onClick={() => guess(c.id)} />
+            <Marker key={c.id} at={map_.project(c.place.lonLat)} scale={scale} label={String(c.number)} onClick={() => guess(c.id)} />
           ))}
         </WorldMap>
         <div className="row choices">
