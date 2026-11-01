@@ -4,6 +4,8 @@ export interface HouseholdMeta {
   schemaVersion: number;
   profileIds: string[];
   activeProfileId: string | null;
+  /** The parent's test profile. Stored so a rename can't cause a second one. */
+  testProfileId?: string;
 }
 
 export interface Household {

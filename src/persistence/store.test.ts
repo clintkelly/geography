@@ -45,7 +45,7 @@ describe('household', () => {
   it('creates two independent profiles once, and never again', async () => {
     const store = indexedDbStore(new IDBFactory());
     const first = await openHousehold(store, PACK, env());
-    expect(Object.values(first.profiles).map((p) => p.profile.displayName)).toEqual(['Explorer 1', 'Explorer 2']);
+    expect(first.meta.profileIds.map((id) => first.profiles[id]!.profile.displayName)).toEqual(['Explorer 1', 'Explorer 2', 'Dad']);
     expect(await openHousehold(store, PACK, env())).toEqual(first);
   });
 
@@ -115,13 +115,43 @@ describe('v1 migration', () => {
     await seedLegacy(factory);
     const store = indexedDbStore(factory);
     const h = await openHousehold(store, PACK, env());
-    expect(h.meta.profileIds).toHaveLength(2);
+    expect(h.meta.profileIds).toHaveLength(3);
     expect(await store.loadLegacy()).toEqual(v1Save);
     expect(await openHousehold(indexedDbStore(factory), PACK, env())).toEqual(h);
   });
 
   it('refuses something that is not a v1 save', () => {
     expect(() => migrateV1({ schemaVersion: 7 }, PACK, env())).toThrow(UnsupportedSaveError);
+  });
+});
+
+describe('test profile', () => {
+  it('joins an existing household once, with its own blank save, and leaves the children alone', async () => {
+    const store = indexedDbStore(new IDBFactory());
+    const kids = freshHousehold(PACK, env());
+    await store.replace(kids);
+    const h = await openHousehold(store, PACK, env());
+    expect(h.meta.profileIds).toHaveLength(3);
+    for (const id of kids.meta.profileIds) expect(h.profiles[id]).toEqual(kids.profiles[id]);
+    const dad = h.profiles[h.meta.testProfileId!]!;
+    expect(dad.profile.displayName).toBe('Dad');
+    expect(dad.completedExpeditions).toBe(0);
+    expect(await openHousehold(store, PACK, env())).toEqual(h);
+  });
+
+  it('a renamed test profile is not recreated', async () => {
+    const store = indexedDbStore(new IDBFactory());
+    const h = await openHousehold(store, PACK, env());
+    const id = h.meta.testProfileId!;
+    await store.saveProfile(reduce(h.profiles[id]!, { type: 'updateProfile', patch: { displayName: 'Papa' } }, PACK, 0));
+    expect((await openHousehold(store, PACK, env())).meta.profileIds).toHaveLength(3);
+  });
+
+  it('does not receive a copy of the old saves', async () => {
+    const factory = new IDBFactory();
+    await seedLegacy(factory);
+    const h = await openHousehold(indexedDbStore(factory), PACK, env());
+    expect(h.profiles[h.meta.testProfileId!]!.souvenirIds).toEqual([]);
   });
 });
 

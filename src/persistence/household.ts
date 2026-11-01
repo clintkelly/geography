@@ -77,7 +77,20 @@ function migrateV2(h: Household, pack: Pack): Household {
   return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles };
 }
 
-export async function openHousehold(store: SaveStore, pack: Pack, env: Env): Promise<Household> {
+const TESTER = { displayName: 'Dad', avatarId: 'cragmaw' };
+
+/** Adds the parent's test profile once, leaving the children's saves untouched. */
+export function withTestProfile(h: Household, pack: Pack, env: Env): Household {
+  if (h.meta.testProfileId) return h;
+  const id = env.makeId();
+  const save = newSave(pack, env.seed, id, TESTER.displayName, TESTER.avatarId);
+  return {
+    meta: { ...h.meta, profileIds: [...h.meta.profileIds, id], testProfileId: id },
+    profiles: { ...h.profiles, [id]: save },
+  };
+}
+
+async function loadOrCreate(store: SaveStore, pack: Pack, env: Env): Promise<Household> {
   const existing = await store.load();
   if (existing?.meta.schemaVersion === 2) {
     await store.keepPreUpgrade(2, existing);
@@ -90,6 +103,13 @@ export async function openHousehold(store: SaveStore, pack: Pack, env: Env): Pro
   const created = legacy ? migrateV1(legacy, pack, env) : freshHousehold(pack, env);
   await store.replace(created);
   return created;
+}
+
+export async function openHousehold(store: SaveStore, pack: Pack, env: Env): Promise<Household> {
+  const h = await loadOrCreate(store, pack, env);
+  const complete = withTestProfile(h, pack, env);
+  if (complete !== h) await store.replace(complete);
+  return complete;
 }
 
 const FORMAT = 'atlaswild-backup';
