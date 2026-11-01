@@ -1,10 +1,11 @@
-// Plays real expeditions in a real browser. Expects `npm run dev` on :5199.
+// Plays real expeditions in a real browser. Expects `npm run dev` on :5199, or set SMOKE_URL.
 // Usage: node scripts/smoke.mjs [screenshot-dir]
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 
 const shots = process.argv[2];
+const BASE = process.env.SMOKE_URL ?? 'http://localhost:5199';
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1200, height: 820 }, acceptDownloads: true });
 const page = await context.newPage();
@@ -150,7 +151,7 @@ async function finishTrail(options) {
 }
 
 // Upgrade: an old save, written before the app first opens, reaches both children.
-await page.goto('http://localhost:5199/art/slatepaw.png');
+await page.goto(`${BASE}/art/slatepaw.png`);
 await page.evaluate(() => new Promise((resolve, reject) => {
   const open = indexedDB.open('atlaswild', 1);
   open.onupgradeneeded = () => open.result.createObjectStore('saves');
@@ -168,7 +169,7 @@ await page.evaluate(() => new Promise((resolve, reject) => {
     tx.oncomplete = () => { open.result.close(); resolve(); };
   };
 }));
-await page.goto('http://localhost:5199/');
+await page.goto(`${BASE}/`);
 await button(/Explorer 1/).waitFor();
 assert.equal(await page.getByText('1 expeditions').count(), 2, 'both children received the old save');
 await shot('profiles');
@@ -286,6 +287,26 @@ assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail throug
 await page.keyboard.press('p');
 await button(/Explorer 2/).waitFor();
 await page.keyboard.press('2');
+
+// A camp summary saved by an older version, with none of the newer fields.
+await page.evaluate(() => new Promise((resolve) => {
+  const open = indexedDB.open('atlaswild', 1);
+  open.onsuccess = () => {
+    const tx = open.result.transaction('saves', 'readwrite');
+    const store = tx.objectStore('saves');
+    const meta = store.get('meta');
+    meta.onsuccess = () => {
+      const key = `profile:${meta.result.activeProfileId}`;
+      const get = store.get(key);
+      get.onsuccess = () => {
+        store.put({ ...get.result, lastSummary: { expeditionId: 'old', reward: { kind: 'creature', speciesId: 'cragmaw' }, answered: 9, correct: 8, discoveryAssisted: false, souvenirId: null, cardsEarned: 2 } }, key);
+      };
+    };
+    tx.oncomplete = () => { open.result.close(); resolve(); };
+  };
+}));
+await page.reload();
+await page.getByText('Welcome back to camp!').waitFor();
 
 // Backup and restore.
 await button(/Start expedition/).waitFor();

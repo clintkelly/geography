@@ -142,6 +142,11 @@ describe('v3 migration', () => {
     expect(migrateV3Save({ ...v3('a'), attempts } as unknown as SaveData, PACK).foundPlaces).toEqual(['oregon']);
   });
 
+  it('keeps a summary from an older version', () => {
+    const lastSummary = { expeditionId: 'e', reward: { kind: 'bond', xp: 10 }, answered: 1, correct: 1, discoveryAssisted: false, souvenirId: null, cardsEarned: 0 };
+    expect(migrateV3Save({ ...v3('a'), lastSummary } as unknown as SaveData, PACK).lastSummary).toEqual(lastSummary);
+  });
+
   it('keeps an unfinished trip', () => {
     const trip = reduce(newSave(PACK, 4, 'a'), startCmd(newSave(PACK, 4, 'a')), PACK, 0).expedition;
     expect(migrateV3Save({ ...v3('a'), expedition: trip }, PACK).expedition).toEqual(trip);

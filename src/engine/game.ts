@@ -140,10 +140,11 @@ export interface Summary {
   discoveryAssisted: boolean;
   souvenirId: string | null;
   cardsEarned: number;
-  xpGained: number;
+  /** Summaries saved by older versions don't have these. */
+  xpGained?: number;
   levelUp?: number;
   /** Badges earned by this trip. */
-  newBadges: string[];
+  newBadges?: string[];
 }
 
 export interface Settings {

@@ -69,10 +69,10 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
             <div>
               <h2>Welcome back to camp!</h2>
               {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
-              {s.newBadges.map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
+              {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
               {s.souvenirId && <p>Found on the trail: <strong>{souvenir(s.souvenirId)?.displayName}</strong></p>}
-              <p className="muted">{s.correct} of {s.answered} answers correct · {s.xpGained} bonus XP{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
+              <p className="muted">{s.correct} of {s.answered} answers correct{s.xpGained ? ` · ${s.xpGained} bonus XP` : ''}{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
             </div>
             {s.reward.kind === 'creature' && <Sprite id={species(s.reward.speciesId).artId} size={96} />}
           </div>
