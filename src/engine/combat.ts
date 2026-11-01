@@ -10,6 +10,8 @@ export interface CombatConfig {
   playerMaxHp: number;
   playerAttack: number;
   special: SpecialTemplate;
+  /** Extra Special power from evolving. */
+  specialBonus?: number;
   opponentMaxHp: number;
   enemyPattern: readonly number[];
   maxTurns: number;
@@ -41,6 +43,7 @@ const SPECIAL_LIGHT_DAMAGE = 2;
 const SPECIAL_HEAL = 4;
 const SPECIAL_BLOCK = 4;
 
+
 export function startCombat(config: CombatConfig): CombatState {
   return { ...config, playerHp: config.playerMaxHp, opponentHp: config.opponentMaxHp, charge: 0, turn: 1, outcome: 'active' };
 }
@@ -69,9 +72,10 @@ function playerEffect(state: CombatState, action: CombatAction, correct: boolean
   if (action === 'attack') return { ...none, damage: state.playerAttack, charge: gain };
 
   const spent = state.charge - SPECIAL_COST;
-  if (state.special === 'strong') return { ...none, damage: state.playerAttack + SPECIAL_BONUS, charge: spent };
-  if (state.special === 'heal') return { ...none, damage: SPECIAL_LIGHT_DAMAGE, heal: SPECIAL_HEAL, charge: spent };
-  return { ...none, damage: SPECIAL_LIGHT_DAMAGE, block: SPECIAL_BLOCK, charge: spent };
+  const bonus = state.specialBonus ?? 0;
+  if (state.special === 'strong') return { ...none, damage: state.playerAttack + SPECIAL_BONUS + bonus, charge: spent };
+  if (state.special === 'heal') return { ...none, damage: SPECIAL_LIGHT_DAMAGE, heal: SPECIAL_HEAL + bonus, charge: spent };
+  return { ...none, damage: SPECIAL_LIGHT_DAMAGE, block: SPECIAL_BLOCK + bonus, charge: spent };
 }
 
 export function resolveTurn(

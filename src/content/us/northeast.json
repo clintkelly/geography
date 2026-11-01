@@ -17,16 +17,16 @@
 "largestCity": "Bridgeport",
 "nickname": {
 "text": "Constitution State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "biome": "harbor",
 "facts": [
-"Mark Twain wrote The Adventures of Tom Sawyer while living in Hartford, Connecticut.",
+"Mark Twain was living in Hartford, Connecticut, when he wrote The Adventures of Tom Sawyer.",
 "The first nuclear submarine, USS Nautilus, was built in Groton, Connecticut."
 ],
 "asks": [
-"In which state did Mark Twain write The Adventures of Tom Sawyer?",
+"In which state was Mark Twain living when he wrote The Adventures of Tom Sawyer?",
 "In which state was the first nuclear submarine built?"
 ],
 "neighbors": [
@@ -202,11 +202,11 @@
 },
 "biome": "harbor",
 "facts": [
-"The Statue of Liberty stands in New York Harbor.",
+"The Statue of Liberty stands on federal land in New York Harbor, reached by ferry from New York and New Jersey.",
 "Niagara Falls sits on the border between New York and Canada."
 ],
 "asks": [
-"Which state's harbor holds the Statue of Liberty, by its own name?",
+"The Statue of Liberty stands in the harbor named for the biggest city of which state?",
 "Which state shares Niagara Falls with Canada?"
 ],
 "neighbors": [
@@ -279,11 +279,11 @@
 },
 "biome": "harbor",
 "facts": [
-"Rhode Island is the smallest US state.",
+"Rhode Island is the smallest US state by area.",
 "Newport, Rhode Island, is famous for its grand old mansions."
 ],
 "asks": [
-"Which is the smallest US state?",
+"Which is the smallest US state by area?",
 "Which state's city of Newport is famous for grand mansions?"
 ],
 "neighbors": [

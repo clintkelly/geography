@@ -66,10 +66,17 @@ export function migrateV1(v1: unknown, pack: Pack, env: Env): Household {
 export function migrateV2Save(old: V2Save, pack: Pack): SaveData {
   const { companion, ...rest } = structuredClone(old) as V2Save & { offer?: unknown };
   delete (rest as { offer?: unknown }).offer;
-  const base = { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, companions: [companion], activeCompanionId: companion.instanceId, stateCards: [], seenFacts: [], expedition: null, lastSummary: null, settings: { ...DEFAULT_SETTINGS, ...rest.settings } };
+  const base = { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, companions: [companion], activeCompanionId: companion.instanceId, stateCards: [], seenFacts: [], foundPlaces: [], learning: {}, badges: [], expertTrails: 0, expedition: null, lastSummary: null, settings: { ...DEFAULT_SETTINGS, ...rest.settings } };
   const rng = new Rng(base.rngState);
   const { offers, nextId } = makeOffers(base, pack, rng);
   return { ...base, offers, nextId, rngState: rng.state };
+}
+
+/** Version 4 tracked no map, levels or learning. Found places come from past correct guesses. */
+export function migrateV4Save(old: SaveData): SaveData {
+  const s = structuredClone(old);
+  const found = s.attempts.filter((a) => a.context === 'discovery' && a.correct).map((a) => a.submitted);
+  return { ...s, schemaVersion: SCHEMA_VERSION, foundPlaces: [...new Set(found)], learning: {}, badges: [], expertTrails: 0, settings: { ...DEFAULT_SETTINGS, ...s.settings } };
 }
 
 /** Version 3 had one set of sightings. Now each region has its own, and Field Notes are tracked. An unfinished trip carries on. */
@@ -77,11 +84,12 @@ export function migrateV3Save(old: SaveData, pack: Pack): SaveData {
   const rest = structuredClone(old);
   const rng = new Rng(rest.rngState);
   const { offers, nextId } = makeOffers(rest, pack, rng);
-  return { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, seenFacts: [], offers, nextId, rngState: rng.state };
+  return migrateV4Save({ ...rest, contentVersion: pack.version, seenFacts: [], offers, nextId, rngState: rng.state });
 }
 
 function upgrade(h: Household, pack: Pack): Household {
-  const step = h.meta.schemaVersion === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : (s: SaveData) => migrateV3Save(s, pack);
+  const v = h.meta.schemaVersion;
+  const step = v === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : v === 3 ? (s: SaveData) => migrateV3Save(s, pack) : migrateV4Save;
   return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles: Object.fromEntries(Object.entries(h.profiles).map(([id, s]) => [id, step(s)])) };
 }
 
@@ -128,7 +136,7 @@ export function exportBackup(h: Household, legacy: unknown, now: number, preUpgr
 
 function isSave(s: unknown): s is SaveData {
   const d = s as Partial<SaveData> | null;
-  return !!d && d.schemaVersion === SCHEMA_VERSION && typeof d.profile?.id === 'string' && Array.isArray(d.companions) && d.companions.length > 0 && Array.isArray(d.souvenirIds) && !!d.settings && Array.isArray(d.offers) && Array.isArray(d.seenFacts);
+  return !!d && d.schemaVersion === SCHEMA_VERSION && typeof d.profile?.id === 'string' && Array.isArray(d.companions) && d.companions.length > 0 && Array.isArray(d.souvenirIds) && !!d.settings && Array.isArray(d.offers) && Array.isArray(d.seenFacts) && Array.isArray(d.foundPlaces);
 }
 
 /** Throws without side effects if the file isn't a usable backup. */
@@ -141,7 +149,7 @@ export function parseBackup(text: string, pack: Pack): Household {
   }
   let h = data?.household;
   if (data?.format !== FORMAT || !h?.meta || !h.profiles) throw new UnsupportedSaveError('This file is not an Atlaswild backup.');
-  if (h.meta.schemaVersion === 2 || h.meta.schemaVersion === 3) {
+  if (h.meta.schemaVersion >= 2 && h.meta.schemaVersion < SCHEMA_VERSION) {
     try {
       h = upgrade(h, pack);
     } catch {

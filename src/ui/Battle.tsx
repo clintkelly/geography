@@ -5,7 +5,7 @@ import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
 import { artUrl, Fx, poseUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
-import { place, souvenir, species } from './content';
+import { companionView, place, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
@@ -31,8 +31,9 @@ function specialText(c: CombatState): string {
 }
 
 /** The sprite sits inside a moving wrapper, so mirroring and motion don't fight over `transform`. */
-function Actor({ creature, pose, motion, side, floats, flash, powered }: {
+function Actor({ creature, artId, pose, motion, side, floats, flash, powered }: {
   creature: Species;
+  artId?: string;
   pose: Pose;
   motion?: Motion | undefined;
   side: Side;
@@ -46,7 +47,7 @@ function Actor({ creature, pose, motion, side, floats, flash, powered }: {
       {floats.filter((f) => f.side === side).map((f) => <span key={f.id} className={`float float-${f.kind}${powered ? ' float-big' : ''}`}>{f.text}</span>)}
       {motion === 'shake' && <><Fx id="spark" className="spark" />{powered && <Fx id="spark" className="spark spark-2" />}</>}
       <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}${flash && motion === 'shake' ? ' flash' : ''}`} data-pose={pose}>
-        <img src={poseUrl(creature, pose)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
+        <img src={poseUrl(creature, pose, artId)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
       </div>
     </div>
   );
@@ -54,7 +55,8 @@ function Actor({ creature, pose, motion, side, floats, flash, powered }: {
 
 export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: BattleState; save: SaveData; dispatch: (c: Command) => void }) {
   const slot = e.slots[battle.slotIndex];
-  const companion = species(activeCompanion(save).speciesId);
+  const view = companionView(activeCompanion(save));
+  const companion = view.species;
   const opponent = species(slot?.opponentId ?? '');
   const [frame, setFrame] = useState<Frame | null>(null);
   const answered = battle.result ? `${e.answered}` : '';
@@ -64,6 +66,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [impact, setImpact] = useState<'small' | 'big' | null>(null);
   const [flash, setFlash] = useState(false);
   const [stayGone, setStayGone] = useState(false);
+  const [burst, setBurst] = useState(false);
   const floatId = useRef(0);
   const finalIntro = slot?.kind === 'guardian' && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
   const [intro, setIntro] = useState(finalIntro);
@@ -76,8 +79,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    for (const c of [companion, opponent]) for (const pose of POSES) new Image().src = poseUrl(c, pose);
-  }, [companion, opponent]);
+    for (const pose of POSES) {
+      new Image().src = poseUrl(companion, pose, view.artId);
+      new Image().src = poseUrl(opponent, pose);
+    }
+  }, [companion, opponent, view.artId]);
 
   useEffect(() => {
     // A reload shows the saved feedback without replaying the animation.
@@ -89,7 +95,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     const { events: ev, correct } = battle.result;
     const ending: Ending = outcome !== 'victory' || action === 'befriend' ? 'none' : slot?.status === 'won' ? 'defeated' : 'wornOut';
     const powered = isPowered(e.streak);
-    const frames = turnFrames(action, correct, ev, action !== 'befriend' && outcome !== 'victory', ending, powered);
+    const frames = turnFrames(action, correct, ev, action !== 'befriend' && outcome !== 'victory', ending, powered, !!battle.result.critical);
     // The saved turn is already final. These replay it one hit at a time.
     let hp = { player: battle.combat.playerHp + ev.damageTaken - ev.healed, opponent: battle.combat.opponentHp + ev.damageDealt };
     setShownHp(hp);
@@ -104,6 +110,10 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         const added = f.floats.map((x) => ({ ...x, id: ++floatId.current }));
         setFloats((all) => [...all, ...added]);
         timers.push(setTimeout(() => setFloats((all) => all.filter((x) => !added.includes(x))), 1000));
+      }
+      if (f.burst) {
+        setBurst(true);
+        timers.push(setTimeout(() => setBurst(false), 520));
       }
       if (f.impact) {
         setImpact(f.impact);
@@ -127,6 +137,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       setFrame(null);
       setShownHp(null);
       setFloats([]);
+      setBurst(false);
       setImpact(null);
       setFlash(false);
     };
@@ -149,29 +160,39 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }
   useKeys(keys);
 
+  const hpNow = shownHp?.player ?? combat.playerHp;
+  const lowHp = hpNow > 0 && hpNow / combat.playerMaxHp <= 0.3 && combat.outcome === 'active';
+  const wasLow = useRef(lowHp);
+  useEffect(() => {
+    if (lowHp && !wasLow.current) playSound('heartbeat');
+    wasLow.current = lowHp;
+  }, [lowHp]);
+
   if (!slot) return null;
   const backdrop = artUrl(`backdrop-${place(slot.locationId).biome}`);
   const events = result?.events;
   const log = events && [
-    events.damageDealt > 0 && `${companion.displayName} dealt ${events.damageDealt} damage.`,
-    events.healed > 0 && `${companion.displayName} healed ${events.healed}.`,
+    result?.critical && 'Critical! You remembered your Field Note and gained a charge.',
+    events.damageDealt > 0 && `${view.name} dealt ${events.damageDealt} damage.`,
+    events.healed > 0 && `${view.name} healed ${events.healed}.`,
     events.blocked > 0 && `Blocked ${events.blocked} damage.`,
     events.damageTaken > 0 && `${opponent.displayName} dealt ${events.damageTaken} damage.`,
     battle.befriended && `${opponent.displayName} wants to be your friend!`,
     battle.action === 'befriend' && !result?.correct && `${opponent.displayName} is still deciding. Try another question.`,
     battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'pending' && `${opponent.displayName} is worn out and watching you closely.`,
     battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'won' && `${opponent.displayName} is impressed and steps aside!`,
-    combat.outcome === 'retreat' && `${companion.displayName} retreats safely to the trail.`,
+    combat.outcome === 'retreat' && `${view.name} retreats safely to the trail.`,
     slot.kind === 'regular' && slot.status === 'won' && e.foundSouvenirId && e.slots.filter((s) => s.kind === 'regular' && s.status === 'won').length === 2 && `You found something on the trail: ${souvenir(e.foundSouvenirId)?.displayName}!`,
   ].filter(Boolean).join(' ');
 
   return (
     <div className="battle">
       <TrailBar e={e} />
-      <section className={`scene${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+      <section className={`scene${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+        {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (
           <div className="vs-intro" aria-hidden="true">
-            <img src={poseUrl(companion, 'idle')} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
+            <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
             <strong>VS</strong>
             <img src={poseUrl(opponent, 'idle')} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
           </div>
@@ -184,7 +205,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         )}
         <div className="scene-hud">
           <div>
-            <Hp label={companion.displayName} hp={shownHp?.player ?? combat.playerHp} max={combat.playerMaxHp} />
+            <Hp label={view.name} hp={shownHp?.player ?? combat.playerHp} max={combat.playerMaxHp} />
             <div className="charge" role="img" aria-label={`Charge: ${combat.charge} of ${MAX_CHARGE}`}>
               Charge {Array.from({ length: MAX_CHARGE }, (_, i) => <span key={i} className={i < combat.charge ? 'pip on' : 'pip'} />)}
             </div>
@@ -193,7 +214,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           <Hp label={opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
         </div>
         <div className="scene-floor">
-          <Actor creature={companion} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
+          <Actor creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
           {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
           <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
         </div>

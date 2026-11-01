@@ -9,9 +9,9 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | 1. Core loop | Done; the children enjoyed it |
 | 2. Foundations: backup, profiles, combat choices, US data, difficulty | Built; fact review still open |
 | 3. The Hunt: trails, points, Field Notes, befriending, simple stable | Built, plus all 50 states, 15 creatures, regional backdrops and Field Note recall; awaiting a playtest |
-| 4. Growth: full stable, levels, evolution | Next |
-| 5. Learning and parent tools | Not started |
-| 6. Polish and playtest | Not started |
+| 4. Growth: full stable, levels, evolution | Built; awaiting a playtest |
+| 5. Learning and parent tools | Built; awaiting a playtest |
+| 6. Polish and playtest | Next |
 
 Keyboard shortcuts shipped after Milestone 1 through `useKeys` in `ui/keys.tsx`, and the smoke test plays a keyboard-only expedition. Every new screen must bind its keys and show hints (PRD acceptance 28).
 

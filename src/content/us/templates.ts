@@ -169,11 +169,13 @@ export const allClues = forGroups((g) => g.records.flatMap((s) => buildClues(s, 
 export const usQuestions = allQuestions.filter((q) => q.regionId.startsWith('us-'));
 export const europeQuestions = allQuestions.filter((q) => q.regionId === 'europe');
 
-export const usCards: StateCard[] = STATES.map((s) => ({
+const hintLine = (s: PlaceRecord) => (s.hint ? s.hint[0]?.toUpperCase() + s.hint.slice(1) : s.name);
+
+export const allCards: StateCard[] = [...STATES, ...COUNTRIES].map((s) => ({
   placeId: s.id,
   name: s.name,
   artId: `card-${s.id}`,
-  subtitle: `The ${s.nickname?.text}`,
-  capital: s.capital,
+  subtitle: s.nickname ? `The ${s.nickname.text}` : hintLine(s),
+  capital: s.cityState ? '' : s.capital,
   facts: s.facts,
 }));

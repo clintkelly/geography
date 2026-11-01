@@ -25,7 +25,7 @@ export function Prep({ e, save, dispatch }: { e: Expedition; save: SaveData; dis
     <div className="stack">
       <section className="panel">
         <h1>Prepare for the trail</h1>
-        <p>You have <strong className="points">{e.points} Trail Points</strong>. Spend some now, or keep them for clues on the trail. Leftover points become bond XP.</p>
+        <p>You have <strong className="points">{e.points} Trail Points</strong>. Spend some now, or keep them for clues on the trail. Leftover points become XP.</p>
       </section>
       <section className="panel">
         <h2>Choose your companion</h2>

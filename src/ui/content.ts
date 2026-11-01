@@ -1,7 +1,8 @@
 import { clampView, MAPS, type MapDef, type View } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Place, Region, Species, StateCard } from '../content/types';
-import type { Reward } from '../engine/game';
+import type { Companion, Reward } from '../engine/game';
+import { formOf } from '../engine/progression';
 
 export const place = (id: string) => PACK.places.find((p) => p.id === id) as Place;
 export const species = (id: string) => PACK.species.find((s) => s.id === id) as Species;
@@ -32,6 +33,13 @@ export function mapFor(regionId: string): MapDef {
   return zoomed;
 }
 export const cardFor = (placeId: string) => PACK.cards.find((c) => c.placeId === placeId) as StateCard;
+
+/** How a companion looks and what it's called right now. */
+export function companionView(c: Companion) {
+  const s = species(c.speciesId);
+  const form = formOf(s, c.bondXp);
+  return { species: s, stage: form.stage, artId: form.artId, formName: form.name, name: c.nickname || form.name };
+}
 
 export function rewardLabel(r: Reward): string {
   return r.kind === 'creature' ? species(r.speciesId).displayName : `${r.xp} bond XP for your companion`;

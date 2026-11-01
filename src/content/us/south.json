@@ -54,7 +54,7 @@
 "largestCity": "Little Rock",
 "nickname": {
 "text": "Natural State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "biome": "forest",
@@ -93,17 +93,17 @@
 "largestCity": "Wilmington",
 "nickname": {
 "text": "First State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "biome": "harbor",
 "facts": [
 "Delaware was the first state to approve the US Constitution, in 1787.",
-"Delaware is the second smallest US state."
+"Delaware is the second smallest US state by area."
 ],
 "asks": [
 "Which state was first to approve the US Constitution?",
-"Which state is the second smallest in the country?"
+"Which state is the second smallest in the country by area?"
 ],
 "neighbors": [
 "maryland",
@@ -129,7 +129,7 @@
 "largestCity": "Jacksonville",
 "nickname": {
 "text": "Sunshine State",
-"status": "official",
+"status": "unverified",
 "others": []
 },
 "biome": "swamp",
@@ -170,11 +170,11 @@
 "biome": "forest",
 "facts": [
 "Martin Luther King Jr. was born in Atlanta, Georgia.",
-"Okefenokee Swamp in Georgia is one of the largest blackwater swamps in North America."
+"Okefenokee Swamp, mostly in Georgia, is one of the largest blackwater swamps in North America."
 ],
 "asks": [
 "In which state was Martin Luther King Jr. born?",
-"Which state has the Okefenokee Swamp?"
+"Which state has most of the Okefenokee Swamp?"
 ],
 "neighbors": [
 "alabama",
@@ -208,7 +208,7 @@
 "biome": "forest",
 "facts": [
 "Mammoth Cave National Park in Kentucky has the longest known cave system in the world.",
-"The Kentucky Derby horse race is held in Louisville every May."
+"The Kentucky Derby horse race is held in Louisville, usually in May."
 ],
 "asks": [
 "Which state has the longest known cave system in the world?",
@@ -288,7 +288,7 @@
 ],
 "asks": [
 "At a fort in which state was the battle behind the Star-Spangled Banner?",
-"Which state is split in two by Chesapeake Bay?"
+"Which state's capital stands on Chesapeake Bay?"
 ],
 "neighbors": [
 "delaware",
@@ -357,11 +357,11 @@
 },
 "biome": "forest",
 "facts": [
-"The Wright brothers made the first airplane flights at Kitty Hawk, North Carolina, in 1903.",
+"The Wright brothers made the first airplane flights near Kitty Hawk, North Carolina, in 1903.",
 "Mount Mitchell in North Carolina is the highest peak east of the Mississippi River."
 ],
 "asks": [
-"In which state did the Wright brothers first fly, at Kitty Hawk?",
+"In which state did the Wright brothers first fly, near Kitty Hawk?",
 "Which state has the highest peak east of the Mississippi River?"
 ],
 "neighbors": [
@@ -399,7 +399,7 @@
 ],
 "asks": [
 "The Trail of Tears ended in what is now which state?",
-"Which state does Historic Route 66 cross for hundreds of miles, between Texas and Missouri?"
+"Which state does Historic Route 66 cross for hundreds of miles, between Texas and Kansas?"
 ],
 "hint2": "This state's capital shares its name.",
 "neighbors": [

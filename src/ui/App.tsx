@@ -1,9 +1,13 @@
 import { useMemo, useState } from 'react';
 import { isExpeditionComplete } from '../engine/game';
 import { indexedDbStore } from '../persistence/store';
+import { speciesOf, stageOf } from '../engine/progression';
+import { PACK } from '../content/pack';
 import { Battle } from './Battle';
 import { Camp } from './Camp';
 import { Discovery } from './Discovery';
+import { Evolution } from './Evolution';
+import { useMusic } from './music';
 import { ProfileSelect } from './ProfileSelect';
 import { Event } from './Event';
 import { Prep } from './Prep';
@@ -19,6 +23,8 @@ export function App() {
   const game = useGame(store);
   const { save, household, dispatch, saveFailed, loadError, setActiveProfile, restore } = game;
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const inBattle = !!save?.expedition?.battle;
+  useMusic(save ? (inBattle ? 'battle' : 'camp') : null, save?.settings.musicVolume ?? 0, save?.settings.muted ?? true);
 
   if (new URLSearchParams(location.search).has('sounds')) return <SoundTest />;
 
@@ -28,9 +34,11 @@ export function App() {
   if (!household) return <main className="screen" aria-busy="true" />;
 
   const e = save?.expedition;
+  const evolving = save?.companions.find((c) => stageOf(c.bondXp, speciesOf(PACK, c.speciesId)) > (c.stageSeen ?? 1));
   let body;
   if (!save) body = <ProfileSelect household={household} onPick={setActiveProfile} />;
   else if (settingsOpen) body = <Settings save={save} household={household} store={store} dispatch={dispatch} restore={(h) => { setSettingsOpen(false); restore(h); }} onClose={() => setSettingsOpen(false)} />;
+  else if (!e && evolving) body = <Evolution key={evolving.instanceId} companion={evolving} dispatch={dispatch} />;
   else if (!e) body = <Camp save={save} dispatch={dispatch} onSwitch={() => setActiveProfile(null)} onSettings={() => setSettingsOpen(true)} />;
   else if (!e.prepared) body = <Prep e={e} save={save} dispatch={dispatch} />;
   else if (e.event) body = <Event key={e.event.id} e={e} event={e.event} dispatch={dispatch} />;
@@ -40,6 +48,8 @@ export function App() {
   else body = <Route key={e.id} e={e} save={save} dispatch={dispatch} />;
 
   if (save) configureSound(save.settings);
+  // Each new kind of screen gets a quick wipe. Turns within a battle don't.
+  const screenKey = !save ? 'profiles' : settingsOpen ? 'settings' : !e ? 'camp' : e.battle ? e.battle.id : e.event ? e.event.id : `${e.discovery}-${e.slots.filter((s) => s.status === 'won').length}`;
 
   return (
     <div className="app">
@@ -54,6 +64,7 @@ export function App() {
           </span>
         )}
       </header>
+      <div key={screenKey} className="wipe" aria-hidden="true" />
       <main className="screen">{body}</main>
     </div>
   );

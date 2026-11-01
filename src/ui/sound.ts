@@ -13,10 +13,14 @@ const LENGTH_MS = {
   hit: 600,
   befriend: 600,
   spend: 600,
+  heartbeat: 650,
+  levelup: 1000,
+  evolve: 1300,
+  crit: 450,
 } as const;
 const FADE_MS = 100;
-/** The retro punches are much louder than the other effects. */
-const GAIN: Partial<Record<keyof typeof LENGTH_MS, number>> = { guard: 0.55, hit: 0.8 };
+/** The retro effects are much louder than the others. */
+const GAIN: Partial<Record<keyof typeof LENGTH_MS, number>> = { guard: 0.55, hit: 0.8, crit: 0.7, levelup: 0.6, heartbeat: 0.7 };
 
 export type SoundId = keyof typeof LENGTH_MS;
 export const SOUND_IDS = Object.keys(LENGTH_MS) as SoundId[];

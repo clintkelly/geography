@@ -45,6 +45,28 @@
     "spend": {
       "generationId": "5bGFJwdew7YMUW4tzopd",
       "prompt": "Two quick bright coin clinks, spending points in a children's game, no voice, very short"
+    },
+    "heartbeat": {
+      "generationId": "iKEVjIB3uvhVNAXho7TM"
+    },
+    "levelup": {
+      "generationId": "5UlT9kRBzMLvJVKwg9cc"
+    },
+    "evolve": {
+      "generationId": "I8pH19JdBKkwRiEaEBol"
+    },
+    "crit": {
+      "generationId": "uq7lhv5VMTkybGV8KCTk"
+    }
+  },
+  "music": {
+    "camp": {
+      "generationId": "XhpeN1vvwOIriP06ZHfq",
+      "note": "50s; ends abruptly, so a click at the loop point is likely"
+    },
+    "battle": {
+      "generationId": "4oKZqCgEhlVrRU6aP0dC",
+      "note": "50s; cleaner seam"
     }
   }
 }

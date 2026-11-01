@@ -74,6 +74,17 @@ describe('turn animations', () => {
     expect(streakRate(50)).toBe(streakRate(9));
   });
 
+  it('a Field Note check lands as a critical', () => {
+    const frame = turnFrames('attack', true, hit, true, 'none', false, true)[1]!;
+    expect(frame).toMatchObject({ impact: 'big', sounds: ['crit'] });
+    expect(frame.floats!.map((f) => f.text)).toContain('Critical!');
+  });
+
+  it('a Special bursts across the scene', () => {
+    expect(turnFrames('special', true, hit, true)[0]).toMatchObject({ burst: true });
+    expect(turnFrames('attack', true, hit, true)[0]!.burst).toBeUndefined();
+  });
+
   it('befriending plays its own moment', () => {
     expect(turnFrames('befriend', true, hit, false)[0]!.sounds).toEqual(['befriend']);
   });

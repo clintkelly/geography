@@ -69,6 +69,8 @@ export interface Region {
 export interface Special {
   name: string;
   template: 'strong' | 'heal' | 'protect';
+  /** The color of its burst on screen. */
+  color: string;
 }
 
 export interface Species {
@@ -79,6 +81,10 @@ export interface Species {
   special: Special;
   /** Regions this creature can be hunted and met in. */
   homes: readonly string[];
+  /** Evolved forms, for stage 2 and stage 3. Rare creatures have none. */
+  evolutions?: readonly { name: string; artId: string }[];
+  /** Offered only once a child has found every place in its region. */
+  rare?: boolean;
   /** The way the art faces, so a companion can be mirrored to face its opponent. */
   facing: 'left' | 'right';
 }

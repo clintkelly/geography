@@ -96,7 +96,7 @@
 ],
 "nickname": null,
 "asks": [
-"In which country was Mozart born?",
+"In which of today's countries was Mozart born?",
 "Which country is largely covered by the Alps and has Vienna on the Danube?"
 ],
 "biome": "mountain"
@@ -164,7 +164,7 @@
 "nickname": null,
 "asks": [
 "Which country has Dutch, French, and German as official languages?",
-"Which country's capital holds many main offices of the European Union?"
+"Which country's capital is home to the headquarters of the European Commission?"
 ],
 "biome": "castle"
 },
@@ -354,12 +354,12 @@
 "hint": "the northernmost of the three Baltic countries",
 "facts": [
 "Around half of Estonia is covered in forest.",
-"People in Estonia can vote in national elections online."
+"Estonia was the first country where everyone could vote online in national elections."
 ],
 "nickname": null,
 "asks": [
-"Which Baltic country is around half covered in forest?",
-"In which country can people vote in national elections online?"
+"Which Baltic country, the farthest north, is around half covered in forest?",
+"Which country was first to let everyone vote online in national elections?"
 ],
 "biome": "forest"
 },
@@ -384,15 +384,15 @@
 "russia",
 "estonia"
 ],
-"hint": "a Nordic country of tens of thousands of lakes, east of Sweden",
+"hint": "a Nordic country of many thousands of lakes, east of Sweden",
 "facts": [
-"Finland has more than 100,000 lakes.",
-"Saunas are a big part of life in Finland."
+"Finland, the Land of a Thousand Lakes, counts about 188,000 lakes.",
+"The word sauna is Finnish, and saunas are a big part of life in Finland."
 ],
 "nickname": null,
 "asks": [
-"Which Nordic country has more than 100,000 lakes?",
-"In which country are saunas a big part of life?"
+"Which Nordic country is known as the Land of a Thousand Lakes?",
+"Which country's language gave us the word sauna?"
 ],
 "biome": "lake"
 },
@@ -530,7 +530,7 @@
 ],
 "hint": "a landlocked country where the Danube runs through the middle of its capital",
 "facts": [
-"Budapest was formed by joining the cities of Buda and Pest.",
+"Budapest was formed in 1873 by joining Buda, Óbuda, and Pest.",
 "The Rubik's Cube was invented in Hungary."
 ],
 "nickname": null,
@@ -561,12 +561,12 @@
 ],
 "hint": "an island of volcanoes and geysers in the North Atlantic",
 "facts": [
-"Reykjavik is the northernmost capital of any country in the world.",
+"Reykjavik is the northernmost capital of any independent country.",
 "The English word geyser comes from Geysir, a hot spring in Iceland."
 ],
 "nickname": null,
 "asks": [
-"Which country has the northernmost capital in the world?",
+"Which independent country has the northernmost capital in the world?",
 "The word geyser comes from a hot spring in which country?"
 ],
 "biome": "snow"
@@ -592,13 +592,13 @@
 "hint": "an island country west of Great Britain, known for its green fields",
 "facts": [
 "The harp is the national symbol of Ireland.",
-"Halloween traces back to the old Irish festival of Samhain."
+"Halloween has roots in Samhain, an old Gaelic festival that began in Ireland."
 ],
 "nickname": null,
 "wiki": "Republic_of_Ireland",
 "asks": [
 "Which country has the harp as its national symbol?",
-"Halloween traces back to the old festival of Samhain in which country?"
+"Halloween has roots in Samhain, an old festival from which country west of Great Britain?"
 ],
 "biome": "castle"
 },
@@ -759,14 +759,14 @@
 "hint": "a tiny grand duchy bordered by Belgium, France, and Germany",
 "facts": [
 "Luxembourg is the only grand duchy left in the world.",
-"Public transport in Luxembourg is free."
+"In 2020 Luxembourg became the first country to make public transport free."
 ],
 "nickname": null,
 "tiny": true,
 "hint2": "This tiny country is the only grand duchy left in the world.",
 "asks": [
 "Which is the only grand duchy left in the world?",
-"Which country has free public transport nationwide?"
+"Which country was first to make public transport free nationwide, in 2020?"
 ],
 "biome": "castle"
 },
@@ -822,12 +822,12 @@
 ],
 "hint": "a landlocked country between Romania and Ukraine",
 "facts": [
-"Moldova's Mileștii Mici has the largest wine cellars in the world.",
-"Most people in Moldova speak Romanian."
+"Moldova's Mileștii Mici holds the largest wine collection in the world.",
+"Most people in Moldova speak Romanian, which some there call Moldovan."
 ],
 "nickname": null,
 "asks": [
-"Which country has the largest wine cellars in the world?",
+"Which country has the largest wine collection in the world?",
 "Which country lies between Romania and Ukraine?"
 ],
 "biome": "plains"
@@ -889,12 +889,12 @@
 "hint": "a small mountainous country on the Adriatic, south of Bosnia",
 "facts": [
 "The Bay of Kotor in Montenegro looks like a fjord.",
-"The Tara River Canyon in Montenegro is the deepest in Europe."
+"The Tara River Canyon in Montenegro is one of the deepest in Europe."
 ],
 "nickname": null,
 "asks": [
 "In which country is the fjord-like Bay of Kotor?",
-"Which country has the Tara River Canyon, the deepest in Europe?"
+"Which country has the Tara River Canyon, one of the deepest in Europe?"
 ],
 "biome": "coast"
 },
@@ -958,7 +958,7 @@
 ],
 "nickname": null,
 "asks": [
-"In which country was Mother Teresa born?",
+"In which of today's countries was Mother Teresa born?",
 "Which country shares ancient Lake Ohrid with Albania?"
 ],
 "biome": "lake"
@@ -1023,11 +1023,11 @@
 "hint": "a large country on the Baltic, between Germany and Belarus",
 "facts": [
 "Marie Curie was born in Warsaw.",
-"Nicolaus Copernicus, who showed that Earth orbits the Sun, was born in Poland."
+"Nicolaus Copernicus, who said that Earth orbits the Sun, was born in Poland."
 ],
 "nickname": null,
 "asks": [
-"In which country was Marie Curie born?",
+"In which of today's countries was Marie Curie born?",
 "In which country was Copernicus born?"
 ],
 "biome": "forest"
@@ -1087,12 +1087,12 @@
 "hint": "a country on the Black Sea, curved around the Carpathian Mountains",
 "facts": [
 "Bran Castle in Romania is linked to the legend of Dracula.",
-"The River Danube reaches the sea in Romania's Danube Delta."
+"The River Danube reaches the sea in the Danube Delta, mostly in Romania."
 ],
 "nickname": null,
 "asks": [
 "In which country is Bran Castle, linked to the legend of Dracula?",
-"In which country does the River Danube reach the sea?"
+"In which country is most of the Danube Delta, where the river reaches the sea?"
 ],
 "biome": "castle"
 },
@@ -1198,7 +1198,7 @@
 "nickname": null,
 "asks": [
 "Which country's capital stands where the River Sava joins the Danube?",
-"In which country was Novak Djokovic born?"
+"In which of today's countries was Novak Djokovic born?"
 ],
 "biome": "forest"
 },
@@ -1232,7 +1232,7 @@
 "nickname": null,
 "asks": [
 "Which country's capital sits right beside Austria and Hungary?",
-"Which country has the High Tatras?"
+"Which country has most of the High Tatras?"
 ],
 "biome": "mountain"
 },
@@ -1289,15 +1289,15 @@
 "france",
 "andorra"
 ],
-"hint": "the larger of the two countries on the Iberian Peninsula",
+"hint": "the largest country on the Iberian Peninsula",
 "facts": [
-"The Sagrada Família in Barcelona has been under construction since 1882.",
-"Spain shares the Iberian Peninsula with Portugal."
+"Building the Sagrada Família in Barcelona began in 1882.",
+"Spain is the largest country on the Iberian Peninsula."
 ],
 "nickname": null,
 "asks": [
 "In which country is the Sagrada Família?",
-"Which country shares the Iberian Peninsula with Portugal?"
+"Which is the largest country on the Iberian Peninsula?"
 ],
 "biome": "desert"
 },
@@ -1358,12 +1358,12 @@
 "hint": "an Alpine country with four national languages",
 "facts": [
 "Switzerland has four national languages: German, French, Italian, and Romansh.",
-"The Swiss flag is square."
+"The Swiss flag is square, with a white cross on red."
 ],
 "nickname": null,
 "asks": [
 "Which country has four national languages?",
-"Which country has a square flag?"
+"Which country has a square red flag with a white cross?"
 ],
 "biome": "mountain"
 },

@@ -528,5 +528,452 @@
    "fx-coin": "0241fbfa-99dc-4bae-9144-8d9401a24c55",
    "fx-flame": "2f640178-c901-4280-9b3a-3fd9ed5bcbf0"
   }
+ },
+ "logo": {
+  "file": "docs/images/logo.png",
+  "jobId": "6cef1a60-3dc3-45e3-b762-7aa335ecd9ec"
+ },
+ "batch4": {
+  "slatepaw-2.png": {
+   "job_id": "cc9f3f72-966a-439a-98b0-d3e14b3439ee",
+   "prompt": "Evolved form of round slate rock creature with mossy tuft: thicker armored plates and mossy mantle. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "barkknight-2.png": {
+   "job_id": "26014de4-82df-4aac-9d23-3465b5293737",
+   "prompt": "Evolved form of stocky black pit bull rottweiler dog with tan markings and a dark cape: bigger dog with a silver collar and longer cape. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "sandwhisk-2.png": {
+   "job_id": "f1c7f510-651c-40a5-9dbb-724f27118e92",
+   "prompt": "Evolved form of sandy desert fox-lizard: taller with a longer whip tail. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "cindermite-2.png": {
+   "job_id": "e0007f64-29d1-4605-8ae2-f7910d0318f7",
+   "prompt": "Evolved form of rocky ember beetle: larger with glowing horns. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "cragmaw-2.png": {
+   "job_id": "d41e4e90-f156-4809-b50f-b72b9fa51735",
+   "prompt": "Evolved form of horned boulder beast: larger horns with crystal growths. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "galewing-2.png": {
+   "job_id": "e9509468-338f-4a06-9f7e-0dacf69a6281",
+   "prompt": "Evolved form of round prairie bird with tornado tail: sleek hawk shape. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "lakeshell-2.png": {
+   "job_id": "f06dea00-2493-4983-8215-beefcbb3143c",
+   "prompt": "Evolved form of turtle with wave-patterned shell: armored shell with spikes. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "thistlehop-2.png": {
+   "job_id": "fb1c042c-d5d5-45d3-b0fa-01300c5d8f0d",
+   "prompt": "Evolved form of rabbit with purple thistle spikes: taller jackrabbit. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "bayouchomp-2.png": {
+   "job_id": "31db4d8f-ee18-4130-a86e-0e5f7ce61847",
+   "prompt": "Evolved form of round mossy alligator: longer jaws. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "dillopod-2.png": {
+   "job_id": "2f40386c-f606-47a6-be2f-a6fc32c763d5",
+   "prompt": "Evolved form of sandy armadillo: thicker bands. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "brinefin-2.png": {
+   "job_id": "e7cc89f8-55a2-4b0e-bd65-b511077f7943",
+   "prompt": "Evolved form of teal fish-lizard: sharp blade fins. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "lobsnap-2.png": {
+   "job_id": "7570562e-53ce-4eeb-9da2-93d3bc0be66b",
+   "prompt": "Evolved form of red lobster creature: massive claws. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "mapleclop-2.png": {
+   "job_id": "1fec2c7e-5d48-4ea8-b0a7-fac391b48d96",
+   "prompt": "Evolved form of moose calf with maple-leaf antlers: young moose with fuller antlers. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "fjordling-2.png": {
+   "job_id": "f2e04af0-b3fd-4d3c-8214-d374d299cb09",
+   "prompt": "Evolved form of silver seal with icy crystal fins: larger with an ice collar. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "alpenhorn-2.png": {
+   "job_id": "29bfa973-df39-47ea-afc3-a4512a678f93",
+   "prompt": "Evolved form of mountain goat with curling horns: huge curling horns. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "fx-badge.png": {
+   "job_id": "23b78498-9ebb-4774-a2f2-9f1d3453ab32",
+   "prompt": "A round gold medal with a blue ribbon and a compass star, pixel art icon, no text"
+  },
+  "slatepaw-3.png": {
+   "job_id": "0222fab2-fcc5-4f6c-9260-3f21c62b396b",
+   "prompt": "Evolved form of round slate rock creature with mossy tuft: single round stone guardian, much larger, big glowing crystal shoulders, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "d27ffe07-0b40-4720-86a4-8c6ffe928fe4"
+   ]
+  },
+  "barkknight-3.png": {
+   "job_id": "6edf387e-bd52-41f2-bbe5-d16b6e35faf5",
+   "prompt": "Evolved form of stocky black pit bull rottweiler dog with tan markings and a dark cape: proud heroic dog wearing light silver armor plates on its shoulders and chest, long flowing cape. Keep it black with tan markings and lovable. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "init_image_strength": 25,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "23314b3d-1d98-46d8-aae0-4b3284bea3e8"
+   ]
+  },
+  "sandwhisk-3.png": {
+   "job_id": "29cc2861-03de-473a-8aaa-c952f1392219",
+   "prompt": "Evolved form of sandy desert fox-lizard: sleek desert guardian with a swirling sand mane. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "cindermite-3.png": {
+   "job_id": "1d48c98c-ffd7-48f2-86d8-62b3647150d1",
+   "prompt": "Evolved form of rocky ember beetle: huge beetle with a molten shell, glowing orange lava cracks across dark rock, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "c4a13094-23f1-4c81-86c1-a6102b9d2c27"
+   ]
+  },
+  "cragmaw-3.png": {
+   "job_id": "fc1ee737-0f59-4907-9c23-7eb3660e1f54",
+   "prompt": "Evolved form of horned boulder beast: ancient mountain beast with a mossy forest on its back. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "galewing-3.png": {
+   "job_id": "b204b206-565c-4bd6-ab8a-779714504288",
+   "prompt": "Evolved form of round prairie bird with tornado tail: single crowned storm bird with a golden crest and spiraling wings, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "74e95018-9f33-4a9d-ad88-6f1f0f17cea5"
+   ]
+  },
+  "lakeshell-3.png": {
+   "job_id": "ea305bcb-b7d8-499e-940c-a34accf31b5b",
+   "prompt": "Evolved form of turtle with wave-patterned shell: giant turtle with a small blue lake and tiny trees on top of its back. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "init_image_strength": 25,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "c80e14f4-df6f-4217-8805-a0716c7793c5"
+   ]
+  },
+  "thistlehop-3.png": {
+   "job_id": "e8133014-2244-4a90-8c65-6be05e19c8f5",
+   "prompt": "Evolved form of rabbit with purple thistle spikes: bramble-crowned rabbit king. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "bayouchomp-3.png": {
+   "job_id": "eb6bc6ca-491e-4fa6-ac72-788ba60ac869",
+   "prompt": "Evolved form of round mossy alligator: big gator with cypress-root armor and a crown of moss. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "dillopod-3.png": {
+   "job_id": "2adfe9fe-f7b2-49fc-a7fa-4f80bd971908",
+   "prompt": "Evolved form of sandy armadillo: fortress-like armored armadillo. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "brinefin-3.png": {
+   "job_id": "37b2f8ad-1cab-4531-bf4b-32158afd17f2",
+   "prompt": "Evolved form of teal fish-lizard: regal sea lord with a coral crown. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "lobsnap-3.png": {
+   "job_id": "6761c93c-a7b8-4b23-84a3-444653795e27",
+   "prompt": "Evolved form of red lobster creature: armored lobster admiral with a barnacle helmet. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "mapleclop-3.png": {
+   "job_id": "4fefa51d-a1c9-4171-96f0-e4f523f71bd4",
+   "prompt": "Evolved form of moose calf with maple-leaf antlers: majestic moose with red-gold autumn antlers. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "fjordling-3.png": {
+   "job_id": "5d6ea9cd-71dd-43a6-b403-2fa435443dd7",
+   "prompt": "Evolved form of silver seal with icy crystal fins: grand frost seal with an ice crown. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "alpenhorn-3.png": {
+   "job_id": "1ab0ccf6-db78-4150-8bff-77320cc2f216",
+   "prompt": "Evolved form of mountain goat with curling horns: snow-maned goat with a peak-like crown of horns. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+  },
+  "thunderhoof.png": {
+   "job_id": "e01cd888-dec3-4f98-84a9-4ad8563437e2",
+   "prompt": "Original rare legendary fantasy creature, young bison with lightning-charged fur. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "aurorawl.png": {
+   "job_id": "86ebc5d1-a896-42a8-a6cc-2bf199825b49",
+   "prompt": "Original rare legendary fantasy creature, snowy owl with northern-lights wings. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "stormray.png": {
+   "job_id": "50c850b0-7bb3-435e-9694-5c29f9ec81a0",
+   "prompt": "Original rare legendary fantasy creature, small flying manta ray with storm clouds on its back. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "lanternwhale.png": {
+   "job_id": "c1111d1b-8345-41c8-8a90-2708bfcf52a7",
+   "prompt": "Original rare legendary fantasy creature, small whale with a glowing lantern on its head. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "castlewyrm.png": {
+   "job_id": "855fbae6-185e-4479-a276-aa69db0f014b",
+   "prompt": "Original rare legendary fantasy creature, small friendly stone-scaled dragon with tiny turrets on its back. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "thunderhoof-attack.png": {
+   "job_id": "65c4822c-70e9-424a-8d55-109f1057ecd9",
+   "prompt": "young bison with lightning-charged fur charging forward to the left, mouth open, motion lines"
+  },
+  "thunderhoof-guard.png": {
+   "job_id": "f7a6f83a-8816-4fa1-b7ae-1b04dd207667",
+   "prompt": "young bison with lightning-charged fur braced defending, eyes shut, glowing blue shield in front of it"
+  },
+  "thunderhoof-special.png": {
+   "job_id": "aed42d22-f36b-4486-8190-c06f0594fa3d",
+   "prompt": "young bison with lightning-charged fur powering up, surrounded by glowing lightning energy, eyes blazing"
+  },
+  "thunderhoof-hit.png": {
+   "job_id": "76cda9aa-3011-451b-b941-1e44adb022f5",
+   "prompt": "young bison with lightning-charged fur recoiling after being hit, wincing, stars around its head"
+  },
+  "aurorawl-attack.png": {
+   "job_id": "e354863c-2b77-4d4d-b3e1-532ddd2ae2b5",
+   "prompt": "snowy owl with northern-lights wings charging forward to the left, mouth open, motion lines"
+  },
+  "aurorawl-guard.png": {
+   "job_id": "0012e85e-ae48-480f-9339-c90664e6a62d",
+   "prompt": "snowy owl with northern-lights wings braced defending, eyes shut, glowing blue shield in front of it"
+  },
+  "aurorawl-special.png": {
+   "job_id": "6da10fad-d03d-4310-9ec8-af54c8c453f6",
+   "prompt": "snowy owl with northern-lights wings powering up, surrounded by glowing aurora energy, eyes blazing"
+  },
+  "aurorawl-hit.png": {
+   "job_id": "55497357-1e52-4e7b-adec-4436267e3b96",
+   "prompt": "snowy owl with northern-lights wings recoiling after being hit, wincing, stars around its head"
+  },
+  "stormray-attack.png": {
+   "job_id": "76b01e32-33a8-4e20-b276-865df2435558",
+   "prompt": "small flying manta ray with storm clouds on its back charging forward to the left, mouth open, motion lines"
+  },
+  "stormray-guard.png": {
+   "job_id": "ff734f43-6ca3-4d83-931d-5dccd4375668",
+   "prompt": "small flying manta ray with storm clouds on its back braced defending, eyes shut, glowing blue shield in front of it"
+  },
+  "stormray-special.png": {
+   "job_id": "b9442db1-3989-45f9-a600-b63592168323",
+   "prompt": "small flying manta ray with storm clouds on its back powering up, surrounded by glowing storm energy, eyes blazing"
+  },
+  "stormray-hit.png": {
+   "job_id": "ad839429-9455-4aac-8d98-4220ab37e08d",
+   "prompt": "small flying manta ray with storm clouds on its back recoiling after being hit, wincing, stars around its head"
+  },
+  "lanternwhale-attack.png": {
+   "job_id": "0563aa98-8368-4bf2-a150-990d34ef9534",
+   "prompt": "small whale with a glowing lantern on its head charging forward to the left, mouth open, motion lines"
+  },
+  "lanternwhale-guard.png": {
+   "job_id": "8ba7a20f-0985-48ad-9e7e-de2abbd2d7e1",
+   "prompt": "small whale with a glowing lantern on its head braced defending, eyes shut, glowing blue shield in front of it"
+  },
+  "lanternwhale-special.png": {
+   "job_id": "03133bdb-fc45-494d-917f-0693b7e62f85",
+   "prompt": "small whale with a glowing lantern on its head powering up, surrounded by glowing lantern light energy, eyes blazing"
+  },
+  "lanternwhale-hit.png": {
+   "job_id": "f5336220-3056-4c77-aeb3-17dbd7cf3abf",
+   "prompt": "small whale with a glowing lantern on its head recoiling after being hit, wincing, stars around its head"
+  },
+  "castlewyrm-attack.png": {
+   "job_id": "bd8016d5-7a4b-4845-aac5-fbbd95fad04c",
+   "prompt": "small friendly stone-scaled dragon with tiny turrets on its back charging forward to the left, mouth open, motion lines"
+  },
+  "castlewyrm-guard.png": {
+   "job_id": "de3a60d6-211d-4416-ae11-27ab643d1b9b",
+   "prompt": "small friendly stone-scaled dragon with tiny turrets on its back braced defending, eyes shut, glowing blue shield in front of it"
+  },
+  "castlewyrm-special.png": {
+   "job_id": "033eae20-cecb-41e3-8354-6be4ec596d7c",
+   "prompt": "small friendly stone-scaled dragon with tiny turrets on its back powering up, surrounded by glowing golden energy, eyes blazing"
+  },
+  "castlewyrm-hit.png": {
+   "job_id": "dd82ec1b-9871-42d4-bc26-0bb239d2c21a",
+   "prompt": "small friendly stone-scaled dragon with tiny turrets on its back recoiling after being hit, wincing, stars around its head"
+  },
+  "card-albania.png": {
+   "job_id": "bad6125c-2178-4142-bcd3-26975bf2bea6",
+   "prompt": "Pixel art landscape postcard: turquoise Adriatic sea coast below rugged green mountains with a small stone hilltop fortress, no text, no people"
+  },
+  "card-andorra.png": {
+   "job_id": "6691235c-701b-4b69-a4cf-b99150acb811",
+   "prompt": "Pixel art landscape postcard: high Pyrenees mountain valley with a small stone village and snowy peaks, no text, no people"
+  },
+  "card-austria.png": {
+   "job_id": "8cedfc63-3635-4b4d-b7d1-7bce39fa88d3",
+   "prompt": "Pixel art landscape postcard: white hilltop fortress above a baroque river town with snowy Alps behind, no text, no people"
+  },
+  "card-belarus.png": {
+   "job_id": "01b3bdb5-00b3-4e52-a06e-513e75bf8039",
+   "prompt": "Pixel art landscape postcard: ancient primeval forest with a European bison grazing beside a calm lake, no text, no people"
+  },
+  "card-belgium.png": {
+   "job_id": "7154211d-ddde-460d-a11e-96ca883334ca",
+   "prompt": "Pixel art landscape postcard: medieval canal town with stepped gable houses and a tall stone belfry tower, no text, no people"
+  },
+  "card-bosnia.png": {
+   "job_id": "b84ca70a-ea69-4351-bf4a-8a874cdcb47d",
+   "prompt": "Pixel art landscape postcard: the Old Bridge at Mostar, a single tall stone arch over an emerald green river between stone towers, no text, no people"
+  },
+  "card-bulgaria.png": {
+   "job_id": "58006970-95fa-4f77-99c0-56c061d4a030",
+   "prompt": "Pixel art landscape postcard: Rose Valley, long rows of pink rose fields in front of green Balkan mountains, no text, no people"
+  },
+  "card-croatia.png": {
+   "job_id": "45265ae7-983f-4837-b2da-591372682d9b",
+   "prompt": "Pixel art landscape postcard: Dubrovnik walled old city with orange roofs and stone city walls on the blue Adriatic sea, no text, no people"
+  },
+  "card-czechia.png": {
+   "job_id": "ea2055b8-bc0a-4349-a466-3c4e004ac513",
+   "prompt": "Pixel art landscape postcard: Prague old town with gothic spires, orange roofs and a stone bridge over a river, no text, no people"
+  },
+  "card-denmark.png": {
+   "job_id": "ee5e3ce8-0de5-439d-a914-b524a3e09d46",
+   "prompt": "Pixel art landscape postcard: colorful gabled harbor houses along a canal with wooden sailing boats in Copenhagen, no text, no people"
+  },
+  "card-estonia.png": {
+   "job_id": "4bca296c-d077-4e9e-a4eb-a23c242000ba",
+   "prompt": "Pixel art landscape postcard: medieval walled old town of Tallinn with red conical tower roofs beside a dense green pine forest, no text, no people"
+  },
+  "card-finland.png": {
+   "job_id": "574c985b-8874-42b4-bc4c-d403c707f7af",
+   "prompt": "Pixel art landscape postcard: eye-level view across a calm blue lake with pine forest islands and a small red wooden sauna cabin on the shore at dusk, no text, no people",
+   "redo": true,
+   "view": "side",
+   "note": "redo of top-down first attempt",
+   "superseded_jobs": [
+    "774a1214-d552-4495-ada9-fb77bc85e668"
+   ]
+  },
+  "card-france.png": {
+   "job_id": "3eaadf81-6923-4492-b5af-4262da24ea55",
+   "prompt": "Pixel art landscape postcard: the Eiffel Tower rising over Paris rooftops and the river Seine at sunset, no text, no people"
+  },
+  "card-germany.png": {
+   "job_id": "9da345b9-6cdf-40ad-86d5-e9e0803699bc",
+   "prompt": "Pixel art landscape postcard: white fairytale castle with slender towers on a forested Bavarian hill, no text, no people"
+  },
+  "card-greece.png": {
+   "job_id": "8dffc9b4-3ebd-44fb-919f-0f753d9c8e47",
+   "prompt": "Pixel art landscape postcard: ancient white marble Greek temple with columns on a rocky hill above the blue Aegean sea and islands, no text, no people"
+  },
+  "card-hungary.png": {
+   "job_id": "ac8ffe04-3835-4bcd-9320-fd5cf7ea0f48",
+   "prompt": "Pixel art landscape postcard: Budapest on the wide Danube with a stone chain bridge and a grand domed riverside parliament building at golden hour, no text, no people"
+  },
+  "card-iceland.png": {
+   "job_id": "05e15cb9-902b-4189-bbcb-d93ef7311078",
+   "prompt": "Pixel art landscape postcard: a steaming geyser erupting from a volcanic plain with a snowy volcano behind, no text, no people"
+  },
+  "card-ireland.png": {
+   "job_id": "bd5caa8a-7601-47b0-bc32-16c29552c06d",
+   "prompt": "Pixel art landscape postcard: rolling emerald green fields with dry stone walls and a ruined stone castle by Atlantic sea cliffs, no text, no people"
+  },
+  "card-italy.png": {
+   "job_id": "bd62ea5d-ce5f-49c9-a8d8-9c3359441246",
+   "prompt": "Pixel art landscape postcard: the Colosseum in Rome, ancient round stone arena ruins with cypress trees under a sunny sky, no text, no people"
+  },
+  "card-latvia.png": {
+   "job_id": "745cb388-e304-44ad-a12e-614138a75040",
+   "prompt": "Pixel art landscape postcard: quiet Baltic beach with pine trees on sand dunes and glowing golden amber stones on the sand, no text, no people"
+  },
+  "card-liechtenstein.png": {
+   "job_id": "b84b3698-0570-4773-bb85-4c2f0b17f120",
+   "prompt": "Pixel art landscape postcard: Vaduz Castle perched on a forested cliff above a small green Alpine valley, no text, no people"
+  },
+  "card-lithuania.png": {
+   "job_id": "98f6756f-8030-4b65-bffb-46c71fd0ca82",
+   "prompt": "Pixel art landscape postcard: red-brick island castle with towers on a calm lake surrounded by green forest, no text, no people"
+  },
+  "card-luxembourg.png": {
+   "job_id": "c622b153-1586-4351-ba01-57a6305b3324",
+   "prompt": "Pixel art landscape postcard: old stone fortress city on cliffs above a deep green river gorge with a tall arched viaduct bridge, no text, no people"
+  },
+  "card-malta.png": {
+   "job_id": "2891a5c6-2c5e-404a-a7ef-2a0764a35672",
+   "prompt": "Pixel art landscape postcard: golden limestone fortress city of Valletta rising from a deep blue Mediterranean harbor with a small painted wooden boat, no text, no people"
+  },
+  "card-moldova.png": {
+   "job_id": "e89d342f-eff3-4248-ba49-53cd140323b5",
+   "prompt": "Pixel art landscape postcard: rolling vineyard hills with rows of grapes and an arched stone wine cellar entrance, no text, no people"
+  },
+  "card-monaco.png": {
+   "job_id": "4f2990f6-e19a-4216-9c45-c6b0aef06da8",
+   "prompt": "Pixel art landscape postcard: Riviera harbor full of white yachts below steep pastel hillside buildings and palm trees, no text, no people"
+  },
+  "card-montenegro.png": {
+   "job_id": "57bac013-2630-4eaf-8d3f-9893391688f7",
+   "prompt": "Pixel art landscape postcard: Bay of Kotor, steep mountains plunging into a calm fjord-like bay with a small stone walled town on the shore, no text, no people"
+  },
+  "card-netherlands.png": {
+   "job_id": "548512ee-653f-4439-8be7-8c9100cd03e0",
+   "prompt": "Pixel art landscape postcard: a Dutch windmill beside a canal with rows of bright red and yellow tulip fields, no text, no people"
+  },
+  "card-north-macedonia.png": {
+   "job_id": "e953b488-ff0b-4b39-b80c-44502bf6792a",
+   "prompt": "Pixel art landscape postcard: Lake Ohrid, a small stone church on a cliff above a clear blue lake with mountains behind, no text, no people"
+  },
+  "card-norway.png": {
+   "job_id": "2be0f6b1-5e87-42d2-a2b3-3e022cc29657",
+   "prompt": "Pixel art landscape postcard: deep Norwegian fjord with steep glacier-carved cliffs, a waterfall and a small red cabin, no text, no people"
+  },
+  "card-poland.png": {
+   "job_id": "cda74db0-3ef2-48f1-ad50-254959cb23e8",
+   "prompt": "Pixel art landscape postcard: red-brick medieval castle on a hill above the Vistula river with green forest around it, no text, no people"
+  },
+  "card-portugal.png": {
+   "job_id": "5590149c-7936-4d5b-8cce-772e86c64f02",
+   "prompt": "Pixel art landscape postcard: old stone Portuguese watchtower on the Atlantic shore with a tall-masted explorer sailing ship at sea, no text, no people"
+  },
+  "card-romania.png": {
+   "job_id": "a7edaa2a-3ccd-4acd-bb66-43181cd2f803",
+   "prompt": "Pixel art landscape postcard: Bran Castle with red-roofed towers on a rocky hill in the forested Carpathian Mountains, no text, no people"
+  },
+  "card-russia.png": {
+   "job_id": "4e85f515-cebf-411b-a649-2876bfb61580",
+   "prompt": "Pixel art landscape postcard: colorful onion-domed cathedral in a snowy winter square with snowy birch forest, no text, no people"
+  },
+  "card-san-marino.png": {
+   "job_id": "ee0043f8-7de1-4b12-827b-3e4667c6ee21",
+   "prompt": "Pixel art landscape postcard: three medieval stone towers on the cliff ridge of Mount Titano above green Italian hills, no text, no people"
+  },
+  "card-serbia.png": {
+   "job_id": "7c2868a8-436c-46e8-8b91-36425f622b8e",
+   "prompt": "Pixel art landscape postcard: old stone fortress on a green bluff where two wide rivers meet, Belgrade, no text, no people"
+  },
+  "card-slovakia.png": {
+   "job_id": "78d96b59-73ff-435c-8bd4-2fbbc5efa76a",
+   "prompt": "Pixel art landscape postcard: jagged granite High Tatra peaks above a clear mountain lake and pine forest, no text, no people"
+  },
+  "card-slovenia.png": {
+   "job_id": "9581ee7c-005c-4627-b6fd-3b38eb20833c",
+   "prompt": "Pixel art landscape postcard: Lake Bled with a tiny white church on a small island, a cliff-top castle and the Alps behind, no text, no people"
+  },
+  "card-spain.png": {
+   "job_id": "e0994c30-ed9c-461e-9c31-8c7e1ecae51a",
+   "prompt": "Pixel art landscape postcard: Sagrada Familia, a tall ornate basilica with clustered stone spires and construction cranes in sunny Barcelona, no text, no people"
+  },
+  "card-sweden.png": {
+   "job_id": "c0fbd89b-3b28-417e-a6c4-b0dcb0568941",
+   "prompt": "Pixel art landscape postcard: Stockholm waterfront of colorful old buildings on an island with a church spire across calm blue water, no text, no people"
+  },
+  "card-switzerland.png": {
+   "job_id": "9e617414-713a-4395-83cc-6d3e44630b34",
+   "prompt": "Pixel art landscape postcard: the snowy pyramid-shaped Matterhorn above a green alpine meadow with a wooden chalet, no text, no people"
+  },
+  "card-ukraine.png": {
+   "job_id": "6ccf7669-07d4-4290-978b-9241686a2347",
+   "prompt": "Pixel art landscape postcard: endless golden wheat fields and sunflowers under a huge blue sky, no text, no people"
+  },
+  "card-uk.png": {
+   "job_id": "6785f1b4-8fb2-49d1-95a7-a7d748ef89b8",
+   "prompt": "Pixel art landscape postcard: the Big Ben clock tower and Palace of Westminster beside the River Thames with a stone bridge, no text, no people"
+  },
+  "card-vatican.png": {
+   "job_id": "385f70fb-a055-4c37-8ef1-1573e3896392",
+   "prompt": "Pixel art landscape postcard: the great dome of St. Peter's Basilica above its round colonnaded square with a central obelisk, no text, no people"
+  },
+  "_rejected_trials": {
+   "slatepaw-3": "791a51bf-d18c-4f64-939f-9d7f0238bb7b",
+   "galewing-3": "397b45d8-7740-4230-a9cd-ce4159eea85e",
+   "card-finland (first attempt, not in jobs file)": "774a1214-d552-4495-ada9-fb77bc85e668"
+  }
  }
 }

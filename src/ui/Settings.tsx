@@ -5,6 +5,7 @@ import type { Command, SaveData } from '../engine/game';
 import { exportBackup, parseBackup } from '../persistence/household';
 import type { Household, SaveStore } from '../persistence/store';
 import { Key, useKeys } from './keys';
+import { Parent } from './Parent';
 import { playSound } from './sound';
 
 const label = (d: Difficulty) => d[0]?.toUpperCase() + d.slice(1);
@@ -25,7 +26,7 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
   const max = DIFFICULTIES.indexOf(settings.maxDifficulty);
 
   const download = async () => {
-    const text = exportBackup(household, await store.loadLegacy(), Date.now(), { v2: await store.loadPreUpgrade(2), v3: await store.loadPreUpgrade(3) });
+    const text = exportBackup(household, await store.loadLegacy(), Date.now(), { v2: await store.loadPreUpgrade(2), v3: await store.loadPreUpgrade(3), v4: await store.loadPreUpgrade(4) });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
     link.download = `atlaswild-backup-${new Date().toISOString().slice(0, 10)}.json`;
@@ -81,7 +82,12 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
         <label className="field">Volume
           <input type="range" min={0} max={1} step={0.1} value={settings.volume} onChange={(e) => dispatch({ type: 'updateSettings', patch: { volume: Number(e.target.value) } })} onPointerUp={() => playSound('correct')} />
         </label>
+        <label className="field">Music
+          <input type="range" min={0} max={1} step={0.05} value={settings.musicVolume} onChange={(e) => dispatch({ type: 'updateSettings', patch: { musicVolume: Number(e.target.value) } })} />
+        </label>
       </section>
+
+      <Parent save={save} dispatch={dispatch} />
 
       <section className="panel">
         <h2>Backup</h2>

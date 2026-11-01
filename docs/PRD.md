@@ -132,8 +132,9 @@ These values are starting points for playtesting.
 | Setting | Default |
 | --- | --- |
 | Starting points | 10 |
-| Earned per correct first-try battle answer | 1 |
-| Leftover at the end | Converts to 2 companion XP per point |
+| Earned per stop won | 1 |
+| Field Note check bonus | 1 |
+| Leftover at the end | Converts to 1 companion XP per point |
 
 | Purchase | Cost | When | Effect |
 | --- | --- | --- | --- |
@@ -232,6 +233,8 @@ An already-won stop can't give XP again, and neither can a reload or a retry.
 
 ### Evolution
 
+Evolved forms use a single sprite, moved by the battle animations, rather than a full set of poses.
+
 - Stage 2 at level 5, stage 3 at level 10.
 - Evolution is automatic, celebrated once, and never fails.
 - Each stage has its own art and name, and changes stats per the table in Section 6.
@@ -290,7 +293,11 @@ Keep creature lore separate from factual content. Fictional creatures appear on 
 
 ### Field Note recall
 
-Every fact has a question whose answer is that state or country. A child never sees one until they have read its Field Note after a correct answer. About two in five questions then test a note they have seen, labeled as a Field Note check and worth 2 bonus Trail Points. The note itself says it may come back. This rewards reading the facts without ever blocking progress.
+Every fact has a question whose answer is that state or country. A child never sees one until they have read its Field Note after a correct answer. About two in five questions then test a note they have seen, labeled as a Field Note check and worth a bonus Trail Point. A right answer is a critical hit that also adds a charge. The note itself says it may come back. This rewards reading the facts without ever blocking progress.
+
+### Explorer's Map
+
+Each region has a map at camp that fills in as places are found. A full map reveals a rare creature for that region. Rare creatures don't evolve. Badges mark filled maps, groups of places such as New England, and other milestones.
 
 ### Arrival
 

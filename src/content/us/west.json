@@ -51,7 +51,7 @@
 "largestCity": "Phoenix",
 "nickname": {
 "text": "Grand Canyon State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "facts": [
@@ -67,7 +67,7 @@
 "biome": "canyon",
 "asks": [
 "Which state has the Grand Canyon?",
-"In which state's desert do giant saguaro cacti grow?"
+"Which state has Saguaro National Park, home of giant cacti?"
 ]
 },
 {
@@ -104,7 +104,7 @@
 "biome": "coast",
 "asks": [
 "Which state has the most people?",
-"Which state has the tallest trees in the world?"
+"Which state has the world's tallest known tree?"
 ]
 },
 {
@@ -164,7 +164,7 @@
 "largestCity": "Honolulu",
 "nickname": {
 "text": "Aloha State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "facts": [
@@ -203,7 +203,7 @@
 },
 "facts": [
 "Idaho grows more potatoes than any other state.",
-"Hells Canyon, on the Idaho-Oregon border, is the deepest river gorge in North America."
+"Hells Canyon, on the Idaho-Oregon border, is deeper than the Grand Canyon."
 ],
 "neighbors": [
 "montana",
@@ -216,7 +216,7 @@
 "biome": "forest",
 "asks": [
 "Which state grows more potatoes than any other?",
-"Which state shares Hells Canyon, North America's deepest river gorge, with Oregon?"
+"Hells Canyon, deeper than the Grand Canyon, runs along Oregon's border with which state?"
 ]
 },
 {
@@ -317,7 +317,7 @@
 "largestCity": "Albuquerque",
 "nickname": {
 "text": "Land of Enchantment",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "facts": [
@@ -472,7 +472,7 @@
 },
 "facts": [
 "Yellowstone, mostly in Wyoming, became the world's first national park in 1872.",
-"Wyoming gave women the right to vote in 1869, long before the rest of the country."
+"Wyoming Territory gave women the right to vote in 1869, long before the rest of the country."
 ],
 "neighbors": [
 "colorado",
@@ -485,7 +485,7 @@
 "biome": "plains",
 "asks": [
 "Which state is home to most of Yellowstone, the world's first national park?",
-"Which state gave women the right to vote in 1869?"
+"Which state, while still a territory, gave women the right to vote in 1869?"
 ]
 }
 ]

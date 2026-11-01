@@ -1,11 +1,12 @@
 /** Every Trail Point number lives here, so playtesting can tune them in one place. */
 export const ECONOMY = {
   startingPoints: 10,
-  perCorrectAnswer: 1,
+  /** Tuned down after playtesting showed points piling up unspent. */
+  perStopWon: 1,
   /** Extra points for answering a question about an earlier Field Note. */
-  recallBonus: 2,
+  recallBonus: 1,
   wrongGuessCost: 1,
-  xpPerLeftoverPoint: 2,
+  xpPerLeftoverPoint: 1,
   extraClue: 2,
   narrowSearch: 3,
 } as const;

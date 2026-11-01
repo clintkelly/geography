@@ -60,11 +60,11 @@
 },
 "biome": "plains",
 "facts": [
-"The famous Indianapolis 500 car race is held every May.",
+"The famous Indianapolis 500 car race is usually held in May.",
 "Indiana Dunes National Park sits on the shore of Lake Michigan."
 ],
 "asks": [
-"Which state hosts a famous 500-mile car race every May?",
+"Which state hosts a famous 500-mile car race, usually in May?",
 "Which state has a national park of sand dunes on Lake Michigan?"
 ],
 "neighbors": [
@@ -73,7 +73,7 @@
 "michigan",
 "ohio"
 ],
-"hint2": "A famous 500-mile car race is held in this state's capital."
+"hint2": "A famous 500-mile car race is named after this state's capital."
 },
 {
 "id": "iowa",
@@ -98,11 +98,11 @@
 },
 "biome": "plains",
 "facts": [
-"Iowa grows more corn than almost any other state.",
+"Iowa usually grows more corn than any other state.",
 "Effigy Mounds National Monument in Iowa protects ancient mounds shaped like animals."
 ],
 "asks": [
-"Which Midwestern state is famous for growing huge amounts of corn?",
+"Which state usually grows more corn than any other?",
 "Which state protects ancient mounds shaped like animals at Effigy Mounds?"
 ],
 "neighbors": [
@@ -248,11 +248,11 @@
 "biome": "forest",
 "facts": [
 "The Gateway Arch in St. Louis is the tallest arch in the United States.",
-"The Lewis and Clark Expedition set off from near St. Louis in 1804."
+"In 1804 the Lewis and Clark Expedition set off up the Missouri River, near St. Louis."
 ],
 "asks": [
 "Which state is home to the Gateway Arch?",
-"From which state did the Lewis and Clark Expedition set off in 1804?"
+"In 1804 Lewis and Clark set off up a river that shares its name with which state?"
 ],
 "neighbors": [
 "arkansas",
@@ -283,7 +283,7 @@
 "largestCity": "Omaha",
 "nickname": {
 "text": "Cornhusker State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "biome": "plains",
@@ -396,7 +396,7 @@
 "largestCity": "Sioux Falls",
 "nickname": {
 "text": "Mount Rushmore State",
-"status": "unverified",
+"status": "official",
 "others": []
 },
 "biome": "plains",
@@ -405,7 +405,7 @@
 "Badlands National Park in South Dakota protects striped rock and fossil beds."
 ],
 "asks": [
-"Where are four US presidents carved into a granite mountain?",
+"In which state are four US presidents carved into a granite mountain?",
 "Which state has Badlands National Park?"
 ],
 "neighbors": [

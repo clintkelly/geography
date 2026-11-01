@@ -10,7 +10,7 @@ export type Ending = 'none' | 'defeated' | 'wornOut';
 export interface Float {
   side: Side;
   text: string;
-  kind: 'damage' | 'heal' | 'block';
+  kind: 'damage' | 'heal' | 'block' | 'crit';
 }
 
 export interface Frame {
@@ -23,6 +23,8 @@ export interface Frame {
   floats?: Float[];
   /** A hit that lands: a brief freeze, a white flash, and a shake. */
   impact?: 'small' | 'big';
+  /** A Special's colored burst fills the scene. */
+  burst?: boolean;
   /** HP change shown at this moment. */
   hp?: { side: Side; delta: number };
 }
@@ -42,7 +44,7 @@ export const streakRate = (streak: number | undefined) => 1 + 0.06 * Math.min(Ma
  * The poses, motions and sounds for one resolved turn. Purely decorative: the
  * turn is already saved, and the outcome doesn't depend on any of this.
  */
-export function turnFrames(action: string, correct: boolean, events: TurnEvents, opponentActs: boolean, ending: Ending = 'none', powered = false): Frame[] {
+export function turnFrames(action: string, correct: boolean, events: TurnEvents, opponentActs: boolean, ending: Ending = 'none', powered = false, critical = false): Frame[] {
   const frames: Frame[] = [];
   let t = 0;
 
@@ -64,6 +66,7 @@ export function turnFrames(action: string, correct: boolean, events: TurnEvents,
       opponent: 'idle',
       playerMotion: special ? 'glow' : 'lunge',
       sounds: [answerSound, special ? 'special' : 'attack'],
+      ...(special ? { burst: true } : {}),
       ...(healFloats ? { floats: healFloats } : {}),
       ...(healHp ? { hp: healHp } : {}),
     });
@@ -79,9 +82,9 @@ export function turnFrames(action: string, correct: boolean, events: TurnEvents,
       player: stance,
       opponent: 'hit',
       opponentMotion: 'shake',
-      sounds: ['hit'],
-      floats: [{ side: 'opponent', text: `-${events.damageDealt}`, kind: 'damage' }],
-      impact: powered ? 'big' : 'small',
+      sounds: [critical ? 'crit' : 'hit'],
+      floats: [{ side: 'opponent', text: `-${events.damageDealt}`, kind: 'damage' }, ...(critical ? [{ side: 'opponent' as const, text: 'Critical!', kind: 'crit' as const }] : [])],
+      impact: powered || critical ? 'big' : 'small',
       hp: { side: 'opponent', delta: -events.damageDealt },
     });
     t += HIT_STOP;

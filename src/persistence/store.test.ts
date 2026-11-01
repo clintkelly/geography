@@ -127,7 +127,7 @@ describe('v1 migration', () => {
 
 describe('v3 migration', () => {
   const v3 = (id: string) => {
-    const { seenFacts: _seen, ...rest } = newSave(PACK, 4, id);
+    const { seenFacts: _seen, foundPlaces: _found, learning: _learning, badges: _badges, expertTrails: _expert, ...rest } = newSave(PACK, 4, id);
     return { ...rest, schemaVersion: 3, completedExpeditions: 7, stateCards: ['oregon'], offers: [{ id: 'old', reward: { kind: 'creature', speciesId: 'cragmaw' } }] } as unknown as SaveData;
   };
 
@@ -135,6 +135,11 @@ describe('v3 migration', () => {
     const s = migrateV3Save(v3('a'), PACK);
     expect(s).toMatchObject({ schemaVersion: SCHEMA_VERSION, completedExpeditions: 7, stateCards: ['oregon'], seenFacts: [] });
     expect(new Set(s.offers.map((o) => o.regionId)).size).toBe(PACK.regions.length);
+  });
+
+  it('fills the map from places already found', () => {
+    const attempts = [{ context: 'discovery', correct: true, submitted: 'oregon' }, { context: 'discovery', correct: false, submitted: 'idaho' }, { context: 'battle', correct: true, submitted: 'o0' }];
+    expect(migrateV3Save({ ...v3('a'), attempts } as unknown as SaveData, PACK).foundPlaces).toEqual(['oregon']);
   });
 
   it('keeps an unfinished trip', () => {

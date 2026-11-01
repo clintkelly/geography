@@ -5,7 +5,10 @@ import type { Difficulty } from '../content/types';
 import { degreesApart } from '../content/geo';
 import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST } from '../content/us/templates';
 import { validatePack, validateRecords } from '../content/validate';
+import { BADGES } from './badges';
 import { ECONOMY } from './economy';
+import { isDue, isFamiliar, localDay, recordAnswer } from './learning';
+import { formOf, levelOf, STAGES, stageOf, xpForLevel } from './progression';
 import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
 import { pickQuestion } from './questions';
 import { Rng } from './rng';
@@ -275,7 +278,7 @@ describe('befriending and the stable', () => {
 
   it('runs out of species honestly, with XP and no befriending', () => {
     let s = fresh();
-    const west = PACK.species.filter((o) => o.homes.includes('us-west'));
+    const west = PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare);
     for (let i = 0; i < west.length; i++) s = fullExpedition(s);
     expect(s.companions).toHaveLength(west.length + 1);
     expect(s.offers.find((o) => o.regionId === 'us-west')!.reward).toEqual({ kind: 'bond', xp: 10 });
@@ -361,10 +364,12 @@ describe('Trail Points', () => {
     expect(step(s, { type: 'useSnack' })).toBe(s);
   });
 
-  it('correct battle answers earn a point; wrong ones do not', () => {
+  it('winning a stop earns a point, so points stay scarce', () => {
     const s = step(find(ready(fresh())), { type: 'enterEncounter' });
-    expect(points(turn(s, true))).toBe(11);
-    expect(points(turn(s, false))).toBe(10);
+    expect(points(turn(s, true))).toBe(10);
+    let won = s;
+    while (won.expedition!.battle) won = turn(won, true);
+    expect(points(won)).toBe(10 + ECONOMY.perStopWon);
   });
 
   it('a wrong guess costs a point, reveals a free clue, and never blocks', () => {
@@ -461,7 +466,9 @@ describe('Field Note recall', () => {
         const q = inBattle.expedition!.battle!.question;
         const answered = answerWith(inBattle, true);
         if (q.recallOf && !e.battle!.befriending) {
-          expect(answered.expedition!.points - inBattle.expedition!.points).toBe(1 + ECONOMY.recallBonus);
+          const gain = answered.expedition!.points - inBattle.expedition!.points;
+          expect(gain).toBeGreaterThanOrEqual(ECONOMY.recallBonus);
+          expect(answered.expedition!.battle!.result!.critical).toBe(true);
           found = true;
         }
         s = step(answered, { type: 'continue' });
@@ -480,6 +487,190 @@ describe('streaks', () => {
     s = turn(s, false);
     expect(s.expedition!.streak).toBe(0);
     expect(s.expedition!.battle!.combat.opponentHp).toBe(hp);
+  });
+});
+
+describe('levels and evolution', () => {
+  const zero = () => fresh();
+
+  it('levels follow the curve, and stages unlock at 5 and 10', () => {
+    expect(levelOf(0)).toBe(1);
+    expect(levelOf(xpForLevel(5) - 1)).toBe(4);
+    expect(levelOf(xpForLevel(5))).toBe(5);
+    expect(levelOf(99999)).toBe(10);
+    expect(stageOf(xpForLevel(5))).toBe(2);
+    expect(stageOf(xpForLevel(10))).toBe(3);
+  });
+
+  it('rare creatures do not evolve', () => {
+    const rare = PACK.species.find((s) => s.rare)!;
+    expect(stageOf(99999, rare)).toBe(1);
+  });
+
+  it('every other creature has two evolved forms', () => {
+    for (const s of PACK.species.filter((o) => !o.rare)) expect(s.evolutions, s.id).toHaveLength(2);
+  });
+
+  it('a win gives XP once, and a retry gives none for a loss', () => {
+    let s = step(find(ready(zero())), { type: 'enterEncounter' });
+    while (s.expedition!.battle) s = turn(s, true);
+    expect(s.companions[0]!.bondXp).toBe(10);
+    let lost = step(find(s), { type: 'enterEncounter' });
+    if (lost.expedition!.battle) {
+      while (lost.expedition!.battle) lost = turn(lost, false);
+      expect(lost.companions[0]!.bondXp).toBe(10);
+    }
+  });
+
+  it('harder trails pay more XP', () => {
+    const xp = (d: Difficulty) => {
+      let s = step(find(ready(fresh(), 'us-west', d)), { type: 'enterEncounter' });
+      while (s.expedition!.battle) s = turn(s, true);
+      return s.companions[0]!.bondXp;
+    };
+    expect(xp('expert')).toBeGreaterThan(xp('ranger'));
+    expect(xp('ranger')).toBeGreaterThan(xp('scout'));
+  });
+
+  it('an evolved companion fights with its stage stats and bigger opponents', () => {
+    const base = fresh();
+    const s = { ...base, companions: [{ ...base.companions[0]!, bondXp: xpForLevel(10) }] };
+    const combat = step(find(ready(s)), { type: 'enterEncounter' }).expedition!.battle!.combat;
+    expect(combat).toMatchObject({ playerMaxHp: STAGES[3].maxHp, playerAttack: 5, opponentMaxHp: STAGES[3].regularHp, charge: 1 });
+  });
+
+  it.each([1, 2, 3] as const)('stage %s battles always take at least 3 right answers', (stage) => {
+    const stats = STAGES[stage];
+    const base = fresh();
+    const xp = stage === 1 ? 0 : xpForLevel(stage === 2 ? 5 : 10);
+    let s: SaveData = { ...base, companions: [{ ...base.companions[0]!, bondXp: xp }] };
+    s = step(start(s), { type: 'buy', item: 'charge' });
+    s = step(find(step(s, { type: 'depart' })), { type: 'enterEncounter' });
+    const first = s.expedition!.battle!.combat;
+    const best = first.charge >= 2 ? stats.attack + 3 + stats.attack : stats.attack * 2;
+    expect(best).toBeLessThan(first.opponentMaxHp);
+  });
+
+  it('an evolution stays pending until acknowledged, and only once', () => {
+    const base = fresh();
+    let s = { ...base, companions: [{ ...base.companions[0]!, bondXp: xpForLevel(5) }] };
+    expect(s.companions[0]!.stageSeen ?? 1).toBe(1);
+    s = step(s, { type: 'ackEvolution', instanceId: s.companions[0]!.instanceId });
+    expect(s.companions[0]!.stageSeen).toBe(2);
+  });
+
+  it('a form has its evolved name and art', () => {
+    const knight = PACK.species.find((o) => o.id === 'barkknight')!;
+    expect(formOf(knight, 0).name).toBe('The Bark Knight');
+    expect(formOf(knight, xpForLevel(5))).toMatchObject({ name: 'Sir Bark Knight', artId: 'barkknight-2', stage: 2 });
+  });
+
+  it('nicknames stick to one creature', () => {
+    const s = step(fresh(), { type: 'renameCompanion', instanceId: fresh().companions[0]!.instanceId, nickname: 'Rocky' });
+    expect(s.companions[0]!.nickname).toBe('Rocky');
+  });
+});
+
+describe("Explorer's Map, rare creatures and badges", () => {
+  it('fills in only when a place is found', () => {
+    const s = ready(fresh());
+    expect(s.foundPlaces).toEqual([]);
+    expect(find(s).foundPlaces).toEqual([s.expedition!.targetId]);
+  });
+
+  it('a wrong guess does not fill the map', () => {
+    const s = ready(fresh());
+    const wrong = s.expedition!.candidateIds.find((id) => id !== s.expedition!.targetId)!;
+    expect(step(s, { type: 'guess', locationId: wrong }).foundPlaces).toEqual([]);
+  });
+
+  const allPlaces = (regionId: string) => PACK.places.filter((p) => p.regionId === regionId).map((p) => p.id);
+
+  it('a full map reveals the rare creature, which never appears before that', () => {
+    for (const r of PACK.regions) {
+      const rare = PACK.species.find((o) => o.rare && o.homes.includes(r.id))!;
+      expect(rare, r.id).toBeTruthy();
+      const has = (s: SaveData) => s.offers.some((o) => o.reward.kind === 'creature' && o.reward.speciesId === rare.id);
+      for (let seed = 1; seed < 10; seed++) expect(has(fresh(seed))).toBe(false);
+    }
+    let s: SaveData = { ...fresh(), foundPlaces: allPlaces('us-west'), companions: [...fresh().companions, ...['barkknight', 'sandwhisk', 'cindermite', 'cragmaw'].map((speciesId, i) => ({ instanceId: `c${i}`, speciesId, bondXp: 0 }))] };
+    s = step(step(start(s, 'us-west'), { type: 'abandon' }), { type: 'dismissSummary' });
+    expect(s.offers.some((o) => o.regionId === 'us-west' && o.reward.kind === 'creature' && o.reward.speciesId === 'thunderhoof')).toBe(true);
+  });
+
+  it('badges are earned and announced once', () => {
+    let s: SaveData = { ...fresh(), foundPlaces: ['spain', 'portugal'] };
+    s = fullExpedition(s);
+    expect(s.badges).toContain('iberia');
+    expect(s.lastSummary!.newBadges).toContain('iberia');
+    expect(fullExpedition(s).lastSummary!.newBadges).not.toContain('iberia');
+    expect(new Set(BADGES.map((b) => b.id)).size).toBe(BADGES.length);
+  });
+});
+
+describe('spaced review', () => {
+  const q = PACK.questions.find((o) => o.objectiveId === 'capital-oregon' && o.difficulty === 'scout')!;
+  const DAY = 86400000;
+  const noon = new Date(2026, 10, 2, 12).getTime();
+
+  it('schedules 1, 3 then 7 days out', () => {
+    let l = recordAnswer({}, q, true, noon, false);
+    expect(l[q.objectiveId]!.nextDue).toBe(noon + DAY);
+    l = recordAnswer(l, q, true, noon + DAY, false);
+    expect(l[q.objectiveId]!.nextDue).toBe(noon + DAY + 3 * DAY);
+    l = recordAnswer(l, q, true, noon + 4 * DAY, false);
+    expect(l[q.objectiveId]!.nextDue).toBe(noon + 11 * DAY);
+  });
+
+  it('a miss makes it due now and restarts the schedule', () => {
+    const l = recordAnswer(recordAnswer({}, q, true, noon, false), q, false, noon + DAY, false);
+    expect(l[q.objectiveId]).toMatchObject({ stage: 0, missed: true });
+    expect(isDue(l[q.objectiveId], noon + DAY)).toBe(true);
+  });
+
+  it('a right answer just after seeing it is not evidence', () => {
+    const missed = recordAnswer({}, q, false, noon, false);
+    expect(recordAnswer(missed, q, true, noon + 1, true)).toBe(missed);
+  });
+
+  it('familiar needs three successes, two days and two variants', () => {
+    const other = PACK.questions.find((o) => o.objectiveId === q.objectiveId && o.id !== q.id && o.difficulty === 'scout')!;
+    let l = recordAnswer({}, q, true, noon, false);
+    l = recordAnswer(l, q, true, noon + 1, false);
+    l = recordAnswer(l, q, true, noon + 2, false);
+    expect(isFamiliar(l[q.objectiveId], 'scout')).toBe(false);
+    l = recordAnswer(l, other, true, noon + DAY, false);
+    expect(isFamiliar(l[q.objectiveId], 'scout')).toBe(true);
+    expect(isFamiliar(l[q.objectiveId], 'expert')).toBe(false);
+    expect(localDay(noon)).not.toBe(localDay(noon + DAY));
+  });
+
+  it('a missed objective comes back later in the same trip, in a different wording', () => {
+    let hits = 0;
+    for (let seed = 1; seed < 25; seed++) {
+      let s = step(find(ready(fresh(seed), 'us-west', 'scout', 'long')), { type: 'enterEncounter' });
+      const missed = s.expedition!.battle!.question.objectiveId;
+      s = step(answerWith(step(s, { type: 'chooseAction', action: 'guard' }), false), { type: 'continue' });
+      for (let i = 0; i < 6 && s.expedition!.battle; i++) {
+        s = turn(s, true);
+        if (s.expedition!.battle?.question.objectiveId === missed) hits++;
+      }
+    }
+    expect(hits).toBeGreaterThan(0);
+  });
+
+  it('a right answer after a miss on this trip is recorded as assisted', () => {
+    const s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    const missed = answerWith(step(s, { type: 'chooseAction', action: 'guard' }), false);
+    expect(missed.expedition!.revealed).toHaveLength(1);
+  });
+
+  it('reset erases progress but keeps the profile', () => {
+    const played = fullExpedition(fresh());
+    const reset = step(played, { type: 'resetProfile' });
+    expect(reset.completedExpeditions).toBe(0);
+    expect(reset.profile).toEqual(played.profile);
+    expect(reset.companions).toHaveLength(1);
   });
 });
 
@@ -533,12 +724,9 @@ describe('State Cards and souvenirs', () => {
     expect(s.stateCards.length).toBeGreaterThan(1);
   });
 
-  it('every US state has a card, and Europe has none yet', () => {
-    expect(PACK.cards).toHaveLength(50);
-  });
-
-  it('Europe still plays without cards', () => {
-    expect(playTrail(fresh(), 'europe').stateCards).toEqual([]);
+  it('all 50 states and 44 countries have cards', () => {
+    expect(PACK.cards).toHaveLength(94);
+    expect(playTrail(fresh(), 'europe').stateCards.length).toBeGreaterThan(0);
   });
 
   it('a souvenir is found once along the trail and survives abandoning', () => {

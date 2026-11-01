@@ -2,7 +2,8 @@ import type { Species } from '../content/types';
 import type { Pose } from './battleAnimation';
 
 export const artUrl = (id: string) => `${import.meta.env.BASE_URL}art/${id}.png`;
-export const poseUrl = (s: Species, pose: Pose) => artUrl(pose === 'idle' ? s.artId : `${s.artId}-${pose}`);
+/** Evolved forms have one sprite, which moves through the same lunges and shakes. */
+export const poseUrl = (s: Species, pose: Pose, artId = s.artId) => artUrl(pose === 'idle' || artId !== s.artId ? artId : `${artId}-${pose}`);
 
 export function Sprite({ id, size, flip, className, alt = '' }: { id: string; size: number; flip?: boolean; className?: string; alt?: string }) {
   return <img src={artUrl(id)} alt={alt} width={size} height={size} className={`sprite ${flip ? 'flip ' : ''}${className ?? ''}`} />;

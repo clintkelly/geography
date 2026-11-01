@@ -35,7 +35,7 @@ function CardAward({ placeId }: { placeId: string }) {
       <div>
         <p className="card-new">New State Card!</p>
         <h3>{card.name}</h3>
-        <p>{card.subtitle} · Capital: {card.capital}</p>
+        <p>{card.subtitle}{card.capital ? ` · Capital: ${card.capital}` : ''}</p>
       </div>
     </div>
   );
@@ -85,7 +85,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
 
   return (
     <section className="panel question">
-      {q.recallOf && <p className="recall-tag">Field Note check! A right answer earns {ECONOMY.recallBonus} bonus points.</p>}
+      {q.recallOf && <p className="recall-tag">Field Note check! A right answer is a critical: +{ECONOMY.recallBonus} point and a charge.</p>}
       <h2>{q.prompt}</h2>
       {q.inputType === 'map-marker' && (
         <WorldMap key={q.id} map={map} label="Map with four numbered markers" interactive={false}>

@@ -58,6 +58,10 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
             </div>
           )}
           {event && <div className="encounter-card"><div><h2>Something on the trail</h2><p className="muted">{event.title}</p></div></div>}
+          <details className="study">
+            <summary>Study {here.name} first</summary>
+            <ul>{here.atlas.map((line) => <li key={line}>{line}</li>)}</ul>
+          </details>
           <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : event ? 'Take a look' : 'Begin encounter'} <Key k="Enter" /></button>
         </section>
         <section className="discovery-map">
@@ -101,7 +105,7 @@ export function ExpeditionComplete({ e, dispatch }: { e: Expedition; dispatch: (
         </div>
       )}
       <p className="learn">{reward.kind === 'creature' ? <><strong>{rewardLabel(reward)}</strong> wants to join your stable!</> : <>You earned <strong>{rewardLabel(reward)}</strong>.</>}</p>
-      <p className="muted">{e.correct} of {e.answered} answers correct · {e.points} leftover Trail Points become bond XP</p>
+      <p className="muted">{e.correct} of {e.answered} answers correct · {e.points} leftover Trail Points become XP</p>
       <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{reward.kind === 'creature' ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>
     </section>
   );

@@ -1,22 +1,23 @@
 import { spaced } from '../content/geo';
 import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
-import { canUse, heal, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
+import { canUse, heal, MAX_CHARGE, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
 import { TRAIL_EVENTS, type TrailEvent } from './events';
+import { isDue, recordAnswer, type Learning } from './learning';
+import { levelOf, speciesOf, STAGES, stageOf, XP, xpFor } from './progression';
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
+import { earnedBadges } from './badges';
 import { Rng } from './rng';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 const RECALL_CHANCE = 0.4;
+const REVIEW_CHANCE = 0.5;
+const ATTEMPT_LIMIT = 500;
 export const BOND_BONUS_XP = 10;
 const RECENT_QUESTION_LIMIT = 24;
 
 export const BALANCE = {
-  playerMaxHp: 12,
-  playerAttack: 3,
-  regularHp: 10,
-  guardianHp: 14,
   enemyPattern: [2, 2, 4],
   regularMaxTurns: 8,
   guardianMaxTurns: 10,
@@ -46,6 +47,8 @@ export interface TurnResult {
   events: TurnEvents;
   /** Place whose State Card this answer earned. */
   cardId?: string;
+  /** Field Note check answered correctly: a critical that adds a charge. */
+  critical?: boolean;
 }
 
 export interface Battle {
@@ -57,6 +60,8 @@ export interface Battle {
   question: Question;
   action?: CombatAction | 'befriend';
   result?: TurnResult;
+  /** The answer was a Field Note check, so it counted as a critical. */
+  critical?: boolean;
   /** The target is worn out and only befriending remains. */
   befriending?: boolean;
   befriended?: boolean;
@@ -106,6 +111,8 @@ export interface Expedition {
   retreated: boolean;
   answered: number;
   correct: number;
+  /** Objectives answered wrongly on this trip. A later right answer here isn't independent evidence. */
+  revealed?: string[];
   /** Correct answers in a row. For show only: it never changes an outcome, and breaking it costs nothing. */
   streak?: number;
 }
@@ -133,6 +140,10 @@ export interface Summary {
   discoveryAssisted: boolean;
   souvenirId: string | null;
   cardsEarned: number;
+  xpGained: number;
+  levelUp?: number;
+  /** Badges earned by this trip. */
+  newBadges: string[];
 }
 
 export interface Settings {
@@ -144,6 +155,9 @@ export interface Settings {
   muted: boolean;
   /** 0 to 1. */
   volume: number;
+  musicVolume: number;
+  /** Regions the parent has turned off for this child. */
+  disabledRegions: string[];
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -154,12 +168,17 @@ export const DEFAULT_SETTINGS: Settings = {
   lastTrail: 'standard',
   muted: false,
   volume: 0.7,
+  musicVolume: 0.25,
+  disabledRegions: [],
 };
 
 export interface Companion {
   instanceId: string;
   speciesId: string;
   bondXp: number;
+  nickname?: string;
+  /** The evolution stage last celebrated, so each evolution shows exactly once. */
+  stageSeen?: number;
 }
 
 /** A saved game for one child. */
@@ -173,6 +192,11 @@ export interface SaveData {
   stateCards: string[];
   /** Field Notes this child has seen, which unlock questions about them. */
   seenFacts: string[];
+  /** Places the child has tracked a creature to. They fill in the Explorer's Map. */
+  foundPlaces: string[];
+  learning: Learning;
+  badges: string[];
+  expertTrails: number;
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -203,6 +227,9 @@ export type Command =
   | { type: 'abandon' }
   | { type: 'dismissSummary' }
   | { type: 'updateSettings'; patch: Partial<Settings> }
+  | { type: 'renameCompanion'; instanceId: string; nickname: string }
+  | { type: 'ackEvolution'; instanceId: string }
+  | { type: 'resetProfile' }
   | { type: 'updateProfile'; patch: Partial<Pick<SaveData['profile'], 'displayName' | 'avatarId'>> };
 
 export function currentSlotIndex(e: Expedition): number {
@@ -237,12 +264,18 @@ function nearestFirst(places: readonly Place[], target: Place): Place[] {
   return [...places].sort((a, b) => d(a) - d(b));
 }
 
+/** Every place in a region has been found: its map is full. */
+export function isRegionComplete(found: readonly string[], pack: Pack, regionId: string): boolean {
+  return pack.places.filter((p) => p.regionId === regionId).every((p) => found.includes(p.id));
+}
+
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
   const owned = new Set(save.companions.map((c) => c.speciesId));
   let nextId = save.nextId;
   const offers = pack.regions.flatMap((region) => {
-    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id)).map((s) => s.id));
+    const mapDone = !!save.foundPlaces && isRegionComplete(save.foundPlaces, pack, region.id);
+    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone)).map((s) => s.id));
     const ordered = [...unowned.filter((id) => id === pack.featuredSpeciesId), ...unowned.filter((id) => id !== pack.featuredSpeciesId)];
     const rewards: Reward[] = ordered.slice(0, 2).map((speciesId) => ({ kind: 'creature', speciesId }));
     if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
@@ -269,6 +302,10 @@ export function newSave(pack: Pack, seed: number, profileId: string, displayName
       souvenirIds: [],
       stateCards: [],
       seenFacts: [],
+      foundPlaces: [],
+      learning: {},
+      badges: [],
+      expertTrails: 0,
       completedExpeditions: 0,
       nextId: 1,
       rngState: seed,
@@ -329,7 +366,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const route = walkTrail(places, kinds.length, rng);
   // A small region shortens the trail from the middle, keeping the final showdown.
   const stops = kinds.length > route.length ? [...kinds.slice(0, route.length - 1), 'guardian' as const] : kinds;
-  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId).map((s) => s.id);
+  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare).map((s) => s.id);
   const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
   const opponents = rng.shuffle(locals.filter((id) => id !== target));
   const events = rng.shuffle(TRAIL_EVENTS);
@@ -396,20 +433,24 @@ function buy(e: Expedition, item: PrepItem): Expedition {
   return { ...e, [field]: true, points: e.points - def.cost };
 }
 
-function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack): { e: Expedition; question: Question } {
+function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack, now: number): { e: Expedition; question: Question } {
   const rng = new Rng(e.rngState);
   const context = { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId };
   const pool = questionPool(pack, e);
   const seen = new Set(save.seenFacts);
-  const recall = pool.filter((q) => q.recallOf && seen.has(q.recallOf) && !e.askedQuestionIds.includes(q.id));
+  const fresh = (q: Question) => !e.askedQuestionIds.includes(q.id);
+  const recall = pool.filter((q) => q.recallOf && seen.has(q.recallOf) && fresh(q));
   const wantRecall = rng.next() < RECALL_CHANCE;
+  const dueNow = pool.filter((q) => !q.recallOf && fresh(q) && isDue(save.learning[q.objectiveId], now));
+  const wantReview = rng.next() < REVIEW_CHANCE;
   // A question about a Field Note only appears once the child has had the chance to read it.
-  const picked = wantRecall && recall.length > 0 ? pickQuestion(recall, context, rng) : pickQuestion(pool.filter((q) => !q.recallOf), context, rng);
+  const source = wantRecall && recall.length > 0 ? recall : wantReview && dueNow.length > 0 ? dueNow : pool.filter((q) => !q.recallOf);
+  const picked = pickQuestion(source, context, rng);
   const question = presentQuestion(picked, rng);
   return { e: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id] }, question };
 }
 
-function enterEncounter(save: SaveData, pack: Pack): SaveData {
+function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
   const e = save.expedition;
   if (!e || !e.prepared || e.discovery !== 'found' || e.battle || e.event) return save;
   const slotIndex = currentSlotIndex(e);
@@ -417,23 +458,26 @@ function enterEncounter(save: SaveData, pack: Pack): SaveData {
   if (!slot) return save;
 
   if (slot.kind === 'event') {
-    const dealt = dealQuestion(save, e, slot, pack);
+    const dealt = dealQuestion(save, e, slot, pack, now);
     const event: EventState = { id: `${e.id}-event-${save.nextId}`, slotIndex, eventId: slot.eventId as string, question: dealt.question };
     return { ...save, nextId: save.nextId + 1, expedition: { ...dealt.e, event, retreated: false } };
   }
 
   const guardian = slot.kind === 'guardian';
   const companion = activeCompanion(save);
+  const species = speciesOf(pack, companion.speciesId);
+  const stats = STAGES[stageOf(companion.bondXp, species)];
   const started = startCombat({
-    playerMaxHp: BALANCE.playerMaxHp + (e.sturdy ? STURDY_HP : 0),
-    playerAttack: BALANCE.playerAttack,
-    special: pack.species.find((s) => s.id === companion.speciesId)?.special.template ?? 'strong',
-    opponentMaxHp: guardian ? BALANCE.guardianHp : BALANCE.regularHp,
+    playerMaxHp: stats.maxHp + (e.sturdy ? STURDY_HP : 0),
+    playerAttack: stats.attack,
+    special: species.special.template,
+    specialBonus: stats.specialBonus,
+    opponentMaxHp: guardian ? stats.finalHp : stats.regularHp,
     enemyPattern: BALANCE.enemyPattern,
     maxTurns: guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns,
   });
-  const combat = e.extraCharge ? { ...started, charge: 1 } : started;
-  const dealt = dealQuestion(save, e, slot, pack);
+  const combat = { ...started, charge: Math.min(MAX_CHARGE, stats.startCharge + (e.extraCharge ? 1 : 0)) };
+  const dealt = dealQuestion(save, e, slot, pack, now);
   const battle: Battle = { id: `${e.id}-battle-${save.nextId}`, slotIndex, combat, phase: 'choose', question: dealt.question };
   return { ...save, nextId: save.nextId + 1, expedition: { ...dealt.e, battle, retreated: false } };
 }
@@ -441,6 +485,16 @@ function enterEncounter(save: SaveData, pack: Pack): SaveData {
 /** Records a Field Note as seen once it has been shown after a correct answer. */
 function noteFacts(save: SaveData, q: Question, correct: boolean): string[] {
   return correct && q.noteId && !save.seenFacts.includes(q.noteId) ? [...save.seenFacts, q.noteId] : save.seenFacts;
+}
+
+/** A right answer after this trip already showed it doesn't prove anything, so it's marked assisted. */
+function learn(save: SaveData, e: Expedition, q: Question, correct: boolean, now: number): Learning {
+  return recordAnswer(save.learning, q, correct, now, (e.revealed ?? []).includes(q.objectiveId));
+}
+
+function revealedAfter(e: Expedition, q: Question, correct: boolean): string[] {
+  const revealed = e.revealed ?? [];
+  return correct || revealed.includes(q.objectiveId) ? revealed : [...revealed, q.objectiveId];
 }
 
 function pointsFor(q: Question, correct: boolean): number {
@@ -466,9 +520,13 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
 
   const correct = isCorrect(b.question, optionId);
   const befriending = b.action === 'befriend';
-  const { state: combat, events } = befriending
+  const resolved = befriending
     ? { state: b.combat, events: { damageDealt: 0, damageTaken: 0, blocked: 0, healed: 0 } }
     : resolveTurn(b.combat, b.action as CombatAction, correct);
+  const { events } = resolved;
+  // A right answer on a Field Note check is a critical: it adds a charge.
+  const critical = correct && !befriending && !!b.question.recallOf;
+  const combat = critical && resolved.state.outcome === 'active' ? { ...resolved.state, charge: Math.min(MAX_CHARGE, resolved.state.charge + 1) } : resolved.state;
   const attempt: Attempt = {
     id: `${b.id}-answer-${e.answered + 1}`,
     context: 'battle',
@@ -478,7 +536,7 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
     submitted: optionId,
     correct,
     timestamp: now,
-    assisted: false,
+    assisted: (e.revealed ?? []).includes(b.question.objectiveId),
     expeditionId: e.id,
     battleId: b.id,
     difficulty: e.difficulty,
@@ -490,10 +548,16 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   const slots = e.slots.map((s, i) => (i === b.slotIndex && huntWon ? { ...s, status: 'won' as const } : s));
   const midTrailFind = huntWon && slot.kind === 'regular' && battlesWon(e) === 1 && e.souvenirId && !e.foundSouvenirId;
   const cardId = earnCard(save, pack, b.question, correct);
-  const result: TurnResult = cardId ? { optionId, correct, events, cardId } : { optionId, correct, events };
+  const result: TurnResult = { optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}) };
+  // Winning a stop earns XP once, because a stop can only be won once.
+  const companions = huntWon && slot.kind !== 'event'
+    ? save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + xpFor(XP.battleWon, e.difficulty) } : c))
+    : save.companions;
   return {
     ...save,
-    attempts: [...save.attempts, attempt],
+    attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
+    companions,
+    learning: learn(save, e, b.question, correct, now),
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
     seenFacts: noteFacts(save, b.question, correct),
     souvenirIds: midTrailFind && e.souvenirId ? [...save.souvenirIds, e.souvenirId] : save.souvenirIds,
@@ -501,7 +565,8 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
       ...e,
       slots,
       foundSouvenirId: midTrailFind ? e.souvenirId : e.foundSouvenirId,
-      points: e.points + (correct && !befriending ? ECONOMY.perCorrectAnswer : 0) + pointsFor(b.question, correct),
+      points: e.points + (huntWon ? ECONOMY.perStopWon : 0) + pointsFor(b.question, correct),
+      revealed: revealedAfter(e, b.question, correct),
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
       streak: correct ? (e.streak ?? 0) + 1 : 0,
@@ -532,12 +597,14 @@ function answerEvent(save: SaveData, pack: Pack, optionId: string, now: number):
   const cardId = earnCard(save, pack, ev.question, correct);
   return {
     ...save,
-    attempts: [...save.attempts, attempt],
+    attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
+    learning: learn(save, e, ev.question, correct, now),
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
     seenFacts: noteFacts(save, ev.question, correct),
     expedition: {
       ...e,
       points: e.points + (correct ? def.points : 0) + pointsFor(ev.question, correct),
+      revealed: revealedAfter(e, ev.question, correct),
       snack: e.snack || (correct && !!def.snack),
       freeClue: correct && !!def.freeClue,
       answered: e.answered + 1,
@@ -557,7 +624,7 @@ function nextStop(e: Expedition, pack: Pack): Expedition {
   return { ...setupSearch(e, pack, rng, next.locationId), rngState: rng.state };
 }
 
-function continueBattle(save: SaveData, pack: Pack): SaveData {
+function continueBattle(save: SaveData, pack: Pack, now: number): SaveData {
   const e = save.expedition;
   if (e?.event?.result) return { ...save, expedition: nextStop({ ...e, event: null }, pack) };
   const b = e?.battle;
@@ -570,7 +637,7 @@ function continueBattle(save: SaveData, pack: Pack): SaveData {
     return { ...save, expedition: b.combat.outcome === 'retreat' ? done : nextStop(done, pack) };
   }
 
-  const dealt = dealQuestion(save, e, slot, pack);
+  const dealt = dealQuestion(save, e, slot, pack, now);
   const { result: _result, action: _action, ...rest } = b;
   const befriending = b.combat.outcome === 'victory' ? { befriending: true } : {};
   return { ...save, expedition: { ...dealt.e, battle: { ...rest, ...befriending, phase: 'choose', question: dealt.question } } };
@@ -599,7 +666,8 @@ function guess(save: SaveData, pack: Pack, locationId: string, now: number): Sav
   };
   return {
     ...save,
-    attempts: [...save.attempts, attempt],
+    attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
+    foundPlaces: correct && !save.foundPlaces.includes(locationId) ? [...save.foundPlaces, locationId] : save.foundPlaces,
     expedition: {
       ...e,
       guesses: [...e.guesses, locationId],
@@ -628,17 +696,24 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
   const owned = save.companions.some((c) => reward.kind === 'creature' && c.speciesId === reward.speciesId);
   const leftoverXp = applied ? 0 : e.points * ECONOMY.xpPerLeftoverPoint;
   const bonus = !applied && reward.kind === 'bond' ? reward.xp : 0;
-  const companions = save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + leftoverXp + bonus } : c));
+  const finishXp = applied ? 0 : xpFor(XP.expeditionDone, e.difficulty);
+  const taken = save.companions.find((c) => c.instanceId === e.companionId);
+  const levelBefore = levelOf(Math.max(0, (taken?.bondXp ?? 0) - e.slots.filter((s) => s.kind !== 'event').length * xpFor(XP.battleWon, e.difficulty)));
+  const companions = save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + leftoverXp + bonus + finishXp } : c));
+  const levelAfter = levelOf(companions.find((c) => c.instanceId === e.companionId)?.bondXp ?? 0);
   if (!applied && reward.kind === 'creature' && !owned) {
     companions.push({ instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: reward.speciesId, bondXp: 0 });
   }
 
+  const claimed: SaveData = { ...save, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
+  const badges = earnedBadges(claimed, pack);
+  const newBadges = badges.filter((id) => !save.badges.includes(id));
+
   return refreshOffers(
     {
-      ...save,
-      companions,
+      ...claimed,
+      badges,
       nextId: save.nextId + 1,
-      completedExpeditions: save.completedExpeditions + (applied ? 0 : 1),
       appliedRewardIds: applied ? save.appliedRewardIds : [...save.appliedRewardIds, e.id],
       expedition: null,
       recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT),
@@ -650,6 +725,9 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
         discoveryAssisted: e.anyAssisted,
         souvenirId: e.foundSouvenirId,
         cardsEarned: save.stateCards.length,
+        xpGained: leftoverXp + bonus + finishXp,
+        ...(levelAfter > levelBefore ? { levelUp: levelAfter } : {}),
+        newBadges,
       },
     },
     pack,
@@ -682,7 +760,7 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'guess':
       return guess(save, pack, cmd.locationId, now);
     case 'enterEncounter':
-      return enterEncounter(save, pack);
+      return enterEncounter(save, pack, now);
     case 'chooseAction': {
       const b = e?.battle;
       if (!e || !b || b.phase !== 'choose') return save;
@@ -697,7 +775,7 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'answer':
       return answer(save, pack, cmd.optionId, now);
     case 'continue':
-      return continueBattle(save, pack);
+      return continueBattle(save, pack, now);
     case 'claimReward':
       return claimReward(save, pack);
     case 'abandon':
@@ -707,6 +785,16 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       return save.lastSummary ? { ...save, lastSummary: null } : save;
     case 'updateSettings':
       return { ...save, settings: { ...save.settings, ...cmd.patch } };
+    case 'renameCompanion':
+      return { ...save, companions: save.companions.map((c) => (c.instanceId === cmd.instanceId ? { ...c, nickname: cmd.nickname.slice(0, 20) } : c)) };
+    case 'ackEvolution': {
+      const c = save.companions.find((o) => o.instanceId === cmd.instanceId);
+      if (!c) return save;
+      const stage = stageOf(c.bondXp, speciesOf(pack, c.speciesId));
+      return { ...save, companions: save.companions.map((o) => (o === c ? { ...o, stageSeen: stage } : o)) };
+    }
+    case 'resetProfile':
+      return { ...newSave(pack, Math.floor(new Rng(save.rngState).next() * 0x7fffffff), save.profile.id, save.profile.displayName, save.profile.avatarId), settings: save.settings };
     case 'updateProfile':
       return { ...save, profile: { ...save.profile, ...cmd.patch } };
   }
