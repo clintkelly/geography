@@ -2,8 +2,9 @@ import { useEffect, useMemo, useRef, type ReactNode } from 'react';
 import type { Question } from '../content/types';
 import { ECONOMY } from '../engine/economy';
 import { CardArt } from './art';
-import { cardFor, mapFor } from './content';
+import { cardFor, mapFor, place } from './content';
 import { Key, useKeys } from './keys';
+import { useMapCursor } from './mapCursor';
 import { playSound } from './sound';
 import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
 
@@ -50,6 +51,12 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
     if (hit && !result) onAnswer(hit.id);
   }, [q, result, onAnswer]);
 
+  const cursorItems = useMemo(() => (clickable ? q.options.map((o) => {
+    const [x, y] = map.project(place(o.id).lonLat);
+    return { id: o.id, x, y };
+  }) : []), [q, clickable, map]);
+  const cursor = useMapCursor(cursorItems, onAnswer, clickable && !result);
+
   const highlights = useMemo(() => {
     const shown: Record<string, Highlight> = {};
     if (!clickable) return shown;
@@ -59,8 +66,10 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
       shown[feature(result.optionId)] = 'wrong';
       shown[feature(q.acceptedId)] = 'correct';
     }
+    const pointed = q.options.find((o) => o.id === cursor)?.featureId;
+    if (pointed) shown[pointed] = 'cursor';
     return shown;
-  }, [q, result, clickable]);
+  }, [q, result, clickable, cursor]);
 
   const keys: Record<string, () => void> = {};
   if (result) keys.enter = onContinue;
@@ -93,19 +102,20 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
         </WorldMap>
       )}
       {clickable && (
-        <WorldMap key={q.id} map={map} label="Blank map. Click a place." highlights={highlights} onFeatureClick={onFeatureClick}>
+        <WorldMap key={q.id} map={map} label="Blank map. Click a place." highlights={highlights} onFeatureClick={onFeatureClick} arrowPan={false}>
           {(scale) => q.options.filter((o) => o.tiny).map((o) => (
             <Dot
               key={o.id}
               id={o.id}
               at={map.project(o.lonLat ?? [0, 0])}
               scale={scale}
-              tone={result ? (o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'default') : 'default'}
+              tone={result ? (o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'default') : o.id === cursor ? 'cursor' : 'default'}
               {...(result ? {} : { onClick: () => onAnswer(o.id) })}
             />
           ))}
         </WorldMap>
       )}
+      {clickable && !result && <p className="muted key-hint">Click the place, or use the arrow keys and press Enter.</p>}
       {!clickable && (
         <div className="options">
           {q.options.map((o, i) => {

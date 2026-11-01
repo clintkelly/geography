@@ -272,6 +272,14 @@ await button('Start expedition').click();
 await page.getByText('Prepare for the trail').waitFor();
 await press('Enter');
 await shotOnce('europe-expert');
+// Choosing on a blank map with only the keyboard.
+await page.keyboard.press('ArrowRight');
+await page.locator('.discovery-map .land-cursor').waitFor();
+await page.keyboard.press('ArrowLeft');
+await shotOnce('map-cursor');
+const beforeKeys = (await save()).attempts.length;
+await press('Enter');
+assert.equal((await save()).attempts.length, beforeKeys + 1, 'arrow keys and Enter choose a place');
 await finishTrail({});
 assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail through Europe finished');
 

@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type Whee
 import { clampView, type MapDef, type View } from '../content/maps';
 import { useKeys } from './keys';
 
-export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable' | 'arrive' | 'wobble';
+export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable' | 'arrive' | 'wobble' | 'cursor';
 
 interface Props {
   map: MapDef;
@@ -12,9 +12,11 @@ interface Props {
   children?: (scale: number) => ReactNode;
   label: string;
   interactive?: boolean;
+  /** Off when the arrow keys are choosing a place instead of panning. */
+  arrowPan?: boolean;
 }
 
-export function WorldMap({ map, highlights = {}, onFeatureClick, children, label, interactive = true }: Props) {
+export function WorldMap({ map, highlights = {}, onFeatureClick, children, label, interactive = true, arrowPan = true }: Props) {
   const home = (map.presets[0] as { view: View }).view;
   const [view, setView] = useState<View>(() => clampView(home, map));
   const drag = useRef<{ x: number; y: number; view: View; moved: boolean } | null>(null);
@@ -54,10 +56,14 @@ export function WorldMap({ map, highlights = {}, onFeatureClick, children, label
           '+': () => zoom(0.7),
           '=': () => zoom(0.7),
           '-': () => zoom(1.4),
-          arrowleft: () => pan(-0.1, 0),
-          arrowright: () => pan(0.1, 0),
-          arrowup: () => pan(0, -0.1),
-          arrowdown: () => pan(0, 0.1),
+          ...(arrowPan
+            ? {
+                arrowleft: () => pan(-0.1, 0),
+                arrowright: () => pan(0.1, 0),
+                arrowup: () => pan(0, -0.1),
+                arrowdown: () => pan(0, 0.1),
+              }
+            : {}),
         }
       : {},
   );
@@ -130,7 +136,7 @@ export function Marker({ at, scale, label, onClick, tone = 'default' }: {
 }
 
 /** A clickable dot for a place too small to click on the map. */
-export function Dot({ at, scale, onClick, tone = 'default', id }: { at: [number, number]; scale: number; onClick?: () => void; tone?: 'default' | 'correct' | 'wrong'; id: string }) {
+export function Dot({ at, scale, onClick, tone = 'default', id }: { at: [number, number]; scale: number; onClick?: () => void; tone?: 'default' | 'correct' | 'wrong' | 'cursor'; id: string }) {
   const [x, y] = at;
   return (
     <g className={`dot dot-${tone}`} data-place={id} onClick={onClick}>

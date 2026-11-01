@@ -287,3 +287,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 
 /* The fight stays in view while a long answer panel scrolls beneath it. */
 .battle .scene { position: sticky; top: 6px; z-index: 4; }
+
+/* Keyboard highlight on blank maps. */
+.land-cursor { fill: #ffe08a; stroke: #1652c8; stroke-width: 3; }
+.dot-cursor .dot-mark { fill: #ffe08a; stroke: #1652c8; stroke-width: 3; r: 8px; }

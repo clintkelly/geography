@@ -4,6 +4,7 @@ import { ECONOMY } from '../engine/economy';
 import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
 import { mapFor, place } from './content';
 import { Key, useKeys } from './keys';
+import { useMapCursor } from './mapCursor';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
@@ -20,13 +21,20 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
   const previous = stopIndex > 0 ? e.slots[stopIndex - 1] : undefined;
 
   const candidates = e.candidateIds.map((id, i) => ({ id, number: i + 1, place: place(id), ruledOut: e.guesses.includes(id) || e.removedIds.includes(id) }));
+  const cursorItems = useMemo(() => (expert ? candidates.filter((c) => !c.ruledOut).map((c) => {
+    const [x, y] = map.project(c.place.lonLat);
+    return { id: c.id, x, y };
+  }) : []), [e.guesses, e.removedIds, expert]); // eslint-disable-line
+  const cursor = useMapCursor(cursorItems, (locationId) => dispatch({ type: 'guess', locationId }), expert);
+
   const highlights = useMemo(() => {
     const shown: Record<string, Highlight> = {};
     for (const c of candidates) shown[c.place.featureId] = c.ruledOut ? 'ruledOut' : expert ? 'selectable' : 'candidate';
     if (lastGuess) shown[place(lastGuess).featureId] = 'wobble';
     if (atlasPlace) shown[place(atlasPlace).featureId] = 'atlas';
+    if (cursor) shown[place(cursor).featureId] = 'cursor';
     return shown;
-  }, [e.guesses, e.removedIds, atlasPlace]); // eslint-disable-line
+  }, [e.guesses, e.removedIds, atlasPlace, cursor]); // eslint-disable-line
 
   const guess = (locationId: string) => dispatch({ type: 'guess', locationId });
   const guesses = useRef(e.guesses.length);
@@ -68,7 +76,7 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
           {previous && <p className="muted">It left {place(previous.locationId).name}.</p>}
           {clues.map((c, i) => <p key={c?.id} className="clue"><span className="muted">Clue {i + 1}</span>{c?.text}</p>)}
           {lastGuess && <p className="correction" role="status">Not yet: that was {place(lastGuess).name}. Check the clues and try another place.</p>}
-          {expert && <p className="muted">Expert: click the place on the map. Very small countries have a dot.</p>}
+          {expert && <p className="muted">Expert: click the place on the map, or use the arrow keys and press Enter. Very small countries have a dot.</p>}
           <div className="row">
             {e.cluesShown < e.clueIds.length && <button type="button" disabled={!canBuyClue} onClick={buyClue}>Another clue ({ECONOMY.extraClue}) <Key k="C" /></button>}
             {!expert && !e.narrowed && <button type="button" disabled={!canNarrow} onClick={narrow}>Narrow search ({ECONOMY.narrowSearch}) <Key k="N" /></button>}
@@ -89,9 +97,9 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
         </section>
 
         <section className="discovery-map">
-          <WorldMap map={map} label={expert ? 'Blank map. Click a place.' : 'Map with numbered places to choose from'} highlights={highlights} onFeatureClick={onFeatureClick}>
+          <WorldMap map={map} label={expert ? 'Blank map. Click a place.' : 'Map with numbered places to choose from'} highlights={highlights} onFeatureClick={onFeatureClick} arrowPan={!expert}>
             {(scale) => (expert
-              ? candidates.filter((c) => c.place.tiny && !c.ruledOut).map((c) => <Dot key={c.id} id={c.id} at={map.project(c.place.lonLat)} scale={scale} onClick={() => guess(c.id)} />)
+              ? candidates.filter((c) => c.place.tiny && !c.ruledOut).map((c) => <Dot key={c.id} id={c.id} at={map.project(c.place.lonLat)} scale={scale} tone={c.id === cursor ? 'cursor' : 'default'} onClick={() => guess(c.id)} />)
               : candidates.filter((c) => !c.ruledOut).map((c) => (
                 <Marker key={c.id} at={map.project(c.place.lonLat)} scale={scale} label={String(c.number)} onClick={() => guess(c.id)} />
               )))}

@@ -352,7 +352,7 @@ State Card illustrations must show general subjects such as landscapes, animals,
 
 ### Keyboard
 
-The whole game is playable from the keyboard. The mouse or touch is needed only to point at a place on a map, such as Expert's click-the-state. Buttons show their key, and hints are hidden on touch devices.
+The whole game is playable from the keyboard. No screen requires the mouse. Buttons show their key, and hints are hidden on touch devices.
 
 | Screen | Keys |
 | --- | --- |
@@ -360,7 +360,7 @@ The whole game is playable from the keyboard. The mouse or touch is needed only 
 | Battle | A to Attack, 1–4 to answer; Guard and Special get G and S when added |
 | Finding a place | 1–4 to choose, C for another clue, A to open or close the atlas |
 | Atlas open | 1–4 to look up a place; close the atlas to choose |
-| Map | + and − to zoom, arrow keys to pan |
+| Map | + and − to zoom, arrow keys to pan; on blank maps the arrow keys move a highlight between places and Enter chooses |
 
 Held keys never repeat an action. Leaving an expedition has no single-key shortcut, because a stray key must not end a trip; it stays reachable with Tab.
 
