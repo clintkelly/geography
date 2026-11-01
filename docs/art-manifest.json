@@ -633,8 +633,15 @@
    ]
   },
   "cragmaw-3.png": {
-   "job_id": "fc1ee737-0f59-4907-9c23-7eb3660e1f54",
-   "prompt": "Evolved form of horned boulder beast: ancient mountain beast with a mossy forest on its back. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "abf93746-4adb-4d59-b9e0-2d86f33e0eb9",
+   "prompt": "Evolved form of horned boulder beast: single ancient mountain beast with huge horns and a mossy forest of small pine trees growing on its back, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "fc1ee737-0f59-4907-9c23-7eb3660e1f54"
+   ]
   },
   "galewing-3.png": {
    "job_id": "b204b206-565c-4bd6-ab8a-779714504288",
@@ -657,16 +664,37 @@
    ]
   },
   "thistlehop-3.png": {
-   "job_id": "e8133014-2244-4a90-8c65-6be05e19c8f5",
-   "prompt": "Evolved form of rabbit with purple thistle spikes: bramble-crowned rabbit king. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "faa9d2d6-e877-4a5e-9566-49e679440b35",
+   "prompt": "Evolved form of rabbit with purple thistle spikes: single tall regal rabbit king wearing a crown of thorny brambles, large purple thistle mantle, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "e8133014-2244-4a90-8c65-6be05e19c8f5"
+   ]
   },
   "bayouchomp-3.png": {
-   "job_id": "eb6bc6ca-491e-4fa6-ac72-788ba60ac869",
-   "prompt": "Evolved form of round mossy alligator: big gator with cypress-root armor and a crown of moss. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "6230f12b-95d2-4c7f-b2a0-8f83035b42be",
+   "prompt": "Evolved form of round mossy alligator: single huge gator with armor of twisted cypress roots and a crown of hanging moss, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "eb6bc6ca-491e-4fa6-ac72-788ba60ac869"
+   ]
   },
   "dillopod-3.png": {
-   "job_id": "2adfe9fe-f7b2-49fc-a7fa-4f80bd971908",
-   "prompt": "Evolved form of sandy armadillo: fortress-like armored armadillo. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "71b85524-56c6-40fb-8c2f-754cba2c3fe5",
+   "prompt": "Evolved form of sandy armadillo: single massive fortress-like armadillo with thick stone-block armor bands and battlement ridges along its back, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "2adfe9fe-f7b2-49fc-a7fa-4f80bd971908"
+   ]
   },
   "brinefin-3.png": {
    "job_id": "37b2f8ad-1cab-4531-bf4b-32158afd17f2",
@@ -677,16 +705,37 @@
    "prompt": "Evolved form of red lobster creature: armored lobster admiral with a barnacle helmet. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
   },
   "mapleclop-3.png": {
-   "job_id": "4fefa51d-a1c9-4171-96f0-e4f523f71bd4",
-   "prompt": "Evolved form of moose calf with maple-leaf antlers: majestic moose with red-gold autumn antlers. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "20ae1636-043c-4beb-9264-ebcd65e2b5db",
+   "prompt": "Evolved form of moose calf with maple-leaf antlers: single majestic full-grown bull moose with huge wide red-gold autumn maple antlers, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "4fefa51d-a1c9-4171-96f0-e4f523f71bd4"
+   ]
   },
   "fjordling-3.png": {
-   "job_id": "5d6ea9cd-71dd-43a6-b403-2fa435443dd7",
-   "prompt": "Evolved form of silver seal with icy crystal fins: grand frost seal with an ice crown. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "9d3b066f-991b-4be9-ba09-1ac64a5448fb",
+   "prompt": "Evolved form of silver seal with icy crystal fins: single grand frost seal wearing a tall ice crystal crown, large ice collar and big crystal fins, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "5d6ea9cd-71dd-43a6-b403-2fa435443dd7"
+   ]
   },
   "alpenhorn-3.png": {
-   "job_id": "1ab0ccf6-db78-4150-8bff-77320cc2f216",
-   "prompt": "Evolved form of mountain goat with curling horns: snow-maned goat with a peak-like crown of horns. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text."
+   "job_id": "a7a4eae9-90ab-438d-978d-407b4854e498",
+   "prompt": "Evolved form of mountain goat with curling horns: single powerful goat with a thick snowy mane and a tall peak-like crown of many horns, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 35,
+   "text_guidance_scale": 12,
+   "superseded_jobs": [
+    "1ab0ccf6-db78-4150-8bff-77320cc2f216"
+   ]
   },
   "thunderhoof.png": {
    "job_id": "e01cd888-dec3-4f98-84a9-4ad8563437e2",
@@ -741,20 +790,38 @@
    "prompt": "snowy owl with northern-lights wings recoiling after being hit, wincing, stars around its head"
   },
   "stormray-attack.png": {
-   "job_id": "76b01e32-33a8-4e20-b276-865df2435558",
-   "prompt": "small flying manta ray with storm clouds on its back charging forward to the left, mouth open, motion lines"
+   "job_id": "420b572d-9f0f-4fb6-b0f7-2c69f74280ff",
+   "prompt": "flat manta ray with wide triangular wings and storm clouds on its back, diving forward to the left with mouth open, motion lines",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 150,
+   "superseded_jobs": [
+    "76b01e32-33a8-4e20-b276-865df2435558"
+   ]
   },
   "stormray-guard.png": {
-   "job_id": "ff734f43-6ca3-4d83-931d-5dccd4375668",
-   "prompt": "small flying manta ray with storm clouds on its back braced defending, eyes shut, glowing blue shield in front of it"
+   "job_id": "c75b8f6e-7101-46d0-b2aa-5163ea53a552",
+   "prompt": "flat manta ray with wide triangular wings and storm clouds on its back, braced defending, eyes shut, glowing blue shield in front of it",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 150,
+   "superseded_jobs": [
+    "ff734f43-6ca3-4d83-931d-5dccd4375668"
+   ]
   },
   "stormray-special.png": {
    "job_id": "b9442db1-3989-45f9-a600-b63592168323",
    "prompt": "small flying manta ray with storm clouds on its back powering up, surrounded by glowing storm energy, eyes blazing"
   },
   "stormray-hit.png": {
-   "job_id": "ad839429-9455-4aac-8d98-4220ab37e08d",
-   "prompt": "small flying manta ray with storm clouds on its back recoiling after being hit, wincing, stars around its head"
+   "job_id": "81e3b403-9ee3-4306-85dc-c8fada13097d",
+   "prompt": "flat manta ray with wide triangular wings and storm clouds on its back, recoiling after being hit, wincing, stars around its head",
+   "redo": true,
+   "pass": 2,
+   "init_image_strength": 150,
+   "superseded_jobs": [
+    "ad839429-9455-4aac-8d98-4220ab37e08d"
+   ]
   },
   "lanternwhale-attack.png": {
    "job_id": "0563aa98-8368-4bf2-a150-990d34ef9534",
@@ -974,6 +1041,43 @@
    "slatepaw-3": "791a51bf-d18c-4f64-939f-9d7f0238bb7b",
    "galewing-3": "397b45d8-7740-4230-a9cd-ce4159eea85e",
    "card-finland (first attempt, not in jobs file)": "774a1214-d552-4495-ada9-fb77bc85e668"
+  },
+  "_rejected_pass2": {
+   "sandwhisk-3": {
+    "job_id": "a3e2babc-0a49-4910-b4be-dbf3eef2d67a",
+    "prompt": "Evolved form of sandy desert fox-lizard: single sleek tall desert guardian with a large swirling sand mane and long whip tail, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+    "init_image_strength": 35,
+    "text_guidance_scale": 12,
+    "reason": "ground shadow, no mane, more color drift"
+   },
+   "brinefin-3": {
+    "job_id": "8bc1b03b-b313-4a6e-ba82-288657779bc3",
+    "prompt": "Evolved form of teal fish-lizard: single regal sea lord with a red coral crown and large sweeping blade fins, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+    "init_image_strength": 35,
+    "text_guidance_scale": 12,
+    "reason": "smaller and pastel, less regal"
+   },
+   "lobsnap-3": {
+    "job_id": "a8bfe35e-ddc3-43ff-ae0e-fab721113c02",
+    "prompt": "Evolved form of red lobster creature: single armored lobster admiral wearing a barnacle-crusted helmet, heavy shell armor and huge claws, one creature only. Same colors and species, clearly the same creature, bigger and more powerful, facing left, crisp pixel art, no text.",
+    "init_image_strength": 35,
+    "text_guidance_scale": 12,
+    "reason": "reads as a crab"
+   },
+   "castlewyrm": {
+    "job_id": "a28eea71-f3ef-49ab-b250-bff5a78d0679",
+    "prompt": "Original rare legendary fantasy creature, small friendly stone-scaled dragon with tiny grey castle turrets with battlements on its back. Three-quarter battle pose facing left. Crisp pixel art, top-left lighting, no text, no logo.",
+    "init_image_strength": 120,
+    "text_guidance_scale": 12,
+    "reason": "softer, turrets still missing"
+   },
+   "lanternwhale-guard": {
+    "job_id": "f996bf59-2fd2-4ea1-8c4b-4ed444133cd9",
+    "prompt": "small whale with a glowing lantern on its head braced defending, eyes shut, large round glowing blue energy shield in front of its face",
+    "init_image_strength": 120,
+    "text_guidance_scale": 12,
+    "reason": "no shield, and lantern no longer matches attack and hit poses"
+   }
   }
  }
 }

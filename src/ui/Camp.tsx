@@ -119,7 +119,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
 
       <section className="panel">
         <h2>Explorer's Map: {found.length} of {places.length} in {region(regionId).label}</h2>
-        <WorldMap map={mapFor(regionId)} label={`Map of ${region(regionId).label} with ${found.length} of ${places.length} places found`} highlights={mapHighlights} interactive={false} />
+        <div className="explorer-map"><WorldMap map={mapFor(regionId)} label={`Map of ${region(regionId).label} with ${found.length} of ${places.length} places found`} highlights={mapHighlights} interactive={false} /></div>
         <p className="muted">{rareOwned ? `You filled this map and befriended ${rare?.displayName}!` : isRegionComplete(save.foundPlaces, PACK, regionId) ? 'Map complete! A rare creature has been sighted here.' : 'Fill the whole map to reveal a rare creature.'}</p>
       </section>
 

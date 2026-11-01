@@ -329,3 +329,5 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 @keyframes flicker { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(0) invert(1); } }
 .evolve-flicker { animation: flicker 320ms steps(2) infinite; }
 .hop-once { animation: hop 620ms ease-out; }
+
+.explorer-map { max-width: 640px; margin: 0 auto 6px; }
