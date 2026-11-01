@@ -1,17 +1,21 @@
 # Atlaswild MVP Engineering Plan
 
-Implements Creature Expedition Game PRD v0.3 (October 31, 2026). The PRD owns product behavior; this document owns how it gets built and in what order. Section references (§) point to the PRD.
+Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns how it gets built and in what order. Section references (§) point to the PRD.
 
 ## Status
 
 | Milestone | State |
 | --- | --- |
-| 1. Prove the core loop | Done, awaiting a playtest with the children |
-| 2. Complete the game mechanics | Not started |
-| 3. Complete the educational experience | Not started |
-| 4. Polish and playtest | Not started |
+| 1. Core loop | Done; the children enjoyed it |
+| 2. Foundations: profiles, US data, difficulty | Next |
+| 3. The Hunt: trails, points, Field Notes | Not started |
+| 4. The Stable: combat depth, growth, evolution | Not started |
+| 5. Learning and parent tools | Not started |
+| 6. Polish and playtest | Not started |
 
-**Gate:** don't start Milestone 2 until a child has played Milestone 1. The PRD's central test is whether a full short expedition is fun, and the answer may change Milestone 2's priorities.
+**Gate:** each milestone ends with the children playing it, and their reaction may reorder the next one. Milestone 3 is the one to watch: it decides whether the Carmen Sandiego loop works.
+
+**Why this order:** profiles come first because every later feature writes per-child data, and each schema change after real play has to be migrated. The Hunt comes before the Stable because points and clues are the riskiest design idea, and evolution means little until expeditions are worth repeating.
 
 ## Architecture
 
@@ -31,90 +35,166 @@ scripts/        Browser smoke test
 
 The rules that carry the PRD's reliability requirements:
 
-1. **One transition function.** Every change goes through `reduce`. An invalid or repeated command returns the same object, and an unchanged object is not saved. That is the whole double-click and duplicate-reward defense (§10, acceptance 4 and 16).
-2. **Write before render.** `useGame` holds the latest state in a ref and updates it synchronously, then renders only after the IndexedDB write. A reload mid-animation can't replay a turn.
-3. **One record, one transaction.** The save is a single record, so an answer, its slot status and its rewards commit atomically without multi-store transactions.
-4. **Snapshots in battle state.** A battle stores its question with options in display order, so a content update can't change a saved turn (§10).
-5. **Randomness is data.** RNG state lives in the save, so the same state and commands always give the same result.
+1. **One transition function.** Every change goes through `reduce`. An invalid or repeated command returns the same object, and an unchanged object is not saved. This also protects purchases from double charging.
+2. **Write before render.** `useGame` updates a ref synchronously and renders only after the IndexedDB write. A reload mid-animation can't replay a turn.
+3. **One record, one transaction.** The save is a single record, so an answer, its stop status, and rewards commit atomically.
+4. **Snapshots in battle state.** A battle stores its question with options in display order, so a content update can't change a saved turn.
+5. **Randomness is data.** RNG state lives in the save.
 
-Keep the single-record save for the MVP. Household data is small; the only pressure on it is unbounded `attempts`, handled in Milestone 3.
+`game.ts` will outgrow one file. Split it in Milestone 3 into `expedition.ts`, `economy.ts`, and `progression.ts`, keeping one exported `reduce`.
 
-## Milestone 2: game mechanics
+## Content model
 
-Do the first three in order; each depends on the previous one. The rest can run in any order.
+The largest design change is moving from hand-written questions to reviewed records plus templates. Fifty states across three difficulties and several question types is well over 500 questions, which is too many to review one by one.
+
+```ts
+interface StateRecord {
+  id: string;                 // 'california'
+  name: string;
+  postal: string;
+  fips: string;               // joins to us-atlas geometry
+  capital: string;
+  sameStateCities: string[];  // real, kid-familiar, never the capital
+  largestCity: string;
+  nickname: { text: string; status: 'official' | 'customary'; sourceUrl: string; others: string[] };
+  neighbors: string[];
+  region: 'west' | 'midwest' | 'south' | 'northeast';
+  facts: { id: string; text: string; sourceUrl: string }[];
+  cardArtId: string;
+  reviewed: boolean;
+}
+```
+
+- `content/us/states/*.json` holds one file per region, so review happens in batches.
+- `content/us/templates.ts` turns records into `Question` objects at load time, with stable IDs such as `q-capital-california-ranger-1`.
+- The existing `Question` shape and `pickQuestion` keep working, so combat and saves need no knowledge of templates.
+- Distractors are chosen deterministically per template and difficulty, and the validator runs over every generated question.
+
+Validator additions for §8: same-state cities exclude the capital, no option list has two correct answers, neighbors are symmetric, every fact has a source, `official` nicknames have a source, and unreviewed records can't enter an active pack.
+
+## Milestone 2: Foundations
 
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
-| 1 | Schema v2: `{ profiles: Record<id, ProfileSave>, activeProfileId }`, with a real v1 migration and test | `game.ts`, `store.ts` | M |
-| 2 | Profile select and quick switching, with display names and avatars for the children | `ui/` | S |
-| 3 | Guard, Special (three templates), charge, block, per-action wrong-answer rules; restore the §5 enemy pattern | `combat.ts`, `Battle.tsx` | M |
-| 4 | Six species and three starters, with Special templates and a starter choice | `pack.ts`, `Camp.tsx` | S |
-| 5 | Deterministic rewards: creature/souvenir alternation, committed at start, advancing on completion | `game.ts` | S |
-| 6 | Companion selection, bond XP per slot, bond levels, journal badges, nicknames | `game.ts`, `Camp.tsx` | M |
-| 7 | Two outing offers from three route templates, replacing the single generated route | `game.ts`, `content/` | M |
-| 8 | Temporary bonus choice after battle 1: Extra Charge or Sturdy Spirit | `game.ts`, `Route.tsx` | S |
-| 9 | Fixed tutorial first session with a guaranteed unowned species | `game.ts` | S |
+| 1 | Schema v2: `{ profiles, activeProfileId }`, with a tested v1 migration. Keep souvenirs and counts; end any in-progress v1 expedition cleanly | `game.ts`, `store.ts` | M |
+| 2 | Profile select and quick switching | `ui/` | S |
+| 3 | Generalize `WorldMap` to a map definition, and add a US map with `us-atlas` and AlbersUsa, including Alaska and Hawaii insets | `ui/`, new `content/maps` | M |
+| 4 | `StateRecord`, templates, and validator | `content/us/` | M |
+| 5 | State records for the West, as the first reviewed batch | `content/us/states/west.json` | M, mostly review |
+| 6 | Difficulty on questions: Scout, Ranger, Expert, plus a choice on the outing card and a click-the-state input type | `questions.ts`, `Battle.tsx` | M |
+| 7 | Parent difficulty limits, in a minimal settings screen | `ui/` | S |
+| 8 | Basic export to a JSON file, so real saves have a backup before later migrations | `persistence/`, `ui/` | S |
 
-Tests to add: Section 5's balance table as a table-driven combat test, profile isolation (acceptance 1), slot XP that can't be farmed (16), bonus expiry (15), XP fallback after both pools empty (17).
+Tests: migration from a real v1 save, profile isolation (1), same-state options (10), no two correct answers (11), nickname status (12), and map click accuracy after zoom (8).
 
-**Exit:** each child completes several expeditions without affecting the other's save, and losses and interruptions preserve outing state.
+Decision for the migration: Milestone 1 data goes to one child's profile, whichever the parent picks once. Don't duplicate it.
 
-## Milestone 3: educational experience
+**Exit:** both children play the existing loop on Western states at a difficulty of their choice.
+
+## Milestone 3: The Hunt
 
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
-| 1 | Content pipeline: move packs to JSON, add a `reviewed` flag, and refuse unreviewed items in the active pack | `content/` | S |
-| 2 | Full pack: 24 objectives, about 72 questions, at least 2 clues per target, atlas entries | `content/` | M, mostly review time |
-| 3 | Learning module: objective progress, 1/3/7-day schedule, familiarity rule, same-session retry of misses | new `engine/learning.ts` | M |
-| 4 | Selection by need: half local, half due, per the §7 fallback order; replaces the coin flip in `pickQuestion` | `questions.ts` | S |
-| 5 | Answer-reveal handling, so repeats shown after a reveal never count as evidence (acceptance 7) | `learning.ts` | S |
-| 6 | Optional study cards before encounters | `ui/` | S |
-| 7 | Parent view: objective groups, Foundation/Challenge, accuracy with sample size, due and missed objectives | new `ui/Parent.tsx` | M |
-| 8 | Export, validated import with preview, confirmed reset | `persistence/` | M |
-| 9 | Compact old attempts into per-objective totals so the save stays small | `game.ts` | S |
+| 1 | Replace `slots` with `stops`: trail generation over state adjacency within a region | `expedition.ts` | L |
+| 2 | Clue generation from records, per target and difficulty, without leaks | `expedition.ts`, `content/` | M |
+| 3 | Trail Points: balance, spend, earn, conversion, and an idempotent purchase ID | `economy.ts` | M |
+| 4 | Prep Shop screen and effects | `ui/`, `game.ts` | M |
+| 5 | Stop screens: paid clues, Narrow the search, Expert free-click | `Discovery.tsx` | M |
+| 6 | Journey events: six templates | `content/`, `ui/` | M |
+| 7 | Field Notes in the feedback panel | `Battle.tsx` | S |
+| 8 | State Cards and album, with first-award idempotency | `game.ts`, `Camp.tsx` | M |
+| 9 | Sighting targets as rewards; souvenirs move to stop finds | `expedition.ts` | S |
+| 10 | Pass 1 art: about 10 card illustrations for the West | `public/art` | S |
 
-The clock enters the learning module only through the `now` argument, so scheduling tests need no fake timers. Dates for "two calendar days" use the device's local date.
+Tests: trails stay adjacent, 0-point completion (19), purchases don't double charge (4), assisted recording (20), no purchase can answer a question (21), card awarded once (22).
 
-**Exit:** content is accurate and legible, questions repeat usefully, and the parent can inspect each child's recent learning.
+**Exit:** a Standard trail is fun for its whole length, and the children make real choices about points.
 
-## Milestone 4: polish and playtest
+## Milestone 4: The Stable
 
-- One more species set, using Slatepaw as a style reference for consistency. Six species total, plus opponent variety if wanted.
-- Reduced-motion audit, tablet layout on the actual device, keyboard pass.
-- Lazy-load the map so camp opens instantly; precompute Europe paths if the 50m geometry feels slow on the tablet.
+| # | Work | Main files | Size |
+| --- | --- | --- | --- |
+| 1 | Guard, Special templates, charge, and block; §6 enemy pattern restored | `combat.ts`, `Battle.tsx` | M |
+| 2 | Combat reads companion stats, and opponents scale by stage | `combat.ts`, `game.ts` | S |
+| 3 | Stable screen, companion selection, nicknames | `ui/` | M |
+| 4 | XP, levels, and idempotent stop awards | `progression.ts` | M |
+| 5 | Evolution: thresholds, stat changes, one-time celebration | `progression.ts`, `ui/` | M |
+| 6 | Species data for 12 species; 3 starters | `content/` | S |
+| 7 | Art: first 6 species, 3 stages each, using reference images | `public/art` | M |
+| 8 | Rival Hunts when new species run out | `expedition.ts` | S |
+
+Tests: §6 as a table-driven combat test (3), minimum 3 correct answers at every stage (24), evolution once (23), XP can't be farmed (4), honest Rival Hunts (25).
+
+**Exit:** the children care which companion they take, and they want to evolve one.
+
+## Milestone 5: Learning and parent tools
+
+| # | Work | Main files | Size |
+| --- | --- | --- | --- |
+| 1 | Records for Midwest, South, and Northeast, in reviewed batches | `content/us/states` | L, mostly review |
+| 2 | Learning module: progress, schedule, per-difficulty familiarity, retry after misses | new `engine/learning.ts` | M |
+| 3 | Selection by need, replacing the coin flip | `questions.ts` | S |
+| 4 | Study cards | `ui/` | S |
+| 5 | Parent view | new `ui/Parent.tsx` | M |
+| 6 | Validated import with preview, confirmed reset | `persistence/` | M |
+| 7 | Compact old attempts | `game.ts` | S |
+
+The clock enters learning only through the `now` argument. "Calendar days" use the device's local date.
+
+**Exit:** the content is accurate across all 50 states, and the parent can see what each child needs.
+
+## Milestone 6: Polish and playtest
+
+- Remaining State Card and creature art.
+- Lazy-load maps so camp opens instantly. The bundle is already over 500 kB because of the 50m world geometry.
+- Reduced-motion audit, the real tablet, keyboard pass.
 - Observation across several days, then balance changes before any new content.
 
-**Exit:** both children play independently, understand why answers were wrong, and find a reason to return.
+**Exit:** both children play independently, understand their mistakes, and find a reason to return.
+
+## Art budget
+
+| Batch | Approximate generations |
+| --- | --- |
+| Creatures, 12 species × 3 stages | 36–70, allowing for rejects |
+| State Cards, 50 | 50–80 |
+| Backdrops and events | 15–25 |
+| Total | About 100–175 of the 2,000 monthly allowance |
+
+Generation cost isn't a constraint. Jobs are limited to 8 concurrent, so batches need waiting. Evolved forms are the riskiest art, so try one full species before generating the set.
 
 ## Testing
 
 | Layer | Tool | Covers |
 | --- | --- | --- |
-| Rules | Vitest | Combat, expedition flow, idempotency, selection, content validation |
-| Persistence | Vitest with fake-indexeddb | Resume, schema rejection; migrations from Milestone 2 |
-| Whole loop | Playwright (`npm run smoke`) | One real expedition including reloads and double clicks |
-| Visual | Screenshots, reviewed by eye | Map framing, layout. Milestone 1's map cropping passed the automated run and was only caught this way |
-| Fun | The children | Everything else (§14) |
+| Rules | Vitest | Combat, trails, economy, progression, idempotency, selection |
+| Content | Vitest | Every generated question and clue, for all difficulties |
+| Persistence | Vitest with fake-indexeddb | Resume, migrations, schema rejection |
+| Whole loop | Playwright (`npm run smoke`) | One real trail, including reloads and double clicks |
+| Visual | Screenshots, reviewed by eye | Map framing and layout. Milestone 1's map cropping passed the automated run and was only caught this way |
+| Fun | The children | Everything else (§15) |
 
-Before starting a milestone, add its acceptance items from §13 as named tests.
+Before starting a milestone, add its §14 acceptance items as named tests. Automated checks can prove that a record is consistent, not that a fact is true, so facts need human review.
 
 ## Risks
 
 | Risk | Mitigation |
 | --- | --- |
-| Clearing browser data destroys progress | Export is Milestone 3 task 8; move it earlier if the children start caring about their collection |
-| Six places make clues guessable once memorized | Accepted by the PRD; assisted tracking keeps the data honest. Watch in playtest |
-| Marker questions with neighbors (Spain and Portugal) are fiddly on touch | Numbered buttons always work; verify on the tablet |
-| Question text is authored by AI | Fixture needs parent review now; the `reviewed` flag enforces it from Milestone 3 |
-| Schema changes break a child's real save | Migrations with tests from v2 onward; unsupported versions are refused and left untouched |
+| 50 state records are a large fact-checking job | Regional batches, source URLs on each fact, and a `reviewed` gate; playable after the first region |
+| Points punish the children who need the most help | §5 fairness rules; free atlas; watch this in playtest |
+| Field Notes add reading that slows play | No extra click; can be skipped by pressing Continue |
+| Standard trail feels too long | Short trail stays available; expeditions pause between stops |
+| Stat growth makes questions unnecessary | Stage-scaled opponents and a tested minimum of 3 correct answers |
+| Economy has a dominant strategy | Numbers live in one config; watch what they buy |
+| Clearing browser data destroys progress | Export is in Milestone 5; ship a basic version in Milestone 2 now that the children care about progress |
+| Pokémon-derived names or art slip in | §1 rule; check prompts and names at review |
+| Schema changes break a child's real save | Tested migrations from v2 onward; unsupported versions refused and left untouched |
 
 ## Decisions already made
 
-- **Enemy pattern in Milestone 1 is 1, 2, 2**, not the PRD's 2, 2, 4. With Attack alone, the PRD's numbers make the guardian require a perfect run. Restore them with Guard and Special, then retune by playtest. Change it in `BALANCE` in `engine/game.ts`.
-- **The project stays in this `geography` directory** and keeps the provisional Atlaswild name.
-- **Geometry comes from the `world-atlas` npm package**, which packages Natural Earth 1:50m data.
-- **Question sources use Wikipedia URLs** as a stable, checkable default.
-
-## Milestone 1 differences from the PRD
-
-Built early because they were cheap and made the prototype easier to judge: PixelLab art, map pan and zoom, marker questions, and a retry flow. Reduced to fit: one profile named Explorer, one starter, no tutorial, souvenir rewards only, and a one-button action step that exists so Guard and Special have a place to go. Question selection uses a simple local-question coin flip with spacing rules. Answers are recorded but don't yet drive review.
+- **Creatures stay original** (§1).
+- **Trail Points are per-expedition**, not a persistent currency, so a bad run can't hurt the next one.
+- **Reward is the creature you hunted**, so every expedition has one clear goal.
+- **Questions come from reviewed records plus templates**, not hand-written lists.
+- **The US map uses `us-atlas`**, alongside `world-atlas` for Europe.
+- **Enemy pattern stays 1, 2, 2 until Guard and Special ship** in Milestone 4, then moves to the PRD's values.
