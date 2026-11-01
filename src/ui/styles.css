@@ -146,7 +146,7 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 
 @media (prefers-reduced-motion: reduce) {
   /* Poses, numbers and sounds remain, so the feedback survives without the movement. */
-  .rare-scene, .rare-scene::before, .rare-intro *, .rare-intro, .streak-banner, .streak-banner .burst, .wipe, .low-hp::after, .actor img, .idle-sprite, .hop-once, .evolve-flicker, .scene, .float, .fx, .bump, .reveal, .reveal::after, .vs-intro *, .friend-banner, .special-ready, .hop-loop, .land-wobble, button { animation: none !important; transition: none !important; }
+  .actor-slot, .rare-scene, .rare-scene::before, .rare-intro *, .rare-intro, .streak-banner, .streak-banner .burst, .wipe, .low-hp::after, .actor img, .idle-sprite, .hop-once, .evolve-flicker, .scene, .float, .fx, .bump, .reveal, .reveal::after, .vs-intro *, .friend-banner, .special-ready, .hop-loop, .land-wobble, button { animation: none !important; transition: none !important; }
   .flash { filter: none !important; }
   .actor, .land-arrive { animation: none !important; }
   .hp-fill { transition: none; }
@@ -383,3 +383,13 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .rare-intro { background: radial-gradient(circle, rgba(120, 40, 170, 0.92), rgba(14, 8, 30, 0.97)); flex-wrap: wrap; align-content: center; animation-delay: 2300ms; }
 .rare-intro em { width: 100%; text-align: center; font-style: normal; font-weight: 900; font-size: 3rem; color: #fff1a8; text-shadow: 2px 2px 0 #6a1fa0, -2px -2px 0 #6a1fa0, 2px -2px 0 #6a1fa0, -2px 2px 0 #6a1fa0, 0 0 18px #ffd84a; animation: vs-pop 380ms ease-out backwards; }
 .rare-intro .burst { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; animation: burst-out 900ms ease-out 200ms both; }
+
+/* Teams. */
+.team-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.team-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 2px 8px 2px 3px; font-size: 0.85rem; font-weight: 600; }
+.team-chip small { font-weight: 400; color: var(--muted); }
+.team-chip.active { border: 2px solid var(--accent); background: #eef6f1; }
+.team-chip.fainted { opacity: 0.45; filter: grayscale(1); }
+.turf-tag { display: inline-block; margin-top: 4px; background: #e6f6d8; border: 1px solid #6aa84f; border-radius: 6px; padding: 1px 8px; font-size: 0.78rem; font-weight: 700; color: #33691e; }
+@keyframes switch-in { from { transform: translateX(-110px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.actor-slot { animation: switch-in 260ms ease-out; }

@@ -12,6 +12,8 @@ export interface CombatConfig {
   special: SpecialTemplate;
   /** Extra Special power from evolving. */
   specialBonus?: number;
+  /** Extra Attack damage on home turf. Specials don't get it, so battles still take three right answers. */
+  turf?: number;
   opponentMaxHp: number;
   enemyPattern: readonly number[];
   maxTurns: number;
@@ -69,13 +71,21 @@ function playerEffect(state: CombatState, action: CombatAction, correct: boolean
     return correct ? { ...none, damage: GUARD_DAMAGE, block: GUARD_BLOCK, charge: gain } : { ...none, block: GUARD_WRONG_BLOCK };
   }
   if (!correct) return none;
-  if (action === 'attack') return { ...none, damage: state.playerAttack, charge: gain };
+  if (action === 'attack') return { ...none, damage: state.playerAttack + (state.turf ?? 0), charge: gain };
 
   const spent = state.charge - SPECIAL_COST;
   const bonus = state.specialBonus ?? 0;
   if (state.special === 'strong') return { ...none, damage: state.playerAttack + SPECIAL_BONUS + bonus, charge: spent };
   if (state.special === 'heal') return { ...none, damage: SPECIAL_LIGHT_DAMAGE, heal: SPECIAL_HEAL + bonus, charge: spent };
   return { ...none, damage: SPECIAL_LIGHT_DAMAGE, block: SPECIAL_BLOCK + bonus, charge: spent };
+}
+
+/** The opponent's attack with no player action, as when a creature switches in. */
+export function enemyStrikes(state: CombatState): { state: CombatState; damage: number } {
+  const damage = enemyIntent(state);
+  const playerHp = Math.max(0, state.playerHp - damage);
+  const retreat = playerHp === 0 || state.turn >= state.maxTurns;
+  return { state: { ...state, playerHp, outcome: retreat ? 'retreat' : 'active', turn: retreat ? state.turn : state.turn + 1 }, damage };
 }
 
 export function resolveTurn(

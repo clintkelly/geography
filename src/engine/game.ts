@@ -1,10 +1,10 @@
 import { spaced } from '../content/geo';
 import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
-import { canUse, heal, MAX_CHARGE, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
+import { canUse, enemyStrikes, heal, MAX_CHARGE, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
 import { TRAIL_EVENTS, type TrailEvent } from './events';
 import { isDue, recordAnswer, type Learning } from './learning';
-import { levelOf, speciesOf, STAGES, stageOf, XP, xpFor } from './progression';
+import { levelOf, MAX_TEAM, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS, XP, xpFor } from './progression';
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { earnedBadges } from './badges';
 import { cardLevelOf, type CardLevel } from './cards';
@@ -71,6 +71,12 @@ export interface Battle {
   result?: TurnResult;
   /** Right answers so far in a Bold Befriend attempt. */
   tameHits?: number;
+  /** HP and charge of each team member, by instance id. The active one's live values are in `combat`. */
+  bench?: Record<string, { hp: number; charge: number }>;
+  /** The active creature fainted, so the next move must be a switch. */
+  mustSwitch?: boolean;
+  /** Counts switches, and what the last one cost, so the screen can react. */
+  switches?: { count: number; damage: number };
   /** The answer was a Field Note check, so it counted as a critical. */
   critical?: boolean;
   /** The target is worn out and only befriending remains. */
@@ -93,7 +99,12 @@ export interface Expedition {
   trail: TrailLength;
   rngState: number;
   reward: Reward;
+  /** The creature fighting right now. */
   companionId: string;
+  /** Everyone on this trip, lead first. Older trips have only `companionId`. */
+  teamIds?: string[];
+  /** XP at departure, to spot level-ups. */
+  xpAtStart?: Record<string, number>;
   prepared: boolean;
   points: number;
   sturdy: boolean;
@@ -213,6 +224,8 @@ export interface SaveData {
   badges: string[];
   expertTrails: number;
   bestStreak?: number;
+  /** The last team taken, offered again next trip. */
+  lastTeamIds?: string[];
   tamedAny?: boolean;
   rareFound?: boolean;
   completedExpeditions: number;
@@ -230,6 +243,8 @@ export interface SaveData {
 export type Command =
   | { type: 'start'; offerId: string; regionId: string; difficulty: Difficulty; trail: TrailLength }
   | { type: 'selectCompanion'; instanceId: string }
+  | { type: 'toggleTeam'; instanceId: string }
+  | { type: 'switchTo'; instanceId: string }
   | { type: 'buy'; item: PrepItem }
   | { type: 'depart' }
   | { type: 'revealClue'; shown: number }
@@ -249,6 +264,8 @@ export type Command =
   | { type: 'ackEvolution'; instanceId: string }
   | { type: 'resetProfile' }
   | { type: 'updateProfile'; patch: Partial<Pick<SaveData['profile'], 'displayName' | 'avatarId'>> };
+
+export const teamOf = (e: Expedition) => e.teamIds ?? [e.companionId];
 
 export function currentSlotIndex(e: Expedition): number {
   return e.slots.findIndex((s) => s.status === 'pending');
@@ -397,6 +414,9 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     return { kind, locationId, opponentId: opponents[battles++ % opponents.length] as string, status: 'pending' };
   });
 
+  const owned = save.companions.map((c) => c.instanceId);
+  const remembered = (save.lastTeamIds ?? []).filter((id) => owned.includes(id));
+  const team = remembered.length > 0 ? remembered : [save.activeCompanionId];
   const blank: Expedition = {
     id,
     regionId: cmd.regionId,
@@ -404,7 +424,8 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     trail: cmd.trail,
     rngState: 0,
     reward: offer.reward,
-    companionId: save.activeCompanionId,
+    companionId: team[0] as string,
+    teamIds: team,
     prepared: false,
     points: ECONOMY.startingPoints,
     sturdy: false,
@@ -463,9 +484,62 @@ function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack, now
   const wantReview = rng.next() < REVIEW_CHANCE;
   // A question about a Field Note only appears once the child has had the chance to read it.
   const source = wantRecall && recall.length > 0 ? recall : wantReview && dueNow.length > 0 ? dueNow : pool.filter((q) => !q.recallOf);
-  const picked = pickQuestion(source, context, rng);
+  // pickQuestion can only space places within its pool, so the whole pool backs up a narrow one.
+  const placed = new Set(e.askedQuestionIds.slice(-4).map((id) => pack.questions.find((q) => q.id === id)?.locationId).filter(Boolean));
+  const clear = (list: Question[]) => list.filter((q) => !q.locationId || !placed.has(q.locationId));
+  const plain = pool.filter((q) => !q.recallOf);
+  const options = [clear(source), clear(plain), plain].find((list) => list.length > 0) ?? plain;
+  const picked = pickQuestion(options, context, rng);
   const question = presentQuestion(picked, rng);
   return { e: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id] }, question };
+}
+
+/** One creature's battle numbers on this stop, including the home-turf bonus. */
+function memberStats(save: SaveData, e: Expedition, instanceId: string, slot: Slot, pack: Pack) {
+  const companion = save.companions.find((c) => c.instanceId === instanceId) as Companion;
+  const species = speciesOf(pack, companion.speciesId);
+  const stage = stageOf(companion.bondXp, species);
+  const stats = STAGES[stage];
+  const biome = pack.places.find((p) => p.id === slot.locationId)?.biome ?? '';
+  return {
+    stage,
+    charge: Math.min(MAX_CHARGE, stats.startCharge + (e.extraCharge ? 1 : 0)),
+    config: {
+      playerMaxHp: stats.maxHp + (e.sturdy ? STURDY_HP : 0),
+      playerAttack: stats.attack,
+      special: species.special.template,
+      specialBonus: stats.specialBonus,
+      turf: species.habitats.includes(biome) ? TURF_BONUS : 0,
+    },
+  };
+}
+
+/** A knocked-out creature hands over to the team unless nobody is left. Companions never die. */
+function afterFaint(combat: CombatState, b: Battle, activeId: string): { combat: CombatState; mustSwitch: boolean } {
+  const others = Object.entries(b.bench ?? {}).some(([id, m]) => id !== activeId && m.hp > 0);
+  if (combat.outcome === 'retreat' && combat.playerHp === 0 && others && combat.turn < combat.maxTurns) {
+    return { combat: { ...combat, outcome: 'active', turn: combat.turn + 1 }, mustSwitch: true };
+  }
+  return { combat, mustSwitch: false };
+}
+
+function switchTo(save: SaveData, e: Expedition, b: Battle, instanceId: string, pack: Pack): SaveData {
+  const incoming = b.bench?.[instanceId];
+  const slot = e.slots[b.slotIndex] as Slot;
+  if (!incoming || incoming.hp === 0 || b.phase !== 'choose' || b.befriending || instanceId === e.companionId || (b.tameHits ?? 0) > 0) return save;
+  const m = memberStats(save, e, instanceId, slot, pack);
+  const bench = { ...b.bench, [e.companionId]: { hp: b.combat.playerHp, charge: b.combat.charge } };
+  const swapped: CombatState = { ...b.combat, ...m.config, playerHp: incoming.hp, charge: incoming.charge };
+  const count = (b.switches?.count ?? 0) + 1;
+  if (b.mustSwitch) {
+    const { mustSwitch: _done, ...rest } = b;
+    return { ...save, expedition: { ...e, companionId: instanceId, battle: { ...rest, bench, combat: swapped, switches: { count, damage: 0 } } } };
+  }
+  // A planned switch uses the turn, and the opponent hits whoever came in.
+  const hit = enemyStrikes(swapped);
+  const after = afterFaint(hit.state, { ...b, bench }, instanceId);
+  if (after.combat.outcome === 'retreat') return { ...save, expedition: { ...e, companionId: instanceId, battle: null, retreated: true } };
+  return { ...save, expedition: { ...e, companionId: instanceId, battle: { ...b, bench, combat: after.combat, mustSwitch: after.mustSwitch, switches: { count, damage: hit.damage } } } };
 }
 
 /** Better play makes the next battle more likely to be a rare creature. */
@@ -494,22 +568,25 @@ function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
   }
 
   const guardian = slot.kind === 'guardian';
-  const companion = activeCompanion(save);
-  const species = speciesOf(pack, companion.speciesId);
-  const stats = STAGES[stageOf(companion.bondXp, species)];
+  const team = teamOf(e);
+  const leadId = team[0] as string;
+  const lead = memberStats(save, e, leadId, slot, pack);
+  const scale = teamScaling(team.length);
+  const stage = STAGES[lead.stage];
   const started = startCombat({
-    playerMaxHp: stats.maxHp + (e.sturdy ? STURDY_HP : 0),
-    playerAttack: stats.attack,
-    special: species.special.template,
-    specialBonus: stats.specialBonus,
-    opponentMaxHp: guardian ? stats.finalHp : stats.regularHp + (slot.rare ? RARE_EXTRA_HP : 0),
-    enemyPattern: BALANCE.enemyPattern,
-    maxTurns: guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns,
+    ...lead.config,
+    opponentMaxHp: (guardian ? stage.finalHp : stage.regularHp + (slot.rare ? RARE_EXTRA_HP : 0)) + scale.hp,
+    enemyPattern: BALANCE.enemyPattern.map((d) => d + scale.damage),
+    maxTurns: (guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns) + scale.turns,
   });
-  const combat = { ...started, charge: Math.min(MAX_CHARGE, stats.startCharge + (e.extraCharge ? 1 : 0)) };
+  const combat = { ...started, charge: lead.charge };
+  const bench = Object.fromEntries(team.map((id) => {
+    const m = memberStats(save, e, id, slot, pack);
+    return [id, { hp: m.config.playerMaxHp, charge: m.charge }];
+  }));
   const dealt = dealQuestion(save, e, slot, pack, now);
-  const battle: Battle = { id: `${e.id}-battle-${save.nextId}`, slotIndex, combat, phase: 'choose', question: dealt.question };
-  return { ...save, nextId: save.nextId + 1, expedition: { ...dealt.e, battle, retreated: false } };
+  const battle: Battle = { id: `${e.id}-battle-${save.nextId}`, slotIndex, combat, phase: 'choose', question: dealt.question, bench };
+  return { ...save, nextId: save.nextId + 1, expedition: { ...dealt.e, companionId: leadId, battle, retreated: false } };
 }
 
 /** Records a Field Note as seen once it has been shown after a correct answer. */
@@ -537,7 +614,7 @@ export const TAME_HITS = 2;
 
 /** Bold Befriend: an unowned creature at half HP or less, for 2 charge. Once started, it can continue at no cost. */
 export function canTame(save: SaveData, b: Battle, slot: Slot): boolean {
-  if (slot.kind !== 'regular' || slot.rare || b.befriending || b.combat.outcome !== 'active') return false;
+  if (slot.kind !== 'regular' || slot.rare || b.befriending || b.mustSwitch || b.combat.outcome !== 'active') return false;
   if (save.companions.some((c) => c.speciesId === slot.opponentId)) return false;
   if ((b.tameHits ?? 0) > 0) return true;
   return b.combat.charge >= TAME_COST && b.combat.opponentHp * 2 <= b.combat.opponentMaxHp;
@@ -602,7 +679,9 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   const streak = correct ? (e.streak ?? 0) + 1 : 0;
   const milestone = streakReward(streak);
   const roomToHeal = charged.outcome === 'active' ? Math.min(milestone?.heal ?? 0, charged.playerMaxHp - charged.playerHp) : 0;
-  const combat = roomToHeal > 0 ? { ...charged, playerHp: charged.playerHp + roomToHeal } : charged;
+  const healed = roomToHeal > 0 ? { ...charged, playerHp: charged.playerHp + roomToHeal } : charged;
+  const { combat, mustSwitch } = afterFaint(healed, b, e.companionId);
+  const benched = { ...b.bench, [e.companionId]: { hp: combat.playerHp, charge: combat.charge } };
   const events = roomToHeal > 0 ? { ...resolved.events, healed: resolved.events.healed + roomToHeal } : resolved.events;
   const attempt: Attempt = {
     id: `${b.id}-answer-${e.answered + 1}`,
@@ -630,8 +709,13 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   const cardUp = cardRaised(save, learning, b.question);
   const result: TurnResult = { optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}) };
   // Winning a stop earns XP once, because a stop can only be won once.
+  // The finisher earns full XP and the rest of the team half, so everyone grows.
+  const winXp = xpFor(XP.battleWon, e.difficulty);
   const paidXp = huntWon && slot.kind !== 'event'
-    ? save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + xpFor(XP.battleWon, e.difficulty) } : c))
+    ? save.companions.map((c) => {
+        if (c.instanceId === e.companionId) return { ...c, bondXp: c.bondXp + winXp };
+        return teamOf(e).includes(c.instanceId) ? { ...c, bondXp: c.bondXp + Math.floor(winXp / 2) } : c;
+      })
     : save.companions;
   const companions = joined ? [...paidXp, { instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: slot.opponentId, bondXp: 0 }] : paidXp;
   return {
@@ -656,7 +740,7 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
       streak,
-      battle: { ...b, combat, phase: 'feedback', result, tameHits, ...((befriending && correct) || tamed ? { befriended: true } : {}) },
+      battle: { ...b, combat, bench: benched, phase: 'feedback', result, tameHits, ...(mustSwitch ? { mustSwitch } : {}), ...((befriending && correct) || tamed ? { befriended: true } : {}) },
     },
   };
 }
@@ -787,10 +871,13 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
   const leftoverXp = applied ? 0 : e.points * ECONOMY.xpPerLeftoverPoint;
   const bonus = !applied && reward.kind === 'bond' ? reward.xp : 0;
   const finishXp = applied ? 0 : xpFor(XP.expeditionDone, e.difficulty);
-  const taken = save.companions.find((c) => c.instanceId === e.companionId);
-  const levelBefore = levelOf(Math.max(0, (taken?.bondXp ?? 0) - e.slots.filter((s) => s.kind !== 'event').length * xpFor(XP.battleWon, e.difficulty)));
-  const companions = save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + leftoverXp + bonus + finishXp } : c));
-  const levelAfter = levelOf(companions.find((c) => c.instanceId === e.companionId)?.bondXp ?? 0);
+  const team = teamOf(e);
+  const companions = save.companions.map((c) => {
+    if (c.instanceId === e.companionId) return { ...c, bondXp: c.bondXp + leftoverXp + bonus + finishXp };
+    return team.includes(c.instanceId) ? { ...c, bondXp: c.bondXp + Math.floor(finishXp / 2) } : c;
+  });
+  const gained = companions.filter((c) => team.includes(c.instanceId) && levelOf(c.bondXp) > levelOf(e.xpAtStart?.[c.instanceId] ?? c.bondXp));
+  const levelAfter = Math.max(0, ...gained.map((c) => levelOf(c.bondXp)));
   if (!applied && reward.kind === 'creature' && !owned) {
     companions.push({ instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: reward.speciesId, bondXp: 0 });
   }
@@ -816,7 +903,7 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
         souvenirId: e.foundSouvenirId,
         cardsEarned: save.stateCards.length,
         xpGained: leftoverXp + bonus + finishXp,
-        ...(levelAfter > levelBefore ? { levelUp: levelAfter } : {}),
+        ...(levelAfter > 0 ? { levelUp: levelAfter } : {}),
         newBadges,
         ...(e.tamedIds ? { tamedIds: e.tamedIds } : {}),
       },
@@ -834,11 +921,21 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       return e ? save : startExpedition(save, pack, cmd);
     case 'selectCompanion':
       if (e?.prepared || !save.companions.some((c) => c.instanceId === cmd.instanceId) || save.activeCompanionId === cmd.instanceId) return save;
-      return { ...save, activeCompanionId: cmd.instanceId, expedition: e ? { ...e, companionId: cmd.instanceId } : null };
+      return { ...save, activeCompanionId: cmd.instanceId, lastTeamIds: [cmd.instanceId], expedition: e ? { ...e, companionId: cmd.instanceId, teamIds: [cmd.instanceId] } : null };
+    case 'toggleTeam': {
+      if (!e || e.prepared || !save.companions.some((c) => c.instanceId === cmd.instanceId)) return save;
+      const current = teamOf(e);
+      const onTeam = current.includes(cmd.instanceId);
+      if (onTeam ? current.length === 1 : current.length >= MAX_TEAM) return save;
+      const teamIds = onTeam ? current.filter((id) => id !== cmd.instanceId) : [...current, cmd.instanceId];
+      return { ...save, activeCompanionId: teamIds[0] as string, lastTeamIds: teamIds, expedition: { ...e, teamIds, companionId: teamIds[0] as string } };
+    }
+    case 'switchTo':
+      return e?.battle ? switchTo(save, e, e.battle, cmd.instanceId, pack) : save;
     case 'buy':
       return e ? withExpedition(buy(e, cmd.item)) : save;
     case 'depart':
-      return !e || e.prepared ? save : withExpedition({ ...e, prepared: true });
+      return !e || e.prepared ? save : withExpedition({ ...e, prepared: true, xpAtStart: Object.fromEntries(save.companions.map((c) => [c.instanceId, c.bondXp])) });
     case 'revealClue':
       // `shown` makes a double click a no-op rather than a second purchase.
       if (!e || e.discovery !== 'searching' || cmd.shown !== e.cluesShown || e.cluesShown >= e.clueIds.length || e.points < ECONOMY.extraClue) return save;
@@ -855,13 +952,14 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'chooseAction': {
       const b = e?.battle;
       if (!e || !b || b.phase !== 'choose') return save;
+      if (b.mustSwitch) return save;
       if (cmd.action === 'tame') return startTame(save, e, b, pack);
       const allowed = b.befriending ? cmd.action === 'befriend' : cmd.action !== 'befriend' && canUse(b.combat, cmd.action);
       return allowed ? withExpedition({ ...e, battle: { ...b, phase: 'question', action: cmd.action } }) : save;
     }
     case 'useSnack': {
       const b = e?.battle;
-      if (!e || !b || !e.snack || b.phase !== 'choose' || b.befriending || b.combat.playerHp >= b.combat.playerMaxHp) return save;
+      if (!e || !b || !e.snack || b.phase !== 'choose' || b.befriending || b.mustSwitch || b.combat.playerHp >= b.combat.playerMaxHp) return save;
       return withExpedition({ ...e, snack: false, battle: { ...b, combat: heal(b.combat, SNACK_HEAL) } });
     }
     case 'answer':

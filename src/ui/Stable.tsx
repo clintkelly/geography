@@ -5,9 +5,11 @@ import { companionView } from './content';
 import { Key } from './keys';
 
 /** The creatures a child has befriended. Pass onPick to choose one, or dispatch to allow nicknames. */
-export function Stable({ companions, activeId, onPick, dispatch }: {
+export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
   companions: readonly Companion[];
   activeId: string;
+  /** Everyone chosen for the trip, when choosing a team. */
+  teamIds?: readonly string[];
   onPick?: (instanceId: string) => void;
   dispatch?: (c: Command) => void;
 }) {
@@ -25,7 +27,7 @@ export function Stable({ companions, activeId, onPick, dispatch }: {
             <span className="xp-track" role="img" aria-label={level >= MAX_LEVEL ? 'Maximum level' : `${Math.round(levelProgress(c.bondXp) * 100)} percent to the next level`}><span className="xp-fill" style={{ width: `${levelProgress(c.bondXp) * 100}%` }} /></span>
           </>
         );
-        const active = c.instanceId === activeId;
+        const active = teamIds ? teamIds.includes(c.instanceId) : c.instanceId === activeId;
         return (
           <li key={c.instanceId}>
             {onPick

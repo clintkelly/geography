@@ -1,6 +1,9 @@
 import type { Question } from '../content/types';
 import type { Rng } from './rng';
 
+/** How many recent questions must pass before a place can be the answer again. */
+const PLACE_GAP = 4;
+
 export interface PickContext {
   /** Asked this expedition, oldest first. */
   asked: readonly string[];
@@ -18,9 +21,15 @@ export function pickQuestion(pool: readonly Question[], ctx: PickContext, rng: R
   const askedSet = new Set(ctx.asked);
   const recentSet = new Set(ctx.recent);
   const spaced = new Set(ctx.asked.slice(-2).map((id) => byId.get(id)?.objectiveId));
+  // The same state or country shouldn't be the answer over and over.
+  const lastPlaces = new Set(ctx.asked.slice(-PLACE_GAP).map((id) => byId.get(id)?.locationId).filter(Boolean));
+  const newPlace = (q: Question) => !q.locationId || !lastPlaces.has(q.locationId);
 
   const fresh = pool.filter((q) => !askedSet.has(q.id));
   const tiers = [
+    fresh.filter((q) => !spaced.has(q.objectiveId) && !recentSet.has(q.id) && newPlace(q)),
+    fresh.filter((q) => !spaced.has(q.objectiveId) && newPlace(q)),
+    fresh.filter(newPlace),
     fresh.filter((q) => !spaced.has(q.objectiveId) && !recentSet.has(q.id)),
     fresh.filter((q) => !spaced.has(q.objectiveId)),
     fresh,

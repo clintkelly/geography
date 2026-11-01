@@ -6,6 +6,7 @@ import { degreesApart } from '../content/geo';
 import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST } from '../content/us/templates';
 import { validatePack, validateRecords } from '../content/validate';
 import { BADGES } from './badges';
+import { enemyIntent, resolveTurn } from './combat';
 import { ECONOMY } from './economy';
 import { cardProgress } from './cards';
 import { isDue, isFamiliar, localDay, recordAnswer, type Learning } from './learning';
@@ -553,7 +554,8 @@ describe('levels and evolution', () => {
     s = step(start(s), { type: 'buy', item: 'charge' });
     s = step(find(step(s, { type: 'depart' })), { type: 'enterEncounter' });
     const first = s.expedition!.battle!.combat;
-    const best = first.charge >= 2 ? stats.attack + 3 + stats.attack : stats.attack * 2;
+    const onTurf = stats.attack + 1;
+    const best = first.charge >= 2 ? stats.attack + 3 + onTurf : onTurf * 2;
     expect(best).toBeLessThan(first.opponentMaxHp);
   });
 
@@ -655,12 +657,12 @@ describe('spaced review', () => {
     let hits = 0;
     for (let seed = 1; seed < 25; seed++) {
       let s = step(find(ready(fresh(seed), 'us-west', 'scout', 'long')), { type: 'enterEncounter' });
-      const missed = s.expedition!.battle!.question.objectiveId;
+      const first = s.expedition!.battle!.question;
       s = step(answerWith(step(s, { type: 'chooseAction', action: 'guard' }), false), { type: 'continue' });
-      for (let i = 0; i < 6 && s.expedition!.battle; i++) {
-        s = turn(s, true);
-        if (s.expedition!.battle?.question.objectiveId === missed) hits++;
-      }
+      while (s.expedition!.battle) s = turn(s, true);
+      while (!isExpeditionComplete(s.expedition!)) s = winStop(find(s));
+      const later = s.expedition!.askedQuestionIds.slice(1).map((id) => PACK.questions.find((q) => q.id === id)!);
+      if (later.some((q) => q.objectiveId === first.objectiveId && q.id !== first.id)) hits++;
     }
     expect(hits).toBeGreaterThan(0);
   });
@@ -758,6 +760,125 @@ describe('rare encounters', () => {
       const t = stepRare({ ...s, expedition: { ...s.expedition!, rngState: seed } }, { type: 'enterEncounter' });
       expect(t.expedition!.slots[0]!.rare).toBeUndefined();
     }
+  });
+});
+
+describe('teams and switching', () => {
+  const withTeam = (n: number) => {
+    const base = fresh();
+    const ids = ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk'].slice(0, n - 1);
+    const companions = [...base.companions, ...ids.map((speciesId, i) => ({ instanceId: `m${i}`, speciesId, bondXp: 0 }))];
+    let s: SaveData = start({ ...base, companions });
+    for (const id of companions.slice(1)) s = step(s, { type: 'toggleTeam', instanceId: id.instanceId });
+    return s;
+  };
+  const fight = (n: number) => step(find(step(withTeam(n), { type: 'depart' })), { type: 'enterEncounter' });
+
+  it('takes up to five creatures and always at least one', () => {
+    const s = withTeam(5);
+    expect(s.expedition!.teamIds).toHaveLength(5);
+    const extra = { ...s, companions: [...s.companions, { instanceId: 'x', speciesId: 'lobsnap', bondXp: 0 }] };
+    expect(step(extra, { type: 'toggleTeam', instanceId: 'x' })).toBe(extra);
+    let one = start(fresh());
+    one = { ...one };
+    expect(step(one, { type: 'toggleTeam', instanceId: one.companions[0]!.instanceId })).toBe(one);
+  });
+
+  it('remembers the last team for the next trip', () => {
+    const s = withTeam(3);
+    const again = start(step(s, { type: 'abandon' }));
+    expect(again.expedition!.teamIds).toEqual(s.expedition!.teamIds);
+  });
+
+  it('switching uses the turn, and the opponent hits the one who came in', () => {
+    const s = fight(2);
+    const hpBefore = s.expedition!.battle!.bench!.m0!.hp;
+    const t = step(s, { type: 'switchTo', instanceId: 'm0' });
+    const b = t.expedition!.battle!;
+    expect(t.expedition!.companionId).toBe('m0');
+    expect(b.combat.turn).toBe(2);
+    expect(b.combat.playerHp).toBe(hpBefore - 2);
+    expect(b.bench![s.expedition!.companionId]!.hp).toBe(s.expedition!.battle!.combat.playerHp);
+  });
+
+  it('charge belongs to each creature', () => {
+    let s = fight(2);
+    s = turn(turn(s, true), true);
+    expect(s.expedition!.battle!.combat.charge).toBe(2);
+    const lead = s.expedition!.companionId;
+    s = step(s, { type: 'switchTo', instanceId: 'm0' });
+    expect(s.expedition!.battle!.combat.charge).toBe(0);
+    s = step(s, { type: 'switchTo', instanceId: lead });
+    expect(s.expedition!.battle!.combat.charge).toBe(2);
+  });
+
+  it('each creature uses its own Special', () => {
+    const s = step(fight(2), { type: 'switchTo', instanceId: 'm0' });
+    expect(s.expedition!.battle!.combat.special).toBe('heal');
+  });
+
+  it('a fainted creature must be replaced, for free, and can\'t come back', () => {
+    let s = fight(2);
+    s = { ...s, expedition: { ...s.expedition!, battle: { ...s.expedition!.battle!, combat: { ...s.expedition!.battle!.combat, playerHp: 1 } } } };
+    const lead = s.expedition!.companionId;
+    s = step(answerWith(step(s, { type: 'chooseAction', action: 'attack' }), false), { type: 'continue' });
+    expect(s.expedition!.battle!.mustSwitch).toBe(true);
+    expect(s.expedition!.retreated).toBe(false);
+    expect(step(s, { type: 'chooseAction', action: 'attack' })).toBe(s);
+    const turnNow = s.expedition!.battle!.combat.turn;
+    s = step(s, { type: 'switchTo', instanceId: 'm0' });
+    expect(s.expedition!.battle!.combat.turn).toBe(turnNow);
+    expect(s.expedition!.battle!.combat.playerHp).toBe(12);
+    expect(step(s, { type: 'switchTo', instanceId: lead })).toBe(s);
+  });
+
+  it('only retreats once the whole team is down', () => {
+    let s = fight(2);
+    let guard = 0;
+    while (s.expedition!.battle && guard++ < 40) {
+      s = s.expedition!.battle.mustSwitch ? step(s, { type: 'switchTo', instanceId: 'm0' }) : turn(s, false);
+    }
+    expect(s.expedition!.retreated).toBe(true);
+    expect(s.attempts.length).toBeGreaterThan(5);
+  });
+
+  it('the finisher gets full XP and the rest half', () => {
+    let s = fight(3);
+    const lead = s.expedition!.companionId;
+    while (s.expedition!.battle) s = turn(s, true);
+    expect(s.companions.find((c) => c.instanceId === lead)!.bondXp).toBe(10);
+    expect(s.companions.find((c) => c.instanceId === 'm0')!.bondXp).toBe(5);
+  });
+
+  it('bigger teams face tougher opponents', () => {
+    const solo = fight(1).expedition!.battle!.combat;
+    const full = fight(5).expedition!.battle!.combat;
+    expect(full.opponentMaxHp).toBe(solo.opponentMaxHp + 8);
+    expect(full.maxTurns).toBe(solo.maxTurns + 4);
+    expect(enemyIntent(full)).toBe(enemyIntent(solo) + 1);
+  });
+
+  it('home turf adds to Attack only, where the landscape matches', () => {
+    const base = fight(1);
+    const combat = { ...base.expedition!.battle!.combat, turf: 1 };
+    expect(resolveTurn(combat, 'attack', true).events.damageDealt).toBe(4);
+    expect(resolveTurn({ ...combat, charge: 2 }, 'special', true).events.damageDealt).toBe(5);
+    const home = PACK.places.find((p) => p.biome === 'mountain' && p.regionId === 'us-west')!;
+    const slate = PACK.species.find((o) => o.id === 'slatepaw')!;
+    expect(slate.habitats).toContain(home.biome);
+  });
+
+  it('every creature has a habitat that exists', () => {
+    const biomes = new Set(PACK.places.map((p) => p.biome));
+    for (const c of PACK.species) for (const h of c.habitats) expect(biomes.has(h), `${c.id} ${h}`).toBe(true);
+  });
+
+  it('an unfinished older trip plays on with a team of one', () => {
+    let s = ready(fresh());
+    const { teamIds: _team, ...older } = s.expedition!;
+    s = find({ ...s, expedition: older as typeof s.expedition });
+    const t = step(s, { type: 'enterEncounter' });
+    expect(Object.keys(t.expedition!.battle!.bench!)).toHaveLength(1);
   });
 });
 
@@ -1067,6 +1188,18 @@ describe('question selection', () => {
       if (i > 0) expect(objectives[i - 1]).not.toBe(o);
       if (i > 1) expect(objectives[i - 2]).not.toBe(o);
     });
+  });
+
+  it('never makes the same place the answer within four questions in a whole trail', () => {
+    for (const regionId of PACK.regions.map((r) => r.id)) {
+      for (let seed = 1; seed < 12; seed++) {
+        const asked = playTrail(fresh(seed), regionId, 'scout', 'long').expedition!.askedQuestionIds;
+        const places = asked.map((id) => PACK.questions.find((q) => q.id === id)!.locationId);
+        places.forEach((p, i) => {
+          if (p) expect(places.slice(Math.max(0, i - 4), i), `${regionId} ${seed}`).not.toContain(p);
+        });
+      }
+    }
   });
 
   it('falls back to tracked repeats instead of failing on a small pool', () => {

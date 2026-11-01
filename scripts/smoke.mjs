@@ -82,6 +82,10 @@ async function step(options = {}) {
   if (e.battle) {
     const b = e.battle;
     if (b.phase === 'choose') {
+      if (b.mustSwitch) {
+        const next = e.teamIds.findIndex((id) => id !== e.companionId && b.bench[id].hp > 0);
+        return press(String(next + 1));
+      }
       if (b.befriending) {
         await shotOnce('befriend');
         stats.befriends++;
@@ -236,8 +240,17 @@ assert.ok(stats.befriends >= 1 && stats.events >= 1 && stats.specials >= 1 && st
 // A second trip with the new companion, entirely by keyboard.
 await press('Enter');
 await press('2');
-assert.equal((await save()).expedition.companionId, done.companions[1].instanceId, 'the new companion was chosen');
+assert.deepEqual((await save()).expedition.teamIds, [done.companions[0].instanceId, done.companions[1].instanceId], 'the new companion joined the team');
 await press('Enter');
+// Find the first place, then switch creatures by keyboard.
+await step();
+await press('Enter');
+await page.getByRole('button', { name: /Switch creature/ }).waitFor();
+await shotOnce('team');
+await page.keyboard.press('w');
+await page.getByText('Switch to who?').waitFor();
+await press('2');
+assert.equal((await save()).expedition.companionId, done.companions[1].instanceId, 'switching changes the active creature');
 await finishTrail({});
 assert.equal((await save()).companions.length, 3, 'a second creature joined');
 

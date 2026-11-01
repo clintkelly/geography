@@ -1,5 +1,6 @@
 import { ECONOMY, PREP_ITEMS, type PrepItem } from '../engine/economy';
-import type { Command, Expedition, SaveData } from '../engine/game';
+import { teamOf, type Command, type Expedition, type SaveData } from '../engine/game';
+import { MAX_TEAM } from '../engine/progression';
 import { Key, useKeys } from './keys';
 import { playSound } from './sound';
 import { Stable } from './Stable';
@@ -13,7 +14,8 @@ export function Prep({ e, save, dispatch }: { e: Expedition; save: SaveData; dis
     if (def && !owned(e, item) && e.points >= def.cost) playSound('spend');
     dispatch({ type: 'buy', item });
   };
-  const pick = (instanceId: string) => dispatch({ type: 'selectCompanion', instanceId });
+  const pick = (instanceId: string) => dispatch({ type: 'toggleTeam', instanceId });
+  const team = teamOf(e);
 
   useKeys({
     enter: () => dispatch({ type: 'depart' }),
@@ -28,8 +30,9 @@ export function Prep({ e, save, dispatch }: { e: Expedition; save: SaveData; dis
         <p>You have <strong className="points">{e.points} Trail Points</strong>. Spend some now, or keep them for clues on the trail. Leftover points become XP.</p>
       </section>
       <section className="panel">
-        <h2>Choose your companion</h2>
-        <Stable companions={save.companions} activeId={e.companionId} onPick={pick} />
+        <h2>Choose your team: {team.length} of {Math.min(MAX_TEAM, save.companions.length)}</h2>
+        <p className="muted">Bring up to {MAX_TEAM}. The first one leads. Bigger teams face tougher opponents, and creatures get +1 Attack in their home landscapes.</p>
+        <Stable companions={save.companions} activeId={e.companionId} teamIds={team} onPick={pick} />
       </section>
       <section className="panel">
         <h2>Prep Shop</h2>

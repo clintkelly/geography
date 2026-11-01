@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Species } from '../content/types';
 import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
-import { activeCompanion, canTame, TAME_HITS, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
+import { activeCompanion, canTame, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
 import { artUrl, Fx, poseUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
 import { companionView, place, souvenir, species } from './content';
@@ -68,6 +68,21 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [flash, setFlash] = useState(false);
   const [stayGone, setStayGone] = useState(false);
   const [burst, setBurst] = useState(false);
+  const [picking, setPicking] = useState(false);
+  const switchCount = battle.switches?.count ?? 0;
+  const lastSwitch = useRef(switchCount);
+  useEffect(() => {
+    if (switchCount === lastSwitch.current) return;
+    lastSwitch.current = switchCount;
+    setPicking(false);
+    const damage = battle.switches?.damage ?? 0;
+    playSound(damage > 0 ? 'hit' : 'guard');
+    if (damage > 0) {
+      const added: (Float & { id: number })[] = [{ side: 'player', text: `-${damage}`, kind: 'damage', id: ++floatId.current }];
+      setFloats((all) => [...all, ...added]);
+      setTimeout(() => setFloats((all) => all.filter((x) => !added.includes(x))), 1000);
+    }
+  }, [switchCount]); // eslint-disable-line
   const floatId = useRef(0);
   const rareFoe = !!slot?.rare;
   const finalIntro = (slot?.kind === 'guardian' || rareFoe) && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
@@ -155,8 +170,21 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const tameable = !!slot && canTame(save, battle, slot);
   const tameHits = battle.tameHits ?? 0;
 
+  const members = teamOf(e).map((id) => save.companions.find((c) => c.instanceId === id)).filter((c) => !!c);
+  const memberHp = (id: string) => (id === e.companionId ? combat.playerHp : battle.bench?.[id]?.hp ?? 0);
+  const canSwitch = !battle.befriending && (battle.tameHits ?? 0) === 0 && members.some((c) => c.instanceId !== e.companionId && memberHp(c.instanceId) > 0);
+  const chooser = !!battle.mustSwitch || picking;
+  const swapTo = (instanceId: string) => {
+    setPicking(false);
+    dispatch({ type: 'switchTo', instanceId });
+  };
+
   const keys: Record<string, () => void> = {};
-  if (battle.phase === 'choose') {
+  if (battle.phase === 'choose' && chooser) {
+    members.forEach((c, i) => { if (c.instanceId !== e.companionId && memberHp(c.instanceId) > 0) keys[String(i + 1)] = () => swapTo(c.instanceId); });
+    if (!battle.mustSwitch) Object.assign(keys, { w: () => setPicking(false), escape: () => setPicking(false) });
+  } else if (battle.phase === 'choose') {
+    if (canSwitch) keys.w = () => setPicking(true);
     if (battle.befriending) Object.assign(keys, { b: () => choose('befriend'), enter: () => choose('befriend') });
     else {
       Object.assign(keys, { a: () => choose('attack'), enter: () => choose('attack'), g: () => choose('guard') });
@@ -216,6 +244,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         <div className="scene-hud">
           <div>
             <Hp label={view.name} hp={shownHp?.player ?? combat.playerHp} max={combat.playerMaxHp} />
+            {(combat.turf ?? 0) > 0 && <div className="turf-tag">Home turf! +{combat.turf} Attack</div>}
             <div className="charge" role="img" aria-label={`Charge: ${combat.charge} of ${MAX_CHARGE}`}>
               Charge {Array.from({ length: MAX_CHARGE }, (_, i) => <span key={i} className={i < combat.charge ? 'pip on' : 'pip'} />)}
             </div>
@@ -224,13 +253,45 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           <Hp label={rareFoe ? `Rare: ${opponent.displayName}` : opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
         </div>
         <div className="scene-floor">
-          <Actor creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
+          <Actor key={e.companionId} creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
           {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
           <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
         </div>
       </section>
 
-      {battle.phase === 'choose' && (
+      {members.length > 1 && (
+        <div className="team-row" aria-label="Your team">
+          {members.map((c) => {
+            const v = companionView(c);
+            const hp = memberHp(c.instanceId);
+            return (
+              <span key={c.instanceId} className={`team-chip${c.instanceId === e.companionId ? ' active' : ''}${hp === 0 ? ' fainted' : ''}`}>
+                <img src={artUrl(v.artId)} alt="" width={32} height={32} className="sprite" />
+                {v.name} <small>{hp} HP · {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge</small>
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      {battle.phase === 'choose' && chooser && (
+        <section className="panel question">
+          <div className="actions">
+            <p className="learn">{battle.mustSwitch ? `${view.name} needs a rest. Who's next?` : 'Switch to who? It uses your turn, and the opponent will hit them.'}</p>
+            <div className="action-row">
+              {members.map((c, i) => {
+                const v = companionView(c);
+                const hp = memberHp(c.instanceId);
+                const usable = c.instanceId !== e.companionId && hp > 0;
+                return <button key={c.instanceId} type="button" className="big" disabled={!usable} onClick={() => swapTo(c.instanceId)}>{v.name} <Key k={i + 1} /><small>{hp} HP, {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge</small></button>;
+              })}
+            </div>
+            {!battle.mustSwitch && <button type="button" onClick={() => setPicking(false)}>Never mind <Key k="W" /></button>}
+          </div>
+        </section>
+      )}
+
+      {battle.phase === 'choose' && !chooser && (
         <section className="panel question">
           <div className="actions">
             <p className="muted">{place(slot.locationId).name} · Local questions and expedition review</p>
@@ -242,10 +303,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             ) : (
               <>
                 <div className="action-row">
-                  <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack} damage, +1 charge</small></button>
+                  <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack + (combat.turf ?? 0)} damage, +1 charge</small></button>
                   <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
                   <button type="button" className={`big${special ? ' special-ready' : ''}`} disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
                 </div>
+                {canSwitch && <button type="button" onClick={() => setPicking(true)}>Switch creature <Key k="W" /></button>}
                 {tameable && <button type="button" className="tame-button" onClick={() => choose('tame')}>{tameHits > 0 ? `Keep going: ${tameHits} of ${TAME_HITS}` : 'Bold Befriend'} <Key k="B" /><small>{tameHits > 0 ? 'One more right answer wins it over' : `Two right in a row on harder questions. Costs 2 charge.`}</small></button>}
                 {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
               </>

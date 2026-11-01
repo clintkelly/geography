@@ -216,7 +216,7 @@ Persist the resolved turn before animating. Reloading must not submit an answer 
 - A profile may hold every species it has befriended. Duplicates are not needed: a sighting offers species the profile doesn't own, and once all are owned, sightings become Rival Hunts that award XP and a badge. Never imply an unlimited supply of new creatures.
 - Each owned companion has an instance ID, optional nickname, level, and XP.
 - One unowned souvenir can be found on each trail, on the second battle win.
-- Companions are chosen before an expedition. In-battle switching is deferred.
+- Companions are chosen before an expedition.
 - A companion left in the stable gains no XP, which makes choosing meaningful. A companion's level never falls.
 
 ### XP and levels
@@ -299,6 +299,10 @@ Every fact has a question whose answer is that state or country. A child never s
 
 Each region has a map at camp that fills in as places are found. A full map reveals a rare creature for that region. Rare creatures don't evolve. Badges mark filled maps, groups of places such as New England, and other milestones.
 
+### Teams
+
+A trip takes up to 5 creatures, each with its own HP and charge. Switching uses the turn and the opponent hits the newcomer, except when replacing a fainted creature, which is free. The trip retreats only when the whole team is down. The finisher earns full XP and the rest half. Each extra member adds 2 opponent HP and a turn, and teams of 4 or more face +1 enemy damage. A creature gets +1 Attack, not Special, in its home landscapes.
+
 ### Harder ways to win creatures
 
 **Bold Befriend:** an unowned creature in a regular battle at half HP or less can be won with 2 charge and two right answers in a row on questions one level harder than the trail. It keeps attacking, and a miss ends the attempt.
@@ -330,7 +334,7 @@ Trails follow one region: West, Midwest, South, Northeast, or Europe. Each regio
 Offer optional study cards before an encounter for unfamiliar objectives. Use neutral feedback such as "Not yet—here is the location."
 
 1. Prefer roughly half objectives local to the current region and half due or previously missed objectives.
-2. Avoid exact repeats within an expedition when the pool allows. Space variants of an objective by at least two unrelated questions. Keep recent-question history between expeditions.
+2. Avoid exact repeats within an expedition when the pool allows. The same place shouldn't be the answer again within four questions. Space variants of an objective by at least two unrelated questions. Keep recent-question history between expeditions.
 3. After a miss, schedule a different variant later in the expedition if spacing allows, otherwise next session.
 4. After an unaided correct response, schedule review about 1, 3, then 7 days later.
 5. Treat an objective as familiar only after three unaided correct responses across at least two calendar days and two variants, at that difficulty or higher. This is a game heuristic, not an assessment.

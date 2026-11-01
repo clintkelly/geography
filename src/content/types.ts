@@ -83,6 +83,8 @@ export interface Species {
   special: Special;
   /** Regions this creature can be hunted and met in. */
   homes: readonly string[];
+  /** Landscapes where its Attack gets the home-turf bonus. */
+  habitats: readonly string[];
   /** Evolved forms, for stage 2 and stage 3. Rare creatures have none. */
   evolutions?: readonly { name: string; artId: string }[];
   /** Offered only once a child has found every place in its region. */

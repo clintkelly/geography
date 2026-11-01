@@ -41,7 +41,7 @@ Saves live in your browser, on that computer, at that address. Nothing goes onli
 
 1. **Pick an explorer.** Each player has their own save.
 2. **Pick a sighting at camp.** Choose a region, a trail length, and a difficulty.
-3. **Prepare.** Choose a companion from your stable and spend Trail Points in the Prep Shop, or save them for clues.
+3. **Prepare.** Pick a team of up to 5 from your stable and spend Trail Points in the Prep Shop, or save them for clues. Creatures hit harder in their home landscapes, and you can switch during a fight.
 4. **Follow the trail.** Use clues and the free atlas to work out where the creature went.
 5. **Win encounters.** Choose Attack, Guard, or your Special, then answer a question. A right answer makes your move work.
 6. **Befriend the creature.** Wear it down in the final showdown, then answer one more question to bring it home.
@@ -66,10 +66,10 @@ The whole game works from the keyboard. Buttons show their keys.
 | --- | --- |
 | Anywhere | **Enter** or **Space** for the main action, **Tab** to move between buttons |
 | Camp | **R** region, **L** trail length, **T** sighting, **1–3** difficulty, **P** switch explorer, **O** settings |
-| Prep Shop | **1–9** companion, **S**, **C**, **T** to buy |
+| Prep Shop | **1–9** add or remove a team member, **S**, **C**, **T** to buy |
 | Finding a place | **1–4** choose, **C** clue, **N** narrow the search, **A** atlas |
 | Blank maps | Arrow keys move the highlight, **Enter** chooses |
-| Battle | **A** Attack, **G** Guard, **S** Special, **H** Trail Snack, **B** Befriend or Bold Befriend, **1–4** answer |
+| Battle | **A** Attack, **G** Guard, **S** Special, **W** switch creature, **H** Trail Snack, **B** Befriend or Bold Befriend, **1–4** answer |
 | Maps | **+** and **−** zoom |
 
 ## Update it with Claude
