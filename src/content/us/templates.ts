@@ -63,15 +63,32 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
   const farList = [...ranked].reverse();
   const far = spaced([0, 2, 4, 6, 8, 1, 3, 5, 7].flatMap((i) => farList[i] ?? []), s, 3, gap);
   const name = s.sentenceName ?? s.name;
+  // Wrong answers teach too: each option can say what it really is.
+  const inName = (o: PlaceRecord) => o.sentenceName ?? o.name;
+  const aboutCapital = (o: PlaceRecord) => (o.cityState ? `${o.capital} is its own tiny country.` : `${o.capital} is the capital of ${inName(o)}.`);
+  const aboutPlace = (o: PlaceRecord) => {
+    const known = o.nickname ? `, known as the ${o.nickname.text}` : '';
+    return o.cityState ? `That's ${inName(o)}${known}.` : `That's ${inName(o)}${known}. Its capital is ${o.capital}.`;
+  };
+  const aboutCity = (city: string) => (city === s.largestCity ? `${city} is the largest city in ${name}, but not its capital.` : `${city} is a city in ${name}, but not its capital.`);
   const Name = name[0]?.toUpperCase() + name.slice(1);
 
-  const choices = (labels: string[]): Answer => ({ options: labels.map((label, i) => ({ id: `o${i}`, label })), acceptedId: 'o0' });
+  const choices = (labels: string[], about: (i: number) => string | undefined = () => undefined): Answer => ({
+    options: labels.map((label, i) => {
+      const note = i > 0 ? about(i - 1) : undefined;
+      return { id: `o${i}`, label, ...(note ? { about: note } : {}) };
+    }),
+    acceptedId: 'o0',
+  });
+  const capitalsOf = (list: PlaceRecord[]) => choices([s.capital, ...list.map((o) => o.capital)], (i) => aboutCapital(list[i] as PlaceRecord));
+  const namesOf = (list: PlaceRecord[]) => choices([s.name, ...list.map((o) => o.name)], (i) => aboutPlace(list[i] as PlaceRecord));
+  const citiesHere = () => choices([s.capital, ...s.sameStateCities], (i) => aboutCity(s.sameStateCities[i] as string));
   const markers = (others: PlaceRecord[]): Answer => ({
-    options: [s, ...others].map((o): QuestionOption => ({ id: o.id, label: o.name, lonLat: o.lonLat })),
+    options: [s, ...others].map((o): QuestionOption => ({ id: o.id, label: o.name, lonLat: o.lonLat, ...(o.id === s.id ? {} : { about: aboutPlace(o) }) })),
     acceptedId: s.id,
   });
   const clickPlace: Answer = {
-    options: all.map((o): QuestionOption => ({ id: o.id, label: o.name, featureId: o.fips, ...(o.tiny ? { tiny: true, lonLat: o.lonLat } : {}) })),
+    options: all.map((o): QuestionOption => ({ id: o.id, label: o.name, featureId: o.fips, ...(o.id === s.id ? {} : { about: aboutPlace(o) }), ...(o.tiny ? { tiny: true, lonLat: o.lonLat } : {}) })),
     acceptedId: s.id,
   };
 
@@ -101,11 +118,11 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
   ];
   if (!s.cityState) {
     out.push(
-      q('scout', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, choices([s.capital, ...far.map((o) => o.capital)])),
-      q('scout', 'capital', 2, 'capital', `${s.capital} is the capital of which ${noun}?`, capitalWhy, choices([s.name, ...far.map((o) => o.name)])),
-      q('ranger', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
-      q('ranger', 'capital', 2, 'capital', `In which ${noun} is the capital city ${s.capital}?`, capitalWhy, choices([s.name, ...near.map((o) => o.name)])),
-      q('expert', 'capital', 1, 'capital', `Which of these cities is the capital of ${name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
+      q('scout', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, capitalsOf(far)),
+      q('scout', 'capital', 2, 'capital', `${s.capital} is the capital of which ${noun}?`, capitalWhy, namesOf(far)),
+      q('ranger', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, citiesHere()),
+      q('ranger', 'capital', 2, 'capital', `In which ${noun} is the capital city ${s.capital}?`, capitalWhy, namesOf(near)),
+      q('expert', 'capital', 1, 'capital', `Which of these cities is the capital of ${name}?`, capitalWhy, citiesHere()),
       q('expert', 'capital', 2, 'capital', `The city of ${s.capital} is the capital of which ${noun}? Click it on the map.`, capitalWhy, clickPlace, 'map-click'),
     );
   }
@@ -113,8 +130,8 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
     const known = `the ${s.nickname.text}`;
     const why = `${Name} is known as ${known}.`;
     out.push(
-      q('scout', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, choices([s.name, ...far.map((o) => o.name)])),
-      q('ranger', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, choices([s.name, ...near.map((o) => o.name)])),
+      q('scout', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, namesOf(far)),
+      q('ranger', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, namesOf(near)),
       q('expert', 'nickname', 1, 'nickname', `${known[0]?.toUpperCase()}${known.slice(1)}: which ${noun} is that? Click it on the map.`, why, clickPlace, 'map-click'),
     );
   }
@@ -126,7 +143,7 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
       ...recall,
       objectiveId: `fact-${s.id}-${i}`,
     });
-    out.push(fact('scout', choices([s.name, ...far.map((o) => o.name)])), fact('ranger', choices([s.name, ...near.map((o) => o.name)])), fact('expert', clickPlace, 'map-click'));
+    out.push(fact('scout', namesOf(far)), fact('ranger', namesOf(near)), fact('expert', clickPlace, 'map-click'));
   });
   return out;
 }

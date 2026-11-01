@@ -1,5 +1,6 @@
 import type { Pack } from '../content/types';
 import type { SaveData } from './game';
+import { hasCardsAtLeast } from './cards';
 import { stageOf, speciesOf } from './progression';
 
 export interface Badge {
@@ -27,6 +28,14 @@ export const BADGES: readonly Badge[] = [
   { id: 'stable-5', name: 'Growing Stable', hint: 'Befriend 5 creatures', earned: (s) => s.companions.length >= 5 },
   { id: 'notes-25', name: 'Note Taker', hint: 'Read 25 Field Notes', earned: (s) => s.seenFacts.length >= 25 },
   { id: 'cards-25', name: 'Card Collector', hint: 'Earn 25 State Cards', earned: (s) => s.stateCards.length >= 25 },
+  { id: 'first-gold', name: 'Going for Gold', hint: 'Raise a card to Gold', earned: (s) => hasCardsAtLeast(s.stateCards, s.learning, 'gold').length >= 1 },
+  { id: 'gold-10', name: 'Gold Collection', hint: 'Raise 10 cards to Gold', earned: (s) => hasCardsAtLeast(s.stateCards, s.learning, 'gold').length >= 10 },
+  { id: 'first-shiny', name: 'Shiny!', hint: 'Raise a card to Shiny on Expert', earned: (s) => hasCardsAtLeast(s.stateCards, s.learning, 'shiny').length >= 1 },
+  { id: 'new-england-gold', name: 'New England in Gold', hint: 'Raise all six New England cards to Gold', earned: (s) => ['connecticut', 'maine', 'massachusetts', 'new-hampshire', 'rhode-island', 'vermont'].every((id) => hasCardsAtLeast(s.stateCards, s.learning, 'gold').includes(id)) },
+  { id: 'streak-10', name: 'Unstoppable', hint: 'Get 10 answers right in a row', earned: (s) => (s.bestStreak ?? 0) >= 10 },
+  { id: 'streak-20', name: 'Legendary Streak', hint: 'Get 20 answers right in a row', earned: (s) => (s.bestStreak ?? 0) >= 20 },
+  { id: 'rare-find', name: 'Rare Find', hint: 'Befriend a creature in a rare encounter', earned: (s) => s.rareFound === true },
+  { id: 'bold', name: 'Bold Befriender', hint: 'Befriend a creature mid-fight', earned: (s) => s.tamedAny === true },
   { id: 'expert', name: 'True Expert', hint: 'Finish an Expert trail', earned: (s) => s.expertTrails >= 1 },
 ];
 

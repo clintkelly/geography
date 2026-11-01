@@ -146,7 +146,7 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 
 @media (prefers-reduced-motion: reduce) {
   /* Poses, numbers and sounds remain, so the feedback survives without the movement. */
-  .wipe, .low-hp::after, .actor img, .idle-sprite, .hop-once, .evolve-flicker, .scene, .float, .fx, .bump, .reveal, .reveal::after, .vs-intro *, .friend-banner, .special-ready, .hop-loop, .land-wobble, button { animation: none !important; transition: none !important; }
+  .rare-scene, .rare-scene::before, .rare-intro *, .rare-intro, .streak-banner, .streak-banner .burst, .wipe, .low-hp::after, .actor img, .idle-sprite, .hop-once, .evolve-flicker, .scene, .float, .fx, .bump, .reveal, .reveal::after, .vs-intro *, .friend-banner, .special-ready, .hop-loop, .land-wobble, button { animation: none !important; transition: none !important; }
   .flash { filter: none !important; }
   .actor, .land-arrive { animation: none !important; }
   .hp-fill { transition: none; }
@@ -331,3 +331,55 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .hop-once { animation: hop 620ms ease-out; }
 
 .explorer-map { max-width: 640px; margin: 0 auto 6px; }
+
+/* Card levels. */
+.card-silver .card-art, .card-award.card-silver { box-shadow: 0 0 0 3px #b8c2cc; }
+.card-gold .card-art, .card-award.card-gold { box-shadow: 0 0 0 3px #e0b02e, 0 0 10px rgba(224, 176, 46, 0.7); }
+.card-shiny .card-art, .card-award.card-shiny { box-shadow: 0 0 0 3px #d870e0, 0 0 14px rgba(120, 200, 255, 0.9); }
+.card-shiny .card-art { animation: shiny-hue 3s linear infinite; }
+@keyframes shiny-hue { 50% { filter: saturate(1.5) brightness(1.1); } }
+.level-tag { font-size: 0.72rem; font-weight: 700; padding: 1px 6px; border-radius: 999px; }
+.level-bronze { background: #e8cdb0; color: #6a4420; }
+.level-silver { background: #dde3e8; color: #3a4650; }
+.level-gold { background: #f5dc8a; color: #6a4e00; }
+.level-shiny { background: linear-gradient(90deg, #f5c0f0, #b8e0ff); color: #4a2a60; }
+.land-silver { fill: #b9c8d4; }
+.land-gold { fill: #edc95a; }
+.land-shiny { fill: #dba3ec; }
+
+/* What the wrong pick really was. */
+.picked-note { font-size: 1.15rem; background: rgba(255, 255, 255, 0.6); border-left: 5px solid #c9863f; border-radius: 6px; padding: 8px 12px; }
+.picked-note span { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #9a5a14; }
+
+.tame-button { width: 100%; max-width: 420px; background: #fff1f5; border-color: #d8628a; font-weight: 700; }
+.tame-button small { display: block; font-weight: 400; font-size: 0.72rem; }
+
+/* Streaks. */
+.streak-big { font-size: 1.15em; }
+.streak-max { font-size: 1.3em; color: #d4300c; }
+.streak-low .actor.player img { filter: drop-shadow(0 0 5px #ffb340); }
+.streak-mid .actor.player img { filter: drop-shadow(0 0 9px #ff8a1f); }
+.streak-high .actor.player img { filter: drop-shadow(0 0 14px #ff4a1f) drop-shadow(0 0 4px #ffe066); }
+.streak-high { box-shadow: 0 0 0 3px #ff8a1f, 0 0 22px rgba(255, 120, 30, 0.7); }
+@keyframes streak-pop { 0% { opacity: 0; transform: translateX(-50%) scale(0.4) rotate(-5deg); } 18% { opacity: 1; transform: translateX(-50%) scale(1.15); } 30% { transform: translateX(-50%) scale(1); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(-50%) translateY(-14px); } }
+.streak-banner { position: fixed; z-index: 40; top: 150px; left: 50%; display: flex; align-items: center; gap: 8px; white-space: nowrap; background: #fff4d6; border: 3px solid #ff8a1f; border-radius: 12px; padding: 8px 20px; font-size: 1.5rem; pointer-events: none; animation: streak-pop 1600ms ease-out forwards; }
+.streak-banner .fx { width: 30px; height: 30px; }
+@keyframes burst-out { 0% { opacity: 1; transform: translate(0, 0) scale(0.5); } 100% { opacity: 0; transform: translate(var(--bx), var(--by)) scale(1.1) rotate(60deg); } }
+.streak-banner .burst { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; animation: burst-out 800ms ease-out forwards; }
+.burst-0 { --bx: -150px; --by: -50px; } .burst-1 { --bx: 150px; --by: -50px; } .burst-2 { --bx: -110px; --by: 55px; }
+.burst-3 { --bx: 110px; --by: 55px; } .burst-4 { --bx: 0px; --by: -70px; } .burst-5 { --bx: 0px; --by: 70px; }
+
+.trail-score { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+.score-label { font-weight: 700; }
+.score-track { display: inline-block; width: 90px; height: 10px; border-radius: 5px; background: #e4dcc8; overflow: hidden; border: 1px solid var(--land-edge); }
+.score-fill { display: block; height: 100%; background: linear-gradient(90deg, #7ce08f, #ffd866, #ff8a1f); transition: width 400ms ease-out; }
+.score-chance { color: #7a3fb0; font-weight: 700; animation: bump 280ms ease-out; display: inline-block; }
+.trail-score.hot .score-fill { box-shadow: 0 0 8px #ff8a1f; }
+
+/* Rare encounters: impossible to miss. */
+@keyframes rare-rainbow { 0% { box-shadow: 0 0 0 4px #ff5ca8, 0 0 26px #ff5ca8; } 33% { box-shadow: 0 0 0 4px #ffd84a, 0 0 26px #ffd84a; } 66% { box-shadow: 0 0 0 4px #5cc8ff, 0 0 26px #5cc8ff; } 100% { box-shadow: 0 0 0 4px #ff5ca8, 0 0 26px #ff5ca8; } }
+.rare-scene { animation: rare-rainbow 2.4s linear infinite; }
+.rare-scene .actor.opponent img { filter: drop-shadow(0 0 10px #ffe066) drop-shadow(0 0 22px #ff5ca8); }
+.rare-intro { background: radial-gradient(circle, rgba(120, 40, 170, 0.92), rgba(14, 8, 30, 0.97)); flex-wrap: wrap; align-content: center; animation-delay: 2300ms; }
+.rare-intro em { width: 100%; text-align: center; font-style: normal; font-weight: 900; font-size: 3rem; color: #fff1a8; text-shadow: 2px 2px 0 #6a1fa0, -2px -2px 0 #6a1fa0, 2px -2px 0 #6a1fa0, -2px 2px 0 #6a1fa0, 0 0 18px #ffd84a; animation: vs-pop 380ms ease-out backwards; }
+.rare-intro .burst { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; animation: burst-out 900ms ease-out 200ms both; }

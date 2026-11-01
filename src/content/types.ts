@@ -10,6 +10,8 @@ export interface QuestionOption {
   featureId?: string;
   /** Too small to click, so the map draws a dot for it. */
   tiny?: boolean;
+  /** Something true about this option, shown if a child picks it by mistake. */
+  about?: string;
 }
 
 export interface Question {

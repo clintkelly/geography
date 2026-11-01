@@ -1,21 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { clampView, EUROPE_VIEW, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
-import type { Difficulty } from '../content/types';
+import type { Difficulty, Question } from '../content/types';
 import { degreesApart } from '../content/geo';
 import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST } from '../content/us/templates';
 import { validatePack, validateRecords } from '../content/validate';
 import { BADGES } from './badges';
 import { ECONOMY } from './economy';
-import { isDue, isFamiliar, localDay, recordAnswer } from './learning';
+import { cardProgress } from './cards';
+import { isDue, isFamiliar, localDay, recordAnswer, type Learning } from './learning';
+import { rareChance, trailScore } from './luck';
 import { formOf, levelOf, STAGES, stageOf, xpForLevel } from './progression';
 import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
 import { pickQuestion } from './questions';
 import { Rng } from './rng';
+import { streakReward } from './streak';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from './trail';
 
 const NOW = 1_800_000_000_000;
-const step = (s: SaveData, cmd: Command) => reduce(s, cmd, PACK, NOW);
+// Most tests play perfectly, so rare encounters are switched off to keep their stops predictable.
+const PLAIN = { ...PACK, species: PACK.species.filter((o) => !o.rare) };
+const step = (s: SaveData, cmd: Command) => reduce(s, cmd, PLAIN, NOW);
+const stepRare = (s: SaveData, cmd: Command) => reduce(s, cmd, PACK, NOW);
 const fresh = (seed = 7) => newSave(PACK, seed, 'p1');
 
 const start = (s: SaveData, regionId = 'us-west', difficulty: Difficulty = 'scout', trail: TrailLength = 'standard') =>
@@ -594,7 +600,7 @@ describe("Explorer's Map, rare creatures and badges", () => {
       for (let seed = 1; seed < 10; seed++) expect(has(fresh(seed))).toBe(false);
     }
     let s: SaveData = { ...fresh(), foundPlaces: allPlaces('us-west'), companions: [...fresh().companions, ...['barkknight', 'sandwhisk', 'cindermite', 'cragmaw'].map((speciesId, i) => ({ instanceId: `c${i}`, speciesId, bondXp: 0 }))] };
-    s = step(step(start(s, 'us-west'), { type: 'abandon' }), { type: 'dismissSummary' });
+    s = stepRare(start(s, 'us-west'), { type: 'abandon' });
     expect(s.offers.some((o) => o.regionId === 'us-west' && o.reward.kind === 'creature' && o.reward.speciesId === 'thunderhoof')).toBe(true);
   });
 
@@ -671,6 +677,242 @@ describe('spaced review', () => {
     expect(reset.completedExpeditions).toBe(0);
     expect(reset.profile).toEqual(played.profile);
     expect(reset.companions).toHaveLength(1);
+  });
+});
+
+describe('rare encounters', () => {
+  const stats = (answered: number, correct: number, streak: number, difficulty: Difficulty = 'scout') => ({ answered, correct, streak, difficulty });
+
+  it('the score rises with accuracy, streak and difficulty', () => {
+    expect(trailScore(stats(0, 0, 0))).toBe(0);
+    expect(trailScore(stats(10, 10, 0))).toBeGreaterThan(trailScore(stats(10, 5, 0)));
+    expect(trailScore(stats(10, 8, 6))).toBeGreaterThan(trailScore(stats(10, 8, 0)));
+    expect(trailScore(stats(10, 8, 2, 'expert'))).toBeGreaterThan(trailScore(stats(10, 8, 2)));
+    expect(trailScore(stats(50, 50, 40, 'expert'))).toBe(100);
+  });
+
+  it('the chance runs from small to large, and never to certain', () => {
+    expect(rareChance(0)).toBeCloseTo(0.02);
+    expect(rareChance(100)).toBeCloseTo(0.25);
+  });
+
+  const rigged = () => {
+    let s = find(ready(fresh()));
+    s = { ...s, expedition: { ...s.expedition!, rngState: 1, answered: 20, correct: 20, streak: 10, difficulty: 'expert' as const } };
+    return s;
+  };
+
+  it('playing better brings more rare encounters', () => {
+    const rate = (answered: number, correct: number, streak: number) => {
+      let hits = 0;
+      for (let seed = 0; seed < 300; seed++) {
+        let s = find(ready(fresh(seed + 1)));
+        s = { ...s, expedition: { ...s.expedition!, rngState: seed * 7919, answered, correct, streak } };
+        if (stepRare(s, { type: 'enterEncounter' }).expedition!.slots[0]!.rare) hits++;
+      }
+      return hits;
+    };
+    expect(rate(20, 20, 10)).toBeGreaterThan(rate(20, 8, 0) * 2);
+  });
+
+  const toRare = () => {
+    for (let seed = 1; seed < 400; seed++) {
+      const base = rigged();
+      const s = stepRare({ ...base, expedition: { ...base.expedition!, rngState: seed } }, { type: 'enterEncounter' });
+      if (s.expedition!.slots[0]!.rare) return s;
+    }
+    throw new Error('no rare encounter');
+  };
+
+  it('a rare creature fights harder, can\'t be Bold Befriended, and joins through a question', () => {
+    let s = toRare();
+    const slot = s.expedition!.slots[0]!;
+    expect(PACK.species.find((o) => o.id === slot.opponentId)!.rare).toBe(true);
+    expect(s.expedition!.battle!.combat.opponentMaxHp).toBe(14);
+    const count = s.companions.length;
+    s = { ...s, expedition: { ...s.expedition!, battle: { ...s.expedition!.battle!, combat: { ...s.expedition!.battle!.combat, opponentHp: 3 } } } };
+    const rareTurn = (x: SaveData, action: 'attack' | 'befriend') => stepRare(stepRare(stepRare(x, { type: 'chooseAction', action }), { type: 'answer', optionId: stepRare(x, { type: 'chooseAction', action }).expedition!.battle!.question.acceptedId }), { type: 'continue' });
+    s = rareTurn(s, 'attack');
+    expect(s.expedition!.battle!.befriending).toBe(true);
+    expect(s.expedition!.slots[0]!.status).toBe('pending');
+    s = rareTurn(s, 'befriend');
+    expect(s.companions).toHaveLength(count + 1);
+    expect(s.companions.at(-1)!.speciesId).toBe(slot.opponentId);
+    expect(s.expedition!.slots[0]!.status).toBe('won');
+    expect(s.rareFound).toBe(true);
+  });
+
+  it('the roll holds through a retreat and retry', () => {
+    let s = toRare();
+    const id = s.expedition!.slots[0]!.opponentId;
+    while (s.expedition!.battle) s = turn(s, false);
+    expect(s.expedition!.retreated).toBe(true);
+    s = stepRare(s, { type: 'enterEncounter' });
+    expect(s.expedition!.slots[0]!.opponentId).toBe(id);
+  });
+
+  it('never appears once owned, and never at an event or final showdown', () => {
+    const owned = rigged();
+    const s = { ...owned, companions: [...owned.companions, { instanceId: 'r', speciesId: 'thunderhoof', bondXp: 0 }] };
+    for (let seed = 1; seed < 60; seed++) {
+      const t = stepRare({ ...s, expedition: { ...s.expedition!, rngState: seed } }, { type: 'enterEncounter' });
+      expect(t.expedition!.slots[0]!.rare).toBeUndefined();
+    }
+  });
+});
+
+describe('wrong answers teach', () => {
+  it('a wrong capital says what that city is the capital of', () => {
+    const q = PACK.questions.find((o) => o.id === 'q-capital-maryland-scout-1')!;
+    const wrong = q.options.filter((o) => o.id !== q.acceptedId);
+    expect(wrong).toHaveLength(3);
+    for (const o of wrong) expect(o.about, o.label).toMatch(new RegExp(`^${o.label} is the capital of `));
+  });
+
+  it('a same-state city says so, and the largest city is called out', () => {
+    const q = PACK.questions.find((o) => o.id === 'q-capital-california-ranger-1')!;
+    expect(q.options.find((o) => o.label === 'Los Angeles')!.about).toBe('Los Angeles is the largest city in California, but not its capital.');
+    expect(q.options.find((o) => o.label === 'San Diego')!.about).toBe('San Diego is a city in California, but not its capital.');
+  });
+
+  it('every wrong option in the states and countries has something to teach, and the right one has nothing', () => {
+    for (const q of PACK.questions.filter((o) => o.locationId)) {
+      for (const o of q.options) {
+        if (o.id === q.acceptedId) expect(o.about, q.id).toBeUndefined();
+        else expect(o.about, `${q.id} ${o.label}`).toBeTruthy();
+      }
+    }
+  });
+});
+
+describe('Bold Befriend', () => {
+  const inBattle = (seed = 3) => {
+    let s = step(find(ready(fresh(seed))), { type: 'enterEncounter' });
+    s = turn(turn(s, true), true);
+    return s;
+  };
+  const go = (s: SaveData) => step(s, { type: 'chooseAction', action: 'tame' });
+
+  it('needs half HP and 2 charge', () => {
+    const start_ = step(find(ready(fresh())), { type: 'enterEncounter' });
+    expect(go(start_)).toBe(start_);
+    const s = inBattle();
+    expect(s.expedition!.battle!.combat).toMatchObject({ opponentHp: 4, charge: 2 });
+    expect(go(s).expedition!.battle!.action).toBe('tame');
+  });
+
+  it('asks a harder question than the trail', () => {
+    expect(go(inBattle()).expedition!.battle!.question.difficulty).toBe('ranger');
+  });
+
+  it('two right in a row brings the creature home and wins the stop', () => {
+    let s = go(inBattle());
+    const opponent = s.expedition!.slots[0]!.opponentId;
+    const owned = s.companions.length;
+    s = step(answerWith(s, true), { type: 'continue' });
+    expect(s.expedition!.battle!.tameHits).toBe(1);
+    expect(s.companions).toHaveLength(owned);
+    s = answerWith(go(s), true);
+    expect(s.companions).toHaveLength(owned + 1);
+    expect(s.companions.at(-1)!.speciesId).toBe(opponent);
+    expect(s.expedition!.slots[0]!.status).toBe('won');
+    expect(s.expedition!.tamedIds).toEqual([opponent]);
+    expect(answerWith(s, true)).toBe(s);
+  });
+
+  it('a miss ends the attempt and loses the charge, and the creature hits back', () => {
+    let s = go(inBattle());
+    const hp = s.expedition!.battle!.combat.playerHp;
+    s = answerWith(s, false);
+    const { combat, tameHits } = s.expedition!.battle!;
+    expect(combat.charge).toBe(0);
+    expect(tameHits).toBe(0);
+    expect(combat.playerHp).toBeLessThan(hp);
+  });
+
+  it('the second question costs no more charge', () => {
+    let s = go(inBattle());
+    s = answerWith(s, true);
+    expect(s.expedition!.battle!.combat.charge).toBe(0);
+    s = step(s, { type: 'continue' });
+    expect(s.expedition!.battle!.combat.charge).toBe(0);
+    expect(go(s).expedition!.battle!.action).toBe('tame');
+  });
+
+  it('does not work on a creature already owned, or in the final showdown', () => {
+    const s = inBattle();
+    const owned = { ...s, companions: [...s.companions, { instanceId: 'x', speciesId: s.expedition!.slots[0]!.opponentId, bondXp: 0 }] };
+    expect(go(owned)).toBe(owned);
+  });
+});
+
+describe('streak rewards', () => {
+  it('pay out at milestones and only there', () => {
+    expect(streakReward(4)).toBeNull();
+    expect(streakReward(5)).toMatchObject({ points: 1 });
+    expect(streakReward(8)).toMatchObject({ heal: 2 });
+    expect(streakReward(10)).toMatchObject({ points: 2 });
+    expect(streakReward(15)).toMatchObject({ points: 2 });
+  });
+
+  it('the best streak is kept and earns badges', () => {
+    const s = playTrail(fresh());
+    expect(s.bestStreak).toBeGreaterThanOrEqual(10);
+  });
+});
+
+describe('card levels', () => {
+  const noon = new Date(2026, 10, 2, 12).getTime();
+  const DAY = 86400000;
+  const q = (objective: string, difficulty: Difficulty = 'scout') => PACK.questions.find((o) => o.objectiveId === objective && o.difficulty === difficulty)!;
+  const right = (l: Learning, question: Question, t: number) => recordAnswer(l, question, true, t, false);
+
+  it('climbs bronze, silver, gold, shiny', () => {
+    let l: Learning = {};
+    expect(cardProgress(l, 'oregon').level).toBe('bronze');
+    l = right(l, q('capital-oregon'), noon);
+    l = right(l, q('location-oregon'), noon);
+    expect(cardProgress(l, 'oregon')).toEqual({ level: 'bronze', next: '1 more topic for Silver' });
+    l = right(l, q('nickname-oregon'), noon);
+    expect(cardProgress(l, 'oregon').level).toBe('silver');
+    expect(cardProgress(l, 'oregon').next).toBe('Come back another day for Gold');
+    l = right(l, q('capital-oregon'), noon + DAY);
+    expect(cardProgress(l, 'oregon').level).toBe('gold');
+    for (let i = 0; i < 3; i++) l = right(l, q('capital-oregon', 'expert'), noon + DAY + i);
+    expect(cardProgress(l, 'oregon')).toEqual({ level: 'shiny', next: '' });
+  });
+
+  it('Gold can never be earned in one day', () => {
+    let l: Learning = {};
+    for (let i = 0; i < 6; i++) for (const id of ['capital-oregon', 'location-oregon', 'nickname-oregon']) l = right(l, q(id), noon + i);
+    expect(cardProgress(l, 'oregon').level).toBe('silver');
+  });
+
+  it('other places do not count, even with similar names', () => {
+    const l = right(right(right({}, q('capital-virginia'), noon), q('location-virginia'), noon), q('nickname-virginia'), noon);
+    expect(cardProgress(l, 'west-virginia').level).toBe('bronze');
+    expect(cardProgress(l, 'virginia').level).toBe('silver');
+  });
+
+  it('a city-state can still reach every level', () => {
+    let l: Learning = {};
+    const objectives = ['location-monaco', 'fact-monaco-0', 'fact-monaco-1'];
+    for (const id of objectives) l = right(l, q(id), noon);
+    expect(cardProgress(l, 'monaco').level).toBe('silver');
+  });
+
+  it('an upgrade is announced by the answer that earned it', () => {
+    const base = fresh();
+    const placeId = 'oregon';
+    const start_ = reduce(ready(base), { type: 'useAtlas' }, PACK, NOW);
+    expect(start_.expedition).toBeTruthy();
+    const q1 = q('nickname-oregon');
+    const learning = right(right({}, q('capital-oregon'), NOW), q('location-oregon'), NOW);
+    let s: SaveData = step(find(ready({ ...base, learning, stateCards: [placeId] })), { type: 'enterEncounter' });
+    s = step(s, { type: 'chooseAction', action: 'attack' });
+    s = { ...s, expedition: { ...s.expedition!, battle: { ...s.expedition!.battle!, question: q1 } } };
+    s = answerWith(s, true);
+    expect(s.expedition!.battle!.result!.cardUp).toEqual({ placeId, level: 'silver' });
   });
 });
 

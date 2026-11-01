@@ -52,11 +52,14 @@ export function turnFrames(action: string, correct: boolean, events: TurnEvents,
     return correct ? [{ at: 0, player: 'idle', opponent: 'idle', opponentMotion: 'hop', sounds: ['befriend'] }] : [{ at: 0, player: 'idle', opponent: 'idle', sounds: ['not-yet'] }];
   }
 
+  const taming = action === 'tame';
   const guarding = action === 'guard';
   const answerSound: SoundId = correct ? 'correct' : 'not-yet';
   const healFloat: Frame = events.healed > 0 ? { at: 0, player: 'idle', opponent: 'idle', floats: [{ side: 'player', text: `+${events.healed}`, kind: 'heal' }], hp: { side: 'player', delta: events.healed } } : ({} as Frame);
   const { floats: healFloats, hp: healHp } = healFloat;
-  if (guarding) {
+  if (taming) {
+    frames.push({ at: t, player: 'idle', opponent: 'idle', ...(correct ? { opponentMotion: 'glow' as const } : {}), sounds: [answerSound] });
+  } else if (guarding) {
     frames.push({ at: t, player: 'guard', opponent: 'idle', playerMotion: 'glow', sounds: [answerSound, 'guard'] });
   } else if (correct) {
     const special = action === 'special';

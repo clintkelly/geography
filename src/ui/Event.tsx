@@ -8,7 +8,7 @@ import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 
-export function Event({ e, event, dispatch }: { e: Expedition; event: EventState; dispatch: (c: Command) => void }) {
+export function Event({ e, event, owned, dispatch }: { e: Expedition; event: EventState; owned: readonly string[]; dispatch: (c: Command) => void }) {
   const def = TRAIL_EVENTS.find((t) => t.id === event.eventId);
   const onAnswer = useCallback((optionId: string) => dispatch({ type: 'answer', optionId }), [dispatch]);
   const { result } = event;
@@ -20,7 +20,7 @@ export function Event({ e, event, dispatch }: { e: Expedition; event: EventState
   }, [result]); // eslint-disable-line
   return (
     <div className="stack">
-      <TrailBar e={e} />
+      <TrailBar e={e} owned={owned} />
       <section className="event-banner" style={{ backgroundImage: `url(${artUrl(`backdrop-${place(e.slots[event.slotIndex]?.locationId ?? '').biome}`)})` }}>
         <Sprite id={`event-${event.eventId}`} size={160} />
         <div>

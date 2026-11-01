@@ -48,7 +48,9 @@ Saves live in your browser, on that computer, at that address. Nothing goes onli
 
 Field Notes after right answers are worth reading. They come back as Field Note checks, which land as critical hits.
 
-Along the way you can fill the Explorer's Map to reveal rare creatures, level up and evolve your companions, and collect State Cards and badges.
+Along the way you can fill the Explorer's Map, level up and evolve your companions, and collect badges and cards, which rise from Bronze to Silver, Gold, and Shiny as you remember more.
+
+Want a creature in the middle of a fight? Once one you don't own is at half HP, spend 2 charge on **Bold Befriend** and get two harder questions right in a row. Play well and your Trail Score rises, raising your chance of a **rare encounter**.
 
 | Difficulty | What changes |
 | --- | --- |
@@ -67,7 +69,7 @@ The whole game works from the keyboard. Buttons show their keys.
 | Prep Shop | **1–9** companion, **S**, **C**, **T** to buy |
 | Finding a place | **1–4** choose, **C** clue, **N** narrow the search, **A** atlas |
 | Blank maps | Arrow keys move the highlight, **Enter** chooses |
-| Battle | **A** Attack, **G** Guard, **S** Special, **H** Trail Snack, **B** Befriend, **1–4** answer |
+| Battle | **A** Attack, **G** Guard, **S** Special, **H** Trail Snack, **B** Befriend or Bold Befriend, **1–4** answer |
 | Maps | **+** and **−** zoom |
 
 ## Update it with Claude

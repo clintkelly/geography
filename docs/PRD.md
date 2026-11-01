@@ -204,7 +204,7 @@ A battle should take at least 3 correct answers at any stage. Growth may shorten
 
 ### Feedback and timing
 
-An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts under two seconds. Hit and block sounds are deep, retro 8-bit punches. Hits show floating damage numbers, a brief freeze and flash, a screen shake, sparks, and HP bars that drain with a pale trail. Correct answers build a streak with a rising chime and bigger-looking hits; a streak is for show and changes no numbers. Final showdowns open with a VS intro, a beaten opponent slides away, and befriending has its own celebration. Reduced motion removes the movement and flashing but keeps poses, numbers, and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
+An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts under two seconds. Hit and block sounds are deep, retro 8-bit punches. Hits show floating damage numbers, a brief freeze and flash, a screen shake, sparks, and HP bars that drain with a pale trail. Correct answers build a streak with a rising chime, a growing aura, and bigger-looking hits. Final showdowns open with a VS intro, a beaten opponent slides away, and befriending has its own celebration. Reduced motion removes the movement and flashing but keeps poses, numbers, and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
 
 Persist the resolved turn before animating. Reloading must not submit an answer or resolve a turn twice.
 
@@ -298,6 +298,24 @@ Every fact has a question whose answer is that state or country. A child never s
 ### Explorer's Map
 
 Each region has a map at camp that fills in as places are found. A full map reveals a rare creature for that region. Rare creatures don't evolve. Badges mark filled maps, groups of places such as New England, and other milestones.
+
+### Harder ways to win creatures
+
+**Bold Befriend:** an unowned creature in a regular battle at half HP or less can be won with 2 charge and two right answers in a row on questions one level harder than the trail. It keeps attacking, and a miss ends the attempt.
+
+**Rare encounters:** a Trail Score from 0 to 100 reflects accuracy, streak, and difficulty, and sets the chance (2 to 25 percent) that a battle stop is a rare creature. The roll is made once per stop.
+
+### Card levels
+
+Cards rise from Bronze (one right answer) to Silver (three topics), Gold (unaided answers on two different days), and Shiny (three more on Expert). Levels come from learning records, so they can't be rushed in one sitting.
+
+### Wrong answers
+
+A wrong pick shows what that option really is, such as what the chosen city is the capital of.
+
+### Streaks
+
+Streaks pay out at milestones: 5 and 10 in a row earn Trail Points, 8 restores HP, and each brings a banner. Breaking a streak costs nothing.
 
 ### Arrival
 

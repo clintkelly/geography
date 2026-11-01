@@ -12,6 +12,7 @@ interface Result {
   optionId: string;
   correct: boolean;
   cardId?: string;
+  cardUp?: { placeId: string; level: string };
 }
 
 interface Props {
@@ -22,18 +23,20 @@ interface Props {
   onContinue: () => void;
   /** Extra lines under the feedback, such as what happened in the battle. */
   log?: ReactNode;
+  /** A label above the question. */
+  tag?: string;
 }
 
 /** Focuses Continue without scrolling the page, which would hide the battle while its effects play. */
 const focusWithoutScrolling = (button: HTMLButtonElement | null) => button?.focus({ preventScroll: true });
 
-function CardAward({ placeId }: { placeId: string }) {
+function CardAward({ placeId, level }: { placeId: string; level?: string }) {
   const card = cardFor(placeId);
   return (
-    <div className="card-award reveal">
+    <div className={`card-award reveal card-${level ?? 'bronze'}`}>
       <CardArt id={card.artId} width={192} />
       <div>
-        <p className="card-new">New State Card!</p>
+        <p className="card-new">{level ? `Card upgraded to ${level[0]?.toUpperCase()}${level.slice(1)}!` : 'New card!'}</p>
         <h3>{card.name}</h3>
         <p>{card.subtitle}{card.capital ? ` · Capital: ${card.capital}` : ''}</p>
       </div>
@@ -41,9 +44,10 @@ function CardAward({ placeId }: { placeId: string }) {
   );
 }
 
-export function QuestionPanel({ question: q, regionId, result, onAnswer, onContinue, log }: Props) {
+export function QuestionPanel({ question: q, regionId, result, onAnswer, onContinue, log, tag }: Props) {
   const map = mapFor(regionId);
   const accepted = q.options.find((o) => o.id === q.acceptedId)?.label;
+  const picked = result && !result.correct ? q.options.find((o) => o.id === result.optionId) : undefined;
   const clickable = q.inputType === 'map-click';
 
   const onFeatureClick = useMemo(() => (featureId: string) => {
@@ -76,7 +80,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
   else if (!clickable) q.options.forEach((o, i) => { keys[String(i + 1)] = () => onAnswer(o.id); });
   useKeys(keys);
 
-  const cardId = result?.cardId;
+  const cardId = result?.cardId ?? result?.cardUp?.placeId;
   const announced = useRef(false);
   useEffect(() => {
     if (cardId && !announced.current) playSound('card');
@@ -85,6 +89,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
 
   return (
     <section className="panel question">
+      {tag && <p className="recall-tag">{tag}</p>}
       {q.recallOf && <p className="recall-tag">Field Note check! A right answer is a critical: +{ECONOMY.recallBonus} point and a charge.</p>}
       <h2>{q.prompt}</h2>
       {q.inputType === 'map-marker' && (
@@ -133,8 +138,10 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
       {result && (
         <div className={`feedback ${result.correct ? 'good' : 'notyet'}`} role="status">
           <p className="learn"><strong>{result.correct ? 'Correct!' : `Not yet. The answer is ${accepted}.`}</strong> {q.explanation}</p>
+          {picked?.about && <p className="picked-note"><span>Your pick</span>{picked.about}</p>}
           {result.correct && q.fieldNote && !q.recallOf && <p className="field-note"><span>Field Note: remember this!</span>{q.fieldNote}<small>It may come back as a bonus question.</small></p>}
-          {cardId && <CardAward placeId={cardId} />}
+          {result.cardId && <CardAward placeId={result.cardId} />}
+          {result.cardUp && <CardAward placeId={result.cardUp.placeId} level={result.cardUp.level} />}
           {log && <p className="muted">{log}</p>}
           <button ref={focusWithoutScrolling} type="button" className="primary" onClick={onContinue}>Continue <Key k="Enter" /></button>
         </div>

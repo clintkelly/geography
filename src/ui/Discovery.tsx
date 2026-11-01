@@ -9,7 +9,7 @@ import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
 
-export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
+export function Discovery({ e, owned, dispatch }: { e: Expedition; owned: readonly string[]; dispatch: (c: Command) => void }) {
   const [atlasOpen, setAtlasOpen] = useState(false);
   const [atlasPlace, setAtlasPlace] = useState<string | null>(null);
 
@@ -69,7 +69,7 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
 
   return (
     <div className="stack">
-      <TrailBar e={e} />
+      <TrailBar e={e} owned={owned} />
       <div className="discovery">
         <section className="panel clues">
           <h1>{previous ? 'Where did it go next?' : 'Where was it seen?'}</h1>

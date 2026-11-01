@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Species } from '../content/types';
 import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
-import { activeCompanion, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
+import { activeCompanion, canTame, TAME_HITS, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
 import { artUrl, Fx, poseUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
 import { companionView, place, souvenir, species } from './content';
@@ -55,6 +55,7 @@ function Actor({ creature, artId, pose, motion, side, floats, flash, powered }: 
 
 export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: BattleState; save: SaveData; dispatch: (c: Command) => void }) {
   const slot = e.slots[battle.slotIndex];
+  const owned = save.companions.map((c) => c.speciesId);
   const view = companionView(activeCompanion(save));
   const companion = view.species;
   const opponent = species(slot?.opponentId ?? '');
@@ -68,13 +69,15 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [stayGone, setStayGone] = useState(false);
   const [burst, setBurst] = useState(false);
   const floatId = useRef(0);
-  const finalIntro = slot?.kind === 'guardian' && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
+  const rareFoe = !!slot?.rare;
+  const finalIntro = (slot?.kind === 'guardian' || rareFoe) && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
   const [intro, setIntro] = useState(finalIntro);
 
   useEffect(() => {
     if (!intro) return;
-    playSound('special');
-    const t = setTimeout(() => setIntro(false), 1500);
+    playSound(rareFoe ? 'evolve' : 'special');
+    if (rareFoe) setTimeout(() => playSound('levelup'), 700);
+    const t = setTimeout(() => setIntro(false), rareFoe ? 2600 : 1500);
     return () => clearTimeout(t);
   }, []); // eslint-disable-line
 
@@ -93,7 +96,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     const { outcome } = battle.combat;
     const action = battle.action ?? 'attack';
     const { events: ev, correct } = battle.result;
-    const ending: Ending = outcome !== 'victory' || action === 'befriend' ? 'none' : slot?.status === 'won' ? 'defeated' : 'wornOut';
+    const ending: Ending = outcome !== 'victory' || action === 'befriend' || action === 'tame' ? 'none' : slot?.status === 'won' ? 'defeated' : 'wornOut';
     const powered = isPowered(e.streak);
     const frames = turnFrames(action, correct, ev, action !== 'befriend' && outcome !== 'victory', ending, powered, !!battle.result.critical);
     // The saved turn is already final. These replay it one hit at a time.
@@ -123,7 +126,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     }, f.at));
     const end = frames.at(-1)?.at ?? 0;
     timers.push(setTimeout(() => {
-      if (outcome === 'victory' && action !== 'befriend') playSound('win');
+      if (outcome === 'victory' && action !== 'befriend' && action !== 'tame') playSound('win');
+      if (battle.befriended && action === 'tame') playSound('befriend');
       if (outcome === 'retreat') playSound('retreat');
     }, end));
     timers.push(setTimeout(() => {
@@ -144,10 +148,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, [answered]); // eslint-disable-line
 
   const { combat, question: q, result } = battle;
-  const choose = (action: CombatAction | 'befriend') => dispatch({ type: 'chooseAction', action });
+  const choose = (action: CombatAction | 'befriend' | 'tame') => dispatch({ type: 'chooseAction', action });
   const onAnswer = useCallback((optionId: string) => dispatch({ type: 'answer', optionId }), [dispatch]);
   const special = canUse(combat, 'special');
   const snackReady = e.snack && combat.playerHp < combat.playerMaxHp;
+  const tameable = !!slot && canTame(save, battle, slot);
+  const tameHits = battle.tameHits ?? 0;
 
   const keys: Record<string, () => void> = {};
   if (battle.phase === 'choose') {
@@ -156,6 +162,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       Object.assign(keys, { a: () => choose('attack'), enter: () => choose('attack'), g: () => choose('guard') });
       if (special) keys.s = () => choose('special');
       if (snackReady) keys.h = () => dispatch({ type: 'useSnack' });
+      if (tameable) keys.b = () => choose('tame');
     }
   }
   useKeys(keys);
@@ -179,19 +186,22 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     events.damageTaken > 0 && `${opponent.displayName} dealt ${events.damageTaken} damage.`,
     battle.befriended && `${opponent.displayName} wants to be your friend!`,
     battle.action === 'befriend' && !result?.correct && `${opponent.displayName} is still deciding. Try another question.`,
+    battle.action === 'tame' && !result?.correct && `${opponent.displayName} backed away. The attempt is over.`,
+    battle.action === 'tame' && result?.correct && !battle.befriended && `${opponent.displayName} is listening. One more right answer!`,
     battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'pending' && `${opponent.displayName} is worn out and watching you closely.`,
-    battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'won' && `${opponent.displayName} is impressed and steps aside!`,
+    battle.action !== 'befriend' && battle.action !== 'tame' && combat.outcome === 'victory' && slot.status === 'won' && `${opponent.displayName} is impressed and steps aside!`,
     combat.outcome === 'retreat' && `${view.name} retreats safely to the trail.`,
     slot.kind === 'regular' && slot.status === 'won' && e.foundSouvenirId && e.slots.filter((s) => s.kind === 'regular' && s.status === 'won').length === 2 && `You found something on the trail: ${souvenir(e.foundSouvenirId)?.displayName}!`,
   ].filter(Boolean).join(' ');
 
   return (
     <div className="battle">
-      <TrailBar e={e} />
-      <section className={`scene${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+      <TrailBar e={e} owned={owned} />
+      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
         {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (
-          <div className="vs-intro" aria-hidden="true">
+          <div className={`vs-intro${rareFoe ? ' rare-intro' : ''}`} aria-hidden="true">
+            {rareFoe && <>{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}<em>Rare encounter!</em></>}
             <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
             <strong>VS</strong>
             <img src={poseUrl(opponent, 'idle')} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
@@ -211,7 +221,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             </div>
           </div>
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
-          <Hp label={opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
+          <Hp label={rareFoe ? `Rare: ${opponent.displayName}` : opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
         </div>
         <div className="scene-floor">
           <Actor creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
@@ -236,6 +246,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
                   <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
                   <button type="button" className={`big${special ? ' special-ready' : ''}`} disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
                 </div>
+                {tameable && <button type="button" className="tame-button" onClick={() => choose('tame')}>{tameHits > 0 ? `Keep going: ${tameHits} of ${TAME_HITS}` : 'Bold Befriend'} <Key k="B" /><small>{tameHits > 0 ? 'One more right answer wins it over' : `Two right in a row on harder questions. Costs 2 charge.`}</small></button>}
                 {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
               </>
             )}
@@ -244,7 +255,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       )}
 
       {battle.phase !== 'choose' && (
-        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} log={log} />
+        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} log={log} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
       )}
       <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave expedition</button>
     </div>

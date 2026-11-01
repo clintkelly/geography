@@ -85,6 +85,12 @@ describe('turn animations', () => {
     expect(turnFrames('attack', true, hit, true)[0]!.burst).toBeUndefined();
   });
 
+  it('a Bold Befriend attempt shows no attack', () => {
+    const frames = turnFrames('tame', true, { damageDealt: 0, damageTaken: 2, blocked: 0, healed: 0 }, true);
+    expect(frames.some((f) => f.player === 'attack')).toBe(false);
+    expect(frames[0]).toMatchObject({ opponentMotion: 'glow' });
+  });
+
   it('befriending plays its own moment', () => {
     expect(turnFrames('befriend', true, hit, false)[0]!.sounds).toEqual(['befriend']);
   });

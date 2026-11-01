@@ -14,6 +14,7 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
   useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });
   const index = currentSlotIndex(e);
   const slot = e.slots[index];
+  const owned = save.companions.map((c) => c.speciesId);
   // Only stops already reached are drawn, so the map doesn't give away where the trail goes.
   const reached = e.slots.slice(0, index + 1);
   const highlights = useMemo(
@@ -42,7 +43,7 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
 
   return (
     <div className="stack">
-      <TrailBar e={e} />
+      <TrailBar e={e} owned={owned} />
       <div className="discovery">
         <section className="panel clues">
           {e.retreated

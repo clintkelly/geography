@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { currentSlotIndex, type Expedition } from '../engine/game';
+import { PACK } from '../content/pack';
+import { availableRare, rareChance, trailScore } from '../engine/luck';
+import { streakReward } from '../engine/streak';
 import { Fx } from './art';
+import { playSound } from './sound';
 
 /** Coins fly up into the counter, which ticks along to the new total. */
 function Points({ points }: { points: number }) {
@@ -33,7 +37,39 @@ function Points({ points }: { points: number }) {
   );
 }
 
-export function TrailBar({ e }: { e: Expedition }) {
+/** How well the trip is going, and what that does for the odds of a rare encounter. */
+function TrailScore({ e, owned }: { e: Expedition; owned: readonly string[] }) {
+  const score = trailScore(e);
+  const percent = Math.round(rareChance(score) * 100);
+  const rare = availableRare(PACK, e.regionId, owned);
+  const hot = score >= 70;
+  return (
+    <span className={`trail-score${hot ? ' hot' : ''}`} title="Answer well and keep your streak going to raise your chance of a rare encounter.">
+      <span className="score-label">Trail Score {score}</span>
+      <span className="score-track" role="img" aria-label={`Trail Score ${score} of 100`}><span className="score-fill" style={{ width: `${score}%` }} /></span>
+      <span className="score-chance" key={percent}>{rare ? `${percent}% rare chance` : 'Rare creature found'}</span>
+    </span>
+  );
+}
+
+/** A milestone banner, shown when the streak reaches one. It never blocks input. */
+function StreakBanner({ streak }: { streak: number }) {
+  const reward = streakReward(streak);
+  const last = useRef(streak);
+  useEffect(() => {
+    if (streak > last.current && reward) playSound('levelup');
+    last.current = streak;
+  }, [streak]); // eslint-disable-line
+  if (!reward) return null;
+  return (
+    <div className="streak-banner" key={streak} aria-live="polite">
+      {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}
+      <Fx id="flame" /><strong>{streak} in a row! {reward.label}</strong>
+    </div>
+  );
+}
+
+export function TrailBar({ e, owned }: { e: Expedition; owned: readonly string[] }) {
   const index = currentSlotIndex(e);
   const stop = index === -1 ? e.slots.length : index + 1;
   const streak = e.streak ?? 0;
@@ -44,7 +80,9 @@ export function TrailBar({ e }: { e: Expedition }) {
       </span>
       <span>Stop {stop} of {e.slots.length}</span>
       <Points points={e.points} />
-      {streak >= 2 && <span className="streak bump" key={streak}><Fx id="flame" />{streak} in a row!</span>}
+      <TrailScore e={e} owned={owned} />
+      <StreakBanner streak={streak} />
+      {streak >= 2 && <span className={`streak bump${streak >= 10 ? ' streak-max' : streak >= 5 ? ' streak-big' : ''}`} key={streak}><Fx id="flame" />{streak} in a row!</span>}
       {e.snack && <span className="muted">Trail Snack packed</span>}
       <span className="muted">Hunting: {e.reward.kind === 'creature' ? 'a mystery creature' : 'a rival'}</span>
     </div>

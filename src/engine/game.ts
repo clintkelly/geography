@@ -7,6 +7,9 @@ import { isDue, recordAnswer, type Learning } from './learning';
 import { levelOf, speciesOf, STAGES, stageOf, XP, xpFor } from './progression';
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { earnedBadges } from './badges';
+import { cardLevelOf, type CardLevel } from './cards';
+import { availableRare, rareChance, trailScore } from './luck';
+import { streakReward } from './streak';
 import { Rng } from './rng';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
@@ -34,6 +37,10 @@ export interface Offer {
 
 export interface Slot {
   kind: StopKind;
+  /** The rare encounter roll happens once per stop, so a reload or retry can't change it. */
+  rareRolled?: boolean;
+  /** A rare creature took this stop. */
+  rare?: boolean;
   locationId: string;
   /** Opponent species; empty for events. */
   opponentId: string;
@@ -49,6 +56,8 @@ export interface TurnResult {
   cardId?: string;
   /** Field Note check answered correctly: a critical that adds a charge. */
   critical?: boolean;
+  /** A card this answer raised to a new level. */
+  cardUp?: { placeId: string; level: CardLevel };
 }
 
 export interface Battle {
@@ -58,8 +67,10 @@ export interface Battle {
   phase: 'choose' | 'question' | 'feedback';
   /** A snapshot with options in display order, so content updates can't change a saved turn. */
   question: Question;
-  action?: CombatAction | 'befriend';
+  action?: CombatAction | 'befriend' | 'tame';
   result?: TurnResult;
+  /** Right answers so far in a Bold Befriend attempt. */
+  tameHits?: number;
   /** The answer was a Field Note check, so it counted as a critical. */
   critical?: boolean;
   /** The target is worn out and only befriending remains. */
@@ -72,7 +83,7 @@ export interface EventState {
   slotIndex: number;
   eventId: string;
   question: Question;
-  result?: Omit<TurnResult, 'events'>;
+  result?: Omit<TurnResult, 'events' | 'critical'>;
 }
 
 export interface Expedition {
@@ -113,7 +124,9 @@ export interface Expedition {
   correct: number;
   /** Objectives answered wrongly on this trip. A later right answer here isn't independent evidence. */
   revealed?: string[];
-  /** Correct answers in a row. For show only: it never changes an outcome, and breaking it costs nothing. */
+  /** Creatures won by Bold Befriend on this trip. */
+  tamedIds?: string[];
+  /** Correct answers in a row. It pays out at milestones: breaking it costs nothing. */
   streak?: number;
 }
 
@@ -145,6 +158,7 @@ export interface Summary {
   levelUp?: number;
   /** Badges earned by this trip. */
   newBadges?: string[];
+  tamedIds?: string[];
 }
 
 export interface Settings {
@@ -198,6 +212,9 @@ export interface SaveData {
   learning: Learning;
   badges: string[];
   expertTrails: number;
+  bestStreak?: number;
+  tamedAny?: boolean;
+  rareFound?: boolean;
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -220,7 +237,7 @@ export type Command =
   | { type: 'useAtlas' }
   | { type: 'guess'; locationId: string }
   | { type: 'enterEncounter' }
-  | { type: 'chooseAction'; action: CombatAction | 'befriend' }
+  | { type: 'chooseAction'; action: CombatAction | 'befriend' | 'tame' }
   | { type: 'useSnack' }
   | { type: 'answer'; optionId: string }
   | { type: 'continue' }
@@ -451,12 +468,24 @@ function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack, now
   return { e: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id] }, question };
 }
 
-function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
-  const e = save.expedition;
-  if (!e || !e.prepared || e.discovery !== 'found' || e.battle || e.event) return save;
-  const slotIndex = currentSlotIndex(e);
+/** Better play makes the next battle more likely to be a rare creature. */
+function rollRare(save: SaveData, e: Expedition, slotIndex: number, pack: Pack): Expedition {
   const slot = e.slots[slotIndex];
-  if (!slot) return save;
+  if (!slot || slot.kind !== 'regular' || slot.rareRolled) return e;
+  const rng = new Rng(e.rngState);
+  const rare = availableRare(pack, e.regionId, save.companions.map((c) => c.speciesId));
+  const hit = !!rare && rng.next() < rareChance(trailScore(e));
+  const rolled: Slot = hit && rare ? { ...slot, rareRolled: true, rare: true, opponentId: rare.id } : { ...slot, rareRolled: true };
+  return { ...e, rngState: rng.state, slots: e.slots.map((s, i) => (i === slotIndex ? rolled : s)) };
+}
+
+function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
+  const before = save.expedition;
+  if (!before || !before.prepared || before.discovery !== 'found' || before.battle || before.event) return save;
+  const slotIndex = currentSlotIndex(before);
+  if (!before.slots[slotIndex]) return save;
+  const e = rollRare(save, before, slotIndex, pack);
+  const slot = e.slots[slotIndex] as Slot;
 
   if (slot.kind === 'event') {
     const dealt = dealQuestion(save, e, slot, pack, now);
@@ -473,7 +502,7 @@ function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
     playerAttack: stats.attack,
     special: species.special.template,
     specialBonus: stats.specialBonus,
-    opponentMaxHp: guardian ? stats.finalHp : stats.regularHp,
+    opponentMaxHp: guardian ? stats.finalHp : stats.regularHp + (slot.rare ? RARE_EXTRA_HP : 0),
     enemyPattern: BALANCE.enemyPattern,
     maxTurns: guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns,
   });
@@ -502,6 +531,39 @@ function pointsFor(q: Question, correct: boolean): number {
   return correct && q.recallOf ? ECONOMY.recallBonus : 0;
 }
 
+const RARE_EXTRA_HP = 4;
+const TAME_COST = 2;
+export const TAME_HITS = 2;
+
+/** Bold Befriend: an unowned creature at half HP or less, for 2 charge. Once started, it can continue at no cost. */
+export function canTame(save: SaveData, b: Battle, slot: Slot): boolean {
+  if (slot.kind !== 'regular' || slot.rare || b.befriending || b.combat.outcome !== 'active') return false;
+  if (save.companions.some((c) => c.speciesId === slot.opponentId)) return false;
+  if ((b.tameHits ?? 0) > 0) return true;
+  return b.combat.charge >= TAME_COST && b.combat.opponentHp * 2 <= b.combat.opponentMaxHp;
+}
+
+/** A Bold Befriend question is one level harder than the trail, and never one the child just saw. */
+function startTame(save: SaveData, e: Expedition, b: Battle, pack: Pack): SaveData {
+  const slot = e.slots[b.slotIndex] as Slot;
+  if (!canTame(save, b, slot)) return save;
+  const harder = DIFFICULTIES[Math.min(DIFFICULTIES.indexOf(e.difficulty) + 1, DIFFICULTIES.length - 1)] as Difficulty;
+  const pool = questionPool(pack, { regionId: e.regionId, difficulty: harder }).filter((q) => !q.recallOf);
+  const rng = new Rng(e.rngState);
+  const picked = pickQuestion(pool, { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
+  const question = presentQuestion(picked, rng);
+  return { ...save, expedition: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id], battle: { ...b, phase: 'question', action: 'tame', question } } };
+}
+
+/** A card this answer raised a level, if any. A new card is announced separately. */
+function cardRaised(save: SaveData, learning: Learning, q: Question): TurnResult['cardUp'] {
+  const placeId = q.locationId;
+  if (!placeId || !save.stateCards.includes(placeId)) return undefined;
+  const before = cardLevelOf(save.learning, placeId);
+  const after = cardLevelOf(learning, placeId);
+  return before === after ? undefined : { placeId, level: after };
+}
+
 function battlesWon(e: Expedition): number {
   return e.slots.filter((s) => s.kind === 'regular' && s.status === 'won').length;
 }
@@ -521,13 +583,27 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
 
   const correct = isCorrect(b.question, optionId);
   const befriending = b.action === 'befriend';
+  const taming = b.action === 'tame';
+  const tameHits = taming && correct ? (b.tameHits ?? 0) + 1 : 0;
+  const tamed = taming && tameHits >= TAME_HITS;
+  const quiet = { damageDealt: 0, damageTaken: 0, blocked: 0, healed: 0 };
+  // Starting an attempt spends the charge. The creature keeps attacking until it's won over.
+  const paid = taming && !b.tameHits ? { ...b.combat, charge: b.combat.charge - TAME_COST } : b.combat;
   const resolved = befriending
-    ? { state: b.combat, events: { damageDealt: 0, damageTaken: 0, blocked: 0, healed: 0 } }
-    : resolveTurn(b.combat, b.action as CombatAction, correct);
-  const { events } = resolved;
+    ? { state: b.combat, events: quiet }
+    : tamed
+      ? { state: { ...paid, outcome: 'victory' as const }, events: quiet }
+      : taming
+        ? resolveTurn(paid, 'attack', false)
+        : resolveTurn(b.combat, b.action as CombatAction, correct);
   // A right answer on a Field Note check is a critical: it adds a charge.
   const critical = correct && !befriending && !!b.question.recallOf;
-  const combat = critical && resolved.state.outcome === 'active' ? { ...resolved.state, charge: Math.min(MAX_CHARGE, resolved.state.charge + 1) } : resolved.state;
+  const charged = critical && resolved.state.outcome === 'active' ? { ...resolved.state, charge: Math.min(MAX_CHARGE, resolved.state.charge + 1) } : resolved.state;
+  const streak = correct ? (e.streak ?? 0) + 1 : 0;
+  const milestone = streakReward(streak);
+  const roomToHeal = charged.outcome === 'active' ? Math.min(milestone?.heal ?? 0, charged.playerMaxHp - charged.playerHp) : 0;
+  const combat = roomToHeal > 0 ? { ...charged, playerHp: charged.playerHp + roomToHeal } : charged;
+  const events = roomToHeal > 0 ? { ...resolved.events, healed: resolved.events.healed + roomToHeal } : resolved.events;
   const attempt: Attempt = {
     id: `${b.id}-answer-${e.answered + 1}`,
     context: 'battle',
@@ -544,21 +620,29 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   };
 
   const slot = e.slots[b.slotIndex] as Slot;
-  const huntWon = befriending ? correct : combat.outcome === 'victory' && (slot.kind !== 'guardian' || e.reward.kind !== 'creature');
+  const huntWon = befriending ? correct : combat.outcome === 'victory' && !slot.rare && (slot.kind !== 'guardian' || e.reward.kind !== 'creature');
+  const joined = tamed || (befriending && correct && !!slot.rare);
   // The answer, stop win, points, card and any find all commit together in this one save.
   const slots = e.slots.map((s, i) => (i === b.slotIndex && huntWon ? { ...s, status: 'won' as const } : s));
   const midTrailFind = huntWon && slot.kind === 'regular' && battlesWon(e) === 1 && e.souvenirId && !e.foundSouvenirId;
   const cardId = earnCard(save, pack, b.question, correct);
-  const result: TurnResult = { optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}) };
+  const learning = learn(save, e, b.question, correct, now);
+  const cardUp = cardRaised(save, learning, b.question);
+  const result: TurnResult = { optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}) };
   // Winning a stop earns XP once, because a stop can only be won once.
-  const companions = huntWon && slot.kind !== 'event'
+  const paidXp = huntWon && slot.kind !== 'event'
     ? save.companions.map((c) => (c.instanceId === e.companionId ? { ...c, bondXp: c.bondXp + xpFor(XP.battleWon, e.difficulty) } : c))
     : save.companions;
+  const companions = joined ? [...paidXp, { instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: slot.opponentId, bondXp: 0 }] : paidXp;
   return {
     ...save,
     attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
     companions,
-    learning: learn(save, e, b.question, correct, now),
+    nextId: save.nextId + (joined ? 1 : 0),
+    ...(joined && slot.rare ? { rareFound: true } : {}),
+    bestStreak: Math.max(save.bestStreak ?? 0, streak),
+    tamedAny: save.tamedAny || tamed,
+    learning,
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
     seenFacts: noteFacts(save, b.question, correct),
     souvenirIds: midTrailFind && e.souvenirId ? [...save.souvenirIds, e.souvenirId] : save.souvenirIds,
@@ -566,12 +650,13 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
       ...e,
       slots,
       foundSouvenirId: midTrailFind ? e.souvenirId : e.foundSouvenirId,
-      points: e.points + (huntWon ? ECONOMY.perStopWon : 0) + pointsFor(b.question, correct),
+      points: e.points + (huntWon ? ECONOMY.perStopWon : 0) + pointsFor(b.question, correct) + (milestone?.points ?? 0),
       revealed: revealedAfter(e, b.question, correct),
+      ...(joined ? { tamedIds: [...(e.tamedIds ?? []), slot.opponentId] } : {}),
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
-      streak: correct ? (e.streak ?? 0) + 1 : 0,
-      battle: { ...b, combat, phase: 'feedback', result, ...(befriending && correct ? { befriended: true } : {}) },
+      streak,
+      battle: { ...b, combat, phase: 'feedback', result, tameHits, ...((befriending && correct) || tamed ? { befriended: true } : {}) },
     },
   };
 }
@@ -596,23 +681,27 @@ function answerEvent(save: SaveData, pack: Pack, optionId: string, now: number):
     difficulty: e.difficulty,
   };
   const cardId = earnCard(save, pack, ev.question, correct);
+  const learning = learn(save, e, ev.question, correct, now);
+  const cardUp = cardRaised(save, learning, ev.question);
+  const streak = correct ? (e.streak ?? 0) + 1 : 0;
   return {
     ...save,
     attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
-    learning: learn(save, e, ev.question, correct, now),
+    bestStreak: Math.max(save.bestStreak ?? 0, streak),
+    learning,
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
     seenFacts: noteFacts(save, ev.question, correct),
     expedition: {
       ...e,
-      points: e.points + (correct ? def.points : 0) + pointsFor(ev.question, correct),
+      points: e.points + (correct ? def.points : 0) + pointsFor(ev.question, correct) + (streakReward(streak)?.points ?? 0),
       revealed: revealedAfter(e, ev.question, correct),
       snack: e.snack || (correct && !!def.snack),
       freeClue: correct && !!def.freeClue,
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
-      streak: correct ? (e.streak ?? 0) + 1 : 0,
+      streak,
       slots: e.slots.map((s, i) => (i === ev.slotIndex ? { ...s, status: 'won' as const } : s)),
-      event: { ...ev, result: cardId ? { optionId, correct, cardId } : { optionId, correct } },
+      event: { ...ev, result: { optionId, correct, ...(cardId ? { cardId } : {}), ...(cardUp ? { cardUp } : {}) } },
     },
   };
 }
@@ -729,6 +818,7 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
         xpGained: leftoverXp + bonus + finishXp,
         ...(levelAfter > levelBefore ? { levelUp: levelAfter } : {}),
         newBadges,
+        ...(e.tamedIds ? { tamedIds: e.tamedIds } : {}),
       },
     },
     pack,
@@ -765,6 +855,7 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'chooseAction': {
       const b = e?.battle;
       if (!e || !b || b.phase !== 'choose') return save;
+      if (cmd.action === 'tame') return startTame(save, e, b, pack);
       const allowed = b.befriending ? cmd.action === 'befriend' : cmd.action !== 'befriend' && canUse(b.combat, cmd.action);
       return allowed ? withExpedition({ ...e, battle: { ...b, phase: 'question', action: cmd.action } }) : save;
     }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
+import { cardProgress } from '../engine/cards';
 import { allowedDifficulties, isRegionComplete, type Command, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { CardArt, Fx, Sprite } from './art';
@@ -47,7 +48,12 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const found = places.filter((p) => save.foundPlaces.includes(p.id));
   const rare = PACK.species.find((o) => o.rare && o.homes.includes(regionId));
   const rareOwned = save.companions.some((c) => c.speciesId === rare?.id);
-  const mapHighlights = Object.fromEntries(found.map((p): [string, Highlight] => [p.featureId, 'found']));
+  const mapLevel = (id: string): Highlight => {
+    if (!save.stateCards.includes(id)) return 'found';
+    const { level } = cardProgress(save.learning, id);
+    return level === 'bronze' ? 'found' : level === 'silver' ? 'silver' : level === 'gold' ? 'gold' : 'shiny';
+  };
+  const mapHighlights = Object.fromEntries(found.map((p): [string, Highlight] => [p.featureId, mapLevel(p.id)]));
 
   const start = () => dispatch({ type: 'start', offerId: offer.id, regionId, difficulty, trail });
   const cycle = <T,>(list: readonly T[], now: T) => list[(list.indexOf(now) + 1) % list.length] as T;
@@ -71,6 +77,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
+              {s.tamedIds?.map((id) => <p key={id}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
               {s.souvenirId && <p>Found on the trail: <strong>{souvenir(s.souvenirId)?.displayName}</strong></p>}
               <p className="muted">{s.correct} of {s.answered} answers correct{s.xpGained ? ` · ${s.xpGained} bonus XP` : ''}{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
             </div>
@@ -138,11 +145,12 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <ul className="album">
           {regionCards.map((c) => {
             const has = save.stateCards.includes(c.placeId);
+            const progress = cardProgress(save.learning, c.placeId);
             return (
-              <li key={c.placeId} className={has ? 'state-card' : 'state-card unowned'}>
+              <li key={c.placeId} className={has ? `state-card card-${progress.level}` : 'state-card unowned'}>
                 <CardArt id={c.artId} width={128} />
                 {has
-                  ? <details><summary><strong>{c.name}</strong></summary><p>{c.subtitle}</p>{c.capital && <p>Capital: {c.capital}</p>}<ul>{c.facts.map((f) => <li key={f}>{f}</li>)}</ul></details>
+                  ? <details><summary><strong>{c.name}</strong> <span className={`level-tag level-${progress.level}`}>{title(progress.level)}</span></summary>{progress.next && <p className="muted">{progress.next}</p>}<p>{c.subtitle}</p>{c.capital && <p>Capital: {c.capital}</p>}<ul>{c.facts.map((f) => <li key={f}>{f}</li>)}</ul></details>
                   : <strong>???</strong>}
               </li>
             );
