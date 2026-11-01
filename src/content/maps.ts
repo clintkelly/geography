@@ -40,7 +40,7 @@ const worldBase = build('world', 960, 500, geoNaturalEarth1(), world, 'countries
 
 /** Fits Europe from Iceland to Moscow and north past Scandinavia, padded to the map's aspect ratio. */
 export const EUROPE_VIEW: View = (() => {
-  const corners = [[-25, 34], [-25, 67], [46, 34], [46, 67], [10, 34], [10, 67]].map((c) => worldBase.project(c as [number, number]));
+  const corners = [[-25, 34], [-25, 72], [46, 34], [46, 72], [10, 34], [10, 72]].map((c) => worldBase.project(c as [number, number]));
   const xs = corners.map((c) => c[0]);
   const ys = corners.map((c) => c[1]);
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
