@@ -7,7 +7,7 @@ import { Battle } from './Battle';
 import { Camp } from './Camp';
 import { Discovery } from './Discovery';
 import { Evolution } from './Evolution';
-import { useMusic } from './music';
+import { trackFor, useMusic } from './music';
 import { ProfileSelect } from './ProfileSelect';
 import { Event } from './Event';
 import { Prep } from './Prep';
@@ -23,8 +23,7 @@ export function App() {
   const game = useGame(store);
   const { save, household, dispatch, saveFailed, loadError, setActiveProfile, restore } = game;
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const inBattle = !!save?.expedition?.battle;
-  useMusic(save ? (inBattle ? 'battle' : 'camp') : null, save?.settings.musicVolume ?? 0, save?.settings.muted ?? true);
+  useMusic(trackFor(save), save?.settings.musicVolume ?? 0, save?.settings.muted ?? true);
 
   if (new URLSearchParams(location.search).has('sounds')) return <SoundTest />;
 

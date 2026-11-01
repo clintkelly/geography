@@ -49,6 +49,13 @@ async function press(key) {
 }
 
 async function clickState(scope, featureId) {
+  const dot = (await save()).expedition?.event?.question.options.find((o) => o.featureId === featureId && o.tiny);
+  if (dot) {
+    const was = JSON.stringify(await save());
+    await page.locator(`${scope} .dot[data-place="${dot.id}"]`).dispatchEvent('click');
+    await settled(was);
+    return false;
+  }
   const before = JSON.stringify(await save());
   const point = await page.evaluate(([where, id]) => {
     const shape = document.querySelector(`${where} path[data-feature="${id}"]`);
@@ -96,6 +103,15 @@ async function step(options = {}) {
       return press('a');
     }
     if (b.phase === 'question') {
+      if (!stats.moveChanged && !b.befriending) {
+        stats.moveChanged = true;
+        await shotOnce('move-bar');
+        await press('c');
+        const back = (await save()).expedition.battle;
+        assert.equal(back.phase, 'choose', 'C goes back to the moves');
+        assert.equal(back.question.id, b.question.id, 'changing moves keeps the question');
+        return;
+      }
       await shotOnce(b.question.inputType === 'map-click' ? 'question-click' : b.question.inputType === 'map-marker' ? 'question-marker' : 'question');
       const accepted = b.question.options.find((o) => o.id === b.question.acceptedId);
       if (b.question.inputType === 'map-click') {
@@ -124,6 +140,12 @@ async function step(options = {}) {
       await shotOnce('feedback');
       return;
     }
+    if (b.combat.outcome === 'victory' && e.slots[b.slotIndex].status === 'won' && !b.befriended) {
+      await page.locator('.victory-banner').waitFor({ timeout: 6000 }).catch(() => undefined);
+      if (await page.locator('.victory-banner').count()) { stats.victoryBanners = (stats.victoryBanners ?? 0) + 1; await shotOnce('victory'); }
+    }
+    // A win holds Continue for a moment, so the child sees it.
+    await page.locator('.feedback button.primary:enabled').waitFor({ timeout: 8000 });
     return press('Enter');
   }
 
@@ -143,7 +165,7 @@ async function step(options = {}) {
   return press('Enter');
 }
 
-const records = ['src/content/us/west.json', 'src/content/europe/countries.json'].flatMap((f) => JSON.parse(readFileSync(f, 'utf8')));
+const records = ['src/content/us/west.json', 'src/content/europe/countries.json', 'src/content/world/antarctica.json', 'src/content/world/oceania.json'].flatMap((f) => JSON.parse(readFileSync(f, 'utf8')));
 const featureOf = async (id) => records.find((r) => r.id === id).fips;
 
 async function finishTrail(options) {
@@ -233,7 +255,9 @@ await page.reload();
 await button('Start expedition').waitFor();
 const done = await save();
 assert.equal(done.completedExpeditions, 2);
-assert.equal(done.companions.length, 2, 'the hunted creature joined the stable');
+console.log('Stable after trip 1:', done.companions.map((c) => c.speciesId).join(', '));
+// A rare encounter can add one more, and the seed is random.
+assert.ok(done.companions.length >= 2, 'the hunted creature joined the stable');
 assert.ok(done.stateCards.length > 0, 'State Cards were earned');
 assert.ok(stats.befriends >= 1 && stats.events >= 1 && stats.specials >= 1 && stats.guarded >= 1, JSON.stringify(stats));
 
@@ -252,7 +276,7 @@ await page.getByText('Switch to who?').waitFor();
 await press('2');
 assert.equal((await save()).expedition.companionId, done.companions[1].instanceId, 'switching changes the active creature');
 await finishTrail({});
-assert.equal((await save()).companions.length, 3, 'a second creature joined');
+assert.ok((await save()).companions.length > done.companions.length, 'a second creature joined');
 
 // Isolation: the other child sees none of that progress.
 await button(/Start expedition/).waitFor();
@@ -273,13 +297,13 @@ await press('Enter');
 await finishTrail({});
 assert.ok(stats.realClicks >= 1 || (await save()).completedExpeditions === 2, 'Expert trail finished');
 
-// Europe, as the test profile: all 44 countries, on a blank map.
+// Southern Europe, as the test profile: 15 countries, on a blank map.
 await button(/Start expedition/).waitFor();
 await page.keyboard.press('p');
 await button(/Dad/).waitFor();
 await page.keyboard.press('3');
 await button('Start expedition').waitFor();
-await button('Europe').click();
+await button('Southern Europe').click();
 await button(/Expert/).click();
 await button(/Long/).click();
 await button('Start expedition').click();
@@ -295,7 +319,25 @@ const beforeKeys = (await save()).attempts.length;
 await press('Enter');
 assert.equal((await save()).attempts.length, beforeKeys + 1, 'arrow keys and Enter choose a place');
 await finishTrail({});
-assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail through Europe finished');
+assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail through Southern Europe finished');
+
+// The two regions with their own maps, on Expert: landmarks in Antarctica, tiny islands in Oceania.
+for (const [i, name] of ['Antarctica', 'Oceania'].entries()) {
+  // A strong trail can end in an evolution, which waits for a key press.
+  for (let tries = 0; tries < 5 && !(await button(/Start expedition/).count()); tries++) {
+    await shot(`after-${name}-${tries}`);
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(1200);
+  }
+  await button(/Start expedition/).waitFor({ timeout: 8000 });
+  await button(name).click();
+  await button('Start expedition').click();
+  await page.getByText('Prepare for the trail').waitFor();
+  await press('Enter');
+  await shotOnce(`expert-${name}`);
+  await finishTrail({});
+  assert.equal((await save()).completedExpeditions, 2 + i, `an Expert trail through ${name} finished`);
+}
 
 await page.keyboard.press('p');
 await button(/Explorer 2/).waitFor();

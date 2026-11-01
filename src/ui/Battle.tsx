@@ -11,6 +11,9 @@ import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 
+/** How long a win stays on screen after the last hit, before the trail can carry on. */
+const WIN_PAUSE_MS = 1400;
+
 const POSES: Pose[] = ['idle', 'attack', 'guard', 'special', 'hit'];
 
 function Hp({ label, hp, max }: { label: string; hp: number; max: number }) {
@@ -69,6 +72,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [stayGone, setStayGone] = useState(false);
   const [burst, setBurst] = useState(false);
   const [picking, setPicking] = useState(false);
+  const [celebrating, setCelebrating] = useState(false);
+  const [holding, setHolding] = useState(false);
   const switchCount = battle.switches?.count ?? 0;
   const lastSwitch = useRef(switchCount);
   useEffect(() => {
@@ -113,6 +118,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     const { events: ev, correct } = battle.result;
     const ending: Ending = outcome !== 'victory' || action === 'befriend' || action === 'tame' ? 'none' : slot?.status === 'won' ? 'defeated' : 'wornOut';
     const powered = isPowered(e.streak);
+    const won = !!battle.befriended || ending === 'defeated';
+    if (won) setHolding(true);
     const frames = turnFrames(action, correct, ev, action !== 'befriend' && outcome !== 'victory', ending, powered, !!battle.result.critical);
     // The saved turn is already final. These replay it one hit at a time.
     let hp = { player: battle.combat.playerHp + ev.damageTaken - ev.healed, opponent: battle.combat.opponentHp + ev.damageDealt };
@@ -140,6 +147,10 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       }
     }, f.at));
     const end = frames.at(-1)?.at ?? 0;
+    if (won) {
+      timers.push(setTimeout(() => setCelebrating(!battle.befriended), end));
+      timers.push(setTimeout(() => setHolding(false), end + WIN_PAUSE_MS));
+    }
     timers.push(setTimeout(() => {
       if (outcome === 'victory' && action !== 'befriend' && action !== 'tame') playSound('win');
       if (battle.befriended && action === 'tame') playSound('befriend');
@@ -159,6 +170,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       setBurst(false);
       setImpact(null);
       setFlash(false);
+      setCelebrating(false);
+      setHolding(false);
     };
   }, [answered]); // eslint-disable-line
 
@@ -179,6 +192,9 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     dispatch({ type: 'switchTo', instanceId });
   };
 
+  const changeMove = () => dispatch({ type: 'changeMove' });
+  const moveName = battle.action === 'tame' ? 'Bold Befriend' : battle.action === 'special' ? companion.special.name : battle.action === 'guard' ? 'Guard' : 'Attack';
+
   const keys: Record<string, () => void> = {};
   if (battle.phase === 'choose' && chooser) {
     members.forEach((c, i) => { if (c.instanceId !== e.companionId && memberHp(c.instanceId) > 0) keys[String(i + 1)] = () => swapTo(c.instanceId); });
@@ -192,6 +208,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       if (snackReady) keys.h = () => dispatch({ type: 'useSnack' });
       if (tameable) keys.b = () => choose('tame');
     }
+  } else if (battle.phase === 'question' && !battle.befriending) {
+    Object.assign(keys, { c: changeMove, escape: changeMove });
   }
   useKeys(keys);
 
@@ -233,6 +251,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
             <strong>VS</strong>
             <img src={poseUrl(opponent, 'idle')} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
+          </div>
+        )}
+        {celebrating && (
+          <div className="victory-banner">
+            {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}
+            <strong>Victory!</strong>
           </div>
         )}
         {battle.befriended && (
@@ -317,7 +341,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       )}
 
       {battle.phase !== 'choose' && (
-        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} log={log} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
+        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} hold={holding} log={log} move={battle.befriending ? undefined : { name: moveName, onChange: changeMove }} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
       )}
       <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave expedition</button>
     </div>

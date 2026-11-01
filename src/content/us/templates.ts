@@ -1,4 +1,10 @@
 import countries from '../europe/countries.json';
+import africa from '../world/africa.json';
+import antarctica from '../world/antarctica.json';
+import asia from '../world/asia.json';
+import northAmerica from '../world/north-america.json';
+import oceania from '../world/oceania.json';
+import southAmerica from '../world/south-america.json';
 import { degreesApart, spaced } from '../geo';
 import type { Clue, Difficulty, Place, Question, QuestionOption, StateCard } from '../types';
 import midwest from './midwest.json';
@@ -42,13 +48,57 @@ export interface PlaceRecord {
 export const WEST = west as unknown as PlaceRecord[];
 export const COUNTRIES = countries as PlaceRecord[];
 
+/** Europe is too crowded for one map, so it follows the UN's four subregions. */
+const EUROPE_PARTS = {
+  'europe-north': ['denmark', 'estonia', 'finland', 'iceland', 'ireland', 'latvia', 'lithuania', 'norway', 'sweden', 'uk'],
+  'europe-west': ['austria', 'belgium', 'france', 'germany', 'liechtenstein', 'luxembourg', 'monaco', 'netherlands', 'switzerland'],
+  'europe-south': ['albania', 'andorra', 'bosnia', 'croatia', 'greece', 'italy', 'malta', 'montenegro', 'north-macedonia', 'portugal', 'san-marino', 'serbia', 'slovenia', 'spain', 'vatican'],
+  'europe-east': ['belarus', 'bulgaria', 'czechia', 'hungary', 'moldova', 'poland', 'romania', 'russia', 'slovakia', 'ukraine'],
+} as const;
+const europePart = (id: keyof typeof EUROPE_PARTS) => COUNTRIES.filter((c) => (EUROPE_PARTS[id] as readonly string[]).includes(c.id));
+
+/** Big continents are split the same way, keeping each map readable. */
+const AFRICA_PARTS = {
+  north: ['algeria', 'egypt', 'libya', 'mauritania', 'morocco', 'sudan', 'tunisia'],
+  west: ['benin', 'burkina-faso', 'cabo-verde', 'cote-divoire', 'gambia', 'ghana', 'guinea', 'guinea-bissau', 'liberia', 'mali', 'niger', 'nigeria', 'senegal', 'sierra-leone', 'togo'],
+  central: ['angola', 'cameroon', 'central-african-republic', 'chad', 'congo', 'dr-congo', 'equatorial-guinea', 'gabon', 'sao-tome-and-principe'],
+  east: ['burundi', 'comoros', 'djibouti', 'eritrea', 'ethiopia', 'kenya', 'madagascar', 'mauritius', 'rwanda', 'seychelles', 'somalia', 'south-sudan', 'tanzania', 'uganda'],
+  south: ['botswana', 'eswatini', 'lesotho', 'malawi', 'mozambique', 'namibia', 'south-africa', 'zambia', 'zimbabwe'],
+} as const;
+const ASIA_PARTS = {
+  west: ['armenia', 'azerbaijan', 'bahrain', 'cyprus', 'georgia-country', 'iraq', 'israel', 'jordan', 'kuwait', 'lebanon', 'oman', 'palestine', 'qatar', 'saudi-arabia', 'syria', 'turkey', 'united-arab-emirates', 'yemen'],
+  south: ['afghanistan', 'bangladesh', 'bhutan', 'india', 'iran', 'kazakhstan', 'kyrgyzstan', 'maldives', 'nepal', 'pakistan', 'sri-lanka', 'tajikistan', 'turkmenistan', 'uzbekistan'],
+  east: ['brunei', 'cambodia', 'china', 'indonesia', 'japan', 'laos', 'malaysia', 'mongolia', 'myanmar', 'north-korea', 'philippines', 'singapore', 'south-korea', 'taiwan', 'thailand', 'timor-leste', 'vietnam'],
+} as const;
+const AMERICA_PARTS = {
+  mainland: ['belize', 'canada', 'costa-rica', 'el-salvador', 'guatemala', 'honduras', 'mexico', 'nicaragua', 'panama', 'usa'],
+  caribbean: ['antigua-and-barbuda', 'bahamas', 'barbados', 'cuba', 'dominica', 'dominican-republic', 'grenada', 'haiti', 'jamaica', 'saint-kitts-and-nevis', 'saint-lucia', 'saint-vincent-and-the-grenadines', 'trinidad-and-tobago'],
+} as const;
+const from = (records: unknown, ids: readonly string[]) => (records as PlaceRecord[]).filter((c) => ids.includes(c.id));
+
 /** Each region quizzes among its own places, with markers spaced for its zoomed map. */
 export const GROUPS = [
   { id: 'us-west', records: WEST, noun: 'state', gap: 4 },
   { id: 'us-midwest', records: midwest as unknown as PlaceRecord[], noun: 'state', gap: 2.5 },
   { id: 'us-south', records: south as unknown as PlaceRecord[], noun: 'state', gap: 2.5 },
   { id: 'us-northeast', records: northeast as unknown as PlaceRecord[], noun: 'state', gap: 1.2 },
-  { id: 'europe', records: COUNTRIES, noun: 'country', gap: 4 },
+  { id: 'europe-north', records: europePart('europe-north'), noun: 'country', gap: 3 },
+  { id: 'europe-west', records: europePart('europe-west'), noun: 'country', gap: 1.5 },
+  { id: 'europe-south', records: europePart('europe-south'), noun: 'country', gap: 2 },
+  { id: 'europe-east', records: europePart('europe-east'), noun: 'country', gap: 2.5 },
+  { id: 'africa-north', records: from(africa, AFRICA_PARTS.north), noun: 'country', gap: 3 },
+  { id: 'africa-west', records: from(africa, AFRICA_PARTS.west), noun: 'country', gap: 2 },
+  { id: 'africa-central', records: from(africa, AFRICA_PARTS.central), noun: 'country', gap: 2 },
+  { id: 'africa-east', records: from(africa, AFRICA_PARTS.east), noun: 'country', gap: 2 },
+  { id: 'africa-south', records: from(africa, AFRICA_PARTS.south), noun: 'country', gap: 2 },
+  { id: 'asia-west', records: from(asia, ASIA_PARTS.west), noun: 'country', gap: 2 },
+  { id: 'asia-south', records: from(asia, ASIA_PARTS.south), noun: 'country', gap: 3 },
+  { id: 'asia-east', records: from(asia, ASIA_PARTS.east), noun: 'country', gap: 3 },
+  { id: 'america-mainland', records: from(northAmerica, AMERICA_PARTS.mainland), noun: 'country', gap: 1.5 },
+  { id: 'america-caribbean', records: from(northAmerica, AMERICA_PARTS.caribbean), noun: 'country', gap: 1 },
+  { id: 'south-america', records: from(southAmerica, southAmerica.map((c) => c.id)), noun: 'country', gap: 4 },
+  { id: 'oceania', records: from(oceania, oceania.map((c) => c.id)), noun: 'country', gap: 4 },
+  { id: 'antarctica', records: from(antarctica, antarctica.map((c) => c.id)), noun: 'place', gap: 6 },
 ] as const;
 
 export const STATES = GROUPS.filter((g) => g.noun === 'state').flatMap((g) => g.records);
@@ -111,9 +161,10 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
     ...answer,
   });
 
+  const markerAsk = noun === 'place' ? `Which marker shows ${name}?` : `Which marker is on ${name}?`;
   const out: Question[] = [
-    q('scout', 'location', 1, 'location', `Which marker is on ${name}?`, whereWhy, markers(far), 'map-marker'),
-    q('ranger', 'location', 1, 'location', `Which marker is on ${name}?`, whereWhy, markers(near), 'map-marker'),
+    q('scout', 'location', 1, 'location', `${markerAsk}`, whereWhy, markers(far), 'map-marker'),
+    q('ranger', 'location', 1, 'location', `${markerAsk}`, whereWhy, markers(near), 'map-marker'),
     q('expert', 'location', 1, 'location', `Click ${name} on the map.`, whereWhy, clickPlace, 'map-click'),
   ];
   if (!s.cityState) {
@@ -184,11 +235,11 @@ export const allPlaces = forGroups((g) => g.records.map((s) => buildPlace(s, g.i
 export const allQuestions = forGroups((g) => g.records.flatMap((s) => buildQuestions(s, g.records, g.id, g.noun, g.gap)));
 export const allClues = forGroups((g) => g.records.flatMap((s) => buildClues(s, g.noun)));
 export const usQuestions = allQuestions.filter((q) => q.regionId.startsWith('us-'));
-export const europeQuestions = allQuestions.filter((q) => q.regionId === 'europe');
+export const europeQuestions = allQuestions.filter((q) => q.regionId.startsWith('europe-'));
 
 const hintLine = (s: PlaceRecord) => (s.hint ? s.hint[0]?.toUpperCase() + s.hint.slice(1) : s.name);
 
-export const allCards: StateCard[] = [...STATES, ...COUNTRIES].map((s) => ({
+export const allCards: StateCard[] = GROUPS.flatMap((g) => g.records as readonly PlaceRecord[]).map((s) => ({
   placeId: s.id,
   name: s.name,
   artId: `card-${s.id}`,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { usMap, worldMap } from '../content/maps';
+import { MAPS } from '../content/maps';
 import { PACK } from '../content/pack';
 import { centerItem, nextInDirection } from './mapCursor';
 
@@ -30,7 +30,7 @@ describe('map cursor', () => {
   });
 
   it.each(PACK.regions.map((r) => r.id))('can reach every place in %s with arrow keys alone', (regionId) => {
-    const map = regionId === 'europe' ? worldMap : usMap;
+    const map = MAPS[PACK.regions.find((r) => r.id === regionId)!.mapId];
     const items = PACK.places.filter((p) => p.regionId === regionId).map((p) => {
       const [x, y] = map.project(p.lonLat);
       return { id: p.id, x, y };

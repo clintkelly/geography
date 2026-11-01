@@ -67,6 +67,54 @@
     "battle": {
       "generationId": "4oKZqCgEhlVrRU6aP0dC",
       "note": "50s; cleaner seam"
+    },
+    "trail-us": {
+      "generationId": "qQoRCjBB6SCsDemz9msG",
+      "note": "50s; take 2 of 2, -1.5 dB; RMS -16 dBFS, peak -2.2 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-europe": {
+      "generationId": "bp0NVgFyQIWeTSbyA2nM",
+      "note": "49.75s; take 2 of 2, +1.5 dB, 0.3s fading tail cut; RMS -16.7 dBFS, peak 0 dBFS, 24 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-africa": {
+      "generationId": "pYc2k3EjTKs3B4QizwPx",
+      "note": "50s; take 1 of 2; RMS -16.7 dBFS, peak -1.2 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-asia": {
+      "generationId": "Lja5edUIYFjyYxQT9a5y",
+      "note": "50s; take 2 of 2, +1.5 dB; quietest track; RMS -19.2 dBFS, peak 0 dBFS, 12 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-america": {
+      "generationId": "SavL7LYHcToWS0pF8Pkx",
+      "note": "50s; take 2 of 2; RMS -15.2 dBFS, peak -0.7 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-south-america": {
+      "generationId": "V8yycVENokB9wDTCXXsa",
+      "note": "50s; take 1 of 2; RMS -15.4 dBFS, peak -0.9 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-oceania": {
+      "generationId": "Rjx2UYxJDEr00sX76Bul",
+      "note": "50s; take 1 of 2, +1.5 dB; RMS -17 dBFS, peak 0 dBFS, 27 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-antarctica": {
+      "generationId": "Xh9pfJK4pjYVGmn4DuHJ",
+      "note": "50s; take 1 of 2, +3 dB; rises about 3 dB across the track; RMS -16.8 dBFS, peak 0 dBFS, 1 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "boss": {
+      "generationId": "FMigqnTc574Nxy0Watzn",
+      "note": "49.34s; take 2 of 2, 0.7s fading tail cut; energy sags late, last second about 7 dB under the opening; RMS -15.3 dBFS, peak -0.5 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "rare": {
+      "generationId": "gRH7Pc9sKkclcZrqui8H",
+      "note": "50s; take 1 of 2; RMS -15.5 dBFS, peak -0.8 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "event": {
+      "generationId": "rA5VS8OoMkBE7CaJdiNM",
+      "note": "50s; take 2 of 2, +1.5 dB; RMS -16.4 dBFS, peak 0 dBFS, 26 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "victory": {
+      "generationId": "iC8CLk4FeOGYfBeKXFEX",
+      "note": "48.36s; take 1 of 2, -1.5 dB, 0.3s lead silence and 1.4s fading tail cut; 0.1s of silence remains at the start; RMS -15.9 dBFS, peak -1.9 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
     }
   }
 }

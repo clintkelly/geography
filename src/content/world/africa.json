@@ -1,0 +1,1832 @@
+[
+{
+"id": "algeria",
+"name": "Algeria",
+"fips": "012",
+"lonLat": [
+2.6,
+28
+],
+"capital": "Algiers",
+"sameStateCities": [
+"Oran",
+"Constantine",
+"Annaba"
+],
+"largestCity": "Algiers",
+"neighbors": [
+"libya",
+"mali",
+"mauritania",
+"morocco",
+"niger",
+"tunisia"
+],
+"hint": "the biggest country on the North African coast, stretching deep into the Sahara",
+"facts": [
+"Algeria is the largest country in Africa by area.",
+"The big-eared fennec fox is Algeria's national animal, and its football team is nicknamed the Desert Foxes."
+],
+"nickname": null,
+"hint2": "This country's huge south lies in the Sahara, and its capital looks out on the Mediterranean.",
+"asks": [
+"Which is the largest country in Africa by area?",
+"Which country has the fennec fox as its national animal?"
+],
+"biome": "desert"
+},
+{
+"id": "angola",
+"name": "Angola",
+"fips": "024",
+"lonLat": [
+17.5,
+-12.3
+],
+"capital": "Luanda",
+"sameStateCities": [
+"Huambo",
+"Lobito",
+"Benguela"
+],
+"largestCity": "Luanda",
+"neighbors": [
+"congo",
+"dr-congo",
+"namibia",
+"zambia"
+],
+"hint": "a large Portuguese-speaking country on the Atlantic coast, north of Namibia",
+"facts": [
+"The giant sable antelope, with huge curved horns, lives only in Angola.",
+"Kalandula Falls in Angola drops more than 100 meters over a wide cliff on the Lucala River."
+],
+"nickname": null,
+"asks": [
+"Which country is the only home of the giant sable antelope?",
+"In which country does the Lucala River pour over Kalandula Falls?"
+],
+"biome": "plains"
+},
+{
+"id": "benin",
+"name": "Benin",
+"fips": "204",
+"lonLat": [
+2.3,
+9.6
+],
+"capital": "Porto-Novo",
+"sameStateCities": [
+"Cotonou",
+"Parakou",
+"Bohicon"
+],
+"largestCity": "Cotonou",
+"neighbors": [
+"burkina-faso",
+"niger",
+"nigeria",
+"togo"
+],
+"hint": "a narrow West African country between Togo and Nigeria",
+"facts": [
+"Ganvié in Benin is a whole town built on stilts in a lake, where people get around by canoe.",
+"Benin was called Dahomey until 1975."
+],
+"nickname": null,
+"asks": [
+"In which country is Ganvié, a town on stilts in Lake Nokoué?",
+"Which country was called Dahomey until 1975?"
+],
+"biome": "lake"
+},
+{
+"id": "botswana",
+"name": "Botswana",
+"fips": "072",
+"lonLat": [
+24,
+-22.3
+],
+"capital": "Gaborone",
+"sameStateCities": [
+"Francistown",
+"Maun",
+"Selebi-Phikwe"
+],
+"largestCity": "Gaborone",
+"neighbors": [
+"namibia",
+"south-africa",
+"zambia",
+"zimbabwe"
+],
+"hint": "a landlocked southern African country that holds much of the Kalahari",
+"facts": [
+"Botswana has more elephants than any other country.",
+"The Okavango River ends in a huge delta in Botswana's Kalahari and never reaches the sea."
+],
+"nickname": null,
+"asks": [
+"Which country has more elephants than any other?",
+"In which country does the Okavango River spread into a great delta in the Kalahari?"
+],
+"biome": "swamp"
+},
+{
+"id": "burkina-faso",
+"name": "Burkina Faso",
+"fips": "854",
+"lonLat": [
+-1.6,
+12.3
+],
+"capital": "Ouagadougou",
+"sameStateCities": [
+"Bobo-Dioulasso",
+"Koudougou",
+"Banfora"
+],
+"largestCity": "Ouagadougou",
+"neighbors": [
+"benin",
+"cote-divoire",
+"ghana",
+"mali",
+"niger",
+"togo"
+],
+"hint": "a landlocked West African country north of Ghana",
+"facts": [
+"Burkina Faso's name means land of upright, honest people.",
+"Burkina Faso was called Upper Volta until 1984."
+],
+"nickname": null,
+"asks": [
+"Which country's name means land of upright, honest people?",
+"Which country was called Upper Volta until 1984?"
+],
+"biome": "plains"
+},
+{
+"id": "burundi",
+"name": "Burundi",
+"fips": "108",
+"lonLat": [
+29.9,
+-3.4
+],
+"capital": "Gitega",
+"sameStateCities": [
+"Bujumbura",
+"Ngozi",
+"Rumonge"
+],
+"largestCity": "Bujumbura",
+"neighbors": [
+"dr-congo",
+"rwanda",
+"tanzania"
+],
+"hint": "a small, hilly country on the shore of Lake Tanganyika, just south of Rwanda",
+"facts": [
+"Burundi's royal drummers are on UNESCO's list of living cultural heritage.",
+"Burundi's flag has a white X with three red stars in the middle."
+],
+"nickname": null,
+"asks": [
+"Which country's royal drummers are on UNESCO's list of living cultural heritage?",
+"Which country's flag has a white X with three red stars in the middle?"
+],
+"biome": "lake"
+},
+{
+"id": "cabo-verde",
+"name": "Cabo Verde",
+"fips": "132",
+"lonLat": [
+-23.6,
+15.1
+],
+"capital": "Praia",
+"sameStateCities": [
+"Mindelo",
+"Santa Maria",
+"Assomada"
+],
+"largestCity": "Praia",
+"neighbors": [
+"senegal"
+],
+"hint": "a chain of volcanic islands in the Atlantic, west of Senegal",
+"facts": [
+"Pico do Fogo is an active volcano on the islands of Cabo Verde.",
+"The singer Cesária Évora made Cabo Verde's morna music famous around the world."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which Atlantic island country has the active volcano Pico do Fogo?",
+"Which island country is the home of morna music, sung by Cesária Évora?"
+],
+"biome": "coast"
+},
+{
+"id": "cameroon",
+"name": "Cameroon",
+"fips": "120",
+"lonLat": [
+12.5,
+5.5
+],
+"capital": "Yaoundé",
+"sameStateCities": [
+"Douala",
+"Garoua",
+"Bamenda"
+],
+"largestCity": "Douala",
+"neighbors": [
+"central-african-republic",
+"chad",
+"congo",
+"equatorial-guinea",
+"gabon",
+"nigeria"
+],
+"hint": "a country where West and Central Africa meet, at the bend of the Atlantic coast",
+"facts": [
+"Cameroon's name comes from a Portuguese phrase meaning River of Prawns.",
+"Cameroon's football team is called the Indomitable Lions."
+],
+"nickname": null,
+"asks": [
+"Which country's name comes from a Portuguese phrase meaning River of Prawns?",
+"Which country's football team is called the Indomitable Lions?"
+],
+"biome": "forest"
+},
+{
+"id": "central-african-republic",
+"name": "Central African Republic",
+"fips": "140",
+"lonLat": [
+20.8,
+6.6
+],
+"capital": "Bangui",
+"sameStateCities": [
+"Bimbo",
+"Berbérati",
+"Bouar"
+],
+"largestCity": "Bangui",
+"neighbors": [
+"cameroon",
+"chad",
+"congo",
+"dr-congo",
+"south-sudan",
+"sudan"
+],
+"hint": "a landlocked country at the very middle of the continent, south of Chad",
+"facts": [
+"Forest elephants gather at a clearing called Dzanga Bai in the Central African Republic.",
+"The Central African Republic's flag has four stripes crossed by a red stripe down the middle."
+],
+"nickname": null,
+"sentenceName": "the Central African Republic",
+"asks": [
+"In which country do forest elephants gather at the clearing called Dzanga Bai?",
+"Which country's flag has four stripes crossed by a red stripe down the middle?"
+],
+"biome": "forest"
+},
+{
+"id": "chad",
+"name": "Chad",
+"fips": "148",
+"lonLat": [
+18.5,
+15.5
+],
+"capital": "N'Djamena",
+"sameStateCities": [
+"Moundou",
+"Sarh",
+"Abéché"
+],
+"largestCity": "N'Djamena",
+"neighbors": [
+"cameroon",
+"central-african-republic",
+"libya",
+"niger",
+"nigeria",
+"sudan"
+],
+"hint": "a large landlocked country in the Sahara, between Niger and Sudan",
+"facts": [
+"West African crocodiles still live at the Guelta d'Archei, a desert pool in Chad.",
+"Chad's blue, yellow and red flag looks almost the same as Romania's."
+],
+"nickname": null,
+"asks": [
+"In which Sahara country do crocodiles live at the Guelta d'Archei?",
+"Which African country's blue, yellow and red flag looks almost the same as Romania's?"
+],
+"biome": "desert"
+},
+{
+"id": "comoros",
+"name": "Comoros",
+"fips": "174",
+"lonLat": [
+43.35,
+-11.65
+],
+"capital": "Moroni",
+"sameStateCities": [
+"Mutsamudu",
+"Fomboni",
+"Domoni"
+],
+"largestCity": "Moroni",
+"neighbors": [
+"madagascar",
+"tanzania"
+],
+"hint": "a group of volcanic islands between Mozambique and Madagascar",
+"facts": [
+"Fishermen in the Comoros caught a coelacanth in 1952, a fish once thought extinct, the second ever known to science.",
+"Mount Karthala, an active volcano, rises on the largest island of the Comoros."
+],
+"nickname": null,
+"tiny": true,
+"sentenceName": "the Comoros",
+"asks": [
+"Near which island country was the second coelacanth ever known to science caught?",
+"Which island country has the active volcano Mount Karthala?"
+],
+"biome": "tropical"
+},
+{
+"id": "congo",
+"name": "Republic of the Congo",
+"fips": "178",
+"lonLat": [
+15.2,
+-0.7
+],
+"capital": "Brazzaville",
+"sameStateCities": [
+"Pointe-Noire",
+"Dolisie",
+"Nkayi"
+],
+"largestCity": "Brazzaville",
+"neighbors": [
+"angola",
+"cameroon",
+"central-african-republic",
+"dr-congo",
+"gabon"
+],
+"hint": "a rainforest country on the Equator, just west of its much larger namesake neighbor",
+"facts": [
+"The capital of the Republic of the Congo, Brazzaville, is named after the explorer Pierre de Brazza.",
+"Western lowland gorillas live in Odzala-Kokoua National Park in the Republic of the Congo."
+],
+"nickname": null,
+"sentenceName": "the Republic of the Congo",
+"asks": [
+"Which country's capital is named after the explorer Pierre de Brazza?",
+"In which country is Odzala-Kokoua National Park, home of western lowland gorillas?"
+],
+"biome": "forest"
+},
+{
+"id": "cote-divoire",
+"name": "Côte d'Ivoire",
+"fips": "384",
+"lonLat": [
+-5.5,
+7.6
+],
+"capital": "Yamoussoukro",
+"sameStateCities": [
+"Abidjan",
+"Bouaké",
+"San-Pédro"
+],
+"largestCity": "Abidjan",
+"neighbors": [
+"burkina-faso",
+"ghana",
+"guinea",
+"liberia",
+"mali"
+],
+"hint": "a West African country on the Atlantic, between Liberia and Ghana",
+"facts": [
+"Côte d'Ivoire grows more cocoa beans than any other country.",
+"The Basilica of Our Lady of Peace, a giant domed church, stands in Yamoussoukro in Côte d'Ivoire."
+],
+"nickname": null,
+"wiki": "Ivory_Coast",
+"asks": [
+"Which country grows more cocoa beans than any other?",
+"In which country's capital does the giant Basilica of Our Lady of Peace stand?"
+],
+"biome": "tropical"
+},
+{
+"id": "djibouti",
+"name": "Djibouti",
+"fips": "262",
+"lonLat": [
+42.6,
+11.7
+],
+"capital": "Djibouti City",
+"sameStateCities": [
+"Ali Sabieh",
+"Tadjourah",
+"Obock"
+],
+"largestCity": "Djibouti City",
+"neighbors": [
+"eritrea",
+"ethiopia",
+"somalia"
+],
+"hint": "a small hot country on the Horn of Africa, where the Red Sea meets the Gulf of Aden",
+"facts": [
+"Lake Assal in Djibouti, about 155 meters below sea level, is the lowest point in Africa.",
+"Whale sharks gather in the Gulf of Tadjoura off Djibouti."
+],
+"nickname": null,
+"hint2": "This country's salty Lake Assal is the lowest place in Africa.",
+"asks": [
+"Which country has the lowest point in Africa, at Lake Assal?",
+"Which Horn of Africa country has whale sharks gathering in the Gulf of Tadjoura?"
+],
+"biome": "desert"
+},
+{
+"id": "dr-congo",
+"name": "DR Congo",
+"fips": "180",
+"lonLat": [
+23.6,
+-2.9
+],
+"capital": "Kinshasa",
+"sameStateCities": [
+"Lubumbashi",
+"Mbuji-Mayi",
+"Kisangani"
+],
+"largestCity": "Kinshasa",
+"neighbors": [
+"angola",
+"burundi",
+"central-african-republic",
+"congo",
+"rwanda",
+"south-sudan",
+"tanzania",
+"uganda",
+"zambia"
+],
+"hint": "a giant rainforest country in the heart of Africa, the second largest on the continent",
+"facts": [
+"The okapi, a striped forest relative of the giraffe, lives in the wild only in DR Congo.",
+"Bonobos, close cousins of chimpanzees, live in the wild only in DR Congo."
+],
+"nickname": null,
+"wiki": "Democratic_Republic_of_the_Congo",
+"asks": [
+"In which country does the okapi live in the wild, and nowhere else?",
+"In which country do bonobos live in the wild, and nowhere else?"
+],
+"biome": "forest"
+},
+{
+"id": "egypt",
+"name": "Egypt",
+"fips": "818",
+"lonLat": [
+30,
+26.7
+],
+"capital": "Cairo",
+"sameStateCities": [
+"Alexandria",
+"Giza",
+"Luxor"
+],
+"largestCity": "Cairo",
+"neighbors": [
+"libya",
+"sudan"
+],
+"hint": "a country in the north-east corner of Africa, with the River Nile running through its desert",
+"facts": [
+"The Great Pyramid in Egypt is the last of the Seven Wonders of the Ancient World still standing.",
+"The Suez Canal in Egypt links the Mediterranean Sea to the Red Sea."
+],
+"nickname": null,
+"asks": [
+"In which country does the Great Pyramid stand, the last of the Seven Wonders of the Ancient World?",
+"Which country does the Suez Canal cross?"
+],
+"biome": "desert"
+},
+{
+"id": "equatorial-guinea",
+"name": "Equatorial Guinea",
+"fips": "226",
+"lonLat": [
+10.5,
+1.6
+],
+"capital": "Ciudad de la Paz",
+"sameStateCities": [
+"Bata",
+"Malabo",
+"Ebebiyín"
+],
+"largestCity": "Bata",
+"neighbors": [
+"cameroon",
+"gabon",
+"sao-tome-and-principe"
+],
+"hint": "a small Central African country, part mainland and part volcanic island, between Cameroon and Gabon",
+"facts": [
+"Equatorial Guinea is the only African country with Spanish as an official language.",
+"Equatorial Guinea is split between a mainland part and Bioko, an island in the Atlantic."
+],
+"nickname": null,
+"asks": [
+"Which is the only African country with Spanish as an official language?",
+"Which Central African country includes Bioko Island as well as land on the mainland?"
+],
+"biome": "tropical"
+},
+{
+"id": "eritrea",
+"name": "Eritrea",
+"fips": "232",
+"lonLat": [
+38.8,
+15.3
+],
+"capital": "Asmara",
+"sameStateCities": [
+"Keren",
+"Massawa",
+"Assab"
+],
+"largestCity": "Asmara",
+"neighbors": [
+"djibouti",
+"ethiopia",
+"sudan"
+],
+"hint": "a country on the Red Sea coast, just north of Ethiopia",
+"facts": [
+"A 1930s gas station in Asmara, Eritrea, is built to look like an airplane.",
+"Eritrea's national emblem shows a camel."
+],
+"nickname": null,
+"asks": [
+"In which country's capital is there a 1930s gas station built to look like an airplane?",
+"Which Red Sea country has a camel on its national emblem?"
+],
+"biome": "coast"
+},
+{
+"id": "eswatini",
+"name": "eSwatini",
+"fips": "748",
+"lonLat": [
+31.5,
+-26.5
+],
+"capital": "Mbabane",
+"sameStateCities": [
+"Manzini",
+"Big Bend",
+"Siteki"
+],
+"largestCity": "Mbabane",
+"neighbors": [
+"mozambique",
+"south-africa"
+],
+"hint": "a small kingdom tucked between South Africa and Mozambique",
+"facts": [
+"eSwatini was called Swaziland until 2018.",
+"eSwatini's flag shows a black and white warrior's shield lying across spears."
+],
+"nickname": null,
+"wiki": "Eswatini",
+"asks": [
+"Which country was called Swaziland until 2018?",
+"Which southern African country's flag shows a black and white warrior's shield lying across spears?"
+],
+"biome": "mountain"
+},
+{
+"id": "ethiopia",
+"name": "Ethiopia",
+"fips": "231",
+"lonLat": [
+39.6,
+8.6
+],
+"capital": "Addis Ababa",
+"sameStateCities": [
+"Dire Dawa",
+"Gondar",
+"Bahir Dar"
+],
+"largestCity": "Addis Ababa",
+"neighbors": [
+"djibouti",
+"eritrea",
+"kenya",
+"somalia",
+"south-sudan",
+"sudan"
+],
+"hint": "a high, landlocked country on the Horn of Africa",
+"facts": [
+"Ethiopia's calendar has 13 months.",
+"The churches of Lalibela in Ethiopia were carved out of solid rock."
+],
+"nickname": null,
+"asks": [
+"Which country's calendar has 13 months?",
+"In which country were the churches of Lalibela carved out of solid rock?"
+],
+"biome": "mountain"
+},
+{
+"id": "gabon",
+"name": "Gabon",
+"fips": "266",
+"lonLat": [
+11.7,
+-0.8
+],
+"capital": "Libreville",
+"sameStateCities": [
+"Port-Gentil",
+"Franceville",
+"Oyem"
+],
+"largestCity": "Libreville",
+"neighbors": [
+"cameroon",
+"congo",
+"equatorial-guinea",
+"sao-tome-and-principe"
+],
+"hint": "a rainforest country on the Atlantic coast, right on the Equator",
+"facts": [
+"Hippos at Loango National Park in Gabon wade into the ocean surf.",
+"About nine-tenths of Gabon is covered by forest."
+],
+"nickname": null,
+"asks": [
+"In which country do hippos wade into the ocean surf at Loango National Park?",
+"Which Central African country is about nine-tenths forest?"
+],
+"biome": "forest"
+},
+{
+"id": "gambia",
+"name": "Gambia",
+"fips": "270",
+"lonLat": [
+-15.3,
+13.45
+],
+"capital": "Banjul",
+"sameStateCities": [
+"Serekunda",
+"Brikama",
+"Bakau"
+],
+"largestCity": "Serekunda",
+"neighbors": [
+"senegal"
+],
+"hint": "a thin ribbon of a country along a West African river",
+"facts": [
+"Gambia is the smallest country on the African mainland.",
+"Gambia is a thin strip of land along one river, and Senegal wraps around it on three sides."
+],
+"nickname": null,
+"tiny": true,
+"sentenceName": "the Gambia",
+"wiki": "The_Gambia",
+"asks": [
+"Which is the smallest country on the African mainland?",
+"Which thin West African country follows one river, with Senegal wrapped around it on three sides?"
+],
+"biome": "swamp"
+},
+{
+"id": "ghana",
+"name": "Ghana",
+"fips": "288",
+"lonLat": [
+-1.2,
+7.9
+],
+"capital": "Accra",
+"sameStateCities": [
+"Kumasi",
+"Tamale",
+"Cape Coast"
+],
+"largestCity": "Accra",
+"neighbors": [
+"burkina-faso",
+"cote-divoire",
+"togo"
+],
+"hint": "a West African country on the Gulf of Guinea, between Togo and Côte d'Ivoire",
+"facts": [
+"Lake Volta in Ghana is the largest human-made lake in the world by surface area.",
+"Bright kente cloth is woven by the Asante people of Ghana."
+],
+"nickname": null,
+"asks": [
+"Which country has the largest human-made lake in the world by surface area?",
+"Which country's Asante people weave bright kente cloth?"
+],
+"biome": "lake"
+},
+{
+"id": "guinea",
+"name": "Guinea",
+"fips": "324",
+"lonLat": [
+-10.9,
+10.4
+],
+"capital": "Conakry",
+"sameStateCities": [
+"Nzérékoré",
+"Kankan",
+"Kindia"
+],
+"largestCity": "Conakry",
+"neighbors": [
+"cote-divoire",
+"guinea-bissau",
+"liberia",
+"mali",
+"senegal",
+"sierra-leone"
+],
+"hint": "a West African country on the Atlantic, south of Senegal and Mali",
+"facts": [
+"The Senegal and Gambia rivers begin in Guinea's Fouta Djallon highlands.",
+"Guinea has the world's largest known reserves of bauxite, the rock used to make aluminum."
+],
+"nickname": null,
+"asks": [
+"In which country's Fouta Djallon highlands do the Senegal and Gambia rivers begin?",
+"Which country has the world's largest known reserves of bauxite, the rock used to make aluminum?"
+],
+"biome": "mountain"
+},
+{
+"id": "guinea-bissau",
+"name": "Guinea-Bissau",
+"fips": "624",
+"lonLat": [
+-15,
+12
+],
+"capital": "Bissau",
+"sameStateCities": [
+"Bafatá",
+"Gabú",
+"Cacheu"
+],
+"largestCity": "Bissau",
+"neighbors": [
+"guinea",
+"senegal"
+],
+"hint": "a small West African country of mangroves and islands, just south of Senegal",
+"facts": [
+"Hippos live in the salty lagoons of the Bijagós Islands of Guinea-Bissau.",
+"Cashew nuts are by far the biggest export of Guinea-Bissau."
+],
+"nickname": null,
+"hint2": "This country's Bijagós Islands are a World Heritage site full of turtles and birds.",
+"asks": [
+"Which West African country has the Bijagós Islands, where hippos live in salty lagoons?",
+"Which small West African country has cashew nuts as by far its biggest export?"
+],
+"biome": "swamp"
+},
+{
+"id": "kenya",
+"name": "Kenya",
+"fips": "404",
+"lonLat": [
+37.9,
+0.5
+],
+"capital": "Nairobi",
+"sameStateCities": [
+"Mombasa",
+"Kisumu",
+"Nakuru"
+],
+"largestCity": "Nairobi",
+"neighbors": [
+"ethiopia",
+"seychelles",
+"somalia",
+"south-sudan",
+"tanzania",
+"uganda"
+],
+"hint": "an East African country on the Equator, with a coast on the Indian Ocean",
+"facts": [
+"Lions and rhinos roam Nairobi National Park in Kenya, with the city's skyscrapers in view.",
+"Huge herds of wildebeest cross into the Maasai Mara in Kenya every year."
+],
+"nickname": null,
+"asks": [
+"Which country's capital has a national park where lions roam in view of skyscrapers?",
+"In which country is the Maasai Mara, where huge herds of wildebeest arrive every year?"
+],
+"biome": "plains"
+},
+{
+"id": "lesotho",
+"name": "Lesotho",
+"fips": "426",
+"lonLat": [
+28.2,
+-29.6
+],
+"capital": "Maseru",
+"sameStateCities": [
+"Teyateyaneng",
+"Mafeteng",
+"Hlotse"
+],
+"largestCity": "Maseru",
+"neighbors": [
+"south-africa"
+],
+"hint": "a high mountain kingdom in southern Africa",
+"facts": [
+"Lesotho is completely surrounded by South Africa.",
+"Lesotho's lowest point is about 1,400 meters above sea level, the highest low point of any country."
+],
+"nickname": {
+"text": "Kingdom in the Sky",
+"status": "unverified",
+"others": [
+"Mountain Kingdom"
+]
+},
+"asks": [
+"Which country is completely surrounded by South Africa?",
+"Which country has the highest low point of any country in the world?"
+],
+"biome": "mountain"
+},
+{
+"id": "liberia",
+"name": "Liberia",
+"fips": "430",
+"lonLat": [
+-9.4,
+6.4
+],
+"capital": "Monrovia",
+"sameStateCities": [
+"Gbarnga",
+"Buchanan",
+"Harper"
+],
+"largestCity": "Monrovia",
+"neighbors": [
+"cote-divoire",
+"guinea",
+"sierra-leone"
+],
+"hint": "a West African country on the Atlantic, between Sierra Leone and Côte d'Ivoire",
+"facts": [
+"Monrovia, the capital of Liberia, is named after US President James Monroe.",
+"Most of the world's wild pygmy hippos live in Liberia."
+],
+"nickname": null,
+"asks": [
+"Which country's capital is named after US President James Monroe?",
+"In which West African country do most of the world's wild pygmy hippos live?"
+],
+"biome": "forest"
+},
+{
+"id": "libya",
+"name": "Libya",
+"fips": "434",
+"lonLat": [
+17.8,
+27
+],
+"capital": "Tripoli",
+"sameStateCities": [
+"Benghazi",
+"Misrata",
+"Sabha"
+],
+"largestCity": "Tripoli",
+"neighbors": [
+"algeria",
+"chad",
+"egypt",
+"niger",
+"sudan",
+"tunisia"
+],
+"hint": "a big Sahara country on the Mediterranean, between Tunisia and Egypt",
+"facts": [
+"Libya's Great Man-Made River is a network of giant buried pipes carrying water from under the Sahara to the coast.",
+"The great Roman ruins of Leptis Magna stand on the coast of Libya."
+],
+"nickname": null,
+"asks": [
+"Which country built the Great Man-Made River, giant pipes carrying water from under the Sahara?",
+"Which North African country has the great Roman ruins of Leptis Magna?"
+],
+"biome": "desert"
+},
+{
+"id": "madagascar",
+"name": "Madagascar",
+"fips": "450",
+"lonLat": [
+46.7,
+-19.4
+],
+"capital": "Antananarivo",
+"sameStateCities": [
+"Toamasina",
+"Antsirabe",
+"Mahajanga"
+],
+"largestCity": "Antananarivo",
+"neighbors": [
+"comoros",
+"mauritius",
+"mozambique"
+],
+"hint": "a huge island in the Indian Ocean, off the south-east coast of Africa",
+"facts": [
+"Ring-tailed lemurs live in the wild only in Madagascar.",
+"Giant baobab trees line the famous Avenue of the Baobabs in Madagascar."
+],
+"nickname": null,
+"asks": [
+"Which country is the only wild home of ring-tailed lemurs?",
+"Which island country has the famous Avenue of the Baobabs?"
+],
+"biome": "tropical"
+},
+{
+"id": "malawi",
+"name": "Malawi",
+"fips": "454",
+"lonLat": [
+33.9,
+-13.4
+],
+"capital": "Lilongwe",
+"sameStateCities": [
+"Blantyre",
+"Mzuzu",
+"Zomba"
+],
+"largestCity": "Lilongwe",
+"neighbors": [
+"mozambique",
+"tanzania",
+"zambia"
+],
+"hint": "a long, narrow landlocked country beside a great lake in south-east Africa",
+"facts": [
+"Lake Malawi holds more kinds of fish than any other lake in the world.",
+"Malawi's flag has black, red and green stripes with a red rising sun."
+],
+"nickname": {
+"text": "Warm Heart of Africa",
+"status": "unverified",
+"others": []
+},
+"asks": [
+"Which country shares its name with the lake that holds more kinds of fish than any other in the world?",
+"Which country's flag has black, red and green stripes with a red rising sun?"
+],
+"biome": "lake"
+},
+{
+"id": "mali",
+"name": "Mali",
+"fips": "466",
+"lonLat": [
+-2.5,
+17.3
+],
+"capital": "Bamako",
+"sameStateCities": [
+"Sikasso",
+"Ségou",
+"Timbuktu"
+],
+"largestCity": "Bamako",
+"neighbors": [
+"algeria",
+"burkina-faso",
+"cote-divoire",
+"guinea",
+"mauritania",
+"niger",
+"senegal"
+],
+"hint": "a landlocked West African country reaching far north into the Sahara",
+"facts": [
+"The Great Mosque of Djenné in Mali is the largest mud-brick building in the world.",
+"The old desert city of Timbuktu is in Mali."
+],
+"nickname": null,
+"asks": [
+"In which country is the Great Mosque of Djenné, the largest mud-brick building in the world?",
+"In which country is the old desert city of Timbuktu?"
+],
+"biome": "desert"
+},
+{
+"id": "mauritania",
+"name": "Mauritania",
+"fips": "478",
+"lonLat": [
+-10.5,
+20.2
+],
+"capital": "Nouakchott",
+"sameStateCities": [
+"Nouadhibou",
+"Kiffa",
+"Rosso"
+],
+"largestCity": "Nouakchott",
+"neighbors": [
+"algeria",
+"mali",
+"morocco",
+"senegal"
+],
+"hint": "a Sahara country on the Atlantic coast, north of Senegal",
+"facts": [
+"The Richat Structure in Mauritania, a giant ring of rock called the Eye of the Sahara, can be seen from space.",
+"Mauritania's iron ore trains run across the Sahara and can be about 2.5 kilometers long."
+],
+"nickname": null,
+"asks": [
+"In which country is the Eye of the Sahara, a giant ring of rock seen from space?",
+"Which Sahara country has iron ore trains about 2.5 kilometers long?"
+],
+"biome": "desert"
+},
+{
+"id": "mauritius",
+"name": "Mauritius",
+"fips": "480",
+"lonLat": [
+57.55,
+-20.25
+],
+"capital": "Port Louis",
+"sameStateCities": [
+"Curepipe",
+"Quatre Bornes",
+"Mahébourg"
+],
+"largestCity": "Port Louis",
+"neighbors": [
+"madagascar",
+"seychelles"
+],
+"hint": "a volcanic island in the Indian Ocean, east of Madagascar",
+"facts": [
+"The flightless dodo lived only on Mauritius before it died out.",
+"The Seven Colored Earths at Chamarel in Mauritius are dunes of many-colored sand."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"On which island country did the dodo live before it died out?",
+"Which island country has the Seven Colored Earths at Chamarel?"
+],
+"biome": "tropical"
+},
+{
+"id": "morocco",
+"name": "Morocco",
+"fips": "504",
+"lonLat": [
+-6.5,
+32.2
+],
+"capital": "Rabat",
+"sameStateCities": [
+"Casablanca",
+"Marrakesh",
+"Fes"
+],
+"largestCity": "Casablanca",
+"neighbors": [
+"algeria",
+"mauritania"
+],
+"hint": "a country in the north-west corner of Africa, just across the sea from Spain",
+"facts": [
+"Goats climb high into argan trees in Morocco to eat the fruit.",
+"The town of Chefchaouen in Morocco is famous for its blue-painted streets."
+],
+"nickname": null,
+"asks": [
+"In which country do goats climb high into argan trees?",
+"In which country is Chefchaouen, the town of blue-painted streets?"
+],
+"biome": "mountain"
+},
+{
+"id": "mozambique",
+"name": "Mozambique",
+"fips": "508",
+"lonLat": [
+35.5,
+-17.8
+],
+"capital": "Maputo",
+"sameStateCities": [
+"Beira",
+"Nampula",
+"Matola"
+],
+"largestCity": "Maputo",
+"neighbors": [
+"eswatini",
+"madagascar",
+"malawi",
+"south-africa",
+"tanzania",
+"zambia",
+"zimbabwe"
+],
+"hint": "a long Portuguese-speaking country on the Indian Ocean, across the water from Madagascar",
+"facts": [
+"The last strong group of dugongs in East Africa lives around the Bazaruto Islands of Mozambique.",
+"The Mozambique Channel, the sea between Africa and Madagascar, is named after Mozambique."
+],
+"nickname": null,
+"asks": [
+"Which country has the Bazaruto Islands, home of East Africa's last strong group of dugongs?",
+"Which country gives its name to the channel of sea between Africa and Madagascar?"
+],
+"biome": "coast"
+},
+{
+"id": "namibia",
+"name": "Namibia",
+"fips": "516",
+"lonLat": [
+17.5,
+-22.5
+],
+"capital": "Windhoek",
+"sameStateCities": [
+"Walvis Bay",
+"Swakopmund",
+"Rundu"
+],
+"largestCity": "Windhoek",
+"neighbors": [
+"angola",
+"botswana",
+"south-africa",
+"zambia"
+],
+"hint": "a dry country on the Atlantic coast of southern Africa, north-west of South Africa",
+"facts": [
+"The Hoba meteorite in Namibia is the largest known meteorite on Earth.",
+"The towering red dunes of Sossusvlei rise in Namibia's desert."
+],
+"nickname": null,
+"asks": [
+"In which country does the largest known meteorite on Earth lie?",
+"In which country are the towering red dunes of Sossusvlei?"
+],
+"biome": "desert"
+},
+{
+"id": "niger",
+"name": "Niger",
+"fips": "562",
+"lonLat": [
+9,
+17.4
+],
+"capital": "Niamey",
+"sameStateCities": [
+"Zinder",
+"Maradi",
+"Agadez"
+],
+"largestCity": "Niamey",
+"neighbors": [
+"algeria",
+"benin",
+"burkina-faso",
+"chad",
+"libya",
+"mali",
+"nigeria"
+],
+"hint": "a huge landlocked Sahara country to the east of Mali",
+"facts": [
+"West African giraffes live in the wild only in Niger.",
+"The Tree of Ténéré in Niger was once called the most isolated tree on Earth."
+],
+"nickname": null,
+"asks": [
+"In which country do West African giraffes live in the wild, and nowhere else?",
+"In which country did the Tree of Ténéré stand, once called the most isolated tree on Earth?"
+],
+"biome": "desert"
+},
+{
+"id": "nigeria",
+"name": "Nigeria",
+"fips": "566",
+"lonLat": [
+8,
+9.6
+],
+"capital": "Abuja",
+"sameStateCities": [
+"Lagos",
+"Kano",
+"Ibadan"
+],
+"largestCity": "Lagos",
+"neighbors": [
+"benin",
+"cameroon",
+"chad",
+"niger"
+],
+"hint": "a large West African country on the Gulf of Guinea, between Benin and Cameroon",
+"facts": [
+"Nigeria has more people than any other country in Africa.",
+"Nigeria's film industry is called Nollywood."
+],
+"nickname": null,
+"asks": [
+"Which country has more people than any other in Africa?",
+"Which country's film industry is called Nollywood?"
+],
+"biome": "tropical"
+},
+{
+"id": "rwanda",
+"name": "Rwanda",
+"fips": "646",
+"lonLat": [
+29.9,
+-2
+],
+"capital": "Kigali",
+"sameStateCities": [
+"Huye",
+"Gisenyi",
+"Musanze"
+],
+"largestCity": "Kigali",
+"neighbors": [
+"burundi",
+"dr-congo",
+"tanzania",
+"uganda"
+],
+"hint": "a small, green, landlocked country in East Africa, north of Burundi",
+"facts": [
+"Mountain gorillas live in Volcanoes National Park in Rwanda.",
+"Rwanda banned plastic bags back in 2008."
+],
+"nickname": {
+"text": "Land of a Thousand Hills",
+"status": "unverified",
+"others": []
+},
+"asks": [
+"In which country is Volcanoes National Park, home of mountain gorillas?",
+"Which East African country banned plastic bags back in 2008?"
+],
+"biome": "mountain"
+},
+{
+"id": "sao-tome-and-principe",
+"name": "São Tomé and Príncipe",
+"fips": "678",
+"lonLat": [
+6.65,
+0.25
+],
+"capital": "São Tomé",
+"sameStateCities": [
+"Trindade",
+"Santana",
+"Santo António"
+],
+"largestCity": "São Tomé",
+"neighbors": [
+"equatorial-guinea",
+"gabon"
+],
+"hint": "two small volcanic islands in the Gulf of Guinea, near the Equator",
+"facts": [
+"The Equator crosses the tiny islet of Ilhéu das Rolas in São Tomé and Príncipe, where a monument marks it.",
+"Pico Cão Grande, a needle of rock, rises from the rainforest of São Tomé and Príncipe."
+],
+"nickname": null,
+"tiny": true,
+"hint2": "This island country is known for a needle of rock that rises from its rainforest.",
+"asks": [
+"Which island country has a monument marking the Equator on the islet of Ilhéu das Rolas?",
+"Which island country has the needle of rock called Pico Cão Grande?"
+],
+"biome": "tropical"
+},
+{
+"id": "senegal",
+"name": "Senegal",
+"fips": "686",
+"lonLat": [
+-14.5,
+14.5
+],
+"capital": "Dakar",
+"sameStateCities": [
+"Touba",
+"Saint-Louis",
+"Thiès"
+],
+"largestCity": "Dakar",
+"neighbors": [
+"cabo-verde",
+"gambia",
+"guinea",
+"guinea-bissau",
+"mali",
+"mauritania"
+],
+"hint": "the country at the far western bulge of Africa, wrapped around a thin river country",
+"facts": [
+"Lake Retba in Senegal often looks pink because of tiny algae in its salty water.",
+"Pointe des Almadies in Senegal is the westernmost point of mainland Africa."
+],
+"nickname": null,
+"asks": [
+"In which country is Lake Retba, which often looks pink?",
+"Which country has the westernmost point of mainland Africa?"
+],
+"biome": "coast"
+},
+{
+"id": "seychelles",
+"name": "Seychelles",
+"fips": "690",
+"lonLat": [
+55.45,
+-4.65
+],
+"capital": "Victoria",
+"sameStateCities": [
+"Beau Vallon",
+"Anse Royale",
+"Anse Boileau"
+],
+"largestCity": "Victoria",
+"neighbors": [
+"kenya",
+"mauritius"
+],
+"hint": "a group of islands in the Indian Ocean, north-east of Madagascar",
+"facts": [
+"The coco de mer palm of the Seychelles grows the largest seed of any plant.",
+"Aldabra Atoll in the Seychelles has the world's largest group of giant tortoises."
+],
+"nickname": null,
+"tiny": true,
+"sentenceName": "the Seychelles",
+"asks": [
+"Which island country is home to the coco de mer, the palm with the largest seed of any plant?",
+"Which island country has Aldabra Atoll, with the world's largest group of giant tortoises?"
+],
+"biome": "tropical"
+},
+{
+"id": "sierra-leone",
+"name": "Sierra Leone",
+"fips": "694",
+"lonLat": [
+-11.8,
+8.6
+],
+"capital": "Freetown",
+"sameStateCities": [
+"Bo",
+"Kenema",
+"Makeni"
+],
+"largestCity": "Freetown",
+"neighbors": [
+"guinea",
+"liberia"
+],
+"hint": "a West African country on the Atlantic, between Guinea and Liberia",
+"facts": [
+"Sierra Leone's name comes from Portuguese words meaning lion mountains.",
+"The western chimpanzee is the national animal of Sierra Leone."
+],
+"nickname": null,
+"asks": [
+"Which country's name comes from Portuguese words meaning lion mountains?",
+"Which West African country has the western chimpanzee as its national animal?"
+],
+"biome": "tropical"
+},
+{
+"id": "somalia",
+"name": "Somalia",
+"fips": "706",
+"lonLat": [
+45.3,
+4
+],
+"capital": "Mogadishu",
+"sameStateCities": [
+"Baidoa",
+"Kismayo",
+"Beledweyne"
+],
+"largestCity": "Mogadishu",
+"neighbors": [
+"djibouti",
+"ethiopia",
+"kenya"
+],
+"hint": "the country on the very tip of the Horn of Africa, along the Indian Ocean",
+"facts": [
+"Somalia has the longest coastline on the African mainland.",
+"Somalia has more camels than any other country."
+],
+"nickname": null,
+"asks": [
+"Which country has the longest coastline on the African mainland?",
+"Which country has more camels than any other?"
+],
+"biome": "coast"
+},
+{
+"id": "south-africa",
+"name": "South Africa",
+"fips": "710",
+"lonLat": [
+24.7,
+-29.5
+],
+"capital": "Pretoria",
+"sameStateCities": [
+"Johannesburg",
+"Durban",
+"Gqeberha"
+],
+"largestCity": "Johannesburg",
+"neighbors": [
+"botswana",
+"eswatini",
+"lesotho",
+"mozambique",
+"namibia",
+"zimbabwe"
+],
+"hint": "the country at the southern tip of the continent",
+"facts": [
+"South Africa has three capitals: Pretoria, Cape Town and Bloemfontein.",
+"Flat-topped Table Mountain rises above Cape Town in South Africa."
+],
+"nickname": null,
+"asks": [
+"Which country has three capital cities?",
+"In which country does flat-topped Table Mountain stand?"
+],
+"biome": "coast"
+},
+{
+"id": "south-sudan",
+"name": "South Sudan",
+"fips": "728",
+"lonLat": [
+30.3,
+7.3
+],
+"capital": "Juba",
+"sameStateCities": [
+"Wau",
+"Malakal",
+"Yei"
+],
+"largestCity": "Juba",
+"neighbors": [
+"central-african-republic",
+"dr-congo",
+"ethiopia",
+"kenya",
+"sudan",
+"uganda"
+],
+"hint": "a landlocked country on the White Nile, north of Uganda",
+"facts": [
+"South Sudan became a country in 2011, making it Africa's youngest.",
+"A 2024 survey found about six million antelope migrating across South Sudan."
+],
+"nickname": null,
+"asks": [
+"Which is Africa's youngest country, independent since 2011?",
+"In which country did a 2024 survey find about six million migrating antelope?"
+],
+"biome": "swamp"
+},
+{
+"id": "sudan",
+"name": "Sudan",
+"fips": "729",
+"lonLat": [
+30,
+15.5
+],
+"capital": "Khartoum",
+"sameStateCities": [
+"Omdurman",
+"Kassala",
+"El Obeid"
+],
+"largestCity": "Khartoum",
+"neighbors": [
+"central-african-republic",
+"chad",
+"egypt",
+"eritrea",
+"ethiopia",
+"libya",
+"south-sudan"
+],
+"hint": "a large country on the Nile, directly south of Egypt",
+"facts": [
+"Sudan has more ancient pyramids than Egypt.",
+"The Blue Nile and the White Nile meet at Khartoum in Sudan."
+],
+"nickname": null,
+"asks": [
+"Which African country has more ancient pyramids than Egypt?",
+"In which country's capital do the Blue Nile and the White Nile meet?"
+],
+"biome": "desert"
+},
+{
+"id": "tanzania",
+"name": "Tanzania",
+"fips": "834",
+"lonLat": [
+34.9,
+-6.4
+],
+"capital": "Dodoma",
+"sameStateCities": [
+"Dar es Salaam",
+"Mwanza",
+"Arusha"
+],
+"largestCity": "Dar es Salaam",
+"neighbors": [
+"burundi",
+"comoros",
+"dr-congo",
+"kenya",
+"malawi",
+"mozambique",
+"rwanda",
+"uganda",
+"zambia"
+],
+"hint": "an East African country on the Indian Ocean, south of Kenya",
+"facts": [
+"Mount Kilimanjaro in Tanzania is the highest mountain in Africa.",
+"Ngorongoro Crater in Tanzania is a huge volcanic bowl full of wildlife."
+],
+"nickname": null,
+"asks": [
+"Which country has the highest mountain in Africa?",
+"In which country is Ngorongoro Crater, a huge volcanic bowl full of wildlife?"
+],
+"biome": "plains"
+},
+{
+"id": "togo",
+"name": "Togo",
+"fips": "768",
+"lonLat": [
+1.1,
+8.6
+],
+"capital": "Lomé",
+"sameStateCities": [
+"Sokodé",
+"Kara",
+"Atakpamé"
+],
+"largestCity": "Lomé",
+"neighbors": [
+"benin",
+"burkina-faso",
+"ghana"
+],
+"hint": "a thin West African country between Ghana and Benin",
+"facts": [
+"Togo is only about 160 kilometers wide at its broadest point.",
+"Lomé, the capital of Togo, sits right on the border with Ghana."
+],
+"nickname": null,
+"asks": [
+"Which thin West African country lies between Ghana and Benin?",
+"Which country's capital sits right on the border with Ghana?"
+],
+"biome": "coast"
+},
+{
+"id": "tunisia",
+"name": "Tunisia",
+"fips": "788",
+"lonLat": [
+9.5,
+34
+],
+"capital": "Tunis",
+"sameStateCities": [
+"Sfax",
+"Sousse",
+"Kairouan"
+],
+"largestCity": "Tunis",
+"neighbors": [
+"algeria",
+"libya"
+],
+"hint": "the northernmost country in Africa, between Algeria and Libya",
+"facts": [
+"An underground home in Matmata, Tunisia, was used as Luke Skywalker's house in Star Wars.",
+"The ruins of ancient Carthage stand in Tunisia."
+],
+"nickname": null,
+"hint2": "Luke Skywalker's movie home is a real underground building in this country.",
+"asks": [
+"In which country was an underground home used as Luke Skywalker's house in Star Wars?",
+"In which country do the ruins of ancient Carthage stand?"
+],
+"biome": "coast"
+},
+{
+"id": "uganda",
+"name": "Uganda",
+"fips": "800",
+"lonLat": [
+32.4,
+1.3
+],
+"capital": "Kampala",
+"sameStateCities": [
+"Entebbe",
+"Gulu",
+"Jinja"
+],
+"largestCity": "Kampala",
+"neighbors": [
+"dr-congo",
+"kenya",
+"rwanda",
+"south-sudan",
+"tanzania"
+],
+"hint": "a landlocked East African country on the northern shore of Lake Victoria",
+"facts": [
+"Uganda's flag shows a grey crowned crane.",
+"Nearly half of the world's mountain gorillas live in Uganda's Bwindi forest and the small reserve beside it."
+],
+"nickname": null,
+"asks": [
+"Which country's flag shows a grey crowned crane?",
+"In which country is Bwindi Impenetrable Forest, home to nearly half of the world's mountain gorillas?"
+],
+"biome": "lake"
+},
+{
+"id": "zambia",
+"name": "Zambia",
+"fips": "894",
+"lonLat": [
+27.8,
+-13.5
+],
+"capital": "Lusaka",
+"sameStateCities": [
+"Kitwe",
+"Ndola",
+"Livingstone"
+],
+"largestCity": "Lusaka",
+"neighbors": [
+"angola",
+"botswana",
+"dr-congo",
+"malawi",
+"mozambique",
+"namibia",
+"tanzania",
+"zimbabwe"
+],
+"hint": "a landlocked southern African country named for a great river",
+"facts": [
+"Millions of fruit bats gather at Kasanka National Park in Zambia every year.",
+"Zambia's name comes from the Zambezi River."
+],
+"nickname": null,
+"asks": [
+"In which country do millions of fruit bats gather at Kasanka National Park every year?",
+"Which country's name comes from the Zambezi River?"
+],
+"biome": "plains"
+},
+{
+"id": "zimbabwe",
+"name": "Zimbabwe",
+"fips": "716",
+"lonLat": [
+29.8,
+-19
+],
+"capital": "Harare",
+"sameStateCities": [
+"Bulawayo",
+"Mutare",
+"Gweru"
+],
+"largestCity": "Harare",
+"neighbors": [
+"botswana",
+"mozambique",
+"south-africa",
+"zambia"
+],
+"hint": "a landlocked country between the Zambezi and Limpopo rivers",
+"facts": [
+"Zimbabwe's name comes from Shona words meaning houses of stone.",
+"Zimbabwe's flag shows a bird based on stone carvings from an ancient city."
+],
+"nickname": null,
+"asks": [
+"Which country's name comes from Shona words meaning houses of stone?",
+"Which country's flag shows a bird based on stone carvings from an ancient city?"
+],
+"biome": "plains"
+}
+]

@@ -1,0 +1,262 @@
+[
+  {
+    "id": "south-pole",
+    "name": "South Pole",
+    "sentenceName": "the South Pole",
+    "fips": "aq-south-pole",
+    "lonLat": [0, -90],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["mount-vinson", "ross-ice-shelf", "lake-vostok", "lambert-glacier", "weddell-sea"],
+    "hint": "the very bottom of the world, where every direction is north",
+    "hint2": "Explorers raced each other across the ice to reach this spot more than a century ago.",
+    "facts": [
+      "Roald Amundsen's team were the first people to reach the South Pole, in December 1911.",
+      "The South Pole sees just one sunrise and one sunset a year. It is not the same place as the South Magnetic Pole, which is thousands of kilometers away."
+    ],
+    "asks": [
+      "Which spot did Roald Amundsen's team become the first people to reach, in 1911?",
+      "Where in Antarctica do people see just one sunrise and one sunset each year?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "South_Pole"
+  },
+  {
+    "id": "mount-vinson",
+    "name": "Mount Vinson",
+    "sentenceName": "Mount Vinson",
+    "fips": "aq-mount-vinson",
+    "lonLat": [-85.62, -78.53],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["south-pole", "antarctic-peninsula", "weddell-sea"],
+    "hint": "the highest peak on the frozen continent",
+    "hint2": "This peak rises in the Sentinel Range of the Ellsworth Mountains.",
+    "facts": [
+      "Mount Vinson is the highest mountain in Antarctica, at 4,892 meters (16,050 feet).",
+      "Mount Vinson is one of the Seven Summits, the highest peaks of the seven continents. It is the top of a larger mountain mass called the Vinson Massif."
+    ],
+    "asks": [
+      "Which is the highest mountain in Antarctica?",
+      "Which of the Seven Summits, the highest peaks of the seven continents, stands in Antarctica?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "Vinson_Massif"
+  },
+  {
+    "id": "mount-erebus",
+    "name": "Mount Erebus",
+    "sentenceName": "Mount Erebus",
+    "fips": "aq-mount-erebus",
+    "lonLat": [167.15, -77.53],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["ross-ice-shelf", "cape-denison", "lake-vostok"],
+    "hint": "a snowy volcano on Ross Island",
+    "hint2": "This volcano rises above McMurdo Station, the big American research base.",
+    "facts": [
+      "Mount Erebus is the southernmost active volcano on Earth.",
+      "Scientists have seen a lake of lava churning at the top of Mount Erebus since at least 1972."
+    ],
+    "asks": [
+      "Which is the southernmost active volcano on Earth?",
+      "Which Antarctic volcano has a long-lasting lake of lava at its top?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "Mount_Erebus"
+  },
+  {
+    "id": "ross-ice-shelf",
+    "name": "Ross Ice Shelf",
+    "sentenceName": "the Ross Ice Shelf",
+    "fips": "aq-ross-ice-shelf",
+    "lonLat": [-175, -81.5],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["south-pole", "mount-erebus"],
+    "hint": "a floating sheet of ice roughly the size of France",
+    "hint2": "This ice meets the sea in a wall more than 600 kilometers long.",
+    "facts": [
+      "The Ross Ice Shelf is the largest ice shelf in Antarctica, roughly the size of France.",
+      "James Clark Ross reached the Ross Ice Shelf in 1841, and early explorers called it the Barrier."
+    ],
+    "asks": [
+      "Which is the largest ice shelf in Antarctica?",
+      "Which great sheet of floating ice did early explorers call the Barrier?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "Ross_Ice_Shelf"
+  },
+  {
+    "id": "antarctic-peninsula",
+    "name": "Antarctic Peninsula",
+    "sentenceName": "the Antarctic Peninsula",
+    "fips": "aq-antarctic-peninsula",
+    "lonLat": [-65, -69.5],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["mount-vinson", "weddell-sea", "deception-island"],
+    "hint": "the long arm of Antarctica that reaches toward South America",
+    "hint2": "This strip of mountains has the mildest weather on the Antarctic mainland.",
+    "facts": [
+      "The Antarctic Peninsula is the part of the mainland closest to South America, about 1,000 kilometers across the Drake Passage.",
+      "The Antarctic Peninsula has the mildest weather on the Antarctic mainland, though it is still very cold."
+    ],
+    "asks": [
+      "Which part of Antarctica's mainland reaches closest to South America?",
+      "Which part of Antarctica's mainland has the mildest weather?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "coast",
+    "wiki": "Antarctic_Peninsula"
+  },
+  {
+    "id": "lambert-glacier",
+    "name": "Lambert Glacier",
+    "sentenceName": "the Lambert Glacier",
+    "fips": "aq-lambert-glacier",
+    "lonLat": [70, -71],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["south-pole", "lake-vostok"],
+    "hint": "a giant river of ice in East Antarctica",
+    "hint2": "This great flow of ice slides north toward the Indian Ocean.",
+    "facts": [
+      "Guinness World Records counts the Lambert Glacier as the longest glacier in the world.",
+      "The Lambert Glacier and the rivers of ice that join it flow into the Amery Ice Shelf."
+    ],
+    "asks": [
+      "Which glacier does Guinness World Records count as the longest in the world?",
+      "Which glacier is the main river of ice feeding the Amery Ice Shelf?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "Lambert_Glacier"
+  },
+  {
+    "id": "deception-island",
+    "name": "Deception Island",
+    "sentenceName": "Deception Island",
+    "fips": "aq-deception-island",
+    "lonLat": [-60.64, -62.96],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["antarctic-peninsula", "weddell-sea"],
+    "hint": "a horseshoe-shaped volcano in the South Shetland Islands",
+    "hint2": "Ships enter the harbor inside this island through a narrow gap called Neptunes Bellows.",
+    "facts": [
+      "Deception Island is a volcano with a flooded middle, and ships can sail right inside through a narrow gap.",
+      "Volcanic heat makes the beaches of Deception Island steam. Its name fits: from outside it looks like an ordinary island."
+    ],
+    "asks": [
+      "Which Antarctic island lets ships sail right inside a flooded volcano?",
+      "Which Antarctic island has beaches that steam from volcanic heat?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "coast",
+    "wiki": "Deception_Island"
+  },
+  {
+    "id": "lake-vostok",
+    "name": "Lake Vostok",
+    "sentenceName": "Lake Vostok",
+    "fips": "aq-lake-vostok",
+    "lonLat": [106, -77.5],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["south-pole", "cape-denison", "lambert-glacier", "mount-erebus"],
+    "hint": "a huge hidden lake buried under nearly 4 kilometers of ice",
+    "hint2": "Nobody can see this water, because it lies deep under the ice of East Antarctica.",
+    "facts": [
+      "Lake Vostok is the largest known lake under Antarctica's ice, lying nearly 4 kilometers (2.5 miles) below the surface.",
+      "In 2012 Russian scientists drilled down to Lake Vostok. The lake is named after Vostok Station, the Russian base on the ice above it."
+    ],
+    "asks": [
+      "Which is the largest known lake under Antarctica's ice?",
+      "Which hidden lake did Russian scientists drill down to in 2012?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "snow",
+    "wiki": "Lake_Vostok"
+  },
+  {
+    "id": "weddell-sea",
+    "name": "Weddell Sea",
+    "sentenceName": "the Weddell Sea",
+    "fips": "aq-weddell-sea",
+    "lonLat": [-45, -73],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["south-pole", "mount-vinson", "antarctic-peninsula", "deception-island"],
+    "hint": "the icy waters east of the Antarctic Peninsula",
+    "hint2": "Ernest Shackleton's ship was trapped and crushed by the ice here.",
+    "facts": [
+      "Ernest Shackleton's ship Endurance sank in the Weddell Sea in 1915. Its wreck was found in 2022, about 3 kilometers down.",
+      "Scientists measured the clearest sea water on record in the Weddell Sea, seeing a disc 80 meters (262 feet) down."
+    ],
+    "asks": [
+      "In which sea did Ernest Shackleton's ship Endurance sink in 1915?",
+      "Which sea off Antarctica has the clearest water ever measured?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "coast",
+    "wiki": "Weddell_Sea"
+  },
+  {
+    "id": "cape-denison",
+    "name": "Cape Denison",
+    "sentenceName": "Cape Denison",
+    "fips": "aq-cape-denison",
+    "lonLat": [142.67, -67],
+    "capital": "",
+    "sameStateCities": [],
+    "largestCity": "",
+    "neighbors": ["mount-erebus", "lake-vostok"],
+    "hint": "a rocky point on Commonwealth Bay, blasted by fierce winds",
+    "hint2": "Douglas Mawson's expedition built its main base on this windy shore.",
+    "facts": [
+      "Cape Denison is known as the windiest place on Earth at sea level.",
+      "Douglas Mawson's expedition built its main base at Cape Denison in 1912. This is not Australia's Mawson Station, which is far to the west."
+    ],
+    "asks": [
+      "Which Antarctic cape is known as the windiest place on Earth at sea level?",
+      "Which cape was the main base of Douglas Mawson's 1911-14 expedition?"
+    ],
+    "nickname": null,
+    "tiny": true,
+    "cityState": true,
+    "biome": "coast",
+    "wiki": "Cape_Denison"
+  }
+]

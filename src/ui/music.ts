@@ -1,6 +1,27 @@
 import { useEffect, useRef } from 'react';
+import type { SaveData } from '../engine/game';
 
-export type Track = 'camp' | 'battle' | null;
+export const TRAIL_TRACKS = ['trail-us', 'trail-europe', 'trail-africa', 'trail-asia', 'trail-america', 'trail-south-america', 'trail-oceania', 'trail-antarctica'] as const;
+export const TRACKS = ['camp', 'battle', 'boss', 'rare', 'event', 'victory', ...TRAIL_TRACKS] as const;
+export type Track = (typeof TRACKS)[number] | null;
+
+const trailTrack = (regionId: string): Track => {
+  const continent = regionId.split('-')[0];
+  return `trail-${continent === 'south' ? 'south-america' : continent}` as Track;
+};
+
+/** Each continent has a trail theme, and big moments have their own. */
+export function trackFor(save: SaveData | null | undefined): Track {
+  if (!save) return null;
+  const e = save.expedition;
+  if (!e) return save.lastSummary ? 'victory' : 'camp';
+  if (e.battle) {
+    const slot = e.slots[e.battle.slotIndex];
+    if (slot?.rare) return 'rare';
+    return slot?.kind === 'guardian' ? 'boss' : 'battle';
+  }
+  return e.event ? 'event' : trailTrack(e.regionId);
+}
 
 /** Quiet looping music. It starts on the first key or click, which browsers require, and never interrupts play. */
 export function useMusic(track: Track, volume: number, muted: boolean) {

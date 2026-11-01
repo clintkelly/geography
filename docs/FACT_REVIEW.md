@@ -136,7 +136,7 @@ The other 40 stay `unverified`. Some may well be official; no statute or state s
 - **Lake counts** depend on the size cutoff. A database that counts only lakes over 0.1 square km gives Belarus 1,420.
 - **Close population races** that could flip with the next estimates: Charleston and Huntington WV (46,117 to 44,815), Charleston and Columbia SC, Bridgeport and Stamford CT, Cheyenne and Casper WY.
 - **Largest cities outside the US** are from general knowledge except the four tiny countries above. Belgium counts Antwerp as largest by city limits; greater Brussels is bigger.
-- **Gulf of Mexico.** Kept in the Louisiana question. The US government now uses "Gulf of America"; the name was not researched here. Worth a family decision.
+- **Gulf of Mexico.** Owner decision: the game says Gulf of Mexico.
 - **Bern** is Switzerland's seat of government, but Swiss law does not formally name a capital (general knowledge, not looked up).
 - **Moldova's language.** Romanian and Moldovan are the same language, but people label it differently and the topic is political.
 - **Kosovo, Cyprus and Turkey** are not in the game, so neighbor lists for Serbia, Albania, Montenegro and North Macedonia leave out Kosovo.

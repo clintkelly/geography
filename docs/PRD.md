@@ -307,6 +307,8 @@ A trip takes up to 5 creatures, each with its own HP and charge. Switching uses 
 
 **Bold Befriend:** an unowned creature in a regular battle at half HP or less can be won with 2 charge and two right answers in a row on questions one level harder than the trail. It keeps attacking, and a miss ends the attempt.
 
+**Changing a move:** before answering, the child can go back and pick another move. The question stays dealt, including a Bold Befriend question if they return to that move, so changing moves can't swap a hard question for an easier one.
+
 **Rare encounters:** a Trail Score from 0 to 100 reflects accuracy, streak, and difficulty, and sets the chance (2 to 25 percent) that a battle stop is a rare creature. The roll is made once per stop.
 
 ### Card levels
@@ -501,3 +503,9 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 - [List of US state and territory nicknames](https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_nicknames): a starting point; check official status against state sources.
 - [PixelLab MCP guide](https://api.pixellab.ai/mcp/docs): development-time art generation.
 - [IndexedDB on MDN](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API): local persistence.
+
+**Europe regions:** Europe follows the UN's four subregions (Northern, Western, Southern, Eastern) so maps stay readable. Each has its own map, Explorer's Map, sightings and badge, and Grand Tour of Europe needs all four. Schema 6 moves old settings and redraws sightings; an unfinished trip in the old Europe region ends, and everything earned stays.
+
+**Whole world:** 21 regions under eight headings: United States (4), Europe (4), Africa (5), Asia (3), North America (2), South America, Oceania and Antarctica. Countries are UN members plus Vatican City, Palestine and Taiwan. Oceania uses a Pacific-centered map, and Antarctica uses a polar map with 10 landmarks in place of countries. Each continent has two new regular creatures and one rare, shared across its regions. Fact reviews for the new content are in docs/fact-review/.
+
+**Music:** camp, a trail theme per continent, battle, final showdown, rare encounter, trail event and homecoming.

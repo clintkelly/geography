@@ -8,7 +8,7 @@ const choice = (labels: string[], acceptedIndex: number) => {
   return { options, acceptedId: `o${acceptedIndex}` };
 };
 
-const basics = (id: string, group: 'continent' | 'ocean', key: string, prompt: string, answer: string, wrong: string[], explanation: string, page: string): Question => ({
+const basics = (regionId: string, id: string, group: 'continent' | 'ocean', key: string, prompt: string, answer: string, wrong: string[], explanation: string, page: string): Question => ({
   id: `q-${group}-${id}`,
   version: 1,
   objectiveId: `${group}-${key}`,
@@ -17,55 +17,92 @@ const basics = (id: string, group: 'continent' | 'ocean', key: string, prompt: s
   ...choice([answer, ...wrong], 0),
   explanation,
   difficulty: 'scout',
-    regionId: 'europe',
+  regionId,
   sourceUrl: wiki(page),
 });
 
 const worldBasics: Question[] = [
-  basics('europe-1', 'continent', 'europe', 'On which continent are France and Italy?', 'Europe', ['Asia', 'Africa', 'South America'], 'France and Italy are both in Europe.', 'Europe'),
-  basics('africa-1', 'continent', 'africa', 'Which continent lies directly south of Spain, across the Strait of Gibraltar?', 'Africa', ['Asia', 'Australia', 'Antarctica'], 'The narrow Strait of Gibraltar separates Spain from Africa.', 'Strait_of_Gibraltar'),
-  basics('antarctica-1', 'continent', 'antarctica', 'Which continent surrounds the South Pole?', 'Antarctica', ['Australia', 'South America', 'Africa'], 'Antarctica surrounds the South Pole.', 'Antarctica'),
-  basics('atlantic-1', 'ocean', 'atlantic', 'Which ocean lies between Europe and North America?', 'Atlantic Ocean', ['Pacific Ocean', 'Indian Ocean', 'Arctic Ocean'], 'The Atlantic Ocean separates Europe from North America.', 'Atlantic_Ocean'),
-  basics('pacific-1', 'ocean', 'pacific', 'Which is the largest ocean on Earth?', 'Pacific Ocean', ['Atlantic Ocean', 'Indian Ocean', 'Southern Ocean'], 'The Pacific is the largest of the five oceans.', 'Pacific_Ocean'),
-  basics('arctic-1', 'ocean', 'arctic', 'Which ocean surrounds the North Pole?', 'Arctic Ocean', ['Southern Ocean', 'Atlantic Ocean', 'Indian Ocean'], 'The Arctic Ocean surrounds the North Pole.', 'Arctic_Ocean'),
+  basics('europe-west', 'europe-1', 'continent', 'europe', 'On which continent are France and Italy?', 'Europe', ['Asia', 'Africa', 'South America'], 'France and Italy are both in Europe.', 'Europe'),
+  basics('europe-south', 'africa-1', 'continent', 'africa', 'Which continent lies directly south of Spain, across the Strait of Gibraltar?', 'Africa', ['Asia', 'Australia', 'Antarctica'], 'The narrow Strait of Gibraltar separates Spain from Africa.', 'Strait_of_Gibraltar'),
+  basics('europe-north', 'antarctica-1', 'continent', 'antarctica', 'Which continent surrounds the South Pole?', 'Antarctica', ['Australia', 'South America', 'Africa'], 'Antarctica surrounds the South Pole.', 'Antarctica'),
+  basics('europe-west', 'atlantic-1', 'ocean', 'atlantic', 'Which ocean lies between Europe and North America?', 'Atlantic Ocean', ['Pacific Ocean', 'Indian Ocean', 'Arctic Ocean'], 'The Atlantic Ocean separates Europe from North America.', 'Atlantic_Ocean'),
+  basics('europe-east', 'pacific-1', 'ocean', 'pacific', 'Which is the largest ocean on Earth?', 'Pacific Ocean', ['Atlantic Ocean', 'Indian Ocean', 'Southern Ocean'], 'The Pacific is the largest of the five oceans.', 'Pacific_Ocean'),
+  basics('europe-north', 'arctic-1', 'ocean', 'arctic', 'Which ocean surrounds the North Pole?', 'Arctic Ocean', ['Southern Ocean', 'Atlantic Ocean', 'Indian Ocean'], 'The Arctic Ocean surrounds the North Pole.', 'Arctic_Ocean'),
 ];
 
+const CONTINENTS: Record<string, string> = { us: 'United States', europe: 'Europe', africa: 'Africa', asia: 'Asia', america: 'North America', south: 'South America', oceania: 'Oceania', antarctica: 'Antarctica' };
+const continentOf = (id: string) => CONTINENTS[id.split('-')[0] as string] as string;
+
 export const PACK: Pack = {
-  version: 'usa-and-europe-3',
+  version: 'whole-world-2',
   regions: [
     { id: 'us-west', label: 'American West' },
     { id: 'us-midwest', label: 'Midwest' },
     { id: 'us-south', label: 'The South' },
     { id: 'us-northeast', label: 'Northeast' },
-    { id: 'europe', label: 'Europe' },
+    { id: 'europe-north', label: 'Northern Europe' },
+    { id: 'europe-west', label: 'Western Europe' },
+    { id: 'europe-south', label: 'Southern Europe' },
+    { id: 'europe-east', label: 'Eastern Europe' },
+    { id: 'africa-north', label: 'North Africa' },
+    { id: 'africa-west', label: 'West Africa' },
+    { id: 'africa-central', label: 'Central Africa' },
+    { id: 'africa-east', label: 'East Africa' },
+    { id: 'africa-south', label: 'Southern Africa' },
+    { id: 'asia-west', label: 'Western Asia' },
+    { id: 'asia-south', label: 'South and Central Asia' },
+    { id: 'asia-east', label: 'East and Southeast Asia' },
+    { id: 'america-mainland', label: 'North and Central America' },
+    { id: 'america-caribbean', label: 'The Caribbean' },
+    { id: 'south-america', label: 'South America' },
+    { id: 'oceania', label: 'Oceania' },
+    { id: 'antarctica', label: 'Antarctica' },
   ].map((r) => {
     const group = GROUPS.find((g) => g.id === r.id);
-    return { ...r, mapId: r.id === 'europe' ? ('world' as const) : ('us' as const), difficulties: ['scout', 'ranger', 'expert'] as const, markerGap: group?.gap ?? 4 };
+    return { ...r, continent: continentOf(r.id), mapId: r.id.startsWith('us-') ? ('us' as const) : r.id === 'oceania' ? ('pacific' as const) : r.id === 'antarctica' ? ('antarctica' as const) : ('world' as const), difficulties: ['scout', 'ranger', 'expert'] as const, markerGap: group?.gap ?? 4 };
   }),
   questions: [...allQuestions, ...worldBasics],
   clues: allClues,
   places: allPlaces,
   species: [
     { id: 'slatepaw', displayName: 'Slatepaw', artId: 'slatepaw', facing: 'right', habitats: ['mountain', 'canyon'], homes: [], evolutions: [{ name: 'Slatehide', artId: 'slatepaw-2' }, { name: 'Slatekeep', artId: 'slatepaw-3' }], flavor: 'A round little mountain-dweller with mossy shoulders.', special: { name: 'Landslide', template: 'strong', color: '#d9a441' } },
-    { id: 'barkknight', displayName: 'The Bark Knight', artId: 'barkknight', facing: 'left', habitats: ['castle', 'forest'], homes: ['us-west', 'us-midwest', 'us-south', 'us-northeast', 'europe'], evolutions: [{ name: 'Sir Bark Knight', artId: 'barkknight-2' }, { name: 'The Bark Legend', artId: 'barkknight-3' }], flavor: 'A loyal guardian who patrols at night and never leaves a friend behind.', special: { name: 'Midnight Howl', template: 'strong', color: '#3a4fa8' } },
+    { id: 'barkknight', displayName: 'The Bark Knight', artId: 'barkknight', facing: 'left', habitats: ['castle', 'forest'], homes: ['us-west', 'us-midwest', 'us-south', 'us-northeast', 'europe-north', 'europe-west', 'europe-south', 'europe-east', 'africa-north', 'africa-west', 'africa-central', 'africa-east', 'africa-south', 'asia-west', 'asia-south', 'asia-east', 'america-mainland', 'america-caribbean', 'south-america', 'oceania', 'antarctica'], evolutions: [{ name: 'Sir Bark Knight', artId: 'barkknight-2' }, { name: 'The Bark Legend', artId: 'barkknight-3' }], flavor: 'A loyal guardian who patrols at night and never leaves a friend behind.', special: { name: 'Midnight Howl', template: 'strong', color: '#3a4fa8' } },
     { id: 'sandwhisk', displayName: 'Sandwhisk', artId: 'sandwhisk', facing: 'left', habitats: ['desert', 'canyon'], homes: ['us-west'], evolutions: [{ name: 'Dunewhisk', artId: 'sandwhisk-2' }, { name: 'Sirocco', artId: 'sandwhisk-3' }], flavor: 'It listens for lizards with enormous ears and never stops moving.', special: { name: 'Dust Devil', template: 'protect', color: '#d8b070' } },
     { id: 'cindermite', displayName: 'Cindermite', artId: 'cindermite', facing: 'left', habitats: ['desert', 'canyon'], homes: ['us-west'], evolutions: [{ name: 'Cinderhorn', artId: 'cindermite-2' }, { name: 'Magma Titan', artId: 'cindermite-3' }], flavor: 'A warm, grumpy creature that naps in sun-baked rocks.', special: { name: 'Ember Burst', template: 'strong', color: '#f0642e' } },
-    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', facing: 'left', habitats: ['mountain', 'snow'], homes: ['us-west', 'europe'], evolutions: [{ name: 'Cragmaw the Elder', artId: 'cragmaw-2' }, { name: 'Cragmaw the Ancient', artId: 'cragmaw-3' }], flavor: 'The great guardian of the high passes.', special: { name: 'Rockfall', template: 'strong', color: '#d9a441' } },
+    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', facing: 'left', habitats: ['mountain', 'snow'], homes: ['us-west', 'europe-west', 'europe-east'], evolutions: [{ name: 'Cragmaw the Elder', artId: 'cragmaw-2' }, { name: 'Cragmaw the Ancient', artId: 'cragmaw-3' }], flavor: 'The great guardian of the high passes.', special: { name: 'Rockfall', template: 'strong', color: '#d9a441' } },
     { id: 'galewing', displayName: 'Galewing', artId: 'galewing', facing: 'left', habitats: ['plains', 'lake'], homes: ['us-midwest'], evolutions: [{ name: 'Galehawk', artId: 'galewing-2' }, { name: 'Stormcrown', artId: 'galewing-3' }], flavor: 'A prairie bird that rides in on the first spring storm.', special: { name: 'Prairie Breeze', template: 'heal', color: '#9fd8e8' } },
     { id: 'lakeshell', displayName: 'Lakeshell', artId: 'lakeshell', facing: 'left', habitats: ['lake', 'coast'], homes: ['us-midwest'], evolutions: [{ name: 'Lakeguard', artId: 'lakeshell-2' }, { name: 'Great Lakeshell', artId: 'lakeshell-3' }], flavor: 'It suns itself on rocks along the Great Lakes.', special: { name: 'Shell Tide', template: 'protect', color: '#3fa8c8' } },
     { id: 'thistlehop', displayName: 'Thistlehop', artId: 'thistlehop', facing: 'left', habitats: ['forest', 'plains'], homes: ['us-midwest', 'us-northeast'], evolutions: [{ name: 'Thistlejack', artId: 'thistlehop-2' }, { name: 'Bramble King', artId: 'thistlehop-3' }], flavor: 'It bounds through the woods, all prickles and mischief.', special: { name: 'Bramble Wall', template: 'protect', color: '#8a4fc0' } },
     { id: 'bayouchomp', displayName: 'Bayou Chomp', artId: 'bayouchomp', facing: 'left', habitats: ['swamp', 'lake'], homes: ['us-south'], evolutions: [{ name: 'Bayou Jaws', artId: 'bayouchomp-2' }, { name: 'Bayou King', artId: 'bayouchomp-3' }], flavor: 'It grins from the slow green water and loves a good snack.', special: { name: 'Swamp Snap', template: 'strong', color: '#5f9a3a' } },
     { id: 'dillopod', displayName: 'Dillopod', artId: 'dillopod', facing: 'left', habitats: ['desert', 'plains'], homes: ['us-south'], evolutions: [{ name: 'Dillotank', artId: 'dillopod-2' }, { name: 'Dillofort', artId: 'dillopod-3' }], flavor: 'It rolls into a ball at the first sign of trouble.', special: { name: 'Roll Up', template: 'protect', color: '#b89060' } },
-    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', facing: 'left', habitats: ['coast', 'tropical'], homes: ['us-south', 'europe'], evolutions: [{ name: 'Brineblade', artId: 'brinefin-2' }, { name: 'Tidelord', artId: 'brinefin-3' }], flavor: 'It chases waves along the shore and hates to lose.', special: { name: 'Tide Pool', template: 'heal', color: '#2fb8a8' } },
+    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', facing: 'left', habitats: ['coast', 'tropical'], homes: ['us-south', 'europe-north', 'europe-south'], evolutions: [{ name: 'Brineblade', artId: 'brinefin-2' }, { name: 'Tidelord', artId: 'brinefin-3' }], flavor: 'It chases waves along the shore and hates to lose.', special: { name: 'Tide Pool', template: 'heal', color: '#2fb8a8' } },
     { id: 'lobsnap', displayName: 'Lobsnap', artId: 'lobsnap', facing: 'left', habitats: ['harbor', 'coast'], homes: ['us-northeast'], evolutions: [{ name: 'Lobcrusher', artId: 'lobsnap-2' }, { name: 'Lobster Admiral', artId: 'lobsnap-3' }], flavor: 'It guards the rocky coast with two very serious claws.', special: { name: 'Claw Crash', template: 'strong', color: '#e0503a' } },
     { id: 'mapleclop', displayName: 'Mapleclop', artId: 'mapleclop', facing: 'left', habitats: ['forest', 'mountain'], homes: ['us-northeast'], evolutions: [{ name: 'Maplehart', artId: 'mapleclop-2' }, { name: 'Autumn Monarch', artId: 'mapleclop-3' }], flavor: 'Its leafy antlers turn red every fall.', special: { name: 'Maple Mend', template: 'heal', color: '#d86a2a' } },
-    { id: 'fjordling', displayName: 'Fjordling', artId: 'fjordling', facing: 'left', habitats: ['fjord', 'snow'], homes: ['europe'], evolutions: [{ name: 'Fjordguard', artId: 'fjordling-2' }, { name: 'Frost Sentinel', artId: 'fjordling-3' }], flavor: 'It slips through cold blue fjords without a sound.', special: { name: 'Ice Bloom', template: 'heal', color: '#a8e0f0' } },
-    { id: 'alpenhorn', displayName: 'Alpenhorn', artId: 'alpenhorn', facing: 'left', habitats: ['mountain', 'snow'], homes: ['europe'], evolutions: [{ name: 'Alpenram', artId: 'alpenhorn-2' }, { name: 'Summit King', artId: 'alpenhorn-3' }], flavor: 'It leaps between Alpine peaks as if they were stepping stones.', special: { name: 'Peak Charge', template: 'strong', color: '#e8e8f0' } },
+    { id: 'fjordling', displayName: 'Fjordling', artId: 'fjordling', facing: 'left', habitats: ['fjord', 'snow'], homes: ['europe-north', 'europe-east'], evolutions: [{ name: 'Fjordguard', artId: 'fjordling-2' }, { name: 'Frost Sentinel', artId: 'fjordling-3' }], flavor: 'It slips through cold blue fjords without a sound.', special: { name: 'Ice Bloom', template: 'heal', color: '#a8e0f0' } },
+    { id: 'alpenhorn', displayName: 'Alpenhorn', artId: 'alpenhorn', facing: 'left', habitats: ['mountain', 'snow'], homes: ['europe-west', 'europe-south'], evolutions: [{ name: 'Alpenram', artId: 'alpenhorn-2' }, { name: 'Summit King', artId: 'alpenhorn-3' }], flavor: 'It leaps between Alpine peaks as if they were stepping stones.', special: { name: 'Peak Charge', template: 'strong', color: '#e8e8f0' } },
     { id: 'thunderhoof', displayName: 'Thunderhoof', artId: 'thunderhoof', facing: 'left', rare: true, habitats: ['plains', 'desert'], homes: ['us-west'], flavor: 'They say its hooves crack like summer storms across the plains.', special: { name: 'Thunder Stampede', template: 'strong', color: '#ffe066' } },
     { id: 'aurorawl', displayName: 'Aurorawl', artId: 'aurorawl', facing: 'left', rare: true, habitats: ['lake', 'snow'], homes: ['us-midwest'], flavor: 'It appears only on nights when the northern lights reach the lakes.', special: { name: 'Aurora Veil', template: 'protect', color: '#7ce0b8' } },
-    { id: 'stormray', displayName: 'Stormray', artId: 'stormray', facing: 'left', rare: true, habitats: ['coast', 'tropical'], homes: ['us-south'], flavor: 'It glides out of Gulf storms and vanishes with the rain.', special: { name: 'Gulf Gale', template: 'heal', color: '#6a8fd8' } },
+    { id: 'stormray', displayName: 'Stormray', artId: 'stormray', facing: 'left', rare: true, habitats: ['coast', 'tropical'], homes: ['us-south'], flavor: 'It glides out of storms on the Gulf of Mexico and vanishes with the rain.', special: { name: 'Gulf Gale', template: 'heal', color: '#6a8fd8' } },
     { id: 'lanternwhale', displayName: 'Lanternwhale', artId: 'lanternwhale', facing: 'left', rare: true, habitats: ['harbor', 'fjord'], homes: ['us-northeast'], flavor: 'Sailors swear its light has guided lost ships home.', special: { name: 'Harbor Light', template: 'heal', color: '#ffd27a' } },
-    { id: 'castlewyrm', displayName: 'Castlewyrm', artId: 'castlewyrm', facing: 'left', rare: true, habitats: ['castle', 'mountain'], homes: ['europe'], flavor: 'A tiny dragon that has guarded the same old tower for a thousand years.', special: { name: 'Golden Breath', template: 'strong', color: '#ffc23a' } },
+    { id: 'castlewyrm', displayName: 'Castlewyrm', artId: 'castlewyrm', facing: 'left', rare: true, habitats: ['castle', 'mountain'], homes: ['europe-north', 'europe-west', 'europe-south', 'europe-east'], flavor: 'A tiny dragon that has guarded the same old tower for a thousand years.', special: { name: 'Golden Breath', template: 'strong', color: '#ffc23a' } },
+    { id: 'baobun', displayName: 'Baobun', artId: 'baobun', facing: 'left', habitats: ['plains', 'desert'], homes: ['africa-north', 'africa-west', 'africa-central', 'africa-east', 'africa-south'], evolutions: [{ name: 'Baobark', artId: 'baobun-2' }, { name: 'Baobab Elder', artId: 'baobun-3' }], flavor: "It naps under the savanna sun and stores water in its round belly.", special: { name: 'Root Shield', template: 'protect', color: '#8a6a3f' } },
+    { id: 'zebrisk', displayName: 'Zebrisk', artId: 'zebrisk', facing: 'left', habitats: ['plains', 'tropical'], homes: ['africa-north', 'africa-west', 'africa-central', 'africa-east', 'africa-south'], evolutions: [{ name: 'Zebrush', artId: 'zebrisk-2' }, { name: 'Stripe Sovereign', artId: 'zebrisk-3' }], flavor: "Nobody has ever counted its stripes, because it never stands still.", special: { name: 'Stripe Dash', template: 'strong', color: '#c8b48a' } },
+    { id: 'bambloom', displayName: 'Bambloom', artId: 'bambloom', facing: 'left', habitats: ['forest', 'mountain'], homes: ['asia-west', 'asia-south', 'asia-east'], evolutions: [{ name: 'Bambrawl', artId: 'bambloom-2' }, { name: 'Grand Bamboo', artId: 'bambloom-3' }], flavor: "It chews bamboo all day and shares with anyone who asks.", special: { name: 'Bamboo Mend', template: 'heal', color: '#6fae4a' } },
+    { id: 'lanternox', displayName: 'Lanternox', artId: 'lanternox', facing: 'left', habitats: ['castle', 'plains'], homes: ['asia-west', 'asia-south', 'asia-east'], evolutions: [{ name: 'Lanternbull', artId: 'lanternox-2' }, { name: 'Festival Ox', artId: 'lanternox-3' }], flavor: "Its little lantern lights the path home on foggy mornings.", special: { name: 'Lantern Glow', template: 'protect', color: '#f0a040' } },
+    { id: 'moosedrift', displayName: 'Moosedrift', artId: 'moosedrift', facing: 'left', habitats: ['snow', 'forest'], homes: ['america-mainland', 'america-caribbean'], evolutions: [{ name: 'Moosefrost', artId: 'moosedrift-2' }, { name: 'Blizzard Moose', artId: 'moosedrift-3' }], flavor: "It wanders through snowdrifts and never seems to get cold.", special: { name: 'Snow Charge', template: 'strong', color: '#a8c8e8' } },
+    { id: 'conchling', displayName: 'Conchling', artId: 'conchling', facing: 'left', habitats: ['coast', 'tropical'], homes: ['america-mainland', 'america-caribbean'], evolutions: [{ name: 'Conchguard', artId: 'conchling-2' }, { name: 'Conch Captain', artId: 'conchling-3' }], flavor: "It trades up to a bigger shell whenever it finds one.", special: { name: 'Shell Song', template: 'heal', color: '#f08aa8' } },
+    { id: 'capyboop', displayName: 'Capyboop', artId: 'capyboop', facing: 'left', habitats: ['swamp', 'lake'], homes: ['south-america'], evolutions: [{ name: 'Capybuddy', artId: 'capyboop-2' }, { name: 'Capy Chief', artId: 'capyboop-3' }], flavor: "Everyone in the river wants to sit next to it.", special: { name: 'Warm Soak', template: 'heal', color: '#b8855a' } },
+    { id: 'llamist', displayName: 'Llamist', artId: 'llamist', facing: 'left', habitats: ['mountain', 'canyon'], homes: ['south-america'], evolutions: [{ name: 'Llamacloud', artId: 'llamist-2' }, { name: 'Stormwool', artId: 'llamist-3' }], flavor: "Its wool is so fluffy that clouds get stuck in it.", special: { name: 'Mist Veil', template: 'protect', color: '#d0d8e8' } },
+    { id: 'koalump', displayName: 'Koalump', artId: 'koalump', facing: 'left', habitats: ['forest', 'coast'], homes: ['oceania'], evolutions: [{ name: 'Koalog', artId: 'koalump-2' }, { name: 'Gum Tree King', artId: 'koalump-3' }], flavor: "It sleeps nearly all day, and it is grumpy if you wake it.", special: { name: 'Eucalyptus Nap', template: 'heal', color: '#8a9a8a' } },
+    { id: 'reefling', displayName: 'Reefling', artId: 'reefling', facing: 'left', habitats: ['coast', 'tropical'], homes: ['oceania'], evolutions: [{ name: 'Reefrider', artId: 'reefling-2' }, { name: 'Coral Regent', artId: 'reefling-3' }], flavor: "It hides among bright coral and changes color when it is happy.", special: { name: 'Coral Crash', template: 'strong', color: '#f06a5a' } },
+    { id: 'pengwee', displayName: 'Pengwee', artId: 'pengwee', facing: 'left', habitats: ['snow', 'coast'], homes: ['antarctica'], evolutions: [{ name: 'Pengrand', artId: 'pengwee-2' }, { name: 'Emperor Pengwee', artId: 'pengwee-3' }], flavor: "It slides everywhere on its belly and calls that walking.", special: { name: 'Belly Slide', template: 'strong', color: '#4a7ac8' } },
+    { id: 'floeseal', displayName: 'Floeseal', artId: 'floeseal', facing: 'left', habitats: ['snow', 'lake'], homes: ['antarctica'], evolutions: [{ name: 'Floeguard', artId: 'floeseal-2' }, { name: 'Berg Warden', artId: 'floeseal-3' }], flavor: "It naps on floating ice and wakes up somewhere new.", special: { name: 'Ice Blanket', template: 'protect', color: '#c8e8f0' } },
+    { id: 'sunmane', displayName: 'Sunmane', artId: 'sunmane', facing: 'left', rare: true, habitats: ['plains', 'desert'], homes: ['africa-north', 'africa-west', 'africa-central', 'africa-east', 'africa-south'], flavor: "Its mane glows like sunrise over the savanna.", special: { name: 'Solar Roar', template: 'strong', color: '#ffc23a' } },
+    { id: 'jadewyrm', displayName: 'Jadewyrm', artId: 'jadewyrm', facing: 'left', rare: true, habitats: ['mountain', 'lake'], homes: ['asia-west', 'asia-south', 'asia-east'], flavor: "It coils among misty peaks and shines like polished jade.", special: { name: 'Jade Coil', template: 'protect', color: '#3ab88a' } },
+    { id: 'quetzalight', displayName: 'Quetzalight', artId: 'quetzalight', facing: 'left', rare: true, habitats: ['forest', 'tropical'], homes: ['america-mainland', 'america-caribbean'], flavor: "Its long tail feathers trail light through the cloud forest.", special: { name: 'Plume Flare', template: 'heal', color: '#3ad8a0' } },
+    { id: 'jagglow', displayName: 'Jagglow', artId: 'jagglow', facing: 'left', rare: true, habitats: ['tropical', 'swamp'], homes: ['south-america'], flavor: "At night, all you can see are its glowing spots.", special: { name: 'Night Pounce', template: 'strong', color: '#3ac8d8' } },
+    { id: 'kiwisp', displayName: 'Kiwisp', artId: 'kiwisp', facing: 'left', rare: true, habitats: ['forest', 'coast'], homes: ['oceania'], flavor: "A small round bird that leads lost hikers home by wisp-light.", special: { name: 'Wisp Trail', template: 'heal', color: '#c8e070' } },
+    { id: 'glaciarch', displayName: 'Glaciarch', artId: 'glaciarch', facing: 'left', rare: true, habitats: ['snow', 'coast'], homes: ['antarctica'], flavor: "An ancient ice whale that sings under the frozen sea.", special: { name: 'Glacier Song', template: 'protect', color: '#9fe0f0' } },
   ],
   souvenirs: [
     { id: 'compass', displayName: 'Carved Compass', artId: 'compass', flavor: 'Its needle always seems to be pointing somewhere exciting.' },

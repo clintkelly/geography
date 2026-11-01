@@ -1,0 +1,759 @@
+[
+{
+"id": "antigua-and-barbuda",
+"name": "Antigua and Barbuda",
+"fips": "028",
+"lonLat": [
+-61.8,
+17.08
+],
+"capital": "St. John's",
+"sameStateCities": [
+"All Saints",
+"Liberta",
+"Codrington"
+],
+"largestCity": "St. John's",
+"neighbors": [
+"dominica",
+"dominican-republic",
+"saint-kitts-and-nevis"
+],
+"hint": "two small islands in the Leeward Islands, east of Puerto Rico",
+"facts": [
+"Antigua is said to have 365 beaches, one for every day of the year.",
+"Codrington Lagoon on Barbuda has the Caribbean's largest frigatebird colony."
+],
+"nickname": null,
+"asks": [
+"Which country is said to have a beach for every day of the year?",
+"Which country has the largest frigatebird colony in the Caribbean, at Codrington Lagoon?"
+],
+"biome": "coast",
+"tiny": true
+},
+{
+"id": "bahamas",
+"name": "Bahamas",
+"fips": "044",
+"lonLat": [
+-78,
+24.4
+],
+"capital": "Nassau",
+"sameStateCities": [
+"Freeport",
+"Marsh Harbour",
+"George Town"
+],
+"largestCity": "Nassau",
+"neighbors": [
+"cuba",
+"usa"
+],
+"hint": "a long chain of islands just east of Florida",
+"facts": [
+"On Big Major Cay in the Bahamas, pigs swim out to meet passing boats.",
+"The flamingo is the national bird of the Bahamas."
+],
+"nickname": null,
+"asks": [
+"In which country do pigs swim out to meet boats at Big Major Cay?",
+"Which country has the flamingo as its national bird?"
+],
+"biome": "coast",
+"tiny": true,
+"sentenceName": "the Bahamas",
+"wiki": "The_Bahamas"
+},
+{
+"id": "barbados",
+"name": "Barbados",
+"fips": "052",
+"lonLat": [
+-59.55,
+13.17
+],
+"capital": "Bridgetown",
+"sameStateCities": [
+"Speightstown",
+"Holetown",
+"Oistins"
+],
+"largestCity": "Bridgetown",
+"neighbors": [
+"saint-lucia",
+"saint-vincent-and-the-grenadines",
+"trinidad-and-tobago"
+],
+"hint": "a small coral island out in the Atlantic, east of the other Caribbean islands",
+"facts": [
+"Barbados's flag shows the black head of a trident, the spear of the sea god Neptune.",
+"Barbados's national dish is cou-cou and flying fish."
+],
+"nickname": null,
+"asks": [
+"Which country's flag shows the black head of a trident?",
+"Which country has cou-cou and flying fish as its national dish?"
+],
+"biome": "coast",
+"tiny": true
+},
+{
+"id": "belize",
+"name": "Belize",
+"fips": "084",
+"lonLat": [
+-88.7,
+17.2
+],
+"capital": "Belmopan",
+"sameStateCities": [
+"San Ignacio",
+"Orange Walk Town",
+"Belize City"
+],
+"largestCity": "Belize City",
+"neighbors": [
+"guatemala",
+"mexico"
+],
+"hint": "a small country on the Caribbean coast, between Mexico and Guatemala",
+"facts": [
+"The Great Blue Hole, a giant round sinkhole in the sea, lies off the coast of Belize.",
+"Belize is the only country in Central America with English as its official language."
+],
+"nickname": null,
+"asks": [
+"Which country has the Great Blue Hole, a giant round sinkhole in the sea?",
+"Which country in Central America has English as its official language?"
+],
+"biome": "coast"
+},
+{
+"id": "canada",
+"name": "Canada",
+"fips": "124",
+"lonLat": [
+-100,
+56
+],
+"capital": "Ottawa",
+"sameStateCities": [
+"Toronto",
+"Vancouver",
+"Montreal"
+],
+"largestCity": "Toronto",
+"neighbors": [
+"usa"
+],
+"hint": "a huge northern country that stretches from the Atlantic to the Pacific and up to the Arctic",
+"facts": [
+"Canada has the longest coastline of any country in the world.",
+"Canada's flag shows a red maple leaf."
+],
+"nickname": null,
+"asks": [
+"Which country has the longest coastline in the world?",
+"Which country's flag shows a red maple leaf?"
+],
+"biome": "snow"
+},
+{
+"id": "costa-rica",
+"name": "Costa Rica",
+"fips": "188",
+"lonLat": [
+-84.2,
+10
+],
+"capital": "San José",
+"sameStateCities": [
+"Alajuela",
+"Cartago",
+"Limón"
+],
+"largestCity": "San José",
+"neighbors": [
+"nicaragua",
+"panama"
+],
+"hint": "a green country of rainforests and volcanoes between Nicaragua and Panama",
+"facts": [
+"\"Costa Rica\" means \"rich coast\" in Spanish.",
+"The misty Monteverde Cloud Forest grows high in the mountains of Costa Rica."
+],
+"nickname": null,
+"asks": [
+"Which country's name means \"rich coast\" in Spanish?",
+"Which country is home to the misty Monteverde Cloud Forest?"
+],
+"biome": "tropical"
+},
+{
+"id": "cuba",
+"name": "Cuba",
+"fips": "192",
+"lonLat": [
+-79,
+22
+],
+"capital": "Havana",
+"sameStateCities": [
+"Camagüey",
+"Santiago de Cuba",
+"Holguín"
+],
+"largestCity": "Havana",
+"neighbors": [
+"bahamas",
+"haiti",
+"jamaica",
+"mexico",
+"usa"
+],
+"hint": "the largest island in the Caribbean, just south of Florida",
+"facts": [
+"Cuba is the largest island in the Caribbean.",
+"The bee hummingbird, the world's smallest bird, lives only in Cuba."
+],
+"nickname": null,
+"asks": [
+"Which country is the largest island in the Caribbean?",
+"Which country is the only home of the bee hummingbird, the world's smallest bird?"
+],
+"biome": "coast"
+},
+{
+"id": "dominica",
+"name": "Dominica",
+"fips": "212",
+"lonLat": [
+-61.35,
+15.42
+],
+"capital": "Roseau",
+"sameStateCities": [
+"Portsmouth",
+"Marigot",
+"Berekua"
+],
+"largestCity": "Roseau",
+"neighbors": [
+"antigua-and-barbuda",
+"saint-lucia"
+],
+"hint": "a steep green island between Guadeloupe and Martinique",
+"facts": [
+"Dominica's Boiling Lake is the second-largest hot lake in the world.",
+"Dominica's flag shows a Sisserou parrot, the island's national bird."
+],
+"nickname": {
+"text": "Nature Island",
+"status": "unverified",
+"others": [
+"Nature Isle of the Caribbean"
+]
+},
+"asks": [
+"Which country has a steaming Boiling Lake, the second largest of its kind in the world?",
+"Which country's flag shows a Sisserou parrot?"
+],
+"biome": "forest",
+"tiny": true
+},
+{
+"id": "dominican-republic",
+"name": "Dominican Republic",
+"fips": "214",
+"lonLat": [
+-70.5,
+18.9
+],
+"capital": "Santo Domingo",
+"sameStateCities": [
+"Santiago",
+"La Romana",
+"Puerto Plata"
+],
+"largestCity": "Santo Domingo",
+"neighbors": [
+"antigua-and-barbuda",
+"haiti"
+],
+"hint": "the eastern part of Hispaniola, an island shared by two countries",
+"facts": [
+"Pico Duarte in the Dominican Republic is the highest mountain in the Caribbean.",
+"Merengue, a fast and joyful music and dance, comes from the Dominican Republic."
+],
+"nickname": null,
+"asks": [
+"Which country has the highest mountain in the Caribbean?",
+"Which country is the home of merengue music and dance?"
+],
+"biome": "mountain",
+"sentenceName": "the Dominican Republic"
+},
+{
+"id": "el-salvador",
+"name": "El Salvador",
+"fips": "222",
+"lonLat": [
+-88.9,
+13.75
+],
+"capital": "San Salvador",
+"sameStateCities": [
+"Santa Ana",
+"San Miguel",
+"Soyapango"
+],
+"largestCity": "San Salvador",
+"neighbors": [
+"guatemala",
+"honduras"
+],
+"hint": "the only country in Central America with no Caribbean coast",
+"facts": [
+"El Salvador is the smallest country in Central America by area.",
+"Pupusas, thick corn cakes stuffed with cheese or beans, are the national dish of El Salvador."
+],
+"nickname": null,
+"asks": [
+"Which country is the smallest in Central America by area?",
+"Pupusas, thick stuffed corn cakes, are the national dish of which country?"
+],
+"biome": "coast",
+"hint2": "This is the smallest country in Central America."
+},
+{
+"id": "grenada",
+"name": "Grenada",
+"fips": "308",
+"lonLat": [
+-61.68,
+12.12
+],
+"capital": "St. George's",
+"sameStateCities": [
+"Grenville",
+"Gouyave",
+"Sauteurs"
+],
+"largestCity": "St. George's",
+"neighbors": [
+"saint-vincent-and-the-grenadines",
+"trinidad-and-tobago"
+],
+"hint": "a small island in the southern Caribbean, just north of Trinidad",
+"facts": [
+"Grenada's flag shows a nutmeg, one of the spices the island is famous for.",
+"Grenada's Molinière Bay has an underwater sculpture park, often called the world's first."
+],
+"nickname": {
+"text": "Spice Isle",
+"status": "unverified",
+"others": [
+"Isle of Spice"
+]
+},
+"asks": [
+"Which country's flag shows a nutmeg?",
+"Which country has an underwater sculpture park at Molinière Bay?"
+],
+"biome": "tropical",
+"tiny": true
+},
+{
+"id": "guatemala",
+"name": "Guatemala",
+"fips": "320",
+"lonLat": [
+-90.4,
+15.5
+],
+"capital": "Guatemala City",
+"sameStateCities": [
+"Quetzaltenango",
+"Escuintla",
+"Cobán"
+],
+"largestCity": "Guatemala City",
+"neighbors": [
+"belize",
+"el-salvador",
+"honduras",
+"mexico"
+],
+"hint": "a land of volcanoes and Maya temples, just south of Mexico",
+"facts": [
+"Tikal, an ancient Maya city in Guatemala, has temples that rise above the jungle trees.",
+"Guatemala's money, the quetzal, is named after its bright green national bird."
+],
+"nickname": null,
+"asks": [
+"Which country is home to the ancient Maya city of Tikal?",
+"Which country's money is named after a bright green bird?"
+],
+"biome": "mountain",
+"hint2": "Volcanoes rise near the highland capital of this country."
+},
+{
+"id": "haiti",
+"name": "Haiti",
+"fips": "332",
+"lonLat": [
+-72.6,
+19.1
+],
+"capital": "Port-au-Prince",
+"sameStateCities": [
+"Gonaïves",
+"Cap-Haïtien",
+"Les Cayes"
+],
+"largestCity": "Port-au-Prince",
+"neighbors": [
+"cuba",
+"dominican-republic",
+"jamaica"
+],
+"hint": "the western part of Hispaniola, an island shared by two countries",
+"facts": [
+"Haiti's name comes from a Taíno word meaning \"land of high mountains.\"",
+"Soup joumou, a pumpkin soup, is a New Year's Day tradition in Haiti."
+],
+"nickname": null,
+"asks": [
+"Which country's name comes from a Taíno word meaning \"land of high mountains\"?",
+"In which country do families eat soup joumou, a pumpkin soup, on New Year's Day?"
+],
+"biome": "mountain"
+},
+{
+"id": "honduras",
+"name": "Honduras",
+"fips": "340",
+"lonLat": [
+-86.6,
+14.8
+],
+"capital": "Tegucigalpa",
+"sameStateCities": [
+"San Pedro Sula",
+"La Ceiba",
+"Choloma"
+],
+"largestCity": "Tegucigalpa",
+"neighbors": [
+"el-salvador",
+"guatemala",
+"nicaragua"
+],
+"hint": "a Central American country with a long Caribbean coast, between Guatemala and Nicaragua",
+"facts": [
+"Copán, an ancient Maya city in Honduras, has a stone stairway carved with the longest known Maya text.",
+"The scarlet macaw is the national bird of Honduras."
+],
+"nickname": null,
+"asks": [
+"Which country is home to the ancient Maya city of Copán, with its carved stone stairway?",
+"Which country has the scarlet macaw as its national bird?"
+],
+"biome": "forest"
+},
+{
+"id": "jamaica",
+"name": "Jamaica",
+"fips": "388",
+"lonLat": [
+-77.3,
+18.15
+],
+"capital": "Kingston",
+"sameStateCities": [
+"Montego Bay",
+"Spanish Town",
+"Portmore"
+],
+"largestCity": "Kingston",
+"neighbors": [
+"cuba",
+"haiti",
+"panama"
+],
+"hint": "a mountainous Caribbean island just south of Cuba",
+"facts": [
+"Reggae music comes from Jamaica.",
+"Jamaica's flag is black, green and gold, with no red, white or blue."
+],
+"nickname": null,
+"asks": [
+"Which island country is the home of reggae music?",
+"Which country's flag is black and green, crossed by a gold X?"
+],
+"biome": "tropical",
+"tiny": true
+},
+{
+"id": "mexico",
+"name": "Mexico",
+"fips": "484",
+"lonLat": [
+-102,
+24
+],
+"capital": "Mexico City",
+"sameStateCities": [
+"Guadalajara",
+"Monterrey",
+"Cancún"
+],
+"largestCity": "Mexico City",
+"neighbors": [
+"belize",
+"cuba",
+"guatemala",
+"usa"
+],
+"hint": "a large country just south of the United States, with coasts on the Pacific and the Caribbean",
+"facts": [
+"Every winter, millions of monarch butterflies from Canada and the United States gather in the mountain forests of Mexico.",
+"Mexico's flag shows an eagle on a cactus, holding a snake."
+],
+"nickname": null,
+"asks": [
+"In which country's mountain forests do millions of monarch butterflies gather each winter?",
+"Which country's flag shows an eagle on a cactus, holding a snake?"
+],
+"biome": "desert",
+"hint2": "The capital of this country stands on the site of the old Aztec city of Tenochtitlan."
+},
+{
+"id": "nicaragua",
+"name": "Nicaragua",
+"fips": "558",
+"lonLat": [
+-85,
+12.9
+],
+"capital": "Managua",
+"sameStateCities": [
+"León",
+"Granada",
+"Masaya"
+],
+"largestCity": "Managua",
+"neighbors": [
+"costa-rica",
+"honduras"
+],
+"hint": "a land of lakes and volcanoes between Honduras and Costa Rica",
+"facts": [
+"Lake Nicaragua is the largest lake in Central America.",
+"Ometepe, in Lake Nicaragua, is an island made of two volcanoes."
+],
+"nickname": null,
+"asks": [
+"Which country has the largest lake in Central America?",
+"Which country has Ometepe, an island of two volcanoes rising from a lake?"
+],
+"biome": "lake"
+},
+{
+"id": "panama",
+"name": "Panama",
+"fips": "591",
+"lonLat": [
+-80.2,
+8.5
+],
+"capital": "Panama City",
+"sameStateCities": [
+"Colón",
+"David",
+"Santiago"
+],
+"largestCity": "Panama City",
+"neighbors": [
+"costa-rica",
+"jamaica"
+],
+"hint": "a narrow country that links Central America and South America",
+"facts": [
+"The Panama Canal lets ships cross between the Atlantic and Pacific Oceans.",
+"The golden frog is a national symbol of Panama, with its own special day each August."
+],
+"nickname": null,
+"asks": [
+"Which country has a canal that joins the Atlantic and Pacific Oceans?",
+"Which country has a golden frog as a national symbol?"
+],
+"biome": "harbor",
+"hint2": "A famous canal cuts across this narrow country."
+},
+{
+"id": "saint-kitts-and-nevis",
+"name": "Saint Kitts and Nevis",
+"fips": "659",
+"lonLat": [
+-62.75,
+17.33
+],
+"capital": "Basseterre",
+"sameStateCities": [
+"Sandy Point Town",
+"Charlestown",
+"Dieppe Bay Town"
+],
+"largestCity": "Basseterre",
+"neighbors": [
+"antigua-and-barbuda"
+],
+"hint": "two small volcanic islands in the Leeward Islands",
+"facts": [
+"Saint Kitts and Nevis is the smallest country in the Americas, by both area and population.",
+"Alexander Hamilton, a founder of the United States, was born on the island of Nevis."
+],
+"nickname": null,
+"asks": [
+"Which is the smallest country in the Americas?",
+"Alexander Hamilton, a founder of the United States, was born on an island in which country?"
+],
+"biome": "tropical",
+"tiny": true
+},
+{
+"id": "saint-lucia",
+"name": "Saint Lucia",
+"fips": "662",
+"lonLat": [
+-60.97,
+13.9
+],
+"capital": "Castries",
+"sameStateCities": [
+"Gros Islet",
+"Soufrière",
+"Vieux Fort"
+],
+"largestCity": "Castries",
+"neighbors": [
+"barbados",
+"dominica",
+"saint-vincent-and-the-grenadines"
+],
+"hint": "a green volcanic island between Martinique and Saint Vincent",
+"facts": [
+"The Pitons are two steep volcanic peaks rising beside the sea in Saint Lucia.",
+"Saint Lucia's Sulphur Springs is often called a drive-in volcano."
+],
+"nickname": null,
+"asks": [
+"Which country has the Pitons, two steep volcanic peaks beside the sea?",
+"Which country's Sulphur Springs is often called a drive-in volcano?"
+],
+"biome": "tropical",
+"tiny": true
+},
+{
+"id": "saint-vincent-and-the-grenadines",
+"name": "Saint Vincent and the Grenadines",
+"fips": "670",
+"lonLat": [
+-61.2,
+13.25
+],
+"capital": "Kingstown",
+"sameStateCities": [
+"Georgetown",
+"Barrouallie",
+"Port Elizabeth"
+],
+"largestCity": "Kingstown",
+"neighbors": [
+"barbados",
+"grenada",
+"saint-lucia"
+],
+"hint": "a volcanic island with a chain of smaller islands trailing south toward Grenada",
+"facts": [
+"Wallilabou Bay on Saint Vincent was a filming location for the first Pirates of the Caribbean movie.",
+"The botanic gardens in Kingstown were started in 1765, making them among the oldest in the Americas."
+],
+"nickname": null,
+"asks": [
+"Which country has Wallilabou Bay, a filming location for the first Pirates of the Caribbean movie?",
+"Which country has botanic gardens in Kingstown that were started in 1765?"
+],
+"biome": "tropical",
+"tiny": true
+},
+{
+"id": "trinidad-and-tobago",
+"name": "Trinidad and Tobago",
+"fips": "780",
+"lonLat": [
+-61.25,
+10.45
+],
+"capital": "Port of Spain",
+"sameStateCities": [
+"Chaguanas",
+"San Fernando",
+"Arima"
+],
+"largestCity": "Chaguanas",
+"neighbors": [
+"barbados",
+"grenada"
+],
+"hint": "two islands just off the coast of Venezuela, at the south end of the Caribbean",
+"facts": [
+"The steelpan, a musical drum made from steel barrels, was developed in Trinidad and Tobago.",
+"Pitch Lake in Trinidad is the world's largest natural deposit of asphalt."
+],
+"nickname": null,
+"asks": [
+"In which country was the steelpan, a musical drum made from steel barrels, developed?",
+"Which country has Pitch Lake, the world's largest natural deposit of asphalt?"
+],
+"biome": "harbor",
+"tiny": true
+},
+{
+"id": "usa",
+"name": "United States",
+"fips": "840",
+"lonLat": [
+-98,
+39.5
+],
+"capital": "Washington, D.C.",
+"sameStateCities": [
+"New York City",
+"Los Angeles",
+"Chicago"
+],
+"largestCity": "New York City",
+"neighbors": [
+"bahamas",
+"canada",
+"cuba",
+"mexico"
+],
+"hint": "a big country with 50 states, between Canada and Mexico",
+"facts": [
+"Yellowstone, often called the world's first national park, is in the United States.",
+"The flag of the United States has 50 stars, one for each state."
+],
+"nickname": null,
+"asks": [
+"Which country is home to Yellowstone, often called the world's first national park?",
+"Which country's flag has 50 stars, one for each of its states?"
+],
+"biome": "plains",
+"sentenceName": "the United States"
+}
+]

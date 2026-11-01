@@ -15,7 +15,7 @@
   <img src="public/art/alpenhorn.png" alt="Alpenhorn" width="96">
 </p>
 
-Atlaswild is a browser game for kids that makes geography practice feel like an expedition. You pick a mystery creature, follow it from place to place using clues, win quiz-powered battles, and bring it home to your stable. It covers all 50 US states and 44 European countries.
+Atlaswild is a browser game for kids that makes geography practice feel like an expedition. You pick a mystery creature, follow it from place to place using clues, win quiz-powered battles, and bring it home to your stable. It covers the whole world: all 50 US states, 196 countries on six continents, and 10 Antarctic landmarks. Big continents are split into smaller regions, 21 in all, so each map stays readable.
 
 ## Install
 
@@ -43,7 +43,7 @@ Saves live in your browser, on that computer, at that address. Nothing goes onli
 2. **Pick a sighting at camp.** Choose a region, a trail length, and a difficulty.
 3. **Prepare.** Pick a team of up to 5 from your stable and spend Trail Points in the Prep Shop, or save them for clues. Creatures hit harder in their home landscapes, and you can switch during a fight.
 4. **Follow the trail.** Use clues and the free atlas to work out where the creature went.
-5. **Win encounters.** Choose Attack, Guard, or your Special, then answer a question. A right answer makes your move work.
+5. **Win encounters.** Choose Attack, Guard, or your Special, then answer a question. A right answer makes your move work. Changed your mind? You can pick another move before you answer, and the question stays the same.
 6. **Befriend the creature.** Wear it down in the final showdown, then answer one more question to bring it home.
 
 Field Notes after right answers are worth reading. They come back as Field Note checks, which land as critical hits.
@@ -69,7 +69,7 @@ The whole game works from the keyboard. Buttons show their keys.
 | Prep Shop | **1–9** add or remove a team member, **S**, **C**, **T** to buy |
 | Finding a place | **1–4** choose, **C** clue, **N** narrow the search, **A** atlas |
 | Blank maps | Arrow keys move the highlight, **Enter** chooses |
-| Battle | **A** Attack, **G** Guard, **S** Special, **W** switch creature, **H** Trail Snack, **B** Befriend or Bold Befriend, **1–4** answer |
+| Battle | **A** Attack, **G** Guard, **S** Special, **W** switch creature, **H** Trail Snack, **B** Befriend or Bold Befriend, **C** or **Esc** change move, **1–4** answer |
 | Maps | **+** and **−** zoom |
 
 ## Update it with Claude

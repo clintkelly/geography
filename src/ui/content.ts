@@ -11,12 +11,15 @@ export const region = (id: string) => PACK.regions.find((r) => r.id === id) as R
 
 const regionMaps = new Map<string, MapDef>();
 
-/** Frames a US region on its own states, keeping the whole-country view as a button. */
+/** Frames a region on its own places, keeping the wider view as a button. */
 function zoomedTo(regionId: string, map: MapDef): MapDef {
   const points = PACK.places.filter((p) => p.regionId === regionId).map((p) => map.project(p.lonLat));
   const xs = points.map((p) => p[0]);
   const ys = points.map((p) => p[1]);
-  const [x0, x1, y0, y1] = [Math.min(...xs) - 50, Math.max(...xs) + 50, Math.min(...ys) - 45, Math.max(...ys) + 45];
+  // World maps draw places far smaller than the US map, so the margin follows the region's size.
+  const padX = map.id === 'us' ? 50 : Math.max(14, (Math.max(...xs) - Math.min(...xs)) * 0.14);
+  const padY = map.id === 'us' ? 45 : Math.max(12, (Math.max(...ys) - Math.min(...ys)) * 0.14);
+  const [x0, x1, y0, y1] = [Math.min(...xs) - padX, Math.max(...xs) + padX, Math.min(...ys) - padY, Math.max(...ys) + padY];
   const ratio = map.height / map.width;
   const w = Math.max(x1 - x0, (y1 - y0) / ratio);
   const view: View = clampView({ x: (x0 + x1 - w) / 2, y: (y0 + y1 - w * ratio) / 2, w }, map);
@@ -25,7 +28,8 @@ function zoomedTo(regionId: string, map: MapDef): MapDef {
 
 export function mapFor(regionId: string): MapDef {
   const base = MAPS[region(regionId).mapId];
-  if (base.id !== 'us') return base;
+  // Antarctica already fills its own map.
+  if (base.id === 'antarctica') return base;
   const cached = regionMaps.get(regionId);
   if (cached) return cached;
   const zoomed = zoomedTo(regionId, base);

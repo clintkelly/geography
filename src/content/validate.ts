@@ -54,7 +54,7 @@ export function validateRecords(records: readonly PlaceRecord[]): string[] {
   const problems: string[] = [];
   for (const s of records) {
     const cities = s.sameStateCities;
-    if (s.id !== 'vatican' && cities.length !== 3) problems.push(`${s.id}: needs 3 same-place cities`);
+    if (!s.cityState && cities.length !== 3) problems.push(`${s.id}: needs 3 same-place cities`);
     if (new Set(cities).size !== cities.length) problems.push(`${s.id}: duplicate city`);
     if (cities.includes(s.capital)) problems.push(`${s.id}: capital listed as a wrong answer`);
     if (s.largestCity !== s.capital && !cities.includes(s.largestCity)) problems.push(`${s.id}: largest city is not offered`);

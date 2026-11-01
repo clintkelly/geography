@@ -261,8 +261,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .rise-3 { left: 58%; animation-delay: 140ms; } .rise-4 { left: 74%; animation-delay: 380ms; } .rise-5 { left: 90%; animation-delay: 640ms; }
 .celebrate { position: relative; width: 300px; display: grid; justify-items: center; }
 @keyframes banner-in { 0% { transform: translateX(-50%) scale(0.4) rotate(-6deg); opacity: 0; } 60% { transform: translateX(-50%) scale(1.12); opacity: 1; } 100% { transform: translateX(-50%) scale(1); } }
-.friend-banner { position: absolute; z-index: 6; inset: 0; pointer-events: none; }
-.friend-banner strong { position: absolute; top: 34%; left: 50%; transform: translateX(-50%); background: #fff8e1; border: 3px solid var(--candidate); border-radius: 12px; padding: 6px 22px; font-size: 2rem; animation: banner-in 500ms ease-out; }
+.friend-banner, .victory-banner { position: absolute; z-index: 6; inset: 0; pointer-events: none; }
+.victory-banner strong { color: #2f7a3f; }
+.friend-banner strong, .victory-banner strong { position: absolute; top: 34%; left: 50%; transform: translateX(-50%); background: #fff8e1; border: 3px solid var(--candidate); border-radius: 12px; padding: 6px 22px; font-size: 2rem; animation: banner-in 500ms ease-out; }
 
 @keyframes vs-left { from { transform: translateX(-240px); } to { transform: translateX(0); } }
 @keyframes vs-right { from { transform: translateX(240px); } to { transform: translateX(0); } }
@@ -351,6 +352,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .picked-note { font-size: 1.15rem; background: rgba(255, 255, 255, 0.6); border-left: 5px solid #c9863f; border-radius: 6px; padding: 8px 12px; }
 .picked-note span { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #9a5a14; }
 
+.move-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.continent-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%; }
+.continent-name { font-size: 0.78rem; font-weight: 700; color: var(--muted); min-width: 104px; }
 .tame-button { width: 100%; max-width: 420px; background: #fff1f5; border-color: #d8628a; font-weight: 700; }
 .tame-button small { display: block; font-weight: 400; font-size: 0.72rem; }
 

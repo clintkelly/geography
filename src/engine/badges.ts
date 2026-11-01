@@ -11,13 +11,17 @@ export interface Badge {
 }
 
 const foundAll = (ids: string[]) => (s: SaveData) => ids.every((id) => s.foundPlaces.includes(id));
-const regionDone = (regionId: string) => (s: SaveData, pack: Pack) => pack.places.filter((p) => p.regionId === regionId).every((p) => s.foundPlaces.includes(p.id));
+const regionDone = (regionId: string) => (s: SaveData, pack: Pack) => pack.places.filter((p) => p.regionId === regionId || p.regionId.startsWith(`${regionId}-`)).every((p) => s.foundPlaces.includes(p.id));
 
 export const BADGES: readonly Badge[] = [
   { id: 'west', name: 'Western Trailblazer', hint: 'Find every state in the American West', earned: regionDone('us-west') },
   { id: 'midwest', name: 'Heartland Hero', hint: 'Find every state in the Midwest', earned: regionDone('us-midwest') },
   { id: 'south', name: 'Southern Star', hint: 'Find every state in the South', earned: regionDone('us-south') },
   { id: 'northeast', name: 'Northeast Navigator', hint: 'Find every state in the Northeast', earned: regionDone('us-northeast') },
+  { id: 'europe-north', name: 'Northern Lights', hint: 'Find every country in Northern Europe', earned: regionDone('europe-north') },
+  { id: 'europe-west', name: 'Western Wanderer', hint: 'Find every country in Western Europe', earned: regionDone('europe-west') },
+  { id: 'europe-south', name: 'Southern Sunseeker', hint: 'Find every country in Southern Europe', earned: regionDone('europe-south') },
+  { id: 'europe-east', name: 'Eastern Explorer', hint: 'Find every country in Eastern Europe', earned: regionDone('europe-east') },
   { id: 'europe', name: 'Grand Tour of Europe', hint: 'Find every country in Europe', earned: regionDone('europe') },
   { id: 'new-england', name: 'All of New England', hint: 'Find all six New England states', earned: foundAll(['connecticut', 'maine', 'massachusetts', 'new-hampshire', 'rhode-island', 'vermont']) },
   { id: 'great-lakes', name: 'Found the Great Lakes', hint: 'Find all eight states that touch the Great Lakes', earned: foundAll(['illinois', 'indiana', 'michigan', 'minnesota', 'new-york', 'ohio', 'pennsylvania', 'wisconsin']) },

@@ -9,7 +9,7 @@ import { CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { Stable } from './Stable';
-import { WorldMap, type Highlight } from './WorldMap';
+import { Dot, WorldMap, type Highlight } from './WorldMap';
 
 const DESCRIPTIONS: Record<Difficulty, string> = {
   scout: 'Faraway wrong answers',
@@ -96,8 +96,13 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         </div>
         <div className="picker" role="group" aria-label="Region">
           <span className="muted">Where <Key k="R" /></span>
-          {regions.map((r) => (
-            <button key={r.id} type="button" aria-pressed={r.id === regionId} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label}</button>
+          {[...new Set(regions.map((r) => r.continent))].map((continent) => (
+            <div key={continent} className="continent-row">
+              <span className="continent-name">{continent}</span>
+              {regions.filter((r) => r.continent === continent).map((r) => (
+                <button key={r.id} type="button" aria-pressed={r.id === regionId} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label}</button>
+              ))}
+            </div>
           ))}
         </div>
         <div className="picker" role="group" aria-label="Trail length">
@@ -126,7 +131,9 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
 
       <section className="panel">
         <h2>Explorer's Map: {found.length} of {places.length} in {region(regionId).label}</h2>
-        <div className="explorer-map"><WorldMap map={mapFor(regionId)} label={`Map of ${region(regionId).label} with ${found.length} of ${places.length} places found`} highlights={mapHighlights} interactive={false} /></div>
+        <div className="explorer-map"><WorldMap key={regionId} map={mapFor(regionId)} label={`Map of ${region(regionId).label} with ${found.length} of ${places.length} places found`} highlights={mapHighlights} interactive={false}>
+          {(scale) => places.filter((p) => p.tiny).map((p) => <Dot key={p.id} id={p.id} at={mapFor(regionId).project(p.lonLat)} scale={scale} tone={found.includes(p) ? 'correct' : 'default'} />)}
+        </WorldMap></div>
         <p className="muted">{rareOwned ? `You filled this map and befriended ${rare?.displayName}!` : isRegionComplete(save.foundPlaces, PACK, regionId) ? 'Map complete! A rare creature has been sighted here.' : 'Fill the whole map to reveal a rare creature.'}</p>
       </section>
 
@@ -141,7 +148,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
       </section>
 
       <section className="panel">
-        <h2>{regionId === 'europe' ? 'Country' : 'State'} Cards: {earnedCards.length} of {regionCards.length}</h2>
+        <h2>{regionId.startsWith('us-') ? 'State' : regionId === 'antarctica' ? 'Landmark' : 'Country'} Cards: {earnedCards.length} of {regionCards.length}</h2>
         <ul className="album">
           {regionCards.map((c) => {
             const has = save.stateCards.includes(c.placeId);

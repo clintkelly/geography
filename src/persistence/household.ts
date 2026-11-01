@@ -1,5 +1,5 @@
 import type { Pack } from '../content/types';
-import { DEFAULT_SETTINGS, makeOffers, newSave, SCHEMA_VERSION, type Companion, type SaveData } from '../engine/game';
+import { DEFAULT_SETTINGS, makeOffers, newSave, RECENT_QUESTION_LIMIT, SCHEMA_VERSION, type Companion, type SaveData } from '../engine/game';
 import { Rng } from '../engine/rng';
 import { UnsupportedSaveError, type Household, type SaveStore } from './store';
 
@@ -87,9 +87,36 @@ export function migrateV3Save(old: SaveData, pack: Pack): SaveData {
   return migrateV4Save({ ...rest, contentVersion: pack.version, seenFacts: [], offers, nextId, rngState: rng.state });
 }
 
+const EUROPE_REGIONS = ['europe-north', 'europe-west', 'europe-south', 'europe-east'];
+
+/** Version 5 had one Europe region, now four. Its sightings are redrawn. A trip there can't continue, so it ends; everything earned stays. */
+export function migrateV5Save(old: SaveData, pack: Pack): SaveData {
+  const s = structuredClone(old);
+  const rng = new Rng(s.rngState);
+  const { offers, nextId } = makeOffers(s, pack, rng);
+  const onDeadTrip = s.expedition?.regionId === 'europe';
+  const recent = onDeadTrip ? [...s.recentQuestionIds, ...(s.expedition?.askedQuestionIds ?? [])].slice(-RECENT_QUESTION_LIMIT) : s.recentQuestionIds;
+  return {
+    ...s,
+    schemaVersion: SCHEMA_VERSION,
+    contentVersion: pack.version,
+    offers,
+    nextId,
+    rngState: rng.state,
+    recentQuestionIds: recent,
+    expedition: onDeadTrip ? null : s.expedition,
+    settings: {
+      ...s.settings,
+      lastRegionId: s.settings.lastRegionId === 'europe' ? 'europe-west' : s.settings.lastRegionId,
+      disabledRegions: s.settings.disabledRegions.flatMap((id) => (id === 'europe' ? EUROPE_REGIONS : [id])),
+    },
+  };
+}
+
 function upgrade(h: Household, pack: Pack): Household {
   const v = h.meta.schemaVersion;
-  const step = v === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : v === 3 ? (s: SaveData) => migrateV3Save(s, pack) : migrateV4Save;
+  const older = v === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : v === 3 ? (s: SaveData) => migrateV3Save(s, pack) : v === 4 ? migrateV4Save : (s: SaveData) => s;
+  const step = (s: SaveData) => migrateV5Save(older(s), pack);
   return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles: Object.fromEntries(Object.entries(h.profiles).map(([id, s]) => [id, step(s)])) };
 }
 

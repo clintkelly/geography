@@ -1,4 +1,4 @@
-import { geoAlbersUsa, geoNaturalEarth1, geoPath, type GeoPermissibleObjects, type GeoProjection } from 'd3-geo';
+import { geoAlbersUsa, geoAzimuthalEqualArea, geoNaturalEarth1, geoPath, type GeoPermissibleObjects, type GeoProjection } from 'd3-geo';
 import { feature } from 'topojson-client';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 import states from 'us-atlas/states-10m.json';
@@ -11,7 +11,7 @@ export interface View {
 }
 
 export interface MapDef {
-  id: 'world' | 'us';
+  id: 'world' | 'pacific' | 'antarctica' | 'us';
   width: number;
   height: number;
   features: { id: string; d: string }[];
@@ -65,7 +65,24 @@ export const usMap: MapDef = {
   presets: [{ label: 'USA', view: { x: 0, y: 0, w: usBase.width } }],
 };
 
-export const MAPS = { world: worldMap, us: usMap };
+// The Pacific islands straddle the edge of the usual world map, so this one is centered on them.
+const pacificBase = build('pacific', 960, 500, geoNaturalEarth1().rotate([-165, 0]), world, 'countries', { type: 'Sphere' }, () => true);
+
+export const pacificMap: MapDef = {
+  ...pacificBase,
+  presets: [{ label: 'Pacific', view: { x: 0, y: 0, w: pacificBase.width } }],
+};
+
+// Antarctica looks like a smear along the bottom of a world map, so it gets a view from above the pole.
+const ANTARCTICA = '010';
+const antarcticaBase = build('antarctica', 800, 700, geoAzimuthalEqualArea().rotate([0, 90]), world, 'countries', null, (id) => id === ANTARCTICA);
+
+export const antarcticaMap: MapDef = {
+  ...antarcticaBase,
+  presets: [{ label: 'Antarctica', view: { x: 0, y: 0, w: antarcticaBase.width } }],
+};
+
+export const MAPS = { world: worldMap, pacific: pacificMap, antarctica: antarcticaMap, us: usMap };
 
 export function clampView(v: View, map: MapDef): View {
   const w = Math.min(map.width, Math.max(70, v.w));

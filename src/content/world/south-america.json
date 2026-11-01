@@ -1,0 +1,397 @@
+[
+{
+"id": "argentina",
+"name": "Argentina",
+"fips": "032",
+"lonLat": [
+-64,
+-34
+],
+"capital": "Buenos Aires",
+"sameStateCities": [
+"Córdoba",
+"Rosario",
+"Mendoza"
+],
+"largestCity": "Buenos Aires",
+"neighbors": [
+"bolivia",
+"brazil",
+"chile",
+"paraguay",
+"uruguay"
+],
+"hint": "a huge country of grassy pampas and icy Patagonia, east of the Andes",
+"facts": [
+"Aconcagua, in Argentina, is the highest mountain in the Americas.",
+"Huge chunks of ice crash from the Perito Moreno Glacier into a lake in Argentina."
+],
+"nickname": null,
+"asks": [
+"Which country has Aconcagua, the highest mountain in the Americas?",
+"Which country has the Perito Moreno Glacier, where huge chunks of ice crash into a lake?"
+],
+"biome": "plains"
+},
+{
+"id": "bolivia",
+"name": "Bolivia",
+"fips": "068",
+"lonLat": [
+-65,
+-17
+],
+"capital": "Sucre",
+"sameStateCities": [
+"Santa Cruz",
+"Cochabamba",
+"Potosí"
+],
+"largestCity": "Santa Cruz",
+"neighbors": [
+"argentina",
+"brazil",
+"chile",
+"paraguay",
+"peru"
+],
+"hint": "a landlocked country high in the Andes, in the middle of South America",
+"facts": [
+"Salar de Uyuni in Bolivia is the largest salt flat in the world.",
+"Sucre is the capital in Bolivia's constitution, but the president and congress work in La Paz."
+],
+"nickname": null,
+"asks": [
+"Which country has Salar de Uyuni, the largest salt flat in the world?",
+"Which country has Sucre as its capital in the constitution, while its president and congress work in La Paz?"
+],
+"biome": "mountain"
+},
+{
+"id": "brazil",
+"name": "Brazil",
+"fips": "076",
+"lonLat": [
+-53,
+-10
+],
+"capital": "Brasília",
+"sameStateCities": [
+"São Paulo",
+"Rio de Janeiro",
+"Salvador"
+],
+"largestCity": "São Paulo",
+"neighbors": [
+"argentina",
+"bolivia",
+"colombia",
+"guyana",
+"paraguay",
+"peru",
+"suriname",
+"uruguay",
+"venezuela"
+],
+"hint": "the giant country on South America's Atlantic side, crossed by the Amazon River",
+"facts": [
+"Brazil is the largest country in South America, covering nearly half the continent.",
+"Brazil is the only country in the Americas with Portuguese as its official language."
+],
+"nickname": null,
+"hint2": "This country's capital is a planned city that opened in 1960, far from the coast.",
+"asks": [
+"Which is the largest country in South America?",
+"Which is the only country in the Americas with Portuguese as its official language?"
+],
+"biome": "tropical"
+},
+{
+"id": "chile",
+"name": "Chile",
+"fips": "152",
+"lonLat": [
+-71,
+-33
+],
+"capital": "Santiago",
+"sameStateCities": [
+"Valparaíso",
+"Concepción",
+"Antofagasta"
+],
+"largestCity": "Santiago",
+"neighbors": [
+"argentina",
+"bolivia",
+"peru"
+],
+"hint": "a long, thin country between the Andes and the Pacific Ocean",
+"facts": [
+"Chile is more than 4,000 km long, but on average less than 200 km wide.",
+"Easter Island, home of the giant moai statues, is part of Chile."
+],
+"nickname": null,
+"asks": [
+"Which South American country is more than 4,000 km long, but on average less than 200 km wide?",
+"Easter Island, home of the giant moai statues, is part of which country?"
+],
+"biome": "desert"
+},
+{
+"id": "colombia",
+"name": "Colombia",
+"fips": "170",
+"lonLat": [
+-73,
+4.5
+],
+"capital": "Bogotá",
+"sameStateCities": [
+"Medellín",
+"Cali",
+"Cartagena"
+],
+"largestCity": "Bogotá",
+"neighbors": [
+"brazil",
+"ecuador",
+"peru",
+"venezuela"
+],
+"hint": "the country at South America's north-west corner, where the continent meets Central America",
+"facts": [
+"Colombia is the only South American country with coasts on both the Pacific Ocean and the Caribbean Sea.",
+"Caño Cristales in Colombia is called the River of Five Colors because plants in it turn bright red."
+],
+"nickname": null,
+"asks": [
+"Which is the only South American country with coasts on both the Pacific Ocean and the Caribbean Sea?",
+"Which country has Caño Cristales, the River of Five Colors?"
+],
+"biome": "tropical"
+},
+{
+"id": "ecuador",
+"name": "Ecuador",
+"fips": "218",
+"lonLat": [
+-78.5,
+-1.5
+],
+"capital": "Quito",
+"sameStateCities": [
+"Guayaquil",
+"Cuenca",
+"Manta"
+],
+"largestCity": "Guayaquil",
+"neighbors": [
+"colombia",
+"peru"
+],
+"hint": "a small Andean country on the Pacific coast, between Colombia and Peru",
+"facts": [
+"Ecuador's name is the Spanish word for the equator, which runs across the country.",
+"The Galápagos Islands, home of giant tortoises, belong to Ecuador."
+],
+"nickname": null,
+"asks": [
+"Which country's name is the Spanish word for the equator?",
+"Which country do the Galápagos Islands, home of giant tortoises, belong to?"
+],
+"biome": "mountain"
+},
+{
+"id": "guyana",
+"name": "Guyana",
+"fips": "328",
+"lonLat": [
+-59,
+5
+],
+"capital": "Georgetown",
+"sameStateCities": [
+"Linden",
+"New Amsterdam",
+"Bartica"
+],
+"largestCity": "Georgetown",
+"neighbors": [
+"brazil",
+"suriname",
+"venezuela"
+],
+"hint": "a rainforest country on South America's north coast, between Venezuela and Suriname",
+"facts": [
+"English is the official language of Guyana.",
+"Kaieteur Falls in Guyana plunges 226 m in a single drop, about four times the height of Niagara Falls."
+],
+"nickname": null,
+"asks": [
+"Which South American country has English as its official language?",
+"Which country has Kaieteur Falls, about four times the height of Niagara Falls?"
+],
+"biome": "forest"
+},
+{
+"id": "paraguay",
+"name": "Paraguay",
+"fips": "600",
+"lonLat": [
+-58,
+-23.5
+],
+"capital": "Asunción",
+"sameStateCities": [
+"Ciudad del Este",
+"Encarnación",
+"Luque"
+],
+"largestCity": "Asunción",
+"neighbors": [
+"argentina",
+"bolivia",
+"brazil"
+],
+"hint": "a landlocked country in the heart of South America, between Argentina, Bolivia and Brazil",
+"facts": [
+"Paraguay's flag shows a different emblem on each side.",
+"Most people in Paraguay speak both Spanish and Guaraní, an Indigenous language."
+],
+"nickname": null,
+"asks": [
+"Which South American country's flag shows a different emblem on each side?",
+"In which South American country do most people speak both Spanish and Guaraní?"
+],
+"biome": "plains"
+},
+{
+"id": "peru",
+"name": "Peru",
+"fips": "604",
+"lonLat": [
+-75,
+-10
+],
+"capital": "Lima",
+"sameStateCities": [
+"Arequipa",
+"Cusco",
+"Trujillo"
+],
+"largestCity": "Lima",
+"neighbors": [
+"bolivia",
+"brazil",
+"chile",
+"colombia",
+"ecuador"
+],
+"hint": "an Andean country on the Pacific coast, between Ecuador and Chile",
+"facts": [
+"Machu Picchu is a stone city built by the Inca, high in the Andes of Peru.",
+"The Nazca Lines are giant animal drawings marked into the desert of southern Peru."
+],
+"nickname": null,
+"asks": [
+"In which country is the Inca mountain city of Machu Picchu?",
+"In which country are the Nazca Lines, giant animal drawings in the desert?"
+],
+"biome": "mountain"
+},
+{
+"id": "suriname",
+"name": "Suriname",
+"fips": "740",
+"lonLat": [
+-56,
+4
+],
+"capital": "Paramaribo",
+"sameStateCities": [
+"Lelydorp",
+"Nieuw Nickerie",
+"Moengo"
+],
+"largestCity": "Paramaribo",
+"neighbors": [
+"brazil",
+"guyana"
+],
+"hint": "a small rainforest country on South America's north coast, just east of Guyana",
+"facts": [
+"Suriname is the smallest country in South America, by both land and people.",
+"Dutch is the official language of Suriname."
+],
+"nickname": null,
+"asks": [
+"Which is the smallest country in South America, by both land and people?",
+"Which South American country has Dutch as its official language?"
+],
+"biome": "forest"
+},
+{
+"id": "uruguay",
+"name": "Uruguay",
+"fips": "858",
+"lonLat": [
+-56,
+-33
+],
+"capital": "Montevideo",
+"sameStateCities": [
+"Salto",
+"Paysandú",
+"Maldonado"
+],
+"largestCity": "Montevideo",
+"neighbors": [
+"argentina",
+"brazil"
+],
+"hint": "a small, grassy country on the Atlantic coast, between Argentina and Brazil",
+"facts": [
+"Uruguay hosted and won the first soccer World Cup in 1930.",
+"Uruguay has more than three cows for every person."
+],
+"nickname": null,
+"asks": [
+"Which country hosted and won the first soccer World Cup in 1930?",
+"Which South American country has more than three cows for every person?"
+],
+"biome": "plains"
+},
+{
+"id": "venezuela",
+"name": "Venezuela",
+"fips": "862",
+"lonLat": [
+-66,
+7
+],
+"capital": "Caracas",
+"sameStateCities": [
+"Maracaibo",
+"Valencia",
+"Barquisimeto"
+],
+"largestCity": "Caracas",
+"neighbors": [
+"brazil",
+"colombia",
+"guyana"
+],
+"hint": "a country on the Caribbean coast of South America, between Colombia and Guyana",
+"facts": [
+"Angel Falls in Venezuela, 979 m high, is usually counted as the world's tallest waterfall.",
+"NASA satellite data ranked Lake Maracaibo in Venezuela as Earth's top lightning hotspot."
+],
+"nickname": null,
+"asks": [
+"Which country has Angel Falls, usually counted as the world's tallest waterfall?",
+"Which country has Lake Maracaibo, ranked by NASA as Earth's top lightning hotspot?"
+],
+"biome": "tropical"
+}
+]

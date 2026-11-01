@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TRAIL_EVENTS } from '../engine/events';
+import { TRACKS } from '../ui/music';
 import { PACK } from './pack';
 
 const ART = 'public/art';
@@ -21,6 +22,13 @@ function png(id: string) {
   const b = readFileSync(`${ART}/${id}.png`);
   return { signature: b.subarray(1, 4).toString(), w: b.readUInt32BE(16), h: b.readUInt32BE(20), colorType: b[25], hasTrns: b.includes('tRNS'), size: b.length };
 }
+
+describe('music', () => {
+  it('has a file for every track', () => {
+    for (const track of TRACKS) expect(existsSync(`public/music/${track}.mp3`), track).toBe(true);
+    expect(readdirSync('public/music').sort()).toEqual(TRACKS.map((t) => `${t}.mp3`).sort());
+  });
+});
 
 describe('art', () => {
   it('has a file for every reference', () => {
@@ -56,12 +64,6 @@ describe('art', () => {
 
   it('every avatar choice is a creature', () => {
     for (const s of PACK.species) expect(existsSync(`${ART}/${s.artId}.png`), s.id).toBe(true);
-  });
-});
-
-describe('music', () => {
-  it('has both tracks', () => {
-    expect(readdirSync('public/music').sort()).toEqual(['battle.mp3', 'camp.mp3']);
   });
 });
 

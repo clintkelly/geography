@@ -1,4 +1,4 @@
-import { spaced } from '../content/geo';
+import { degreesApart, spaced } from '../content/geo';
 import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
 import { canUse, enemyStrikes, heal, MAX_CHARGE, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
@@ -13,12 +13,12 @@ import { streakReward } from './streak';
 import { Rng } from './rng';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 const RECALL_CHANCE = 0.4;
 const REVIEW_CHANCE = 0.5;
 const ATTEMPT_LIMIT = 500;
 export const BOND_BONUS_XP = 10;
-const RECENT_QUESTION_LIMIT = 24;
+export const RECENT_QUESTION_LIMIT = 24;
 
 export const BALANCE = {
   enemyPattern: [2, 2, 4],
@@ -71,6 +71,8 @@ export interface Battle {
   result?: TurnResult;
   /** Right answers so far in a Bold Befriend attempt. */
   tameHits?: number;
+  /** Questions put aside by Bold Befriend, so changing moves can't deal a new, easier one. */
+  heldQuestions?: { regular: Question; tame?: Question };
   /** HP and charge of each team member, by instance id. The active one's live values are in `combat`. */
   bench?: Record<string, { hp: number; charge: number }>;
   /** The active creature fainted, so the next move must be a switch. */
@@ -253,6 +255,7 @@ export type Command =
   | { type: 'guess'; locationId: string }
   | { type: 'enterEncounter' }
   | { type: 'chooseAction'; action: CombatAction | 'befriend' | 'tame' }
+  | { type: 'changeMove' }
   | { type: 'useSnack' }
   | { type: 'answer'; optionId: string }
   | { type: 'continue' }
@@ -295,8 +298,7 @@ function questionPool(pack: Pack, e: Pick<Expedition, 'regionId' | 'difficulty'>
 }
 
 function nearestFirst(places: readonly Place[], target: Place): Place[] {
-  const d = (p: Place) => Math.hypot(p.lonLat[0] - target.lonLat[0], p.lonLat[1] - target.lonLat[1]);
-  return [...places].sort((a, b) => d(a) - d(b));
+  return [...places].sort((a, b) => degreesApart(a, target) - degreesApart(b, target));
 }
 
 /** Every place in a region has been found: its map is full. */
@@ -624,12 +626,24 @@ export function canTame(save: SaveData, b: Battle, slot: Slot): boolean {
 function startTame(save: SaveData, e: Expedition, b: Battle, pack: Pack): SaveData {
   const slot = e.slots[b.slotIndex] as Slot;
   if (!canTame(save, b, slot)) return save;
+  const regular = b.heldQuestions?.regular ?? b.question;
+  const held = b.heldQuestions?.tame;
+  if (held) return { ...save, expedition: { ...e, battle: { ...b, phase: 'question', action: 'tame', question: held, heldQuestions: { regular } } } };
   const harder = DIFFICULTIES[Math.min(DIFFICULTIES.indexOf(e.difficulty) + 1, DIFFICULTIES.length - 1)] as Difficulty;
   const pool = questionPool(pack, { regionId: e.regionId, difficulty: harder }).filter((q) => !q.recallOf);
   const rng = new Rng(e.rngState);
   const picked = pickQuestion(pool, { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
   const question = presentQuestion(picked, rng);
-  return { ...save, expedition: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id], battle: { ...b, phase: 'question', action: 'tame', question } } };
+  return { ...save, expedition: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id], battle: { ...b, phase: 'question', action: 'tame', question, heldQuestions: { regular } } } };
+}
+
+/** Back to the move buttons before answering. The question stays dealt, so this can't swap a hard one. */
+function changeMove(save: SaveData, e: Expedition, b: Battle): SaveData {
+  if (b.phase !== 'question' || b.befriending) return save;
+  const { action, ...rest } = b;
+  if (action !== 'tame') return { ...save, expedition: { ...e, battle: { ...rest, phase: 'choose' } } };
+  const regular = b.heldQuestions?.regular ?? b.question;
+  return { ...save, expedition: { ...e, battle: { ...rest, phase: 'choose', question: regular, heldQuestions: { regular, tame: b.question } } } };
 }
 
 /** A card this answer raised a level, if any. A new card is announced separately. */
@@ -812,7 +826,7 @@ function continueBattle(save: SaveData, pack: Pack, now: number): SaveData {
   }
 
   const dealt = dealQuestion(save, e, slot, pack, now);
-  const { result: _result, action: _action, ...rest } = b;
+  const { result: _result, action: _action, heldQuestions: _held, ...rest } = b;
   const befriending = b.combat.outcome === 'victory' ? { befriending: true } : {};
   return { ...save, expedition: { ...dealt.e, battle: { ...rest, ...befriending, phase: 'choose', question: dealt.question } } };
 }
@@ -957,6 +971,8 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       const allowed = b.befriending ? cmd.action === 'befriend' : cmd.action !== 'befriend' && canUse(b.combat, cmd.action);
       return allowed ? withExpedition({ ...e, battle: { ...b, phase: 'question', action: cmd.action } }) : save;
     }
+    case 'changeMove':
+      return e?.battle ? changeMove(save, e, e.battle) : save;
     case 'useSnack': {
       const b = e?.battle;
       if (!e || !b || !e.snack || b.phase !== 'choose' || b.befriending || b.mustSwitch || b.combat.playerHp >= b.combat.playerMaxHp) return save;

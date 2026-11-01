@@ -1,8 +1,8 @@
 import { IDBFactory } from 'fake-indexeddb';
 import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
-import { DEFAULT_SETTINGS, newSave, reduce, SCHEMA_VERSION, type SaveData } from '../engine/game';
-import { exportBackup, freshHousehold, migrateV1, migrateV2Save, migrateV3Save, openHousehold, parseBackup, type V2Save } from './household';
+import { DEFAULT_SETTINGS, newSave, reduce, SCHEMA_VERSION, type Expedition, type SaveData } from '../engine/game';
+import { exportBackup, freshHousehold, migrateV1, migrateV2Save, migrateV3Save, migrateV5Save, openHousehold, parseBackup, type V2Save } from './household';
 import { indexedDbStore, UnsupportedSaveError, type Household } from './store';
 
 let n = 0;
@@ -267,4 +267,29 @@ describe('v2 migration', () => {
 
 it('a new save starts from default settings', () => {
   expect(newSave(PACK, 1, 'p').settings.volume).toBeGreaterThan(0);
+});
+
+describe('splitting Europe', () => {
+  const pack = PACK;
+  const old = (): SaveData => {
+    const s = newSave(pack, 5, 'a');
+    return { ...s, schemaVersion: 5, offers: [{ id: 'old', regionId: 'europe', reward: { kind: 'bond', xp: 1 } }], stateCards: ['france'], settings: { ...s.settings, lastRegionId: 'europe', disabledRegions: ['europe', 'us-west'] } };
+  };
+
+  it('moves settings and sightings to the four new regions and keeps what was earned', () => {
+    const s = migrateV5Save(old(), pack);
+    expect(s.schemaVersion).toBe(SCHEMA_VERSION);
+    expect(s.settings.lastRegionId).toBe('europe-west');
+    expect(s.settings.disabledRegions).toEqual(['europe-north', 'europe-west', 'europe-south', 'europe-east', 'us-west']);
+    expect(s.offers.every((o) => pack.regions.some((r) => r.id === o.regionId))).toBe(true);
+    expect(s.stateCards).toEqual(['france']);
+  });
+
+  it('ends a trip in the old region, and leaves any other trip running', () => {
+    const trip = (regionId: string) => ({ ...old(), expedition: { regionId, askedQuestionIds: ['q1'] } as Expedition });
+    const ended = migrateV5Save(trip('europe'), pack);
+    expect(ended.expedition).toBeNull();
+    expect(ended.recentQuestionIds).toContain('q1');
+    expect(migrateV5Save(trip('us-west'), pack).expedition?.regionId).toBe('us-west');
+  });
 });

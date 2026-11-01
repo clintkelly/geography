@@ -23,8 +23,12 @@ interface Props {
   onContinue: () => void;
   /** Extra lines under the feedback, such as what happened in the battle. */
   log?: ReactNode;
+  /** Keeps Continue locked while a win plays out. */
+  hold?: boolean;
   /** A label above the question. */
   tag?: string;
+  /** The chosen move, with a way to pick another before answering. */
+  move?: { name: string; onChange: () => void } | undefined;
 }
 
 /** Focuses Continue without scrolling the page, which would hide the battle while its effects play. */
@@ -44,7 +48,7 @@ function CardAward({ placeId, level }: { placeId: string; level?: string }) {
   );
 }
 
-export function QuestionPanel({ question: q, regionId, result, onAnswer, onContinue, log, tag }: Props) {
+export function QuestionPanel({ question: q, regionId, result, onAnswer, onContinue, hold, log, tag, move }: Props) {
   const map = mapFor(regionId);
   const accepted = q.options.find((o) => o.id === q.acceptedId)?.label;
   const picked = result && !result.correct ? q.options.find((o) => o.id === result.optionId) : undefined;
@@ -76,7 +80,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
   }, [q, result, clickable, cursor]);
 
   const keys: Record<string, () => void> = {};
-  if (result) keys.enter = onContinue;
+  if (result) { if (!hold) keys.enter = onContinue; }
   else if (!clickable) q.options.forEach((o, i) => { keys[String(i + 1)] = () => onAnswer(o.id); });
   useKeys(keys);
 
@@ -89,6 +93,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
 
   return (
     <section className="panel question">
+      {move && !result && <div className="move-bar"><span>Your move: <strong>{move.name}</strong></span><button type="button" onClick={move.onChange}>Change move <Key k="C" /></button></div>}
       {tag && <p className="recall-tag">{tag}</p>}
       {q.recallOf && <p className="recall-tag">Field Note check! A right answer is a critical: +{ECONOMY.recallBonus} point and a charge.</p>}
       <h2>{q.prompt}</h2>
@@ -143,7 +148,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
           {result.cardId && <CardAward placeId={result.cardId} />}
           {result.cardUp && <CardAward placeId={result.cardUp.placeId} level={result.cardUp.level} />}
           {log && <p className="muted">{log}</p>}
-          <button ref={focusWithoutScrolling} type="button" className="primary" onClick={onContinue}>Continue <Key k="Enter" /></button>
+          <button ref={focusWithoutScrolling} type="button" className="primary" disabled={!!hold} onClick={onContinue}>Continue <Key k="Enter" /></button>
         </div>
       )}
     </section>

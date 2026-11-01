@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { clampView, EUROPE_VIEW, usMap, worldMap } from '../content/maps';
+import { trackFor } from '../ui/music';
+import { clampView, EUROPE_VIEW, MAPS, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Difficulty, Question } from '../content/types';
 import { degreesApart } from '../content/geo';
-import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST } from '../content/us/templates';
+import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST, type PlaceRecord } from '../content/us/templates';
 import { validatePack, validateRecords } from '../content/validate';
 import { BADGES } from './badges';
 import { enemyIntent, resolveTurn } from './combat';
@@ -89,8 +90,10 @@ describe('content', () => {
   });
 
   it('every tiny country has a dot to click', () => {
-    const click = europeQuestions.find((q) => q.inputType === 'map-click')!;
-    for (const c of COUNTRIES.filter((o) => o.tiny)) expect(click.options.find((o) => o.id === c.id)).toMatchObject({ tiny: true });
+    for (const c of COUNTRIES.filter((o) => o.tiny)) {
+      const click = europeQuestions.find((q) => q.inputType === 'map-click' && q.locationId === c.id)!;
+      expect(click.options.find((o) => o.id === c.id)).toMatchObject({ tiny: true });
+    }
   });
 
   it('generates all three difficulties for the states', () => {
@@ -150,7 +153,7 @@ describe('maps', () => {
   it('shows every European place, with margin, in the Europe view', () => {
     const v = clampView(EUROPE_VIEW, worldMap);
     const h = (v.w * worldMap.height) / worldMap.width;
-    for (const p of PACK.places.filter((o) => o.regionId === 'europe')) {
+    for (const p of PACK.places.filter((o) => o.regionId.startsWith('europe-'))) {
       const [x, y] = worldMap.project(p.lonLat);
       expect(x, p.name).toBeGreaterThan(v.x + v.w * 0.04);
       expect(x, p.name).toBeLessThan(v.x + v.w * 0.96);
@@ -190,7 +193,7 @@ describe('trails', () => {
 
   it('European trails follow borders and sea crossings too', () => {
     for (let seed = 1; seed < 40; seed++) {
-      const { slots } = start(fresh(seed), 'europe', 'scout', 'long').expedition!;
+      const { slots } = start(fresh(seed), 'europe-south', 'scout', 'long').expedition!;
       expect(slots).toHaveLength(7);
       slots.slice(1).forEach((s, i) => expect(PACK.places.find((p) => p.id === slots[i]!.locationId)!.neighbors).toContain(s.locationId));
     }
@@ -906,6 +909,59 @@ describe('wrong answers teach', () => {
   });
 });
 
+describe('whole world', () => {
+  it('passes the record rules and has no duplicate place ids', () => {
+    const records = GROUPS.flatMap((g) => g.records as readonly PlaceRecord[]);
+    expect(validateRecords(records)).toEqual([]);
+    expect(new Set(records.map((r) => r.id)).size).toBe(records.length);
+    expect(PACK.regions).toHaveLength(21);
+  });
+
+  it('lands every place on a map', () => {
+    for (const r of PACK.regions) {
+      const map = MAPS[r.mapId];
+      for (const p of PACK.places.filter((o) => o.regionId === r.id)) {
+        const [x, y] = map.project(p.lonLat);
+        expect(x, p.name).toBeGreaterThanOrEqual(0);
+        expect(x, p.name).toBeLessThanOrEqual(map.width);
+        expect(y, p.name).toBeGreaterThanOrEqual(0);
+        expect(y, p.name).toBeLessThanOrEqual(map.height);
+        if (!p.tiny) expect(map.features.some((f) => f.id === p.featureId), p.name).toBe(true);
+      }
+    }
+  });
+});
+
+describe('changing a move', () => {
+  const inBattle = () => step(find(ready(fresh())), { type: 'enterEncounter' });
+  const change = (s: SaveData) => step(s, { type: 'changeMove' });
+
+  it('goes back to the moves with the same question and nothing spent', () => {
+    const s = inBattle();
+    const b = s.expedition!.battle!;
+    const back = change(step(s, { type: 'chooseAction', action: 'attack' }));
+    expect(back.expedition!.battle).toEqual(b);
+    expect(back.expedition!.answered).toBe(s.expedition!.answered);
+    expect(step(back, { type: 'chooseAction', action: 'guard' }).expedition!.battle!.action).toBe('guard');
+  });
+
+  it('only works while a question is waiting', () => {
+    const s = inBattle();
+    expect(change(s)).toBe(s);
+    const answered = answerWith(step(s, { type: 'chooseAction', action: 'attack' }), true);
+    expect(change(answered)).toBe(answered);
+  });
+
+  it('is not offered when befriending is the only move', () => {
+    let s = ready(fresh());
+    while (s.expedition!.slots.filter((o) => o.status === 'won').length < s.expedition!.slots.length - 1) s = winStop(find(s));
+    s = step(find(s), { type: 'enterEncounter' });
+    while (!s.expedition!.battle!.befriending) s = turn(s, true);
+    const asked = step(s, { type: 'chooseAction', action: 'befriend' });
+    expect(change(asked)).toBe(asked);
+  });
+});
+
 describe('Bold Befriend', () => {
   const inBattle = (seed = 3) => {
     let s = step(find(ready(fresh(seed))), { type: 'enterEncounter' });
@@ -918,7 +974,9 @@ describe('Bold Befriend', () => {
     const start_ = step(find(ready(fresh())), { type: 'enterEncounter' });
     expect(go(start_)).toBe(start_);
     const s = inBattle();
-    expect(s.expedition!.battle!.combat).toMatchObject({ opponentHp: 4, charge: 2 });
+    const { combat } = s.expedition!.battle!;
+    expect(combat.charge).toBe(2);
+    expect(combat.opponentHp * 2).toBeLessThanOrEqual(combat.opponentMaxHp);
     expect(go(s).expedition!.battle!.action).toBe('tame');
   });
 
@@ -958,6 +1016,20 @@ describe('Bold Befriend', () => {
     s = step(s, { type: 'continue' });
     expect(s.expedition!.battle!.combat.charge).toBe(0);
     expect(go(s).expedition!.battle!.action).toBe('tame');
+  });
+
+  it('changing away and back keeps the same harder question, at no cost', () => {
+    const s = inBattle();
+    const regular = s.expedition!.battle!.question.id;
+    const trying = go(s);
+    const hard = trying.expedition!.battle!.question.id;
+    const back = step(trying, { type: 'changeMove' });
+    expect(back.expedition!.battle).toMatchObject({ phase: 'choose', question: { id: regular } });
+    expect(back.expedition!.battle!.combat.charge).toBe(2);
+    expect(back.expedition!.battle!.action).toBeUndefined();
+    expect(go(back).expedition!.battle!.question.id).toBe(hard);
+    const attacked = step(answerWith(step(back, { type: 'chooseAction', action: 'attack' }), false), { type: 'continue' });
+    expect(attacked.expedition!.battle!.heldQuestions).toBeUndefined();
   });
 
   it('does not work on a creature already owned, or in the final showdown', () => {
@@ -1087,9 +1159,10 @@ describe('State Cards and souvenirs', () => {
     expect(s.stateCards.length).toBeGreaterThan(1);
   });
 
-  it('all 50 states and 44 countries have cards', () => {
-    expect(PACK.cards).toHaveLength(94);
-    expect(playTrail(fresh(), 'europe').stateCards.length).toBeGreaterThan(0);
+  it('every place in every region has a card', () => {
+    expect(PACK.cards).toHaveLength(PACK.places.length);
+    expect(PACK.places.length).toBe(94 + 162);
+    expect(playTrail(fresh(), 'europe-west').stateCards.length).toBeGreaterThan(0);
   });
 
   it('a souvenir is found once along the trail and survives abandoning', () => {
@@ -1166,13 +1239,13 @@ describe('difficulty', () => {
   });
 
   it('a region with one tier stays playable under any limits', () => {
-    const region = { id: 'x', label: 'x', mapId: 'world' as const, difficulties: ['scout'] as const, markerGap: 4 };
+    const region = { id: 'x', label: 'x', continent: 'Test', mapId: 'world' as const, difficulties: ['scout'] as const, markerGap: 4 };
     expect(allowedDifficulties({ ...DEFAULT_SETTINGS, minDifficulty: 'expert' }, region)).toEqual(['scout']);
   });
 });
 
 describe('question selection', () => {
-  const europe = PACK.questions.filter((q) => q.regionId === 'europe' && q.difficulty === 'scout');
+  const europe = PACK.questions.filter((q) => q.regionId === 'europe-west' && q.difficulty === 'scout');
 
   it('never repeats within a trail while the pool allows', () => {
     const asked = playTrail(fresh(), 'us-west', 'scout', 'long').expedition!.askedQuestionIds;
@@ -1205,5 +1278,24 @@ describe('question selection', () => {
   it('falls back to tracked repeats instead of failing on a small pool', () => {
     const pool = europe.slice(0, 1);
     expect(pickQuestion(pool, { asked: [pool[0]!.id], recent: [], locationId: 'spain' }, new Rng(1))).toBe(pool[0]);
+  });
+});
+
+describe('music', () => {
+  it('follows the trip', () => {
+    const s = fresh();
+    expect(trackFor(s)).toBe('camp');
+    expect(trackFor({ ...s, lastSummary: {} as SaveData['lastSummary'] })).toBe('victory');
+    const trip = find(ready(s, 'europe-south'));
+    expect(trackFor(trip)).toBe('trail-europe');
+    expect(trackFor(find(ready(s, 'us-south')))).toBe('trail-us');
+    expect(trackFor(find(ready(s, 'south-america')))).toBe('trail-south-america');
+    const fight = step(trip, { type: 'enterEncounter' });
+    expect(trackFor(fight)).toBe('battle');
+    const e = fight.expedition!;
+    const boss = e.slots.map((o, i) => (i === e.battle!.slotIndex ? { ...o, kind: 'guardian' as const } : o));
+    expect(trackFor({ ...fight, expedition: { ...e, slots: boss } })).toBe('boss');
+    const rare = e.slots.map((o, i) => (i === e.battle!.slotIndex ? { ...o, rare: true } : o));
+    expect(trackFor({ ...fight, expedition: { ...e, slots: rare } })).toBe('rare');
   });
 });

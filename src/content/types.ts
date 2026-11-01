@@ -62,7 +62,9 @@ export interface Place {
 export interface Region {
   id: string;
   label: string;
-  mapId: 'world' | 'us';
+  mapId: 'world' | 'pacific' | 'antarctica' | 'us';
+  /** Groups regions in the picker. */
+  continent: string;
   difficulties: readonly Difficulty[];
   /** Minimum distance between map markers, in degrees. */
   markerGap: number;

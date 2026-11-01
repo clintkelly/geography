@@ -1,0 +1,482 @@
+[
+{
+"id": "australia",
+"name": "Australia",
+"fips": "036",
+"lonLat": [
+134,
+-25
+],
+"capital": "Canberra",
+"sameStateCities": [
+"Sydney",
+"Melbourne",
+"Brisbane"
+],
+"largestCity": "Sydney",
+"neighbors": [
+"new-zealand",
+"papua-new-guinea",
+"fiji",
+"solomon-islands",
+"vanuatu",
+"nauru"
+],
+"facts": [
+"The Great Barrier Reef, off Australia's north-east coast, is the largest coral reef system in the world.",
+"Wild koalas live only in Australia."
+],
+"nickname": {
+"text": "Land Down Under",
+"status": "unverified",
+"others": []
+},
+"asks": [
+"Which country has the Great Barrier Reef, the largest coral reef system in the world?",
+"Which country is the only wild home of koalas?"
+],
+"biome": "desert"
+},
+{
+"id": "new-zealand",
+"name": "New Zealand",
+"fips": "554",
+"lonLat": [
+172.5,
+-42
+],
+"capital": "Wellington",
+"sameStateCities": [
+"Auckland",
+"Christchurch",
+"Queenstown"
+],
+"largestCity": "Auckland",
+"neighbors": [
+"australia",
+"fiji",
+"samoa",
+"tonga"
+],
+"facts": [
+"In 1893 New Zealand became the first self-governing country to let women vote.",
+"The kiwi, a flightless bird found only in New Zealand, is a national symbol."
+],
+"nickname": {
+"text": "Land of the Long White Cloud",
+"status": "unverified",
+"others": []
+},
+"asks": [
+"Which country became the first self-governing country to let women vote, in 1893?",
+"Which country is the only wild home of the flightless kiwi bird?"
+],
+"biome": "mountain"
+},
+{
+"id": "papua-new-guinea",
+"name": "Papua New Guinea",
+"fips": "598",
+"lonLat": [
+144.5,
+-6
+],
+"capital": "Port Moresby",
+"sameStateCities": [
+"Lae",
+"Madang",
+"Mount Hagen"
+],
+"largestCity": "Port Moresby",
+"neighbors": [
+"australia",
+"solomon-islands",
+"fiji"
+],
+"hint": "the eastern half of a huge rainforest island, just north of Australia",
+"facts": [
+"Papua New Guinea has more living languages than any other country, over 800.",
+"Papua New Guinea's flag shows a bird of paradise and the stars of the Southern Cross."
+],
+"nickname": null,
+"asks": [
+"Which country has more living languages than any other, over 800?",
+"Which country's flag shows a bird of paradise and the Southern Cross?"
+],
+"biome": "forest"
+},
+{
+"id": "fiji",
+"name": "Fiji",
+"fips": "242",
+"lonLat": [
+178,
+-17.8
+],
+"capital": "Suva",
+"sameStateCities": [
+"Lautoka",
+"Nadi",
+"Labasa"
+],
+"largestCity": "Suva",
+"neighbors": [
+"australia",
+"new-zealand",
+"papua-new-guinea",
+"solomon-islands",
+"vanuatu",
+"samoa",
+"tonga",
+"kiribati",
+"tuvalu"
+],
+"hint": "more than 300 tropical islands in the South Pacific, north of New Zealand",
+"facts": [
+"Fiji's flag has a shield with a lion holding a cocoa pod.",
+"Fiji won its first Olympic medal, a gold, in men's rugby sevens at the 2016 Rio Games."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country's flag has a shield with a lion holding a cocoa pod?",
+"Which Pacific country won its first Olympic medal, a gold, in rugby sevens in 2016?"
+],
+"biome": "tropical"
+},
+{
+"id": "solomon-islands",
+"name": "Solomon Islands",
+"fips": "090",
+"lonLat": [
+160,
+-9.6
+],
+"capital": "Honiara",
+"sameStateCities": [
+"Gizo",
+"Auki",
+"Munda"
+],
+"largestCity": "Honiara",
+"neighbors": [
+"australia",
+"papua-new-guinea",
+"fiji",
+"vanuatu"
+],
+"hint": "a long double chain of jungle islands east of Papua New Guinea",
+"facts": [
+"Rennell Island in the Solomon Islands is the largest raised coral atoll in the world.",
+"People on Malaita in the Solomon Islands still make traditional money from strings of tiny shells."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country has Rennell Island, the largest raised coral atoll in the world?",
+"Which country's island of Malaita is known for traditional money made from strings of tiny shells?"
+],
+"biome": "tropical",
+"sentenceName": "the Solomon Islands"
+},
+{
+"id": "vanuatu",
+"name": "Vanuatu",
+"fips": "548",
+"lonLat": [
+166.9,
+-15.4
+],
+"capital": "Port Vila",
+"sameStateCities": [
+"Luganville",
+"Lakatoro",
+"Isangel"
+],
+"largestCity": "Port Vila",
+"neighbors": [
+"australia",
+"solomon-islands",
+"fiji"
+],
+"hint": "a Y-shaped chain of volcanic islands in the South Pacific, east of Australia",
+"facts": [
+"On Pentecost Island in Vanuatu, men jump from tall wooden towers with vines tied to their ankles.",
+"Mount Yasur, a volcano on Tanna island in Vanuatu, has been erupting for hundreds of years."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"On which country's Pentecost Island do men jump from tall towers with vines tied to their ankles?",
+"Which country has Mount Yasur, a volcano on Tanna island that has been erupting for hundreds of years?"
+],
+"biome": "tropical"
+},
+{
+"id": "samoa",
+"name": "Samoa",
+"fips": "882",
+"lonLat": [
+-171.75,
+-13.9
+],
+"capital": "Apia",
+"sameStateCities": [
+"Salelologa",
+"Asau",
+"Mulifanua"
+],
+"largestCity": "Apia",
+"neighbors": [
+"new-zealand",
+"fiji",
+"tonga"
+],
+"hint": "two big green volcanic islands in the South Pacific, north-east of Fiji",
+"facts": [
+"Samoa skipped December 30, 2011, when it moved to the other side of the International Date Line.",
+"Robert Louis Stevenson, author of Treasure Island, spent his last years at Vailima in Samoa."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which Pacific country skipped December 30 in 2011 by moving across the International Date Line?",
+"In which Pacific country did Treasure Island author Robert Louis Stevenson spend his last years?"
+],
+"biome": "tropical"
+},
+{
+"id": "tonga",
+"name": "Tonga",
+"fips": "776",
+"lonLat": [
+-175.2,
+-21.15
+],
+"capital": "Nuku'alofa",
+"sameStateCities": [
+"Neiafu",
+"Pangai",
+"Ohonua"
+],
+"largestCity": "Nuku'alofa",
+"neighbors": [
+"new-zealand",
+"fiji",
+"samoa"
+],
+"facts": [
+"Tonga is the only Pacific island country with its own king or queen from its own royal family.",
+"The Ha'amonga 'a Maui in Tonga is a giant stone arch built about 800 years ago."
+],
+"nickname": {
+"text": "Friendly Islands",
+"status": "unverified",
+"others": []
+},
+"tiny": true,
+"asks": [
+"Which Pacific island country still has its own king or queen from its own royal family?",
+"Which country has the Ha'amonga 'a Maui, a giant stone arch about 800 years old?"
+],
+"biome": "coast"
+},
+{
+"id": "kiribati",
+"name": "Kiribati",
+"fips": "296",
+"lonLat": [
+172.98,
+1.35
+],
+"capital": "Tarawa",
+"sameStateCities": [
+"Kiritimati",
+"Abemama",
+"Butaritari"
+],
+"largestCity": "Tarawa",
+"neighbors": [
+"fiji",
+"tuvalu",
+"nauru",
+"marshall-islands"
+],
+"hint": "a wide scatter of coral atolls across the equator in the middle of the Pacific",
+"facts": [
+"Kiribati's islands spread across the equator and the 180th meridian, so they sit in all four hemispheres.",
+"Kiribati's Line Islands are in the earliest time zone on Earth, so they start each new day first."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which Pacific country has islands in all four hemispheres: north, south, east and west?",
+"Which country's Line Islands are first in the world to start each new day?"
+],
+"biome": "coast"
+},
+{
+"id": "tuvalu",
+"name": "Tuvalu",
+"fips": "798",
+"lonLat": [
+179.2,
+-8.52
+],
+"capital": "Funafuti",
+"sameStateCities": [
+"Vaitupu",
+"Nanumea",
+"Nui"
+],
+"largestCity": "Funafuti",
+"neighbors": [
+"fiji",
+"kiribati"
+],
+"hint": "nine low coral islands in the South Pacific, north of Fiji",
+"facts": [
+"The name Tuvalu means \"eight standing together\", for the eight islands where people traditionally lived.",
+"Tuvalu's internet address ending is .tv, and letting websites use it earns money for the country."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country's name means \"eight standing together\"?",
+"Which country's internet address ending is .tv?"
+],
+"biome": "coast"
+},
+{
+"id": "nauru",
+"name": "Nauru",
+"fips": "520",
+"lonLat": [
+166.93,
+-0.53
+],
+"capital": "Yaren",
+"sameStateCities": [
+"Denigomodu",
+"Meneng",
+"Aiwo"
+],
+"largestCity": "Denigomodu",
+"neighbors": [
+"australia",
+"kiribati",
+"marshall-islands"
+],
+"hint": "one tiny round island just south of the equator, in the middle of the Pacific",
+"facts": [
+"Nauru is the smallest island country in the world.",
+"Nauru has no official capital, but its parliament meets in Yaren."
+],
+"nickname": null,
+"tiny": true,
+"hint2": "This country has no official capital, but its parliament meets in Yaren.",
+"asks": [
+"Which is the smallest island country in the world?",
+"Which Pacific country has no official capital city?"
+],
+"biome": "coast"
+},
+{
+"id": "marshall-islands",
+"name": "Marshall Islands",
+"fips": "584",
+"lonLat": [
+171.2,
+7.08
+],
+"capital": "Majuro",
+"sameStateCities": [
+"Ebeye",
+"Jaluit",
+"Wotje"
+],
+"largestCity": "Majuro",
+"neighbors": [
+"kiribati",
+"nauru",
+"micronesia"
+],
+"hint": "two long chains of low coral atolls in the North Pacific, between Hawaii and Australia",
+"facts": [
+"Sailors in the Marshall Islands made stick charts from palm strips and shells to learn the ocean swells.",
+"The flag of the Marshall Islands has a star with 24 points."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country's sailors made charts of ocean swells from palm strips and shells?",
+"Which country's flag has a star with 24 points?"
+],
+"biome": "coast",
+"sentenceName": "the Marshall Islands"
+},
+{
+"id": "micronesia",
+"name": "Micronesia",
+"fips": "583",
+"lonLat": [
+158.2,
+6.88
+],
+"capital": "Palikir",
+"sameStateCities": [
+"Weno",
+"Kolonia",
+"Tofol"
+],
+"largestCity": "Weno",
+"neighbors": [
+"marshall-islands",
+"palau"
+],
+"hint": "four island states strung across the western Pacific, just north of the equator",
+"facts": [
+"Nan Madol in Micronesia is an ancient stone city built on about 100 human-made islets.",
+"On Yap in Micronesia, giant round stones with holes in the middle were used as money."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country has Nan Madol, an ancient stone city built on human-made islets?",
+"On which country's island of Yap were giant round stones with holes in them used as money?"
+],
+"biome": "tropical",
+"wiki": "Federated_States_of_Micronesia"
+},
+{
+"id": "palau",
+"name": "Palau",
+"fips": "585",
+"lonLat": [
+134.56,
+7.5
+],
+"capital": "Ngerulmud",
+"sameStateCities": [
+"Koror",
+"Airai",
+"Peleliu"
+],
+"largestCity": "Koror",
+"neighbors": [
+"micronesia"
+],
+"hint": "hundreds of green rock islands in the far western Pacific, east of the Philippines",
+"facts": [
+"Palau created the first shark sanctuary in the world, in 2009.",
+"Palau's Jellyfish Lake is home to golden jellyfish with a sting too weak for people to notice."
+],
+"nickname": null,
+"tiny": true,
+"asks": [
+"Which country created the first shark sanctuary in the world, in 2009?",
+"Which country has Jellyfish Lake, on the island of Eil Malk?"
+],
+"biome": "tropical"
+}
+]
