@@ -7,9 +7,9 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | Milestone | State |
 | --- | --- |
 | 1. Core loop | Done; the children enjoyed it |
-| 2. Foundations: backup, profiles, combat choices, US data, difficulty | Built; awaiting fact review and a playtest |
-| 3. The Hunt: trails, points, Field Notes | Next |
-| 4. Growth: full stable, levels, evolution | Not started |
+| 2. Foundations: backup, profiles, combat choices, US data, difficulty | Built; fact review still open |
+| 3. The Hunt: trails, points, Field Notes, befriending, simple stable | Built; awaiting a playtest |
+| 4. Growth: full stable, levels, evolution | Next |
 | 5. Learning and parent tools | Not started |
 | 6. Polish and playtest | Not started |
 
@@ -43,7 +43,7 @@ The rules that carry the PRD's reliability requirements:
 4. **Snapshots in battle state.** A battle stores its question with options in display order, so a content update can't change a saved turn.
 5. **Randomness is data.** RNG state lives in the save.
 
-`game.ts` will outgrow one file. Split it in Milestone 3 into `expedition.ts`, `economy.ts`, and `progression.ts`, keeping one exported `reduce`.
+`game.ts` holds the transitions, with numbers in `economy.ts`, routes in `trail.ts`, and events in `events.ts`. Split progression out of it in Milestone 4. `ui/battleAnimation.ts` turns a resolved turn into timed poses and sounds as a pure function, so it can be tested and can never affect an outcome.
 
 ## Content model
 
@@ -214,6 +214,8 @@ What already helps, at no extra cost: storage sits behind `SaveStore`, game rule
 - **Creatures stay original** (§1).
 - **Trail Points are per-expedition**, not a persistent currency, so a bad run can't hurt the next one.
 - **Reward is the creature you hunted**, so every expedition has one clear goal.
+- **Poses come from img2img on each sprite** (PixelLab pixflux, strength 55). Strength 120 barely changed the art. At 55 the pose is clear but some creatures drift from their idle art, which matters more when evolved forms are made.
+- **A Trail Snack is a free action**, which is simpler than giving it a turn with no question.
 - **Questions come from reviewed records plus templates**, not hand-written lists.
 - **The US map uses `us-atlas`**, alongside `world-atlas` for Europe.
 - **Enemy pattern stays 1, 2, 2 until Guard and Special ship** in Milestone 2, then moves to the PRD's values.

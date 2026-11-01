@@ -139,7 +139,7 @@ These values are starting points for playtesting.
 | --- | --- | --- | --- |
 | Sturdy Spirit | 4 | Prep Shop | +2 maximum HP this expedition |
 | Extra Charge | 4 | Prep Shop | Start each battle with 1 charge |
-| Trail Snack | 2 | Prep Shop, carried | Restore 4 HP once during a battle, used instead of acting |
+| Trail Snack | 2 | Prep Shop, carried | Restore 4 HP once during a battle, as a free action |
 | Extra clue | 2 | At a stop | Reveals another clue |
 | Narrow the search | 3 | At a stop, Scout and Ranger | Removes two wrong places |
 
@@ -203,7 +203,7 @@ A battle should take at least 3 correct answers at any stage. Growth may shorten
 
 ### Feedback and timing
 
-An answer is final for that turn. Show the correct answer and a short explanation, or a Field Note when correct, then let the child continue. Effects last about 150–300 ms and respect reduced motion. Do not slow-print text or require several acknowledgements for one result.
+An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts about a second. Reduced motion removes the movement but keeps poses and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
 
 Persist the resolved turn before animating. Reloading must not submit an answer or resolve a turn twice.
 
@@ -214,6 +214,7 @@ Persist the resolved turn before animating. Reloading must not submit an answer 
 - Launch with up to 12 original species across habitats such as mountain, coast, forest, desert, and plains. Three are starters; the rest are found by hunting.
 - A profile may hold every species it has befriended. Duplicates are not needed: a sighting offers species the profile doesn't own, and once all are owned, sightings become Rival Hunts that award XP and a badge. Never imply an unlimited supply of new creatures.
 - Each owned companion has an instance ID, optional nickname, level, and XP.
+- One unowned souvenir can be found on each trail, on the second battle win.
 - Companions are chosen before an expedition. In-battle switching is deferred.
 - A companion left in the stable gains no XP, which makes choosing meaningful. A companion's level never falls.
 
@@ -283,7 +284,7 @@ The child picks a difficulty on the sighting card. The parent can set the lowest
 
 After a correct answer, the feedback panel shows a **Field Note**: one or two sentences of something interesting about what the child just answered. It appears in the existing feedback panel and needs no extra click.
 
-The first correct answer about a state also awards its **State Card**, with a pixel-art illustration, nickname, capital, and facts. Cards fill a journal album with 50 slots, a second collection that rewards knowledge rather than battles. Later correct answers can add a fact to a card already owned. Wrong answers show the correct answer and a brief explanation, with no card.
+The first correct answer about a state also awards its **State Card**, with a pixel-art illustration, nickname, capital, and facts. Facts meant to be remembered use larger text than the rest of the interface. Cards fill a journal album with 50 slots, a second collection that rewards knowledge rather than battles. Wrong answers show the correct answer and a brief explanation, with no card.
 
 Keep creature lore separate from factual content. Fictional creatures appear on cards only as clearly illustrative decoration.
 
@@ -442,6 +443,7 @@ Each milestone ends with the children playing it. Their reaction may reorder the
 27. Mute and volume persist per profile, and a missing or blocked sound never interrupts play.
 28. A full expedition can be completed with the keyboard alone, excluding questions that require pointing at a map, and a held key never repeats an action.
 29. Befriending cannot fail by chance, a wrong answer only offers a new question, and a double click or refresh cannot add a creature twice.
+30. Every creature has idle, attack, guard, special, and hit art, and an animation never decides an outcome.
 
 ## 15 Playtest questions
 

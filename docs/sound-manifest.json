@@ -2,10 +2,49 @@
   "tool": "ElevenLabs eleven_text_to_sound_v2",
   "flowId": "cB2Od1oGTTYZVwVgiH0s",
   "sounds": {
-    "correct": { "generationId": "g3mVAds15rSZrTbDbCUE", "prompt": "Very short bright cheerful two-note marimba chime for a correct answer in a children's adventure game, clean, no voice, under one second" },
-    "not-yet": { "generationId": "X15525h5ukQiOMBnb1IX", "prompt": "Very short soft gentle low wooden tap, neutral and kind, not a buzzer, not negative, children's game, no voice, under one second" },
-    "win": { "generationId": "wPu407JqPFCckp0Phgpv", "prompt": "Short triumphant rising three-note marimba and bell fanfare for winning a battle in a children's adventure game, no voice, about one second" },
-    "retreat": { "generationId": "S3Yjh9ZczxLBS3qHcOer", "prompt": "Short soft descending two-note woodblock, calm and gentle retreat, not sad, children's adventure game, no voice, under one second" },
-    "card": { "generationId": "Yr6DSNrb4vYTFkRuhfcN", "prompt": "Short sparkling magical shimmer with a soft paper card flip, reward sound for a children's adventure game, no voice, about one second" }
+    "correct": {
+      "generationId": "g3mVAds15rSZrTbDbCUE",
+      "prompt": "Very short bright cheerful two-note marimba chime for a correct answer in a children's adventure game, clean, no voice, under one second"
+    },
+    "not-yet": {
+      "generationId": "X15525h5ukQiOMBnb1IX",
+      "prompt": "Very short soft gentle low wooden tap, neutral and kind, not a buzzer, not negative, children's game, no voice, under one second"
+    },
+    "win": {
+      "generationId": "wPu407JqPFCckp0Phgpv",
+      "prompt": "Short triumphant rising three-note marimba and bell fanfare for winning a battle in a children's adventure game, no voice, about one second"
+    },
+    "retreat": {
+      "generationId": "S3Yjh9ZczxLBS3qHcOer",
+      "prompt": "Short soft descending two-note woodblock, calm and gentle retreat, not sad, children's adventure game, no voice, under one second"
+    },
+    "card": {
+      "generationId": "Yr6DSNrb4vYTFkRuhfcN",
+      "prompt": "Short sparkling magical shimmer with a soft paper card flip, reward sound for a children's adventure game, no voice, about one second"
+    },
+    "attack": {
+      "generationId": "WElRH4NaLYhQig2NA2JE",
+      "prompt": "Single quick cartoon swoosh and soft thump for a small creature attacking in a children's game, no voice, very short"
+    },
+    "guard": {
+      "generationId": "1VHMqzutelGeDYYiiHb3",
+      "prompt": "Short bright magical shield shimmer with a soft metallic ding, children's game, no voice, very short"
+    },
+    "special": {
+      "generationId": "qCtEYNu4CysOqmIXm9I6",
+      "prompt": "Short powerful magical rising whoosh ending in a sparkling burst, special attack in a children's game, no voice, about one second"
+    },
+    "hit": {
+      "generationId": "iXNu2wpaJDC1oi1lYfsH",
+      "prompt": "Single soft cartoon bonk impact, a creature gets hit, playful not violent, children's game, no voice, very short"
+    },
+    "befriend": {
+      "generationId": "bskzcDjzr9xIXqfPqb0o",
+      "prompt": "Warm joyful rising chime with a happy sparkle, a new friend joins, children's adventure game, no voice, about two seconds"
+    },
+    "spend": {
+      "generationId": "5bGFJwdew7YMUW4tzopd",
+      "prompt": "Two quick bright coin clinks, spending points in a children's game, no voice, very short"
+    }
   }
 }

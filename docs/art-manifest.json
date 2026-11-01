@@ -3,18 +3,128 @@
   "style": "128x128 creatures facing the opponent, 64x64 souvenirs, 480x192 backdrops",
   "promptTemplate": "Original friendly fantasy creature, <subject>. Distinctive readable silhouette. Three-quarter battle pose. Crisp pixel art, restrained colors, top-left lighting, no text, no logo.",
   "assets": {
-    "slatepaw": { "role": "starter, style reference", "jobId": "a9c0f1bd-cc51-437b-b829-f9f053dd3eef", "subject": "small mountain creature with a round body, layered slate plates, a mossy tuft, bright amber eyes" },
-    "brinefin": { "role": "opponent", "jobId": "d30921d8-fa5a-4456-afb6-32d98fb644b5", "subject": "small coastal fish-lizard, round body, teal scales, sail-like fin" },
-    "thistlehop": { "role": "opponent", "jobId": "57f50625-9862-49ea-8dd8-1ae197a0c505", "subject": "small woodland rabbit-like hopper, purple thistle spikes, leaf ears" },
-    "cindermite": { "role": "opponent", "jobId": "fdc4148e-fcbc-488c-b967-232622741013", "subject": "small grumpy ember beetle, cracked rocky shell, glowing orange seams" },
-    "cragmaw": { "role": "guardian", "jobId": "9f565a6c-5329-4842-b339-0b7d4435ac56", "subject": "large ancient horned mountain beast, boulder body, granite plates, mossy mane" },
-    "backdrop-coast": { "role": "backdrop", "jobId": "c3c5bd00-eb97-478f-a2c2-d072836135a4", "subject": "green coastal hills, blue sea on the horizon" },
-    "backdrop-mountain": { "role": "backdrop", "jobId": "f04e8141-13a8-4e47-bf53-33a8e5027e71", "subject": "rocky mountain pass at dusk, peaks, pine trees" },
-    "compass": { "role": "souvenir", "jobId": "96b4d00b-822a-4d7c-a293-102f7fade192", "subject": "carved wooden compass, brass needle" },
-    "shell": { "role": "souvenir", "jobId": "83ca1909-1ec0-4e4d-b4e1-c15182cf371b", "subject": "patterned spiral sea shell, cream and coral" },
-    "lantern": { "role": "souvenir", "jobId": "198a59bc-5993-441c-9694-77f835bc7d1d", "subject": "tiny brass lantern with warm glow" },
-    "feather": { "role": "souvenir", "jobId": "585d6428-30a9-4093-be1d-3aa55eb095ce", "subject": "long blue-grey storm feather" },
-    "stone": { "role": "souvenir", "jobId": "6340b459-8d69-45e6-9301-10ad47c83cdd", "subject": "smooth oval river stone with a white band" },
-    "map-scrap": { "role": "souvenir", "jobId": "ecb7285b-6144-40b1-b0bc-8e0265110cfb", "subject": "torn parchment map scrap, dotted route, small red X" }
+    "slatepaw": {
+      "role": "starter, style reference",
+      "jobId": "a9c0f1bd-cc51-437b-b829-f9f053dd3eef",
+      "subject": "small mountain creature with a round body, layered slate plates, a mossy tuft, bright amber eyes"
+    },
+    "brinefin": {
+      "role": "opponent",
+      "jobId": "d30921d8-fa5a-4456-afb6-32d98fb644b5",
+      "subject": "small coastal fish-lizard, round body, teal scales, sail-like fin"
+    },
+    "thistlehop": {
+      "role": "opponent",
+      "jobId": "57f50625-9862-49ea-8dd8-1ae197a0c505",
+      "subject": "small woodland rabbit-like hopper, purple thistle spikes, leaf ears"
+    },
+    "cindermite": {
+      "role": "opponent",
+      "jobId": "fdc4148e-fcbc-488c-b967-232622741013",
+      "subject": "small grumpy ember beetle, cracked rocky shell, glowing orange seams"
+    },
+    "cragmaw": {
+      "role": "guardian",
+      "jobId": "9f565a6c-5329-4842-b339-0b7d4435ac56",
+      "subject": "large ancient horned mountain beast, boulder body, granite plates, mossy mane"
+    },
+    "backdrop-coast": {
+      "role": "backdrop",
+      "jobId": "c3c5bd00-eb97-478f-a2c2-d072836135a4",
+      "subject": "green coastal hills, blue sea on the horizon"
+    },
+    "backdrop-mountain": {
+      "role": "backdrop",
+      "jobId": "f04e8141-13a8-4e47-bf53-33a8e5027e71",
+      "subject": "rocky mountain pass at dusk, peaks, pine trees"
+    },
+    "compass": {
+      "role": "souvenir",
+      "jobId": "96b4d00b-822a-4d7c-a293-102f7fade192",
+      "subject": "carved wooden compass, brass needle"
+    },
+    "shell": {
+      "role": "souvenir",
+      "jobId": "83ca1909-1ec0-4e4d-b4e1-c15182cf371b",
+      "subject": "patterned spiral sea shell, cream and coral"
+    },
+    "lantern": {
+      "role": "souvenir",
+      "jobId": "198a59bc-5993-441c-9694-77f835bc7d1d",
+      "subject": "tiny brass lantern with warm glow"
+    },
+    "feather": {
+      "role": "souvenir",
+      "jobId": "585d6428-30a9-4093-be1d-3aa55eb095ce",
+      "subject": "long blue-grey storm feather"
+    },
+    "stone": {
+      "role": "souvenir",
+      "jobId": "6340b459-8d69-45e6-9301-10ad47c83cdd",
+      "subject": "smooth oval river stone with a white band"
+    },
+    "map-scrap": {
+      "role": "souvenir",
+      "jobId": "ecb7285b-6144-40b1-b0bc-8e0265110cfb",
+      "subject": "torn parchment map scrap, dotted route, small red X"
+    },
+    "sandwhisk": {
+      "role": "huntable",
+      "jobId": "b6b87b1a-022e-4e21-9a4d-6a5d473dd06e",
+      "subject": "small desert fox-lizard, sandy fur, whisk-like tail, big ears"
+    }
+  },
+  "poses": {
+    "tool": "PixelLab create_image_pixflux, init image is the idle sprite, strength 55, seed 7, no background",
+    "files": "<species>-attack, -guard, -special, -hit",
+    "prompts": {
+      "attack": "charging forward, mouth open, motion lines",
+      "guard": "curled up defending, eyes shut, glowing blue shield",
+      "special": "powering up, surrounded by themed glowing energy",
+      "hit": "recoiling, tilted backward, wincing, stars around its head"
+    },
+    "jobIdsInPoseOrder": {
+      "slatepaw": [
+        "676b2e21-eec5-4b4e-97c0-9198b4bd1ba2",
+        "77766ccc-f851-4407-9461-66a798c46447",
+        "eb60d8a3-4990-4870-bce9-bbb239315975",
+        "77c75f64-19ae-4471-a542-4ea2e26170a1"
+      ],
+      "brinefin": [
+        "07ff7663-0f1e-4b18-9a3d-3bc0d5c9caa0",
+        "302f7c62-ff07-4b04-89b2-94974e9aa14b",
+        "459d8346-9699-47cc-ab73-a1d4cb1491a6",
+        "ba5db6f9-8bfe-436d-a335-517232941528"
+      ],
+      "thistlehop": [
+        "2ad29510-ce5c-414d-868d-7540ec4256d2",
+        "6da562be-0367-4304-bcf3-ece789343d1e",
+        "961122b7-dcc2-423b-aa1b-54de081bde0d",
+        "2f099f3f-9acb-4c36-8e02-cd38dd599a7f"
+      ],
+      "cindermite": [
+        "c3e4bc0f-78a6-4596-91c7-d39a39b861d4",
+        "bc9f5737-4ca6-41f9-9df0-558ce6b1654e",
+        "439025c1-b042-4f25-bbdc-3c9bf6358aea",
+        "e2679b1b-082a-4bbb-821e-f4c2dafe7bfc"
+      ],
+      "sandwhisk": [
+        "cbafdbc7-7955-4fce-b45e-d227cbca4aa8",
+        "de9d76b5-add6-40ea-9821-50b2e8e3f909",
+        "60bfc549-7bdf-463c-a0ff-eac4d94b3409",
+        "bb84cf31-58ff-45b6-9834-eee426a6661d"
+      ],
+      "cragmaw": [
+        "f8703e08-8e7a-4789-a389-47f2da439801",
+        "98140930-9e0e-4237-a2a6-b716e54187ac",
+        "c354ff7e-2f13-49c8-b9a1-0225e72a26dd",
+        "01b4f2e3-4783-47c8-a283-e151979c4c42"
+      ]
+    }
+  },
+  "stateCards": {
+    "tool": "PixelLab create_image_pixen, 128x96, seed 42",
+    "prompt": "Pixel art landscape postcard: <scene> in <state>, no text, no people",
+    "files": "card-<state>"
   }
 }
