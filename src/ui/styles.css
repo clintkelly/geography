@@ -145,7 +145,9 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Poses and sounds remain, so the feedback survives without the movement. */
+  /* Poses, numbers and sounds remain, so the feedback survives without the movement. */
+  .scene, .float, .fx, .bump, .reveal, .reveal::after, .vs-intro *, .friend-banner, .special-ready, .hop-loop, .land-wobble, button { animation: none !important; transition: none !important; }
+  .flash { filter: none !important; }
   .actor, .land-arrive { animation: none !important; }
   .hp-fill { transition: none; }
 }
@@ -196,7 +198,7 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 
 /* Arriving at a place: the border lights up and the shape bounces. */
 @keyframes arrive { 0% { transform: scale(0.92); } 45% { transform: scale(1.12); } 70% { transform: scale(0.97); } 100% { transform: scale(1); } }
-.land-arrive { fill: var(--candidate); stroke: #b4470f; stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: arrive 650ms ease-out 2; }
+.land-arrive { fill: var(--candidate); stroke: #b4470f; stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: arrive 650ms ease-out 800ms 2; }
 .land-candidate:hover, .land-selectable:hover { stroke: #b4470f; stroke-width: 2.5; }
 
 .recall-tag { display: inline-block; background: #fff1c2; border: 2px solid var(--candidate); border-radius: 999px; padding: 3px 14px; font-weight: 700; font-size: 1rem; }
@@ -204,3 +206,84 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 .event-banner { min-height: 190px; display: flex; gap: 14px; align-items: flex-end; border-radius: 10px; overflow: hidden; background-size: cover; background-position: center bottom; image-rendering: pixelated; padding: 12px; }
 .event-banner > div { background: rgba(255, 253, 247, 0.93); border-radius: 8px; padding: 8px 14px; }
 .event-banner h1, .event-banner p { margin: 0; }
+
+/* Juice. Nothing here blocks input; Continue always works straight away. */
+button { transition: transform 80ms ease-out, box-shadow 120ms; }
+button:hover:not(:disabled) { transform: translateY(-1px); }
+button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
+@keyframes ready-pulse { 50% { box-shadow: 0 0 0 5px rgba(231, 185, 91, 0.6); } }
+.special-ready { animation: ready-pulse 1s ease-in-out infinite; border-color: var(--candidate); }
+
+.fx { image-rendering: pixelated; pointer-events: none; }
+.actor-slot { position: relative; }
+.flash { filter: brightness(0) invert(1); }
+.hit-stop .actor { animation-play-state: paused; }
+@keyframes scene-shake { 20% { transform: translate(-4px, 2px); } 50% { transform: translate(4px, -2px); } 80% { transform: translate(-2px, 1px); } }
+@keyframes scene-shake-big { 20% { transform: translate(-9px, 4px); } 50% { transform: translate(9px, -4px); } 80% { transform: translate(-5px, 2px); } }
+.impact-small { animation: scene-shake 240ms linear; }
+.impact-big { animation: scene-shake-big 300ms linear; }
+
+@keyframes float-up { 0% { opacity: 0; transform: translate(-50%, 8px) scale(0.6); } 15% { opacity: 1; transform: translate(-50%, -6px) scale(1.25); } 30% { transform: translate(-50%, -12px) scale(1); } 100% { opacity: 0; transform: translate(-50%, -60px); } }
+.float { position: absolute; z-index: 3; top: 8px; left: 50%; white-space: nowrap; font-weight: 800; font-size: 2rem; -webkit-text-stroke: 1px #2b2a26; text-shadow: 2px 2px 0 #2b2a26; animation: float-up 950ms ease-out forwards; pointer-events: none; }
+.float-damage { color: #ff7a5c; }
+.float-heal { color: #7ce08f; }
+.float-block { color: #a9d8ff; font-size: 1.5rem; }
+.float-big { font-size: 2.8rem; }
+
+@keyframes spark-pop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(0); } 30% { opacity: 1; transform: translate(-50%, -50%) scale(1.3) rotate(20deg); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8) rotate(40deg); } }
+.spark { position: absolute; z-index: 2; top: 45%; left: 50%; width: 96px; height: 96px; animation: spark-pop 340ms ease-out forwards; }
+.spark-2 { top: 30%; left: 30%; width: 72px; height: 72px; animation-delay: 60ms; }
+
+.hp-track { position: relative; }
+.hp-fill { position: relative; transition: width 120ms; }
+.hp-ghost { position: absolute; inset: 0 auto 0 0; background: #fff; opacity: 0.85; transition: width 500ms ease-out 260ms; }
+
+@keyframes hop { 40% { transform: translateY(-26px); } 65% { transform: translateY(0); } 80% { transform: translateY(-10px); } }
+@keyframes slide-off { to { transform: translateX(150%) rotate(14deg); opacity: 0; } }
+.actor.motion-hop { animation: hop 620ms ease-out; }
+.actor.motion-slide { animation: slide-off 560ms ease-in forwards; }
+.hop-loop { animation: hop 900ms ease-out infinite; }
+
+@keyframes bump { 40% { transform: scale(1.25); } }
+.bump { display: inline-block; animation: bump 280ms ease-out; }
+.streak { display: inline-flex; align-items: center; gap: 3px; font-weight: 800; color: #b4470f; }
+.streak .fx { width: 22px; height: 22px; }
+.points { position: relative; }
+@keyframes fly-in { 0% { opacity: 0; transform: translateY(150px) scale(1.4); } 25% { opacity: 1; } 100% { opacity: 0.9; transform: translateY(0) scale(0.7); } }
+.fly { position: absolute; z-index: 5; top: -4px; left: 30px; width: 28px; height: 28px; animation: fly-in 620ms ease-in forwards; }
+.fly-1 { left: 55px; animation-delay: 80ms; opacity: 0; }
+.fly-2 { left: 80px; animation-delay: 160ms; opacity: 0; }
+.fly-3 { left: 15px; animation-delay: 240ms; opacity: 0; }
+
+@keyframes rise-up { 0% { opacity: 0; transform: translateY(20px) scale(0.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-130px) scale(1.2); } }
+.rise { position: absolute; bottom: 10px; width: 32px; height: 32px; opacity: 0; animation: rise-up 1500ms ease-out infinite; }
+.rise-0 { left: 8%; } .rise-1 { left: 24%; animation-delay: 240ms; } .rise-2 { left: 42%; animation-delay: 520ms; }
+.rise-3 { left: 58%; animation-delay: 140ms; } .rise-4 { left: 74%; animation-delay: 380ms; } .rise-5 { left: 90%; animation-delay: 640ms; }
+.celebrate { position: relative; width: 300px; display: grid; justify-items: center; }
+@keyframes banner-in { 0% { transform: translateX(-50%) scale(0.4) rotate(-6deg); opacity: 0; } 60% { transform: translateX(-50%) scale(1.12); opacity: 1; } 100% { transform: translateX(-50%) scale(1); } }
+.friend-banner { position: absolute; z-index: 6; inset: 0; pointer-events: none; }
+.friend-banner strong { position: absolute; top: 34%; left: 50%; transform: translateX(-50%); background: #fff8e1; border: 3px solid var(--candidate); border-radius: 12px; padding: 6px 22px; font-size: 2rem; animation: banner-in 500ms ease-out; }
+
+@keyframes vs-left { from { transform: translateX(-240px); } to { transform: translateX(0); } }
+@keyframes vs-right { from { transform: translateX(240px); } to { transform: translateX(0); } }
+@keyframes vs-pop { 0% { transform: scale(3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes vs-out { to { opacity: 0; } }
+.vs-intro { position: absolute; z-index: 7; inset: 0; display: flex; align-items: center; justify-content: center; gap: 28px; background: rgba(20, 18, 14, 0.9); pointer-events: none; animation: vs-out 300ms ease-in 1200ms forwards; }
+.vs-intro img { width: 150px; height: 150px; }
+.vs-intro strong { color: #ffd866; font-size: 4rem; font-weight: 900; -webkit-text-stroke: 2px #2b2a26; animation: vs-pop 320ms ease-out 260ms backwards; }
+.vs-left { animation: vs-left 340ms ease-out; }
+.vs-right { animation: vs-right 340ms ease-out; }
+
+@keyframes card-flip { 0% { transform: perspective(700px) rotateY(90deg); } 70% { transform: perspective(700px) rotateY(-8deg); } 100% { transform: perspective(700px) rotateY(0); } }
+@keyframes card-shine { from { left: -40%; } to { left: 130%; } }
+.reveal { position: relative; overflow: hidden; animation: card-flip 480ms ease-out; }
+.reveal::after { content: ''; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent); animation: card-shine 800ms ease-out 400ms 1 both; pointer-events: none; }
+
+@keyframes wobble { 20% { transform: translateX(-6px) rotate(-1.5deg); } 50% { transform: translateX(6px) rotate(1.5deg); } 80% { transform: translateX(-3px); } }
+.land-wobble { fill: #c4bba5; transform-box: fill-box; transform-origin: center; animation: wobble 420ms ease-in-out; }
+@keyframes draw-line { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.route-new { stroke: #b4470f; stroke-dasharray: 1; stroke-linecap: round; }
+.route-new.drawing { animation: draw-line 800ms linear both; }
+
+/* The fight stays in view while a long answer panel scrolls beneath it. */
+.battle .scene { position: sticky; top: 6px; z-index: 4; }

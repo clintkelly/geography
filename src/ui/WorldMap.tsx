@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type Whee
 import { clampView, type MapDef, type View } from '../content/maps';
 import { useKeys } from './keys';
 
-export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable' | 'arrive';
+export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable' | 'arrive' | 'wobble';
 
 interface Props {
   map: MapDef;

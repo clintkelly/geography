@@ -37,7 +37,7 @@ export function App() {
   else if (e.discovery === 'searching') body = <Discovery key={e.id} e={e} dispatch={dispatch} />;
   else if (e.battle) body = <Battle key={e.battle.id} e={e} battle={e.battle} save={save} dispatch={dispatch} />;
   else if (isExpeditionComplete(e)) body = <ExpeditionComplete e={e} dispatch={dispatch} />;
-  else body = <Route key={e.id} e={e} dispatch={dispatch} />;
+  else body = <Route key={e.id} e={e} save={save} dispatch={dispatch} />;
 
   if (save) configureSound(save.settings);
 

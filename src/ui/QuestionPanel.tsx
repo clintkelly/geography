@@ -23,10 +23,13 @@ interface Props {
   log?: ReactNode;
 }
 
+/** Focuses Continue without scrolling the page, which would hide the battle while its effects play. */
+const focusWithoutScrolling = (button: HTMLButtonElement | null) => button?.focus({ preventScroll: true });
+
 function CardAward({ placeId }: { placeId: string }) {
   const card = cardFor(placeId);
   return (
-    <div className="card-award">
+    <div className="card-award reveal">
       <CardArt id={card.artId} width={192} />
       <div>
         <p className="card-new">New State Card!</p>
@@ -120,10 +123,10 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
       {result && (
         <div className={`feedback ${result.correct ? 'good' : 'notyet'}`} role="status">
           <p className="learn"><strong>{result.correct ? 'Correct!' : `Not yet. The answer is ${accepted}.`}</strong> {q.explanation}</p>
-          {result.correct && q.fieldNote && <p className="field-note"><span>Field Note: remember this!</span>{q.fieldNote}<small>It may come back as a bonus question.</small></p>}
+          {result.correct && q.fieldNote && !q.recallOf && <p className="field-note"><span>Field Note: remember this!</span>{q.fieldNote}<small>It may come back as a bonus question.</small></p>}
           {cardId && <CardAward placeId={cardId} />}
           {log && <p className="muted">{log}</p>}
-          <button type="button" className="primary" autoFocus onClick={onContinue}>Continue <Key k="Enter" /></button>
+          <button ref={focusWithoutScrolling} type="button" className="primary" onClick={onContinue}>Continue <Key k="Enter" /></button>
         </div>
       )}
     </section>

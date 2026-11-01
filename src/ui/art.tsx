@@ -8,6 +8,9 @@ export function Sprite({ id, size, flip, className, alt = '' }: { id: string; si
   return <img src={artUrl(id)} alt={alt} width={size} height={size} className={`sprite ${flip ? 'flip ' : ''}${className ?? ''}`} />;
 }
 
+/** A small effect sprite, decorative only. */
+export const Fx = ({ id, className }: { id: string; className?: string }) => <img src={artUrl(`fx-${id}`)} alt="" className={`fx ${className ?? ''}`} />;
+
 export function CardArt({ id, width }: { id: string; width: number }) {
   return <img src={artUrl(id)} alt="" width={width} height={(width * 96) / 128} className="sprite card-art" />;
 }

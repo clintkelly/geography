@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { turnFrames } from './battleAnimation';
+import { isPowered, streakRate, turnFrames } from './battleAnimation';
 
 const hit = { damageDealt: 3, damageTaken: 2, blocked: 0, healed: 0 };
 
@@ -37,7 +37,41 @@ describe('turn animations', () => {
   });
 
   it('stays brief', () => {
-    expect(turnFrames('attack', true, hit, true).at(-1)!.at).toBeLessThanOrEqual(1700);
+    expect(turnFrames('attack', true, hit, true).at(-1)!.at).toBeLessThanOrEqual(1800);
+  });
+
+  it('shows each hit as a number and a shake, and tracks HP as it lands', () => {
+    const frames = turnFrames('attack', true, hit, true);
+    expect(frames[1]).toMatchObject({ floats: [{ side: 'opponent', text: '-3', kind: 'damage' }], impact: 'small', hp: { side: 'opponent', delta: -3 } });
+    const taken = frames.find((f) => f.hp?.side === 'player')!;
+    expect(taken).toMatchObject({ floats: [{ text: '-2' }], hp: { delta: -2 } });
+  });
+
+  it('labels a block', () => {
+    const frames = turnFrames('guard', true, { damageDealt: 1, damageTaken: 1, blocked: 3, healed: 0 }, true);
+    expect(frames.flatMap((f) => f.floats ?? []).map((f) => f.text)).toEqual(['-1', 'Blocked 3', '-1']);
+  });
+
+  it('shows healing', () => {
+    const frames = turnFrames('special', true, { damageDealt: 2, damageTaken: 0, blocked: 0, healed: 4 }, false);
+    expect(frames[0]).toMatchObject({ floats: [{ side: 'player', text: '+4', kind: 'heal' }], hp: { delta: 4 } });
+  });
+
+  it('a defeated opponent slides away while the companion hops', () => {
+    expect(turnFrames('attack', true, { ...hit, damageTaken: 0 }, false, 'defeated').at(-1)).toMatchObject({ playerMotion: 'hop', opponentMotion: 'slide' });
+    expect(turnFrames('attack', true, { ...hit, damageTaken: 0 }, false, 'wornOut').at(-1)!.opponentMotion).toBeUndefined();
+  });
+
+  it('a streak makes hits bigger, without changing what happens', () => {
+    expect(isPowered(2)).toBe(false);
+    expect(isPowered(3)).toBe(true);
+    expect(turnFrames('attack', true, hit, true, 'none', true)[1]).toMatchObject({ impact: 'big', floats: [{ text: '-3' }] });
+  });
+
+  it('the chime climbs with the streak, up to a limit', () => {
+    expect(streakRate(1)).toBe(1);
+    expect(streakRate(5)).toBeGreaterThan(streakRate(2));
+    expect(streakRate(50)).toBe(streakRate(9));
   });
 
   it('befriending plays its own moment', () => {

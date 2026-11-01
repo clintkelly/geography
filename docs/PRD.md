@@ -203,7 +203,7 @@ A battle should take at least 3 correct answers at any stage. Growth may shorten
 
 ### Feedback and timing
 
-An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts about a second and a half. Hit and block sounds are deep, retro 8-bit punches. Reduced motion removes the movement but keeps poses and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
+An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts under two seconds. Hit and block sounds are deep, retro 8-bit punches. Hits show floating damage numbers, a brief freeze and flash, a screen shake, sparks, and HP bars that drain with a pale trail. Correct answers build a streak with a rising chime and bigger-looking hits; a streak is for show and changes no numbers. Final showdowns open with a VS intro, a beaten opponent slides away, and befriending has its own celebration. Reduced motion removes the movement and flashing but keeps poses, numbers, and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
 
 Persist the resolved turn before animating. Reloading must not submit an answer or resolve a turn twice.
 

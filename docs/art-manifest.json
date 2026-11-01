@@ -519,5 +519,14 @@
    "ranger": "26ebf893-160d-4485-8195-b342cb9542b2",
    "marker": "fd38a8dc-4638-4ba8-93ce-6828f792d637"
   }
+ },
+ "effects": {
+  "tool": "PixelLab create_image_pixen, transparent, seed 42",
+  "jobIds": {
+   "fx-spark": "800fa3dc-5af5-4d1b-93c5-c6b0289a0465",
+   "fx-heart": "e977b466-816b-4a15-8f2b-4da4e7aae7ec",
+   "fx-coin": "0241fbfa-99dc-4bae-9144-8d9401a24c55",
+   "fx-flame": "2f640178-c901-4280-9b3a-3fd9ed5bcbf0"
+  }
  }
 }

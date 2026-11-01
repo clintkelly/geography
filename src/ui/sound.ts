@@ -28,12 +28,14 @@ export function configureSound(next: Pick<Settings, 'muted' | 'volume'>) {
 }
 
 /** Sound is decoration: a blocked, missing or failed file never interrupts play. */
-export function playSound(id: SoundId, force = false) {
+export function playSound(id: SoundId, force = false, rate = 1) {
   if (settings.muted && !force) return;
   try {
     const audio = new Audio(`${import.meta.env.BASE_URL}sfx/${id}.mp3`);
     const volume = settings.volume * (GAIN[id] ?? 1);
     audio.volume = volume;
+    audio.playbackRate = rate;
+    audio.preservesPitch = false;
     void audio.play().catch(() => undefined);
     setTimeout(() => {
       audio.volume = volume / 2;

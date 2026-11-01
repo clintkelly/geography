@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
-import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
+import { activeCompanion, currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
 import { TRAIL_EVENTS } from '../engine/events';
-import { Sprite } from './art';
+import { artUrl, Fx, Sprite } from './art';
 import { mapFor, place, rewardLabel, species } from './content';
 import { Key, useKeys } from './keys';
 import { playSound } from './sound';
@@ -10,7 +10,7 @@ import { Marker, WorldMap } from './WorldMap';
 
 const FLIGHT = ['alaska', 'hawaii', 'iceland', 'malta'];
 
-export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
+export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; dispatch: (c: Command) => void }) {
   useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });
   const index = currentSlotIndex(e);
   const slot = e.slots[index];
@@ -27,7 +27,12 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
   if (!slot) return null;
 
   const map = mapFor(e.regionId);
-  const line = reached.map((s) => map.project(place(s.locationId).lonLat).join(',')).join(' ');
+  // Legs already walked stay dashed. The newest one draws itself, with the companion hopping along it.
+  const points = reached.map((s) => map.project(place(s.locationId).lonLat));
+  const line = points.slice(0, -1).map((p) => p.join(',')).join(' ');
+  const from = points[points.length - 2];
+  const to = points[points.length - 1] as [number, number];
+  const walking = !!from && !e.retreated && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const here = place(slot.locationId);
   const previous = e.slots[index - 1];
   const flight = !!previous && (FLIGHT.includes(here.id) || FLIGHT.includes(previous.locationId));
@@ -60,6 +65,16 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
             {(scale) => (
               <>
                 <polyline points={line} className="route-line" strokeWidth={2.5 * scale} strokeDasharray={`${6 * scale} ${5 * scale}`} />
+                {from && <line x1={from[0]} y1={from[1]} x2={to[0]} y2={to[1]} className={`route-new${walking ? ' drawing' : ''}`} pathLength={1} strokeWidth={3 * scale} />}
+                {walking && from && (
+                  <g>
+                    <animateMotion dur="0.8s" fill="freeze" path={`M${from[0]},${from[1]} L${to[0]},${to[1]}`} />
+                    <g>
+                      <animateTransform attributeName="transform" type="translate" values={`0,0; 0,${-14 * scale}; 0,0`} dur="0.2s" repeatCount="4" />
+                      <image href={artUrl(species(activeCompanion(save).speciesId).artId)} x={-16 * scale} y={-32 * scale} width={32 * scale} height={32 * scale} />
+                    </g>
+                  </g>
+                )}
                 {reached.filter((s) => s.status === 'won' || e.retreated).map((s, i) => (
                   <Marker key={s.locationId} at={map.project(place(s.locationId).lonLat)} scale={scale} label={s.status === 'won' ? '✓' : String(i + 1)} tone={s.status === 'won' ? 'done' : 'current'} />
                 ))}
@@ -79,7 +94,12 @@ export function ExpeditionComplete({ e, dispatch }: { e: Expedition; dispatch: (
   return (
     <section className="panel complete">
       <h1>Expedition complete!</h1>
-      {reward.kind === 'creature' && <Sprite id={species(reward.speciesId).artId} size={192} />}
+      {reward.kind === 'creature' && (
+        <div className="celebrate">
+          {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="heart" className={`rise rise-${i}`} />)}
+          <Sprite id={species(reward.speciesId).artId} size={192} className="hop-loop" />
+        </div>
+      )}
       <p className="learn">{reward.kind === 'creature' ? <><strong>{rewardLabel(reward)}</strong> wants to join your stable!</> : <>You earned <strong>{rewardLabel(reward)}</strong>.</>}</p>
       <p className="muted">{e.correct} of {e.answered} answers correct · {e.points} leftover Trail Points become bond XP</p>
       <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{reward.kind === 'creature' ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>

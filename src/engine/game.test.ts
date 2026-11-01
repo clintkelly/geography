@@ -471,6 +471,18 @@ describe('Field Note recall', () => {
   });
 });
 
+describe('streaks', () => {
+  it('count correct answers, reset on a miss, and change nothing else', () => {
+    let s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    s = turn(turn(s, true), true);
+    expect(s.expedition!.streak).toBe(2);
+    const hp = s.expedition!.battle!.combat.opponentHp;
+    s = turn(s, false);
+    expect(s.expedition!.streak).toBe(0);
+    expect(s.expedition!.battle!.combat.opponentHp).toBe(hp);
+  });
+});
+
 describe('journey events', () => {
   const toEvent = () => {
     let s = ready(fresh());

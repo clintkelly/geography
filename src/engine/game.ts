@@ -106,6 +106,8 @@ export interface Expedition {
   retreated: boolean;
   answered: number;
   correct: number;
+  /** Correct answers in a row. For show only: it never changes an outcome, and breaking it costs nothing. */
+  streak?: number;
 }
 
 export interface Attempt {
@@ -502,6 +504,7 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
       points: e.points + (correct && !befriending ? ECONOMY.perCorrectAnswer : 0) + pointsFor(b.question, correct),
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
+      streak: correct ? (e.streak ?? 0) + 1 : 0,
       battle: { ...b, combat, phase: 'feedback', result, ...(befriending && correct ? { befriended: true } : {}) },
     },
   };
@@ -539,6 +542,7 @@ function answerEvent(save: SaveData, pack: Pack, optionId: string, now: number):
       freeClue: correct && !!def.freeClue,
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
+      streak: correct ? (e.streak ?? 0) + 1 : 0,
       slots: e.slots.map((s, i) => (i === ev.slotIndex ? { ...s, status: 'won' as const } : s)),
       event: { ...ev, result: cardId ? { optionId, correct, cardId } : { optionId, correct } },
     },

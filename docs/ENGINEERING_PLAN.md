@@ -181,6 +181,7 @@ Connect the ElevenLabs hosted MCP server, then confirm that it offers a sound ef
 | Content | Vitest | Every generated question and clue, for all difficulties |
 | Persistence | Vitest with fake-indexeddb | Resume, migrations, schema rejection |
 | Whole loop | Playwright (`npm run smoke`) | One real trail, including reloads and double clicks |
+| Assets | Vitest (`content/assets.test.ts`) | Every art and sound reference has a file of the right size, with no unused files |
 | Visual | Screenshots, reviewed by eye | Map framing and layout. Milestone 1's map cropping passed the automated run and was only caught this way |
 | Fun | The children | Everything else (§15) |
 

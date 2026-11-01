@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { PACK } from '../content/pack';
 import { ECONOMY } from '../engine/economy';
 import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
@@ -23,11 +23,17 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
   const highlights = useMemo(() => {
     const shown: Record<string, Highlight> = {};
     for (const c of candidates) shown[c.place.featureId] = c.ruledOut ? 'ruledOut' : expert ? 'selectable' : 'candidate';
+    if (lastGuess) shown[place(lastGuess).featureId] = 'wobble';
     if (atlasPlace) shown[place(atlasPlace).featureId] = 'atlas';
     return shown;
   }, [e.guesses, e.removedIds, atlasPlace]); // eslint-disable-line
 
   const guess = (locationId: string) => dispatch({ type: 'guess', locationId });
+  const guesses = useRef(e.guesses.length);
+  useEffect(() => {
+    if (e.guesses.length > guesses.current) playSound('not-yet');
+    guesses.current = e.guesses.length;
+  }, [e.guesses.length]);
   const onFeatureClick = useMemo(() => (id: string) => {
     const hit = e.candidateIds.find((c) => place(c).featureId === id);
     if (hit) dispatch({ type: 'guess', locationId: hit });

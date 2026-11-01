@@ -3,8 +3,8 @@ import type { Species } from '../content/types';
 import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
-import { artUrl, poseUrl } from './art';
-import { turnFrames, type Frame, type Motion, type Pose } from './battleAnimation';
+import { artUrl, Fx, poseUrl } from './art';
+import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
 import { place, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { QuestionPanel } from './QuestionPanel';
@@ -14,10 +14,12 @@ import { TrailBar } from './TrailBar';
 const POSES: Pose[] = ['idle', 'attack', 'guard', 'special', 'hit'];
 
 function Hp({ label, hp, max }: { label: string; hp: number; max: number }) {
+  const width = `${(hp / max) * 100}%`;
   return (
     <div className="hp" role="img" aria-label={`${label}: ${hp} of ${max} HP`}>
       <div className="hp-label"><span>{label}</span><span>{hp}/{max}</span></div>
-      <div className="hp-track"><div className="hp-fill" style={{ width: `${(hp / max) * 100}%` }} /></div>
+      {/* The pale bar catches up late, showing the chunk of HP just lost. */}
+      <div className="hp-track"><div className="hp-ghost" style={{ width }} /><div className="hp-fill" style={{ width }} /></div>
     </div>
   );
 }
@@ -29,11 +31,23 @@ function specialText(c: CombatState): string {
 }
 
 /** The sprite sits inside a moving wrapper, so mirroring and motion don't fight over `transform`. */
-function Actor({ creature, pose, motion, side }: { creature: Species; pose: Pose; motion?: Motion | undefined; side: 'player' | 'opponent' }) {
+function Actor({ creature, pose, motion, side, floats, flash, powered }: {
+  creature: Species;
+  pose: Pose;
+  motion?: Motion | undefined;
+  side: Side;
+  floats: (Float & { id: number })[];
+  flash: boolean;
+  powered: boolean;
+}) {
   const faces = side === 'player' ? 'right' : 'left';
   return (
-    <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}`} data-pose={pose}>
-      <img src={poseUrl(creature, pose)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
+    <div className="actor-slot">
+      {floats.filter((f) => f.side === side).map((f) => <span key={f.id} className={`float float-${f.kind}${powered ? ' float-big' : ''}`}>{f.text}</span>)}
+      {motion === 'shake' && <><Fx id="spark" className="spark" />{powered && <Fx id="spark" className="spark spark-2" />}</>}
+      <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}${flash && motion === 'shake' ? ' flash' : ''}`} data-pose={pose}>
+        <img src={poseUrl(creature, pose)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
+      </div>
     </div>
   );
 }
@@ -45,6 +59,21 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [frame, setFrame] = useState<Frame | null>(null);
   const answered = battle.result ? `${e.answered}` : '';
   const lastTurn = useRef(answered);
+  const [shownHp, setShownHp] = useState<{ player: number; opponent: number } | null>(null);
+  const [floats, setFloats] = useState<(Float & { id: number })[]>([]);
+  const [impact, setImpact] = useState<'small' | 'big' | null>(null);
+  const [flash, setFlash] = useState(false);
+  const [stayGone, setStayGone] = useState(false);
+  const floatId = useRef(0);
+  const finalIntro = slot?.kind === 'guardian' && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
+  const [intro, setIntro] = useState(finalIntro);
+
+  useEffect(() => {
+    if (!intro) return;
+    playSound('special');
+    const t = setTimeout(() => setIntro(false), 1500);
+    return () => clearTimeout(t);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     for (const c of [companion, opponent]) for (const pose of POSES) new Image().src = poseUrl(c, pose);
@@ -57,20 +86,49 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     if (!battle.result) return;
     const { outcome } = battle.combat;
     const action = battle.action ?? 'attack';
-    const frames = turnFrames(action, battle.result.correct, battle.result.events, action !== 'befriend' && outcome !== 'victory');
-    const timers = frames.map((f) => setTimeout(() => {
+    const { events: ev, correct } = battle.result;
+    const ending: Ending = outcome !== 'victory' || action === 'befriend' ? 'none' : slot?.status === 'won' ? 'defeated' : 'wornOut';
+    const powered = isPowered(e.streak);
+    const frames = turnFrames(action, correct, ev, action !== 'befriend' && outcome !== 'victory', ending, powered);
+    // The saved turn is already final. These replay it one hit at a time.
+    let hp = { player: battle.combat.playerHp + ev.damageTaken - ev.healed, opponent: battle.combat.opponentHp + ev.damageDealt };
+    setShownHp(hp);
+    const timers: ReturnType<typeof setTimeout>[] = frames.map((f) => setTimeout(() => {
       setFrame(f);
-      f.sounds?.forEach((id) => playSound(id));
+      f.sounds?.forEach((id) => playSound(id, false, id === 'correct' ? streakRate(e.streak) : 1));
+      if (f.hp) {
+        hp = { ...hp, [f.hp.side]: hp[f.hp.side] + f.hp.delta };
+        setShownHp(hp);
+      }
+      if (f.floats) {
+        const added = f.floats.map((x) => ({ ...x, id: ++floatId.current }));
+        setFloats((all) => [...all, ...added]);
+        timers.push(setTimeout(() => setFloats((all) => all.filter((x) => !added.includes(x))), 1000));
+      }
+      if (f.impact) {
+        setImpact(f.impact);
+        setFlash(true);
+        timers.push(setTimeout(() => setFlash(false), 90), setTimeout(() => setImpact(null), 320));
+      }
     }, f.at));
     const end = frames.at(-1)?.at ?? 0;
     timers.push(setTimeout(() => {
       if (outcome === 'victory' && action !== 'befriend') playSound('win');
       if (outcome === 'retreat') playSound('retreat');
     }, end));
-    timers.push(setTimeout(() => setFrame(null), end + 100));
+    timers.push(setTimeout(() => {
+      setShownHp(null);
+      // A beaten opponent stays gone until the child moves on.
+      if (ending === 'defeated') setStayGone(true);
+      else setFrame(null);
+    }, end + 100));
     return () => {
       timers.forEach(clearTimeout);
       setFrame(null);
+      setShownHp(null);
+      setFloats([]);
+      setImpact(null);
+      setFlash(false);
     };
   }, [answered]); // eslint-disable-line
 
@@ -110,21 +168,34 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   return (
     <div className="battle">
       <TrailBar e={e} />
-      <section className="scene" style={{ backgroundImage: `url(${backdrop})` }}>
+      <section className={`scene${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+        {intro && (
+          <div className="vs-intro" aria-hidden="true">
+            <img src={poseUrl(companion, 'idle')} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
+            <strong>VS</strong>
+            <img src={poseUrl(opponent, 'idle')} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
+          </div>
+        )}
+        {battle.befriended && (
+          <div className="friend-banner">
+            {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="heart" className={`rise rise-${i}`} />)}
+            <strong>New friend!</strong>
+          </div>
+        )}
         <div className="scene-hud">
           <div>
-            <Hp label={companion.displayName} hp={combat.playerHp} max={combat.playerMaxHp} />
+            <Hp label={companion.displayName} hp={shownHp?.player ?? combat.playerHp} max={combat.playerMaxHp} />
             <div className="charge" role="img" aria-label={`Charge: ${combat.charge} of ${MAX_CHARGE}`}>
               Charge {Array.from({ length: MAX_CHARGE }, (_, i) => <span key={i} className={i < combat.charge ? 'pip on' : 'pip'} />)}
             </div>
           </div>
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
-          <Hp label={opponent.displayName} hp={combat.opponentHp} max={combat.opponentMaxHp} />
+          <Hp label={opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
         </div>
         <div className="scene-floor">
-          <Actor creature={companion} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} />
+          <Actor creature={companion} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
           {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
-          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={frame?.opponentMotion} />
+          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
         </div>
       </section>
 
@@ -142,7 +213,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
                 <div className="action-row">
                   <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack} damage, +1 charge</small></button>
                   <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
-                  <button type="button" className="big" disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
+                  <button type="button" className={`big${special ? ' special-ready' : ''}`} disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
                 </div>
                 {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
               </>
