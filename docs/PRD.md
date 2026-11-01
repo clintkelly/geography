@@ -403,10 +403,10 @@ Avoid names such as `countryQuizScore` in shared engine code.
 ## 13 Build order
 
 1. **Milestone 1:** core loop. Done and enjoyed by the children.
-2. **Milestone 2, Foundations:** two profiles, migration, state records for one region, US map, difficulty tiers.
+2. **Milestone 2, Foundations:** backup and restore, two profiles, migration, Guard and Special, state records for one region, US map, difficulty tiers.
 3. **Milestone 3, The Hunt:** multi-stop trails, Trail Points, Prep Shop, clues, events, Field Notes, State Cards, Befriend, and a simple stable.
-4. **Milestone 4, Growth:** Guard and Special, full stable, XP, evolution, more species.
-5. **Milestone 5, Learning and parent tools:** all 50 states, review scheduling, parent view, backups.
+4. **Milestone 4, Growth:** full stable, XP, evolution, more species.
+5. **Milestone 5, Learning and parent tools:** all 50 states, review scheduling, parent view, import preview.
 6. **Milestone 6, Polish and playtest:** full art, tablet, tuning across several days.
 
 Each milestone ends with the children playing it. Their reaction may reorder the rest.

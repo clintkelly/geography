@@ -7,9 +7,9 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | Milestone | State |
 | --- | --- |
 | 1. Core loop | Done; the children enjoyed it |
-| 2. Foundations: profiles, US data, difficulty | Next |
+| 2. Foundations: backup, profiles, combat choices, US data, difficulty | Next |
 | 3. The Hunt: trails, points, Field Notes | Not started |
-| 4. Growth: combat depth, full stable, evolution | Not started |
+| 4. Growth: full stable, levels, evolution | Not started |
 | 5. Learning and parent tools | Not started |
 | 6. Polish and playtest | Not started |
 
@@ -17,7 +17,7 @@ Keyboard shortcuts shipped after Milestone 1 through `useKeys` in `ui/keys.tsx`,
 
 **Gate:** each milestone ends with the children playing it, and their reaction may reorder the next one. Milestone 3 is the one to watch: it decides whether the Carmen Sandiego loop works.
 
-**Why this order:** profiles come first because every later feature writes per-child data, and each schema change after real play has to be migrated. The Hunt comes before the Stable because points and clues are the riskiest design idea, and evolution means little until expeditions are worth repeating.
+**Why this order:** backup comes first to protect real saves. Profiles follow because every later feature writes per-child data, and each schema change after real play has to be migrated. The Hunt comes before the Stable because points and clues are the riskiest design idea, and evolution means little until expeditions are worth repeating.
 
 ## Architecture
 
@@ -76,23 +76,26 @@ Validator additions for §8: same-state cities exclude the capital, no option li
 
 ## Milestone 2: Foundations
 
+Task 1 ships first and on its own, so real saves are protected before any migration runs. Tasks 2 and 3 follow in order; the rest can run in any order.
+
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
-| 1 | Schema v2: one IndexedDB record per profile plus a small household record, with a tested v1 migration. Keep souvenirs and counts; end any in-progress v1 expedition cleanly | `game.ts`, `store.ts` | M |
-| 2 | Profile select and quick switching | `ui/` | S |
-| 3 | Generalize `WorldMap` to a map definition, and add a US map with `us-atlas` and AlbersUsa, including Alaska and Hawaii insets | `ui/`, new `content/maps` | M |
-| 4 | `StateRecord`, templates, and validator | `content/us/` | M |
-| 5 | State records for the West, as the first reviewed batch | `content/us/states/west.json` | M, mostly review |
-| 6 | Difficulty on questions: Scout, Ranger, Expert, plus a choice on the outing card and a click-the-state input type | `questions.ts`, `Battle.tsx` | M |
-| 7 | Parent difficulty limits, in a minimal settings screen | `ui/` | S |
-| 8 | Basic export to a JSON file, so real saves have a backup before later migrations | `persistence/`, `ui/` | S |
-| 9 | Sound: `playSound(id)` wrapper, mute and volume per profile, first effects, and a dev page that plays each one | new `ui/sound.ts`, `public/sfx` | S |
+| 1 | Backup: export the save to a JSON file, and restore one with a schema check and confirmation | `persistence/`, `ui/` | S |
+| 2 | Schema v2: one IndexedDB record per profile plus a small household record, with a tested v1 migration. Keep souvenirs and counts; end any in-progress v1 expedition cleanly | `game.ts`, `store.ts` | M |
+| 3 | Profile select and quick switching | `ui/` | S |
+| 4 | Guard, Special templates, charge, and block; §6 enemy pattern restored; Slatepaw gets a Special | `combat.ts`, `Battle.tsx`, `pack.ts` | M |
+| 5 | Generalize `WorldMap` to a map definition, and add a US map with `us-atlas` and AlbersUsa, including Alaska and Hawaii insets | `ui/`, new `content/maps` | M |
+| 6 | `StateRecord`, templates, and validator | `content/us/` | M |
+| 7 | State records for the West, as the first reviewed batch | `content/us/states/west.json` | M, mostly review |
+| 8 | Difficulty on questions: Scout, Ranger, Expert, plus a choice on the outing card and a click-the-state input type | `questions.ts`, `Battle.tsx` | M |
+| 9 | Parent difficulty limits, in a minimal settings screen | `ui/` | S |
+| 10 | Sound: `playSound(id)` wrapper, mute and volume per profile, first effects, and a dev page that plays each one | new `ui/sound.ts`, `public/sfx` | S |
 
-Tests: migration from a real v1 save, sound settings per profile and a failed sound not interrupting play (27), profile isolation (1), same-state options (10), no two correct answers (11), nickname status (12), and map click accuracy after zoom (8).
+Tests: backup round trip and rejected bad files (13), migration from a real v1 save (14), profile isolation (1), §6 as a table-driven combat test (3), keyboard bindings for Guard and Special (28), same-state options (10), no two correct answers (11), nickname status (12), map click accuracy after zoom (8), and sound settings per profile with a failed sound not interrupting play (27).
 
 Decision for the migration: Milestone 1 data goes to one child's profile, whichever the parent picks once. Don't duplicate it.
 
-**Exit:** both children play the existing loop on Western states at a difficulty of their choice.
+**Exit:** both children play on Western states at a difficulty of their choice, make real choices in combat, and have a backup of their saves.
 
 ## Milestone 3: The Hunt
 
@@ -120,16 +123,15 @@ Tests: trails stay adjacent, 0-point completion (19), purchases don't double cha
 
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
-| 1 | Guard, Special templates, charge, and block; §6 enemy pattern restored | `combat.ts`, `Battle.tsx` | M |
-| 2 | Combat reads companion stats, and opponents scale by stage | `combat.ts`, `game.ts` | S |
-| 3 | Full stable: creature details, nicknames, level and stage display | `ui/Stable.tsx` | M |
-| 4 | XP, levels, and idempotent stop awards | `progression.ts` | M |
-| 5 | Evolution: thresholds, stat changes, one-time celebration | `progression.ts`, `ui/` | M |
-| 6 | Species data for 12 species; 3 starters | `content/` | S |
-| 7 | Art: first 6 species, 3 stages each, using reference images | `public/art` | M |
-| 8 | Rival Hunts when new species run out | `expedition.ts` | S |
+| 1 | Combat reads companion stats, and opponents scale by stage | `combat.ts`, `game.ts` | S |
+| 2 | Full stable: creature details, nicknames, level and stage display | `ui/Stable.tsx` | M |
+| 3 | XP, levels, and idempotent stop awards | `progression.ts` | M |
+| 4 | Evolution: thresholds, stat changes, one-time celebration | `progression.ts`, `ui/` | M |
+| 5 | Species data for 12 species; 3 starters | `content/` | S |
+| 6 | Art: first 6 species, 3 stages each, using reference images | `public/art` | M |
+| 7 | Rival Hunts when new species run out | `expedition.ts` | S |
 
-Tests: §6 as a table-driven combat test (3), minimum 3 correct answers at every stage (24), evolution once (23), XP can't be farmed (4), honest Rival Hunts (25).
+Tests: minimum 3 correct answers at every stage (24), evolution once (23), XP can't be farmed (4), honest Rival Hunts (25).
 
 **Exit:** the children care which companion they take, and they want to evolve one.
 
@@ -142,7 +144,7 @@ Tests: §6 as a table-driven combat test (3), minimum 3 correct answers at every
 | 3 | Selection by need, replacing the coin flip | `questions.ts` | S |
 | 4 | Study cards | `ui/` | S |
 | 5 | Parent view | new `ui/Parent.tsx` | M |
-| 6 | Validated import with preview, confirmed reset | `persistence/` | M |
+| 6 | Import preview of affected profiles, confirmed reset | `persistence/` | M |
 | 7 | Compact old attempts | `game.ts` | S |
 
 The clock enters learning only through the `now` argument. "Calendar days" use the device's local date.
@@ -196,7 +198,7 @@ Before starting a milestone, add its §14 acceptance items as named tests. Autom
 | Standard trail feels too long | Short trail stays available; expeditions pause between stops |
 | Stat growth makes questions unnecessary | Stage-scaled opponents and a tested minimum of 3 correct answers |
 | Economy has a dominant strategy | Numbers live in one config; watch what they buy |
-| Clearing browser data destroys progress | Export is in Milestone 5; ship a basic version in Milestone 2 now that the children care about progress |
+| Clearing browser data destroys progress | Backup and restore ship first in Milestone 2; remind the parent to export now and then |
 | Pokémon-derived names or art slip in | §1 rule; check prompts and names at review |
 | Schema changes break a child's real save | Tested migrations from v2 onward; unsupported versions refused and left untouched |
 
@@ -216,4 +218,5 @@ What already helps, at no extra cost: storage sits behind `SaveStore`, game rule
 - **Reward is the creature you hunted**, so every expedition has one clear goal.
 - **Questions come from reviewed records plus templates**, not hand-written lists.
 - **The US map uses `us-atlas`**, alongside `world-atlas` for Europe.
-- **Enemy pattern stays 1, 2, 2 until Guard and Special ship** in Milestone 4, then moves to the PRD's values.
+- **Enemy pattern stays 1, 2, 2 until Guard and Special ship** in Milestone 2, then moves to the PRD's values.
+- **Backup comes before the schema migration**, and includes a restore, because a backup can't be used without one.
