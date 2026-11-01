@@ -32,10 +32,12 @@ export function validatePack(pack: Pack): string[] {
   const regionIds = new Set(pack.regions.map((r) => r.id));
   for (const p of pack.places) if (!regionIds.has(p.regionId)) problems.push(`${p.id}: unknown region`);
   const speciesIds = new Set(pack.species.map((s) => s.id));
-  for (const id of [pack.starterSpeciesId, ...pack.regularOpponentIds]) {
+  for (const id of [pack.starterSpeciesId, pack.featuredSpeciesId]) {
     if (!speciesIds.has(id)) problems.push(`unknown species ${id}`);
   }
-  for (const id of pack.huntableIds) if (!speciesIds.has(id)) problems.push(`unknown huntable species ${id}`);
+  for (const r of pack.regions) {
+    if (pack.species.filter((s) => s.homes.includes(r.id)).length < 3) problems.push(`${r.id}: needs 3 creatures`);
+  }
   for (const p of pack.places) {
     for (const n of p.neighbors ?? []) {
       const other = pack.places.find((o) => o.id === n);
@@ -63,6 +65,8 @@ export function validateRecords(records: readonly PlaceRecord[]): string[] {
     if (s.cityState && !s.hint2) problems.push(`${s.id}: a city-state needs a second hint`);
     if (!s.cityState && cities[0]?.includes(s.name)) problems.push(`${s.id}: clue city names the place`);
     if (s.facts.length < 2) problems.push(`${s.id}: needs 2 facts`);
+    if (s.asks.length !== s.facts.length) problems.push(`${s.id}: needs a question for each fact`);
+    if (s.asks.some((a) => a.includes(s.name))) problems.push(`${s.id}: a fact question names its answer`);
   }
   return problems;
 }

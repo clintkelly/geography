@@ -3,7 +3,7 @@ import type { Species } from '../content/types';
 import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
-import { poseUrl } from './art';
+import { artUrl, poseUrl } from './art';
 import { turnFrames, type Frame, type Motion, type Pose } from './battleAnimation';
 import { place, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
@@ -92,7 +92,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   useKeys(keys);
 
   if (!slot) return null;
-  const backdrop = slot.kind === 'guardian' ? 'backdrop-mountain' : 'backdrop-coast';
+  const backdrop = artUrl(`backdrop-${place(slot.locationId).biome}`);
   const events = result?.events;
   const log = events && [
     events.damageDealt > 0 && `${companion.displayName} dealt ${events.damageDealt} damage.`,
@@ -110,7 +110,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   return (
     <div className="battle">
       <TrailBar e={e} />
-      <section className={`scene ${backdrop}`}>
+      <section className="scene" style={{ backgroundImage: `url(${backdrop})` }}>
         <div className="scene-hud">
           <div>
             <Hp label={companion.displayName} hp={combat.playerHp} max={combat.playerMaxHp} />

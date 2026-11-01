@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type Whee
 import { clampView, type MapDef, type View } from '../content/maps';
 import { useKeys } from './keys';
 
-export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable';
+export type Highlight = 'candidate' | 'ruledOut' | 'found' | 'route' | 'atlas' | 'correct' | 'wrong' | 'selectable' | 'arrive';
 
 interface Props {
   map: MapDef;
@@ -23,11 +23,12 @@ export function WorldMap({ map, highlights = {}, onFeatureClick, children, label
 
   const shapes = useMemo(
     () =>
-      map.features.map((c, i) => {
+      // Highlighted shapes draw last, so their whole border sits above their neighbors.
+      map.features.map((c, index) => ({ c, index })).sort((a, b) => Number(!!highlights[a.c.id]) - Number(!!highlights[b.c.id])).map(({ c, index }) => {
         const h = highlights[c.id];
         return (
           <path
-            key={i}
+            key={index}
             d={c.d}
             data-feature={c.id}
             className={`land${h ? ` land-${h}` : ''}`}

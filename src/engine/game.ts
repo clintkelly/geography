@@ -7,7 +7,8 @@ import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { Rng } from './rng';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
+const RECALL_CHANCE = 0.4;
 export const BOND_BONUS_XP = 10;
 const RECENT_QUESTION_LIMIT = 24;
 
@@ -26,6 +27,7 @@ export type Reward = { kind: 'creature'; speciesId: string } | { kind: 'bond'; x
 
 export interface Offer {
   id: string;
+  regionId: string;
   reward: Reward;
 }
 
@@ -167,6 +169,8 @@ export interface SaveData {
   activeCompanionId: string;
   souvenirIds: string[];
   stateCards: string[];
+  /** Field Notes this child has seen, which unlock questions about them. */
+  seenFacts: string[];
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -231,13 +235,18 @@ function nearestFirst(places: readonly Place[], target: Place): Place[] {
   return [...places].sort((a, b) => d(a) - d(b));
 }
 
-/** Two sightings, of different creatures when possible. */
+/** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
 export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
   const owned = new Set(save.companions.map((c) => c.speciesId));
-  const unowned = rng.shuffle(pack.huntableIds.filter((id) => !owned.has(id)));
-  const rewards: Reward[] = unowned.slice(0, 2).map((speciesId) => ({ kind: 'creature', speciesId }));
-  if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
-  return { offers: rewards.map((reward, i) => ({ id: `offer-${save.nextId + i}`, reward })), nextId: save.nextId + rewards.length };
+  let nextId = save.nextId;
+  const offers = pack.regions.flatMap((region) => {
+    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id)).map((s) => s.id));
+    const ordered = [...unowned.filter((id) => id === pack.featuredSpeciesId), ...unowned.filter((id) => id !== pack.featuredSpeciesId)];
+    const rewards: Reward[] = ordered.slice(0, 2).map((speciesId) => ({ kind: 'creature', speciesId }));
+    if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
+    return rewards.map((reward): Offer => ({ id: `offer-${nextId++}`, regionId: region.id, reward }));
+  });
+  return { offers, nextId };
 }
 
 function refreshOffers(save: SaveData, pack: Pack): SaveData {
@@ -257,6 +266,7 @@ export function newSave(pack: Pack, seed: number, profileId: string, displayName
       activeCompanionId: instanceId,
       souvenirIds: [],
       stateCards: [],
+      seenFacts: [],
       completedExpeditions: 0,
       nextId: 1,
       rngState: seed,
@@ -274,6 +284,7 @@ export function newSave(pack: Pack, seed: number, profileId: string, displayName
 
 function setupSearch(e: Expedition, pack: Pack, rng: Rng, targetId: string): Expedition {
   const inRegion = pack.places.filter((p) => p.regionId === e.regionId);
+  const gap = pack.regions.find((r) => r.id === e.regionId)?.markerGap ?? 4;
   const target = inRegion.find((p) => p.id === targetId) as Place;
   const others = inRegion.filter((p) => p.id !== targetId);
   let candidates: Place[];
@@ -281,7 +292,7 @@ function setupSearch(e: Expedition, pack: Pack, rng: Rng, targetId: string): Exp
   else {
     // Harder trails offer neighboring places, which are easier to confuse.
     const pool = e.difficulty === 'scout' ? rng.shuffle(others) : nearestFirst(others, target);
-    candidates = [target, ...spaced(pool, target, 3)];
+    candidates = [target, ...spaced(pool, target, 3, gap)];
   }
   const free = e.freeClue ? 1 : 0;
   return {
@@ -303,7 +314,7 @@ function setupSearch(e: Expedition, pack: Pack, rng: Rng, targetId: string): Exp
 function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { type: 'start' }>): SaveData {
   const region = pack.regions.find((r) => r.id === cmd.regionId);
   const offer = save.offers.find((o) => o.id === cmd.offerId);
-  if (!region || !offer) return save;
+  if (!region || !offer || offer.regionId !== cmd.regionId) return save;
   const allowed = allowedDifficulties(save.settings, region);
   const difficulty = allowed.includes(cmd.difficulty) ? cmd.difficulty : (allowed[0] as Difficulty);
 
@@ -316,8 +327,9 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const route = walkTrail(places, kinds.length, rng);
   // A small region shortens the trail from the middle, keeping the final showdown.
   const stops = kinds.length > route.length ? [...kinds.slice(0, route.length - 1), 'guardian' as const] : kinds;
-  const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(pack.huntableIds)[0] as string);
-  const opponents = rng.shuffle(pack.regularOpponentIds.filter((id) => id !== target));
+  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId).map((s) => s.id);
+  const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
+  const opponents = rng.shuffle(locals.filter((id) => id !== target));
   const events = rng.shuffle(TRAIL_EVENTS);
   let battles = 0;
   let eventCount = 0;
@@ -384,7 +396,13 @@ function buy(e: Expedition, item: PrepItem): Expedition {
 
 function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack): { e: Expedition; question: Question } {
   const rng = new Rng(e.rngState);
-  const picked = pickQuestion(questionPool(pack, e), { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
+  const context = { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId };
+  const pool = questionPool(pack, e);
+  const seen = new Set(save.seenFacts);
+  const recall = pool.filter((q) => q.recallOf && seen.has(q.recallOf) && !e.askedQuestionIds.includes(q.id));
+  const wantRecall = rng.next() < RECALL_CHANCE;
+  // A question about a Field Note only appears once the child has had the chance to read it.
+  const picked = wantRecall && recall.length > 0 ? pickQuestion(recall, context, rng) : pickQuestion(pool.filter((q) => !q.recallOf), context, rng);
   const question = presentQuestion(picked, rng);
   return { e: { ...e, rngState: rng.state, askedQuestionIds: [...e.askedQuestionIds, picked.id] }, question };
 }
@@ -416,6 +434,15 @@ function enterEncounter(save: SaveData, pack: Pack): SaveData {
   const dealt = dealQuestion(save, e, slot, pack);
   const battle: Battle = { id: `${e.id}-battle-${save.nextId}`, slotIndex, combat, phase: 'choose', question: dealt.question };
   return { ...save, nextId: save.nextId + 1, expedition: { ...dealt.e, battle, retreated: false } };
+}
+
+/** Records a Field Note as seen once it has been shown after a correct answer. */
+function noteFacts(save: SaveData, q: Question, correct: boolean): string[] {
+  return correct && q.noteId && !save.seenFacts.includes(q.noteId) ? [...save.seenFacts, q.noteId] : save.seenFacts;
+}
+
+function pointsFor(q: Question, correct: boolean): number {
+  return correct && q.recallOf ? ECONOMY.recallBonus : 0;
 }
 
 function battlesWon(e: Expedition): number {
@@ -466,12 +493,13 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
     ...save,
     attempts: [...save.attempts, attempt],
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
+    seenFacts: noteFacts(save, b.question, correct),
     souvenirIds: midTrailFind && e.souvenirId ? [...save.souvenirIds, e.souvenirId] : save.souvenirIds,
     expedition: {
       ...e,
       slots,
       foundSouvenirId: midTrailFind ? e.souvenirId : e.foundSouvenirId,
-      points: e.points + (correct && !befriending ? ECONOMY.perCorrectAnswer : 0),
+      points: e.points + (correct && !befriending ? ECONOMY.perCorrectAnswer : 0) + pointsFor(b.question, correct),
       answered: e.answered + 1,
       correct: e.correct + (correct ? 1 : 0),
       battle: { ...b, combat, phase: 'feedback', result, ...(befriending && correct ? { befriended: true } : {}) },
@@ -503,9 +531,10 @@ function answerEvent(save: SaveData, pack: Pack, optionId: string, now: number):
     ...save,
     attempts: [...save.attempts, attempt],
     stateCards: cardId ? [...save.stateCards, cardId] : save.stateCards,
+    seenFacts: noteFacts(save, ev.question, correct),
     expedition: {
       ...e,
-      points: e.points + (correct ? def.points : 0),
+      points: e.points + (correct ? def.points : 0) + pointsFor(ev.question, correct),
       snack: e.snack || (correct && !!def.snack),
       freeClue: correct && !!def.freeClue,
       answered: e.answered + 1,

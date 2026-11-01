@@ -1,5 +1,5 @@
 import type { Pack, Question, QuestionOption } from './types';
-import { europeClues, europePlaces, europeQuestions, usCards, usClues, usPlaces, usQuestions } from './us/templates';
+import { allClues, allPlaces, allQuestions, GROUPS, usCards } from './us/templates';
 
 const wiki = (page: string) => `https://en.wikipedia.org/wiki/${page}`;
 
@@ -31,21 +31,36 @@ const worldBasics: Question[] = [
 ];
 
 export const PACK: Pack = {
-  version: 'west-and-europe-3',
+  version: 'usa-and-europe-1',
   regions: [
-    { id: 'us-west', label: 'American West', mapId: 'us', difficulties: ['scout', 'ranger', 'expert'] },
-    { id: 'europe', label: 'Europe', mapId: 'world', difficulties: ['scout', 'ranger', 'expert'] },
-  ],
-  questions: [...usQuestions, ...europeQuestions, ...worldBasics],
-  clues: [...usClues, ...europeClues],
-  places: [...usPlaces, ...europePlaces],
+    { id: 'us-west', label: 'American West' },
+    { id: 'us-midwest', label: 'Midwest' },
+    { id: 'us-south', label: 'The South' },
+    { id: 'us-northeast', label: 'Northeast' },
+    { id: 'europe', label: 'Europe' },
+  ].map((r) => {
+    const group = GROUPS.find((g) => g.id === r.id);
+    return { ...r, mapId: r.id === 'europe' ? ('world' as const) : ('us' as const), difficulties: ['scout', 'ranger', 'expert'] as const, markerGap: group?.gap ?? 4 };
+  }),
+  questions: [...allQuestions, ...worldBasics],
+  clues: allClues,
+  places: allPlaces,
   species: [
-    { id: 'slatepaw', displayName: 'Slatepaw', artId: 'slatepaw', facing: 'right', flavor: 'A round little mountain-dweller with mossy shoulders.', special: { name: 'Landslide', template: 'strong' } },
-    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', facing: 'left', flavor: 'It chases waves along the shore and hates to lose.', special: { name: 'Tide Pool', template: 'heal' } },
-    { id: 'thistlehop', displayName: 'Thistlehop', artId: 'thistlehop', facing: 'left', flavor: 'It bounds through the woods, all prickles and mischief.', special: { name: 'Bramble Wall', template: 'protect' } },
-    { id: 'cindermite', displayName: 'Cindermite', artId: 'cindermite', facing: 'left', flavor: 'A warm, grumpy creature that naps in sun-baked rocks.', special: { name: 'Ember Burst', template: 'strong' } },
-    { id: 'sandwhisk', displayName: 'Sandwhisk', artId: 'sandwhisk', facing: 'left', flavor: 'It listens for lizards with enormous ears and never stops moving.', special: { name: 'Dust Devil', template: 'protect' } },
-    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', facing: 'left', flavor: 'The great guardian of the high passes.', special: { name: 'Rockfall', template: 'strong' } },
+    { id: 'slatepaw', displayName: 'Slatepaw', artId: 'slatepaw', facing: 'right', homes: [], flavor: 'A round little mountain-dweller with mossy shoulders.', special: { name: 'Landslide', template: 'strong' } },
+    { id: 'barkknight', displayName: 'The Bark Knight', artId: 'barkknight', facing: 'left', homes: ['us-west', 'us-midwest', 'us-south', 'us-northeast', 'europe'], flavor: 'A loyal guardian who patrols at night and never leaves a friend behind.', special: { name: 'Midnight Howl', template: 'strong' } },
+    { id: 'sandwhisk', displayName: 'Sandwhisk', artId: 'sandwhisk', facing: 'left', homes: ['us-west'], flavor: 'It listens for lizards with enormous ears and never stops moving.', special: { name: 'Dust Devil', template: 'protect' } },
+    { id: 'cindermite', displayName: 'Cindermite', artId: 'cindermite', facing: 'left', homes: ['us-west'], flavor: 'A warm, grumpy creature that naps in sun-baked rocks.', special: { name: 'Ember Burst', template: 'strong' } },
+    { id: 'cragmaw', displayName: 'Old Cragmaw', artId: 'cragmaw', facing: 'left', homes: ['us-west', 'europe'], flavor: 'The great guardian of the high passes.', special: { name: 'Rockfall', template: 'strong' } },
+    { id: 'galewing', displayName: 'Galewing', artId: 'galewing', facing: 'left', homes: ['us-midwest'], flavor: 'A prairie bird that rides in on the first spring storm.', special: { name: 'Prairie Breeze', template: 'heal' } },
+    { id: 'lakeshell', displayName: 'Lakeshell', artId: 'lakeshell', facing: 'left', homes: ['us-midwest'], flavor: 'It suns itself on rocks along the Great Lakes.', special: { name: 'Shell Tide', template: 'protect' } },
+    { id: 'thistlehop', displayName: 'Thistlehop', artId: 'thistlehop', facing: 'left', homes: ['us-midwest', 'us-northeast'], flavor: 'It bounds through the woods, all prickles and mischief.', special: { name: 'Bramble Wall', template: 'protect' } },
+    { id: 'bayouchomp', displayName: 'Bayou Chomp', artId: 'bayouchomp', facing: 'left', homes: ['us-south'], flavor: 'It grins from the slow green water and loves a good snack.', special: { name: 'Swamp Snap', template: 'strong' } },
+    { id: 'dillopod', displayName: 'Dillopod', artId: 'dillopod', facing: 'left', homes: ['us-south'], flavor: 'It rolls into a ball at the first sign of trouble.', special: { name: 'Roll Up', template: 'protect' } },
+    { id: 'brinefin', displayName: 'Brinefin', artId: 'brinefin', facing: 'left', homes: ['us-south', 'europe'], flavor: 'It chases waves along the shore and hates to lose.', special: { name: 'Tide Pool', template: 'heal' } },
+    { id: 'lobsnap', displayName: 'Lobsnap', artId: 'lobsnap', facing: 'left', homes: ['us-northeast'], flavor: 'It guards the rocky coast with two very serious claws.', special: { name: 'Claw Crash', template: 'strong' } },
+    { id: 'mapleclop', displayName: 'Mapleclop', artId: 'mapleclop', facing: 'left', homes: ['us-northeast'], flavor: 'Its leafy antlers turn red every fall.', special: { name: 'Maple Mend', template: 'heal' } },
+    { id: 'fjordling', displayName: 'Fjordling', artId: 'fjordling', facing: 'left', homes: ['europe'], flavor: 'It slips through cold blue fjords without a sound.', special: { name: 'Ice Bloom', template: 'heal' } },
+    { id: 'alpenhorn', displayName: 'Alpenhorn', artId: 'alpenhorn', facing: 'left', homes: ['europe'], flavor: 'It leaps between Alpine peaks as if they were stepping stones.', special: { name: 'Peak Charge', template: 'strong' } },
   ],
   souvenirs: [
     { id: 'compass', displayName: 'Carved Compass', artId: 'compass', flavor: 'Its needle always seems to be pointing somewhere exciting.' },
@@ -57,6 +72,5 @@ export const PACK: Pack = {
   ],
   cards: usCards,
   starterSpeciesId: 'slatepaw',
-  huntableIds: ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk', 'cragmaw'],
-  regularOpponentIds: ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk'],
+  featuredSpeciesId: 'barkknight',
 };

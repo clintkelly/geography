@@ -26,6 +26,10 @@ export interface Question {
   sourceUrl: string;
   /** Shown large after a correct answer, to be remembered. */
   fieldNote?: string;
+  /** Identifies that fact, so the game knows the child has seen it. */
+  noteId?: string;
+  /** This question tests a Field Note, and appears only after the child has seen it. */
+  recallOf?: string;
   /** Destination this question is local to, if any. */
   locationId?: string;
 }
@@ -47,6 +51,8 @@ export interface Place {
   lonLat: readonly [number, number];
   atlas: string[];
   tiny?: boolean;
+  /** Which battle backdrop fits this place. */
+  biome: string;
   /** Connected places. Without this, trails use the nearest places. */
   neighbors?: readonly string[];
 }
@@ -56,6 +62,8 @@ export interface Region {
   label: string;
   mapId: 'world' | 'us';
   difficulties: readonly Difficulty[];
+  /** Minimum distance between map markers, in degrees. */
+  markerGap: number;
 }
 
 export interface Special {
@@ -69,6 +77,8 @@ export interface Species {
   artId: string;
   flavor: string;
   special: Special;
+  /** Regions this creature can be hunted and met in. */
+  homes: readonly string[];
   /** The way the art faces, so a companion can be mirrored to face its opponent. */
   facing: 'left' | 'right';
 }
@@ -100,7 +110,6 @@ export interface Pack {
   souvenirs: readonly Souvenir[];
   cards: readonly StateCard[];
   starterSpeciesId: string;
-  /** Species that can be hunted and befriended. */
-  huntableIds: readonly string[];
-  regularOpponentIds: readonly string[];
+  /** Offered first in every region until it is befriended. */
+  featuredSpeciesId: string;
 }

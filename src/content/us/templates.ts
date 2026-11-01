@@ -1,7 +1,10 @@
 import countries from '../europe/countries.json';
 import { degreesApart, spaced } from '../geo';
 import type { Clue, Difficulty, Place, Question, QuestionOption, StateCard } from '../types';
-import records from './west.json';
+import midwest from './midwest.json';
+import northeast from './northeast.json';
+import south from './south.json';
+import west from './west.json';
 
 /** One reviewed record per state or country. Questions and clues are generated from these. */
 export interface PlaceRecord {
@@ -18,6 +21,10 @@ export interface PlaceRecord {
   /** Only 'official' with a checked source. Questions never call a nickname official. */
   nickname: { text: string; status: 'official' | 'unverified'; others: string[] } | null;
   facts: string[];
+  /** A question for each fact, whose answer is this place. Never names it. */
+  asks: string[];
+  /** Which battle backdrop fits this place. */
+  biome: string;
   /** Bordering places, plus usual flights and sea crossings. */
   neighbors: string[];
   /** A place description that never names it. */
@@ -32,20 +39,29 @@ export interface PlaceRecord {
   wiki?: string;
 }
 
-export const REGION_ID = 'us-west';
-export const EUROPE_ID = 'europe';
-export const STATES = records as PlaceRecord[];
+export const WEST = west as unknown as PlaceRecord[];
 export const COUNTRIES = countries as PlaceRecord[];
+
+/** Each region quizzes among its own places, with markers spaced for its zoomed map. */
+export const GROUPS = [
+  { id: 'us-west', records: WEST, noun: 'state', gap: 4 },
+  { id: 'us-midwest', records: midwest as unknown as PlaceRecord[], noun: 'state', gap: 2.5 },
+  { id: 'us-south', records: south as unknown as PlaceRecord[], noun: 'state', gap: 2.5 },
+  { id: 'us-northeast', records: northeast as unknown as PlaceRecord[], noun: 'state', gap: 1.2 },
+  { id: 'europe', records: COUNTRIES, noun: 'country', gap: 4 },
+] as const;
+
+export const STATES = GROUPS.filter((g) => g.noun === 'state').flatMap((g) => g.records);
 
 const wikiUrl = (s: PlaceRecord) => `https://en.wikipedia.org/wiki/${s.wiki ?? s.name.replaceAll(' ', '_')}${s.id === 'washington' ? '_(state)' : ''}`;
 
 type Answer = Pick<Question, 'options' | 'acceptedId'>;
 
-function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: string, noun: string): Question[] {
+function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: string, noun: string, gap: number): Question[] {
   const ranked = all.filter((o) => o.id !== s.id).sort((a, b) => degreesApart(a, s) - degreesApart(b, s));
-  const near = spaced(ranked, s, 3);
+  const near = spaced(ranked, s, 3, gap);
   const farList = [...ranked].reverse();
-  const far = spaced([0, 2, 4, 6, 8, 1, 3, 5, 7].flatMap((i) => farList[i] ?? []), s, 3);
+  const far = spaced([0, 2, 4, 6, 8, 1, 3, 5, 7].flatMap((i) => farList[i] ?? []), s, 3, gap);
   const name = s.sentenceName ?? s.name;
   const Name = name[0]?.toUpperCase() + name.slice(1);
 
@@ -59,6 +75,7 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
     acceptedId: s.id,
   };
 
+  const noteFor = (i: number) => ({ fieldNote: s.facts[i] as string, noteId: `fact-${s.id}-${i}` });
   const capitalWhy = `${s.capital} is the capital of ${name}.`;
   const whereWhy = s.cityState ? `This is ${name}.` : `This is ${name}. Its capital is ${s.capital}.`;
   const q = (difficulty: Difficulty, kind: string, n: number, objective: string, prompt: string, explanation: string, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
@@ -73,7 +90,7 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
     locationId: s.id,
     sourceUrl: wikiUrl(s),
     // Different questions about a place rotate through its facts.
-    fieldNote: s.facts[(objective.length + n) % s.facts.length] as string,
+    ...noteFor((objective.length + n) % s.facts.length),
     ...answer,
   });
 
@@ -101,6 +118,16 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
       q('expert', 'nickname', 1, 'nickname', `${known[0]?.toUpperCase()}${known.slice(1)}: which ${noun} is that? Click it on the map.`, why, clickPlace, 'map-click'),
     );
   }
+  // A question for each Field Note. The game holds these back until the child has seen the note.
+  s.asks.forEach((ask, i) => {
+    const recall = { ...noteFor(i), recallOf: `fact-${s.id}-${i}` };
+    const fact = (difficulty: Difficulty, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
+      ...q(difficulty, 'fact', i, `fact`, ask, s.facts[i] as string, answer, inputType),
+      ...recall,
+      objectiveId: `fact-${s.id}-${i}`,
+    });
+    out.push(fact('scout', choices([s.name, ...far.map((o) => o.name)])), fact('ranger', choices([s.name, ...near.map((o) => o.name)])), fact('expert', clickPlace, 'map-click'));
+  });
   return out;
 }
 
@@ -123,6 +150,7 @@ function buildPlace(s: PlaceRecord, regionId: string): Place {
     regionId,
     lonLat: s.lonLat,
     neighbors: s.neighbors,
+    biome: s.biome,
     ...(s.tiny ? { tiny: true } : {}),
     atlas: [
       ...(s.cityState ? [] : [`Capital: ${s.capital}`]),
@@ -133,8 +161,13 @@ function buildPlace(s: PlaceRecord, regionId: string): Place {
   };
 }
 
-export const usPlaces = STATES.map((s) => buildPlace(s, REGION_ID));
-export const europePlaces = COUNTRIES.map((s) => buildPlace(s, EUROPE_ID));
+const forGroups = <T>(build: (g: (typeof GROUPS)[number]) => T[]) => GROUPS.flatMap(build);
+
+export const allPlaces = forGroups((g) => g.records.map((s) => buildPlace(s, g.id)));
+export const allQuestions = forGroups((g) => g.records.flatMap((s) => buildQuestions(s, g.records, g.id, g.noun, g.gap)));
+export const allClues = forGroups((g) => g.records.flatMap((s) => buildClues(s, g.noun)));
+export const usQuestions = allQuestions.filter((q) => q.regionId.startsWith('us-'));
+export const europeQuestions = allQuestions.filter((q) => q.regionId === 'europe');
 
 export const usCards: StateCard[] = STATES.map((s) => ({
   placeId: s.id,
@@ -144,8 +177,3 @@ export const usCards: StateCard[] = STATES.map((s) => ({
   capital: s.capital,
   facts: s.facts,
 }));
-
-export const usQuestions = STATES.flatMap((s) => buildQuestions(s, STATES, REGION_ID, 'state'));
-export const europeQuestions = COUNTRIES.flatMap((s) => buildQuestions(s, COUNTRIES, EUROPE_ID, 'country'));
-export const usClues = STATES.flatMap((s) => buildClues(s, 'state'));
-export const europeClues = COUNTRIES.flatMap((s) => buildClues(s, 'country'));

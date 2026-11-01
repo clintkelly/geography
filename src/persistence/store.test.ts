@@ -2,12 +2,12 @@ import { IDBFactory } from 'fake-indexeddb';
 import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
 import { DEFAULT_SETTINGS, newSave, reduce, SCHEMA_VERSION, type SaveData } from '../engine/game';
-import { exportBackup, freshHousehold, migrateV1, migrateV2Save, openHousehold, parseBackup, type V2Save } from './household';
+import { exportBackup, freshHousehold, migrateV1, migrateV2Save, migrateV3Save, openHousehold, parseBackup, type V2Save } from './household';
 import { indexedDbStore, UnsupportedSaveError, type Household } from './store';
 
 let n = 0;
 const env = () => ({ seed: 5, makeId: () => `id-${++n}` });
-const startCmd = (s: SaveData) => ({ type: 'start', offerId: s.offers[0]!.id, regionId: 'us-west', difficulty: 'scout', trail: 'standard' }) as const;
+const startCmd = (s: SaveData) => ({ type: 'start', offerId: s.offers.find((o) => o.regionId === 'us-west')!.id, regionId: 'us-west', difficulty: 'scout', trail: 'standard' }) as const;
 
 const v1Save = {
   schemaVersion: 1,
@@ -122,6 +122,38 @@ describe('v1 migration', () => {
 
   it('refuses something that is not a v1 save', () => {
     expect(() => migrateV1({ schemaVersion: 7 }, PACK, env())).toThrow(UnsupportedSaveError);
+  });
+});
+
+describe('v3 migration', () => {
+  const v3 = (id: string) => {
+    const { seenFacts: _seen, ...rest } = newSave(PACK, 4, id);
+    return { ...rest, schemaVersion: 3, completedExpeditions: 7, stateCards: ['oregon'], offers: [{ id: 'old', reward: { kind: 'creature', speciesId: 'cragmaw' } }] } as unknown as SaveData;
+  };
+
+  it('keeps progress and gives every region its sightings', () => {
+    const s = migrateV3Save(v3('a'), PACK);
+    expect(s).toMatchObject({ schemaVersion: SCHEMA_VERSION, completedExpeditions: 7, stateCards: ['oregon'], seenFacts: [] });
+    expect(new Set(s.offers.map((o) => o.regionId)).size).toBe(PACK.regions.length);
+  });
+
+  it('keeps an unfinished trip', () => {
+    const trip = reduce(newSave(PACK, 4, 'a'), startCmd(newSave(PACK, 4, 'a')), PACK, 0).expedition;
+    expect(migrateV3Save({ ...v3('a'), expedition: trip }, PACK).expedition).toEqual(trip);
+  });
+
+  it('upgrades on open and keeps a copy of the old saves', async () => {
+    const store = indexedDbStore(new IDBFactory());
+    const old = { meta: { schemaVersion: 3, profileIds: ['a'], activeProfileId: 'a', testProfileId: 'a' }, profiles: { a: v3('a') } } as unknown as Household;
+    await store.replace(old);
+    const h = await openHousehold(store, PACK, env());
+    expect(h.meta.schemaVersion).toBe(SCHEMA_VERSION);
+    expect(await store.loadPreUpgrade(3)).toEqual(old);
+  });
+
+  it('restores a backup made on version 3', () => {
+    const text = JSON.stringify({ format: 'atlaswild-backup', household: { meta: { schemaVersion: 3, profileIds: ['a'], activeProfileId: null }, profiles: { a: v3('a') } } });
+    expect(parseBackup(text, PACK).profiles.a!.schemaVersion).toBe(SCHEMA_VERSION);
   });
 });
 

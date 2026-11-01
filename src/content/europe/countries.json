@@ -24,7 +24,12 @@
 "Albania's flag shows a black double-headed eagle on red.",
 "Albanians call their country Shqipëria."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's flag shows a black double-headed eagle on red?",
+"Which country do its people call Shqipëria?"
+],
+"biome": "coast"
 },
 {
 "id": "andorra",
@@ -52,7 +57,12 @@
 ],
 "nickname": null,
 "tiny": true,
-"hint2": "People here speak Catalan, high in the mountains."
+"hint2": "People here speak Catalan, high in the mountains.",
+"asks": [
+"Which country in the Pyrenees has Catalan as its official language?",
+"Which country has the highest capital city in Europe?"
+],
+"biome": "mountain"
 },
 {
 "id": "austria",
@@ -84,7 +94,12 @@
 "Mozart was born in Salzburg, Austria.",
 "The Alps cover much of Austria."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country was Mozart born?",
+"Which country is largely covered by the Alps and has Vienna on the Danube?"
+],
+"biome": "mountain"
 },
 {
 "id": "belarus",
@@ -110,10 +125,15 @@
 ],
 "hint": "a landlocked country between Poland and Russia",
 "facts": [
-"Belarus has no coastline.",
+"Belarus has more than 10,000 lakes.",
 "European bison live in the ancient Białowieża Forest on the Belarus-Poland border."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which landlocked country with Minsk as its capital has more than 10,000 lakes?",
+"Which country shares the Białowieża Forest with Poland?"
+],
+"biome": "forest"
 },
 {
 "id": "belgium",
@@ -141,7 +161,12 @@
 "Belgium has three official languages: Dutch, French, and German.",
 "Many of the European Union's main offices are in Brussels."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country has Dutch, French, and German as official languages?",
+"Which country's capital holds many main offices of the European Union?"
+],
+"biome": "castle"
 },
 {
 "id": "bosnia",
@@ -168,7 +193,12 @@
 "Mostar is famous for its arched Old Bridge over the Neretva River.",
 "Sarajevo hosted the Winter Olympics in 1984."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is the famous Old Bridge at Mostar?",
+"Which country's capital hosted the 1984 Winter Olympics?"
+],
+"biome": "forest"
 },
 {
 "id": "bulgaria",
@@ -196,7 +226,12 @@
 "Bulgaria's Rose Valley is famous for rose oil used in perfume.",
 "Bulgaria writes its language in the Cyrillic alphabet."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's Rose Valley is famous for rose oil?",
+"Which Black Sea country writes in Cyrillic, just south of Romania?"
+],
+"biome": "forest"
 },
 {
 "id": "croatia",
@@ -225,7 +260,12 @@
 "The necktie traces back to scarves worn by Croatian soldiers.",
 "Dubrovnik is famous for its old stone city walls."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"The necktie traces back to soldiers from which country?",
+"In which country is the walled city of Dubrovnik?"
+],
+"biome": "coast"
 },
 {
 "id": "czechia",
@@ -253,7 +293,12 @@
 "Prague's astronomical clock dates from 1410.",
 "Czechia and Slovakia split peacefully in 1993."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is Prague's famous astronomical clock?",
+"Which country split peacefully from Slovakia in 1993?"
+],
+"biome": "castle"
 },
 {
 "id": "denmark",
@@ -279,7 +324,12 @@
 "LEGO bricks come from Denmark.",
 "Hans Christian Andersen, who wrote The Little Mermaid, was Danish."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country do LEGO bricks come from?",
+"Which country was Hans Christian Andersen from?"
+],
+"biome": "harbor"
 },
 {
 "id": "estonia",
@@ -306,7 +356,12 @@
 "Around half of Estonia is covered in forest.",
 "People in Estonia can vote in national elections online."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which Baltic country is around half covered in forest?",
+"In which country can people vote in national elections online?"
+],
+"biome": "forest"
 },
 {
 "id": "finland",
@@ -334,7 +389,12 @@
 "Finland has more than 100,000 lakes.",
 "Saunas are a big part of life in Finland."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which Nordic country has more than 100,000 lakes?",
+"In which country are saunas a big part of life?"
+],
+"biome": "lake"
 },
 {
 "id": "france",
@@ -367,7 +427,12 @@
 "The Eiffel Tower in Paris was built for a world's fair in 1889.",
 "Mont Blanc, the highest peak in the Alps, stands on the France-Italy border."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is the Eiffel Tower?",
+"Mont Blanc stands on the border of Italy and which country?"
+],
+"biome": "castle"
 },
 {
 "id": "germany",
@@ -400,7 +465,12 @@
 "The Berlin Wall came down in 1989.",
 "Germany has more people than any other country in the European Union."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country did the Berlin Wall come down in 1989?",
+"Which country has the most people in the European Union?"
+],
+"biome": "castle"
 },
 {
 "id": "greece",
@@ -427,7 +497,12 @@
 "The first modern Olympic Games were held in Athens in 1896.",
 "Greece has thousands of islands in the Aegean and Ionian Seas."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country were the first modern Olympics held?",
+"Which country has thousands of islands in the Aegean Sea?"
+],
+"biome": "coast"
 },
 {
 "id": "hungary",
@@ -458,7 +533,12 @@
 "Budapest was formed by joining the cities of Buda and Pest.",
 "The Rubik's Cube was invented in Hungary."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's capital was formed by joining Buda and Pest?",
+"In which country was the Rubik's Cube invented?"
+],
+"biome": "plains"
 },
 {
 "id": "iceland",
@@ -484,7 +564,12 @@
 "Reykjavik is the northernmost capital of any country in the world.",
 "The English word geyser comes from Geysir, a hot spring in Iceland."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country has the northernmost capital in the world?",
+"The word geyser comes from a hot spring in which country?"
+],
+"biome": "snow"
 },
 {
 "id": "ireland",
@@ -510,7 +595,12 @@
 "Halloween traces back to the old Irish festival of Samhain."
 ],
 "nickname": null,
-"wiki": "Republic_of_Ireland"
+"wiki": "Republic_of_Ireland",
+"asks": [
+"Which country has the harp as its national symbol?",
+"Halloween traces back to the old festival of Samhain in which country?"
+],
+"biome": "castle"
 },
 {
 "id": "italy",
@@ -541,7 +631,12 @@
 "Italy completely surrounds both San Marino and Vatican City.",
 "Pizza as we know it comes from Naples, Italy."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country completely surrounds San Marino and Vatican City?",
+"Which country does pizza come from?"
+],
+"biome": "coast"
 },
 {
 "id": "latvia",
@@ -569,7 +664,12 @@
 "Riga's old town is famous for its Art Nouveau buildings.",
 "Amber washes up on Latvia's Baltic beaches."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's capital, Riga, is famous for Art Nouveau buildings?",
+"On which middle Baltic country's beaches does amber wash up?"
+],
+"biome": "forest"
 },
 {
 "id": "liechtenstein",
@@ -596,7 +696,12 @@
 "Vaduz Castle, above the capital, is home to the prince."
 ],
 "nickname": null,
-"tiny": true
+"tiny": true,
+"asks": [
+"Which tiny country is surrounded entirely by landlocked Switzerland and Austria?",
+"In which tiny country does a prince live in a castle above Vaduz?"
+],
+"biome": "mountain"
 },
 {
 "id": "lithuania",
@@ -624,7 +729,12 @@
 "In 1990 Lithuania was the first Soviet republic to declare independence.",
 "Basketball is the favorite sport in Lithuania."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country was the first Soviet republic to declare independence?",
+"In which Baltic country is basketball the favorite sport?"
+],
+"biome": "forest"
 },
 {
 "id": "luxembourg",
@@ -653,7 +763,12 @@
 ],
 "nickname": null,
 "tiny": true,
-"hint2": "This tiny country is the only grand duchy left in the world."
+"hint2": "This tiny country is the only grand duchy left in the world.",
+"asks": [
+"Which is the only grand duchy left in the world?",
+"Which country has free public transport nationwide?"
+],
+"biome": "castle"
 },
 {
 "id": "malta",
@@ -679,7 +794,12 @@
 "Valletta is one of the smallest capital cities in Europe."
 ],
 "nickname": null,
-"tiny": true
+"tiny": true,
+"asks": [
+"Which country's language is the only Semitic language official in the European Union?",
+"Which island country has Valletta as its capital?"
+],
+"biome": "coast"
 },
 {
 "id": "moldova",
@@ -705,7 +825,12 @@
 "Moldova's Mileștii Mici has the largest wine cellars in the world.",
 "Most people in Moldova speak Romanian."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country has the largest wine cellars in the world?",
+"Which country lies between Romania and Ukraine?"
+],
+"biome": "plains"
 },
 {
 "id": "monaco",
@@ -733,7 +858,12 @@
 "nickname": null,
 "tiny": true,
 "cityState": true,
-"hint2": "Monte Carlo is one of the districts of this tiny country."
+"hint2": "Monte Carlo is one of the districts of this tiny country.",
+"asks": [
+"Which is the second smallest country in the world?",
+"In which tiny country do cars race through the streets in a famous Grand Prix?"
+],
+"biome": "coast"
 },
 {
 "id": "montenegro",
@@ -761,7 +891,12 @@
 "The Bay of Kotor in Montenegro looks like a fjord.",
 "The Tara River Canyon in Montenegro is the deepest in Europe."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is the fjord-like Bay of Kotor?",
+"Which country has the Tara River Canyon, the deepest in Europe?"
+],
+"biome": "coast"
 },
 {
 "id": "netherlands",
@@ -788,7 +923,12 @@
 "The Netherlands is famous for its tulip fields."
 ],
 "nickname": null,
-"sentenceName": "the Netherlands"
+"sentenceName": "the Netherlands",
+"asks": [
+"About a quarter of which country lies below sea level?",
+"Which country is famous for its tulip fields?"
+],
+"biome": "plains"
 },
 {
 "id": "north-macedonia",
@@ -816,7 +956,12 @@
 "Mother Teresa was born in Skopje.",
 "Lake Ohrid is one of the oldest lakes in Europe."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country was Mother Teresa born?",
+"Which country shares ancient Lake Ohrid with Albania?"
+],
+"biome": "lake"
 },
 {
 "id": "norway",
@@ -844,7 +989,12 @@
 "Norway's fjords were carved by glaciers.",
 "The Nobel Peace Prize is awarded in Oslo."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country is famous for fjords carved by glaciers?",
+"In which country is the Nobel Peace Prize awarded?"
+],
+"biome": "fjord"
 },
 {
 "id": "poland",
@@ -875,7 +1025,12 @@
 "Marie Curie was born in Warsaw.",
 "Nicolaus Copernicus, who showed that Earth orbits the Sun, was born in Poland."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country was Marie Curie born?",
+"In which country was Copernicus born?"
+],
+"biome": "forest"
 },
 {
 "id": "portugal",
@@ -900,7 +1055,12 @@
 "Portugal produces more cork than any other country.",
 "Explorer Vasco da Gama sailed from Portugal to India."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country produces more cork than any other?",
+"From which country did Vasco da Gama sail to India?"
+],
+"biome": "coast"
 },
 {
 "id": "romania",
@@ -929,7 +1089,12 @@
 "Bran Castle in Romania is linked to the legend of Dracula.",
 "The River Danube reaches the sea in Romania's Danube Delta."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is Bran Castle, linked to the legend of Dracula?",
+"In which country does the River Danube reach the sea?"
+],
+"biome": "castle"
 },
 {
 "id": "russia",
@@ -961,7 +1126,12 @@
 "Russia is the largest country in the world.",
 "The Trans-Siberian Railway is the longest railway line in the world."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which is the largest country in the world?",
+"Which country has the Trans-Siberian Railway?"
+],
+"biome": "snow"
 },
 {
 "id": "san-marino",
@@ -989,7 +1159,12 @@
 "nickname": null,
 "tiny": true,
 "cityState": true,
-"hint2": "This tiny country claims to be the oldest republic in the world."
+"hint2": "This tiny country claims to be the oldest republic in the world.",
+"asks": [
+"Which tiny country claims to be the oldest republic in the world?",
+"Which tiny country on Mount Titano is surrounded by Italy?"
+],
+"biome": "castle"
 },
 {
 "id": "serbia",
@@ -1020,7 +1195,12 @@
 "Belgrade stands where the River Sava joins the Danube.",
 "Tennis star Novak Djokovic was born in Belgrade."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's capital stands where the River Sava joins the Danube?",
+"In which country was Novak Djokovic born?"
+],
+"biome": "forest"
 },
 {
 "id": "slovakia",
@@ -1049,7 +1229,12 @@
 "Bratislava sits right beside the borders of Austria and Hungary.",
 "The High Tatras are the tallest part of the Carpathian Mountains."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country's capital sits right beside Austria and Hungary?",
+"Which country has the High Tatras?"
+],
+"biome": "mountain"
 },
 {
 "id": "slovenia",
@@ -1077,7 +1262,12 @@
 "Lake Bled in Slovenia has a tiny church on its island.",
 "Postojna Cave in Slovenia is home to pale cave salamanders called olms."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country has Lake Bled, with a tiny church on its island?",
+"In which country is Postojna Cave, home of the olm?"
+],
+"biome": "mountain"
 },
 {
 "id": "spain",
@@ -1104,7 +1294,12 @@
 "The Sagrada Família in Barcelona has been under construction since 1882.",
 "Spain shares the Iberian Peninsula with Portugal."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country is the Sagrada Família?",
+"Which country shares the Iberian Peninsula with Portugal?"
+],
+"biome": "desert"
 },
 {
 "id": "sweden",
@@ -1131,7 +1326,12 @@
 "Most Nobel Prizes are awarded in Stockholm.",
 "IKEA was founded in Sweden."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"In which country are most Nobel Prizes awarded?",
+"Which country was IKEA founded in?"
+],
+"biome": "lake"
 },
 {
 "id": "switzerland",
@@ -1160,7 +1360,12 @@
 "Switzerland has four national languages: German, French, Italian, and Romansh.",
 "The Swiss flag is square."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which country has four national languages?",
+"Which country has a square flag?"
+],
+"biome": "mountain"
 },
 {
 "id": "ukraine",
@@ -1191,7 +1396,12 @@
 "Ukraine is the largest country entirely inside Europe.",
 "Ukraine's flag is often described as blue sky over yellow wheat."
 ],
-"nickname": null
+"nickname": null,
+"asks": [
+"Which is the largest country entirely inside Europe?",
+"Which country's flag is described as blue sky over yellow wheat?"
+],
+"biome": "plains"
 },
 {
 "id": "uk",
@@ -1219,7 +1429,12 @@
 "Big Ben is the great bell in the clock tower at London's Palace of Westminster."
 ],
 "nickname": null,
-"sentenceName": "the United Kingdom"
+"sentenceName": "the United Kingdom",
+"asks": [
+"Which country is made up of England, Scotland, Wales, and Northern Ireland?",
+"In which country is Big Ben?"
+],
+"biome": "castle"
 },
 {
 "id": "vatican",
@@ -1243,6 +1458,11 @@
 "nickname": null,
 "tiny": true,
 "cityState": true,
-"hint2": "This tiny country is home to the Pope and St. Peter's Basilica."
+"hint2": "This tiny country is home to the Pope and St. Peter's Basilica.",
+"asks": [
+"Which is the smallest country in the world?",
+"Which country is guarded by the Swiss Guard?"
+],
+"biome": "castle"
 }
 ]

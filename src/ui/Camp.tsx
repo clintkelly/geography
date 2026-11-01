@@ -31,8 +31,9 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const s = save.lastSummary;
   const [regionId, setRegionId] = useState(save.settings.lastRegionId);
   const [trail, setTrail] = useState<TrailLength>(save.settings.lastTrail);
-  const [offerId, setOfferId] = useState(save.offers[0]?.id);
-  const offer = save.offers.find((o) => o.id === offerId) ?? (save.offers[0] as Offer);
+  const [offerId, setOfferId] = useState<string>();
+  const sightings = save.offers.filter((o) => o.regionId === regionId);
+  const offer = sightings.find((o) => o.id === offerId) ?? (sightings[0] as Offer);
   const allowed = allowedDifficulties(save.settings, region(regionId));
   const [picked, setPicked] = useState<Difficulty>(save.settings.lastDifficulty);
   const difficulty = allowed.includes(picked) ? picked : (allowed[0] as Difficulty);
@@ -44,7 +45,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
     enter: start,
     r: () => setRegionId(cycle(PACK.regions.map((r) => r.id), regionId)),
     l: () => setTrail(cycle(TRAIL_LENGTHS, trail)),
-    t: () => setOfferId(cycle(save.offers.map((o) => o.id), offer.id)),
+    t: () => setOfferId(cycle(sightings.map((o) => o.id), offer.id)),
     p: onSwitch,
     o: onSettings,
     ...Object.fromEntries(allowed.map((d, i) => [String(i + 1), () => setPicked(d)])),
@@ -72,7 +73,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
-          {save.offers.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => setOfferId(o.id)} />)}
+          {sightings.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => setOfferId(o.id)} />)}
         </div>
         <div className="picker" role="group" aria-label="Region">
           <span className="muted">Where <Key k="R" /></span>

@@ -1,130 +1,523 @@
 {
-  "tool": "PixelLab create_image_pixen, seed 42, black outline for sprites",
-  "style": "128x128 creatures facing the opponent, 64x64 souvenirs, 480x192 backdrops",
-  "promptTemplate": "Original friendly fantasy creature, <subject>. Distinctive readable silhouette. Three-quarter battle pose. Crisp pixel art, restrained colors, top-left lighting, no text, no logo.",
-  "assets": {
-    "slatepaw": {
-      "role": "starter, style reference",
-      "jobId": "a9c0f1bd-cc51-437b-b829-f9f053dd3eef",
-      "subject": "small mountain creature with a round body, layered slate plates, a mossy tuft, bright amber eyes"
-    },
-    "brinefin": {
-      "role": "opponent",
-      "jobId": "d30921d8-fa5a-4456-afb6-32d98fb644b5",
-      "subject": "small coastal fish-lizard, round body, teal scales, sail-like fin"
-    },
-    "thistlehop": {
-      "role": "opponent",
-      "jobId": "57f50625-9862-49ea-8dd8-1ae197a0c505",
-      "subject": "small woodland rabbit-like hopper, purple thistle spikes, leaf ears"
-    },
-    "cindermite": {
-      "role": "opponent",
-      "jobId": "fdc4148e-fcbc-488c-b967-232622741013",
-      "subject": "small grumpy ember beetle, cracked rocky shell, glowing orange seams"
-    },
-    "cragmaw": {
-      "role": "guardian",
-      "jobId": "9f565a6c-5329-4842-b339-0b7d4435ac56",
-      "subject": "large ancient horned mountain beast, boulder body, granite plates, mossy mane"
-    },
-    "backdrop-coast": {
-      "role": "backdrop",
-      "jobId": "c3c5bd00-eb97-478f-a2c2-d072836135a4",
-      "subject": "green coastal hills, blue sea on the horizon"
-    },
-    "backdrop-mountain": {
-      "role": "backdrop",
-      "jobId": "f04e8141-13a8-4e47-bf53-33a8e5027e71",
-      "subject": "rocky mountain pass at dusk, peaks, pine trees"
-    },
-    "compass": {
-      "role": "souvenir",
-      "jobId": "96b4d00b-822a-4d7c-a293-102f7fade192",
-      "subject": "carved wooden compass, brass needle"
-    },
-    "shell": {
-      "role": "souvenir",
-      "jobId": "83ca1909-1ec0-4e4d-b4e1-c15182cf371b",
-      "subject": "patterned spiral sea shell, cream and coral"
-    },
-    "lantern": {
-      "role": "souvenir",
-      "jobId": "198a59bc-5993-441c-9694-77f835bc7d1d",
-      "subject": "tiny brass lantern with warm glow"
-    },
-    "feather": {
-      "role": "souvenir",
-      "jobId": "585d6428-30a9-4093-be1d-3aa55eb095ce",
-      "subject": "long blue-grey storm feather"
-    },
-    "stone": {
-      "role": "souvenir",
-      "jobId": "6340b459-8d69-45e6-9301-10ad47c83cdd",
-      "subject": "smooth oval river stone with a white band"
-    },
-    "map-scrap": {
-      "role": "souvenir",
-      "jobId": "ecb7285b-6144-40b1-b0bc-8e0265110cfb",
-      "subject": "torn parchment map scrap, dotted route, small red X"
-    },
-    "sandwhisk": {
-      "role": "huntable",
-      "jobId": "b6b87b1a-022e-4e21-9a4d-6a5d473dd06e",
-      "subject": "small desert fox-lizard, sandy fur, whisk-like tail, big ears"
-    }
+ "tool": "PixelLab create_image_pixen, seed 42, black outline for sprites",
+ "style": "128x128 creatures facing the opponent, 64x64 souvenirs, 480x192 backdrops",
+ "promptTemplate": "Original friendly fantasy creature, <subject>. Distinctive readable silhouette. Three-quarter battle pose. Crisp pixel art, restrained colors, top-left lighting, no text, no logo.",
+ "assets": {
+  "slatepaw": {
+   "role": "starter, style reference",
+   "jobId": "a9c0f1bd-cc51-437b-b829-f9f053dd3eef",
+   "subject": "small mountain creature with a round body, layered slate plates, a mossy tuft, bright amber eyes"
   },
-  "poses": {
-    "tool": "PixelLab create_image_pixflux, init image is the idle sprite, strength 55, seed 7, no background",
-    "files": "<species>-attack, -guard, -special, -hit",
-    "prompts": {
-      "attack": "charging forward, mouth open, motion lines",
-      "guard": "curled up defending, eyes shut, glowing blue shield",
-      "special": "powering up, surrounded by themed glowing energy",
-      "hit": "recoiling, tilted backward, wincing, stars around its head"
-    },
-    "jobIdsInPoseOrder": {
-      "slatepaw": [
-        "676b2e21-eec5-4b4e-97c0-9198b4bd1ba2",
-        "77766ccc-f851-4407-9461-66a798c46447",
-        "eb60d8a3-4990-4870-bce9-bbb239315975",
-        "77c75f64-19ae-4471-a542-4ea2e26170a1"
-      ],
-      "brinefin": [
-        "07ff7663-0f1e-4b18-9a3d-3bc0d5c9caa0",
-        "302f7c62-ff07-4b04-89b2-94974e9aa14b",
-        "459d8346-9699-47cc-ab73-a1d4cb1491a6",
-        "ba5db6f9-8bfe-436d-a335-517232941528"
-      ],
-      "thistlehop": [
-        "2ad29510-ce5c-414d-868d-7540ec4256d2",
-        "6da562be-0367-4304-bcf3-ece789343d1e",
-        "961122b7-dcc2-423b-aa1b-54de081bde0d",
-        "2f099f3f-9acb-4c36-8e02-cd38dd599a7f"
-      ],
-      "cindermite": [
-        "c3e4bc0f-78a6-4596-91c7-d39a39b861d4",
-        "bc9f5737-4ca6-41f9-9df0-558ce6b1654e",
-        "439025c1-b042-4f25-bbdc-3c9bf6358aea",
-        "e2679b1b-082a-4bbb-821e-f4c2dafe7bfc"
-      ],
-      "sandwhisk": [
-        "cbafdbc7-7955-4fce-b45e-d227cbca4aa8",
-        "de9d76b5-add6-40ea-9821-50b2e8e3f909",
-        "60bfc549-7bdf-463c-a0ff-eac4d94b3409",
-        "bb84cf31-58ff-45b6-9834-eee426a6661d"
-      ],
-      "cragmaw": [
-        "f8703e08-8e7a-4789-a389-47f2da439801",
-        "98140930-9e0e-4237-a2a6-b716e54187ac",
-        "c354ff7e-2f13-49c8-b9a1-0225e72a26dd",
-        "01b4f2e3-4783-47c8-a283-e151979c4c42"
-      ]
-    }
+  "brinefin": {
+   "role": "opponent",
+   "jobId": "d30921d8-fa5a-4456-afb6-32d98fb644b5",
+   "subject": "small coastal fish-lizard, round body, teal scales, sail-like fin"
   },
-  "stateCards": {
-    "tool": "PixelLab create_image_pixen, 128x96, seed 42",
-    "prompt": "Pixel art landscape postcard: <scene> in <state>, no text, no people",
-    "files": "card-<state>"
+  "thistlehop": {
+   "role": "opponent",
+   "jobId": "57f50625-9862-49ea-8dd8-1ae197a0c505",
+   "subject": "small woodland rabbit-like hopper, purple thistle spikes, leaf ears"
+  },
+  "cindermite": {
+   "role": "opponent",
+   "jobId": "fdc4148e-fcbc-488c-b967-232622741013",
+   "subject": "small grumpy ember beetle, cracked rocky shell, glowing orange seams"
+  },
+  "cragmaw": {
+   "role": "guardian",
+   "jobId": "9f565a6c-5329-4842-b339-0b7d4435ac56",
+   "subject": "large ancient horned mountain beast, boulder body, granite plates, mossy mane"
+  },
+  "backdrop-coast": {
+   "role": "backdrop",
+   "jobId": "c3c5bd00-eb97-478f-a2c2-d072836135a4",
+   "subject": "green coastal hills, blue sea on the horizon"
+  },
+  "backdrop-mountain": {
+   "role": "backdrop",
+   "jobId": "f04e8141-13a8-4e47-bf53-33a8e5027e71",
+   "subject": "rocky mountain pass at dusk, peaks, pine trees"
+  },
+  "compass": {
+   "role": "souvenir",
+   "jobId": "96b4d00b-822a-4d7c-a293-102f7fade192",
+   "subject": "carved wooden compass, brass needle"
+  },
+  "shell": {
+   "role": "souvenir",
+   "jobId": "83ca1909-1ec0-4e4d-b4e1-c15182cf371b",
+   "subject": "patterned spiral sea shell, cream and coral"
+  },
+  "lantern": {
+   "role": "souvenir",
+   "jobId": "198a59bc-5993-441c-9694-77f835bc7d1d",
+   "subject": "tiny brass lantern with warm glow"
+  },
+  "feather": {
+   "role": "souvenir",
+   "jobId": "585d6428-30a9-4093-be1d-3aa55eb095ce",
+   "subject": "long blue-grey storm feather"
+  },
+  "stone": {
+   "role": "souvenir",
+   "jobId": "6340b459-8d69-45e6-9301-10ad47c83cdd",
+   "subject": "smooth oval river stone with a white band"
+  },
+  "map-scrap": {
+   "role": "souvenir",
+   "jobId": "ecb7285b-6144-40b1-b0bc-8e0265110cfb",
+   "subject": "torn parchment map scrap, dotted route, small red X"
+  },
+  "sandwhisk": {
+   "role": "huntable",
+   "jobId": "b6b87b1a-022e-4e21-9a4d-6a5d473dd06e",
+   "subject": "small desert fox-lizard, sandy fur, whisk-like tail, big ears"
   }
+ },
+ "poses": {
+  "tool": "PixelLab create_image_pixflux, init image is the idle sprite, strength 55, seed 7, no background",
+  "files": "<species>-attack, -guard, -special, -hit",
+  "prompts": {
+   "attack": "charging forward, mouth open, motion lines",
+   "guard": "curled up defending, eyes shut, glowing blue shield",
+   "special": "powering up, surrounded by themed glowing energy",
+   "hit": "recoiling, tilted backward, wincing, stars around its head"
+  },
+  "jobIdsInPoseOrder": {
+   "slatepaw": [
+    "676b2e21-eec5-4b4e-97c0-9198b4bd1ba2",
+    "77766ccc-f851-4407-9461-66a798c46447",
+    "eb60d8a3-4990-4870-bce9-bbb239315975",
+    "77c75f64-19ae-4471-a542-4ea2e26170a1"
+   ],
+   "brinefin": [
+    "07ff7663-0f1e-4b18-9a3d-3bc0d5c9caa0",
+    "302f7c62-ff07-4b04-89b2-94974e9aa14b",
+    "459d8346-9699-47cc-ab73-a1d4cb1491a6",
+    "ba5db6f9-8bfe-436d-a335-517232941528"
+   ],
+   "thistlehop": [
+    "2ad29510-ce5c-414d-868d-7540ec4256d2",
+    "6da562be-0367-4304-bcf3-ece789343d1e",
+    "961122b7-dcc2-423b-aa1b-54de081bde0d",
+    "2f099f3f-9acb-4c36-8e02-cd38dd599a7f"
+   ],
+   "cindermite": [
+    "c3e4bc0f-78a6-4596-91c7-d39a39b861d4",
+    "bc9f5737-4ca6-41f9-9df0-558ce6b1654e",
+    "439025c1-b042-4f25-bbdc-3c9bf6358aea",
+    "e2679b1b-082a-4bbb-821e-f4c2dafe7bfc"
+   ],
+   "sandwhisk": [
+    "cbafdbc7-7955-4fce-b45e-d227cbca4aa8",
+    "de9d76b5-add6-40ea-9821-50b2e8e3f909",
+    "60bfc549-7bdf-463c-a0ff-eac4d94b3409",
+    "bb84cf31-58ff-45b6-9834-eee426a6661d"
+   ],
+   "cragmaw": [
+    "f8703e08-8e7a-4789-a389-47f2da439801",
+    "98140930-9e0e-4237-a2a6-b716e54187ac",
+    "c354ff7e-2f13-49c8-b9a1-0225e72a26dd",
+    "01b4f2e3-4783-47c8-a283-e151979c4c42"
+   ]
+  }
+ },
+ "stateCards": {
+  "tool": "PixelLab create_image_pixen, 128x96, seed 42",
+  "prompt": "Pixel art landscape postcard: <scene> in <state>, no text, no people",
+  "files": "card-<state>"
+ },
+ "batch3": {
+  "barkknight.png": {
+   "job_id": "fd1780ab-d032-4a31-8091-e154a4d21466",
+   "prompt": "Original friendly fantasy creature, a stocky, loyal black pit bull and rottweiler mix dog with a broad blocky head, soft floppy ears, tan rottweiler markings on its muzzle, chest and paws, kind amber eyes, wearing a short dark knight's cape and brave heroic stance. This is the family's pet, so make it lovable and noble.. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "galewing.png": {
+   "job_id": "099a38e7-41ae-4d86-a525-893969f6d6fe",
+   "prompt": "Original friendly fantasy creature, small round prairie bird with swirling tornado-shaped tail feathers. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "lakeshell.png": {
+   "job_id": "906a0be7-fed1-49bd-b557-c785e33f97fc",
+   "prompt": "Original friendly fantasy creature, small turtle with a wave-patterned blue-green shell. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "bayouchomp.png": {
+   "job_id": "d7f12877-054b-4388-9325-d3fa40b5f1ec",
+   "prompt": "Original friendly fantasy creature, small round alligator with a mossy back and a big friendly grin. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "dillopod.png": {
+   "job_id": "9a809609-4e92-4572-a229-3c562622d737",
+   "prompt": "Original friendly fantasy creature, small armadillo with banded sandy plates. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "lobsnap.png": {
+   "job_id": "489dee0b-3315-4706-bb53-33666289a828",
+   "prompt": "Original friendly fantasy creature, small red lobster creature with oversized claws. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "mapleclop.png": {
+   "job_id": "5a938a12-4fb5-4b2c-8464-90df07423e93",
+   "prompt": "Original friendly fantasy creature, small moose calf with maple-leaf-shaped antlers. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "fjordling.png": {
+   "job_id": "0b848646-9a21-4fe3-a7a7-c0d78bfc5ae7",
+   "prompt": "Original friendly fantasy creature, small silver seal with icy blue crystal fins. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "alpenhorn.png": {
+   "job_id": "14f7af4b-195d-46fc-8d31-c43712645ffe",
+   "prompt": "Original friendly fantasy creature, small mountain goat with huge curling horns and thick cream wool. Distinctive readable silhouette. Three-quarter battle pose facing left. Crisp pixel art, restrained colors, top-left lighting, no text, no logo."
+  },
+  "backdrop-desert.png": {
+   "job_id": "9c441d99-f97c-4097-a188-da1418f343a5",
+   "prompt": "Simple side-view landscape battle background: sandy desert with mesas and cactus, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-canyon.png": {
+   "job_id": "2ff85f6d-95cc-4f22-916e-a02bb88af1f8",
+   "prompt": "Simple side-view landscape battle background: red rock canyon walls, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-forest.png": {
+   "job_id": "6a0a498e-5620-4ae9-a32e-49bb7bb946fb",
+   "prompt": "Simple side-view landscape battle background: tall green pine forest, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-plains.png": {
+   "job_id": "402cedff-97f6-4503-bef5-082a50035081",
+   "prompt": "Simple side-view landscape battle background: golden prairie under a huge sky, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-lake.png": {
+   "job_id": "4aee8143-6426-4ea9-91f4-ac07999beac7",
+   "prompt": "Simple side-view landscape battle background: calm blue lake with pine shore, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-swamp.png": {
+   "job_id": "e2f963c2-07d5-44c0-9d3c-4c1752aee18e",
+   "prompt": "Simple side-view landscape battle background: misty bayou with cypress trees, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "barkknight-attack.png": {
+   "job_id": "20b43616-b151-43d9-b501-b36ade1dfd4b",
+   "prompt": "black and tan dog with dark cape charging forward to the left, mouth open, motion lines"
+  },
+  "barkknight-guard.png": {
+   "job_id": "9cf33f12-39e3-4e0d-8f58-dce8548a7be9",
+   "prompt": "black and tan dog with dark cape curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "barkknight-special.png": {
+   "job_id": "5c263366-e4c3-43cb-a8ce-f6a61cec9b74",
+   "prompt": "black and tan dog with dark cape powering up, surrounded by glowing midnight blue energy, eyes blazing"
+  },
+  "barkknight-hit.png": {
+   "job_id": "72c74c62-3d70-405a-828c-6e17685d4b95",
+   "prompt": "black and tan dog with dark cape recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "galewing-attack.png": {
+   "job_id": "c5b29962-7847-4bd2-8a7e-66d67d0e9ea2",
+   "prompt": "small round brown prairie bird charging forward to the left, mouth open, motion lines"
+  },
+  "galewing-guard.png": {
+   "job_id": "2c4d73ce-277f-4540-a89a-02284af97d1d",
+   "prompt": "small round brown prairie bird curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "galewing-special.png": {
+   "job_id": "96ce8e84-41d4-4c12-b0f3-e21fadfb48cf",
+   "prompt": "small round brown prairie bird powering up, surrounded by glowing swirling wind energy, eyes blazing"
+  },
+  "galewing-hit.png": {
+   "job_id": "7946682d-a7b8-4d60-abfe-4ecb518db7f0",
+   "prompt": "small round brown prairie bird recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "lakeshell-attack.png": {
+   "job_id": "986c6cde-5194-4717-a33d-93a16fa4dd06",
+   "prompt": "small green turtle with blue-green shell charging forward to the left, mouth open, motion lines"
+  },
+  "lakeshell-guard.png": {
+   "job_id": "86dfa0e3-0e84-400a-8c92-33a3812cec86",
+   "prompt": "small green turtle with blue-green shell curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "lakeshell-special.png": {
+   "job_id": "cd3dba61-ec9c-41d1-9a7e-33542797fdce",
+   "prompt": "small green turtle with blue-green shell powering up, surrounded by glowing water energy, eyes blazing"
+  },
+  "lakeshell-hit.png": {
+   "job_id": "abcb7346-65f6-4942-a04f-27df9916d73d",
+   "prompt": "small green turtle with blue-green shell recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "bayouchomp-attack.png": {
+   "job_id": "e9bd3af2-99cc-4c67-b867-546f7496b7c1",
+   "prompt": "small round green alligator with mossy back charging forward to the left, mouth open, motion lines"
+  },
+  "bayouchomp-guard.png": {
+   "job_id": "f721af77-06fb-45de-92f6-7f1b8d467c7a",
+   "prompt": "small round green alligator with mossy back curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "bayouchomp-special.png": {
+   "job_id": "d08ffc3a-cac3-4e4b-88de-7ae61efc2ff5",
+   "prompt": "small round green alligator with mossy back powering up, surrounded by glowing swamp green energy, eyes blazing"
+  },
+  "bayouchomp-hit.png": {
+   "job_id": "cf5a3953-8717-4186-bdb1-e8f1c7f88cd3",
+   "prompt": "small round green alligator with mossy back recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "dillopod-attack.png": {
+   "job_id": "f3a24a10-abb3-40a3-b129-c3e1b4a8bb22",
+   "prompt": "small sandy armadillo with banded plates charging forward to the left, mouth open, motion lines"
+  },
+  "dillopod-guard.png": {
+   "job_id": "6d6e9c07-90f2-4d6a-8551-c45febd1c7f7",
+   "prompt": "small sandy armadillo with banded plates curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "dillopod-special.png": {
+   "job_id": "3fe5a0d7-e16d-48b7-892c-d47c20b84189",
+   "prompt": "small sandy armadillo with banded plates powering up, surrounded by glowing dust energy, eyes blazing"
+  },
+  "dillopod-hit.png": {
+   "job_id": "08f90889-06c2-437e-9b07-5822119e6f3b",
+   "prompt": "small sandy armadillo with banded plates recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "lobsnap-attack.png": {
+   "job_id": "0b779587-b017-4915-ad19-9aa5f0774f9e",
+   "prompt": "small red lobster with oversized claws charging forward to the left, mouth open, motion lines"
+  },
+  "lobsnap-guard.png": {
+   "job_id": "8718ffdd-a035-4a4e-8a45-930baf568f34",
+   "prompt": "small red lobster with oversized claws curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "lobsnap-special.png": {
+   "job_id": "db3d6a36-b838-4c02-81ca-0a5e46b44a1b",
+   "prompt": "small red lobster with oversized claws powering up, surrounded by glowing sea spray energy, eyes blazing"
+  },
+  "lobsnap-hit.png": {
+   "job_id": "c3af2afd-ce6e-4aaa-b8ca-0e32d7e69b7b",
+   "prompt": "small red lobster with oversized claws recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "mapleclop-attack.png": {
+   "job_id": "4bf3ca76-33b5-4012-be94-b2ec51359fd8",
+   "prompt": "small brown moose calf with maple-leaf antlers charging forward to the left, mouth open, motion lines"
+  },
+  "mapleclop-guard.png": {
+   "job_id": "4f19dbd4-502c-4672-b3d2-23a97f440869",
+   "prompt": "small brown moose calf with maple-leaf antlers curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "mapleclop-special.png": {
+   "job_id": "ff2c04da-3e52-46af-a3aa-92634fadf82c",
+   "prompt": "small brown moose calf with maple-leaf antlers powering up, surrounded by glowing falling maple leaves energy, eyes blazing"
+  },
+  "mapleclop-hit.png": {
+   "job_id": "356c57ee-aae6-46af-b314-1308f1357485",
+   "prompt": "small brown moose calf with maple-leaf antlers recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "fjordling-attack.png": {
+   "job_id": "743e3780-4d41-470c-9d1b-f5d10b2be71c",
+   "prompt": "small silver seal with icy blue crystal fins charging forward to the left, mouth open, motion lines"
+  },
+  "fjordling-guard.png": {
+   "job_id": "a583137f-ab89-4b2c-959d-da393cf6a230",
+   "prompt": "small silver seal with icy blue crystal fins curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "fjordling-special.png": {
+   "job_id": "595dcb2b-085c-4949-8e35-b464413ab974",
+   "prompt": "small silver seal with icy blue crystal fins powering up, surrounded by glowing ice energy, eyes blazing"
+  },
+  "fjordling-hit.png": {
+   "job_id": "bd53ce82-3d44-4e06-912f-5f196439def1",
+   "prompt": "small silver seal with icy blue crystal fins recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "alpenhorn-attack.png": {
+   "job_id": "0dd969e2-3737-4425-80f8-e0195b3ef5dd",
+   "prompt": "small cream mountain goat with huge curling horns charging forward to the left, mouth open, motion lines"
+  },
+  "alpenhorn-guard.png": {
+   "job_id": "89605566-72d9-4f08-be91-4849bd92bd72",
+   "prompt": "small cream mountain goat with huge curling horns curled up defending, eyes squeezed shut, glowing blue shield in front of it"
+  },
+  "alpenhorn-special.png": {
+   "job_id": "945588b9-a2ac-495e-b03f-ad83de54c431",
+   "prompt": "small cream mountain goat with huge curling horns powering up, surrounded by glowing mountain snow energy, eyes blazing"
+  },
+  "alpenhorn-hit.png": {
+   "job_id": "33c552ea-0642-46d7-9c1c-fa34c88e859e",
+   "prompt": "small cream mountain goat with huge curling horns recoiling after being hit, tilted backward, eyes shut in a wince, stars around its head, dazed"
+  },
+  "backdrop-snow.png": {
+   "job_id": "46f4bc50-e42c-4854-b00b-a9bb091e9f03",
+   "prompt": "Simple side-view landscape battle background: snowy mountains and spruce trees, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-tropical.png": {
+   "job_id": "a4378aa3-de39-41a1-ba6d-d5f49ff96482",
+   "prompt": "Simple side-view landscape battle background: palm beach with a distant volcano, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-harbor.png": {
+   "job_id": "c30d8d46-53f7-472c-88ab-aefb47773fa2",
+   "prompt": "Simple side-view landscape battle background: rocky harbor with a lighthouse, open foreground. Calm restrained colors, pixel art, no characters, no text.",
+   "replaced_job_ids": [
+    "8b109f12-c41f-4e97-9af3-ad3c08eed979"
+   ],
+   "seed": 43
+  },
+  "backdrop-castle.png": {
+   "job_id": "e938af9f-3abb-4aee-a7ba-8660ec7989f5",
+   "prompt": "Simple side-view landscape battle background: green hills with a distant stone castle, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "backdrop-fjord.png": {
+   "job_id": "1974add3-0c74-4da8-83e0-aa7dcc47e4cd",
+   "prompt": "Simple side-view landscape battle background: steep blue fjord with waterfalls, open foreground. Calm restrained colors, pixel art, no characters, no text."
+  },
+  "card-alabama.png": {
+   "job_id": "e1d5e170-7f81-4648-8c16-625a5740499d",
+   "prompt": "Pixel art landscape postcard: longleaf pines and a red clay road with a rocket on the horizon, no text, no people"
+  },
+  "card-arkansas.png": {
+   "job_id": "b66a780d-e80f-4873-87ae-80c4a82cf33a",
+   "prompt": "Pixel art landscape postcard: green Ozark hills with a clear hot spring, no text, no people"
+  },
+  "card-connecticut.png": {
+   "job_id": "65e96e47-3351-4fbe-a385-5bcf33f701bd",
+   "prompt": "Pixel art landscape postcard: white church on a coastal New England green, no text, no people"
+  },
+  "card-delaware.png": {
+   "job_id": "741ce31c-8e23-4d17-b707-8d22f26037fa",
+   "prompt": "Pixel art landscape postcard: quiet Atlantic beach with sand dunes, no text, no people"
+  },
+  "card-florida.png": {
+   "job_id": "14022453-024c-4844-b6db-561ffdb5c5e7",
+   "prompt": "Pixel art landscape postcard: Everglades wetland with an alligator and palm trees, no text, no people"
+  },
+  "card-georgia.png": {
+   "job_id": "aa9970c1-5f11-4b25-b2d6-b0010ead17ab",
+   "prompt": "Pixel art landscape postcard: peach orchard in front of a Spanish-moss swamp, no text, no people"
+  },
+  "card-illinois.png": {
+   "job_id": "55dc7bcf-afa6-4abd-bb03-44cd37e93070",
+   "prompt": "Pixel art landscape postcard: city skyline beside a big lake with prairie grass, no text, no people"
+  },
+  "card-indiana.png": {
+   "job_id": "2b2000b6-5374-46ad-ac56-997675e41dd4",
+   "prompt": "Pixel art landscape postcard: cornfields beside sand dunes and a lake, no text, no people"
+  },
+  "card-iowa.png": {
+   "job_id": "5984d85d-917e-438f-bf5e-2d8ad92d02c2",
+   "prompt": "Pixel art landscape postcard: endless rows of tall corn and a red barn, no text, no people"
+  },
+  "card-kansas.png": {
+   "job_id": "a50d01fd-f35b-46c9-91b6-f3dd5108dcc5",
+   "prompt": "Pixel art landscape postcard: yellow sunflower field under a wide sky, no text, no people"
+  },
+  "card-kentucky.png": {
+   "job_id": "416d41b3-5d1a-4fdb-bf80-435b1548bfa7",
+   "prompt": "Pixel art landscape postcard: horses on bluegrass hills near a cave entrance, no text, no people"
+  },
+  "card-louisiana.png": {
+   "job_id": "f7dc4f6e-927b-4c35-bd99-d8f6af1859d4",
+   "prompt": "Pixel art landscape postcard: bayou with cypress trees and a pelican, no text, no people"
+  },
+  "card-maine.png": {
+   "job_id": "f0c85792-be36-4d3a-b073-e460d530a0ed",
+   "prompt": "Pixel art landscape postcard: rocky coast with a lighthouse and lobster boats, no text, no people"
+  },
+  "card-maryland.png": {
+   "job_id": "146428c6-7465-4a22-89a4-24b3ab40ac76",
+   "prompt": "Pixel art landscape postcard: Chesapeake Bay with crab boats, no text, no people",
+   "replaced_job_ids": [
+    "5f8b1d24-d4cd-4c8b-a73c-13c2f9fee668"
+   ],
+   "seed": 43
+  },
+  "card-massachusetts.png": {
+   "job_id": "3dab590e-c5f3-45d0-ba34-c23d2c2421e6",
+   "prompt": "Pixel art landscape postcard: old harbor with a tall sailing ship, no text, no people"
+  },
+  "card-michigan.png": {
+   "job_id": "e0d1103b-c35f-4fa7-91dd-02ce3e992372",
+   "prompt": "Pixel art landscape postcard: long suspension bridge over a great lake, no text, no people"
+  },
+  "card-minnesota.png": {
+   "job_id": "b0864526-a97b-4414-b244-ca9208efaa6e",
+   "prompt": "Pixel art landscape postcard: canoe on a calm lake among pines, no text, no people"
+  },
+  "card-mississippi.png": {
+   "job_id": "f0724100-5365-475a-90bb-4dff9ceeda6b",
+   "prompt": "Pixel art landscape postcard: wide river with a paddle steamer and magnolias, no text, no people"
+  },
+  "card-missouri.png": {
+   "job_id": "c31d79e2-eb2d-4a13-840e-b14a4dba0140",
+   "prompt": "Pixel art landscape postcard: tall silver steel arch beside a wide river, no text, no people"
+  },
+  "card-nebraska.png": {
+   "job_id": "1016046f-4706-4bee-98f7-48aac2c3d6f8",
+   "prompt": "Pixel art landscape postcard: tall rock spire on open prairie with covered wagons, no text, no people"
+  },
+  "card-new-hampshire.png": {
+   "job_id": "87c6f3a3-8ae1-4eb0-8af7-73a5b681c268",
+   "prompt": "Pixel art landscape postcard: granite mountains in fall colors, no text, no people"
+  },
+  "card-new-jersey.png": {
+   "job_id": "713cf9e0-cc07-40c9-97d7-13229ae01bfa",
+   "prompt": "Pixel art landscape postcard: seaside boardwalk with a Ferris wheel, no text, no people"
+  },
+  "card-new-york.png": {
+   "job_id": "6331b042-d512-48a0-ad7b-f6fb6be56431",
+   "prompt": "Pixel art landscape postcard: waterfall with green hills, no text, no people"
+  },
+  "card-north-carolina.png": {
+   "job_id": "1ade9186-77d3-4030-a887-50531ffd1cea",
+   "prompt": "Pixel art landscape postcard: Blue Ridge mountains with a lighthouse in the distance, no text, no people"
+  },
+  "card-north-dakota.png": {
+   "job_id": "f1688091-da8f-45fb-90c6-ead58cc1843f",
+   "prompt": "Pixel art landscape postcard: striped badlands with bison, no text, no people"
+  },
+  "card-ohio.png": {
+   "job_id": "9b595adf-7753-4f51-b901-cf2cb3b48dcb",
+   "prompt": "Pixel art landscape postcard: green river valley with a waterfall and an old biplane, no text, no people"
+  },
+  "card-oklahoma.png": {
+   "job_id": "ec6ece2a-dbb6-4bde-931d-5c7383a4dfbf",
+   "prompt": "Pixel art landscape postcard: red dirt plains with an old highway, no text, no people"
+  },
+  "card-pennsylvania.png": {
+   "job_id": "fb89e490-3a90-4ca6-ad53-a4b59a78cf65",
+   "prompt": "Pixel art landscape postcard: brick colonial hall with a bell, no text, no people"
+  },
+  "card-rhode-island.png": {
+   "job_id": "2d912562-5d6d-4cfd-9af8-cd91303ad4c6",
+   "prompt": "Pixel art landscape postcard: tiny island with sailboats, no text, no people"
+  },
+  "card-south-carolina.png": {
+   "job_id": "6edda151-9571-4c64-8185-24351b420195",
+   "prompt": "Pixel art landscape postcard: palm-lined harbor with an old fort, no text, no people"
+  },
+  "card-south-dakota.png": {
+   "job_id": "db94813e-1098-4e64-a988-211bebf06308",
+   "prompt": "Pixel art landscape postcard: striped badlands under granite mountains, no text, no people"
+  },
+  "card-tennessee.png": {
+   "job_id": "4e7db150-eebb-4b8e-a2ef-c72368083e77",
+   "prompt": "Pixel art landscape postcard: misty blue Smoky Mountains, no text, no people"
+  },
+  "card-texas.png": {
+   "job_id": "a07588b2-091e-49d1-b79e-e53cc43402b9",
+   "prompt": "Pixel art landscape postcard: desert river canyon with a lone star-shaped cloud, no text, no people"
+  },
+  "card-vermont.png": {
+   "job_id": "5bcef975-e964-42e4-a220-baff2273b193",
+   "prompt": "Pixel art landscape postcard: red maple forest with a covered bridge, no text, no people"
+  },
+  "card-virginia.png": {
+   "job_id": "40905d6f-3c5e-46b4-9987-a28854c29367",
+   "prompt": "Pixel art landscape postcard: Blue Ridge mountains with a colonial town, no text, no people"
+  },
+  "card-west-virginia.png": {
+   "job_id": "679b0208-7793-4bd8-9b05-33d9bca4e4cc",
+   "prompt": "Pixel art landscape postcard: steel arch bridge across a forested river gorge, no text, no people"
+  },
+  "card-wisconsin.png": {
+   "job_id": "e7bfc8ef-b96c-48f3-b46a-0a79a575a0c6",
+   "prompt": "Pixel art landscape postcard: red dairy barn beside a blue lake, no text, no people"
+  }
+ },
+ "events": {
+  "tool": "PixelLab create_image_pixen, 128x128, transparent, seed 42",
+  "jobIds": {
+   "campfire": "7182be9f-a66d-457d-9d8a-5d6ef3c2c11c",
+   "bridge": "ad1eb7a8-d9a8-4a01-9a3f-4e1b753686fb",
+   "hiker": "90b303bf-5523-45f8-bb32-a960a131a0d9",
+   "prospector": "b3eb9a67-6d85-4fe2-968b-d97bf949098e",
+   "ranger": "26ebf893-160d-4485-8195-b342cb9542b2",
+   "marker": "fd38a8dc-4638-4ba8-93ce-6828f792d637"
+  }
+ }
 }

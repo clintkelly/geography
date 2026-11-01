@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
 import { TRAIL_EVENTS } from '../engine/events';
 import { Sprite } from './art';
 import { mapFor, place, rewardLabel, species } from './content';
 import { Key, useKeys } from './keys';
+import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { Marker, WorldMap } from './WorldMap';
 
@@ -15,7 +16,14 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
   const slot = e.slots[index];
   // Only stops already reached are drawn, so the map doesn't give away where the trail goes.
   const reached = e.slots.slice(0, index + 1);
-  const highlights = useMemo(() => Object.fromEntries(reached.map((s) => [place(s.locationId).featureId, 'route' as const])), [e.slots, index]); // eslint-disable-line
+  const highlights = useMemo(
+    () => Object.fromEntries(reached.map((s, i) => [place(s.locationId).featureId, i === index && !e.retreated ? ('arrive' as const) : ('route' as const)])),
+    [e.slots, index, e.retreated], // eslint-disable-line
+  );
+  // Arriving at a new place, not reloading into one that was already found.
+  useEffect(() => {
+    if (!e.retreated) playSound('correct');
+  }, [index]); // eslint-disable-line
   if (!slot) return null;
 
   const map = mapFor(e.regionId);
@@ -52,7 +60,7 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
             {(scale) => (
               <>
                 <polyline points={line} className="route-line" strokeWidth={2.5 * scale} strokeDasharray={`${6 * scale} ${5 * scale}`} />
-                {reached.map((s, i) => (
+                {reached.filter((s) => s.status === 'won' || e.retreated).map((s, i) => (
                   <Marker key={s.locationId} at={map.project(place(s.locationId).lonLat)} scale={scale} label={s.status === 'won' ? '✓' : String(i + 1)} tone={s.status === 'won' ? 'done' : 'current'} />
                 ))}
               </>

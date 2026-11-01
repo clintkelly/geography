@@ -1,0 +1,603 @@
+[
+{
+"id": "alabama",
+"name": "Alabama",
+"postal": "AL",
+"fips": "01",
+"lonLat": [
+-86.8,
+32.8
+],
+"capital": "Montgomery",
+"sameStateCities": [
+"Birmingham",
+"Huntsville",
+"Mobile"
+],
+"largestCity": "Huntsville",
+"nickname": {
+"text": "Yellowhammer State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Rosa Parks's bus protest began in Montgomery, Alabama, in 1955.",
+"Rockets for the Apollo Moon missions were developed in Huntsville, Alabama."
+],
+"asks": [
+"In which state did Rosa Parks refuse to give up her bus seat?",
+"In which state were rockets developed for the Apollo Moon missions?"
+],
+"neighbors": [
+"florida",
+"georgia",
+"mississippi",
+"tennessee"
+]
+},
+{
+"id": "arkansas",
+"name": "Arkansas",
+"postal": "AR",
+"fips": "05",
+"lonLat": [
+-92.4,
+34.9
+],
+"capital": "Little Rock",
+"sameStateCities": [
+"Fayetteville",
+"Fort Smith",
+"Hot Springs"
+],
+"largestCity": "Little Rock",
+"nickname": {
+"text": "Natural State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"At Crater of Diamonds State Park in Arkansas, visitors can dig for real diamonds.",
+"Hot Springs National Park in Arkansas protects naturally hot spring water."
+],
+"asks": [
+"In which state can visitors dig for real diamonds in a state park?",
+"Which state has Hot Springs National Park?"
+],
+"neighbors": [
+"louisiana",
+"mississippi",
+"missouri",
+"oklahoma",
+"tennessee",
+"texas"
+]
+},
+{
+"id": "delaware",
+"name": "Delaware",
+"postal": "DE",
+"fips": "10",
+"lonLat": [
+-75.5,
+39
+],
+"capital": "Dover",
+"sameStateCities": [
+"Wilmington",
+"Newark",
+"Rehoboth Beach"
+],
+"largestCity": "Wilmington",
+"nickname": {
+"text": "First State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"Delaware was the first state to approve the US Constitution, in 1787.",
+"Delaware is the second smallest US state."
+],
+"asks": [
+"Which state was first to approve the US Constitution?",
+"Which state is the second smallest in the country?"
+],
+"neighbors": [
+"maryland",
+"new-jersey",
+"pennsylvania"
+]
+},
+{
+"id": "florida",
+"name": "Florida",
+"postal": "FL",
+"fips": "12",
+"lonLat": [
+-81.7,
+28.6
+],
+"capital": "Tallahassee",
+"sameStateCities": [
+"Miami",
+"Orlando",
+"Jacksonville"
+],
+"largestCity": "Jacksonville",
+"nickname": {
+"text": "Sunshine State",
+"status": "official",
+"others": []
+},
+"biome": "swamp",
+"facts": [
+"Everglades National Park in Florida protects a huge subtropical wetland.",
+"Rockets launch from Kennedy Space Center on Florida's coast."
+],
+"asks": [
+"Which state is home to Everglades National Park?",
+"From which state do rockets launch at Kennedy Space Center?"
+],
+"neighbors": [
+"alabama",
+"georgia"
+]
+},
+{
+"id": "georgia",
+"name": "Georgia",
+"postal": "GA",
+"fips": "13",
+"lonLat": [
+-83.4,
+32.7
+],
+"capital": "Atlanta",
+"sameStateCities": [
+"Savannah",
+"Augusta",
+"Macon"
+],
+"largestCity": "Atlanta",
+"nickname": {
+"text": "Peach State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Martin Luther King Jr. was born in Atlanta, Georgia.",
+"Okefenokee Swamp in Georgia is one of the largest blackwater swamps in North America."
+],
+"asks": [
+"In which state was Martin Luther King Jr. born?",
+"Which state has the Okefenokee Swamp?"
+],
+"neighbors": [
+"alabama",
+"florida",
+"north-carolina",
+"south-carolina",
+"tennessee"
+]
+},
+{
+"id": "kentucky",
+"name": "Kentucky",
+"postal": "KY",
+"fips": "21",
+"lonLat": [
+-85.3,
+37.5
+],
+"capital": "Frankfort",
+"sameStateCities": [
+"Louisville",
+"Lexington",
+"Bowling Green"
+],
+"largestCity": "Louisville",
+"nickname": {
+"text": "Bluegrass State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Mammoth Cave National Park in Kentucky has the longest known cave system in the world.",
+"The Kentucky Derby horse race is held in Louisville every May."
+],
+"asks": [
+"Which state has the longest known cave system in the world?",
+"In which state is a famous Derby horse race held at Louisville?"
+],
+"neighbors": [
+"illinois",
+"indiana",
+"missouri",
+"ohio",
+"tennessee",
+"virginia",
+"west-virginia"
+]
+},
+{
+"id": "louisiana",
+"name": "Louisiana",
+"postal": "LA",
+"fips": "22",
+"lonLat": [
+-92,
+31
+],
+"capital": "Baton Rouge",
+"sameStateCities": [
+"New Orleans",
+"Shreveport",
+"Lafayette"
+],
+"largestCity": "New Orleans",
+"nickname": {
+"text": "Pelican State",
+"status": "unverified",
+"others": []
+},
+"biome": "swamp",
+"facts": [
+"The Mississippi River reaches the Gulf of Mexico in Louisiana.",
+"Jazz music was born in New Orleans, Louisiana."
+],
+"asks": [
+"In which state does the Mississippi River reach the Gulf of Mexico?",
+"In which state was jazz music born?"
+],
+"neighbors": [
+"arkansas",
+"mississippi",
+"texas"
+]
+},
+{
+"id": "maryland",
+"name": "Maryland",
+"postal": "MD",
+"fips": "24",
+"lonLat": [
+-76.8,
+39.2
+],
+"capital": "Annapolis",
+"sameStateCities": [
+"Baltimore",
+"Frederick",
+"Rockville"
+],
+"largestCity": "Baltimore",
+"nickname": {
+"text": "Old Line State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"The Star-Spangled Banner was written about a battle at Fort McHenry in Baltimore, Maryland.",
+"Chesapeake Bay, the largest estuary in the United States, runs through Maryland."
+],
+"asks": [
+"At a fort in which state was the battle behind the Star-Spangled Banner?",
+"Which state is split in two by Chesapeake Bay?"
+],
+"neighbors": [
+"delaware",
+"pennsylvania",
+"virginia",
+"west-virginia"
+]
+},
+{
+"id": "mississippi",
+"name": "Mississippi",
+"postal": "MS",
+"fips": "28",
+"lonLat": [
+-89.7,
+32.7
+],
+"capital": "Jackson",
+"sameStateCities": [
+"Gulfport",
+"Biloxi",
+"Hattiesburg"
+],
+"largestCity": "Jackson",
+"nickname": {
+"text": "Magnolia State",
+"status": "unverified",
+"others": []
+},
+"biome": "swamp",
+"facts": [
+"The Mississippi Delta is known as the birthplace of the blues.",
+"The Natchez Trace Parkway follows an ancient trail through Mississippi."
+],
+"asks": [
+"Which state's delta is known as the birthplace of the blues?",
+"Which state does the Natchez Trace Parkway mostly run through?"
+],
+"neighbors": [
+"alabama",
+"arkansas",
+"louisiana",
+"tennessee"
+]
+},
+{
+"id": "north-carolina",
+"name": "North Carolina",
+"postal": "NC",
+"fips": "37",
+"lonLat": [
+-79.4,
+35.5
+],
+"capital": "Raleigh",
+"sameStateCities": [
+"Charlotte",
+"Greensboro",
+"Durham"
+],
+"largestCity": "Charlotte",
+"nickname": {
+"text": "Tar Heel State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"The Wright brothers made the first airplane flights at Kitty Hawk, North Carolina, in 1903.",
+"Mount Mitchell in North Carolina is the highest peak east of the Mississippi River."
+],
+"asks": [
+"In which state did the Wright brothers first fly, at Kitty Hawk?",
+"Which state has the highest peak east of the Mississippi River?"
+],
+"neighbors": [
+"georgia",
+"south-carolina",
+"tennessee",
+"virginia"
+]
+},
+{
+"id": "oklahoma",
+"name": "Oklahoma",
+"postal": "OK",
+"fips": "40",
+"lonLat": [
+-97.5,
+35.6
+],
+"capital": "Oklahoma City",
+"sameStateCities": [
+"Tulsa",
+"Norman",
+"Lawton"
+],
+"largestCity": "Oklahoma City",
+"nickname": {
+"text": "Sooner State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"The Trail of Tears ended in what is now Oklahoma, after Native nations were forced from their homes.",
+"Historic Route 66 runs for hundreds of miles across Oklahoma."
+],
+"asks": [
+"The Trail of Tears ended in what is now which state?",
+"Which state does Historic Route 66 cross for hundreds of miles, between Texas and Missouri?"
+],
+"hint2": "This state's capital shares its name.",
+"neighbors": [
+"arkansas",
+"colorado",
+"kansas",
+"missouri",
+"new-mexico",
+"texas"
+]
+},
+{
+"id": "south-carolina",
+"name": "South Carolina",
+"postal": "SC",
+"fips": "45",
+"lonLat": [
+-80.9,
+33.9
+],
+"capital": "Columbia",
+"sameStateCities": [
+"Charleston",
+"Greenville",
+"Myrtle Beach"
+],
+"largestCity": "Charleston",
+"nickname": {
+"text": "Palmetto State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"The Civil War began at Fort Sumter in Charleston Harbor, South Carolina, in 1861.",
+"Congaree National Park in South Carolina protects a rare old-growth bottomland forest."
+],
+"asks": [
+"In which state did the Civil War begin, at Fort Sumter?",
+"Which state has Congaree National Park?"
+],
+"neighbors": [
+"georgia",
+"north-carolina"
+]
+},
+{
+"id": "tennessee",
+"name": "Tennessee",
+"postal": "TN",
+"fips": "47",
+"lonLat": [
+-86.4,
+35.8
+],
+"capital": "Nashville",
+"sameStateCities": [
+"Memphis",
+"Knoxville",
+"Chattanooga"
+],
+"largestCity": "Nashville",
+"nickname": {
+"text": "Volunteer State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Great Smoky Mountains National Park is shared by Tennessee and North Carolina.",
+"Nashville, Tennessee, is known as Music City."
+],
+"asks": [
+"Which state shares Great Smoky Mountains National Park with North Carolina?",
+"In which state is Nashville, known as Music City?"
+],
+"neighbors": [
+"alabama",
+"arkansas",
+"georgia",
+"kentucky",
+"mississippi",
+"missouri",
+"north-carolina",
+"virginia"
+]
+},
+{
+"id": "texas",
+"name": "Texas",
+"postal": "TX",
+"fips": "48",
+"lonLat": [
+-99.3,
+31.4
+],
+"capital": "Austin",
+"sameStateCities": [
+"Houston",
+"Dallas",
+"San Antonio"
+],
+"largestCity": "Houston",
+"nickname": {
+"text": "Lone Star State",
+"status": "unverified",
+"others": []
+},
+"biome": "desert",
+"facts": [
+"The Battle of the Alamo was fought in San Antonio, Texas, in 1836.",
+"Big Bend National Park in Texas sits on a great bend of the Rio Grande."
+],
+"asks": [
+"In which state was the Battle of the Alamo fought?",
+"Which state has Big Bend National Park on the Rio Grande?"
+],
+"neighbors": [
+"arkansas",
+"louisiana",
+"new-mexico",
+"oklahoma"
+]
+},
+{
+"id": "virginia",
+"name": "Virginia",
+"postal": "VA",
+"fips": "51",
+"lonLat": [
+-78.8,
+37.5
+],
+"capital": "Richmond",
+"sameStateCities": [
+"Norfolk",
+"Virginia Beach",
+"Roanoke"
+],
+"largestCity": "Virginia Beach",
+"nickname": {
+"text": "Old Dominion",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Jamestown, Virginia, founded in 1607, was the first lasting English colony in North America.",
+"Skyline Drive runs along the Blue Ridge Mountains in Virginia's Shenandoah National Park."
+],
+"asks": [
+"In which state was Jamestown, the first lasting English colony?",
+"Which state has Shenandoah National Park?"
+],
+"neighbors": [
+"kentucky",
+"maryland",
+"north-carolina",
+"tennessee",
+"west-virginia"
+]
+},
+{
+"id": "west-virginia",
+"name": "West Virginia",
+"postal": "WV",
+"fips": "54",
+"lonLat": [
+-80.6,
+38.7
+],
+"capital": "Charleston",
+"sameStateCities": [
+"Huntington",
+"Morgantown",
+"Wheeling"
+],
+"largestCity": "Charleston",
+"nickname": {
+"text": "Mountain State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"West Virginia broke away from Virginia during the Civil War.",
+"New River Gorge National Park is in West Virginia."
+],
+"asks": [
+"Which state broke away from Virginia during the Civil War?",
+"Which state has New River Gorge National Park?"
+],
+"neighbors": [
+"kentucky",
+"maryland",
+"ohio",
+"pennsylvania",
+"virginia"
+]
+}
+]

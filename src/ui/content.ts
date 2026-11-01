@@ -1,4 +1,4 @@
-import { MAPS } from '../content/maps';
+import { clampView, MAPS, type MapDef, type View } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Place, Region, Species, StateCard } from '../content/types';
 import type { Reward } from '../engine/game';
@@ -7,7 +7,30 @@ export const place = (id: string) => PACK.places.find((p) => p.id === id) as Pla
 export const species = (id: string) => PACK.species.find((s) => s.id === id) as Species;
 export const souvenir = (id: string) => PACK.souvenirs.find((s) => s.id === id);
 export const region = (id: string) => PACK.regions.find((r) => r.id === id) as Region;
-export const mapFor = (regionId: string) => MAPS[region(regionId).mapId];
+
+const regionMaps = new Map<string, MapDef>();
+
+/** Frames a US region on its own states, keeping the whole-country view as a button. */
+function zoomedTo(regionId: string, map: MapDef): MapDef {
+  const points = PACK.places.filter((p) => p.regionId === regionId).map((p) => map.project(p.lonLat));
+  const xs = points.map((p) => p[0]);
+  const ys = points.map((p) => p[1]);
+  const [x0, x1, y0, y1] = [Math.min(...xs) - 50, Math.max(...xs) + 50, Math.min(...ys) - 45, Math.max(...ys) + 45];
+  const ratio = map.height / map.width;
+  const w = Math.max(x1 - x0, (y1 - y0) / ratio);
+  const view: View = clampView({ x: (x0 + x1 - w) / 2, y: (y0 + y1 - w * ratio) / 2, w }, map);
+  return { ...map, presets: [{ label: region(regionId).label, view }, ...map.presets] };
+}
+
+export function mapFor(regionId: string): MapDef {
+  const base = MAPS[region(regionId).mapId];
+  if (base.id !== 'us') return base;
+  const cached = regionMaps.get(regionId);
+  if (cached) return cached;
+  const zoomed = zoomedTo(regionId, base);
+  regionMaps.set(regionId, zoomed);
+  return zoomed;
+}
 export const cardFor = (placeId: string) => PACK.cards.find((c) => c.placeId === placeId) as StateCard;
 
 export function rewardLabel(r: Reward): string {

@@ -26,6 +26,11 @@
 ],
 "neighbors": [
 "washington"
+],
+"biome": "snow",
+"asks": [
+"Which is the largest US state by area?",
+"Which state has Denali, the tallest mountain in North America?"
 ]
 },
 {
@@ -56,8 +61,13 @@
 "neighbors": [
 "california",
 "nevada",
-"utah",
-"new-mexico"
+"new-mexico",
+"utah"
+],
+"biome": "canyon",
+"asks": [
+"Which state has the Grand Canyon?",
+"In which state's desert do giant saguaro cacti grow?"
 ]
 },
 {
@@ -86,10 +96,15 @@
 "Coast redwoods in California are the tallest trees in the world."
 ],
 "neighbors": [
-"oregon",
-"nevada",
 "arizona",
-"hawaii"
+"hawaii",
+"nevada",
+"oregon"
+],
+"biome": "coast",
+"asks": [
+"Which state has the most people?",
+"Which state has the tallest trees in the world?"
 ]
 },
 {
@@ -118,9 +133,17 @@
 "Denver is called the Mile High City because it sits about one mile above sea level."
 ],
 "neighbors": [
-"wyoming",
+"kansas",
+"nebraska",
+"new-mexico",
+"oklahoma",
 "utah",
-"new-mexico"
+"wyoming"
+],
+"biome": "mountain",
+"asks": [
+"Which state joined the US in 1876, a hundred years after the Declaration of Independence?",
+"Which state's capital is called the Mile High City?"
 ]
 },
 {
@@ -150,6 +173,11 @@
 ],
 "neighbors": [
 "california"
+],
+"biome": "tropical",
+"asks": [
+"Which is the only state made up entirely of islands?",
+"Which state has the very active Kilauea volcano?"
 ]
 },
 {
@@ -178,12 +206,17 @@
 "Hells Canyon, on the Idaho-Oregon border, is the deepest river gorge in North America."
 ],
 "neighbors": [
-"washington",
-"oregon",
+"montana",
 "nevada",
+"oregon",
 "utah",
-"wyoming",
-"montana"
+"washington",
+"wyoming"
+],
+"biome": "forest",
+"asks": [
+"Which state grows more potatoes than any other?",
+"Which state shares Hells Canyon, North America's deepest river gorge, with Oregon?"
 ]
 },
 {
@@ -211,11 +244,18 @@
 },
 "facts": [
 "Montana's Treasure State nickname comes from its gold and silver mines.",
-"Part of Yellowstone National Park is in Montana."
+"Glacier National Park in Montana sits on the border with Canada."
 ],
 "neighbors": [
 "idaho",
+"north-dakota",
+"south-dakota",
 "wyoming"
+],
+"biome": "plains",
+"asks": [
+"Which state got the nickname Treasure State from its gold and silver mines?",
+"Which state has Glacier National Park?"
 ]
 },
 {
@@ -247,11 +287,16 @@
 "Hoover Dam stands on the Colorado River at the Nevada-Arizona border."
 ],
 "neighbors": [
-"oregon",
-"idaho",
-"utah",
 "arizona",
-"california"
+"california",
+"idaho",
+"oregon",
+"utah"
+],
+"biome": "desert",
+"asks": [
+"Which state's flag says Battle Born?",
+"Which state shares Hoover Dam with Arizona?"
 ]
 },
 {
@@ -281,7 +326,14 @@
 ],
 "neighbors": [
 "arizona",
-"colorado"
+"colorado",
+"oklahoma",
+"texas"
+],
+"biome": "desert",
+"asks": [
+"Which state has the highest state capital in the US?",
+"Which state has Carlsbad Caverns?"
 ]
 },
 {
@@ -310,10 +362,15 @@
 "The American beaver is Oregon's state animal."
 ],
 "neighbors": [
-"washington",
+"california",
 "idaho",
 "nevada",
-"california"
+"washington"
+],
+"biome": "forest",
+"asks": [
+"Which state has Crater Lake, the deepest lake in the US?",
+"Which state has the American beaver as its state animal?"
 ]
 },
 {
@@ -342,11 +399,16 @@
 "The Great Salt Lake is the largest salt lake in the Western Hemisphere."
 ],
 "neighbors": [
-"idaho",
-"wyoming",
-"colorado",
 "arizona",
-"nevada"
+"colorado",
+"idaho",
+"nevada",
+"wyoming"
+],
+"biome": "canyon",
+"asks": [
+"Which state has five national parks, including Zion and Arches?",
+"Which state has the Great Salt Lake?"
 ]
 },
 {
@@ -375,9 +437,14 @@
 "Mount Rainier is the tallest mountain in Washington."
 ],
 "neighbors": [
-"oregon",
+"alaska",
 "idaho",
-"alaska"
+"oregon"
+],
+"biome": "forest",
+"asks": [
+"Which is the only state named after a US president?",
+"Which state has Mount Rainier?"
 ]
 },
 {
@@ -408,10 +475,17 @@
 "Wyoming gave women the right to vote in 1869, long before the rest of the country."
 ],
 "neighbors": [
-"montana",
+"colorado",
 "idaho",
-"utah",
-"colorado"
+"montana",
+"nebraska",
+"south-dakota",
+"utah"
+],
+"biome": "plains",
+"asks": [
+"Which state is home to most of Yellowstone, the world's first national park?",
+"Which state gave women the right to vote in 1869?"
 ]
 }
 ]

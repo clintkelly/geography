@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, type ReactNode } from 'react';
 import type { Question } from '../content/types';
+import { ECONOMY } from '../engine/economy';
 import { CardArt } from './art';
 import { cardFor, mapFor } from './content';
 import { Key, useKeys } from './keys';
@@ -72,6 +73,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
 
   return (
     <section className="panel question">
+      {q.recallOf && <p className="recall-tag">Field Note check! A right answer earns {ECONOMY.recallBonus} bonus points.</p>}
       <h2>{q.prompt}</h2>
       {q.inputType === 'map-marker' && (
         <WorldMap key={q.id} map={map} label="Map with four numbered markers" interactive={false}>
@@ -118,7 +120,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
       {result && (
         <div className={`feedback ${result.correct ? 'good' : 'notyet'}`} role="status">
           <p className="learn"><strong>{result.correct ? 'Correct!' : `Not yet. The answer is ${accepted}.`}</strong> {q.explanation}</p>
-          {result.correct && q.fieldNote && <p className="field-note"><span>Field Note</span>{q.fieldNote}</p>}
+          {result.correct && q.fieldNote && <p className="field-note"><span>Field Note: remember this!</span>{q.fieldNote}<small>It may come back as a bonus question.</small></p>}
           {cardId && <CardAward placeId={cardId} />}
           {log && <p className="muted">{log}</p>}
           <button type="button" className="primary" autoFocus onClick={onContinue}>Continue <Key k="Enter" /></button>

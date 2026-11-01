@@ -25,7 +25,7 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
   const max = DIFFICULTIES.indexOf(settings.maxDifficulty);
 
   const download = async () => {
-    const text = exportBackup(household, await store.loadLegacy(), Date.now(), await store.loadPreUpgrade(2));
+    const text = exportBackup(household, await store.loadLegacy(), Date.now(), { v2: await store.loadPreUpgrade(2), v3: await store.loadPreUpgrade(3) });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
     link.download = `atlaswild-backup-${new Date().toISOString().slice(0, 10)}.json`;

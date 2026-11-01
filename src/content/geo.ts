@@ -4,15 +4,12 @@ export interface Located {
 
 export const degreesApart = (a: Located, b: Located) => Math.hypot(a.lonLat[0] - b.lonLat[0], a.lonLat[1] - b.lonLat[1]);
 
-/** Markers closer than this overlap on the map. */
-export const MIN_MARKER_GAP = 4;
-
-/** The first `count` items far enough from the anchor and from each other to tell apart on a map. */
-export function spaced<T extends Located>(items: readonly T[], anchor: Located, count: number): T[] {
+/** The first `count` items at least `gap` degrees from the anchor and each other, so their map markers don't overlap. */
+export function spaced<T extends Located>(items: readonly T[], anchor: Located, count: number, gap: number): T[] {
   const chosen: T[] = [];
   for (const item of items) {
     if (chosen.length === count) break;
-    if ([anchor, ...chosen].every((o) => degreesApart(o, item) >= MIN_MARKER_GAP)) chosen.push(item);
+    if ([anchor, ...chosen].every((o) => degreesApart(o, item) >= gap)) chosen.push(item);
   }
   return chosen;
 }

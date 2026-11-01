@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import type { Command, EventState, Expedition } from '../engine/game';
 import { TRAIL_EVENTS } from '../engine/events';
+import { artUrl, Sprite } from './art';
+import { place } from './content';
 import { QuestionPanel } from './QuestionPanel';
 import { TrailBar } from './TrailBar';
 
@@ -11,9 +13,12 @@ export function Event({ e, event, dispatch }: { e: Expedition; event: EventState
   return (
     <div className="stack">
       <TrailBar e={e} />
-      <section className="panel">
-        <h1>{def?.title}</h1>
-        <p>{def?.text}</p>
+      <section className="event-banner" style={{ backgroundImage: `url(${artUrl(`backdrop-${place(e.slots[event.slotIndex]?.locationId ?? '').biome}`)})` }}>
+        <Sprite id={`event-${event.eventId}`} size={160} />
+        <div>
+          <h1>{def?.title}</h1>
+          <p>{def?.text}</p>
+        </div>
       </section>
       <QuestionPanel
         question={event.question}

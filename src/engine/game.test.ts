@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { clampView, EUROPE_VIEW, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
-import { degreesApart, MIN_MARKER_GAP } from '../content/geo';
-import { COUNTRIES, europeQuestions, STATES, usQuestions } from '../content/us/templates';
+import { degreesApart } from '../content/geo';
+import { allPlaces, COUNTRIES, europeQuestions, GROUPS, STATES, usQuestions, WEST } from '../content/us/templates';
 import { validatePack, validateRecords } from '../content/validate';
 import { ECONOMY } from './economy';
 import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
@@ -16,7 +16,7 @@ const step = (s: SaveData, cmd: Command) => reduce(s, cmd, PACK, NOW);
 const fresh = (seed = 7) => newSave(PACK, seed, 'p1');
 
 const start = (s: SaveData, regionId = 'us-west', difficulty: Difficulty = 'scout', trail: TrailLength = 'standard') =>
-  step(s, { type: 'start', offerId: s.offers[0]!.id, regionId, difficulty, trail });
+  step(s, { type: 'start', offerId: s.offers.find((o) => o.regionId === regionId)!.id, regionId, difficulty, trail });
 const ready = (s: SaveData, ...args: [string?, Difficulty?, TrailLength?]) => step(start(s, ...args), { type: 'depart' });
 const find = (s: SaveData) => step(s, { type: 'guess', locationId: s.expedition!.targetId });
 
@@ -49,6 +49,8 @@ describe('content', () => {
   it('the pack is valid', () => expect(validatePack(PACK)).toEqual([]));
   it('the state and country records are consistent', () => {
     expect(validateRecords(STATES)).toEqual([]);
+    expect(STATES).toHaveLength(50);
+    expect(usMap.features.filter((f) => STATES.some((s) => s.fips === f.id))).toHaveLength(50);
     expect(validateRecords(COUNTRIES)).toEqual([]);
   });
 
@@ -64,13 +66,15 @@ describe('content', () => {
   });
 
   it('asks no capital questions about city-states', () => {
-    for (const q of europeQuestions) if (['monaco', 'vatican', 'san-marino'].includes(q.locationId!)) expect(q.objectiveId, q.id).toMatch(/^location-/);
+    for (const q of europeQuestions) if (['monaco', 'vatican', 'san-marino'].includes(q.locationId!)) expect(q.objectiveId, q.id).not.toMatch(/^capital-/);
   });
 
   it('marker questions never overlap their markers', () => {
     for (const q of [...usQuestions, ...europeQuestions].filter((o) => o.inputType === 'map-marker')) {
       const options = q.options.map((o) => ({ lonLat: o.lonLat! }));
-      options.forEach((a, i) => options.slice(i + 1).forEach((b) => expect(degreesApart(a, b), q.id).toBeGreaterThanOrEqual(MIN_MARKER_GAP)));
+      const gap = PACK.regions.find((r) => r.id === q.regionId)!.markerGap;
+      expect(options, q.id).toHaveLength(4);
+      options.forEach((a, i) => options.slice(i + 1).forEach((b) => expect(degreesApart(a, b), q.id).toBeGreaterThanOrEqual(gap)));
     }
   });
 
@@ -79,8 +83,8 @@ describe('content', () => {
     for (const c of COUNTRIES.filter((o) => o.tiny)) expect(click.options.find((o) => o.id === c.id)).toMatchObject({ tiny: true });
   });
 
-  it('generates 13 Western states at all three difficulties', () => {
-    expect(STATES).toHaveLength(13);
+  it('generates all three difficulties for the states', () => {
+    expect(WEST).toHaveLength(13);
     expect(new Set(usQuestions.map((q) => q.difficulty))).toEqual(new Set(['scout', 'ranger', 'expert']));
   });
 
@@ -99,6 +103,32 @@ describe('content', () => {
 
   it('every state question has a Field Note from its own record', () => {
     for (const q of usQuestions) expect(STATES.find((s) => s.id === q.locationId)!.facts, q.id).toContain(q.fieldNote);
+  });
+
+  it('every fact has a question whose answer is that place', () => {
+    for (const g of GROUPS) {
+      for (const s of g.records) {
+        s.asks.forEach((ask, i) => {
+          const qs = PACK.questions.filter((q) => q.recallOf === `fact-${s.id}-${i}`);
+          expect(qs.map((q) => q.difficulty).sort(), s.id).toEqual(['expert', 'ranger', 'scout']);
+          for (const q of qs) {
+            expect(q.prompt).toBe(ask);
+            expect(q.options.find((o) => o.id === q.acceptedId)!.label).toBe(s.name);
+            expect(q.fieldNote).toBe(s.facts[i]);
+          }
+        });
+      }
+    }
+  });
+
+  it('every region has at least three creatures, and the Bark Knight lives in all of them', () => {
+    const knight = PACK.species.find((s) => s.id === 'barkknight')!;
+    expect(knight.displayName).toBe('The Bark Knight');
+    expect(knight.homes).toHaveLength(PACK.regions.length);
+  });
+
+  it('every place has a backdrop', () => {
+    for (const p of allPlaces) expect(p.biome, p.id).toBeTruthy();
   });
 
   it('every creature that can be hunted or fought has a Special', () => {
@@ -156,11 +186,17 @@ describe('trails', () => {
     }
   });
 
-  it('search candidates can be told apart on the map', () => {
-    for (let seed = 1; seed < 60; seed++) {
-      const places = start(fresh(seed), 'europe', 'ranger').expedition!.candidateIds.map((id) => PACK.places.find((p) => p.id === id)!);
-      expect(places).toHaveLength(4);
-      places.forEach((a, i) => places.slice(i + 1).forEach((b) => expect(degreesApart(a, b)).toBeGreaterThanOrEqual(MIN_MARKER_GAP)));
+  it.each(PACK.regions.map((r) => r.id))('%s trails work at every length, and candidates can be told apart', (regionId) => {
+    const gap = PACK.regions.find((r) => r.id === regionId)!.markerGap;
+    for (let seed = 1; seed < 40; seed++) {
+      for (const trail of TRAIL_LENGTHS) {
+        const e = start(fresh(seed), regionId, 'ranger', trail).expedition!;
+        expect(e.slots.map((s) => s.kind)).toEqual(TRAIL_STOPS[trail]);
+        e.slots.slice(1).forEach((s, i) => expect(PACK.places.find((p) => p.id === e.slots[i]!.locationId)!.neighbors).toContain(s.locationId));
+        const places = e.candidateIds.map((id) => PACK.places.find((p) => p.id === id)!);
+        expect(places).toHaveLength(4);
+        places.forEach((a, i) => places.slice(i + 1).forEach((b) => expect(degreesApart(a, b)).toBeGreaterThanOrEqual(gap)));
+      }
     }
   });
 
@@ -239,18 +275,45 @@ describe('befriending and the stable', () => {
 
   it('runs out of species honestly, with XP and no befriending', () => {
     let s = fresh();
-    for (let i = 0; i < PACK.huntableIds.length; i++) s = fullExpedition(s);
-    expect(s.companions).toHaveLength(PACK.huntableIds.length + 1);
-    expect(s.offers[0]!.reward).toEqual({ kind: 'bond', xp: 10 });
+    const west = PACK.species.filter((o) => o.homes.includes('us-west'));
+    for (let i = 0; i < west.length; i++) s = fullExpedition(s);
+    expect(s.companions).toHaveLength(west.length + 1);
+    expect(s.offers.find((o) => o.regionId === 'us-west')!.reward).toEqual({ kind: 'bond', xp: 10 });
     const before = s.companions[0]!.bondXp;
     const after = fullExpedition(s);
     expect(after.companions).toHaveLength(s.companions.length);
     expect(after.companions[0]!.bondXp).toBeGreaterThan(before + 9);
   });
 
+  it('every region features the Bark Knight first until it is befriended', () => {
+    const s = fresh();
+    for (const r of PACK.regions) {
+      const reward = s.offers.find((o) => o.regionId === r.id)!.reward;
+      expect(reward).toEqual({ kind: 'creature', speciesId: 'barkknight' });
+    }
+    const after = fullExpedition(s);
+    expect(after.companions[1]!.speciesId).toBe('barkknight');
+    expect(after.offers.some((o) => o.reward.kind === 'creature' && o.reward.speciesId === 'barkknight')).toBe(false);
+  });
+
+  it('sightings are of creatures that live in the region', () => {
+    const s = fullExpedition(fresh());
+    for (const o of s.offers) {
+      if (o.reward.kind !== 'creature') continue;
+      const { speciesId } = o.reward;
+      expect(PACK.species.find((x) => x.id === speciesId)!.homes).toContain(o.regionId);
+    }
+  });
+
+  it('an offer from another region is refused', () => {
+    const s = fresh();
+    const midwest = s.offers.find((o) => o.regionId === 'us-midwest')!;
+    expect(step(s, { type: 'start', offerId: midwest.id, regionId: 'us-west', difficulty: 'scout', trail: 'short' })).toBe(s);
+  });
+
   it('offers differ and exclude owned species', () => {
     const s = fullExpedition(fresh());
-    const ids = s.offers.map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
+    const ids = s.offers.filter((o) => o.regionId === 'us-west').map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
     expect(new Set(ids).size).toBe(2);
     expect(ids).not.toContain(s.companions[1]!.speciesId);
   });
@@ -369,6 +432,45 @@ describe('Trail Points', () => {
   });
 });
 
+describe('Field Note recall', () => {
+  it('a Field Note is seen only after a correct answer', () => {
+    const s = step(step(find(ready(fresh())), { type: 'enterEncounter' }), { type: 'chooseAction', action: 'attack' });
+    expect(answerWith(s, false).seenFacts).toEqual([]);
+    const q = s.expedition!.battle!.question;
+    expect(answerWith(s, true).seenFacts).toEqual([q.noteId]);
+  });
+
+  it('recall questions never appear for a fact the child has not seen', () => {
+    for (let seed = 1; seed < 30; seed++) {
+      const s = playTrail(fresh(seed), 'us-south', 'scout', 'long');
+      const askedRecall = s.expedition!.askedQuestionIds.map((id) => PACK.questions.find((q) => q.id === id)!).filter((q) => q.recallOf);
+      for (const q of askedRecall) expect(s.seenFacts).toContain(q.recallOf);
+    }
+  });
+
+  it('recall questions do come up and pay a bonus', () => {
+    let found = false;
+    for (let seed = 1; seed < 40 && !found; seed++) {
+      let s = ready(fresh(seed), 'us-south', 'scout', 'long');
+      for (let guard = 0; guard < 200 && !found && !isExpeditionComplete(s.expedition!); guard++) {
+        const e = s.expedition!;
+        if (e.discovery === 'searching') { s = find(s); continue; }
+        if (!e.battle && !e.event) { s = step(s, { type: 'enterEncounter' }); continue; }
+        if (e.event) { s = step(answerWith(s, true), { type: 'continue' }); continue; }
+        const inBattle = step(s, { type: 'chooseAction', action: e.battle!.befriending ? 'befriend' : 'attack' });
+        const q = inBattle.expedition!.battle!.question;
+        const answered = answerWith(inBattle, true);
+        if (q.recallOf && !e.battle!.befriending) {
+          expect(answered.expedition!.points - inBattle.expedition!.points).toBe(1 + ECONOMY.recallBonus);
+          found = true;
+        }
+        s = step(answered, { type: 'continue' });
+      }
+    }
+    expect(found).toBe(true);
+  });
+});
+
 describe('journey events', () => {
   const toEvent = () => {
     let s = ready(fresh());
@@ -419,7 +521,11 @@ describe('State Cards and souvenirs', () => {
     expect(s.stateCards.length).toBeGreaterThan(1);
   });
 
-  it('Europe has no cards yet and still plays', () => {
+  it('every US state has a card, and Europe has none yet', () => {
+    expect(PACK.cards).toHaveLength(50);
+  });
+
+  it('Europe still plays without cards', () => {
     expect(playTrail(fresh(), 'europe').stateCards).toEqual([]);
   });
 
@@ -497,7 +603,7 @@ describe('difficulty', () => {
   });
 
   it('a region with one tier stays playable under any limits', () => {
-    const region = { id: 'x', label: 'x', mapId: 'world' as const, difficulties: ['scout'] as const };
+    const region = { id: 'x', label: 'x', mapId: 'world' as const, difficulties: ['scout'] as const, markerGap: 4 };
     expect(allowedDifficulties({ ...DEFAULT_SETTINGS, minDifficulty: 'expert' }, region)).toEqual(['scout']);
   });
 });

@@ -54,14 +54,14 @@ Does a child enjoy a complete expedition and want to return on a later day? And 
 | Area | Include |
 | --- | --- |
 | Profiles | One per child, name/avatar, independent saves, quick switching |
-| Content | 50 US state records, delivered in regional batches; 44 European countries as a second pack |
+| Content | All 50 US states in four regions, 44 European countries, and a question for every Field Note |
 | Exploration | US map with all states; Europe map for the second pack |
 | Expedition | Trails of 3, 5, or 7 stops following a target creature |
 | Difficulty | Scout, Ranger, Expert, with parent limits per profile |
 | Points | Per-expedition Trail Points, Prep Shop, paid clues, trail items |
 | Stops | Find-the-place step, then a battle or a journey event; final showdown with a Befriend moment |
 | Combat | One against one, Attack, Guard, charged Special, visible enemy intent |
-| Stable | Up to 12 species at launch, three starters, one companion per expedition |
+| Stable | 15 species themed by region, including The Bark Knight, one companion per expedition |
 | Growth | Levels, three evolution stages, bounded stat growth |
 | Knowledge rewards | Field Notes on correct answers, 50 collectible State Cards |
 | Collection | Journal of creatures, souvenirs, and State Cards |
@@ -288,9 +288,17 @@ The first correct answer about a state also awards its **State Card**, with a pi
 
 Keep creature lore separate from factual content. Fictional creatures appear on cards only as clearly illustrative decoration.
 
+### Field Note recall
+
+Every fact has a question whose answer is that state or country. A child never sees one until they have read its Field Note after a correct answer. About two in five questions then test a note they have seen, labeled as a Field Note check and worth 2 bonus Trail Points. The note itself says it may come back. This rewards reading the facts without ever blocking progress.
+
+### Arrival
+
+Finding a place plays a sound, lights up its border, and bounces its shape on the map. Reduced motion keeps the highlight without the bounce.
+
 ### Regions
 
-Trails follow one region: West, Midwest, South, or Northeast. The parent can enable regions per profile. Trail routes use bordering or nearby states, and travel lines must not imply routes that make no sense. Alaska and Hawaii appear as insets, and routes to them are labeled as flights.
+Trails follow one region: West, Midwest, South, Northeast, or Europe. Each region has its own sightings of creatures that live there, and its own zoomed map. The Bark Knight, based on the family's dog, is offered first in every region until a child befriends it. Each place has a biome that sets its battle backdrop. The parent can enable regions per profile. Trail routes use bordering or nearby states, and travel lines must not imply routes that make no sense. Alaska and Hawaii appear as insets, and routes to them are labeled as flights.
 
 ### Study and review
 

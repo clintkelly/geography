@@ -1,0 +1,457 @@
+[
+{
+"id": "illinois",
+"name": "Illinois",
+"postal": "IL",
+"fips": "17",
+"lonLat": [
+-89.2,
+40
+],
+"capital": "Springfield",
+"sameStateCities": [
+"Chicago",
+"Peoria",
+"Rockford"
+],
+"largestCity": "Chicago",
+"nickname": {
+"text": "Prairie State",
+"status": "unverified",
+"others": []
+},
+"biome": "lake",
+"facts": [
+"Chicago's Willis Tower was once the tallest building in the world.",
+"Abraham Lincoln's home is preserved in Springfield, Illinois."
+],
+"asks": [
+"Which state is home to the Willis Tower, once the tallest building in the world?",
+"In which state can you visit the home of Abraham Lincoln in the capital city?"
+],
+"neighbors": [
+"indiana",
+"iowa",
+"kentucky",
+"missouri",
+"wisconsin"
+]
+},
+{
+"id": "indiana",
+"name": "Indiana",
+"postal": "IN",
+"fips": "18",
+"lonLat": [
+-86.3,
+39.9
+],
+"capital": "Indianapolis",
+"sameStateCities": [
+"Fort Wayne",
+"Evansville",
+"South Bend"
+],
+"largestCity": "Indianapolis",
+"nickname": {
+"text": "Hoosier State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"The famous Indianapolis 500 car race is held every May.",
+"Indiana Dunes National Park sits on the shore of Lake Michigan."
+],
+"asks": [
+"Which state hosts a famous 500-mile car race every May?",
+"Which state has a national park of sand dunes on Lake Michigan?"
+],
+"neighbors": [
+"illinois",
+"kentucky",
+"michigan",
+"ohio"
+],
+"hint2": "A famous 500-mile car race is held in this state's capital."
+},
+{
+"id": "iowa",
+"name": "Iowa",
+"postal": "IA",
+"fips": "19",
+"lonLat": [
+-93.5,
+42
+],
+"capital": "Des Moines",
+"sameStateCities": [
+"Cedar Rapids",
+"Davenport",
+"Iowa City"
+],
+"largestCity": "Des Moines",
+"nickname": {
+"text": "Hawkeye State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"Iowa grows more corn than almost any other state.",
+"Effigy Mounds National Monument in Iowa protects ancient mounds shaped like animals."
+],
+"asks": [
+"Which Midwestern state is famous for growing huge amounts of corn?",
+"Which state protects ancient mounds shaped like animals at Effigy Mounds?"
+],
+"neighbors": [
+"illinois",
+"minnesota",
+"missouri",
+"nebraska",
+"south-dakota",
+"wisconsin"
+]
+},
+{
+"id": "kansas",
+"name": "Kansas",
+"postal": "KS",
+"fips": "20",
+"lonLat": [
+-98.4,
+38.5
+],
+"capital": "Topeka",
+"sameStateCities": [
+"Wichita",
+"Overland Park",
+"Lawrence"
+],
+"largestCity": "Wichita",
+"nickname": {
+"text": "Sunflower State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"The geographic center of the lower 48 states is in Kansas.",
+"Tallgrass Prairie National Preserve protects a rare stretch of prairie in Kansas."
+],
+"asks": [
+"In which state is the geographic center of the lower 48 states?",
+"Which state has the Tallgrass Prairie National Preserve?"
+],
+"neighbors": [
+"colorado",
+"missouri",
+"nebraska",
+"oklahoma"
+]
+},
+{
+"id": "michigan",
+"name": "Michigan",
+"postal": "MI",
+"fips": "26",
+"lonLat": [
+-84.7,
+43.6
+],
+"capital": "Lansing",
+"sameStateCities": [
+"Detroit",
+"Grand Rapids",
+"Ann Arbor"
+],
+"largestCity": "Detroit",
+"nickname": {
+"text": "Great Lakes State",
+"status": "unverified",
+"others": []
+},
+"biome": "lake",
+"facts": [
+"Michigan touches four of the five Great Lakes.",
+"The Mackinac Bridge connects Michigan's two peninsulas."
+],
+"asks": [
+"Which state touches four of the five Great Lakes?",
+"Which state's two peninsulas are joined by the Mackinac Bridge?"
+],
+"neighbors": [
+"indiana",
+"ohio",
+"wisconsin"
+]
+},
+{
+"id": "minnesota",
+"name": "Minnesota",
+"postal": "MN",
+"fips": "27",
+"lonLat": [
+-94.3,
+46.3
+],
+"capital": "Saint Paul",
+"sameStateCities": [
+"Minneapolis",
+"Duluth",
+"Rochester"
+],
+"largestCity": "Minneapolis",
+"nickname": {
+"text": "North Star State",
+"status": "unverified",
+"others": []
+},
+"biome": "lake",
+"facts": [
+"The Mississippi River begins at Lake Itasca in Minnesota.",
+"Voyageurs National Park in Minnesota is explored mostly by boat."
+],
+"asks": [
+"In which state does the Mississippi River begin?",
+"Which state has Voyageurs National Park, explored mostly by boat?"
+],
+"neighbors": [
+"iowa",
+"north-dakota",
+"south-dakota",
+"wisconsin"
+]
+},
+{
+"id": "missouri",
+"name": "Missouri",
+"postal": "MO",
+"fips": "29",
+"lonLat": [
+-92.5,
+38.4
+],
+"capital": "Jefferson City",
+"sameStateCities": [
+"Kansas City",
+"St. Louis",
+"Springfield"
+],
+"largestCity": "Kansas City",
+"nickname": {
+"text": "Show-Me State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"The Gateway Arch in St. Louis is the tallest arch in the United States.",
+"The Lewis and Clark Expedition set off from near St. Louis in 1804."
+],
+"asks": [
+"Which state is home to the Gateway Arch?",
+"From which state did the Lewis and Clark Expedition set off in 1804?"
+],
+"neighbors": [
+"arkansas",
+"illinois",
+"iowa",
+"kansas",
+"kentucky",
+"nebraska",
+"oklahoma",
+"tennessee"
+]
+},
+{
+"id": "nebraska",
+"name": "Nebraska",
+"postal": "NE",
+"fips": "31",
+"lonLat": [
+-99.8,
+41.5
+],
+"capital": "Lincoln",
+"sameStateCities": [
+"Omaha",
+"Grand Island",
+"Kearney"
+],
+"largestCity": "Omaha",
+"nickname": {
+"text": "Cornhusker State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"Chimney Rock in Nebraska was a famous landmark on the Oregon Trail.",
+"Nebraska is the only state with a one-house legislature."
+],
+"asks": [
+"In which state is Chimney Rock, a famous Oregon Trail landmark?",
+"Which state has a one-house legislature?"
+],
+"neighbors": [
+"colorado",
+"iowa",
+"kansas",
+"missouri",
+"south-dakota",
+"wyoming"
+]
+},
+{
+"id": "north-dakota",
+"name": "North Dakota",
+"postal": "ND",
+"fips": "38",
+"lonLat": [
+-100.5,
+47.4
+],
+"capital": "Bismarck",
+"sameStateCities": [
+"Fargo",
+"Grand Forks",
+"Minot"
+],
+"largestCity": "Fargo",
+"nickname": {
+"text": "Peace Garden State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"Theodore Roosevelt National Park protects badlands in North Dakota.",
+"The International Peace Garden sits on the border between North Dakota and Canada."
+],
+"asks": [
+"Which state has a national park named for Theodore Roosevelt?",
+"Which state shares the International Peace Garden with Canada?"
+],
+"neighbors": [
+"minnesota",
+"montana",
+"south-dakota"
+]
+},
+{
+"id": "ohio",
+"name": "Ohio",
+"postal": "OH",
+"fips": "39",
+"lonLat": [
+-82.8,
+40.3
+],
+"capital": "Columbus",
+"sameStateCities": [
+"Cleveland",
+"Cincinnati",
+"Toledo"
+],
+"largestCity": "Columbus",
+"nickname": {
+"text": "Buckeye State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"The Wright brothers, pioneers of flight, built their planes in Dayton, Ohio.",
+"Cuyahoga Valley National Park lies between Cleveland and Akron in Ohio."
+],
+"asks": [
+"In which state did the Wright brothers build their planes?",
+"Which state has Cuyahoga Valley National Park?"
+],
+"neighbors": [
+"indiana",
+"kentucky",
+"michigan",
+"pennsylvania",
+"west-virginia"
+]
+},
+{
+"id": "south-dakota",
+"name": "South Dakota",
+"postal": "SD",
+"fips": "46",
+"lonLat": [
+-100.2,
+44.4
+],
+"capital": "Pierre",
+"sameStateCities": [
+"Sioux Falls",
+"Rapid City",
+"Aberdeen"
+],
+"largestCity": "Sioux Falls",
+"nickname": {
+"text": "Mount Rushmore State",
+"status": "unverified",
+"others": []
+},
+"biome": "plains",
+"facts": [
+"Four US presidents are carved into the granite of Mount Rushmore in South Dakota.",
+"Badlands National Park in South Dakota protects striped rock and fossil beds."
+],
+"asks": [
+"Where are four US presidents carved into a granite mountain?",
+"Which state has Badlands National Park?"
+],
+"neighbors": [
+"iowa",
+"minnesota",
+"montana",
+"nebraska",
+"north-dakota",
+"wyoming"
+]
+},
+{
+"id": "wisconsin",
+"name": "Wisconsin",
+"postal": "WI",
+"fips": "55",
+"lonLat": [
+-89.8,
+44.6
+],
+"capital": "Madison",
+"sameStateCities": [
+"Milwaukee",
+"Green Bay",
+"Kenosha"
+],
+"largestCity": "Milwaukee",
+"nickname": {
+"text": "Badger State",
+"status": "unverified",
+"others": []
+},
+"biome": "lake",
+"facts": [
+"Wisconsin makes more cheese than any other state.",
+"The Apostle Islands lie in Lake Superior off the coast of Wisconsin."
+],
+"asks": [
+"Which state makes more cheese than any other?",
+"Off which state's coast are the Apostle Islands?"
+],
+"neighbors": [
+"illinois",
+"iowa",
+"michigan",
+"minnesota"
+]
+}
+]

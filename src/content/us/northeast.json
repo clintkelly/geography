@@ -1,0 +1,330 @@
+[
+{
+"id": "connecticut",
+"name": "Connecticut",
+"postal": "CT",
+"fips": "09",
+"lonLat": [
+-72.7,
+41.6
+],
+"capital": "Hartford",
+"sameStateCities": [
+"Bridgeport",
+"New Haven",
+"Stamford"
+],
+"largestCity": "Bridgeport",
+"nickname": {
+"text": "Constitution State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"Mark Twain wrote The Adventures of Tom Sawyer while living in Hartford, Connecticut.",
+"The first nuclear submarine, USS Nautilus, was built in Groton, Connecticut."
+],
+"asks": [
+"In which state did Mark Twain write The Adventures of Tom Sawyer?",
+"In which state was the first nuclear submarine built?"
+],
+"neighbors": [
+"massachusetts",
+"new-york",
+"rhode-island"
+]
+},
+{
+"id": "maine",
+"name": "Maine",
+"postal": "ME",
+"fips": "23",
+"lonLat": [
+-69.2,
+45.3
+],
+"capital": "Augusta",
+"sameStateCities": [
+"Portland",
+"Bangor",
+"Lewiston"
+],
+"largestCity": "Portland",
+"nickname": {
+"text": "Pine Tree State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"Acadia National Park protects the rocky coast of Maine.",
+"Maine catches most of the lobster in the United States."
+],
+"asks": [
+"Which state has Acadia National Park?",
+"Which state catches most of the lobster in the United States?"
+],
+"neighbors": [
+"new-hampshire"
+]
+},
+{
+"id": "massachusetts",
+"name": "Massachusetts",
+"postal": "MA",
+"fips": "25",
+"lonLat": [
+-71.8,
+42.3
+],
+"capital": "Boston",
+"sameStateCities": [
+"Worcester",
+"Springfield",
+"Cambridge"
+],
+"largestCity": "Boston",
+"nickname": {
+"text": "Bay State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"The Boston Tea Party took place in Massachusetts in 1773.",
+"The Pilgrims landed at Plymouth in Massachusetts in 1620."
+],
+"asks": [
+"In which state did the Boston Tea Party take place?",
+"In which state did the Pilgrims land in 1620?"
+],
+"neighbors": [
+"connecticut",
+"new-hampshire",
+"new-york",
+"rhode-island",
+"vermont"
+]
+},
+{
+"id": "new-hampshire",
+"name": "New Hampshire",
+"postal": "NH",
+"fips": "33",
+"lonLat": [
+-71.6,
+43.7
+],
+"capital": "Concord",
+"sameStateCities": [
+"Manchester",
+"Nashua",
+"Portsmouth"
+],
+"largestCity": "Manchester",
+"nickname": {
+"text": "Granite State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Mount Washington in New Hampshire is famous for some of the strongest winds on Earth.",
+"New Hampshire traditionally holds the first US presidential primary."
+],
+"asks": [
+"Which state has Mount Washington, famous for its strong winds?",
+"Which state traditionally holds the first presidential primary?"
+],
+"neighbors": [
+"maine",
+"massachusetts",
+"vermont"
+]
+},
+{
+"id": "new-jersey",
+"name": "New Jersey",
+"postal": "NJ",
+"fips": "34",
+"lonLat": [
+-74.7,
+40.2
+],
+"capital": "Trenton",
+"sameStateCities": [
+"Newark",
+"Jersey City",
+"Atlantic City"
+],
+"largestCity": "Newark",
+"nickname": {
+"text": "Garden State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"Thomas Edison ran his famous invention lab in Menlo Park, New Jersey.",
+"George Washington crossed the Delaware River to attack Trenton, New Jersey, in 1776."
+],
+"asks": [
+"In which state was Thomas Edison's Menlo Park lab?",
+"In 1776 George Washington crossed the Delaware River to attack Trenton in which state?"
+],
+"neighbors": [
+"delaware",
+"new-york",
+"pennsylvania"
+]
+},
+{
+"id": "new-york",
+"name": "New York",
+"postal": "NY",
+"fips": "36",
+"lonLat": [
+-75.5,
+42.9
+],
+"capital": "Albany",
+"sameStateCities": [
+"Buffalo",
+"New York City",
+"Rochester"
+],
+"largestCity": "New York City",
+"nickname": {
+"text": "Empire State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"The Statue of Liberty stands in New York Harbor.",
+"Niagara Falls sits on the border between New York and Canada."
+],
+"asks": [
+"Which state's harbor holds the Statue of Liberty, by its own name?",
+"Which state shares Niagara Falls with Canada?"
+],
+"neighbors": [
+"connecticut",
+"massachusetts",
+"new-jersey",
+"pennsylvania",
+"vermont"
+]
+},
+{
+"id": "pennsylvania",
+"name": "Pennsylvania",
+"postal": "PA",
+"fips": "42",
+"lonLat": [
+-77.8,
+40.9
+],
+"capital": "Harrisburg",
+"sameStateCities": [
+"Philadelphia",
+"Pittsburgh",
+"Allentown"
+],
+"largestCity": "Philadelphia",
+"nickname": {
+"text": "Keystone State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"The Declaration of Independence was signed in Philadelphia, Pennsylvania, in 1776.",
+"The Battle of Gettysburg was fought in Pennsylvania in 1863."
+],
+"asks": [
+"In which state was the Declaration of Independence signed?",
+"In which state was the Battle of Gettysburg fought?"
+],
+"neighbors": [
+"delaware",
+"maryland",
+"new-jersey",
+"new-york",
+"ohio",
+"west-virginia"
+]
+},
+{
+"id": "rhode-island",
+"name": "Rhode Island",
+"postal": "RI",
+"fips": "44",
+"lonLat": [
+-71.5,
+41.7
+],
+"capital": "Providence",
+"sameStateCities": [
+"Warwick",
+"Cranston",
+"Newport"
+],
+"largestCity": "Providence",
+"nickname": {
+"text": "Ocean State",
+"status": "unverified",
+"others": []
+},
+"biome": "harbor",
+"facts": [
+"Rhode Island is the smallest US state.",
+"Newport, Rhode Island, is famous for its grand old mansions."
+],
+"asks": [
+"Which is the smallest US state?",
+"Which state's city of Newport is famous for grand mansions?"
+],
+"neighbors": [
+"connecticut",
+"massachusetts"
+]
+},
+{
+"id": "vermont",
+"name": "Vermont",
+"postal": "VT",
+"fips": "50",
+"lonLat": [
+-72.7,
+44.1
+],
+"capital": "Montpelier",
+"sameStateCities": [
+"Burlington",
+"Rutland",
+"Barre"
+],
+"largestCity": "Burlington",
+"nickname": {
+"text": "Green Mountain State",
+"status": "unverified",
+"others": []
+},
+"biome": "forest",
+"facts": [
+"Montpelier, Vermont, is the smallest state capital by population.",
+"Vermont makes more maple syrup than any other state."
+],
+"asks": [
+"Which state has the smallest capital city by population?",
+"Which state makes more maple syrup than any other?"
+],
+"neighbors": [
+"massachusetts",
+"new-hampshire",
+"new-york"
+]
+}
+]

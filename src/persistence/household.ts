@@ -66,15 +66,23 @@ export function migrateV1(v1: unknown, pack: Pack, env: Env): Household {
 export function migrateV2Save(old: V2Save, pack: Pack): SaveData {
   const { companion, ...rest } = structuredClone(old) as V2Save & { offer?: unknown };
   delete (rest as { offer?: unknown }).offer;
-  const base = { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, companions: [companion], activeCompanionId: companion.instanceId, stateCards: [], expedition: null, lastSummary: null, settings: { ...DEFAULT_SETTINGS, ...rest.settings } };
+  const base = { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, companions: [companion], activeCompanionId: companion.instanceId, stateCards: [], seenFacts: [], expedition: null, lastSummary: null, settings: { ...DEFAULT_SETTINGS, ...rest.settings } };
   const rng = new Rng(base.rngState);
   const { offers, nextId } = makeOffers(base, pack, rng);
   return { ...base, offers, nextId, rngState: rng.state };
 }
 
-function migrateV2(h: Household, pack: Pack): Household {
-  const profiles = Object.fromEntries(Object.entries(h.profiles).map(([id, s]) => [id, migrateV2Save(s as unknown as V2Save, pack)]));
-  return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles };
+/** Version 3 had one set of sightings. Now each region has its own, and Field Notes are tracked. An unfinished trip carries on. */
+export function migrateV3Save(old: SaveData, pack: Pack): SaveData {
+  const rest = structuredClone(old);
+  const rng = new Rng(rest.rngState);
+  const { offers, nextId } = makeOffers(rest, pack, rng);
+  return { ...rest, schemaVersion: SCHEMA_VERSION, contentVersion: pack.version, seenFacts: [], offers, nextId, rngState: rng.state };
+}
+
+function upgrade(h: Household, pack: Pack): Household {
+  const step = h.meta.schemaVersion === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : (s: SaveData) => migrateV3Save(s, pack);
+  return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles: Object.fromEntries(Object.entries(h.profiles).map(([id, s]) => [id, step(s)])) };
 }
 
 const TESTER = { displayName: 'Dad', avatarId: 'cragmaw' };
@@ -92,9 +100,9 @@ export function withTestProfile(h: Household, pack: Pack, env: Env): Household {
 
 async function loadOrCreate(store: SaveStore, pack: Pack, env: Env): Promise<Household> {
   const existing = await store.load();
-  if (existing?.meta.schemaVersion === 2) {
-    await store.keepPreUpgrade(2, existing);
-    const upgraded = migrateV2(existing, pack);
+  if (existing && existing.meta.schemaVersion < SCHEMA_VERSION) {
+    await store.keepPreUpgrade(existing.meta.schemaVersion, existing);
+    const upgraded = upgrade(existing, pack);
     await store.replace(upgraded);
     return upgraded;
   }
@@ -114,13 +122,13 @@ export async function openHousehold(store: SaveStore, pack: Pack, env: Env): Pro
 
 const FORMAT = 'atlaswild-backup';
 
-export function exportBackup(h: Household, legacy: unknown, now: number, preUpgradeV2: unknown = null): string {
-  return JSON.stringify({ format: FORMAT, exportedAt: new Date(now).toISOString(), household: h, preUpgradeSave: legacy ?? null, preUpgradeV2 }, null, 1);
+export function exportBackup(h: Household, legacy: unknown, now: number, preUpgrade: unknown = null): string {
+  return JSON.stringify({ format: FORMAT, exportedAt: new Date(now).toISOString(), household: h, preUpgradeSave: legacy ?? null, preUpgrade }, null, 1);
 }
 
 function isSave(s: unknown): s is SaveData {
   const d = s as Partial<SaveData> | null;
-  return !!d && d.schemaVersion === SCHEMA_VERSION && typeof d.profile?.id === 'string' && Array.isArray(d.companions) && d.companions.length > 0 && Array.isArray(d.souvenirIds) && !!d.settings && Array.isArray(d.offers);
+  return !!d && d.schemaVersion === SCHEMA_VERSION && typeof d.profile?.id === 'string' && Array.isArray(d.companions) && d.companions.length > 0 && Array.isArray(d.souvenirIds) && !!d.settings && Array.isArray(d.offers) && Array.isArray(d.seenFacts);
 }
 
 /** Throws without side effects if the file isn't a usable backup. */
@@ -133,9 +141,9 @@ export function parseBackup(text: string, pack: Pack): Household {
   }
   let h = data?.household;
   if (data?.format !== FORMAT || !h?.meta || !h.profiles) throw new UnsupportedSaveError('This file is not an Atlaswild backup.');
-  if (h.meta.schemaVersion === 2) {
+  if (h.meta.schemaVersion === 2 || h.meta.schemaVersion === 3) {
     try {
-      h = migrateV2(h, pack);
+      h = upgrade(h, pack);
     } catch {
       throw new UnsupportedSaveError('This backup is incomplete or damaged.');
     }

@@ -92,8 +92,6 @@ button.link { border: 0; background: none; color: var(--muted); text-decoration:
 .battle { display: grid; gap: 12px; }
 .battle .leave { justify-self: start; }
 .scene { position: relative; border-radius: 10px; overflow: hidden; background-size: cover; background-position: center bottom; image-rendering: pixelated; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; padding: 10px 14px; border: 1px solid var(--line); }
-.backdrop-coast { background-image: url('/art/backdrop-coast.png'); }
-.backdrop-mountain { background-image: url('/art/backdrop-mountain.png'); }
 .scene-hud { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: start; }
 .turn { background: rgba(255, 253, 247, 0.92); border-radius: 6px; padding: 2px 10px; font-size: 0.85rem; }
 .hp { background: rgba(255, 253, 247, 0.92); border-radius: 6px; padding: 4px 8px; font-size: 0.9rem; }
@@ -148,7 +146,7 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 
 @media (prefers-reduced-motion: reduce) {
   /* Poses and sounds remain, so the feedback survives without the movement. */
-  .actor { animation: none !important; }
+  .actor, .land-arrive { animation: none !important; }
   .hp-fill { transition: none; }
 }
 @media (max-width: 760px) {
@@ -195,3 +193,14 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 .state-card summary { cursor: pointer; }
 .state-card ul { padding-left: 18px; margin: 4px 0 0; }
 .found { background: #fff8e1; border-radius: 8px; padding: 8px 12px; }
+
+/* Arriving at a place: the border lights up and the shape bounces. */
+@keyframes arrive { 0% { transform: scale(0.92); } 45% { transform: scale(1.12); } 70% { transform: scale(0.97); } 100% { transform: scale(1); } }
+.land-arrive { fill: var(--candidate); stroke: #b4470f; stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: arrive 650ms ease-out 2; }
+.land-candidate:hover, .land-selectable:hover { stroke: #b4470f; stroke-width: 2.5; }
+
+.recall-tag { display: inline-block; background: #fff1c2; border: 2px solid var(--candidate); border-radius: 999px; padding: 3px 14px; font-weight: 700; font-size: 1rem; }
+.field-note small { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+.event-banner { min-height: 190px; display: flex; gap: 14px; align-items: flex-end; border-radius: 10px; overflow: hidden; background-size: cover; background-position: center bottom; image-rendering: pixelated; padding: 12px; }
+.event-banner > div { background: rgba(255, 253, 247, 0.93); border-radius: 8px; padding: 8px 14px; }
+.event-banner h1, .event-banner p { margin: 0; }

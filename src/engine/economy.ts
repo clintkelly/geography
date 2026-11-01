@@ -2,6 +2,8 @@
 export const ECONOMY = {
   startingPoints: 10,
   perCorrectAnswer: 1,
+  /** Extra points for answering a question about an earlier Field Note. */
+  recallBonus: 2,
   wrongGuessCost: 1,
   xpPerLeftoverPoint: 2,
   extraClue: 2,
