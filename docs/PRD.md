@@ -59,7 +59,7 @@ Does a child enjoy a complete expedition and want to return on a later day? And 
 | Expedition | Trails of 3, 5, or 7 stops following a target creature |
 | Difficulty | Scout, Ranger, Expert, with parent limits per profile |
 | Points | Per-expedition Trail Points, Prep Shop, paid clues, trail items |
-| Stops | Find-the-place step, then a battle or a journey event; final showdown |
+| Stops | Find-the-place step, then a battle or a journey event; final showdown with a Befriend moment |
 | Combat | One against one, Attack, Guard, charged Special, visible enemy intent |
 | Stable | Up to 12 species at launch, three starters, one companion per expedition |
 | Growth | Levels, three evolution stages, bounded stat growth |
@@ -82,8 +82,8 @@ Do not implement deferred features as empty frameworks or disabled screens.
 2. **Stable.** Choose a companion. It stays for the whole expedition.
 3. **Prep Shop.** Receive the expedition's Trail Points and optionally spend some on preparation. Whatever remains funds clues on the trail.
 4. **The trail.** At each stop, use clues to work out where the creature went, travel there, and resolve that stop.
-5. **Final showdown.** Reach the target and win a slightly longer encounter.
-6. **Return.** Befriend the creature, see a brief summary, and go back to camp.
+5. **Final showdown.** Reach the target, wear it down in a slightly longer encounter, and befriend it.
+6. **Return.** The creature joins the stable. See a brief summary and go back to camp.
 
 Unlocked regions and trail lengths come from the profile's enabled content, not a linear unlock sequence. There is no limit on expeditions per day.
 
@@ -178,6 +178,16 @@ A simple scene shows the companion, opponent, HP, charge, and the opponent's nex
 Resolve the player's action first. If it defeats the opponent, the opponent does not attack. Otherwise resolve the enemy action, then check HP and the length limit. Blocks expire after the enemy turn. HP cannot fall below zero. A successful final allowed turn counts as victory.
 
 HP and charge reset at each encounter, then Prep Shop effects apply.
+
+### Befriending
+
+The catch is its own moment. When the hunted creature's HP reaches 0 in the final showdown, it stops attacking and the only action becomes **Befriend**.
+
+- A correct answer befriends the creature, and it joins the stable.
+- A wrong answer shows the correct answer and offers a new question. Nothing is lost, and the child can keep trying.
+- There is no random failure, no capture device, and no turn limit in this phase.
+- Befriend questions count as normal learning attempts.
+- Rival Hunts have no Befriend step, because the creature is already owned.
 
 ### Opponent scaling
 
@@ -387,14 +397,15 @@ Avoid names such as `countryQuizScore` in shared engine code.
 
 - **More subjects:** new content packs, then new input types only when a subject needs them.
 - **Deeper systems:** two-creature teams, habitat advantages, branching routes. Add one at a time and measure whether it creates decisions or just clicks.
+- **Hosting:** a later milestone moves saves to a server, so the children can play from any device. It needs accounts, sync, and a real database. None of this belongs in the MVP.
 - **Cooperative play:** each child brings a companion to a shared hunt, with separate question levels, rewards, and learning records. This requires shared authority and sync; MVP preparation is limited to stable IDs and serializable state.
 
 ## 13 Build order
 
 1. **Milestone 1:** core loop. Done and enjoyed by the children.
 2. **Milestone 2, Foundations:** two profiles, migration, state records for one region, US map, difficulty tiers.
-3. **Milestone 3, The Hunt:** multi-stop trails, Trail Points, Prep Shop, clues, events, Field Notes, State Cards.
-4. **Milestone 4, The Stable:** Guard and Special, stable, XP, evolution, more species.
+3. **Milestone 3, The Hunt:** multi-stop trails, Trail Points, Prep Shop, clues, events, Field Notes, State Cards, Befriend, and a simple stable.
+4. **Milestone 4, Growth:** Guard and Special, full stable, XP, evolution, more species.
 5. **Milestone 5, Learning and parent tools:** all 50 states, review scheduling, parent view, backups.
 6. **Milestone 6, Polish and playtest:** full art, tablet, tuning across several days.
 
@@ -430,6 +441,7 @@ Each milestone ends with the children playing it. Their reaction may reorder the
 26. Clues identify one valid answer, and nothing in the interface leaks the target.
 27. Mute and volume persist per profile, and a missing or blocked sound never interrupts play.
 28. A full expedition can be completed with the keyboard alone, excluding questions that require pointing at a map, and a held key never repeats an action.
+29. Befriending cannot fail by chance, a wrong answer only offers a new question, and a double click or refresh cannot add a creature twice.
 
 ## 15 Playtest questions
 

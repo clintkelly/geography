@@ -9,7 +9,7 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | 1. Core loop | Done; the children enjoyed it |
 | 2. Foundations: profiles, US data, difficulty | Next |
 | 3. The Hunt: trails, points, Field Notes | Not started |
-| 4. The Stable: combat depth, growth, evolution | Not started |
+| 4. Growth: combat depth, full stable, evolution | Not started |
 | 5. Learning and parent tools | Not started |
 | 6. Polish and playtest | Not started |
 
@@ -39,7 +39,7 @@ The rules that carry the PRD's reliability requirements:
 
 1. **One transition function.** Every change goes through `reduce`. An invalid or repeated command returns the same object, and an unchanged object is not saved. This also protects purchases from double charging.
 2. **Write before render.** `useGame` updates a ref synchronously and renders only after the IndexedDB write. A reload mid-animation can't replay a turn.
-3. **One record, one transaction.** The save is a single record, so an answer, its stop status, and rewards commit atomically.
+3. **One record, one transaction.** Each profile's save is a single record, so an answer, its stop status, and rewards commit atomically. Nothing in a turn crosses profiles.
 4. **Snapshots in battle state.** A battle stores its question with options in display order, so a content update can't change a saved turn.
 5. **Randomness is data.** RNG state lives in the save.
 
@@ -78,7 +78,7 @@ Validator additions for §8: same-state cities exclude the capital, no option li
 
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
-| 1 | Schema v2: `{ profiles, activeProfileId }`, with a tested v1 migration. Keep souvenirs and counts; end any in-progress v1 expedition cleanly | `game.ts`, `store.ts` | M |
+| 1 | Schema v2: one IndexedDB record per profile plus a small household record, with a tested v1 migration. Keep souvenirs and counts; end any in-progress v1 expedition cleanly | `game.ts`, `store.ts` | M |
 | 2 | Profile select and quick switching | `ui/` | S |
 | 3 | Generalize `WorldMap` to a map definition, and add a US map with `us-atlas` and AlbersUsa, including Alaska and Hawaii insets | `ui/`, new `content/maps` | M |
 | 4 | `StateRecord`, templates, and validator | `content/us/` | M |
@@ -108,18 +108,21 @@ Decision for the migration: Milestone 1 data goes to one child's profile, whiche
 | 8 | State Cards and album, with first-award idempotency | `game.ts`, `Camp.tsx` | M |
 | 9 | Sighting targets as rewards; souvenirs move to stop finds | `expedition.ts` | S |
 | 10 | Pass 1 art: about 10 card illustrations for the West | `public/art` | S |
+| 11 | Befriend phase: when the target reaches 0 HP, a question loop with no enemy attacks or turn limit; adds the creature idempotently | `expedition.ts`, `Battle.tsx` | M |
+| 12 | Simple stable: see owned creatures and choose one before departure | new `ui/Stable.tsx` | S |
+| 13 | Art: sprites for about 4 huntable species | `public/art` | S |
 
-Tests: trails stay adjacent, 0-point completion (19), purchases don't double charge (4), assisted recording (20), no purchase can answer a question (21), card awarded once (22).
+Tests: trails stay adjacent, 0-point completion (19), purchases don't double charge (4), assisted recording (20), no purchase can answer a question (21), card awarded once (22), Befriend can't fail or duplicate (29), combat rules unchanged by Befriend.
 
-**Exit:** a Standard trail is fun for its whole length, and the children make real choices about points.
+**Exit:** a Standard trail is fun for its whole length, the children make real choices about points, and befriending a creature feels like a catch.
 
-## Milestone 4: The Stable
+## Milestone 4: Growth
 
 | # | Work | Main files | Size |
 | --- | --- | --- | --- |
 | 1 | Guard, Special templates, charge, and block; §6 enemy pattern restored | `combat.ts`, `Battle.tsx` | M |
 | 2 | Combat reads companion stats, and opponents scale by stage | `combat.ts`, `game.ts` | S |
-| 3 | Stable screen, companion selection, nicknames | `ui/` | M |
+| 3 | Full stable: creature details, nicknames, level and stage display | `ui/Stable.tsx` | M |
 | 4 | XP, levels, and idempotent stop awards | `progression.ts` | M |
 | 5 | Evolution: thresholds, stat changes, one-time celebration | `progression.ts`, `ui/` | M |
 | 6 | Species data for 12 species; 3 starters | `content/` | S |
@@ -197,8 +200,16 @@ Before starting a milestone, add its §14 acceptance items as named tests. Autom
 | Pokémon-derived names or art slip in | §1 rule; check prompts and names at review |
 | Schema changes break a child's real save | Tested migrations from v2 onward; unsupported versions refused and left untouched |
 
+## Later: hosting
+
+The children will eventually play from several devices on a hosted server. This is a future milestone, roughly the tenth, and nothing is built for it now. A server-side `SaveStore`, accounts, sync, and a real database such as SQLite or Postgres come then.
+
+What already helps, at no extra cost: storage sits behind `SaveStore`, game rules are a pure function, IDs are generated rather than name-based, and saves are versioned and migrated. Per-profile records let each child's save move independently.
+
 ## Decisions already made
 
+- **Hosting is refactored later.** The only concession now is per-profile save records in schema v2.
+- **Befriending is a question loop, not a chance roll.** It sits in the expedition layer, so `combat.ts` stays subject-agnostic and unchanged.
 - **Sound effects are pre-generated files**, not live API calls. Background music is deferred.
 - **Creatures stay original** (§1).
 - **Trail Points are per-expedition**, not a persistent currency, so a bad run can't hurt the next one.
