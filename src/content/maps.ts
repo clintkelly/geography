@@ -21,11 +21,12 @@ export interface MapDef {
 
 type Geo = Topology<Record<string, GeometryCollection<{ name: string }>>>;
 
-function build(id: MapDef['id'], width: number, height: number, projection: GeoProjection, topology: unknown, object: string, sphere: GeoPermissibleObjects, keep: (f: string) => boolean) {
-  projection.fitSize([width, height], sphere as never);
-  const path = geoPath(projection);
+function build(id: MapDef['id'], width: number, height: number, projection: GeoProjection, topology: unknown, object: string, sphere: GeoPermissibleObjects | null, keep: (f: string) => boolean) {
   const topo = topology as Geo;
   const shapes = feature(topo, topo.objects[object] as GeometryCollection<{ name: string }>);
+  // Without an explicit outline, the map frames its own shapes.
+  projection.fitExtent([[8, 8], [width - 8, height - 8]], (sphere ?? { ...shapes, features: shapes.features.filter((f) => keep(String(f.id))) }) as never);
+  const path = geoPath(projection);
   return {
     id,
     width,
@@ -57,7 +58,7 @@ export const worldMap: MapDef = {
 
 const FIFTY = (id: string) => id !== '11' && Number(id) <= 56;
 // d3's Albers USA is a composite: Alaska and Hawaii are drawn as insets at the lower left.
-const usBase = build('us', 960, 600, geoAlbersUsa(), states, 'states', { type: 'MultiPoint', coordinates: [[-125, 24], [-66, 50], [-160, 55]] }, FIFTY);
+const usBase = build('us', 960, 600, geoAlbersUsa(), states, 'states', null, FIFTY);
 
 export const usMap: MapDef = {
   ...usBase,

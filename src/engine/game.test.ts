@@ -72,6 +72,24 @@ describe('content', () => {
     }
     expect(usMap.features).toHaveLength(50);
   });
+
+  it('frames all 50 states on the US map', () => {
+    const coordinates = usMap.features.flatMap((f) => (f.d.match(/-?[\d.]+,-?[\d.]+/g) ?? []).map((pair) => pair.split(',').map(Number) as [number, number]));
+    const xs = coordinates.map((c) => c[0]);
+    const ys = coordinates.map((c) => c[1]);
+    expect(Math.min(...xs)).toBeGreaterThanOrEqual(0);
+    expect(Math.max(...xs)).toBeLessThanOrEqual(usMap.width);
+    expect(Math.min(...ys)).toBeGreaterThanOrEqual(0);
+    expect(Math.max(...ys)).toBeLessThanOrEqual(usMap.height);
+    expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(usMap.width * 0.8);
+    for (const s of STATES) {
+      const [x, y] = usMap.project(s.lonLat);
+      expect(x, s.name).toBeGreaterThan(0);
+      expect(x, s.name).toBeLessThan(usMap.width);
+      expect(y, s.name).toBeGreaterThan(0);
+      expect(y, s.name).toBeLessThan(usMap.height);
+    }
+  });
 });
 
 describe('map', () => {

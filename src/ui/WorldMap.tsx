@@ -29,6 +29,7 @@ export function WorldMap({ map, highlights = {}, onFeatureClick, children, label
           <path
             key={i}
             d={c.d}
+            data-feature={c.id}
             className={`land${h ? ` land-${h}` : ''}`}
             onClick={() => {
               if (!drag.current?.moved) onFeatureClick?.(c.id);

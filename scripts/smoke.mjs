@@ -174,7 +174,7 @@ await profileButton('Explorer 2').waitFor();
 await shot('8b-profiles-after');
 await key('2');
 await page.getByRole('button', { name: 'Start expedition' }).waitFor();
-assert.equal((await save()).completedExpeditions, 1, 'Explorer 2 keeps his own count');
+assert.equal((await save()).completedExpeditions, 1, 'each profile keeps its own count');
 
 // Expert: Guard and Special by key, and a click-the-state question.
 await page.getByRole('button', { name: /Expert/ }).click();
@@ -191,7 +191,8 @@ await page.getByRole('button', { name: 'Attack' }).waitFor();
 let guarded = false;
 let clicked = false;
 let specialled = false;
-for (let turns = 0; turns < 40 && !(clicked && specialled); turns++) {
+let clickedTrue = false;
+for (let turns = 0; turns < 40 && !(clickedTrue && specialled); turns++) {
   const button = await page.getByRole('button', { name: /Attack|Begin encounter|Try again|Claim reward/ }).first().textContent();
   if (/Begin|Try again/.test(button)) { await key('Enter'); await page.getByRole('button', { name: 'Attack' }).waitFor(); continue; }
   if (/Claim/.test(button)) break;
@@ -204,8 +205,20 @@ for (let turns = 0; turns < 40 && !(clicked && specialled); turns++) {
   assert.notEqual(b.action, undefined);
   if (b.question.inputType === 'map-click') {
     await shot('12-map-click');
-    // Clicks a selectable shape; any of them is a valid submission for this check.
-    await page.locator('.question .map path.land-selectable').first().dispatchEvent('click');
+    // A real mouse click at the state's position on screen, where its center is inside the shape.
+    const accepted = b.question.options.find((o) => o.id === b.question.acceptedId);
+    const point = await page.evaluate((id) => {
+      const shape = document.querySelector(`.question .map path[data-feature="${id}"]`);
+      const r = shape.getBoundingClientRect();
+      const [x, y] = [r.left + r.width / 2, r.top + r.height / 2];
+      return document.elementFromPoint(x, y) === shape ? [x, y] : null;
+    }, accepted.featureId);
+    if (point) {
+      await page.mouse.click(point[0], point[1]);
+      await page.getByRole('button', { name: 'Continue' }).waitFor();
+      assert.equal((await save()).expedition.battle.result.correct, true, `clicking ${accepted.label} is correct`);
+      clickedTrue = true;
+    } else await page.locator(`.question .map path[data-feature="${accepted.featureId}"]`).dispatchEvent('click');
     clicked = true;
   } else {
     await key(String(b.question.options.findIndex((o) => o.id === b.question.acceptedId) + 1));
