@@ -61,7 +61,7 @@ for (let encounter = 0; encounter < 3; encounter++) {
       await shot('4-question');
       await page.reload();
       await page.locator('.option').first().waitFor();
-      const labels = await page.locator('.option').allTextContents();
+      const labels = await page.locator('.option-label').allTextContents();
       const expected = b.question.inputType === 'choice' ? b.question.options.map((o) => o.label) : labels;
       assert.deepEqual(labels, expected, 'option order survives refresh');
       reloaded = true;
@@ -99,7 +99,47 @@ await page.getByRole('button', { name: 'Start expedition' }).waitFor();
 const final = await save();
 assert.equal(final.completedExpeditions, 1);
 assert.equal(final.souvenirIds.length, 1);
-await click('Start expedition');
+
+// Second expedition, keyboard only.
+const key = (k) => page.keyboard.press(k);
+await key('Enter');
+await page.getByText('Where was it seen?').waitFor();
+await key('c');
+await page.getByText('Clue 2').waitFor();
+await key('a');
+await page.getByText('Press 1–4 to look up').waitFor();
+await key('1');
+await page.locator('.atlas details[open]').waitFor();
+assert.equal((await save()).expedition.guesses.length, 0, 'numbers look up rather than guess while the atlas is open');
+await key('a');
+await page.locator('.atlas').waitFor({ state: 'detached' });
+e = (await save()).expedition;
+await key(String(e.candidateIds.indexOf(e.targetId) + 1));
+await page.getByRole('button', { name: 'Begin encounter' }).waitFor();
+
+await key('=');
+await key('ArrowLeft');
+for (let done = 0; done < 3; done++) {
+  await key('Enter');
+  await page.getByRole('button', { name: 'Attack' }).waitFor();
+  while (true) {
+    await key('a');
+    await page.locator('.option').first().waitFor();
+    const b = (await save()).expedition.battle;
+    await key(String(b.question.options.findIndex((o) => o.id === b.question.acceptedId) + 1));
+    await page.getByRole('button', { name: 'Continue' }).waitFor();
+    await key('Enter');
+    await page.getByRole('button', { name: 'Continue' }).waitFor({ state: 'detached' });
+    await page.getByRole('button', { name: /Attack|Begin encounter|Claim reward/ }).waitFor();
+    if (!(await page.getByRole('button', { name: 'Attack' }).isVisible())) break;
+  }
+}
+await page.getByText('Expedition complete!').waitFor();
+await key('Enter');
+await page.getByText('Welcome back to camp!').waitFor();
+assert.equal((await save()).completedExpeditions, 2, 'keyboard-only expedition completes');
+
+await key('Enter');
 await page.getByText('Where was it seen?').waitFor();
 
 await page.setViewportSize({ width: 900, height: 620 });

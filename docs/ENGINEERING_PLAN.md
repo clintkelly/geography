@@ -13,6 +13,8 @@ Implements `docs/PRD.md` v0.4. The PRD owns product behavior; this document owns
 | 5. Learning and parent tools | Not started |
 | 6. Polish and playtest | Not started |
 
+Keyboard shortcuts shipped after Milestone 1 through `useKeys` in `ui/keys.tsx`, and the smoke test plays a keyboard-only expedition. Every new screen must bind its keys and show hints (PRD acceptance 28).
+
 **Gate:** each milestone ends with the children playing it, and their reaction may reorder the next one. Milestone 3 is the one to watch: it decides whether the Carmen Sandiego loop works.
 
 **Why this order:** profiles come first because every later feature writes per-child data, and each schema change after real play has to be migrated. The Hunt comes before the Stable because points and clues are the riskiest design idea, and evolution means little until expeditions are worth repeating.

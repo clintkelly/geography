@@ -331,6 +331,20 @@ Evolved forms should start from the previous stage as a reference image, so they
 
 State Card illustrations must show general subjects such as landscapes, animals, or industries. Avoid real logos, state seals, and copyrighted characters, and check that any depicted landmark looks reasonably right.
 
+### Keyboard
+
+The whole game is playable from the keyboard. The mouse or touch is needed only to point at a place on a map, such as Expert's click-the-state. Buttons show their key, and hints are hidden on touch devices.
+
+| Screen | Keys |
+| --- | --- |
+| Anywhere | Enter or Space for the main action; Tab moves between buttons |
+| Battle | A to Attack, 1–4 to answer; Guard and Special get G and S when added |
+| Finding a place | 1–4 to choose, C for another clue, A to open or close the atlas |
+| Atlas open | 1–4 to look up a place; close the atlas to choose |
+| Map | + and − to zoom, arrow keys to pan |
+
+Held keys never repeat an action. Leaving an expedition has no single-key shortcut, because a stray key must not end a trip; it stays reachable with Tab.
+
 ### Sound
 
 Use short original sound effects, generated with ElevenLabs during development and stored in the repo as small audio files. The game plays them locally, with no network call or API key in the browser.
@@ -415,6 +429,7 @@ Each milestone ends with the children playing it. Their reaction may reorder the
 25. Exhausting new species produces honestly labeled Rival Hunts.
 26. Clues identify one valid answer, and nothing in the interface leaks the target.
 27. Mute and volume persist per profile, and a missing or blocked sound never interrupts play.
+28. A full expedition can be completed with the keyboard alone, excluding questions that require pointing at a map, and a held key never repeats an action.
 
 ## 15 Playtest questions
 

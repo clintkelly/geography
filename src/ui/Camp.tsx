@@ -2,11 +2,13 @@ import { PACK } from '../content/pack';
 import type { Command, SaveData } from '../engine/game';
 import { Sprite } from './art';
 import { rewardLabel, species } from './content';
+import { Key, useKeys } from './keys';
 
 export function Camp({ save, dispatch }: { save: SaveData; dispatch: (c: Command) => void }) {
   const companion = species(save.companion.speciesId);
   const s = save.lastSummary;
   const { reward } = save.offer;
+  useKeys({ enter: () => dispatch({ type: 'start' }) });
 
   return (
     <div className="stack">
@@ -40,7 +42,7 @@ export function Camp({ save, dispatch }: { save: SaveData; dispatch: (c: Command
           <p className="reward-preview">Reward: <strong>{rewardLabel(reward)}</strong></p>
         </div>
         {reward.kind === 'souvenir' && <Sprite id={reward.souvenirId} size={64} />}
-        <button type="button" className="primary" onClick={() => dispatch({ type: 'start' })}>Start expedition</button>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'start' })}>Start expedition <Key k="Enter" /></button>
       </section>
 
       <section className="panel">

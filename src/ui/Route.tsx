@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
 import { Sprite } from './art';
 import { place, rewardLabel, species } from './content';
+import { Key, useKeys } from './keys';
 import { Marker, project, WorldMap } from './WorldMap';
 
 export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
+  useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });
   const index = currentSlotIndex(e);
   const slot = e.slots[index];
   const highlights = useMemo(() => Object.fromEntries(e.slots.map((s) => [place(s.locationId).isoNumeric, 'route' as const])), [e.slots]);
@@ -30,7 +32,7 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
           </div>
         </div>
         <p className="reward-preview">Expedition reward: <strong>{rewardLabel(e.reward)}</strong></p>
-        <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : 'Begin encounter'}</button>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : 'Begin encounter'} <Key k="Enter" /></button>
       </section>
       <section className="discovery-map">
         <WorldMap label={`Route map. Next stop: ${place(slot.locationId).name}`} highlights={highlights}>
@@ -50,13 +52,14 @@ export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) =
 }
 
 export function ExpeditionComplete({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
+  useKeys({ enter: () => dispatch({ type: 'claimReward' }) });
   return (
     <section className="panel complete">
       <h1>Expedition complete!</h1>
       {e.reward.kind === 'souvenir' && <Sprite id={e.reward.souvenirId} size={128} />}
       <p>You earned: <strong>{rewardLabel(e.reward)}</strong></p>
       <p className="muted">{e.correct} of {e.answered} answers correct</p>
-      <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>Claim reward and return to camp</button>
+      <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>Claim reward and return to camp <Key k="Enter" /></button>
     </section>
   );
 }

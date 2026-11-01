@@ -3,6 +3,7 @@ import { enemyIntent } from '../engine/combat';
 import type { Battle as BattleState, Command, Expedition, SaveData } from '../engine/game';
 import { Sprite } from './art';
 import { place, species } from './content';
+import { Key, useKeys } from './keys';
 import { Marker, WorldMap } from './WorldMap';
 
 function Hp({ label, hp, max }: { label: string; hp: number; max: number }) {
@@ -18,6 +19,13 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const slot = e.slots[battle.slotIndex];
   const [fx, setFx] = useState(false);
   const turnKey = `${battle.combat.turn}-${battle.phase}`;
+  const attack = () => dispatch({ type: 'chooseAction', action: 'attack' });
+  // Bound per phase: answers exist only while a question is open, so a stale key can't reach the next one.
+  const keys: Record<string, () => void> = {};
+  if (battle.phase === 'choose') Object.assign(keys, { a: attack, enter: attack });
+  if (battle.phase === 'question') battle.question.options.forEach((o, i) => { keys[String(i + 1)] = () => dispatch({ type: 'answer', optionId: o.id }); });
+  if (battle.phase === 'feedback') keys.enter = () => dispatch({ type: 'continue' });
+  useKeys(keys);
   useEffect(() => {
     if (battle.phase !== 'feedback') return;
     setFx(true);
@@ -50,7 +58,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         {battle.phase === 'choose' && (
           <div className="actions">
             <p className="muted">{place(slot.locationId).name} · Local questions and expedition review</p>
-            <button type="button" className="primary big" onClick={() => dispatch({ type: 'chooseAction', action: 'attack' })}>Attack</button>
+            <button type="button" className="primary big" onClick={attack}>Attack <Key k="A" /></button>
           </div>
         )}
 
@@ -81,7 +89,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
                 const state = !result ? '' : o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'dim';
                 return (
                   <button key={o.id} type="button" className={`option ${state}`} disabled={!!result} onClick={() => dispatch({ type: 'answer', optionId: o.id })}>
-                    {marker && !result ? `Marker ${i + 1}` : marker ? `${i + 1}: ${o.label}` : o.label}
+                    <Key k={i + 1} /><span className="option-label">{marker && !result ? `Marker ${i + 1}` : marker ? `${i + 1}: ${o.label}` : o.label}</span>
                   </button>
                 );
               })}
@@ -98,7 +106,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
               {combat.outcome === 'victory' ? ` ${opponent.displayName} is impressed and steps aside!` : ''}
               {combat.outcome === 'retreat' ? ` ${companion.displayName} retreats safely to the trail.` : ''}
             </p>
-            <button type="button" className="primary" autoFocus onClick={() => dispatch({ type: 'continue' })}>Continue</button>
+            <button type="button" className="primary" autoFocus onClick={() => dispatch({ type: 'continue' })}>Continue <Key k="Enter" /></button>
           </div>
         )}
       </section>

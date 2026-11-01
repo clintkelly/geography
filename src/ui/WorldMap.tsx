@@ -1,6 +1,7 @@
 import { geoNaturalEarth1, geoPath, type GeoPermissibleObjects } from 'd3-geo';
 import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type WheelEvent } from 'react';
 import { feature } from 'topojson-client';
+import { useKeys } from './keys';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 import topology from 'world-atlas/countries-50m.json';
 
@@ -84,6 +85,21 @@ export function WorldMap({ highlights = {}, onCountryClick, initialView = EUROPE
       const h = (v.w * HEIGHT) / WIDTH;
       return clampView({ w, x: v.x + (v.w - w) * cx, y: v.y + (h - (w * HEIGHT) / WIDTH) * cy });
     });
+
+  const pan = (dx: number, dy: number) => setView((v) => clampView({ ...v, x: v.x + dx * v.w, y: v.y + dy * v.w }));
+  useKeys(
+    interactive
+      ? {
+          '+': () => zoom(0.7),
+          '=': () => zoom(0.7),
+          '-': () => zoom(1.4),
+          arrowleft: () => pan(-0.1, 0),
+          arrowright: () => pan(0.1, 0),
+          arrowup: () => pan(0, -0.1),
+          arrowdown: () => pan(0, 0.1),
+        }
+      : {},
+  );
 
   const onWheel = (e: WheelEvent<SVGSVGElement>) => {
     if (!interactive) return;
