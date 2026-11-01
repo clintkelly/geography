@@ -13,9 +13,9 @@ export interface Frame {
   sounds?: SoundId[];
 }
 
-const HIT_DELAY = 220;
-const ENEMY_GAP = 320;
-const REST = 280;
+const HIT_DELAY = 340;
+const ENEMY_GAP = 480;
+const REST = 420;
 
 /**
  * The poses, motions and sounds for one resolved turn. Purely decorative: the

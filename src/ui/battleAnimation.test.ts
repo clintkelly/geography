@@ -37,7 +37,7 @@ describe('turn animations', () => {
   });
 
   it('stays brief', () => {
-    expect(turnFrames('attack', true, hit, true).at(-1)!.at).toBeLessThanOrEqual(1100);
+    expect(turnFrames('attack', true, hit, true).at(-1)!.at).toBeLessThanOrEqual(1700);
   });
 
   it('befriending plays its own moment', () => {

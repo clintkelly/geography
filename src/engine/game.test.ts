@@ -2,8 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { clampView, EUROPE_VIEW, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
-import { STATES, usQuestions } from '../content/us/templates';
-import { validatePack, validateStates } from '../content/validate';
+import { degreesApart, MIN_MARKER_GAP } from '../content/geo';
+import { COUNTRIES, europeQuestions, STATES, usQuestions } from '../content/us/templates';
+import { validatePack, validateRecords } from '../content/validate';
 import { ECONOMY } from './economy';
 import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
 import { pickQuestion } from './questions';
@@ -46,7 +47,37 @@ const fullExpedition = (s: SaveData, ...args: [string?, Difficulty?, TrailLength
 
 describe('content', () => {
   it('the pack is valid', () => expect(validatePack(PACK)).toEqual([]));
-  it('the state records are consistent', () => expect(validateStates(STATES)).toEqual([]));
+  it('the state and country records are consistent', () => {
+    expect(validateRecords(STATES)).toEqual([]);
+    expect(validateRecords(COUNTRIES)).toEqual([]);
+  });
+
+  it('covers all 44 European countries at all three difficulties', () => {
+    expect(COUNTRIES).toHaveLength(44);
+    expect(new Set(COUNTRIES.map((c) => c.id)).size).toBe(44);
+    expect(new Set(europeQuestions.map((q) => q.difficulty))).toEqual(new Set(['scout', 'ranger', 'expert']));
+    for (const c of COUNTRIES) {
+      expect(worldMap.features.some((f) => f.id === c.fips), c.name).toBe(true);
+      expect(PACK.clues.filter((o) => o.targetId === c.id).length, c.name).toBeGreaterThanOrEqual(2);
+      expect(europeQuestions.filter((q) => q.locationId === c.id).length, c.name).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it('asks no capital questions about city-states', () => {
+    for (const q of europeQuestions) if (['monaco', 'vatican', 'san-marino'].includes(q.locationId!)) expect(q.objectiveId, q.id).toMatch(/^location-/);
+  });
+
+  it('marker questions never overlap their markers', () => {
+    for (const q of [...usQuestions, ...europeQuestions].filter((o) => o.inputType === 'map-marker')) {
+      const options = q.options.map((o) => ({ lonLat: o.lonLat! }));
+      options.forEach((a, i) => options.slice(i + 1).forEach((b) => expect(degreesApart(a, b), q.id).toBeGreaterThanOrEqual(MIN_MARKER_GAP)));
+    }
+  });
+
+  it('every tiny country has a dot to click', () => {
+    const click = europeQuestions.find((q) => q.inputType === 'map-click')!;
+    for (const c of COUNTRIES.filter((o) => o.tiny)) expect(click.options.find((o) => o.id === c.id)).toMatchObject({ tiny: true });
+  });
 
   it('generates 13 Western states at all three difficulties', () => {
     expect(STATES).toHaveLength(13);
@@ -117,10 +148,20 @@ describe('trails', () => {
     }
   });
 
-  it('a region smaller than the trail shortens it and keeps the final showdown', () => {
-    const { slots } = start(fresh(), 'europe', 'scout', 'long').expedition!;
-    expect(slots).toHaveLength(6);
-    expect(slots.at(-1)!.kind).toBe('guardian');
+  it('European trails follow borders and sea crossings too', () => {
+    for (let seed = 1; seed < 40; seed++) {
+      const { slots } = start(fresh(seed), 'europe', 'scout', 'long').expedition!;
+      expect(slots).toHaveLength(7);
+      slots.slice(1).forEach((s, i) => expect(PACK.places.find((p) => p.id === slots[i]!.locationId)!.neighbors).toContain(s.locationId));
+    }
+  });
+
+  it('search candidates can be told apart on the map', () => {
+    for (let seed = 1; seed < 60; seed++) {
+      const places = start(fresh(seed), 'europe', 'ranger').expedition!.candidateIds.map((id) => PACK.places.find((p) => p.id === id)!);
+      expect(places).toHaveLength(4);
+      places.forEach((a, i) => places.slice(i + 1).forEach((b) => expect(degreesApart(a, b)).toBeGreaterThanOrEqual(MIN_MARKER_GAP)));
+    }
   });
 
   it('the final showdown is against the hunted creature', () => {
@@ -456,13 +497,13 @@ describe('difficulty', () => {
   });
 
   it('a region with one tier stays playable under any limits', () => {
-    const region = PACK.regions.find((r) => r.id === 'europe')!;
+    const region = { id: 'x', label: 'x', mapId: 'world' as const, difficulties: ['scout'] as const };
     expect(allowedDifficulties({ ...DEFAULT_SETTINGS, minDifficulty: 'expert' }, region)).toEqual(['scout']);
   });
 });
 
 describe('question selection', () => {
-  const europe = PACK.questions.filter((q) => q.regionId === 'europe');
+  const europe = PACK.questions.filter((q) => q.regionId === 'europe' && q.difficulty === 'scout');
 
   it('never repeats within a trail while the pool allows', () => {
     const asked = playTrail(fresh(), 'us-west', 'scout', 'long').expedition!.askedQuestionIds;

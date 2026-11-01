@@ -6,9 +6,10 @@
   --line: #ddd5c3;
   --accent: #2f6f5e;
   --accent-ink: #fff;
-  --sea: #bcd8e4;
-  --land: #e4dcc6;
+  --sea: #8fc3dc;
+  --land: #f1e8d0;
   --land-edge: #b9b09a;
+  --border: #4d4638;
   --candidate: #e7b95b;
   --route: #8fc0a6;
   --good: #dcefdc;
@@ -64,18 +65,22 @@ button.link { border: 0; background: none; color: var(--muted); text-decoration:
 .map { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
 .map svg { display: block; width: 100%; height: auto; touch-action: none; cursor: grab; user-select: none; }
 .sea { fill: var(--sea); }
-.land { fill: var(--land); stroke: var(--land-edge); stroke-width: 0.25; vector-effect: non-scaling-stroke; }
+.land { fill: var(--land); stroke: var(--border); stroke-width: 0.9; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .land-candidate { fill: var(--candidate); cursor: pointer; }
 .land-selectable { cursor: pointer; }
 .land-selectable:hover { fill: #d6c9a4; }
 .land-correct { fill: #7cc58a; }
 .land-wrong { fill: #eaa56c; }
 .land-atlas { fill: #d98a4b; }
-.land-ruledOut { fill: #cfc7b4; }
+.land-ruledOut { fill: #c4bba5; }
 .land-route { fill: var(--route); }
 .map-controls { position: absolute; right: 8px; top: 8px; display: flex; gap: 4px; }
 .map-controls button { min-height: 36px; padding: 4px 10px; font-size: 0.85rem; background: rgba(255, 255, 255, 0.92); }
-.marker { cursor: pointer; }
+.marker, .dot { cursor: pointer; }
+.dot-mark { fill: var(--candidate); stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dot:hover .dot-mark { fill: #fff; }
+.dot-correct .dot-mark { fill: #7cc58a; }
+.dot-wrong .dot-mark { fill: #eaa56c; }
 .marker-hit { fill: transparent; }
 .marker-dot { fill: #fff; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .marker text { font-weight: 700; fill: var(--ink); pointer-events: none; }
@@ -134,10 +139,10 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 @keyframes lunge-left { 50% { transform: translateX(-28px); } }
 @keyframes glow { 50% { filter: drop-shadow(0 0 14px #ffe08a); transform: scale(1.06); } }
 /* The sprite sits in a wrapper, so these can move it without undoing its mirroring. */
-.player.motion-lunge { animation: lunge-right 220ms ease-out; }
-.opponent.motion-lunge { animation: lunge-left 220ms ease-out; }
-.actor.motion-shake { animation: shake 220ms linear; }
-.actor.motion-glow { animation: glow 300ms ease-out; }
+.player.motion-lunge { animation: lunge-right 340ms ease-out; }
+.opponent.motion-lunge { animation: lunge-left 340ms ease-out; }
+.actor.motion-shake { animation: shake 340ms linear; }
+.actor.motion-glow { animation: glow 420ms ease-out; }
 
 @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 

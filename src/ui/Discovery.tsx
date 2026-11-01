@@ -6,7 +6,7 @@ import { mapFor, place } from './content';
 import { Key, useKeys } from './keys';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
-import { Marker, WorldMap, type Highlight } from './WorldMap';
+import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
 
 export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
   const [atlasOpen, setAtlasOpen] = useState(false);
@@ -62,7 +62,7 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
           {previous && <p className="muted">It left {place(previous.locationId).name}.</p>}
           {clues.map((c, i) => <p key={c?.id} className="clue"><span className="muted">Clue {i + 1}</span>{c?.text}</p>)}
           {lastGuess && <p className="correction" role="status">Not yet: that was {place(lastGuess).name}. Check the clues and try another place.</p>}
-          {expert && <p className="muted">Expert: click the state on the map.</p>}
+          {expert && <p className="muted">Expert: click the place on the map. Very small countries have a dot.</p>}
           <div className="row">
             {e.cluesShown < e.clueIds.length && <button type="button" disabled={!canBuyClue} onClick={buyClue}>Another clue ({ECONOMY.extraClue}) <Key k="C" /></button>}
             {!expert && !e.narrowed && <button type="button" disabled={!canNarrow} onClick={narrow}>Narrow search ({ECONOMY.narrowSearch}) <Key k="N" /></button>}
@@ -83,10 +83,12 @@ export function Discovery({ e, dispatch }: { e: Expedition; dispatch: (c: Comman
         </section>
 
         <section className="discovery-map">
-          <WorldMap map={map} label={expert ? 'Blank map. Click a state.' : 'Map with numbered places to choose from'} highlights={highlights} onFeatureClick={onFeatureClick}>
-            {(scale) => (expert ? null : candidates.filter((c) => !c.ruledOut).map((c) => (
-              <Marker key={c.id} at={map.project(c.place.lonLat)} scale={scale} label={String(c.number)} onClick={() => guess(c.id)} />
-            )))}
+          <WorldMap map={map} label={expert ? 'Blank map. Click a place.' : 'Map with numbered places to choose from'} highlights={highlights} onFeatureClick={onFeatureClick}>
+            {(scale) => (expert
+              ? candidates.filter((c) => c.place.tiny && !c.ruledOut).map((c) => <Dot key={c.id} id={c.id} at={map.project(c.place.lonLat)} scale={scale} onClick={() => guess(c.id)} />)
+              : candidates.filter((c) => !c.ruledOut).map((c) => (
+                <Marker key={c.id} at={map.project(c.place.lonLat)} scale={scale} label={String(c.number)} onClick={() => guess(c.id)} />
+              )))}
           </WorldMap>
           {!expert && (
             <div className="row choices">

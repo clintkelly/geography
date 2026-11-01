@@ -1,6 +1,7 @@
 // Plays real expeditions in a real browser. Expects `npm run dev` on :5199.
 // Usage: node scripts/smoke.mjs [screenshot-dir]
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 
 const shots = process.argv[2];
@@ -93,6 +94,13 @@ async function step(options = {}) {
       await shotOnce(b.question.inputType === 'map-click' ? 'question-click' : b.question.inputType === 'map-marker' ? 'question-marker' : 'question');
       const accepted = b.question.options.find((o) => o.id === b.question.acceptedId);
       if (b.question.inputType === 'map-click') {
+        if (accepted.tiny) {
+          const before = JSON.stringify(s);
+          await page.locator(`.question .dot[data-place="${accepted.id}"]`).dispatchEvent('click');
+          await settled(before);
+          assert.equal((await save()).expedition.battle.result.correct, true, `the dot for ${accepted.label} answers`);
+          return;
+        }
         if (await clickState('.question', accepted.featureId)) {
           stats.realClicks++;
           assert.equal((await save()).expedition.battle.result.correct, true, `clicking ${accepted.label} lands on it`);
@@ -117,15 +125,21 @@ async function step(options = {}) {
   if (e.discovery === 'searching') {
     await shotOnce(e.difficulty === 'expert' ? 'discovery-expert' : 'discovery');
     if (e.difficulty === 'expert') {
-      return clickState('.discovery-map', await featureOf(e.targetId));
+      const target = records.find((r) => r.id === e.targetId);
+      if (target.tiny) {
+        const before = JSON.stringify(s);
+        await page.locator(`.dot[data-place="${e.targetId}"]`).dispatchEvent('click');
+        return settled(before);
+      }
+      return clickState('.discovery-map', target.fips);
     }
     return press(String(e.candidateIds.indexOf(e.targetId) + 1));
   }
   return press('Enter');
 }
 
-const FIPS = { alaska: '02', arizona: '04', california: '06', colorado: '08', hawaii: '15', idaho: '16', montana: '30', nevada: '32', 'new-mexico': '35', oregon: '41', utah: '49', washington: '53', wyoming: '56' };
-const featureOf = async (id) => FIPS[id];
+const records = ['src/content/us/west.json', 'src/content/europe/countries.json'].flatMap((f) => JSON.parse(readFileSync(f, 'utf8')));
+const featureOf = async (id) => records.find((r) => r.id === id).fips;
 
 async function finishTrail(options) {
   for (let i = 0; i < 300; i++) {
@@ -244,6 +258,26 @@ await page.getByText('Prepare for the trail').waitFor();
 await press('Enter');
 await finishTrail({});
 assert.ok(stats.realClicks >= 1 || (await save()).completedExpeditions === 2, 'Expert trail finished');
+
+// Europe, as the test profile: all 44 countries, on a blank map.
+await button(/Start expedition/).waitFor();
+await page.keyboard.press('p');
+await button(/Dad/).waitFor();
+await page.keyboard.press('3');
+await button('Start expedition').waitFor();
+await button('Europe').click();
+await button(/Expert/).click();
+await button(/Long/).click();
+await button('Start expedition').click();
+await page.getByText('Prepare for the trail').waitFor();
+await press('Enter');
+await shotOnce('europe-expert');
+await finishTrail({});
+assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail through Europe finished');
+
+await page.keyboard.press('p');
+await button(/Explorer 2/).waitFor();
+await page.keyboard.press('2');
 
 // Backup and restore.
 await button(/Start expedition/).waitFor();

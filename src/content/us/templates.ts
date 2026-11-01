@@ -1,10 +1,14 @@
+import countries from '../europe/countries.json';
+import { degreesApart, spaced } from '../geo';
 import type { Clue, Difficulty, Place, Question, QuestionOption, StateCard } from '../types';
 import records from './west.json';
 
-export interface StateRecord {
+/** One reviewed record per state or country. Questions and clues are generated from these. */
+export interface PlaceRecord {
   id: string;
   name: string;
-  postal: string;
+  postal?: string;
+  /** The map feature: a FIPS code for states, an ISO number for countries. */
   fips: string;
   lonLat: [number, number];
   capital: string;
@@ -12,55 +16,52 @@ export interface StateRecord {
   sameStateCities: string[];
   largestCity: string;
   /** Only 'official' with a checked source. Questions never call a nickname official. */
-  nickname: { text: string; status: 'official' | 'unverified'; others: string[] };
+  nickname: { text: string; status: 'official' | 'unverified'; others: string[] } | null;
   facts: string[];
-  /** Bordering states, plus the usual flight for Alaska and Hawaii. */
+  /** Bordering places, plus usual flights and sea crossings. */
   neighbors: string[];
+  /** A place description that never names it. */
+  hint?: string;
+  hint2?: string;
+  /** Too small to click on the map, so it gets a dot. */
+  tiny?: boolean;
+  /** Capital and country share a name, so capital questions don't work. */
+  cityState?: boolean;
+  /** How the name reads mid-sentence, such as "the Netherlands". */
+  sentenceName?: string;
+  wiki?: string;
 }
 
 export const REGION_ID = 'us-west';
-export const STATES = records as StateRecord[];
+export const EUROPE_ID = 'europe';
+export const STATES = records as PlaceRecord[];
+export const COUNTRIES = countries as PlaceRecord[];
 
-const wiki = (s: StateRecord) => `https://en.wikipedia.org/wiki/${s.name.replaceAll(' ', '_')}${s.id === 'washington' ? '_(state)' : ''}`;
+const wikiUrl = (s: PlaceRecord) => `https://en.wikipedia.org/wiki/${s.wiki ?? s.name.replaceAll(' ', '_')}${s.id === 'washington' ? '_(state)' : ''}`;
 
-function byDistance(s: StateRecord): StateRecord[] {
-  const d = (o: StateRecord) => Math.hypot(o.lonLat[0] - s.lonLat[0], o.lonLat[1] - s.lonLat[1]);
-  return STATES.filter((o) => o.id !== s.id).sort((a, b) => d(a) - d(b));
-}
-const near = (s: StateRecord) => byDistance(s).slice(0, 3);
-const far = (s: StateRecord) => {
-  const ranked = byDistance(s).reverse();
-  return [ranked[0], ranked[2], ranked[4]] as StateRecord[];
-};
+type Answer = Pick<Question, 'options' | 'acceptedId'>;
 
-const choices = (labels: string[]): Pick<Question, 'options' | 'acceptedId'> => ({
-  options: labels.map((label, i) => ({ id: `o${i}`, label })),
-  acceptedId: 'o0',
-});
-const markers = (s: StateRecord, others: StateRecord[]): Pick<Question, 'options' | 'acceptedId'> => ({
-  options: [s, ...others].map((o): QuestionOption => ({ id: o.id, label: o.name, lonLat: o.lonLat })),
-  acceptedId: s.id,
-});
-const clickState = (s: StateRecord): Pick<Question, 'options' | 'acceptedId'> => ({
-  options: STATES.map((o): QuestionOption => ({ id: o.id, label: o.name, featureId: o.fips })),
-  acceptedId: s.id,
-});
+function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: string, noun: string): Question[] {
+  const ranked = all.filter((o) => o.id !== s.id).sort((a, b) => degreesApart(a, s) - degreesApart(b, s));
+  const near = spaced(ranked, s, 3);
+  const farList = [...ranked].reverse();
+  const far = spaced([0, 2, 4, 6, 8, 1, 3, 5, 7].flatMap((i) => farList[i] ?? []), s, 3);
+  const name = s.sentenceName ?? s.name;
+  const Name = name[0]?.toUpperCase() + name.slice(1);
 
-function questionsFor(s: StateRecord): Question[] {
-  const known = `the ${s.nickname.text}`;
-  const capitalWhy = `${s.capital} is the capital of ${s.name}.`;
-  const nickWhy = `${s.name} is known as ${known}.`;
-  const whereWhy = `This is ${s.name}. Its capital is ${s.capital}.`;
-  const q = (
-    difficulty: Difficulty,
-    kind: string,
-    n: number,
-    objective: string,
-    prompt: string,
-    explanation: string,
-    answer: Pick<Question, 'options' | 'acceptedId'>,
-    inputType: Question['inputType'] = 'choice',
-  ): Question => ({
+  const choices = (labels: string[]): Answer => ({ options: labels.map((label, i) => ({ id: `o${i}`, label })), acceptedId: 'o0' });
+  const markers = (others: PlaceRecord[]): Answer => ({
+    options: [s, ...others].map((o): QuestionOption => ({ id: o.id, label: o.name, lonLat: o.lonLat })),
+    acceptedId: s.id,
+  });
+  const clickPlace: Answer = {
+    options: all.map((o): QuestionOption => ({ id: o.id, label: o.name, featureId: o.fips, ...(o.tiny ? { tiny: true, lonLat: o.lonLat } : {}) })),
+    acceptedId: s.id,
+  };
+
+  const capitalWhy = `${s.capital} is the capital of ${name}.`;
+  const whereWhy = s.cityState ? `This is ${name}.` : `This is ${name}. Its capital is ${s.capital}.`;
+  const q = (difficulty: Difficulty, kind: string, n: number, objective: string, prompt: string, explanation: string, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
     id: `q-${kind}-${s.id}-${difficulty}-${n}`,
     version: 1,
     objectiveId: `${objective}-${s.id}`,
@@ -68,58 +69,83 @@ function questionsFor(s: StateRecord): Question[] {
     prompt,
     explanation,
     difficulty,
-    regionId: REGION_ID,
+    regionId,
     locationId: s.id,
-    sourceUrl: wiki(s),
-    // Different questions about a state rotate through its facts.
-    fieldNote: s.facts[(objective.length + n) % s.facts.length],
+    sourceUrl: wikiUrl(s),
+    // Different questions about a place rotate through its facts.
+    fieldNote: s.facts[(objective.length + n) % s.facts.length] as string,
     ...answer,
   });
 
-  return [
-    q('scout', 'capital', 1, 'capital', `What is the capital of ${s.name}?`, capitalWhy, choices([s.capital, ...far(s).map((o) => o.capital)])),
-    q('scout', 'capital', 2, 'capital', `${s.capital} is the capital of which state?`, capitalWhy, choices([s.name, ...far(s).map((o) => o.name)])),
-    q('scout', 'nickname', 1, 'nickname', `Which state is known as ${known}?`, nickWhy, choices([s.name, ...far(s).map((o) => o.name)])),
-    q('scout', 'location', 1, 'location', `Which marker is on ${s.name}?`, whereWhy, markers(s, far(s)), 'map-marker'),
-
-    q('ranger', 'capital', 1, 'capital', `What is the capital of ${s.name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
-    q('ranger', 'capital', 2, 'capital', `In which state is the capital city ${s.capital}?`, capitalWhy, choices([s.name, ...near(s).map((o) => o.name)])),
-    q('ranger', 'nickname', 1, 'nickname', `Which state is known as ${known}?`, nickWhy, choices([s.name, ...near(s).map((o) => o.name)])),
-    q('ranger', 'location', 1, 'location', `Which marker is on ${s.name}?`, whereWhy, markers(s, near(s)), 'map-marker'),
-
-    q('expert', 'capital', 1, 'capital', `Which of these cities is the state capital of ${s.name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
-    q('expert', 'nickname', 1, 'nickname', `${known[0]?.toUpperCase()}${known.slice(1)}: which state is that? Click it on the map.`, nickWhy, clickState(s), 'map-click'),
-    q('expert', 'location', 1, 'location', `Click ${s.name} on the map.`, whereWhy, clickState(s), 'map-click'),
-    q('expert', 'capital', 2, 'capital', `The city of ${s.capital} is the capital of which state? Click it on the map.`, capitalWhy, clickState(s), 'map-click'),
+  const out: Question[] = [
+    q('scout', 'location', 1, 'location', `Which marker is on ${name}?`, whereWhy, markers(far), 'map-marker'),
+    q('ranger', 'location', 1, 'location', `Which marker is on ${name}?`, whereWhy, markers(near), 'map-marker'),
+    q('expert', 'location', 1, 'location', `Click ${name} on the map.`, whereWhy, clickPlace, 'map-click'),
   ];
+  if (!s.cityState) {
+    out.push(
+      q('scout', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, choices([s.capital, ...far.map((o) => o.capital)])),
+      q('scout', 'capital', 2, 'capital', `${s.capital} is the capital of which ${noun}?`, capitalWhy, choices([s.name, ...far.map((o) => o.name)])),
+      q('ranger', 'capital', 1, 'capital', `What is the capital of ${name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
+      q('ranger', 'capital', 2, 'capital', `In which ${noun} is the capital city ${s.capital}?`, capitalWhy, choices([s.name, ...near.map((o) => o.name)])),
+      q('expert', 'capital', 1, 'capital', `Which of these cities is the capital of ${name}?`, capitalWhy, choices([s.capital, ...s.sameStateCities])),
+      q('expert', 'capital', 2, 'capital', `The city of ${s.capital} is the capital of which ${noun}? Click it on the map.`, capitalWhy, clickPlace, 'map-click'),
+    );
+  }
+  if (s.nickname) {
+    const known = `the ${s.nickname.text}`;
+    const why = `${Name} is known as ${known}.`;
+    out.push(
+      q('scout', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, choices([s.name, ...far.map((o) => o.name)])),
+      q('ranger', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, choices([s.name, ...near.map((o) => o.name)])),
+      q('expert', 'nickname', 1, 'nickname', `${known[0]?.toUpperCase()}${known.slice(1)}: which ${noun} is that? Click it on the map.`, why, clickPlace, 'map-click'),
+    );
+  }
+  return out;
 }
 
-function cluesFor(s: StateRecord): Clue[] {
-  const objectiveId = `location-${s.id}`;
-  const clue = (n: number, text: string): Clue => ({ id: `clue-${s.id}-${n}`, version: 1, targetId: s.id, objectiveId, text, sourceUrl: wiki(s) });
-  return [
-    clue(1, `Tracks lead toward the ${s.nickname.text}.`),
-    clue(2, `This state's capital is ${s.capital}.`),
-    clue(3, `Travelers in ${s.sameStateCities[0]} reported a sighting.`),
-  ];
+function buildClues(s: PlaceRecord, noun: string): Clue[] {
+  const clue = (n: number, text: string): Clue => ({ id: `clue-${s.id}-${n}`, version: 1, targetId: s.id, objectiveId: `location-${s.id}`, text, sourceUrl: wikiUrl(s) });
+  const first = s.nickname ? `the ${s.nickname.text}` : s.hint;
+  const clues = [clue(1, `Tracks lead to ${first}.`)];
+  // A capital that contains the country's name would give the answer away.
+  clues.push(clue(2, s.hint2 ?? `This ${noun}'s capital is ${s.capital}.`));
+  if (s.sameStateCities[0] && !s.cityState) clues.push(clue(3, `Travelers in ${s.sameStateCities[0]} reported a sighting.`));
+  return clues;
 }
 
-export const usPlaces: Place[] = STATES.map((s) => ({
-  id: s.id,
-  name: s.name,
-  featureId: s.fips,
-  regionId: REGION_ID,
-  lonLat: s.lonLat,
-  neighbors: s.neighbors,
-  atlas: [`Capital: ${s.capital}`, `Known as the ${s.nickname.text}`, `Cities: ${s.sameStateCities.join(', ')}`, ...s.facts],
-}));
+function buildPlace(s: PlaceRecord, regionId: string): Place {
+  const about = s.nickname ? `Known as the ${s.nickname.text}` : (s.hint as string);
+  return {
+    id: s.id,
+    name: s.name,
+    featureId: s.fips,
+    regionId,
+    lonLat: s.lonLat,
+    neighbors: s.neighbors,
+    ...(s.tiny ? { tiny: true } : {}),
+    atlas: [
+      ...(s.cityState ? [] : [`Capital: ${s.capital}`]),
+      about[0]?.toUpperCase() + about.slice(1),
+      ...(s.sameStateCities.length > 0 ? [`${s.cityState ? 'Places' : 'Cities'}: ${s.sameStateCities.join(', ')}`] : []),
+      ...s.facts,
+    ],
+  };
+}
+
+export const usPlaces = STATES.map((s) => buildPlace(s, REGION_ID));
+export const europePlaces = COUNTRIES.map((s) => buildPlace(s, EUROPE_ID));
+
 export const usCards: StateCard[] = STATES.map((s) => ({
   placeId: s.id,
   name: s.name,
   artId: `card-${s.id}`,
-  subtitle: `The ${s.nickname.text}`,
+  subtitle: `The ${s.nickname?.text}`,
   capital: s.capital,
   facts: s.facts,
 }));
-export const usQuestions = STATES.flatMap(questionsFor);
-export const usClues = STATES.flatMap(cluesFor);
+
+export const usQuestions = STATES.flatMap((s) => buildQuestions(s, STATES, REGION_ID, 'state'));
+export const europeQuestions = COUNTRIES.flatMap((s) => buildQuestions(s, COUNTRIES, EUROPE_ID, 'country'));
+export const usClues = STATES.flatMap((s) => buildClues(s, 'state'));
+export const europeClues = COUNTRIES.flatMap((s) => buildClues(s, 'country'));

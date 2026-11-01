@@ -63,7 +63,7 @@ interface StateRecord {
 }
 ```
 
-- `content/us/west.json` holds the first region; other regions follow as their own files, so review happens in batches.
+- `content/us/west.json` and `content/europe/countries.json` hold the records; other regions follow as their own files, so review happens in batches. `content/us/templates.ts` builds both. City-states skip capital questions, and tiny countries get a clickable dot.
 - `content/us/templates.ts` turns records into `Question` objects at load time, with stable IDs such as `q-capital-california-ranger-1`.
 - The existing `Question` shape and `pickQuestion` keep working, so combat and saves need no knowledge of templates.
 - Distractors are chosen deterministically per template and difficulty, and the validator runs over every generated question.

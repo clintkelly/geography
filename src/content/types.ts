@@ -8,6 +8,8 @@ export interface QuestionOption {
   lonLat?: readonly [number, number];
   /** Present for map-click options; the map feature that selects this option. */
   featureId?: string;
+  /** Too small to click, so the map draws a dot for it. */
+  tiny?: boolean;
 }
 
 export interface Question {
@@ -44,6 +46,7 @@ export interface Place {
   regionId: string;
   lonLat: readonly [number, number];
   atlas: string[];
+  tiny?: boolean;
   /** Connected places. Without this, trails use the nearest places. */
   neighbors?: readonly string[];
 }

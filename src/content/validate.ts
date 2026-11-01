@@ -1,5 +1,5 @@
 import type { Pack } from './types';
-import type { StateRecord } from './us/templates';
+import type { PlaceRecord } from './us/templates';
 
 /** Returns a list of problems; an empty list means the pack is usable. */
 export function validatePack(pack: Pack): string[] {
@@ -16,6 +16,7 @@ export function validatePack(pack: Pack): string[] {
     if (!q.explanation || !q.sourceUrl.startsWith('https://')) problems.push(`${q.id}: missing explanation or source`);
     if (q.inputType === 'map-marker' && q.options.some((o) => !o.lonLat)) problems.push(`${q.id}: marker without coordinates`);
     if (q.inputType === 'map-click' && q.options.some((o) => !o.featureId)) problems.push(`${q.id}: clickable option without a map feature`);
+    if (new Set(q.options.map((o) => o.label)).size !== q.options.length) problems.push(`${q.id}: repeated option`);
     if (!pack.regions.some((r) => r.id === q.regionId)) problems.push(`${q.id}: unknown region`);
   }
   const placeIds = new Set(pack.places.map((p) => p.id));
@@ -46,17 +47,21 @@ export function validatePack(pack: Pack): string[] {
   return problems;
 }
 
-/** Rules for state records. Consistency only: this cannot prove a fact is true. */
-export function validateStates(states: readonly StateRecord[]): string[] {
+/** Rules for place records. Consistency only: this cannot prove a fact is true. */
+export function validateRecords(records: readonly PlaceRecord[]): string[] {
   const problems: string[] = [];
-  for (const s of states) {
-    if (s.sameStateCities.length !== 3) problems.push(`${s.id}: needs 3 same-state cities`);
-    if (new Set(s.sameStateCities).size !== s.sameStateCities.length) problems.push(`${s.id}: duplicate city`);
-    if (s.sameStateCities.includes(s.capital)) problems.push(`${s.id}: capital listed as a wrong answer`);
-    if (s.largestCity !== s.capital && !s.sameStateCities.includes(s.largestCity)) problems.push(`${s.id}: largest city is not offered`);
-    if (s.nickname.others.includes(s.nickname.text)) problems.push(`${s.id}: duplicate nickname`);
-    if (s.nickname.text.includes(s.name)) problems.push(`${s.id}: nickname names the state`);
-    if (s.sameStateCities[0]?.includes(s.name)) problems.push(`${s.id}: clue city names the state`);
+  for (const s of records) {
+    const cities = s.sameStateCities;
+    if (s.id !== 'vatican' && cities.length !== 3) problems.push(`${s.id}: needs 3 same-place cities`);
+    if (new Set(cities).size !== cities.length) problems.push(`${s.id}: duplicate city`);
+    if (cities.includes(s.capital)) problems.push(`${s.id}: capital listed as a wrong answer`);
+    if (s.largestCity !== s.capital && !cities.includes(s.largestCity)) problems.push(`${s.id}: largest city is not offered`);
+    if (s.nickname?.others.includes(s.nickname.text)) problems.push(`${s.id}: duplicate nickname`);
+    if (s.nickname?.text.includes(s.name)) problems.push(`${s.id}: nickname names the place`);
+    if (s.hint?.includes(s.name) || s.hint2?.includes(s.name)) problems.push(`${s.id}: hint names the place`);
+    if (!s.nickname && !s.hint) problems.push(`${s.id}: needs a nickname or a hint`);
+    if (s.cityState && !s.hint2) problems.push(`${s.id}: a city-state needs a second hint`);
+    if (!s.cityState && cities[0]?.includes(s.name)) problems.push(`${s.id}: clue city names the place`);
     if (s.facts.length < 2) problems.push(`${s.id}: needs 2 facts`);
   }
   return problems;

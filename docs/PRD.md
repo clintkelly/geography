@@ -54,7 +54,7 @@ Does a child enjoy a complete expedition and want to return on a later day? And 
 | Area | Include |
 | --- | --- |
 | Profiles | One per child, name/avatar, independent saves, quick switching |
-| Content | 50 US state records, delivered in regional batches; Europe fixture as second pack |
+| Content | 50 US state records, delivered in regional batches; 44 European countries as a second pack |
 | Exploration | US map with all states; Europe map for the second pack |
 | Expedition | Trails of 3, 5, or 7 stops following a target creature |
 | Difficulty | Scout, Ranger, Expert, with parent limits per profile |
@@ -203,7 +203,7 @@ A battle should take at least 3 correct answers at any stage. Growth may shorten
 
 ### Feedback and timing
 
-An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts about a second. Reduced motion removes the movement but keeps poses and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
+An answer is final for that turn. Show the correct answer and a short explanation, plus a Field Note when correct, in large text, then let the child continue. Each creature has attack, guard, special, and hit poses. A turn swaps poses with short lunges, shakes, and sounds, and lasts about a second and a half. Hit and block sounds are deep, retro 8-bit punches. Reduced motion removes the movement but keeps poses and sounds. The result text appears at once, and Continue never waits for the animation. Do not slow-print text or require several acknowledgements for one result.
 
 Persist the resolved turn before animating. Reloading must not submit an answer or resolve a turn twice.
 
@@ -307,7 +307,7 @@ A repeated item right after its answer was shown never counts as independent evi
 
 ### Second pack
 
-Keep the existing "World basics and Europe" content as a second pack. It demonstrates that a new subject needs content and configuration rather than a new engine.
+Europe is a second pack of 44 countries, the UN's list for the region, plus a few world-basics questions. Kosovo, Cyprus, and countries that straddle Asia, such as Turkey, are left out for now. It demonstrates that a new subject needs content and configuration rather than a new engine.
 
 ## 9 Profiles and parent controls
 

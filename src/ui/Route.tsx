@@ -7,7 +7,7 @@ import { Key, useKeys } from './keys';
 import { TrailBar } from './TrailBar';
 import { Marker, WorldMap } from './WorldMap';
 
-const FLIGHT = ['alaska', 'hawaii'];
+const FLIGHT = ['alaska', 'hawaii', 'iceland', 'malta'];
 
 export function Route({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
   useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });

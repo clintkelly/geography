@@ -1,0 +1,1248 @@
+[
+{
+"id": "albania",
+"name": "Albania",
+"fips": "008",
+"lonLat": [
+20.1,
+41
+],
+"capital": "Tirana",
+"sameStateCities": [
+"Durrës",
+"Vlorë",
+"Shkodër"
+],
+"largestCity": "Tirana",
+"neighbors": [
+"montenegro",
+"north-macedonia",
+"greece"
+],
+"hint": "a small Balkan country on the Adriatic and Ionian coasts, north-west of Greece",
+"facts": [
+"Albania's flag shows a black double-headed eagle on red.",
+"Albanians call their country Shqipëria."
+],
+"nickname": null
+},
+{
+"id": "andorra",
+"name": "Andorra",
+"fips": "020",
+"lonLat": [
+1.6,
+42.55
+],
+"capital": "Andorra la Vella",
+"sameStateCities": [
+"Escaldes-Engordany",
+"Encamp",
+"Sant Julià de Lòria"
+],
+"largestCity": "Andorra la Vella",
+"neighbors": [
+"france",
+"spain"
+],
+"hint": "a tiny mountain country in the Pyrenees, between France and Spain",
+"facts": [
+"Andorra's official language is Catalan.",
+"Andorra la Vella is the highest capital city in Europe."
+],
+"nickname": null,
+"tiny": true,
+"hint2": "People here speak Catalan, high in the mountains."
+},
+{
+"id": "austria",
+"name": "Austria",
+"fips": "040",
+"lonLat": [
+14.5,
+47.6
+],
+"capital": "Vienna",
+"sameStateCities": [
+"Graz",
+"Linz",
+"Salzburg"
+],
+"largestCity": "Vienna",
+"neighbors": [
+"germany",
+"czechia",
+"slovakia",
+"hungary",
+"slovenia",
+"italy",
+"switzerland",
+"liechtenstein"
+],
+"hint": "an Alpine country whose capital sits on the River Danube",
+"facts": [
+"Mozart was born in Salzburg, Austria.",
+"The Alps cover much of Austria."
+],
+"nickname": null
+},
+{
+"id": "belarus",
+"name": "Belarus",
+"fips": "112",
+"lonLat": [
+28,
+53.6
+],
+"capital": "Minsk",
+"sameStateCities": [
+"Gomel",
+"Brest",
+"Vitebsk"
+],
+"largestCity": "Minsk",
+"neighbors": [
+"russia",
+"ukraine",
+"poland",
+"lithuania",
+"latvia"
+],
+"hint": "a landlocked country between Poland and Russia",
+"facts": [
+"Belarus has no coastline.",
+"European bison live in the ancient Białowieża Forest on the Belarus-Poland border."
+],
+"nickname": null
+},
+{
+"id": "belgium",
+"name": "Belgium",
+"fips": "056",
+"lonLat": [
+4.6,
+50.6
+],
+"capital": "Brussels",
+"sameStateCities": [
+"Antwerp",
+"Ghent",
+"Bruges"
+],
+"largestCity": "Antwerp",
+"neighbors": [
+"france",
+"netherlands",
+"germany",
+"luxembourg"
+],
+"hint": "a small country between France and the Netherlands, famous for waffles and chocolate",
+"facts": [
+"Belgium has three official languages: Dutch, French, and German.",
+"Many of the European Union's main offices are in Brussels."
+],
+"nickname": null
+},
+{
+"id": "bosnia",
+"name": "Bosnia and Herzegovina",
+"fips": "070",
+"lonLat": [
+17.8,
+44.2
+],
+"capital": "Sarajevo",
+"sameStateCities": [
+"Banja Luka",
+"Tuzla",
+"Mostar"
+],
+"largestCity": "Sarajevo",
+"neighbors": [
+"croatia",
+"serbia",
+"montenegro"
+],
+"hint": "a Balkan country with only a tiny strip of coast on the Adriatic",
+"facts": [
+"Mostar is famous for its arched Old Bridge over the Neretva River.",
+"Sarajevo hosted the Winter Olympics in 1984."
+],
+"nickname": null
+},
+{
+"id": "bulgaria",
+"name": "Bulgaria",
+"fips": "100",
+"lonLat": [
+25.3,
+42.7
+],
+"capital": "Sofia",
+"sameStateCities": [
+"Plovdiv",
+"Varna",
+"Burgas"
+],
+"largestCity": "Sofia",
+"neighbors": [
+"romania",
+"serbia",
+"north-macedonia",
+"greece"
+],
+"hint": "a Balkan country on the Black Sea, just south of Romania",
+"facts": [
+"Bulgaria's Rose Valley is famous for rose oil used in perfume.",
+"Bulgaria writes its language in the Cyrillic alphabet."
+],
+"nickname": null
+},
+{
+"id": "croatia",
+"name": "Croatia",
+"fips": "191",
+"lonLat": [
+16,
+45.5
+],
+"capital": "Zagreb",
+"sameStateCities": [
+"Split",
+"Rijeka",
+"Dubrovnik"
+],
+"largestCity": "Zagreb",
+"neighbors": [
+"slovenia",
+"hungary",
+"serbia",
+"bosnia",
+"montenegro"
+],
+"hint": "a crescent-shaped country on the Adriatic with more than a thousand islands",
+"facts": [
+"The necktie traces back to scarves worn by Croatian soldiers.",
+"Dubrovnik is famous for its old stone city walls."
+],
+"nickname": null
+},
+{
+"id": "czechia",
+"name": "Czechia",
+"fips": "203",
+"lonLat": [
+15.4,
+49.8
+],
+"capital": "Prague",
+"sameStateCities": [
+"Brno",
+"Ostrava",
+"Plzeň"
+],
+"largestCity": "Prague",
+"neighbors": [
+"germany",
+"poland",
+"slovakia",
+"austria"
+],
+"hint": "a landlocked central European country that was once joined with Slovakia",
+"facts": [
+"Prague's astronomical clock dates from 1410.",
+"Czechia and Slovakia split peacefully in 1993."
+],
+"nickname": null
+},
+{
+"id": "denmark",
+"name": "Denmark",
+"fips": "208",
+"lonLat": [
+9.5,
+56
+],
+"capital": "Copenhagen",
+"sameStateCities": [
+"Aarhus",
+"Odense",
+"Aalborg"
+],
+"largestCity": "Copenhagen",
+"neighbors": [
+"germany",
+"sweden"
+],
+"hint": "a Scandinavian country made of a peninsula north of Germany and many islands",
+"facts": [
+"LEGO bricks come from Denmark.",
+"Hans Christian Andersen, who wrote The Little Mermaid, was Danish."
+],
+"nickname": null
+},
+{
+"id": "estonia",
+"name": "Estonia",
+"fips": "233",
+"lonLat": [
+25.8,
+58.7
+],
+"capital": "Tallinn",
+"sameStateCities": [
+"Tartu",
+"Narva",
+"Pärnu"
+],
+"largestCity": "Tallinn",
+"neighbors": [
+"latvia",
+"russia",
+"finland"
+],
+"hint": "the northernmost of the three Baltic countries",
+"facts": [
+"Around half of Estonia is covered in forest.",
+"People in Estonia can vote in national elections online."
+],
+"nickname": null
+},
+{
+"id": "finland",
+"name": "Finland",
+"fips": "246",
+"lonLat": [
+26,
+63.5
+],
+"capital": "Helsinki",
+"sameStateCities": [
+"Espoo",
+"Tampere",
+"Turku"
+],
+"largestCity": "Helsinki",
+"neighbors": [
+"sweden",
+"norway",
+"russia",
+"estonia"
+],
+"hint": "a Nordic country of tens of thousands of lakes, east of Sweden",
+"facts": [
+"Finland has more than 100,000 lakes.",
+"Saunas are a big part of life in Finland."
+],
+"nickname": null
+},
+{
+"id": "france",
+"name": "France",
+"fips": "250",
+"lonLat": [
+2.5,
+46.8
+],
+"capital": "Paris",
+"sameStateCities": [
+"Marseille",
+"Lyon",
+"Toulouse"
+],
+"largestCity": "Paris",
+"neighbors": [
+"spain",
+"andorra",
+"belgium",
+"luxembourg",
+"germany",
+"switzerland",
+"italy",
+"monaco",
+"uk"
+],
+"hint": "the country just north of Spain, on the far side of the Pyrenees mountains",
+"facts": [
+"The Eiffel Tower in Paris was built for a world's fair in 1889.",
+"Mont Blanc, the highest peak in the Alps, stands on the France-Italy border."
+],
+"nickname": null
+},
+{
+"id": "germany",
+"name": "Germany",
+"fips": "276",
+"lonLat": [
+10.4,
+51
+],
+"capital": "Berlin",
+"sameStateCities": [
+"Hamburg",
+"Munich",
+"Cologne"
+],
+"largestCity": "Berlin",
+"neighbors": [
+"denmark",
+"netherlands",
+"belgium",
+"luxembourg",
+"france",
+"switzerland",
+"austria",
+"czechia",
+"poland"
+],
+"hint": "the central European country with the most people in the European Union",
+"facts": [
+"The Berlin Wall came down in 1989.",
+"Germany has more people than any other country in the European Union."
+],
+"nickname": null
+},
+{
+"id": "greece",
+"name": "Greece",
+"fips": "300",
+"lonLat": [
+22,
+39.3
+],
+"capital": "Athens",
+"sameStateCities": [
+"Thessaloniki",
+"Patras",
+"Heraklion"
+],
+"largestCity": "Athens",
+"neighbors": [
+"albania",
+"north-macedonia",
+"bulgaria"
+],
+"hint": "the southern end of the Balkan Peninsula, among thousands of islands",
+"facts": [
+"The first modern Olympic Games were held in Athens in 1896.",
+"Greece has thousands of islands in the Aegean and Ionian Seas."
+],
+"nickname": null
+},
+{
+"id": "hungary",
+"name": "Hungary",
+"fips": "348",
+"lonLat": [
+19.3,
+47.2
+],
+"capital": "Budapest",
+"sameStateCities": [
+"Debrecen",
+"Szeged",
+"Pécs"
+],
+"largestCity": "Budapest",
+"neighbors": [
+"austria",
+"slovakia",
+"ukraine",
+"romania",
+"serbia",
+"croatia",
+"slovenia"
+],
+"hint": "a landlocked country where the Danube runs through the middle of its capital",
+"facts": [
+"Budapest was formed by joining the cities of Buda and Pest.",
+"The Rubik's Cube was invented in Hungary."
+],
+"nickname": null
+},
+{
+"id": "iceland",
+"name": "Iceland",
+"fips": "352",
+"lonLat": [
+-18.5,
+64.9
+],
+"capital": "Reykjavik",
+"sameStateCities": [
+"Kópavogur",
+"Akureyri",
+"Hafnarfjörður"
+],
+"largestCity": "Reykjavik",
+"neighbors": [
+"uk",
+"norway"
+],
+"hint": "an island of volcanoes and geysers in the North Atlantic",
+"facts": [
+"Reykjavik is the northernmost capital of any country in the world.",
+"The English word geyser comes from Geysir, a hot spring in Iceland."
+],
+"nickname": null
+},
+{
+"id": "ireland",
+"name": "Ireland",
+"fips": "372",
+"lonLat": [
+-8,
+53.2
+],
+"capital": "Dublin",
+"sameStateCities": [
+"Cork",
+"Limerick",
+"Galway"
+],
+"largestCity": "Dublin",
+"neighbors": [
+"uk"
+],
+"hint": "an island country west of Great Britain, known for its green fields",
+"facts": [
+"The harp is the national symbol of Ireland.",
+"Halloween traces back to the old Irish festival of Samhain."
+],
+"nickname": null,
+"wiki": "Republic_of_Ireland"
+},
+{
+"id": "italy",
+"name": "Italy",
+"fips": "380",
+"lonLat": [
+12.5,
+43
+],
+"capital": "Rome",
+"sameStateCities": [
+"Milan",
+"Naples",
+"Turin"
+],
+"largestCity": "Rome",
+"neighbors": [
+"france",
+"switzerland",
+"austria",
+"slovenia",
+"san-marino",
+"vatican",
+"malta"
+],
+"hint": "the boot-shaped country reaching into the Mediterranean Sea",
+"facts": [
+"Italy completely surrounds both San Marino and Vatican City.",
+"Pizza as we know it comes from Naples, Italy."
+],
+"nickname": null
+},
+{
+"id": "latvia",
+"name": "Latvia",
+"fips": "428",
+"lonLat": [
+25,
+57
+],
+"capital": "Riga",
+"sameStateCities": [
+"Daugavpils",
+"Liepāja",
+"Jelgava"
+],
+"largestCity": "Riga",
+"neighbors": [
+"estonia",
+"lithuania",
+"belarus",
+"russia"
+],
+"hint": "the middle one of the three Baltic countries",
+"facts": [
+"Riga's old town is famous for its Art Nouveau buildings.",
+"Amber washes up on Latvia's Baltic beaches."
+],
+"nickname": null
+},
+{
+"id": "liechtenstein",
+"name": "Liechtenstein",
+"fips": "438",
+"lonLat": [
+9.55,
+47.15
+],
+"capital": "Vaduz",
+"sameStateCities": [
+"Schaan",
+"Triesen",
+"Balzers"
+],
+"largestCity": "Schaan",
+"neighbors": [
+"switzerland",
+"austria"
+],
+"hint": "a tiny Alpine country squeezed between Switzerland and Austria",
+"facts": [
+"Liechtenstein is one of only two countries surrounded entirely by landlocked countries.",
+"Vaduz Castle, above the capital, is home to the prince."
+],
+"nickname": null,
+"tiny": true
+},
+{
+"id": "lithuania",
+"name": "Lithuania",
+"fips": "440",
+"lonLat": [
+23.9,
+55.3
+],
+"capital": "Vilnius",
+"sameStateCities": [
+"Kaunas",
+"Klaipėda",
+"Šiauliai"
+],
+"largestCity": "Vilnius",
+"neighbors": [
+"latvia",
+"belarus",
+"poland",
+"russia"
+],
+"hint": "the southernmost of the three Baltic countries",
+"facts": [
+"In 1990 Lithuania was the first Soviet republic to declare independence.",
+"Basketball is the favorite sport in Lithuania."
+],
+"nickname": null
+},
+{
+"id": "luxembourg",
+"name": "Luxembourg",
+"fips": "442",
+"lonLat": [
+6.13,
+49.8
+],
+"capital": "Luxembourg City",
+"sameStateCities": [
+"Esch-sur-Alzette",
+"Differdange",
+"Dudelange"
+],
+"largestCity": "Luxembourg City",
+"neighbors": [
+"belgium",
+"france",
+"germany"
+],
+"hint": "a tiny grand duchy bordered by Belgium, France, and Germany",
+"facts": [
+"Luxembourg is the only grand duchy left in the world.",
+"Public transport in Luxembourg is free."
+],
+"nickname": null,
+"tiny": true,
+"hint2": "This tiny country is the only grand duchy left in the world."
+},
+{
+"id": "malta",
+"name": "Malta",
+"fips": "470",
+"lonLat": [
+14.4,
+35.9
+],
+"capital": "Valletta",
+"sameStateCities": [
+"St. Paul's Bay",
+"Birkirkara",
+"Mosta"
+],
+"largestCity": "St. Paul's Bay",
+"neighbors": [
+"italy"
+],
+"hint": "a tiny island country in the Mediterranean, south of Sicily",
+"facts": [
+"Maltese is the only Semitic language that is official in the European Union.",
+"Valletta is one of the smallest capital cities in Europe."
+],
+"nickname": null,
+"tiny": true
+},
+{
+"id": "moldova",
+"name": "Moldova",
+"fips": "498",
+"lonLat": [
+28.5,
+47.2
+],
+"capital": "Chișinău",
+"sameStateCities": [
+"Bălți",
+"Cahul",
+"Ungheni"
+],
+"largestCity": "Chișinău",
+"neighbors": [
+"romania",
+"ukraine"
+],
+"hint": "a landlocked country between Romania and Ukraine",
+"facts": [
+"Moldova's Mileștii Mici has the largest wine cellars in the world.",
+"Most people in Moldova speak Romanian."
+],
+"nickname": null
+},
+{
+"id": "monaco",
+"name": "Monaco",
+"fips": "492",
+"lonLat": [
+7.42,
+43.74
+],
+"capital": "Monaco",
+"sameStateCities": [
+"Monte Carlo",
+"La Condamine",
+"Fontvieille"
+],
+"largestCity": "Monte Carlo",
+"neighbors": [
+"france"
+],
+"hint": "a tiny country on the French Riviera",
+"facts": [
+"Monaco is the second smallest country in the world.",
+"Cars race through the streets of Monaco in a famous Grand Prix."
+],
+"nickname": null,
+"tiny": true,
+"cityState": true,
+"hint2": "Monte Carlo is one of the districts of this tiny country."
+},
+{
+"id": "montenegro",
+"name": "Montenegro",
+"fips": "499",
+"lonLat": [
+19.3,
+42.8
+],
+"capital": "Podgorica",
+"sameStateCities": [
+"Nikšić",
+"Herceg Novi",
+"Bar"
+],
+"largestCity": "Podgorica",
+"neighbors": [
+"croatia",
+"bosnia",
+"serbia",
+"albania"
+],
+"hint": "a small mountainous country on the Adriatic, south of Bosnia",
+"facts": [
+"The Bay of Kotor in Montenegro looks like a fjord.",
+"The Tara River Canyon in Montenegro is the deepest in Europe."
+],
+"nickname": null
+},
+{
+"id": "netherlands",
+"name": "Netherlands",
+"fips": "528",
+"lonLat": [
+5.4,
+52.2
+],
+"capital": "Amsterdam",
+"sameStateCities": [
+"Rotterdam",
+"The Hague",
+"Utrecht"
+],
+"largestCity": "Amsterdam",
+"neighbors": [
+"belgium",
+"germany"
+],
+"hint": "a flat country of canals and windmills, with much of its land below sea level",
+"facts": [
+"About a quarter of the Netherlands lies below sea level.",
+"The Netherlands is famous for its tulip fields."
+],
+"nickname": null,
+"sentenceName": "the Netherlands"
+},
+{
+"id": "north-macedonia",
+"name": "North Macedonia",
+"fips": "807",
+"lonLat": [
+21.7,
+41.6
+],
+"capital": "Skopje",
+"sameStateCities": [
+"Bitola",
+"Kumanovo",
+"Prilep"
+],
+"largestCity": "Skopje",
+"neighbors": [
+"serbia",
+"bulgaria",
+"greece",
+"albania"
+],
+"hint": "a landlocked Balkan country just north of Greece",
+"facts": [
+"Mother Teresa was born in Skopje.",
+"Lake Ohrid is one of the oldest lakes in Europe."
+],
+"nickname": null
+},
+{
+"id": "norway",
+"name": "Norway",
+"fips": "578",
+"lonLat": [
+9,
+61.5
+],
+"capital": "Oslo",
+"sameStateCities": [
+"Bergen",
+"Trondheim",
+"Stavanger"
+],
+"largestCity": "Oslo",
+"neighbors": [
+"sweden",
+"finland",
+"russia",
+"iceland"
+],
+"hint": "a long, narrow Scandinavian country with deep fjords on the Atlantic",
+"facts": [
+"Norway's fjords were carved by glaciers.",
+"The Nobel Peace Prize is awarded in Oslo."
+],
+"nickname": null
+},
+{
+"id": "poland",
+"name": "Poland",
+"fips": "616",
+"lonLat": [
+19.4,
+52.1
+],
+"capital": "Warsaw",
+"sameStateCities": [
+"Kraków",
+"Łódź",
+"Gdańsk"
+],
+"largestCity": "Warsaw",
+"neighbors": [
+"germany",
+"czechia",
+"slovakia",
+"ukraine",
+"belarus",
+"lithuania",
+"russia"
+],
+"hint": "a large country on the Baltic, between Germany and Belarus",
+"facts": [
+"Marie Curie was born in Warsaw.",
+"Nicolaus Copernicus, who showed that Earth orbits the Sun, was born in Poland."
+],
+"nickname": null
+},
+{
+"id": "portugal",
+"name": "Portugal",
+"fips": "620",
+"lonLat": [
+-8.2,
+39.6
+],
+"capital": "Lisbon",
+"sameStateCities": [
+"Porto",
+"Braga",
+"Coimbra"
+],
+"largestCity": "Lisbon",
+"neighbors": [
+"spain"
+],
+"hint": "the country directly west of Spain, facing the Atlantic Ocean",
+"facts": [
+"Portugal produces more cork than any other country.",
+"Explorer Vasco da Gama sailed from Portugal to India."
+],
+"nickname": null
+},
+{
+"id": "romania",
+"name": "Romania",
+"fips": "642",
+"lonLat": [
+25,
+45.9
+],
+"capital": "Bucharest",
+"sameStateCities": [
+"Cluj-Napoca",
+"Timișoara",
+"Iași"
+],
+"largestCity": "Bucharest",
+"neighbors": [
+"hungary",
+"ukraine",
+"moldova",
+"bulgaria",
+"serbia"
+],
+"hint": "a country on the Black Sea, curved around the Carpathian Mountains",
+"facts": [
+"Bran Castle in Romania is linked to the legend of Dracula.",
+"The River Danube reaches the sea in Romania's Danube Delta."
+],
+"nickname": null
+},
+{
+"id": "russia",
+"name": "Russia",
+"fips": "643",
+"lonLat": [
+38,
+56
+],
+"capital": "Moscow",
+"sameStateCities": [
+"Saint Petersburg",
+"Kazan",
+"Volgograd"
+],
+"largestCity": "Moscow",
+"neighbors": [
+"norway",
+"finland",
+"estonia",
+"latvia",
+"lithuania",
+"poland",
+"belarus",
+"ukraine"
+],
+"hint": "the largest country in the world, stretching across Europe and Asia",
+"facts": [
+"Russia is the largest country in the world.",
+"The Trans-Siberian Railway is the longest railway line in the world."
+],
+"nickname": null
+},
+{
+"id": "san-marino",
+"name": "San Marino",
+"fips": "674",
+"lonLat": [
+12.46,
+43.94
+],
+"capital": "San Marino",
+"sameStateCities": [
+"Serravalle",
+"Borgo Maggiore",
+"Domagnano"
+],
+"largestCity": "Serravalle",
+"neighbors": [
+"italy"
+],
+"hint": "a tiny country on the slopes of Mount Titano",
+"facts": [
+"San Marino claims to be the oldest republic in the world.",
+"San Marino is completely surrounded by Italy."
+],
+"nickname": null,
+"tiny": true,
+"cityState": true,
+"hint2": "This tiny country claims to be the oldest republic in the world."
+},
+{
+"id": "serbia",
+"name": "Serbia",
+"fips": "688",
+"lonLat": [
+20.9,
+44.1
+],
+"capital": "Belgrade",
+"sameStateCities": [
+"Novi Sad",
+"Niš",
+"Kragujevac"
+],
+"largestCity": "Belgrade",
+"neighbors": [
+"hungary",
+"romania",
+"bulgaria",
+"north-macedonia",
+"montenegro",
+"bosnia",
+"croatia"
+],
+"hint": "a landlocked Balkan country where the River Sava meets the Danube",
+"facts": [
+"Belgrade stands where the River Sava joins the Danube.",
+"Tennis star Novak Djokovic was born in Belgrade."
+],
+"nickname": null
+},
+{
+"id": "slovakia",
+"name": "Slovakia",
+"fips": "703",
+"lonLat": [
+19.5,
+48.7
+],
+"capital": "Bratislava",
+"sameStateCities": [
+"Košice",
+"Prešov",
+"Žilina"
+],
+"largestCity": "Bratislava",
+"neighbors": [
+"czechia",
+"poland",
+"ukraine",
+"hungary",
+"austria"
+],
+"hint": "a landlocked country east of Czechia, home of the High Tatra mountains",
+"facts": [
+"Bratislava sits right beside the borders of Austria and Hungary.",
+"The High Tatras are the tallest part of the Carpathian Mountains."
+],
+"nickname": null
+},
+{
+"id": "slovenia",
+"name": "Slovenia",
+"fips": "705",
+"lonLat": [
+14.8,
+46.1
+],
+"capital": "Ljubljana",
+"sameStateCities": [
+"Maribor",
+"Celje",
+"Koper"
+],
+"largestCity": "Ljubljana",
+"neighbors": [
+"italy",
+"austria",
+"hungary",
+"croatia"
+],
+"hint": "a small country between Italy and Croatia, with a very short Adriatic coast",
+"facts": [
+"Lake Bled in Slovenia has a tiny church on its island.",
+"Postojna Cave in Slovenia is home to pale cave salamanders called olms."
+],
+"nickname": null
+},
+{
+"id": "spain",
+"name": "Spain",
+"fips": "724",
+"lonLat": [
+-3.6,
+40.2
+],
+"capital": "Madrid",
+"sameStateCities": [
+"Barcelona",
+"Valencia",
+"Seville"
+],
+"largestCity": "Madrid",
+"neighbors": [
+"portugal",
+"france",
+"andorra"
+],
+"hint": "the larger of the two countries on the Iberian Peninsula",
+"facts": [
+"The Sagrada Família in Barcelona has been under construction since 1882.",
+"Spain shares the Iberian Peninsula with Portugal."
+],
+"nickname": null
+},
+{
+"id": "sweden",
+"name": "Sweden",
+"fips": "752",
+"lonLat": [
+15,
+62
+],
+"capital": "Stockholm",
+"sameStateCities": [
+"Gothenburg",
+"Malmö",
+"Uppsala"
+],
+"largestCity": "Stockholm",
+"neighbors": [
+"norway",
+"finland",
+"denmark"
+],
+"hint": "the largest Scandinavian country, between Norway and the Baltic Sea",
+"facts": [
+"Most Nobel Prizes are awarded in Stockholm.",
+"IKEA was founded in Sweden."
+],
+"nickname": null
+},
+{
+"id": "switzerland",
+"name": "Switzerland",
+"fips": "756",
+"lonLat": [
+8.2,
+46.8
+],
+"capital": "Bern",
+"sameStateCities": [
+"Zurich",
+"Geneva",
+"Basel"
+],
+"largestCity": "Zurich",
+"neighbors": [
+"germany",
+"france",
+"italy",
+"austria",
+"liechtenstein"
+],
+"hint": "an Alpine country with four national languages",
+"facts": [
+"Switzerland has four national languages: German, French, Italian, and Romansh.",
+"The Swiss flag is square."
+],
+"nickname": null
+},
+{
+"id": "ukraine",
+"name": "Ukraine",
+"fips": "804",
+"lonLat": [
+31.4,
+49
+],
+"capital": "Kyiv",
+"sameStateCities": [
+"Kharkiv",
+"Odesa",
+"Lviv"
+],
+"largestCity": "Kyiv",
+"neighbors": [
+"poland",
+"slovakia",
+"hungary",
+"romania",
+"moldova",
+"belarus",
+"russia"
+],
+"hint": "the largest country entirely inside Europe, on the Black Sea",
+"facts": [
+"Ukraine is the largest country entirely inside Europe.",
+"Ukraine's flag is often described as blue sky over yellow wheat."
+],
+"nickname": null
+},
+{
+"id": "uk",
+"name": "United Kingdom",
+"fips": "826",
+"lonLat": [
+-1.8,
+52.9
+],
+"capital": "London",
+"sameStateCities": [
+"Birmingham",
+"Manchester",
+"Glasgow"
+],
+"largestCity": "London",
+"neighbors": [
+"ireland",
+"france",
+"iceland"
+],
+"hint": "a country mostly on the island of Great Britain, across the English Channel from France",
+"facts": [
+"The United Kingdom is made up of England, Scotland, Wales, and Northern Ireland.",
+"Big Ben is the great bell in the clock tower at London's Palace of Westminster."
+],
+"nickname": null,
+"sentenceName": "the United Kingdom"
+},
+{
+"id": "vatican",
+"name": "Vatican City",
+"fips": "336",
+"lonLat": [
+12.45,
+41.9
+],
+"capital": "Vatican City",
+"sameStateCities": [],
+"largestCity": "Vatican City",
+"neighbors": [
+"italy"
+],
+"hint": "the smallest country in the world, inside the city of Rome",
+"facts": [
+"Vatican City is the smallest country in the world.",
+"The Swiss Guard has protected the Pope for more than 500 years."
+],
+"nickname": null,
+"tiny": true,
+"cityState": true,
+"hint2": "This tiny country is home to the Pope and St. Peter's Basilica."
+}
+]

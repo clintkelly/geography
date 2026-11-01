@@ -4,7 +4,7 @@ import { CardArt } from './art';
 import { cardFor, mapFor } from './content';
 import { Key, useKeys } from './keys';
 import { playSound } from './sound';
-import { Marker, WorldMap, type Highlight } from './WorldMap';
+import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
 
 interface Result {
   optionId: string;
@@ -87,7 +87,20 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
           ))}
         </WorldMap>
       )}
-      {clickable && <WorldMap key={q.id} map={map} label="Blank map. Click a state." highlights={highlights} onFeatureClick={onFeatureClick} />}
+      {clickable && (
+        <WorldMap key={q.id} map={map} label="Blank map. Click a place." highlights={highlights} onFeatureClick={onFeatureClick}>
+          {(scale) => q.options.filter((o) => o.tiny).map((o) => (
+            <Dot
+              key={o.id}
+              id={o.id}
+              at={map.project(o.lonLat ?? [0, 0])}
+              scale={scale}
+              tone={result ? (o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'default') : 'default'}
+              {...(result ? {} : { onClick: () => onAnswer(o.id) })}
+            />
+          ))}
+        </WorldMap>
+      )}
       {!clickable && (
         <div className="options">
           {q.options.map((o, i) => {

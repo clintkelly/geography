@@ -1,3 +1,4 @@
+import { spaced } from '../content/geo';
 import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
 import { canUse, heal, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
@@ -280,7 +281,7 @@ function setupSearch(e: Expedition, pack: Pack, rng: Rng, targetId: string): Exp
   else {
     // Harder trails offer neighboring places, which are easier to confuse.
     const pool = e.difficulty === 'scout' ? rng.shuffle(others) : nearestFirst(others, target);
-    candidates = [target, ...pool.slice(0, 3)];
+    candidates = [target, ...spaced(pool, target, 3)];
   }
   const free = e.freeClue ? 1 : 0;
   return {
