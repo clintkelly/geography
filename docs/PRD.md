@@ -508,4 +508,20 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 
 **Whole world:** 21 regions under eight headings: United States (4), Europe (4), Africa (5), Asia (3), North America (2), South America, Oceania and Antarctica. Countries are UN members plus Vatican City, Palestine and Taiwan. Oceania uses a Pacific-centered map, and Antarctica uses a polar map with 10 landmarks in place of countries. Each continent has two new regular creatures and one rare, shared across its regions. Fact reviews for the new content are in docs/fact-review/.
 
+**Wolves and sea creatures:** Howlpup (evolves to Moonfang) and Toothling (evolves to the Megalodon) are regular creatures across several regions. Emberwolf and Inkraken are rare. Pebbletort (Stone, evolves to the Mount Tortoise) and Lilyhop (Leaf, evolves to the Lily Monarch) are regular creatures added later. A region with two rares offers the second after the first is befriended.
+
+**Moves:** every creature has its own Attack and Guard names, listed in src/content/moves.ts. Attacks are steady (+1 charge) or fierce (+1 damage, no charge, and a miss takes 1 extra damage). Guards are steady (1 damage, block 3), spiky (2 damage, block 2), wall (block 5) or focus (1 damage, block 2, +2 charge). A simulation across many opponents put every combination within a few points of steady. The battle team row shows each member's type.
+
+**Type effects:** a hit sprays the attacker's type particles where it lands: water splashes, embers rise, leaves twirl, rocks drop, wind streaks or ice shatters. A Special fills the scene with its type: a wave, rising embers, a leaf storm, falling rocks, wind or snow. The effects are decorative only, and reduced-motion settings hide them.
+
 **Music:** camp, a trail theme per continent, battle, final showdown, rare encounter, trail event and homecoming.
+
+**Focus:** Camp offers Everything, Places and capitals, or Flags. Flags needs a region with countries, so US states and Antarctica don't offer it yet.
+
+**Flags:** 196 accurate flags from the MIT-licensed flag-icons set, used in questions and on cards.
+
+**Types:** six types in a loop: Tide beats Flame, Flame beats Leaf, Leaf beats Stone, Stone beats Gale, Gale beats Frost, Frost beats Tide. A strong matchup adds 1 damage to Attack and strong Specials, and a weak one takes 1 away, never below 1. A creature traveling alone has no weak matchups, so right answers always win. Types never change the opponent's damage.
+
+**Passport:** a stamp for each region. Bronze for a finished trail, silver for a full map, gold when every card there is Gold.
+
+**Continent Bosses:** eight bosses, one per picker heading, appear as sightings once every region under that heading is stamped. They have 8 more HP, 4 more turns, a big hit every third turn that Guard softens, and questions from the whole continent.

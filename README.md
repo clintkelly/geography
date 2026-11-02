@@ -50,6 +50,8 @@ Field Notes after right answers are worth reading. They come back as Field Note 
 
 Along the way you can fill the Explorer's Map, level up and evolve your companions, and collect badges and cards, which rise from Bronze to Silver, Gold, and Shiny as you remember more.
 
+Every creature has a **type**, and each type is strong against one other, so mixing types on your team helps. Finish a trail in every region of a continent and its **Continent Boss** appears at Camp. Choose **Everything**, **Places and capitals** or **Flags** to set what a trail asks about, and collect stamps in your **Passport**.
+
 Want a creature in the middle of a fight? Once one you don't own is at half HP, spend 2 charge on **Bold Befriend** and get two harder questions right in a row. Play well and your Trail Score rises, raising your chance of a **rare encounter**.
 
 | Difficulty | What changes |
@@ -65,7 +67,7 @@ The whole game works from the keyboard. Buttons show their keys.
 | Where | Keys |
 | --- | --- |
 | Anywhere | **Enter** or **Space** for the main action, **Tab** to move between buttons |
-| Camp | **R** region, **L** trail length, **T** sighting, **1–3** difficulty, **P** switch explorer, **O** settings |
+| Camp | **R** region, **L** trail length, **T** sighting, **1–3** difficulty, **P** switch explorer, **O** settings, **F** question focus, **V** Passport |
 | Prep Shop | **1–9** add or remove a team member, **S**, **C**, **T** to buy |
 | Finding a place | **1–4** choose, **C** clue, **N** narrow the search, **A** atlas |
 | Blank maps | Arrow keys move the highlight, **Enter** chooses |

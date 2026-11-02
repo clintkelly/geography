@@ -4,6 +4,8 @@ import { ECONOMY } from '../engine/economy';
 import { CardArt } from './art';
 import { cardFor, mapFor, place } from './content';
 import { Key, useKeys } from './keys';
+import { PlaceFlash } from './PlaceFlash';
+import { flagUrl } from './TypeGuide';
 import { useMapCursor } from './mapCursor';
 import { playSound } from './sound';
 import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
@@ -44,6 +46,8 @@ function CardAward({ placeId, level }: { placeId: string; level?: string }) {
         <h3>{card.name}</h3>
         <p>{card.subtitle}{card.capital ? ` · Capital: ${card.capital}` : ''}</p>
       </div>
+      {card.flag && <img className="card-flag" src={flagUrl(card.flag)} alt={`Flag of ${card.name}`} />}
+      <PlaceFlash placeId={placeId} />
     </div>
   );
 }
@@ -97,6 +101,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
       {tag && <p className="recall-tag">{tag}</p>}
       {q.recallOf && <p className="recall-tag">Field Note check! A right answer is a critical: +{ECONOMY.recallBonus} point and a charge.</p>}
       <h2>{q.prompt}</h2>
+      {q.flag && <img key={q.id} className="quiz-flag" src={flagUrl(q.flag)} alt="The flag in question" />}
       {q.inputType === 'map-marker' && (
         <WorldMap key={q.id} map={map} label="Map with four numbered markers" interactive={false}>
           {(scale) => q.options.map((o, i) => (
@@ -133,7 +138,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
             const state = !result ? '' : o.id === q.acceptedId ? 'correct' : o.id === result.optionId ? 'wrong' : 'dim';
             return (
               <button key={o.id} type="button" className={`option ${state}`} disabled={!!result} onClick={() => onAnswer(o.id)}>
-                <Key k={i + 1} /><span className="option-label">{marker && !result ? `Marker ${i + 1}` : marker ? `${i + 1}: ${o.label}` : o.label}</span>
+                <Key k={i + 1} />{o.flag && <img className="option-flag" src={flagUrl(o.flag)} alt={result ? '' : `Flag ${i + 1}`} />}{(!o.flag || result) && <span className="option-label">{marker && !result ? `Marker ${i + 1}` : marker ? `${i + 1}: ${o.label}` : o.label}</span>}
               </button>
             );
           })}
@@ -145,6 +150,7 @@ export function QuestionPanel({ question: q, regionId, result, onAnswer, onConti
           <p className="learn"><strong>{result.correct ? 'Correct!' : `Not yet. The answer is ${accepted}.`}</strong> {q.explanation}</p>
           {picked?.about && <p className="picked-note"><span>Your pick</span>{picked.about}</p>}
           {result.correct && q.fieldNote && !q.recallOf && <p className="field-note"><span>Field Note: remember this!</span>{q.fieldNote}<small>It may come back as a bonus question.</small></p>}
+          {!clickable && q.inputType !== 'map-marker' && !cardId && q.locationId && <PlaceFlash placeId={q.locationId} />}
           {result.cardId && <CardAward placeId={result.cardId} />}
           {result.cardUp && <CardAward placeId={result.cardUp.placeId} level={result.cardUp.level} />}
           {log && <p className="muted">{log}</p>}

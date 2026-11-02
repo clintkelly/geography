@@ -8,12 +8,16 @@ import { levelOf, MAX_TEAM, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS,
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { earnedBadges } from './badges';
 import { cardLevelOf, type CardLevel } from './cards';
+import { typeEdge } from './types';
 import { availableRare, rareChance, trailScore } from './luck';
 import { streakReward } from './streak';
 import { Rng } from './rng';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
-export const SCHEMA_VERSION = 6;
+export const SCHEMA_VERSION = 7;
+/** What questions a trail asks. */
+export type Focus = 'all' | 'basics' | 'flags';
+export const FOCUSES: readonly Focus[] = ['all', 'basics', 'flags'];
 const RECALL_CHANCE = 0.4;
 const REVIEW_CHANCE = 0.5;
 const ATTEMPT_LIMIT = 500;
@@ -25,6 +29,8 @@ export const BALANCE = {
   regularMaxTurns: 8,
   guardianMaxTurns: 10,
 } as const;
+/** Continent bosses are tougher guardians with a big hit every third turn. */
+const BOSS = { hp: 8, turns: 4, power: 3 } as const;
 
 /** What finishing a hunt gives: the creature itself, or honest XP once every species is owned. */
 export type Reward = { kind: 'creature'; speciesId: string } | { kind: 'bond'; xp: number };
@@ -99,6 +105,8 @@ export interface Expedition {
   regionId: string;
   difficulty: Difficulty;
   trail: TrailLength;
+  /** Older trips ask everything. */
+  focus?: Focus;
   rngState: number;
   reward: Reward;
   /** The creature fighting right now. */
@@ -171,6 +179,8 @@ export interface Summary {
   levelUp?: number;
   /** Badges earned by this trip. */
   newBadges?: string[];
+  /** The region stamped for the first time by this trip. */
+  newStamp?: string;
   tamedIds?: string[];
 }
 
@@ -180,6 +190,7 @@ export interface Settings {
   lastDifficulty: Difficulty;
   lastRegionId: string;
   lastTrail: TrailLength;
+  lastFocus?: Focus;
   muted: boolean;
   /** 0 to 1. */
   volume: number;
@@ -228,6 +239,8 @@ export interface SaveData {
   bestStreak?: number;
   /** The last team taken, offered again next trip. */
   lastTeamIds?: string[];
+  /** Regions with a finished trail, shown as stamps in the Passport. */
+  stampedRegions?: string[];
   tamedAny?: boolean;
   rareFound?: boolean;
   completedExpeditions: number;
@@ -243,7 +256,7 @@ export interface SaveData {
 }
 
 export type Command =
-  | { type: 'start'; offerId: string; regionId: string; difficulty: Difficulty; trail: TrailLength }
+  | { type: 'start'; offerId: string; regionId: string; difficulty: Difficulty; trail: TrailLength; focus?: Focus }
   | { type: 'selectCompanion'; instanceId: string }
   | { type: 'toggleTeam'; instanceId: string }
   | { type: 'switchTo'; instanceId: string }
@@ -291,11 +304,31 @@ export function allowedDifficulties(settings: Settings, region: Region): Difficu
   return allowed.length > 0 ? allowed : [region.difficulties[0] as Difficulty];
 }
 
-function questionPool(pack: Pack, e: Pick<Expedition, 'regionId' | 'difficulty'>): Question[] {
-  const region = pack.questions.filter((q) => q.regionId === e.regionId);
+const inFocus = (focus: Focus | undefined) => (q: Question) => {
+  if (focus === 'basics') return q.topic === 'location' || q.topic === 'capital';
+  if (focus === 'flags') return q.topic === 'flag';
+  return true;
+};
+
+/** A region has this focus if it has any questions for it. Antarctica has no flag questions. */
+export const regionHasFocus = (pack: Pack, regionId: string, focus: Focus) => pack.questions.some((q) => q.regionId === regionId && inFocus(focus)(q));
+
+function questionPool(pack: Pack, e: Pick<Expedition, 'regionId' | 'difficulty' | 'focus'>, wide = false): Question[] {
+  const continent = pack.regions.find((r) => r.id === e.regionId)?.continent;
+  const regions = wide ? pack.regions.filter((r) => r.continent === continent).map((r) => r.id) : [e.regionId];
+  const matches = inFocus(e.focus);
+  const region = pack.questions.filter((q) => regions.includes(q.regionId) && matches(q));
   const tier = region.filter((q) => q.difficulty === e.difficulty);
   return tier.length > 0 ? tier : region;
 }
+
+/** Boss hunts open up once a child has finished a trail in every region of the continent. */
+export function bossUnlocked(save: Pick<SaveData, 'stampedRegions'>, pack: Pack, regionId: string): boolean {
+  const continent = pack.regions.find((r) => r.id === regionId)?.continent;
+  return pack.regions.filter((r) => r.continent === continent).every((r) => save.stampedRegions?.includes(r.id));
+}
+
+const isBossSlot = (slot: Slot, pack: Pack) => slot.kind === 'guardian' && !!pack.species.find((s) => s.id === slot.opponentId)?.boss;
 
 function nearestFirst(places: readonly Place[], target: Place): Place[] {
   return [...places].sort((a, b) => degreesApart(a, target) - degreesApart(b, target));
@@ -307,13 +340,15 @@ export function isRegionComplete(found: readonly string[], pack: Pack, regionId:
 }
 
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
   const owned = new Set(save.companions.map((c) => c.speciesId));
   let nextId = save.nextId;
   const offers = pack.regions.flatMap((region) => {
     const mapDone = !!save.foundPlaces && isRegionComplete(save.foundPlaces, pack, region.id);
-    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone)).map((s) => s.id));
-    const ordered = [...unowned.filter((id) => id === pack.featuredSpeciesId), ...unowned.filter((id) => id !== pack.featuredSpeciesId)];
+    const bossReady = bossUnlocked(save, pack, region.id);
+    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady)).map((s) => s.id));
+    const isBoss = (id: string) => !!pack.species.find((s) => s.id === id)?.boss;
+    const ordered = [...unowned.filter(isBoss), ...unowned.filter((id) => id === pack.featuredSpeciesId), ...unowned.filter((id) => id !== pack.featuredSpeciesId && !isBoss(id))];
     const rewards: Reward[] = ordered.slice(0, 2).map((speciesId) => ({ kind: 'creature', speciesId }));
     if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
     return rewards.map((reward): Offer => ({ id: `offer-${nextId++}`, regionId: region.id, reward }));
@@ -391,6 +426,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const region = pack.regions.find((r) => r.id === cmd.regionId);
   const offer = save.offers.find((o) => o.id === cmd.offerId);
   if (!region || !offer || offer.regionId !== cmd.regionId) return save;
+  const focus: Focus = cmd.focus && regionHasFocus(pack, cmd.regionId, cmd.focus) ? cmd.focus : 'all';
   const allowed = allowedDifficulties(save.settings, region);
   const difficulty = allowed.includes(cmd.difficulty) ? cmd.difficulty : (allowed[0] as Difficulty);
 
@@ -403,7 +439,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const route = walkTrail(places, kinds.length, rng);
   // A small region shortens the trail from the middle, keeping the final showdown.
   const stops = kinds.length > route.length ? [...kinds.slice(0, route.length - 1), 'guardian' as const] : kinds;
-  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare).map((s) => s.id);
+  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss).map((s) => s.id);
   const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
   const opponents = rng.shuffle(locals.filter((id) => id !== target));
   const events = rng.shuffle(TRAIL_EVENTS);
@@ -422,6 +458,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const blank: Expedition = {
     id,
     regionId: cmd.regionId,
+    focus,
     difficulty,
     trail: cmd.trail,
     rngState: 0,
@@ -462,7 +499,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     lastSummary: null,
     nextId: save.nextId + 1,
     rngState: rng.state,
-    settings: { ...save.settings, lastDifficulty: difficulty, lastRegionId: cmd.regionId, lastTrail: cmd.trail },
+    settings: { ...save.settings, lastDifficulty: difficulty, lastRegionId: cmd.regionId, lastTrail: cmd.trail, lastFocus: cmd.focus ?? 'all' },
   };
 }
 
@@ -477,7 +514,8 @@ function buy(e: Expedition, item: PrepItem): Expedition {
 function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack, now: number): { e: Expedition; question: Question } {
   const rng = new Rng(e.rngState);
   const context = { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId };
-  const pool = questionPool(pack, e);
+  // A boss tests everything learned on its continent.
+  const pool = questionPool(pack, e, isBossSlot(slot, pack));
   const seen = new Set(save.seenFacts);
   const fresh = (q: Question) => !e.askedQuestionIds.includes(q.id);
   const recall = pool.filter((q) => q.recallOf && seen.has(q.recallOf) && fresh(q));
@@ -510,8 +548,12 @@ function memberStats(save: SaveData, e: Expedition, instanceId: string, slot: Sl
       playerMaxHp: stats.maxHp + (e.sturdy ? STURDY_HP : 0),
       playerAttack: stats.attack,
       special: species.special.template,
+      attackStyle: species.moves.attackStyle,
+      guardStyle: species.moves.guardStyle,
       specialBonus: stats.specialBonus,
       turf: species.habitats.includes(biome) ? TURF_BONUS : 0,
+      // A lone creature can't switch, so a weak matchup never costs it the fight.
+      typeEdge: Math.max(typeEdge(species.type, speciesOf(pack, slot.opponentId).type), teamOf(e).length > 1 ? -1 : 0),
     },
   };
 }
@@ -570,6 +612,7 @@ function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
   }
 
   const guardian = slot.kind === 'guardian';
+  const boss = isBossSlot(slot, pack);
   const team = teamOf(e);
   const leadId = team[0] as string;
   const lead = memberStats(save, e, leadId, slot, pack);
@@ -577,9 +620,10 @@ function enterEncounter(save: SaveData, pack: Pack, now: number): SaveData {
   const stage = STAGES[lead.stage];
   const started = startCombat({
     ...lead.config,
-    opponentMaxHp: (guardian ? stage.finalHp : stage.regularHp + (slot.rare ? RARE_EXTRA_HP : 0)) + scale.hp,
+    opponentMaxHp: (guardian ? stage.finalHp : stage.regularHp + (slot.rare ? RARE_EXTRA_HP : 0)) + scale.hp + (boss ? BOSS.hp : 0),
     enemyPattern: BALANCE.enemyPattern.map((d) => d + scale.damage),
-    maxTurns: (guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns) + scale.turns,
+    maxTurns: (guardian ? BALANCE.guardianMaxTurns : BALANCE.regularMaxTurns) + scale.turns + (boss ? BOSS.turns : 0),
+    ...(boss ? { bossPower: BOSS.power } : {}),
   });
   const combat = { ...started, charge: lead.charge };
   const bench = Object.fromEntries(team.map((id) => {
@@ -630,7 +674,7 @@ function startTame(save: SaveData, e: Expedition, b: Battle, pack: Pack): SaveDa
   const held = b.heldQuestions?.tame;
   if (held) return { ...save, expedition: { ...e, battle: { ...b, phase: 'question', action: 'tame', question: held, heldQuestions: { regular } } } };
   const harder = DIFFICULTIES[Math.min(DIFFICULTIES.indexOf(e.difficulty) + 1, DIFFICULTIES.length - 1)] as Difficulty;
-  const pool = questionPool(pack, { regionId: e.regionId, difficulty: harder }).filter((q) => !q.recallOf);
+  const pool = questionPool(pack, { regionId: e.regionId, difficulty: harder, ...(e.focus ? { focus: e.focus } : {}) }).filter((q) => !q.recallOf);
   const rng = new Rng(e.rngState);
   const picked = pickQuestion(pool, { asked: e.askedQuestionIds, recent: save.recentQuestionIds, locationId: slot.locationId }, rng);
   const question = presentQuestion(picked, rng);
@@ -896,7 +940,9 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
     companions.push({ instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: reward.speciesId, bondXp: 0 });
   }
 
-  const claimed: SaveData = { ...save, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
+  const stamped = save.stampedRegions ?? [];
+  const newStamp = !applied && !stamped.includes(e.regionId) ? e.regionId : undefined;
+  const claimed: SaveData = { ...save, stampedRegions: newStamp ? [...stamped, newStamp] : stamped, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
   const badges = earnedBadges(claimed, pack);
   const newBadges = badges.filter((id) => !save.badges.includes(id));
 
@@ -910,6 +956,7 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
       recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT),
       lastSummary: {
         expeditionId: e.id,
+        ...(newStamp ? { newStamp } : {}),
         reward,
         answered: e.answered,
         correct: e.correct,

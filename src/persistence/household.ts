@@ -113,10 +113,17 @@ export function migrateV5Save(old: SaveData, pack: Pack): SaveData {
   };
 }
 
+/** Version 6 had no Passport. A region with three found places has seen a finished trail. */
+export function migrateV6Save(old: SaveData, pack: Pack): SaveData {
+  const s = structuredClone(old);
+  const stamped = pack.regions.filter((r) => pack.places.filter((p) => p.regionId === r.id && s.foundPlaces.includes(p.id)).length >= 3).map((r) => r.id);
+  return { ...s, schemaVersion: SCHEMA_VERSION, stampedRegions: stamped, settings: { ...s.settings, lastFocus: 'all' } };
+}
+
 function upgrade(h: Household, pack: Pack): Household {
   const v = h.meta.schemaVersion;
   const older = v === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : v === 3 ? (s: SaveData) => migrateV3Save(s, pack) : v === 4 ? migrateV4Save : (s: SaveData) => s;
-  const step = (s: SaveData) => migrateV5Save(older(s), pack);
+  const step = (s: SaveData) => migrateV6Save(v <= 5 ? migrateV5Save(older(s), pack) : s, pack);
   return { meta: { ...h.meta, schemaVersion: SCHEMA_VERSION }, profiles: Object.fromEntries(Object.entries(h.profiles).map(([id, s]) => [id, step(s)])) };
 }
 

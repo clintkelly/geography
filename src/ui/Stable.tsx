@@ -3,6 +3,7 @@ import { levelOf, levelProgress, MAX_LEVEL } from '../engine/progression';
 import { Sprite } from './art';
 import { companionView } from './content';
 import { Key } from './keys';
+import { TypeLine } from './TypeGuide';
 
 /** The creatures a child has befriended. Pass onPick to choose one, or dispatch to allow nicknames. */
 export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
@@ -23,7 +24,9 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
             <Sprite id={v.artId} size={96} className="idle-sprite" />
             <strong>{v.name}</strong>
             {c.nickname && <span className="muted">{v.formName}</span>}
-            <span className="muted">Level {level} · Special: {v.species.special.name}</span>
+            <TypeLine type={v.species.type} />
+            <span className="muted">Level {level}</span>
+            <span className="move-list"><span>{v.species.moves.attack}</span><span>{v.species.moves.guard}</span><span className="move-special">{v.species.special.name}</span></span>
             <span className="xp-track" role="img" aria-label={level >= MAX_LEVEL ? 'Maximum level' : `${Math.round(levelProgress(c.bondXp) * 100)} percent to the next level`}><span className="xp-fill" style={{ width: `${levelProgress(c.bondXp) * 100}%` }} /></span>
           </>
         );

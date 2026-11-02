@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { reportError } from './errorLog';
 
 /** If a screen crashes, say so plainly instead of showing a blank page. Saves aren't touched. */
 export class ErrorScreen extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -10,6 +11,7 @@ export class ErrorScreen extends Component<{ children: ReactNode }, { error: Err
 
   override componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(error, info.componentStack);
+    reportError(error, 'screen', info.componentStack ?? undefined);
   }
 
   override render() {

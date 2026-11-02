@@ -2056,5 +2056,356 @@
         "70eb4d05-6585-4dc0-a0cd-ac72b9fa93fd"
       ]
     }
+  },
+  "bossesStampsTypes": {
+    "ironbison.png": {
+      "subject": "massive bison with iron-plated horns and a storm-grey mane",
+      "job_id": "1b825dcd-9106-41ec-a431-9377e1fd0ac2"
+    },
+    "ironbison-attack.png": {
+      "subject": "massive bison with iron-plated horns and a storm-grey mane",
+      "job_id": "7ce37474-f2a6-407f-b357-3ca43d488e38"
+    },
+    "ironbison-guard.png": {
+      "subject": "massive bison with iron-plated horns and a storm-grey mane",
+      "job_id": "71e7a734-fb24-4cd7-8590-babb7e4f41c9"
+    },
+    "ironbison-special.png": {
+      "subject": "massive bison with iron-plated horns and a storm-grey mane",
+      "job_id": "0bff70af-9867-46fd-9d53-bbcfbadfc605"
+    },
+    "ironbison-hit.png": {
+      "subject": "massive bison with iron-plated horns and a storm-grey mane",
+      "job_id": "b245444a-4863-4048-8401-e1cd90ee434d"
+    },
+    "bastion.png": {
+      "subject": "walking stone castle golem with turret shoulders",
+      "job_id": "4de68f11-b931-4df6-942b-f69b9146b151"
+    },
+    "bastion-attack.png": {
+      "subject": "walking stone castle golem with turret shoulders",
+      "job_id": "8ab98cb2-eb3f-41c5-92d0-8dbaa6eb2d25"
+    },
+    "bastion-guard.png": {
+      "subject": "walking stone castle golem with turret shoulders",
+      "job_id": "f8dd92b1-a51b-4eff-931f-2a57cbffb90a"
+    },
+    "bastion-special.png": {
+      "subject": "walking stone castle golem with turret shoulders",
+      "job_id": "2cb82845-3723-412d-9be0-5e7c2324852b"
+    },
+    "bastion-hit.png": {
+      "subject": "walking stone castle golem with turret shoulders",
+      "job_id": "69f46fad-f231-40c0-b04b-66d36f0b535c"
+    },
+    "sphinxar.png": {
+      "subject": "huge sandstone sphinx-lion with glowing ember eyes",
+      "job_id": "40ab0758-17ca-4a4f-8200-fc53bb45a983"
+    },
+    "sphinxar-attack.png": {
+      "subject": "huge sandstone sphinx-lion with glowing ember eyes",
+      "job_id": "4aaf21b9-9825-4529-8ae4-6ad2fd6f7608"
+    },
+    "sphinxar-guard.png": {
+      "subject": "huge sandstone sphinx-lion with glowing ember eyes",
+      "job_id": "92fa3d6b-083b-464e-bcf7-fabc5d1ae6a4"
+    },
+    "sphinxar-special.png": {
+      "subject": "huge sandstone sphinx-lion with glowing ember eyes",
+      "job_id": "b15ca11e-8d84-4a55-8404-92c526289121"
+    },
+    "sphinxar-hit.png": {
+      "subject": "huge sandstone sphinx-lion with glowing ember eyes",
+      "job_id": "2d8a1120-1958-4f0f-96d6-1fede3ef4330"
+    },
+    "typhoondrake.png": {
+      "subject": "long blue storm dragon wrapped in a swirling wave",
+      "job_id": "c5a4e122-b2a1-45b4-9694-d0336863512a"
+    },
+    "typhoondrake-attack.png": {
+      "subject": "long blue storm dragon wrapped in a swirling wave",
+      "job_id": "25176603-1317-4b42-97c8-f86a7a644224"
+    },
+    "typhoondrake-guard.png": {
+      "subject": "long blue storm dragon wrapped in a swirling wave",
+      "job_id": "0130dd57-fedf-41af-94b5-380025200051"
+    },
+    "typhoondrake-special.png": {
+      "subject": "long blue storm dragon wrapped in a swirling wave",
+      "job_id": "4c3c7a9c-edcf-46cd-bba2-2fa156d78fae"
+    },
+    "typhoondrake-hit.png": {
+      "subject": "long blue storm dragon wrapped in a swirling wave",
+      "job_id": "a753257e-61bd-4ad2-8458-3e5dc68dc376"
+    },
+    "hurricoil.png": {
+      "subject": "giant feathered wind serpent with spiral hurricane wings",
+      "job_id": "9c19d8f2-a3c0-449f-95a3-52f3eef3f1be"
+    },
+    "hurricoil-attack.png": {
+      "subject": "giant feathered wind serpent with spiral hurricane wings",
+      "job_id": "bdcaa0cf-cfb8-489f-8246-e781db54aec2"
+    },
+    "hurricoil-guard.png": {
+      "subject": "giant feathered wind serpent with spiral hurricane wings",
+      "job_id": "b6ad9e79-98a9-4a9d-bdc6-853b1629ab74"
+    },
+    "hurricoil-special.png": {
+      "subject": "giant feathered wind serpent with spiral hurricane wings",
+      "job_id": "9ed8b64f-0c40-4b55-9122-f32330d86658"
+    },
+    "hurricoil-hit.png": {
+      "subject": "giant feathered wind serpent with spiral hurricane wings",
+      "job_id": "d7fd98e2-7191-4506-aa43-43c744ca8e82"
+    },
+    "amazorn.png": {
+      "subject": "enormous jungle vine serpent with thorny leaf crown",
+      "job_id": "c6cd56f2-57f2-4200-aae5-6176b859e94d"
+    },
+    "amazorn-attack.png": {
+      "subject": "enormous jungle vine serpent with thorny leaf crown",
+      "job_id": "e5b9648b-8185-4b45-a8be-83fe9e58ddba"
+    },
+    "amazorn-guard.png": {
+      "subject": "enormous jungle vine serpent with thorny leaf crown",
+      "job_id": "3afc0f5c-ae55-49f9-8724-20bad319fe6b"
+    },
+    "amazorn-special.png": {
+      "subject": "enormous jungle vine serpent with thorny leaf crown",
+      "job_id": "451fb745-8f70-42f5-b7e9-b1679f701863"
+    },
+    "amazorn-hit.png": {
+      "subject": "enormous jungle vine serpent with thorny leaf crown",
+      "job_id": "cc24dcf7-588e-406b-966d-94f1ae46270e"
+    },
+    "coralcolossus.png": {
+      "subject": "giant coral and turtle-shell sea titan",
+      "job_id": "c9bf803f-6dfb-43a3-b5bb-05be727887f2"
+    },
+    "coralcolossus-attack.png": {
+      "subject": "giant coral and turtle-shell sea titan",
+      "job_id": "82c99afe-8ad8-4faf-9c3c-0aad0cc556b2"
+    },
+    "coralcolossus-guard.png": {
+      "subject": "giant coral and turtle-shell sea titan",
+      "job_id": "d5db172b-ea04-4bf9-8ff6-bbf20a572336"
+    },
+    "coralcolossus-special.png": {
+      "subject": "giant coral and turtle-shell sea titan",
+      "job_id": "794eba1d-9e24-4eff-97fe-2f20e22b9eeb"
+    },
+    "coralcolossus-hit.png": {
+      "subject": "giant coral and turtle-shell sea titan",
+      "job_id": "b4f2cb63-77f8-4003-996b-5b6ce165362a"
+    },
+    "frostmaw.png": {
+      "subject": "gigantic ice walrus-beast with glacier tusks",
+      "job_id": "aa12ea67-28ac-43ce-b85f-62303fd725d1"
+    },
+    "frostmaw-attack.png": {
+      "subject": "gigantic ice walrus-beast with glacier tusks",
+      "job_id": "b977b9b8-12e2-416a-8af0-964b38da5766"
+    },
+    "frostmaw-guard.png": {
+      "subject": "gigantic ice walrus-beast with glacier tusks",
+      "job_id": "9d0cd738-0567-4c14-98a1-1e8e46a2bbd3"
+    },
+    "frostmaw-special.png": {
+      "subject": "gigantic ice walrus-beast with glacier tusks",
+      "job_id": "25fa02ad-8a2a-45eb-845e-fa96bfa7ee6f"
+    },
+    "frostmaw-hit.png": {
+      "subject": "gigantic ice walrus-beast with glacier tusks",
+      "job_id": "d130e216-09ad-41a2-9bd2-54a4f8add9de"
+    },
+    "stamp-us-west.png": {
+      "subject": "cactus and mesa",
+      "job_id": "551c481f-3def-4ef7-997d-962ad41aa156",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-us-midwest.png": {
+      "subject": "corn and barn",
+      "job_id": "2bd460a3-6a96-4ff9-ac0f-c7387faaf501",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-us-south.png": {
+      "subject": "magnolia",
+      "job_id": "5c348d9b-7fd3-47a3-958d-7bd0d726e7ef",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-us-northeast.png": {
+      "subject": "lighthouse",
+      "job_id": "3d80da22-90d1-490b-86eb-bb91228f75dd",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-europe-north.png": {
+      "subject": "viking ship",
+      "job_id": "8be57cb7-d04e-4fe3-9fa3-25d78c76034c",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-europe-west.png": {
+      "subject": "castle",
+      "job_id": "20f0a03b-1939-4a94-baea-6745f32a5eea",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-europe-south.png": {
+      "subject": "temple columns",
+      "job_id": "dfc50daf-7c9b-4d48-a5d3-85ca6ad137ee",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-europe-east.png": {
+      "subject": "onion dome",
+      "job_id": "35d12bf4-4858-4588-9d5e-5895c01e1643",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-africa-north.png": {
+      "subject": "pyramid",
+      "job_id": "3f7086ed-4adb-409b-972a-675d1d06e9f3",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-africa-west.png": {
+      "subject": "drum",
+      "job_id": "39c5adc7-ef78-433a-900b-3387867bb812",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-africa-central.png": {
+      "subject": "gorilla",
+      "job_id": "4a42ed9d-c022-4054-ba64-886a4f3c4838",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-africa-east.png": {
+      "subject": "giraffe",
+      "job_id": "75c0cb87-3c4e-4ad8-bba1-5024b148cf91",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-africa-south.png": {
+      "subject": "protea flower",
+      "job_id": "47ae34c0-17fc-48b9-8062-579bf116704c",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-asia-west.png": {
+      "subject": "crescent dunes",
+      "job_id": "b909a175-2008-4747-b823-50a48baaf286",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-asia-south.png": {
+      "subject": "lotus",
+      "job_id": "1c42a2d6-d93a-46e8-b767-4a3d7cd09556",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-asia-east.png": {
+      "subject": "pagoda",
+      "job_id": "1b6e4053-9d7c-45dd-9727-15d3e722ea0d",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-america-mainland.png": {
+      "subject": "maple leaf",
+      "job_id": "13afe1e1-c65d-440d-a96f-d3f38e5da255",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-america-caribbean.png": {
+      "subject": "palm",
+      "job_id": "ed173df7-0a27-4635-a75a-629ecc6a890b",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-south-america.png": {
+      "subject": "llama",
+      "job_id": "bc881c0b-e54d-458e-8436-d1b4a8831993",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-oceania.png": {
+      "subject": "kangaroo",
+      "job_id": "0f4d49d5-be2e-4873-97e0-aac814ba2864",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "stamp-antarctica.png": {
+      "subject": "penguin",
+      "job_id": "0135dd12-c61c-4f2d-92da-f888d3af9fd1",
+      "note": "flattened to one ink #141b4d, luminance threshold 130 (boss-ink.mjs)"
+    },
+    "type-stone.png": {
+      "subject": "rock",
+      "job_id": "b1b0d02b-eddb-41c9-b80d-c902ec782448"
+    },
+    "type-flame.png": {
+      "subject": "flame",
+      "job_id": "067aaac7-4687-4be4-966a-5c52f6ddc974"
+    },
+    "type-tide.png": {
+      "subject": "wave",
+      "job_id": "4db257f8-413e-49ea-9845-c92d517bb0ad"
+    },
+    "type-leaf.png": {
+      "subject": "leaf",
+      "job_id": "bb4754f7-b275-4138-9413-a7d7a6fe78be"
+    },
+    "type-frost.png": {
+      "subject": "snowflake",
+      "job_id": "a8ded7a5-eb9d-4499-a712-2f424391a713"
+    },
+    "type-gale.png": {
+      "subject": "swirl",
+      "job_id": null,
+      "note": "drawn by script boss-gale.mjs; PixelLab attempts rejected, tornado alternative job b455f3d9-805a-4408-81c7-598a3ab5c815"
+    }
+  },
+  "wolvesAndSea": {
+    "tool": "create_image_pixen seed 42 for idles and seed 42/13 for final forms; edit_image_pixen seed 7 for poses and stage 2",
+    "files": {
+      "emberwolf.png": "6acd6dd0-001b-480f-a6e8-3776872ad2b9",
+      "emberwolf-attack.png": "9b263b68-a6eb-4566-84e4-ee03371651f2",
+      "emberwolf-guard.png": "57f17bc1-fe4e-4fdb-aee4-c3420330e792",
+      "emberwolf-hit.png": "3ad855df-e6c6-4356-b444-30a52d6af054",
+      "emberwolf-special.png": "b96938ea-fe77-4b32-a1fd-3919a4de9bd8",
+      "howlpup.png": "18622419-b4af-41fd-adf9-2014da9521af",
+      "howlpup-2.png": "56429066-8f3b-49c8-8c39-6432e15d12bb",
+      "howlpup-3.png": "10e34271-3206-4227-90a1-e5a88f4c4aff",
+      "howlpup-attack.png": "8bf9f8c1-decf-499c-bda2-ae729d19dbc9",
+      "howlpup-guard.png": "4debf832-d6de-48db-a21f-b69b8c47ba29",
+      "howlpup-hit.png": "7139edec-9e7e-4e6c-85b9-6617780c9497",
+      "howlpup-special.png": "298cda56-35b6-4c7d-b5bb-a501557f22fb",
+      "inkraken.png": "e427e95f-d01c-4146-af34-111dc64daa48",
+      "inkraken-attack.png": "4ab42192-86ee-4e5e-9fc2-19bbb5ee3f22",
+      "inkraken-guard.png": "25d9cb2b-0e12-49c0-ac2f-6e858736028b",
+      "inkraken-hit.png": "bae94bf5-3a42-412d-9b34-1a1532bc4f0d",
+      "inkraken-special.png": "f6a0a964-c0cc-4820-b4f2-25734a12c40e",
+      "toothling.png": "e5e540de-069d-4589-bbc3-cd28db566d75",
+      "toothling-2.png": "2e751bc5-d509-42ac-9f6e-81cfbf4fb357",
+      "toothling-3.png": "1a46a597-3cf3-4227-908c-264098c644ee",
+      "toothling-attack.png": "6275be9f-97be-431d-b52e-0c56b6d7070f",
+      "toothling-guard.png": "8df95a37-eecc-497e-8d22-446e6f03db0a",
+      "toothling-hit.png": "e2c46b12-997f-4294-b3d3-c2a0d5d21ef1",
+      "toothling-special.png": "9cc7eed9-5635-463e-a4c7-49b757312248"
+    }
+  },
+  "typeEffects": {
+    "tool": "create_image_pixen 32x32, no background, single color outline",
+    "files": {
+      "fxtype-tide.png": "6f07fa7d-dd52-4031-97b3-441c30a62791",
+      "fxtype-flame.png": "5797955f-25bd-4825-9cdb-98d7344b0c78",
+      "fxtype-leaf.png": "68b82568-6b77-485e-9708-013594a13c63",
+      "fxtype-stone.png": "45ee8b3a-d1b6-4082-87a8-5d1a65b189b7",
+      "fxtype-gale.png": "92aa9a14-c3b2-4fe9-946d-cd8579364aec",
+      "fxtype-frost.png": "e91c6b19-f267-4e7b-96dc-c7c1f3d3864d"
+    }
+  },
+  "tortoiseAndFrog": {
+    "tool": "create_image_pixen seed 42 idle, seed 13 final forms; edit_image_pixen seed 7 poses and frog stage 2, seed 13 tortoise stage 2",
+    "files": {
+      "pebbletort.png": "7ae041ec-f9ff-4a13-b0a2-6d9261d1ba9e",
+      "pebbletort-attack.png": "c8cd77c0-a279-4879-bef6-9d55fe99bbb8",
+      "pebbletort-guard.png": "28038ffd-e353-411e-816a-d106e9199244",
+      "pebbletort-special.png": "25e15d97-a022-44e8-bf16-c37e7f52b4b1",
+      "pebbletort-hit.png": "8ca02ba6-8441-49c2-a299-8ec56d553c6b",
+      "pebbletort-2.png": "4e05c34a-5a34-4188-97b1-97fea9b27d4c",
+      "pebbletort-3.png": "9440abb8-f48e-4c45-a2bb-d8e0d5cbc3ba",
+      "lilyhop.png": "dd2b9799-034b-4f7d-8e53-67bc99aec618",
+      "lilyhop-attack.png": "65a2c877-a4f4-4bac-9f73-751a78280dcd",
+      "lilyhop-guard.png": "b9dfbe91-9c8d-473d-a4ed-b2ef9adb6bd5",
+      "lilyhop-special.png": "4641be22-bd0e-4044-bed2-da27bd8cea43",
+      "lilyhop-hit.png": "187de6be-bfd6-4c73-8294-28ed11d7355b",
+      "lilyhop-2.png": "ee1a6c8f-ae9b-4e4e-a403-5b20bcd2481c",
+      "lilyhop-3.png": "fb22ef1a-9316-4e62-983a-4d12b999c788"
+    }
   }
 }

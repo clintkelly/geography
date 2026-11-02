@@ -1,3 +1,5 @@
+import type { Moves } from './moves';
+export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost';
 export type Difficulty = 'scout' | 'ranger' | 'expert';
 export const DIFFICULTIES: readonly Difficulty[] = ['scout', 'ranger', 'expert'];
 
@@ -10,6 +12,8 @@ export interface QuestionOption {
   featureId?: string;
   /** Too small to click, so the map draws a dot for it. */
   tiny?: boolean;
+  /** Shows this flag instead of the label until the question is answered. */
+  flag?: string;
   /** Something true about this option, shown if a child picks it by mistake. */
   about?: string;
 }
@@ -32,6 +36,10 @@ export interface Question {
   noteId?: string;
   /** This question tests a Field Note, and appears only after the child has seen it. */
   recallOf?: string;
+  /** What it asks about, for the Camp focus setting. */
+  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics';
+  /** A flag shown with the question. */
+  flag?: string;
   /** Destination this question is local to, if any. */
   locationId?: string;
 }
@@ -83,6 +91,8 @@ export interface Species {
   artId: string;
   flavor: string;
   special: Special;
+  /** Its own Attack and Guard. */
+  moves: Moves;
   /** Regions this creature can be hunted and met in. */
   homes: readonly string[];
   /** Landscapes where its Attack gets the home-turf bonus. */
@@ -91,12 +101,16 @@ export interface Species {
   evolutions?: readonly { name: string; artId: string }[];
   /** Offered only once a child has found every place in its region. */
   rare?: boolean;
+  /** A continent boss, offered once every region on its continent is stamped. */
+  boss?: { move: string; warning: string };
+  type: CreatureType;
   /** The way the art faces, so a companion can be mirrored to face its opponent. */
   facing: 'left' | 'right';
 }
 
 /** A collectible card for one place. */
 export interface StateCard {
+  flag?: string;
   placeId: string;
   name: string;
   artId: string;

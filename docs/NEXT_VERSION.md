@@ -29,7 +29,7 @@ Short practice rounds on names kids mix up. These target the real weak spot of a
 - **Questions:** "Which country has this flag?" with lookalikes as wrong answers on Ranger and Expert, such as Chad and Romania, or Indonesia and Monaco.
 - **Cards:** each country card shows its flag beside the postcard.
 - **Art:** use accurate flag images, not generated art, because generated flags would be wrong. An open-licensed SVG set is the likely source. Check its license before adding it.
-- **US states:** state flags later, as a separate set.
+- **US states:** done. State flags come from Wikimedia Commons (public domain, Mississippi copyrighted free use), current as of November 2026, including the 2024 Utah and Minnesota flags.
 - **Size:** medium, mostly content.
 
 ## 4. Type Matchups

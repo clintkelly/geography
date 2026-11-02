@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { attackDamage, isBossTurn, startCombat } from './combat';
+import { beats, losesTo, TYPE_LOOP, typeEdge } from './types';
 import { trackFor } from '../ui/music';
 import { clampView, EUROPE_VIEW, MAPS, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
@@ -11,9 +13,9 @@ import { enemyIntent, resolveTurn } from './combat';
 import { ECONOMY } from './economy';
 import { cardProgress } from './cards';
 import { isDue, isFamiliar, localDay, recordAnswer, type Learning } from './learning';
-import { rareChance, trailScore } from './luck';
-import { formOf, levelOf, STAGES, stageOf, xpForLevel } from './progression';
-import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
+import { availableRare, rareChance, trailScore } from './luck';
+import { formOf, levelOf, speciesOf, STAGES, stageOf, xpForLevel } from './progression';
+import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, makeOffers, newSave, reduce, regionHasFocus, type Command, type Focus, type Reward, type SaveData } from './game';
 import { pickQuestion } from './questions';
 import { Rng } from './rng';
 import { streakReward } from './streak';
@@ -40,6 +42,15 @@ function turn(s: SaveData, correct: boolean): SaveData {
   const b = s.expedition!.battle!;
   const action = b.befriending ? 'befriend' : 'attack';
   return step(answerWith(step(s, { type: 'chooseAction', action }), correct), { type: 'continue' });
+}
+
+/** A battle with no type or home-turf bonus, so hits are the same every run. */
+function even(): SaveData {
+  for (let seed = 1; ; seed++) {
+    const s = step(find(ready(fresh(seed))), { type: 'enterEncounter' });
+    const { turf, typeEdge: edge } = s.expedition!.battle!.combat;
+    if (!turf && !edge) return s;
+  }
 }
 
 function winStop(s: SaveData): SaveData {
@@ -142,6 +153,12 @@ describe('content', () => {
 
   it('every place has a backdrop', () => {
     for (const p of allPlaces) expect(p.biome, p.id).toBeTruthy();
+  });
+
+  it('the wolf pup and the little shark grow into Moonfang and the Megalodon', () => {
+    const finalForm = (id: string) => PACK.species.find((s) => s.id === id)!.evolutions!.at(-1)!.name;
+    expect(finalForm('howlpup')).toBe('Moonfang');
+    expect(finalForm('toothling')).toBe('Megalodon');
   });
 
   it('every creature that can be hunted or fought has a Special', () => {
@@ -288,7 +305,7 @@ describe('befriending and the stable', () => {
 
   it('runs out of species honestly, with XP and no befriending', () => {
     let s = fresh();
-    const west = PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare);
+    const west = PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare && !o.boss);
     for (let i = 0; i < west.length; i++) s = fullExpedition(s);
     expect(s.companions).toHaveLength(west.length + 1);
     expect(s.offers.find((o) => o.regionId === 'us-west')!.reward).toEqual({ kind: 'bond', xp: 10 });
@@ -490,7 +507,7 @@ describe('Field Note recall', () => {
 
 describe('streaks', () => {
   it('count correct answers, reset on a miss, and change nothing else', () => {
-    let s = step(find(ready(fresh())), { type: 'enterEncounter' });
+    let s = even();
     s = turn(turn(s, true), true);
     expect(s.expedition!.streak).toBe(2);
     const hp = s.expedition!.battle!.combat.opponentHp;
@@ -518,7 +535,7 @@ describe('levels and evolution', () => {
   });
 
   it('every other creature has two evolved forms', () => {
-    for (const s of PACK.species.filter((o) => !o.rare)) expect(s.evolutions, s.id).toHaveLength(2);
+    for (const s of PACK.species.filter((o) => !o.rare && !o.boss)) expect(s.evolutions, s.id).toHaveLength(2);
   });
 
   it('a win gives XP once, and a retry gives none for a loss', () => {
@@ -756,9 +773,16 @@ describe('rare encounters', () => {
     expect(s.expedition!.slots[0]!.opponentId).toBe(id);
   });
 
-  it('never appears once owned, and never at an event or final showdown', () => {
+  it('offers a region\'s next rare creature once the first is owned', () => {
     const owned = rigged();
     const s = { ...owned, companions: [...owned.companions, { instanceId: 'r', speciesId: 'thunderhoof', bondXp: 0 }] };
+    expect(availableRare(PACK, 'us-west', s.companions.map((c) => c.speciesId))?.id).toBe('emberwolf');
+  });
+
+  it('never appears once owned, and never at an event or final showdown', () => {
+    const owned = rigged();
+    const rares = PACK.species.filter((o) => o.rare && o.homes.includes('us-west'));
+    const s = { ...owned, companions: [...owned.companions, ...rares.map((o) => ({ instanceId: o.id, speciesId: o.id, bondXp: 0 }))] };
     for (let seed = 1; seed < 60; seed++) {
       const t = stepRare({ ...s, expedition: { ...s.expedition!, rngState: seed } }, { type: 'enterEncounter' });
       expect(t.expedition!.slots[0]!.rare).toBeUndefined();
@@ -863,7 +887,7 @@ describe('teams and switching', () => {
 
   it('home turf adds to Attack only, where the landscape matches', () => {
     const base = fight(1);
-    const combat = { ...base.expedition!.battle!.combat, turf: 1 };
+    const combat = { ...base.expedition!.battle!.combat, turf: 1, typeEdge: 0 };
     expect(resolveTurn(combat, 'attack', true).events.damageDealt).toBe(4);
     expect(resolveTurn({ ...combat, charge: 2 }, 'special', true).events.damageDealt).toBe(5);
     const home = PACK.places.find((p) => p.biome === 'mountain' && p.regionId === 'us-west')!;
@@ -1297,5 +1321,125 @@ describe('music', () => {
     expect(trackFor({ ...fight, expedition: { ...e, slots: boss } })).toBe('boss');
     const rare = e.slots.map((o, i) => (i === e.battle!.slotIndex ? { ...o, rare: true } : o));
     expect(trackFor({ ...fight, expedition: { ...e, slots: rare } })).toBe('rare');
+  });
+});
+
+describe('types', () => {
+  it('forms a loop where every type beats one and loses to one', () => {
+    for (const t of TYPE_LOOP) {
+      expect(typeEdge(t, beats(t))).toBe(1);
+      expect(typeEdge(beats(t), t)).toBe(-1);
+      expect(typeEdge(t, t)).toBe(0);
+      expect(beats(losesTo(t))).toBe(t);
+    }
+    expect(beats('frost')).toBe('tide');
+  });
+
+  it('every creature has a type', () => {
+    for (const s of PACK.species) expect(TYPE_LOOP, s.id).toContain(s.type);
+    expect(new Set(PACK.species.map((s) => s.type)).size).toBe(6);
+  });
+
+  const base = { playerMaxHp: 12, playerAttack: 3, special: 'strong' as const, opponentMaxHp: 20, enemyPattern: [2, 2, 4], maxTurns: 8 };
+
+  it('a strong matchup hits harder and a weak one softer, with the opponent unchanged', () => {
+    const strong = resolveTurn(startCombat({ ...base, typeEdge: 1 }), 'attack', true).events;
+    expect(strong).toMatchObject({ damageDealt: 4, damageTaken: 2 });
+    const weak = resolveTurn(startCombat({ ...base, typeEdge: -1 }), 'attack', true).events;
+    expect(weak).toMatchObject({ damageDealt: 2, damageTaken: 2 });
+  });
+
+  it('damage never drops below 1', () => {
+    const c = startCombat({ ...base, playerAttack: 1, enemyPattern: [1], typeEdge: -1 });
+    expect(attackDamage(c)).toBe(1);
+  });
+
+  it('a lone creature never has a weak matchup, so right answers always win', () => {
+    for (let seed = 1; seed < 30; seed++) {
+      const s = step(find(ready(fresh(seed))), { type: 'enterEncounter' });
+      const { typeEdge: edge } = s.expedition!.battle!.combat;
+      expect(edge).toBe(Math.max(0, typeEdge(speciesOf(PACK, 'slatepaw').type, speciesOf(PACK, s.expedition!.slots[0]!.opponentId).type)));
+    }
+  });
+});
+
+describe('bosses', () => {
+  it('each heading has one boss, and it stays hidden until every region there is stamped', () => {
+    const bosses = PACK.species.filter((s) => s.boss);
+    expect(bosses).toHaveLength(8);
+    const regions = PACK.regions.filter((r) => r.continent === 'Asia').map((r) => r.id);
+    const boss = bosses.find((s) => s.homes.includes('asia-west'))!;
+    const offered = (save: SaveData) => makeOffers(save, PACK, new Rng(1)).offers.some((o) => o.reward.kind === 'creature' && o.reward.speciesId === boss.id);
+    const s = fresh();
+    expect(offered({ ...s, stampedRegions: regions.slice(1) })).toBe(false);
+    expect(offered({ ...s, stampedRegions: regions })).toBe(true);
+  });
+
+  it('winds up a big hit every third turn, which Guard softens', () => {
+    const c = startCombat({ playerMaxHp: 20, playerAttack: 3, special: 'strong', opponentMaxHp: 30, enemyPattern: [2], maxTurns: 12, bossPower: 3 });
+    expect(isBossTurn(c)).toBe(false);
+    const third = { ...c, turn: 3 };
+    expect(isBossTurn(third)).toBe(true);
+    expect(enemyIntent(third)).toBe(5);
+    expect(resolveTurn(third, 'guard', true).events.damageTaken).toBe(2);
+  });
+
+  it('a boss hunt ends in a harder fight with questions from the whole continent', () => {
+    const regions = PACK.regions.filter((r) => r.continent === 'Asia').map((r) => r.id);
+    const s = { ...fresh(), stampedRegions: regions, nextId: 500 };
+    const save = step({ ...s, companions: s.companions }, { type: 'dismissSummary' });
+    const opened = { ...save, ...makeOffers({ ...save, stampedRegions: regions }, PACK, new Rng(2)) };
+    const offer = opened.offers.find((o) => o.regionId === 'asia-east')!;
+    expect(PACK.species.find((p) => o2(offer) === p.id)?.boss).toBeTruthy();
+    let trip = step(step(opened, { type: 'start', offerId: offer.id, regionId: 'asia-east', difficulty: 'scout', trail: 'short' }), { type: 'depart' });
+    while (trip.expedition!.slots.some((o, i) => i < trip.expedition!.slots.length - 1 && o.status === 'pending')) trip = winStop(find(trip));
+    trip = step(find(trip), { type: 'enterEncounter' });
+    const { combat } = trip.expedition!.battle!;
+    expect(combat.bossPower).toBe(3);
+    expect(combat.opponentMaxHp).toBeGreaterThanOrEqual(22);
+  });
+});
+const o2 = (o: { reward: Reward }) => (o.reward.kind === 'creature' ? o.reward.speciesId : '');
+
+describe('focus', () => {
+  const asked = (focus: Focus, regionId = 'europe-west', seed = 7) => {
+    let s = step(step(fresh(seed), { type: 'start', offerId: fresh(seed).offers.find((o) => o.regionId === regionId)!.id, regionId, difficulty: 'scout', trail: 'standard', focus }), { type: 'depart' });
+    s = step(find(s), { type: 'enterEncounter' });
+    return turn(turn(s, false), false);
+  };
+
+  it('Places and capitals asks only those, and Flags asks only flags', () => {
+    const topics = (s: SaveData) => s.expedition!.askedQuestionIds.map((id) => PACK.questions.find((q) => q.id === id)!.topic);
+    for (let n = 0; n < 12; n++) {
+      for (const t of topics(asked('basics', 'europe-west', n + 1))) expect(['location', 'capital']).toContain(t);
+      for (const t of topics(asked('flags', 'europe-west', n + 1))) expect(t).toBe('flag');
+    }
+  });
+
+  it('every region but Antarctica can run on flags', () => {
+    expect(regionHasFocus(PACK, 'antarctica', 'flags')).toBe(false);
+    for (const r of PACK.regions.filter((o) => o.id !== 'antarctica')) expect(regionHasFocus(PACK, r.id, 'flags'), r.id).toBe(true);
+  });
+
+  it('falls back to everything when a region has no flags', () => {
+    const s = fresh();
+    const started = step(s, { type: 'start', offerId: s.offers.find((o) => o.regionId === 'antarctica')!.id, regionId: 'antarctica', difficulty: 'scout', trail: 'short', focus: 'flags' });
+    expect(started.expedition!.focus).toBe('all');
+  });
+
+
+  it('flag questions show a flag, or flags as the options', () => {
+    const flagged = PACK.questions.filter((q) => q.topic === 'flag');
+    expect(flagged).toHaveLength((196 + 50) * 3);
+    for (const q of flagged) expect(!!q.flag || q.options.every((o) => o.flag), q.id).toBe(true);
+  });
+});
+
+describe('passport', () => {
+  it('a finished trail stamps its region once', () => {
+    const s = playTrail(fresh(), 'africa-north');
+    const done = step(s, { type: 'claimReward' });
+    expect(done.stampedRegions).toEqual(['africa-north']);
+    expect(done.lastSummary?.newStamp).toBe('africa-north');
   });
 });

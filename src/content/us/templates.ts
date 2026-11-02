@@ -1,4 +1,5 @@
 import countries from '../europe/countries.json';
+import flags from '../flags.json';
 import africa from '../world/africa.json';
 import antarctica from '../world/antarctica.json';
 import asia from '../world/asia.json';
@@ -107,6 +108,8 @@ const wikiUrl = (s: PlaceRecord) => `https://en.wikipedia.org/wiki/${s.wiki ?? s
 
 type Answer = Pick<Question, 'options' | 'acceptedId'>;
 
+const flagOf = (s: PlaceRecord) => (flags as Record<string, string>)[s.id];
+
 function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: string, noun: string, gap: number): Question[] {
   const ranked = all.filter((o) => o.id !== s.id).sort((a, b) => degreesApart(a, s) - degreesApart(b, s));
   const near = spaced(ranked, s, 3, gap);
@@ -146,6 +149,7 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
   const capitalWhy = `${s.capital} is the capital of ${name}.`;
   const whereWhy = s.cityState ? `This is ${name}.` : `This is ${name}. Its capital is ${s.capital}.`;
   const q = (difficulty: Difficulty, kind: string, n: number, objective: string, prompt: string, explanation: string, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
+    topic: kind as Question['topic'],
     id: `q-${kind}-${s.id}-${difficulty}-${n}`,
     version: 1,
     objectiveId: `${objective}-${s.id}`,
@@ -185,6 +189,20 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
       q('ranger', 'nickname', 1, 'nickname', `Which ${noun} is known as ${known}?`, why, namesOf(near)),
       q('expert', 'nickname', 1, 'nickname', `${known[0]?.toUpperCase()}${known.slice(1)}: which ${noun} is that? Click it on the map.`, why, clickPlace, 'map-click'),
     );
+  }
+  const flag = flagOf(s);
+  if (flag) {
+    const why = `This is the flag of ${name}.`;
+    const pickFlag = (list: PlaceRecord[]): Answer => {
+      const answer = namesOf(list);
+      return { ...answer, options: answer.options.map((o, i) => ({ ...o, flag: flagOf(i === 0 ? s : (list[i - 1] as PlaceRecord)) as string })) };
+    };
+    out.push(
+      q('scout', 'flag', 1, 'flag', `Which ${noun} has this flag?`, why, namesOf(far)),
+      q('ranger', 'flag', 1, 'flag', `Which ${noun} has this flag?`, why, namesOf(near)),
+      q('expert', 'flag', 1, 'flag', `Which flag belongs to ${name}?`, why, pickFlag(near)),
+    );
+    for (const item of out.slice(-3, -1)) item.flag = flag;
   }
   // A question for each Field Note. The game holds these back until the child has seen the note.
   s.asks.forEach((ask, i) => {
@@ -245,5 +263,6 @@ export const allCards: StateCard[] = GROUPS.flatMap((g) => g.records as readonly
   artId: `card-${s.id}`,
   subtitle: s.nickname ? `The ${s.nickname.text}` : hintLine(s),
   capital: s.cityState ? '' : s.capital,
+  ...(flagOf(s) ? { flag: flagOf(s) as string } : {}),
   facts: s.facts,
 }));

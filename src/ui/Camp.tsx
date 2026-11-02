@@ -3,13 +3,20 @@ import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
 import { cardProgress } from '../engine/cards';
-import { allowedDifficulties, isRegionComplete, type Command, type Offer, type SaveData } from '../engine/game';
+import { allowedDifficulties, FOCUSES, isRegionComplete, regionHasFocus, type Command, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
-import { CardArt, Fx, Sprite } from './art';
+import { artUrl, CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
+import { Passport } from './Passport';
 import { Stable } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
+
+const FOCUS_LABELS: Record<Focus, { name: string; text: string }> = {
+  all: { name: 'Everything', text: 'Places, capitals, flags, nicknames and fun facts' },
+  basics: { name: 'Places and capitals', text: 'Just where it is and its capital' },
+  flags: { name: 'Flags', text: 'Just flags. US states and Antarctica have none yet.' },
+};
 
 const DESCRIPTIONS: Record<Difficulty, string> = {
   scout: 'Faraway wrong answers',
@@ -24,7 +31,7 @@ function Sighting({ offer, selected, onPick }: { offer: Offer; selected: boolean
   return (
     <button type="button" className="sighting" aria-pressed={selected} onClick={(e) => { onPick(); e.currentTarget.blur(); }}>
       {reward.kind === 'creature'
-        ? <><Sprite id={species(reward.speciesId).artId} size={96} className="silhouette" /><strong>{species(reward.speciesId).rare ? 'Rare creature!' : 'Mystery creature'}</strong><span className="muted">{species(reward.speciesId).flavor}</span></>
+        ? <><Sprite id={species(reward.speciesId).artId} size={96} className="silhouette" /><strong>{species(reward.speciesId).boss ? 'Continent Boss!' : species(reward.speciesId).rare ? 'Rare creature!' : 'Mystery creature'}</strong><span className="muted">{species(reward.speciesId).flavor}</span></>
         : <><strong>Rival hunt</strong><span className="muted">Every creature is in your stable. Reward: {rewardLabel(reward)}</span></>}
     </button>
   );
@@ -55,17 +62,25 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   };
   const mapHighlights = Object.fromEntries(found.map((p): [string, Highlight] => [p.featureId, mapLevel(p.id)]));
 
-  const start = () => dispatch({ type: 'start', offerId: offer.id, regionId, difficulty, trail });
+  const [focusPick, setFocusPick] = useState<Focus>(save.settings.lastFocus ?? 'all');
+  const focuses = FOCUSES.filter((f) => regionHasFocus(PACK, regionId, f));
+  const focus = focuses.includes(focusPick) ? focusPick : 'all';
+  const [showPassport, setShowPassport] = useState(false);
+  const start = () => dispatch({ type: 'start', offerId: offer.id, regionId, difficulty, trail, focus });
   const cycle = <T,>(list: readonly T[], now: T) => list[(list.indexOf(now) + 1) % list.length] as T;
-  useKeys({
+  useKeys(showPassport ? {} : {
     enter: start,
     r: () => setRegionId(cycle(regions.map((r) => r.id), regionId)),
     l: () => setTrail(cycle(TRAIL_LENGTHS, trail)),
     t: () => setOfferId(cycle(sightings.map((o) => o.id), offer.id)),
+    f: () => setFocusPick(cycle(focuses, focus)),
+    v: () => setShowPassport(true),
     p: onSwitch,
     o: onSettings,
     ...Object.fromEntries(allowed.map((d, i) => [String(i + 1), () => setPicked(d)])),
   });
+
+  if (showPassport) return <Passport save={save} onClose={() => setShowPassport(false)} />;
 
   return (
     <div className="stack">
@@ -75,6 +90,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
             <div>
               <h2>Welcome back to camp!</h2>
               {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
+              {s.newStamp && <div className="stamp-slam"><img src={artUrl(`stamp-${s.newStamp}`)} alt="" width={96} height={96} /><span>New Passport stamp: <strong>{region(s.newStamp).label}</strong></span></div>}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
               {s.tamedIds?.map((id) => <p key={id}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
@@ -88,7 +104,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
       )}
 
       <section className="panel">
-        <h1>Base Camp</h1>
+        <div className="row spread"><h1>Base Camp</h1><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></div>
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
@@ -104,6 +120,13 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               ))}
             </div>
           ))}
+        </div>
+        <div className="picker" role="group" aria-label="Question focus">
+          <span className="muted">Ask about <Key k="F" /></span>
+          {FOCUSES.map((f) => (
+            <button key={f} type="button" disabled={!focuses.includes(f)} aria-pressed={f === focus} onClick={(e) => { setFocusPick(f); e.currentTarget.blur(); }}>{FOCUS_LABELS[f].name}</button>
+          ))}
+          <span className="muted">{FOCUS_LABELS[focus].text}</span>
         </div>
         <div className="picker" role="group" aria-label="Trail length">
           <span className="muted">How far <Key k="L" /></span>

@@ -39,6 +39,8 @@ export const BADGES: readonly Badge[] = [
   { id: 'streak-10', name: 'Unstoppable', hint: 'Get 10 answers right in a row', earned: (s) => (s.bestStreak ?? 0) >= 10 },
   { id: 'streak-20', name: 'Legendary Streak', hint: 'Get 20 answers right in a row', earned: (s) => (s.bestStreak ?? 0) >= 20 },
   { id: 'rare-find', name: 'Rare Find', hint: 'Befriend a creature in a rare encounter', earned: (s) => s.rareFound === true },
+  { id: 'world', name: 'World Traveler', hint: 'Stamp every region in your Passport', earned: (s, pack) => pack.regions.every((r) => s.stampedRegions?.includes(r.id)) },
+  { id: 'boss', name: 'Boss Befriender', hint: 'Befriend a Continent Boss', earned: (s, pack) => s.companions.some((c) => speciesOf(pack, c.speciesId).boss) },
   { id: 'bold', name: 'Bold Befriender', hint: 'Befriend a creature mid-fight', earned: (s) => s.tamedAny === true },
   { id: 'expert', name: 'True Expert', hint: 'Finish an Expert trail', earned: (s) => s.expertTrails >= 1 },
 ];

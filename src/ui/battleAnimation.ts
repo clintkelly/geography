@@ -10,7 +10,7 @@ export type Ending = 'none' | 'defeated' | 'wornOut';
 export interface Float {
   side: Side;
   text: string;
-  kind: 'damage' | 'heal' | 'block' | 'crit';
+  kind: 'damage' | 'heal' | 'block' | 'crit' | 'strong' | 'weak';
 }
 
 export interface Frame {
@@ -25,6 +25,8 @@ export interface Frame {
   impact?: 'small' | 'big';
   /** A Special's colored burst fills the scene. */
   burst?: boolean;
+  /** Type particles burst where a hit lands. The type is the attacker's. */
+  typeFx?: Side;
   /** HP change shown at this moment. */
   hp?: { side: Side; delta: number };
 }
@@ -88,6 +90,7 @@ export function turnFrames(action: string, correct: boolean, events: TurnEvents,
       sounds: [critical ? 'crit' : 'hit'],
       floats: [{ side: 'opponent', text: `-${events.damageDealt}`, kind: 'damage' }, ...(critical ? [{ side: 'opponent' as const, text: 'Critical!', kind: 'crit' as const }] : [])],
       impact: powered || critical ? 'big' : 'small',
+      typeFx: 'opponent',
       hp: { side: 'opponent', delta: -events.damageDealt },
     });
     t += HIT_STOP;
@@ -101,7 +104,7 @@ export function turnFrames(action: string, correct: boolean, events: TurnEvents,
     if (events.blocked > 0) floats.push({ side: 'player', text: `Blocked ${events.blocked}`, kind: 'block' });
     if (events.damageTaken > 0) {
       floats.push({ side: 'player', text: `-${events.damageTaken}`, kind: 'damage' });
-      frames.push({ at: t, player: 'hit', opponent: 'attack', playerMotion: 'shake', sounds: ['hit'], floats, impact: 'small', hp: { side: 'player', delta: -events.damageTaken } });
+      frames.push({ at: t, player: 'hit', opponent: 'attack', playerMotion: 'shake', sounds: ['hit'], floats, impact: 'small', typeFx: 'player', hp: { side: 'player', delta: -events.damageTaken } });
       t += HIT_STOP;
     } else if (events.blocked > 0) {
       frames.push({ at: t, player: 'guard', opponent: 'attack', playerMotion: 'glow', sounds: ['guard'], floats });

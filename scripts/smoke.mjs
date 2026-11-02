@@ -112,6 +112,8 @@ async function step(options = {}) {
         assert.equal(back.question.id, b.question.id, 'changing moves keeps the question');
         return;
       }
+      if (b.question.flag) await shotOnce('flag-question');
+      if (b.question.options[0].flag) await shotOnce('flag-options');
       await shotOnce(b.question.inputType === 'map-click' ? 'question-click' : b.question.inputType === 'map-marker' ? 'question-marker' : 'question');
       const accepted = b.question.options.find((o) => o.id === b.question.acceptedId);
       if (b.question.inputType === 'map-click') {
@@ -130,13 +132,24 @@ async function step(options = {}) {
       }
       await press(String(b.question.options.indexOf(accepted) + 1));
       const after = (await save()).expedition.battle;
+      if (b.action === 'special' && after.result?.correct) {
+        await page.locator('.type-special').waitFor({ state: 'attached', timeout: 1500 });
+        stats.typeStorms = (stats.typeStorms ?? 0) + 1;
+        await page.waitForTimeout(300);
+        await shotOnce('type-special');
+      }
       if (b.action === 'attack' && after.combat.outcome === 'active') {
         await page.locator('.actor.player[data-pose="attack"]').waitFor({ timeout: 1500 });
         await shotOnce('pose-attack');
+        await page.locator('.actor-slot .type-hit').first().waitFor({ state: 'attached', timeout: 1500 });
+        stats.typeHits = (stats.typeHits ?? 0) + 1;
+        await page.waitForTimeout(180);
+        await shotOnce('type-hit');
         await page.locator('.actor.player[data-pose="hit"]').waitFor({ timeout: 2000 });
         await shotOnce('pose-hit');
       }
-      if (after.result?.cardId) { stats.cards++; await shotOnce('card-award'); }
+      if (after.result?.cardId) { stats.cards++; await page.locator('.card-award .place-flash').waitFor({ timeout: 2000 }); await page.waitForTimeout(350); await shotOnce('card-award'); }
+      else if (b.question.inputType === 'choice' && b.question.locationId) { await page.locator('.feedback .place-flash').waitFor({ timeout: 2000 }); stats.placeFlashes = (stats.placeFlashes ?? 0) + 1; await page.waitForTimeout(350); await shotOnce('place-flash'); }
       await shotOnce('feedback');
       return;
     }
@@ -321,6 +334,14 @@ assert.equal((await save()).attempts.length, beforeKeys + 1, 'arrow keys and Ent
 await finishTrail({});
 assert.equal((await save()).completedExpeditions, 1, 'a long Expert trail through Southern Europe finished');
 
+// The Passport.
+await button(/Start expedition/).waitFor();
+await page.keyboard.press('v');
+await page.getByText("Explorer's Passport").waitFor();
+await shotOnce('passport');
+await page.keyboard.press('v');
+await button(/Start expedition/).waitFor();
+
 // The two regions with their own maps, on Expert: landmarks in Antarctica, tiny islands in Oceania.
 for (const [i, name] of ['Antarctica', 'Oceania'].entries()) {
   // A strong trail can end in an evolution, which waits for a key press.
@@ -331,6 +352,7 @@ for (const [i, name] of ['Antarctica', 'Oceania'].entries()) {
   }
   await button(/Start expedition/).waitFor({ timeout: 8000 });
   await button(name).click();
+  if (name === 'Oceania') { await button('Flags').click(); await shotOnce('camp-focus'); }
   await button('Start expedition').click();
   await page.getByText('Prepare for the trail').waitFor();
   await press('Enter');
@@ -338,6 +360,32 @@ for (const [i, name] of ['Antarctica', 'Oceania'].entries()) {
   await finishTrail({});
   assert.equal((await save()).completedExpeditions, 2 + i, `an Expert trail through ${name} finished`);
 }
+
+// Oceania is one region, so its stamp unlocks the boss. Meet it, then see its big attack coming.
+for (let tries = 0; tries < 5 && !(await button(/Start expedition/).count()); tries++) {
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(1200);
+}
+await page.getByText('Continent Boss!').first().waitFor();
+await button('Short').click();
+await button('Scout').click();
+await button('Everything').click();
+await button('Start expedition').click();
+await page.getByText('Prepare for the trail').waitFor();
+await shotOnce('prep-types');
+await press('Enter');
+for (let i = 0; i < 200; i++) {
+  const b = (await save()).expedition?.battle;
+  if (b?.combat.bossPower && b.combat.turn === 3 && b.phase === 'choose' && !b.mustSwitch) break;
+  await step({ guard: true });
+}
+const bossFight = (await save()).expedition.battle;
+assert.equal(bossFight.combat.bossPower, 3, 'the boss winds up a big hit');
+await page.locator('.boss-warning').waitFor();
+await page.waitForTimeout(400);
+await shotOnce('boss-turn');
+await button('Leave expedition').click();
+await button(/Start expedition/).waitFor();
 
 await page.keyboard.press('p');
 await button(/Explorer 2/).waitFor();

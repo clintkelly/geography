@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { canUse, enemyIntent, resolveTurn, startCombat, type CombatAction, type SpecialTemplate } from './combat';
+import { canUse, enemyIntent, GUARDS, resolveTurn, startCombat, type CombatAction, type GuardStyle, type SpecialTemplate } from './combat';
+import { PACK } from '../content/pack';
 
 const config = { playerMaxHp: 12, playerAttack: 3, special: 'strong' as SpecialTemplate, opponentMaxHp: 10, enemyPattern: [2, 2, 4], maxTurns: 8 };
 const charged = (special: SpecialTemplate = 'strong') => ({ ...startCombat({ ...config, special }), charge: 2 });
@@ -113,5 +114,53 @@ describe('balance', () => {
   it('a regular opponent takes at least 3 correct answers', () => {
     expect(play(10, [['attack', true], ['attack', true]])).toBe('active');
     expect(play(10, [['attack', true], ['attack', true], ['special', true]])).toBe('victory');
+  });
+});
+
+describe('creature moves', () => {
+  it('every creature has its own Attack and Guard names', () => {
+    const names = PACK.species.flatMap((s) => [s.moves.attack, s.moves.guard, s.special.name]);
+    for (const s of PACK.species) expect(s.moves, s.id).toBeTruthy();
+    expect(new Set(PACK.species.map((s) => s.moves.attack)).size).toBe(PACK.species.length);
+    expect(new Set(PACK.species.map((s) => s.moves.guard)).size).toBe(PACK.species.length);
+    expect(names.every((n) => n.length > 0)).toBe(true);
+  });
+
+  it('a fierce Attack hits 1 harder and gives no charge', () => {
+    const { state, events } = resolveTurn(startCombat({ ...config, attackStyle: 'fierce' }), 'attack', true);
+    expect(events.damageDealt).toBe(4);
+    expect(state.charge).toBe(0);
+  });
+
+  it.each<[GuardStyle, number, number, number]>([
+    ['steady', 1, 2, 1],
+    ['spiky', 2, 2, 1],
+    ['wall', 0, 2, 1],
+    ['focus', 1, 2, 2],
+  ])('a %s Guard deals %i and blocks the hit, with %i charge', (guardStyle, dealt, blocked, charge) => {
+    const { state, events } = resolveTurn(startCombat({ ...config, guardStyle }), 'guard', true);
+    expect(events.damageDealt).toBe(dealt);
+    expect(events.blocked).toBe(blocked);
+    expect(state.charge).toBe(charge);
+  });
+
+  it('Guard styles trade damage, block and charge', () => {
+    expect(GUARDS).toEqual({
+      steady: { damage: 1, block: 3, charge: 1 },
+      spiky: { damage: 2, block: 2, charge: 1 },
+      wall: { damage: 0, block: 5, charge: 1 },
+      focus: { damage: 1, block: 2, charge: 2 },
+    });
+  });
+
+  it('a missed fierce Attack takes 1 extra damage, and a missed steady one does not', () => {
+    expect(resolveTurn(startCombat({ ...config, attackStyle: 'fierce' }), 'attack', false).events.damageTaken).toBe(3);
+    expect(resolveTurn(startCombat(config), 'attack', false).events.damageTaken).toBe(2);
+    expect(resolveTurn(startCombat({ ...config, attackStyle: 'fierce' }), 'attack', true).events.damageTaken).toBe(2);
+  });
+
+  it('a wrong Guard blocks 1, whatever the style', () => {
+    const styles: GuardStyle[] = ['steady', 'spiky', 'wall', 'focus'];
+    for (const guardStyle of styles) expect(resolveTurn(startCombat({ ...config, guardStyle }), 'guard', false).events.blocked).toBe(1);
   });
 });

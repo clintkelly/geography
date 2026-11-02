@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Species } from '../content/types';
-import { canUse, enemyIntent, MAX_CHARGE, type CombatAction, type CombatState } from '../engine/combat';
+import type { CreatureType, Species } from '../content/types';
+import { attackCharge, attackDamage, canUse, guardOf, enemyIntent, isBossTurn, MAX_CHARGE, strongSpecialDamage, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, canTame, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
 import { artUrl, Fx, poseUrl } from './art';
@@ -10,9 +10,14 @@ import { Key, useKeys } from './keys';
 import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
+import { TypeBadge, TypeGuide } from './TypeGuide';
+import { TypeHit, TypeSpecial } from './TypeFx';
+import { beats, losesTo, typeEdge, TYPE_INFO } from '../engine/types';
 
 /** How long a win stays on screen after the last hit, before the trail can carry on. */
 const WIN_PAUSE_MS = 1400;
+
+const edgeWord = (edge: number) => (edge > 0 ? ' · Strong!' : edge < 0 ? ' · Weak' : '');
 
 const POSES: Pose[] = ['idle', 'attack', 'guard', 'special', 'hit'];
 
@@ -27,20 +32,26 @@ function Hp({ label, hp, max }: { label: string; hp: number; max: number }) {
   );
 }
 
+function guardText(c: CombatState): string {
+  const g = guardOf(c);
+  return [g.damage > 0 ? `${g.damage} damage` : 'no damage', `block ${g.block}`, `+${g.charge} charge`].join(', ');
+}
+
 function specialText(c: CombatState): string {
-  if (c.special === 'strong') return `${c.playerAttack + 2} damage`;
+  if (c.special === 'strong') return `${strongSpecialDamage(c) + (c.specialBonus ?? 0)} damage`;
   if (c.special === 'heal') return '2 damage, heal 4';
   return '2 damage, block 4';
 }
 
 /** The sprite sits inside a moving wrapper, so mirroring and motion don't fight over `transform`. */
-function Actor({ creature, artId, pose, motion, side, floats, flash, powered }: {
+function Actor({ creature, artId, pose, motion, side, floats, hits, flash, powered }: {
   creature: Species;
   artId?: string;
   pose: Pose;
   motion?: Motion | undefined;
   side: Side;
   floats: (Float & { id: number })[];
+  hits: { id: number; side: Side; type: CreatureType }[];
   flash: boolean;
   powered: boolean;
 }) {
@@ -48,6 +59,7 @@ function Actor({ creature, artId, pose, motion, side, floats, flash, powered }: 
   return (
     <div className="actor-slot">
       {floats.filter((f) => f.side === side).map((f) => <span key={f.id} className={`float float-${f.kind}${powered ? ' float-big' : ''}`}>{f.text}</span>)}
+      {hits.filter((h) => h.side === side).map((h) => <TypeHit key={h.id} type={h.type} toward={side === 'player' ? 1 : -1} />)}
       {motion === 'shake' && <><Fx id="spark" className="spark" />{powered && <Fx id="spark" className="spark spark-2" />}</>}
       <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}${flash && motion === 'shake' ? ' flash' : ''}`} data-pose={pose}>
         <img src={poseUrl(creature, pose, artId)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
@@ -71,6 +83,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const [flash, setFlash] = useState(false);
   const [stayGone, setStayGone] = useState(false);
   const [burst, setBurst] = useState(false);
+  const [hits, setHits] = useState<{ id: number; side: Side; type: CreatureType }[]>([]);
+  const [storm, setStorm] = useState<{ id: number; type: CreatureType } | null>(null);
   const [picking, setPicking] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
   const [holding, setHolding] = useState(false);
@@ -90,14 +104,16 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, [switchCount]); // eslint-disable-line
   const floatId = useRef(0);
   const rareFoe = !!slot?.rare;
+  const bossFoe = !!opponent.boss;
   const finalIntro = (slot?.kind === 'guardian' || rareFoe) && battle.combat.turn === 1 && battle.phase === 'choose' && !battle.befriending;
   const [intro, setIntro] = useState(finalIntro);
 
   useEffect(() => {
     if (!intro) return;
-    playSound(rareFoe ? 'evolve' : 'special');
+    playSound(rareFoe || bossFoe ? 'evolve' : 'special');
     if (rareFoe) setTimeout(() => playSound('levelup'), 700);
-    const t = setTimeout(() => setIntro(false), rareFoe ? 2600 : 1500);
+    if (bossFoe) setTimeout(() => playSound('hit'), 900);
+    const t = setTimeout(() => setIntro(false), rareFoe || bossFoe ? 2600 : 1500);
     return () => clearTimeout(t);
   }, []); // eslint-disable-line
 
@@ -138,7 +154,13 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       }
       if (f.burst) {
         setBurst(true);
-        timers.push(setTimeout(() => setBurst(false), 520));
+        setStorm({ id: ++floatId.current, type: companion.type });
+        timers.push(setTimeout(() => setBurst(false), 520), setTimeout(() => setStorm(null), 1200));
+      }
+      if (f.typeFx) {
+        const added = { id: ++floatId.current, side: f.typeFx, type: f.typeFx === 'opponent' ? companion.type : opponent.type };
+        setHits((all) => [...all, added]);
+        timers.push(setTimeout(() => setHits((all) => all.filter((x) => x !== added)), 1000));
       }
       if (f.impact) {
         setImpact(f.impact);
@@ -146,6 +168,15 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         timers.push(setTimeout(() => setFlash(false), 90), setTimeout(() => setImpact(null), 320));
       }
     }, f.at));
+    const hitEdge = battle.combat.typeEdge ?? 0;
+    const landed = ev.damageDealt > 0 && (action === 'attack' || action === 'special') && hitEdge !== 0;
+    if (landed) {
+      const hit = frames.find((f) => f.hp?.side === 'opponent');
+      if (hit) {
+        hit.floats = [...(hit.floats ?? []), hitEdge > 0 ? { side: 'opponent', text: 'Strong hit!', kind: 'strong' } : { side: 'opponent', text: 'Not very strong', kind: 'weak' }];
+        if (hitEdge > 0) hit.impact = 'big';
+      }
+    }
     const end = frames.at(-1)?.at ?? 0;
     if (won) {
       timers.push(setTimeout(() => setCelebrating(!battle.befriended), end));
@@ -168,6 +199,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       setShownHp(null);
       setFloats([]);
       setBurst(false);
+      setHits([]);
+      setStorm(null);
       setImpact(null);
       setFlash(false);
       setCelebrating(false);
@@ -176,6 +209,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, [answered]); // eslint-disable-line
 
   const { combat, question: q, result } = battle;
+  const edge = combat.typeEdge ?? 0;
+  const bossTurn = isBossTurn(combat) && combat.outcome === 'active' && battle.phase !== 'feedback' && !battle.befriending;
   const choose = (action: CombatAction | 'befriend' | 'tame') => dispatch({ type: 'chooseAction', action });
   const onAnswer = useCallback((optionId: string) => dispatch({ type: 'answer', optionId }), [dispatch]);
   const special = canUse(combat, 'special');
@@ -187,13 +222,14 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const memberHp = (id: string) => (id === e.companionId ? combat.playerHp : battle.bench?.[id]?.hp ?? 0);
   const canSwitch = !battle.befriending && (battle.tameHits ?? 0) === 0 && members.some((c) => c.instanceId !== e.companionId && memberHp(c.instanceId) > 0);
   const chooser = !!battle.mustSwitch || picking;
+  const helper = members.map((c) => companionView(c)).find((v) => typeEdge(v.species.type, opponent.type) > 0 && v.species.id !== companion.id)?.name;
   const swapTo = (instanceId: string) => {
     setPicking(false);
     dispatch({ type: 'switchTo', instanceId });
   };
 
   const changeMove = () => dispatch({ type: 'changeMove' });
-  const moveName = battle.action === 'tame' ? 'Bold Befriend' : battle.action === 'special' ? companion.special.name : battle.action === 'guard' ? 'Guard' : 'Attack';
+  const moveName = battle.action === 'tame' ? 'Bold Befriend' : battle.action === 'special' ? companion.special.name : battle.action === 'guard' ? companion.moves.guard : companion.moves.attack;
 
   const keys: Record<string, () => void> = {};
   if (battle.phase === 'choose' && chooser) {
@@ -224,12 +260,14 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   if (!slot) return null;
   const backdrop = artUrl(`backdrop-${place(slot.locationId).biome}`);
   const events = result?.events;
+  const playedTurn = combat.outcome === 'active' ? combat.turn - 1 : combat.turn;
+  const opponentMove = opponent.boss && playedTurn % 3 === 0 ? opponent.boss.move : opponent.moves.attack;
   const log = events && [
     result?.critical && 'Critical! You remembered your Field Note and gained a charge.',
     events.damageDealt > 0 && `${view.name} dealt ${events.damageDealt} damage.`,
     events.healed > 0 && `${view.name} healed ${events.healed}.`,
     events.blocked > 0 && `Blocked ${events.blocked} damage.`,
-    events.damageTaken > 0 && `${opponent.displayName} dealt ${events.damageTaken} damage.`,
+    events.damageTaken > 0 && `${opponent.displayName} used ${opponentMove} for ${events.damageTaken} damage.`,
     battle.befriended && `${opponent.displayName} wants to be your friend!`,
     battle.action === 'befriend' && !result?.correct && `${opponent.displayName} is still deciding. Try another question.`,
     battle.action === 'tame' && !result?.correct && `${opponent.displayName} backed away. The attempt is over.`,
@@ -243,10 +281,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   return (
     <div className="battle">
       <TrailBar e={e} owned={owned} />
-      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
+        {storm && <TypeSpecial key={storm.id} type={storm.type} />}
         {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (
-          <div className={`vs-intro${rareFoe ? ' rare-intro' : ''}`} aria-hidden="true">
+          <div className={`vs-intro${rareFoe || bossFoe ? ' rare-intro' : ''}`} aria-hidden="true">
+            {bossFoe && <em>Continent Boss!</em>}
             {rareFoe && <>{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}<em>Rare encounter!</em></>}
             <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
             <strong>VS</strong>
@@ -268,18 +308,22 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         <div className="scene-hud">
           <div>
             <Hp label={view.name} hp={shownHp?.player ?? combat.playerHp} max={combat.playerMaxHp} />
+            <div className="scene-types"><TypeBadge type={companion.type} /></div>
             {(combat.turf ?? 0) > 0 && <div className="turf-tag">Home turf! +{combat.turf} Attack</div>}
             <div className="charge" role="img" aria-label={`Charge: ${combat.charge} of ${MAX_CHARGE}`}>
               Charge {Array.from({ length: MAX_CHARGE }, (_, i) => <span key={i} className={i < combat.charge ? 'pip on' : 'pip'} />)}
             </div>
           </div>
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
-          <Hp label={rareFoe ? `Rare: ${opponent.displayName}` : opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
+          <div>
+            <Hp label={bossFoe ? `Boss: ${opponent.displayName}` : rareFoe ? `Rare: ${opponent.displayName}` : opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
+            <div className="scene-types"><TypeBadge type={opponent.type} /></div>
+          </div>
         </div>
         <div className="scene-floor">
-          <Actor key={e.companionId} creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
-          {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">Next attack: {enemyIntent(combat)} damage</div>}
-          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} flash={flash} powered={isPowered(e.streak)} />
+          <Actor key={e.companionId} creature={companion} artId={view.artId} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
+          {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">{bossTurn ? 'BIG attack' : 'Next attack'}: {enemyIntent(combat)} damage</div>}
+          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
         </div>
       </section>
 
@@ -291,7 +335,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             return (
               <span key={c.instanceId} className={`team-chip${c.instanceId === e.companionId ? ' active' : ''}${hp === 0 ? ' fainted' : ''}`}>
                 <img src={artUrl(v.artId)} alt="" width={32} height={32} className="sprite" />
-                {v.name} <small>{hp} HP · {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge</small>
+                {v.name} <TypeBadge type={v.species.type} /> <small>{hp} HP · {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge{edgeWord(typeEdge(v.species.type, opponent.type))}</small>
               </span>
             );
           })}
@@ -307,7 +351,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
                 const v = companionView(c);
                 const hp = memberHp(c.instanceId);
                 const usable = c.instanceId !== e.companionId && hp > 0;
-                return <button key={c.instanceId} type="button" className="big" disabled={!usable} onClick={() => swapTo(c.instanceId)}>{v.name} <Key k={i + 1} /><small>{hp} HP, {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge</small></button>;
+                return <button key={c.instanceId} type="button" className="big" disabled={!usable} onClick={() => swapTo(c.instanceId)}>{v.name} <Key k={i + 1} /><small><TypeBadge type={v.species.type} />{edgeWord(typeEdge(v.species.type, opponent.type))} · {hp} HP, {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge</small></button>;
               })}
             </div>
             {!battle.mustSwitch && <button type="button" onClick={() => setPicking(false)}>Never mind <Key k="W" /></button>}
@@ -318,7 +362,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       {battle.phase === 'choose' && !chooser && (
         <section className="panel question">
           <div className="actions">
-            <p className="muted">{place(slot.locationId).name} · Local questions and expedition review</p>
+            <p className="muted">{place(slot.locationId).name} · {bossFoe ? 'Questions from the whole continent' : 'Local questions and expedition review'}</p>
+            {bossTurn && <p className="boss-warning">{opponent.boss?.move}! {opponent.boss?.warning}</p>}
+            {edge > 0 && <p className="matchup matchup-strong">Strong matchup! {TYPE_INFO[companion.type].name} beats {TYPE_INFO[opponent.type].name}: you hit 1 harder. {TYPE_INFO[companion.type].why}</p>}
+            {edge < 0 && <p className="matchup matchup-weak">Weak matchup. {TYPE_INFO[opponent.type].name} beats {TYPE_INFO[companion.type].name}: you hit 1 softer.{helper ? ` Try switching to ${helper}!` : ` A ${TYPE_INFO[losesTo(opponent.type)].name} creature would be strong here.`}</p>}
+            {edge === 0 && <p className="muted">{companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${TYPE_INFO[beats(companion.type)].name}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${TYPE_INFO[beats(companion.type)].name}, and ${TYPE_INFO[opponent.type].name} beats ${TYPE_INFO[beats(opponent.type)].name}.`}</p>}
             {battle.befriending ? (
               <>
                 <p className="learn">{opponent.displayName} is worn out. Answer a question to befriend it!</p>
@@ -327,11 +375,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             ) : (
               <>
                 <div className="action-row">
-                  <button type="button" className="primary big" onClick={() => choose('attack')}>Attack <Key k="A" /><small>{combat.playerAttack + (combat.turf ?? 0)} damage, +1 charge</small></button>
-                  <button type="button" className="big" onClick={() => choose('guard')}>Guard <Key k="G" /><small>1 damage, block 3, +1 charge</small></button>
+                  <button type="button" className="primary big" onClick={() => choose('attack')}>{companion.moves.attack} <Key k="A" /><small>Attack: {attackDamage(combat)} damage, {attackCharge(combat) ? '+1 charge' : 'no charge. A miss takes 1 extra'}</small></button>
+                  <button type="button" className="big" onClick={() => choose('guard')}>{companion.moves.guard} <Key k="G" /><small>Guard: {guardText(combat)}</small></button>
                   <button type="button" className={`big${special ? ' special-ready' : ''}`} disabled={!special} onClick={() => choose('special')}>{companion.special.name} <Key k="S" /><small>{special ? specialText(combat) : 'Needs 2 charge'}</small></button>
                 </div>
                 {canSwitch && <button type="button" onClick={() => setPicking(true)}>Switch creature <Key k="W" /></button>}
+                <TypeGuide />
                 {tameable && <button type="button" className="tame-button" onClick={() => choose('tame')}>{tameHits > 0 ? `Keep going: ${tameHits} of ${TAME_HITS}` : 'Bold Befriend'} <Key k="B" /><small>{tameHits > 0 ? 'One more right answer wins it over' : `Two right in a row on harder questions. Costs 2 charge.`}</small></button>}
                 {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
               </>
@@ -341,7 +390,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       )}
 
       {battle.phase !== 'choose' && (
-        <QuestionPanel question={q} regionId={e.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} hold={holding} log={log} move={battle.befriending ? undefined : { name: moveName, onChange: changeMove }} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
+        <QuestionPanel question={q} regionId={q.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} hold={holding} log={log} move={battle.befriending ? undefined : { name: moveName, onChange: changeMove }} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
       )}
       <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave expedition</button>
     </div>
