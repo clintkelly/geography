@@ -2407,5 +2407,14 @@
       "lilyhop-2.png": "ee1a6c8f-ae9b-4e4e-a403-5b20bcd2481c",
       "lilyhop-3.png": "fb22ef1a-9316-4e62-983a-4d12b999c788"
     }
+  },
+  "medals": {
+    "tool": "create_image_pixen 32x32, no background; gold is edit_image_pixen recolor of the first silver",
+    "files": {
+      "medal-bronze.png": "b03b4464-70ea-4afc-83d4-fb2fe6ef7f29",
+      "medal-silver.png": "cd620264-a513-4b95-bbb1-18f7a5806d78",
+      "medal-gold.png": "7181bc95-aafc-4b50-a433-45a98b27b8f0",
+      "medal-platinum.png": "942ad94b-44a1-4a1c-969f-0b6919d90a78"
+    }
   }
 }

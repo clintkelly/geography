@@ -9,6 +9,8 @@ import { artUrl, CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { Passport } from './Passport';
+import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
+import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
 import { Stable } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
 
@@ -66,21 +68,24 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const focuses = FOCUSES.filter((f) => regionHasFocus(PACK, regionId, f));
   const focus = focuses.includes(focusPick) ? focusPick : 'all';
   const [showPassport, setShowPassport] = useState(false);
+  const [showMedals, setShowMedals] = useState(false);
   const start = () => dispatch({ type: 'start', offerId: offer.id, regionId, difficulty, trail, focus });
   const cycle = <T,>(list: readonly T[], now: T) => list[(list.indexOf(now) + 1) % list.length] as T;
-  useKeys(showPassport ? {} : {
+  useKeys(showPassport || showMedals ? {} : {
     enter: start,
     r: () => setRegionId(cycle(regions.map((r) => r.id), regionId)),
     l: () => setTrail(cycle(TRAIL_LENGTHS, trail)),
     t: () => setOfferId(cycle(sightings.map((o) => o.id), offer.id)),
     f: () => setFocusPick(cycle(focuses, focus)),
     v: () => setShowPassport(true),
+    m: () => setShowMedals(true),
     p: onSwitch,
     o: onSettings,
     ...Object.fromEntries(allowed.map((d, i) => [String(i + 1), () => setPicked(d)])),
   });
 
   if (showPassport) return <Passport save={save} onClose={() => setShowPassport(false)} />;
+  if (showMedals) return <Medals save={save} dispatch={dispatch} onClose={() => setShowMedals(false)} />;
 
   return (
     <div className="stack">
@@ -91,6 +96,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               <h2>Welcome back to camp!</h2>
               {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
               {s.newStamp && <div className="stamp-slam"><img src={artUrl(`stamp-${s.newStamp}`)} alt="" width={96} height={96} /><span>New Passport stamp: <strong>{region(s.newStamp).label}</strong></span></div>}
+              {(s.newMedals ?? []).map((m) => <p key={`${m.regionId}-${m.track}-${m.level}`} className="medal-new"><MedalIcon level={m.level} />New {LEVEL_NAME[m.level]} medal: <strong>{MEDAL_TRACKS.find((t) => t.id === m.track)?.label} of {region(m.regionId).label}</strong> <small>+{MEDAL_POINTS[m.level]} Trail Points next trail</small></p>)}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
               {s.tamedIds?.map((id) => <p key={id}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
@@ -104,7 +110,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
       )}
 
       <section className="panel">
-        <div className="row spread"><h1>Base Camp</h1><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></div>
+        <div className="row spread"><h1>Base Camp</h1><span className="row"><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
@@ -145,6 +151,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
           </div>
         )}
         <button type="button" className="primary" onClick={start}>Start expedition <Key k="Enter" /></button>
+        {(save.bankedPoints ?? 0) > 0 && <p className="muted">Medal bonus: +{save.bankedPoints} Trail Points on this trail.</p>}
       </section>
 
       <section className="panel">

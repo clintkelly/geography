@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { MasteryTest } from './MasteryTest';
 import { isExpeditionComplete } from '../engine/game';
 import { indexedDbStore } from '../persistence/store';
 import { speciesOf, stageOf } from '../engine/progression';
@@ -37,6 +38,7 @@ export function App() {
   let body;
   if (!save) body = <ProfileSelect household={household} onPick={setActiveProfile} />;
   else if (settingsOpen) body = <Settings save={save} household={household} store={store} dispatch={dispatch} restore={(h) => { setSettingsOpen(false); restore(h); }} onClose={() => setSettingsOpen(false)} />;
+  else if (save.masteryTest) body = <MasteryTest test={save.masteryTest} dispatch={dispatch} />;
   else if (!e && evolving) body = <Evolution key={evolving.instanceId} companion={evolving} dispatch={dispatch} />;
   else if (!e) body = <Camp save={save} dispatch={dispatch} onSwitch={() => setActiveProfile(null)} onSettings={() => setSettingsOpen(true)} />;
   else if (!e.prepared) body = <Prep e={e} save={save} dispatch={dispatch} />;
@@ -48,7 +50,7 @@ export function App() {
 
   if (save) configureSound(save.settings);
   // Each new kind of screen gets a quick wipe. Turns within a battle don't.
-  const screenKey = !save ? 'profiles' : settingsOpen ? 'settings' : !e ? 'camp' : e.battle ? e.battle.id : e.event ? e.event.id : `${e.discovery}-${e.slots.filter((s) => s.status === 'won').length}`;
+  const screenKey = !save ? 'profiles' : settingsOpen ? 'settings' : save.masteryTest ? `mastery-${save.masteryTest.outcome ?? 'test'}` : !e ? 'camp' : e.battle ? e.battle.id : e.event ? e.event.id : `${e.discovery}-${e.slots.filter((s) => s.status === 'won').length}`;
 
   return (
     <div className="app">

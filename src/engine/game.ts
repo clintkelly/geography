@@ -12,6 +12,8 @@ import { typeEdge } from './types';
 import { availableRare, rareChance, trailScore } from './luck';
 import { streakReward } from './streak';
 import { Rng } from './rng';
+import { awardMedals, MASTERY_MISSES_ALLOWED, masteryQuestions, medalKey, medalPoints, medalView, type MedalEarned, type Medals, type MedalTrack } from './medals';
+import { localDay } from './learning';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
 
 export const SCHEMA_VERSION = 7;
@@ -182,6 +184,19 @@ export interface Summary {
   /** The region stamped for the first time by this trip. */
   newStamp?: string;
   tamedIds?: string[];
+  /** Medals this trip earned, and the Trail Points they banked. */
+  newMedals?: MedalEarned[];
+}
+
+/** A short quiz with no battle: one question per place, at most one miss, for Platinum. */
+export interface MasteryTest {
+  regionId: string;
+  track: MedalTrack;
+  questions: Question[];
+  index: number;
+  misses: number;
+  result?: { optionId: string; correct: boolean };
+  outcome?: 'passed' | 'failed';
 }
 
 export interface Settings {
@@ -243,6 +258,11 @@ export interface SaveData {
   stampedRegions?: string[];
   tamedAny?: boolean;
   rareFound?: boolean;
+  /** Mastery medals by region and track. Older saves have none. */
+  medals?: Medals;
+  /** Trail Points from medals, added to the next trail. */
+  bankedPoints?: number;
+  masteryTest?: MasteryTest | null;
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -257,6 +277,10 @@ export interface SaveData {
 
 export type Command =
   | { type: 'start'; offerId: string; regionId: string; difficulty: Difficulty; trail: TrailLength; focus?: Focus }
+  | { type: 'startMastery'; regionId: string; track: MedalTrack }
+  | { type: 'masteryAnswer'; optionId: string }
+  | { type: 'masteryNext' }
+  | { type: 'closeMastery' }
   | { type: 'selectCompanion'; instanceId: string }
   | { type: 'toggleTeam'; instanceId: string }
   | { type: 'switchTo'; instanceId: string }
@@ -466,7 +490,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     companionId: team[0] as string,
     teamIds: team,
     prepared: false,
-    points: ECONOMY.startingPoints,
+    points: ECONOMY.startingPoints + (save.bankedPoints ?? 0),
     sturdy: false,
     extraCharge: false,
     snack: false,
@@ -497,6 +521,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     ...save,
     expedition: { ...expedition, rngState: Math.floor(rng.next() * 0x7fffffff) },
     lastSummary: null,
+    bankedPoints: 0,
     nextId: save.nextId + 1,
     rngState: rng.state,
     settings: { ...save.settings, lastDifficulty: difficulty, lastRegionId: cmd.regionId, lastTrail: cmd.trail, lastFocus: cmd.focus ?? 'all' },
@@ -919,7 +944,7 @@ function narrowSearch(e: Expedition): Expedition {
   return { ...e, narrowed: true, removedIds: wrong.slice(0, 2), points: e.points - ECONOMY.narrowSearch };
 }
 
-function claimReward(save: SaveData, pack: Pack): SaveData {
+function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
   const e = save.expedition;
   if (!e || !isExpeditionComplete(e)) return save;
 
@@ -942,7 +967,8 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
 
   const stamped = save.stampedRegions ?? [];
   const newStamp = !applied && !stamped.includes(e.regionId) ? e.regionId : undefined;
-  const claimed: SaveData = { ...save, stampedRegions: newStamp ? [...stamped, newStamp] : stamped, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
+  const won = applied ? { medals: save.medals ?? {}, earned: [] } : awardMedals(save.medals ?? {}, save.learning, pack, now);
+  const claimed: SaveData = { ...save, medals: won.medals, bankedPoints: (save.bankedPoints ?? 0) + medalPoints(won.earned), stampedRegions: newStamp ? [...stamped, newStamp] : stamped, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
   const badges = earnedBadges(claimed, pack);
   const newBadges = badges.filter((id) => !save.badges.includes(id));
 
@@ -967,10 +993,61 @@ function claimReward(save: SaveData, pack: Pack): SaveData {
         ...(levelAfter > 0 ? { levelUp: levelAfter } : {}),
         newBadges,
         ...(e.tamedIds ? { tamedIds: e.tamedIds } : {}),
+        ...(won.earned.length ? { newMedals: won.earned } : {}),
       },
     },
     pack,
   );
+}
+
+function startMastery(save: SaveData, pack: Pack, regionId: string, track: MedalTrack, now: number): SaveData {
+  if (save.expedition || save.masteryTest) return save;
+  if (!medalView(save.medals ?? {}, save.learning, pack, regionId, track, now).testReady) return save;
+  const rng = new Rng(save.rngState);
+  const questions = rng.shuffle(masteryQuestions(pack, regionId, track)).map((q) => presentQuestion(q, rng));
+  if (questions.length === 0) return save;
+  return { ...save, rngState: rng.state, lastSummary: null, masteryTest: { regionId, track, questions, index: 0, misses: 0 } };
+}
+
+function masteryAnswer(save: SaveData, optionId: string, now: number): SaveData {
+  const t = save.masteryTest;
+  const q = t?.questions[t.index];
+  if (!t || !q || t.result || t.outcome) return save;
+  const correct = isCorrect(q, optionId);
+  return {
+    ...save,
+    learning: recordAnswer(save.learning, q, correct, now, false),
+    masteryTest: { ...t, misses: t.misses + (correct ? 0 : 1), result: { optionId, correct } },
+  };
+}
+
+/** A failed test is remembered by day, so the next try waits until tomorrow. */
+function failMastery(save: SaveData, t: MasteryTest, now: number): SaveData {
+  const key = medalKey(t.regionId, t.track);
+  const medal = save.medals?.[key];
+  const medals = medal ? { ...save.medals, [key]: { ...medal, failedDay: localDay(now) } } : save.medals ?? {};
+  return { ...save, medals, masteryTest: { ...t, outcome: 'failed' } };
+}
+
+function masteryNext(save: SaveData, pack: Pack, now: number): SaveData {
+  const t = save.masteryTest;
+  if (!t || !t.result || t.outcome) return save;
+  if (t.misses > MASTERY_MISSES_ALLOWED) return failMastery(save, t, now);
+  if (t.index + 1 < t.questions.length) {
+    const { result: _done, ...rest } = t;
+    return { ...save, masteryTest: { ...rest, index: t.index + 1 } };
+  }
+  const medals = { ...save.medals, [medalKey(t.regionId, t.track)]: { level: 'platinum' as const, at: now } };
+  const passed: SaveData = { ...save, medals, bankedPoints: (save.bankedPoints ?? 0) + medalPoints([{ regionId: t.regionId, track: t.track, level: 'platinum' }]), masteryTest: { ...t, outcome: 'passed' } };
+  return { ...passed, badges: earnedBadges(passed, pack) };
+}
+
+/** Leaving mid-test uses up today's try, so quitting after a miss can't be used to start over. */
+function closeMastery(save: SaveData, now: number): SaveData {
+  const t = save.masteryTest;
+  if (!t) return save;
+  const ended = t.outcome ? save : failMastery(save, t, now);
+  return { ...ended, masteryTest: null };
 }
 
 /** The single state transition. Pure: an invalid or repeated command returns the same object, and callers skip the save. */
@@ -979,7 +1056,15 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
   const withExpedition = (next: Expedition): SaveData => (next === e ? save : { ...save, expedition: next });
   switch (cmd.type) {
     case 'start':
-      return e ? save : startExpedition(save, pack, cmd);
+      return e || save.masteryTest ? save : startExpedition(save, pack, cmd);
+    case 'startMastery':
+      return startMastery(save, pack, cmd.regionId, cmd.track, now);
+    case 'masteryAnswer':
+      return masteryAnswer(save, cmd.optionId, now);
+    case 'masteryNext':
+      return masteryNext(save, pack, now);
+    case 'closeMastery':
+      return closeMastery(save, now);
     case 'selectCompanion':
       if (e?.prepared || !save.companions.some((c) => c.instanceId === cmd.instanceId) || save.activeCompanionId === cmd.instanceId) return save;
       return { ...save, activeCompanionId: cmd.instanceId, lastTeamIds: [cmd.instanceId], expedition: e ? { ...e, companionId: cmd.instanceId, teamIds: [cmd.instanceId] } : null };
@@ -1030,10 +1115,13 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
     case 'continue':
       return continueBattle(save, pack, now);
     case 'claimReward':
-      return claimReward(save, pack);
+      return claimReward(save, pack, now);
     case 'abandon':
       if (!e || isExpeditionComplete(e)) return save;
-      return refreshOffers({ ...save, expedition: null, recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT) }, pack);
+      {
+        const won = awardMedals(save.medals ?? {}, save.learning, pack, now);
+        return refreshOffers({ ...save, medals: won.medals, bankedPoints: (save.bankedPoints ?? 0) + medalPoints(won.earned), expedition: null, recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT) }, pack);
+      }
     case 'dismissSummary':
       return save.lastSummary ? { ...save, lastSummary: null } : save;
     case 'updateSettings':

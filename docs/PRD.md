@@ -514,6 +514,8 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 
 **Type effects:** a hit sprays the attacker's type particles where it lands: water splashes, embers rise, leaves twirl, rocks drop, wind streaks or ice shatters. A Special fills the scene with its type: a wave, rising embers, a leaf storm, falling rocks, wind or snow. The effects are decorative only, and reduced-motion settings hide them.
 
+**Mastery medals:** every region has Places, Capitals and Flags medals (Antarctica only Places), opened from Camp with M. A medal needs every place in the region: Bronze is right once, Silver is right on Ranger or harder, Gold is right on Expert on two different local days, and Platinum is a Mastery Test at least 7 days after Gold. The test has one non-map question per place and allows one miss. A failed or abandoned test can be retried the next day. Medals never go down and bank Trail Points for the next trail (1, 2, 3 and 5). Medals are checked when a trail ends or is abandoned. Gold Medalist and Platinum Master are badges.
+
 **Music:** camp, a trail theme per continent, battle, final showdown, rare encounter, trail event and homecoming.
 
 **Focus:** Camp offers Everything, Places and capitals, or Flags. Flags needs a region with countries, so US states and Antarctica don't offer it yet.

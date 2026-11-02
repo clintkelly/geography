@@ -427,6 +427,13 @@ await button(/Explorer 2/).waitFor();
 assert.equal(await button(/Renamed/).count(), 0, 'restore replaced the rename');
 await page.keyboard.press('1');
 await button('Start expedition').waitFor();
+await page.keyboard.press('m');
+await page.getByRole('heading', { name: 'Mastery Medals' }).waitFor({ timeout: 3000 });
+stats.medalTracks = await page.locator('.medal-track').count();
+assert.ok(stats.medalTracks >= 60, `every region shows its medal tracks (${stats.medalTracks})`);
+await shot('medals');
+await page.keyboard.press('m');
+await page.getByRole('heading', { name: 'Base Camp' }).waitFor({ timeout: 3000 });
 await shot('stable-camp');
 
 await page.setViewportSize({ width: 900, height: 620 });

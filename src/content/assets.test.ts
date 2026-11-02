@@ -20,6 +20,7 @@ expect_(PACK.souvenirs.map((s) => s.artId), 64, 64, true);
 expect_(PACK.regions.map((r) => `stamp-${r.id}`), 64, 64, true);
 expect_(TYPE_LOOP.map((t) => `type-${t}`), 32, 32, true);
 expect_(TYPE_LOOP.map((t) => `fxtype-${t}`), 32, 32, true);
+expect_(['bronze', 'silver', 'gold', 'platinum'].map((l) => `medal-${l}`), 32, 32, true);
 expect_(TRAIL_EVENTS.map((e) => `event-${e.id}`), 128, 128, true);
 
 function png(id: string) {

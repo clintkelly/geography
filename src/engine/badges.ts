@@ -41,6 +41,8 @@ export const BADGES: readonly Badge[] = [
   { id: 'rare-find', name: 'Rare Find', hint: 'Befriend a creature in a rare encounter', earned: (s) => s.rareFound === true },
   { id: 'world', name: 'World Traveler', hint: 'Stamp every region in your Passport', earned: (s, pack) => pack.regions.every((r) => s.stampedRegions?.includes(r.id)) },
   { id: 'boss', name: 'Boss Befriender', hint: 'Befriend a Continent Boss', earned: (s, pack) => s.companions.some((c) => speciesOf(pack, c.speciesId).boss) },
+  { id: 'medal-gold', name: 'Gold Medalist', hint: 'Earn a Gold mastery medal', earned: (s) => Object.values(s.medals ?? {}).some((m) => m.level === 'gold' || m.level === 'platinum') },
+  { id: 'medal-platinum', name: 'Platinum Master', hint: 'Pass a Mastery Test for Platinum', earned: (s) => Object.values(s.medals ?? {}).some((m) => m.level === 'platinum') },
   { id: 'bold', name: 'Bold Befriender', hint: 'Befriend a creature mid-fight', earned: (s) => s.tamedAny === true },
   { id: 'expert', name: 'True Expert', hint: 'Finish an Expert trail', earned: (s) => s.expertTrails >= 1 },
 ];
