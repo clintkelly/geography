@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { attackDamage, isBossTurn, startCombat } from './combat';
-import { beats, losesTo, TYPE_LOOP, typeEdge } from './types';
+import { ALL_TYPES, beatsAll, losesToAll, matchup, TYPE_LOOP, typeEdge, why } from './types';
 import { trackFor } from '../ui/music';
 import { clampView, EUROPE_VIEW, MAPS, usMap, worldMap } from '../content/maps';
 import { PACK } from '../content/pack';
@@ -1393,20 +1393,45 @@ describe('music', () => {
 describe('types', () => {
   it('forms a loop where every type beats one and loses to one', () => {
     for (const t of TYPE_LOOP) {
-      expect(typeEdge(t, beats(t))).toBe(1);
-      expect(typeEdge(beats(t), t)).toBe(-1);
+      for (const b of beatsAll(t)) {
+        expect(typeEdge(t, b)).toBe(1);
+        expect(typeEdge(b, t)).toBe(-1);
+        expect(losesToAll(b)).toContain(t);
+        expect(why(t, b), `${t}>${b}`).not.toBe('');
+      }
       expect(typeEdge(t, t)).toBe(0);
-      expect(beats(losesTo(t))).toBe(t);
     }
-    expect(beats('volt')).toBe('tide');
-    expect(beats('stone')).toBe('volt');
-    expect(beats('frost')).toBe('stone');
-    expect(beats('leaf')).toBe('gale');
+    expect(beatsAll('volt')).toEqual(['tide']);
+    expect(beatsAll('frost')).toEqual(['stone']);
+    expect(beatsAll('leaf')).toEqual(['gale']);
   });
 
-  it('every creature has a type', () => {
-    for (const s of PACK.species) expect(TYPE_LOOP, s.id).toContain(s.type);
-    expect(new Set(PACK.species.map((s) => s.type)).size).toBe(TYPE_LOOP.length);
+  it('Light beats Spirit, Spirit beats Stone, and Stone beats Light as well as Volt', () => {
+    expect(typeEdge('light', 'spirit')).toBe(1);
+    expect(typeEdge('spirit', 'stone')).toBe(1);
+    expect(typeEdge('stone', 'light')).toBe(1);
+    expect(typeEdge('spirit', 'light')).toBe(-1);
+    expect(beatsAll('stone')).toEqual(['volt', 'light']);
+    expect(losesToAll('stone')).toEqual(['frost', 'spirit']);
+    expect(typeEdge('light', 'tide')).toBe(0);
+    expect(typeEdge('spirit', 'volt')).toBe(0);
+    for (const t of ALL_TYPES) {
+      expect(beatsAll(t).length, t).toBe(losesToAll(t).length);
+      for (const b of beatsAll(t)) expect(why(t, b), `${t}>${b}`).not.toBe('');
+    }
+  });
+
+  it('a Light and Tide creature uses Light against Spirit', () => {
+    const lumangler = PACK.species.find((o) => o.id === 'lumangler')!;
+    const ghost = PACK.species.find((o) => o.type === 'spirit' && !o.secondType)!;
+    expect(matchup(lumangler, ghost)).toMatchObject({ edge: 1, mine: 'light' });
+  });
+
+  it('every creature has a type, and every type has creatures', () => {
+    for (const s of PACK.species) expect(ALL_TYPES, s.id).toContain(s.type);
+    expect(new Set(PACK.species.flatMap((s) => (s.secondType ? [s.type, s.secondType] : [s.type])))).toEqual(new Set(ALL_TYPES));
+    expect(PACK.species.filter((s) => s.type === 'light' || s.secondType === 'light').length).toBeGreaterThanOrEqual(4);
+    expect(PACK.species.filter((s) => s.type === 'spirit' || s.secondType === 'spirit').length).toBeGreaterThanOrEqual(4);
   });
 
   const base = { playerMaxHp: 12, playerAttack: 3, special: 'strong' as const, opponentMaxHp: 20, enemyPattern: [2, 2, 4], maxTurns: 8 };

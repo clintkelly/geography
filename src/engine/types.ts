@@ -1,27 +1,56 @@
 import type { CreatureType } from '../content/types';
 
-/** Each type beats the next one, and the last beats the first. */
+/** The first seven types form a loop: each beats the next one, and the last beats the first. */
 export const TYPE_LOOP: readonly CreatureType[] = ['tide', 'flame', 'leaf', 'gale', 'frost', 'stone', 'volt'];
+
+/** Light and Spirit form a small triangle with Stone: Light beats Spirit, Spirit beats Stone, Stone beats Light. */
+export const TYPE_TRIANGLE: readonly CreatureType[] = ['light', 'spirit', 'stone'];
+
+/** Every type, in the order the guide and stable list them. */
+export const ALL_TYPES: readonly CreatureType[] = [...TYPE_LOOP, 'light', 'spirit'];
 
 export const STRONG_BONUS = 1;
 
-export const TYPE_INFO: Record<CreatureType, { name: string; why: string }> = {
-  tide: { name: 'Tide', why: 'Water puts out Flame.' },
-  flame: { name: 'Flame', why: 'Fire burns Leaf.' },
-  leaf: { name: 'Leaf', why: 'Rows of trees break the Gale.' },
-  gale: { name: 'Gale', why: 'Warm wind melts Frost.' },
-  frost: { name: 'Frost', why: 'Ice freezes in cracks and splits Stone.' },
-  stone: { name: 'Stone', why: 'The ground soaks up Volt, like a lightning rod.' },
-  volt: { name: 'Volt', why: 'Electricity zaps through Tide.' },
+export const TYPE_INFO: Record<CreatureType, { name: string }> = {
+  tide: { name: 'Tide' },
+  flame: { name: 'Flame' },
+  leaf: { name: 'Leaf' },
+  gale: { name: 'Gale' },
+  frost: { name: 'Frost' },
+  stone: { name: 'Stone' },
+  volt: { name: 'Volt' },
+  light: { name: 'Light' },
+  spirit: { name: 'Spirit' },
 };
 
-export const beats = (type: CreatureType) => TYPE_LOOP[(TYPE_LOOP.indexOf(type) + 1) % TYPE_LOOP.length] as CreatureType;
-export const losesTo = (type: CreatureType) => TYPE_LOOP[(TYPE_LOOP.indexOf(type) + TYPE_LOOP.length - 1) % TYPE_LOOP.length] as CreatureType;
+const after = (ring: readonly CreatureType[], t: CreatureType) => ring[(ring.indexOf(t) + 1) % ring.length] as CreatureType;
+const before = (ring: readonly CreatureType[], t: CreatureType) => ring[(ring.indexOf(t) + ring.length - 1) % ring.length] as CreatureType;
+const rings = (t: CreatureType) => [TYPE_LOOP, TYPE_TRIANGLE].filter((r) => r.includes(t));
+
+/** The types this one is strong against. Stone, in both the loop and the triangle, beats two. */
+export const beatsAll = (type: CreatureType): CreatureType[] => rings(type).map((r) => after(r, type));
+/** The types this one is weak against. */
+export const losesToAll = (type: CreatureType): CreatureType[] => rings(type).map((r) => before(r, type));
+
+/** Why one type beats another, in words a child can picture. */
+export const WHY: Record<string, string> = {
+  'tide>flame': 'Water puts out Flame.',
+  'flame>leaf': 'Fire burns Leaf.',
+  'leaf>gale': 'Rows of trees break the Gale.',
+  'gale>frost': 'Warm wind melts Frost.',
+  'frost>stone': 'Ice freezes in cracks and splits Stone.',
+  'stone>volt': 'The ground soaks up Volt, like a lightning rod.',
+  'volt>tide': 'Electricity zaps through Tide.',
+  'light>spirit': 'Light chases away the shadows Spirits hide in.',
+  'spirit>stone': 'Spirits float right through Stone walls.',
+  'stone>light': 'Stone blocks Light and makes shade.',
+};
+export const why = (a: CreatureType, b: CreatureType) => WHY[`${a}>${b}`] ?? '';
 
 /** 1 if `mine` beats `theirs`, -1 if it loses to it, otherwise 0. */
 export function typeEdge(mine: CreatureType, theirs: CreatureType): number {
-  if (beats(mine) === theirs) return STRONG_BONUS;
-  return beats(theirs) === mine ? -STRONG_BONUS : 0;
+  if (beatsAll(mine).includes(theirs)) return STRONG_BONUS;
+  return beatsAll(theirs).includes(mine) ? -STRONG_BONUS : 0;
 }
 
 /** A creature's types: one, or two for a dual-type creature. */

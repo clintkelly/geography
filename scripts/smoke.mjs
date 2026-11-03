@@ -302,7 +302,7 @@ assert.equal(second.completedExpeditions, 1, 'each profile keeps its own count')
 assert.equal(second.companions.length, 1);
 
 // Expert: clicking states on a blank map, for finding places and answering.
-await button(/Expert/).click();
+await page.getByRole('button', { name: 'Expert', exact: true }).click();
 await button(/Short/).click();
 await button('Start expedition').click();
 await page.getByText('Prepare for the trail').waitFor();
@@ -317,7 +317,7 @@ await button(/Dad/).waitFor();
 await page.keyboard.press('3');
 await button('Start expedition').waitFor();
 await button('Southern Europe').click();
-await button(/Expert/).click();
+await page.getByRole('button', { name: 'Expert', exact: true }).click();
 await button(/Long/).click();
 await button('Start expedition').click();
 await page.getByText('Prepare for the trail').waitFor();

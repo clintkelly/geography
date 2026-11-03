@@ -197,6 +197,16 @@
       "generationId": "MbadVZD1Psu6Pvq0usst",
       "prompt": "Magical burst of swirling leaves, a whooshing gust full of rustling leaves with a bright woody chime that rings out, special attack in a children's game, no voice, about one second",
       "note": "take 1 of 2; audible to 370 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -12.8 dBFS, 2 clipped samples; measured only, not listened to. Second prompt; the first prompt gave two takes that were too short and quiet."
+    },
+    "special-light": {
+      "generationId": "TIaDhdfbYnEo7a6imRQD",
+      "prompt": "Short magical burst of sunlight, bright rising shimmering chime swelling into a warm golden sparkle burst whoosh, special attack in a children's game, no voice, about one second",
+      "note": "take 4 of 4; audible to 780 ms (-40 dB) / 690 ms (-30 dB) of 1000 ms; no leading silence, not trimmed (no ffmpeg); peak -2 dBFS, loudest 50 ms -12.6 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-spirit": {
+      "generationId": "vY0bYhZosBimTDRVMW6r",
+      "prompt": "Short magical ghostly mist, soft airy swirling whoosh with a gentle ethereal twinkling chime, friendly and playful not spooky, special attack in a children's game, no voice, about one second",
+      "note": "take 3 of 4; audible to 690 ms (-40 dB) / 560 ms (-30 dB) of 1000 ms; no leading silence, not trimmed (no ffmpeg); peak -4 dBFS, loudest 50 ms -13.8 dBFS, 0 clipped samples; measured only, not listened to. Take 4 (WzBTPNm7sPRJyuUthJyV) is louder (-11.2 dBFS) but runs to 1200 ms."
     }
   },
   "music": {

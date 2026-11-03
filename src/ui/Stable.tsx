@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { CreatureType } from '../content/types';
 import { FREE_POINTS, type Command, type Companion } from '../engine/game';
 import { levelOf, levelProgress, MAX_LEVEL } from '../engine/progression';
-import { TYPE_INFO, TYPE_LOOP, typesOf } from '../engine/types';
+import { ALL_TYPES, TYPE_INFO, typesOf } from '../engine/types';
 import { Sprite } from './art';
 import { companionView } from './content';
 import { Key } from './keys';
@@ -28,7 +28,7 @@ export function arrange(companions: readonly Companion[], sort: Sort, type: Crea
     oldest: (a, b) => a.i - b.i,
     level: (a, b) => b.c.bondXp - a.c.bondXp || a.i - b.i,
     name: (a, b) => a.v.name.localeCompare(b.v.name),
-    type: (a, b) => TYPE_LOOP.indexOf(a.v.species.type) - TYPE_LOOP.indexOf(b.v.species.type) || a.v.name.localeCompare(b.v.name),
+    type: (a, b) => ALL_TYPES.indexOf(a.v.species.type) - ALL_TYPES.indexOf(b.v.species.type) || a.v.name.localeCompare(b.v.name),
   };
   return [...shown].sort(by[sort]).map(({ c }) => c);
 }
@@ -56,7 +56,7 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
           <label>Sort <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>{SORTS.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}</select></label>
           <span className="type-filter">
             <button type="button" aria-pressed={type === 'all'} onClick={() => setType('all')}>All</button>
-            {TYPE_LOOP.filter((t) => present.has(t)).map((t) => (
+            {ALL_TYPES.filter((t) => present.has(t)).map((t) => (
               <button key={t} type="button" aria-pressed={type === t} aria-label={`Only ${TYPE_INFO[t].name}`} onClick={() => setType(type === t ? 'all' : t)}><TypeBadge type={t} plain /></button>
             ))}
             {companions.some((c) => c.shiny) && <button type="button" className="shiny-filter" aria-pressed={type === 'shiny'} onClick={() => setType(type === 'shiny' ? 'all' : 'shiny')}>✦ Shiny</button>}

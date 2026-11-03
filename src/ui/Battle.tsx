@@ -12,7 +12,7 @@ import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { TypeBadges, TypeGuide } from './TypeGuide';
 import { TypeHit, TypeSpecial } from './TypeFx';
-import { beats, losesTo, matchup, TYPE_INFO } from '../engine/types';
+import { beatsAll, losesToAll, matchup, TYPE_INFO, why } from '../engine/types';
 
 /** How long a win stays on screen after the last hit, before the trail can carry on. */
 const WIN_PAUSE_MS = 1400;
@@ -77,7 +77,9 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const opponent = species(slot?.opponentId ?? '');
   const mine = matchup(companion, opponent);
   // A creature that just joined mid-fight may have turned out shiny.
-  const newShiny = !!battle.befriended && !!save.companions.find((c) => c.speciesId === opponent.id && c.shiny);
+  // The friend who just joined is always the last one added, so an older shiny of the same kind doesn't count.
+  const joined = save.companions.at(-1);
+  const newShiny = !!battle.befriended && joined?.speciesId === opponent.id && !!joined.shiny;
   const theirs = matchup(opponent, companion);
   const [frame, setFrame] = useState<Frame | null>(null);
   const answered = battle.result ? `${e.answered}` : '';
@@ -236,6 +238,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const memberHp = (id: string) => (id === e.companionId ? combat.playerHp : battle.bench?.[id]?.hp ?? 0);
   const canSwitch = !battle.befriending && (battle.tameHits ?? 0) === 0 && members.some((c) => c.instanceId !== e.companionId && memberHp(c.instanceId) > 0);
   const chooser = !!battle.mustSwitch || picking;
+  const names = (ts: CreatureType[]) => ts.map((t) => TYPE_INFO[t].name).join(' or ');
   const helper = members.map((c) => companionView(c)).find((v) => matchup(v.species, opponent).edge > 0 && v.species.id !== companion.id)?.name;
   const swapTo = (instanceId: string) => {
     setPicking(false);
@@ -378,9 +381,9 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           <div className="actions">
             <p className="muted">{place(slot.locationId).name} · {bossFoe ? 'Questions from the whole continent' : 'Local questions and expedition review'}</p>
             {bossTurn && <p className="boss-warning">{opponent.boss?.move}! {opponent.boss?.warning}</p>}
-            {edge > 0 && <p className="matchup matchup-strong">Strong matchup! {TYPE_INFO[mine.mine].name} beats {TYPE_INFO[mine.theirs].name}: you hit 1 harder. {TYPE_INFO[mine.mine].why}</p>}
-            {edge < 0 && <p className="matchup matchup-weak">Weak matchup. {TYPE_INFO[mine.theirs].name} beats {TYPE_INFO[mine.mine].name}: you hit 1 softer.{helper ? ` Try switching to ${helper}!` : ` A ${TYPE_INFO[losesTo(opponent.type)].name} creature would be strong here.`}</p>}
-            {edge === 0 && <p className="muted">{companion.secondType || opponent.secondType ? 'Even matchup. With two types in the mix, the strong and weak sides cancel out.' : companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${TYPE_INFO[beats(companion.type)].name}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${TYPE_INFO[beats(companion.type)].name}, and ${TYPE_INFO[opponent.type].name} beats ${TYPE_INFO[beats(opponent.type)].name}.`}</p>}
+            {edge > 0 && <p className="matchup matchup-strong">Strong matchup! {TYPE_INFO[mine.mine].name} beats {TYPE_INFO[mine.theirs].name}: you hit 1 harder. {why(mine.mine, mine.theirs)}</p>}
+            {edge < 0 && <p className="matchup matchup-weak">Weak matchup. {TYPE_INFO[mine.theirs].name} beats {TYPE_INFO[mine.mine].name}: you hit 1 softer.{helper ? ` Try switching to ${helper}!` : ` A ${names(losesToAll(opponent.type))} creature would be strong here.`}</p>}
+            {edge === 0 && <p className="muted">{companion.secondType || opponent.secondType ? 'Even matchup. With two types in the mix, the strong and weak sides cancel out.' : companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${names(beatsAll(companion.type))}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${names(beatsAll(companion.type))}, and ${TYPE_INFO[opponent.type].name} beats ${names(beatsAll(opponent.type))}.`}</p>}
             {battle.befriending ? (
               <>
                 <p className="learn">{opponent.displayName} is worn out. Answer a question to befriend it!</p>

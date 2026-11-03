@@ -1,5 +1,5 @@
 import type { Moves } from './moves';
-export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost' | 'volt';
+export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost' | 'volt' | 'light' | 'spirit';
 export type Difficulty = 'scout' | 'ranger' | 'expert';
 export const DIFFICULTIES: readonly Difficulty[] = ['scout', 'ranger', 'expert'];
 

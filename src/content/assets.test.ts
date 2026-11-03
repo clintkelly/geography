@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TRAIL_EVENTS } from '../engine/events';
-import { TYPE_LOOP } from '../engine/types';
+import { ALL_TYPES } from '../engine/types';
 import { MUSIC_FILES, takeFile, TRACKS } from '../ui/music';
 import { SOUND_FILES } from '../ui/sound';
 import { PACK } from './pack';
@@ -19,8 +19,8 @@ expect_(PACK.cards.map((c) => c.artId), 128, 96, false);
 expect_(BUILT_IN_BACKDROPS, 480, 192, false);
 expect_(PACK.souvenirs.map((s) => s.artId), 64, 64, true);
 expect_(PACK.regions.map((r) => `stamp-${r.id}`), 64, 64, true);
-expect_(TYPE_LOOP.map((t) => `type-${t}`), 32, 32, true);
-expect_(TYPE_LOOP.map((t) => `fxtype-${t}`), 32, 32, true);
+expect_(ALL_TYPES.map((t) => `type-${t}`), 32, 32, true);
+expect_(ALL_TYPES.map((t) => `fxtype-${t}`), 32, 32, true);
 expect_(['bronze', 'silver', 'gold', 'platinum'].map((l) => `medal-${l}`), 32, 32, true);
 expect_(TRAIL_EVENTS.map((e) => `event-${e.id}`), 128, 128, true);
 

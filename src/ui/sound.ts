@@ -32,6 +32,8 @@ const LENGTH_MS = {
   'special-frost': 800,
   'special-stone': 850,
   'special-volt': 460,
+  'special-light': 780,
+  'special-spirit': 700,
 } as const;
 /** Sounds with extra takes, -2 and -3. One is picked at random each time, so they don't get old. */
 const TAKES: Partial<Record<keyof typeof LENGTH_MS, number>> = { correct: 3, attack: 3, hit: 3, guard: 3, win: 3, befriend: 3, special: 3 };

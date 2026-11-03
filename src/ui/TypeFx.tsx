@@ -18,6 +18,10 @@ const MOTION: Record<CreatureType, { arc: boolean; spin: number; spread: [number
   frost: { arc: false, spin: 270, spread: [75, 75], lift: 0, ms: 640 },
   // Sparks crackle out fast in every direction.
   volt: { arc: false, spin: 120, spread: [90, 90], lift: 0, ms: 420 },
+  // Sparkles of light burst out wide and twinkle.
+  light: { arc: false, spin: 90, spread: [100, 100], lift: -10, ms: 680 },
+  // Wisps drift slowly upward, swaying.
+  spirit: { arc: false, spin: 30, spread: [55, 40], lift: -70, ms: 1000 },
 };
 
 /** A fixed scatter, so particles don't jump around between renders. */
@@ -59,7 +63,7 @@ export function TypeSpecial({ type }: { type: CreatureType }) {
         const style: Vars = {
           '--x': `${(at(i) * 100).toFixed(0)}%`,
           '--y': `${(at(i + 7) * 100).toFixed(0)}%`,
-          '--spin': `${type === 'leaf' || type === 'frost' ? 360 : 90}deg`,
+          '--spin': `${type === 'leaf' || type === 'frost' || type === 'light' ? 360 : 90}deg`,
           '--size': `${22 + Math.round(at(i + 3) * 22)}px`,
           animationDelay: `${Math.round(at(i + 9) * 260)}ms`,
         };

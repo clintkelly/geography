@@ -372,7 +372,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .continent-name { font-size: 0.78rem; font-weight: 700; color: var(--muted); min-width: 104px; }
 .row.spread { justify-content: space-between; align-items: center; }
 .type-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--type-bg, #eee); color: #2b2a26; white-space: nowrap; }
-.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; } .type-volt { --type-bg: #fbeea0; }
+.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; } .type-volt { --type-bg: #fbeea0; } .type-light { --type-bg: #fff3c4; } .type-spirit { --type-bg: #e4dcfa; }
 .type-line { display: block; line-height: 1.25; } .type-line small { display: block; color: var(--muted); }
 .type-guide { background: #f6f3ea; border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
 .type-guide summary { font-weight: 700; cursor: pointer; }
@@ -457,6 +457,8 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .fx-flame.type-hit img { filter: drop-shadow(0 0 4px #ffb03a); }
 .fx-frost.type-hit img { filter: drop-shadow(0 0 4px #c8f0ff); }
 .fx-volt.type-hit img { filter: drop-shadow(0 0 5px #fff27a); }
+.fx-light.type-hit img { filter: drop-shadow(0 0 6px #fff4c0); }
+.fx-spirit.type-hit img { filter: drop-shadow(0 0 6px #d8c8ff); opacity: 0.9; }
 
 .type-special { inset: 0; overflow: hidden; z-index: 3; }
 .type-special img { animation: 1000ms ease-in forwards; }
@@ -468,6 +470,10 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .fx-stone .type-wash { background: linear-gradient(to bottom, #8a6a3f99, #b8956a55 60%, #8a6a3f00); }
 .fx-gale .type-wash { background: repeating-linear-gradient(170deg, #ffffff00 0 28px, #e8faffaa 28px 32px); }
 .fx-frost .type-wash { box-shadow: inset 0 0 60px 20px #c8f0ffdd; background: #e8f8ff44; }
+/* Sunlight pours down from above. */
+.fx-light .type-wash { background: radial-gradient(ellipse at 50% -10%, #fffbe0ee, #ffe68a88 40%, #ffe68a00 75%); }
+/* A soft lavender mist rolls in. */
+.fx-spirit .type-wash { background: radial-gradient(circle, #b8a0ff00 25%, #9a86d8aa); animation-duration: 1300ms; }
 /* Lightning flashes the whole scene. */
 .fx-volt .type-wash { background: #fff6b0; animation-name: flash; }
 @keyframes flash { 0%, 30%, 60% { opacity: 0; } 10%, 45% { opacity: 0.6; } 75% { opacity: 0.35; } 100% { opacity: 0; } }
@@ -485,6 +491,12 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .type-special.fx-frost img { left: var(--x); top: -14%; animation-name: storm-fall; animation-duration: 1100ms; animation-timing-function: linear; }
 /* Sparks strike down fast, like lightning. */
 .type-special.fx-volt img { left: var(--x); top: -14%; animation-name: storm-fall; animation-duration: 380ms; animation-timing-function: cubic-bezier(0.6, 0, 1, 1); filter: drop-shadow(0 0 5px #fff27a); }
+/* Light sparkles pop in all over the scene. */
+.type-special.fx-light img { left: var(--x); top: var(--y); animation-name: storm-twinkle; animation-duration: 900ms; filter: drop-shadow(0 0 6px #fff4c0); }
+/* Wisps float up from the ground, swaying. */
+.type-special.fx-spirit img { left: var(--x); top: 100%; animation-name: storm-wisp; animation-duration: 1400ms; animation-timing-function: ease-out; filter: drop-shadow(0 0 6px #d8c8ff); }
+@keyframes storm-twinkle { 0% { opacity: 0; transform: scale(0.2) rotate(0); } 35% { opacity: 1; transform: scale(1.2) rotate(calc(var(--spin) / 2)); } 100% { opacity: 0; transform: scale(0.6) rotate(var(--spin)); } }
+@keyframes storm-wisp { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 0.9; } 50% { transform: translate(18px, -150px); } 100% { opacity: 0; transform: translate(-14px, -320px); } }
 @keyframes storm-sweep { 0% { opacity: 1; transform: translateX(0) rotate(0); } 50% { transform: translateX(420px) translateY(-14px) rotate(var(--spin)); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(860px) rotate(var(--spin)); } }
 @keyframes storm-rise { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-300px) scale(1.1) rotate(var(--spin)); } }
 @keyframes storm-diag { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translate(260px, 320px) rotate(var(--spin)); } }

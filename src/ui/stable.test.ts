@@ -40,3 +40,16 @@ describe('music takes', () => {
     expect(takeFile('boss', 0.99)).toBe('boss-2');
   });
 });
+
+describe('trip newcomers', () => {
+  it('matches two of the same kind to two different stable entries', async () => {
+    const { newcomers } = await import('./Camp');
+    const save = { companions: [
+      { instanceId: 'a', speciesId: 'slatepaw', bondXp: 500 },
+      { instanceId: 'b', speciesId: 'glaciarch', bondXp: 0 },
+      { instanceId: 'c', speciesId: 'glaciarch', bondXp: 0 },
+    ] } as unknown as Parameters<typeof newcomers>[0];
+    expect(newcomers(save, ['glaciarch', 'glaciarch']).map((c) => c.instanceId)).toEqual(['c', 'b']);
+    expect(newcomers(save, ['slatepaw'])).toEqual([]);
+  });
+});

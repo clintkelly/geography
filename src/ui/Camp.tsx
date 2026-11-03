@@ -3,7 +3,7 @@ import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
 import { cardProgress } from '../engine/cards';
-import { allowedDifficulties, FOCUSES, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Focus, type Offer, type SaveData } from '../engine/game';
+import { allowedDifficulties, FOCUSES, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { artUrl, CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
@@ -62,9 +62,25 @@ function Sighting({ offer, selected, onPick }: { offer: Offer; selected: boolean
   );
 }
 
+/**
+ * The creatures that joined on the last trip, newest first within a kind. The same kind can join twice,
+ * so each one is matched to its own stable entry rather than the first of that kind.
+ */
+export function newcomers(save: SaveData, speciesIds: readonly string[]): Companion[] {
+  const used = new Set<string>();
+  return speciesIds.flatMap((id) => {
+    const match = [...save.companions].reverse().find((c) => c.speciesId === id && c.bondXp === 0 && !c.freedOnce && !used.has(c.instanceId));
+    if (!match) return [];
+    used.add(match.instanceId);
+    return [match];
+  });
+}
+
 export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData; dispatch: (c: Command) => void; onSwitch: () => void; onSettings: () => void }) {
   const s = save.lastSummary;
-  const shinyJoined = !!s && s.reward.kind === 'creature' && !!save.companions.find((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId && c.shiny && c.bondXp === 0);
+  // Only the newest of that kind is the one that just joined; an older shiny copy doesn't count.
+  const newest = s?.reward.kind === 'creature' ? save.companions.filter((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId).at(-1) : undefined;
+  const shinyJoined = !!newest?.shiny && newest.bondXp === 0;
   const regions = PACK.regions.filter((r) => !save.settings.disabledRegions.includes(r.id));
   const [chosenRegion, setRegionId] = useState(save.settings.lastRegionId);
   const regionId = regions.some((r) => r.id === chosenRegion) ? chosenRegion : (regions[0] as { id: string }).id;
@@ -128,11 +144,10 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
               {shinyJoined && <ShinyReveal />}
-              {s.tamedIds?.map((id) => <p key={id}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
-              {[...(s.reward.kind === 'creature' ? [s.reward.speciesId] : []), ...(s.tamedIds ?? [])].map((id) => {
-                const joined = save.companions.find((c) => c.speciesId === id && c.bondXp === 0 && !c.freedOnce);
-                return joined && save.companions.length > 1 ? <button key={`home-${id}`} type="button" className="link" onClick={() => { playSound('free'); dispatch({ type: 'freeCompanion', instanceId: joined.instanceId }); }}>Not for me: send {species(id).displayName} home (+{FREE_POINTS} Trail Points, call it back any time)</button> : null;
-              })}
+              {s.tamedIds?.map((id, i) => <p key={`${id}-${i}`}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
+              {newcomers(save, [...(s.reward.kind === 'creature' ? [s.reward.speciesId] : []), ...(s.tamedIds ?? [])]).map((joined) => (
+                save.companions.length > 1 ? <button key={`home-${joined.instanceId}`} type="button" className="link" onClick={() => { playSound('free'); dispatch({ type: 'freeCompanion', instanceId: joined.instanceId }); }}>Not for me: send {species(joined.speciesId).displayName} home (+{FREE_POINTS} Trail Points, call it back any time)</button> : null
+              ))}
               {s.correct >= Math.max(1, s.answered * 0.8) && s.difficulty !== 'expert' && <p className="nudge">Great tracking! {s.difficulty === 'ranger' ? 'Expert' : 'Ranger'} trails hide creatures you can't meet here. Try {s.difficulty === 'ranger' ? 'Expert' : 'Ranger'} next time!</p>}
               {s.souvenirId && <p>Found on the trail: <strong>{souvenir(s.souvenirId)?.displayName}</strong></p>}
               <p className="muted">{s.correct} of {s.answered} answers correct{s.xpGained ? ` · ${s.xpGained} bonus XP` : ''}{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
