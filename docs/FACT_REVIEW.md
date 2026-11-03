@@ -141,3 +141,52 @@ The other 40 stay `unverified`. Some may well be official; no statute or state s
 - **Moldova's language.** Romanian and Moldovan are the same language, but people label it differently and the topic is political.
 - **Kosovo, Cyprus and Turkey** are not in the game, so neighbor lists for Serbia, Albania, Montenegro and North Macedonia leave out Kosovo.
 - **Monaco and San Marino** "cities" are quarters and municipalities, not separate cities.
+
+## Animal questions (2026-11-02)
+
+Written and web-checked by an AI research pass, one source link per item, in `src/content/animals/`. Not yet reviewed by a person.
+
+**Americas and Europe** (`americas-europe.json`, 141 questions for 112 places).
+- **Removed:** Montenegro's Lake Skadar, because the lake is shared with Albania in the same region. Ukraine's Askania-Nova reserve, because it has been occupied since 2022 and Russia is in the same region.
+- **Skipped,** because nothing was both true and unique within the region: Andorra, Liechtenstein, Monaco, San Marino, Vatican, Bosnia, Czechia, Moldova, Slovakia, North Macedonia, Belarus, Serbia, El Salvador, Saint Kitts and Nevis, Suriname.
+
+Please review:
+1. **Unofficial national birds:** Sweden (common blackbird, chosen by a vote) and the UK (robin, a 2015 public vote).
+2. **National birds sourced only from Wikipedia's list:** Belgium (kestrel), the Netherlands (godwit), Luxembourg (goldcrest), Hungary (saker falcon), Albania (golden eagle).
+3. **National animals sourced only from Wikipedia's list:** Finland (brown bear), Belize (Baird's tapir), Peru (vicuña).
+4. **Bolivia:** Laguna Colorada as the biggest nesting site of James's flamingo.
+5. **Iceland:** the Westman Islands puffins, worded as "one of the biggest colonies".
+6. **Antigua and Barbuda:** "largest frigatebird colony in the Caribbean" comes from a 2008 census, before the 2017 hurricane.
+7. **Wording to check:**
+   - Mississippi: "only known wild population".
+   - Barbados: the threadsnake is "maybe" the smallest snake.
+   - Georgia: the brown thrasher's "over 1,000 songs".
+   - Texas: Kemp's ridley as the smallest and rarest sea turtle.
+   - Mexico: the axolotl in the wild.
+   - Romania: bear numbers.
+8. **Weak source links:** Florida (alligators and crocodiles), North Carolina (red wolves), Glacier National Park, France (Camargue).
+9. **Idaho:** the ask's hint, "a ground squirrel named after that state", may be too easy.
+
+**Africa, Asia, Oceania and Antarctica** (`africa-asia-oceania.json`).
+- **Removed:**
+  - Togo's elephants: the only count is about 50, from 2003.
+  - Burundi's Gustave the crocodile: famous as a man-eater.
+  - Mount Erebus: the penguin colony is at Cape Royds, not on the volcano.
+- **Skipped:**
+  - North Korea: its national bird is unclear.
+  - Timor-Leste: the reef claim couldn't be confirmed.
+  - Tuvalu: nothing unique was found.
+  - Mount Vinson, Lambert Glacier and Lake Vostok: they have no animal life.
+
+Please review:
+1. **Lebanon:** the striped hyena as national animal rests on one Wikipedia line.
+2. **Burkina Faso:** Bazoulé's sacred crocodiles, from an AFP story.
+3. **UAE:** the second-largest dugong population, from Gulf news outlets.
+4. **South Sudan:** "huge herds of antelope" in Badingilo. The source doesn't name the animals.
+5. **Equatorial Guinea:** Pennant's red colobus only on Bioko. Its taxonomy has changed.
+6. **South Korea:** dolphins released off Jeju in 2013, from one Wikipedia sentence.
+7. **Guinea:** "most western chimpanzees", where estimates vary.
+8. **Gabon:** "more than half of forest elephants".
+9. **Saudi Arabia:** Arabian Leopard Day. **Kyrgyzstan:** snow leopard decree, December 2023.
+10. **Kuwait:** crab-plovers nesting in burrows comes from general knowledge, not the source.
+11. **Repeats of existing Field Notes, with new angles:** Algeria (fennec), DR Congo (okapi, bonobo), Liberia (pygmy hippo), Niger (giraffe), Seychelles (Aldabra tortoises), Palau (Jellyfish Lake).

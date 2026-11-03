@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
 import { cardProgress } from '../engine/cards';
-import { allowedDifficulties, FOCUSES, isRegionComplete, regionHasFocus, type Command, type Focus, type Offer, type SaveData } from '../engine/game';
+import { allowedDifficulties, FOCUSES, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { artUrl, CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
@@ -11,13 +11,15 @@ import { Key, useKeys } from './keys';
 import { Passport } from './Passport';
 import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
-import { Stable } from './Stable';
+import { playSound } from './sound';
+import { Stable, Wild } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
 
 const FOCUS_LABELS: Record<Focus, { name: string; text: string }> = {
   all: { name: 'Everything', text: 'Places, capitals, flags, nicknames and fun facts' },
   basics: { name: 'Places and capitals', text: 'Just where it is and its capital' },
   flags: { name: 'Flags', text: 'Just flags. US states and Antarctica have none yet.' },
+  animals: { name: 'Animals', text: 'Which place is home to which wild animal' },
 };
 
 const DESCRIPTIONS: Record<Difficulty, string> = {
@@ -27,13 +29,34 @@ const DESCRIPTIONS: Record<Difficulty, string> = {
 };
 const MINUTES: Record<TrailLength, string> = { short: 'about 15 minutes', standard: 'about 25 minutes', long: 'about 35 minutes' };
 const title = (d: string) => d[0]?.toUpperCase() + d.slice(1);
+const RANK: Record<Difficulty, number> = { scout: 0, ranger: 1, expert: 2 };
+
+/** A lock tag for creatures met only on harder trails. */
+export function LockTag({ difficulty }: { difficulty: Difficulty }) {
+  return <span className={`lock-tag lock-${difficulty}`}>{title(difficulty)} trails{difficulty === 'ranger' ? ' or harder' : ' only'}</span>;
+}
+
+/** The big moment: the new friend turned out shiny. */
+function ShinyReveal() {
+  useEffect(() => {
+    playSound('card');
+    const t = setTimeout(() => playSound('levelup'), 450);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <p className="shiny-reveal" role="status">
+      {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}
+      <strong>✦ It's SHINY! ✦</strong> <span>A rare sparkling color. Harder trails find more of these.</span>
+    </p>
+  );
+}
 
 function Sighting({ offer, selected, onPick }: { offer: Offer; selected: boolean; onPick: () => void }) {
   const { reward } = offer;
   return (
     <button type="button" className="sighting" aria-pressed={selected} onClick={(e) => { onPick(); e.currentTarget.blur(); }}>
       {reward.kind === 'creature'
-        ? <><Sprite id={species(reward.speciesId).artId} size={96} className="silhouette" /><strong>{species(reward.speciesId).boss ? 'Continent Boss!' : species(reward.speciesId).rare ? 'Rare creature!' : 'Mystery creature'}</strong><span className="muted">{species(reward.speciesId).flavor}</span></>
+        ? <><Sprite id={species(reward.speciesId).artId} size={96} className="silhouette" /><strong>{species(reward.speciesId).boss ? 'Continent Boss!' : species(reward.speciesId).rare ? 'Rare creature!' : species(reward.speciesId).minDifficulty ? 'Hidden creature!' : 'Mystery creature'}</strong>{species(reward.speciesId).minDifficulty && <LockTag difficulty={lowestFor(species(reward.speciesId))} />}{species(reward.speciesId).secondType && <span className="dual-tag">Two types!</span>}<span className="muted">{species(reward.speciesId).flavor}</span></>
         : <><strong>Rival hunt</strong><span className="muted">Every creature is in your stable. Reward: {rewardLabel(reward)}</span></>}
     </button>
   );
@@ -41,6 +64,7 @@ function Sighting({ offer, selected, onPick }: { offer: Offer; selected: boolean
 
 export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData; dispatch: (c: Command) => void; onSwitch: () => void; onSettings: () => void }) {
   const s = save.lastSummary;
+  const shinyJoined = !!s && s.reward.kind === 'creature' && !!save.companions.find((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId && c.shiny && c.bondXp === 0);
   const regions = PACK.regions.filter((r) => !save.settings.disabledRegions.includes(r.id));
   const [chosenRegion, setRegionId] = useState(save.settings.lastRegionId);
   const regionId = regions.some((r) => r.id === chosenRegion) ? chosenRegion : (regions[0] as { id: string }).id;
@@ -50,13 +74,17 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const offer = sightings.find((o) => o.id === offerId) ?? (sightings[0] as Offer);
   const allowed = allowedDifficulties(save.settings, region(regionId));
   const [picked, setPicked] = useState<Difficulty>(save.settings.lastDifficulty);
-  const difficulty = allowed.includes(picked) ? picked : (allowed[0] as Difficulty);
+  const floor: Difficulty = offer.reward.kind === 'creature' ? lowestFor(species(offer.reward.speciesId)) : 'scout';
+  const choice = allowed.includes(picked) ? picked : (allowed[0] as Difficulty);
+  const difficulty: Difficulty = RANK[choice] >= RANK[floor] ? choice : floor;
+  const known = knownSpecies(save);
+  const hidden = PACK.species.filter((o) => o.minDifficulty && o.homes.includes(regionId) && !known.has(o.id));
   const regionCards = PACK.cards.filter((c) => place(c.placeId).regionId === regionId);
   const earnedCards = regionCards.filter((c) => save.stateCards.includes(c.placeId));
   const places = PACK.places.filter((p) => p.regionId === regionId);
   const found = places.filter((p) => save.foundPlaces.includes(p.id));
   const rare = PACK.species.find((o) => o.rare && o.homes.includes(regionId));
-  const rareOwned = save.companions.some((c) => c.speciesId === rare?.id);
+  const rareOwned = !!rare && known.has(rare.id);
   const mapLevel = (id: string): Highlight => {
     if (!save.stateCards.includes(id)) return 'found';
     const { level } = cardProgress(save.learning, id);
@@ -81,7 +109,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
     m: () => setShowMedals(true),
     p: onSwitch,
     o: onSettings,
-    ...Object.fromEntries(allowed.map((d, i) => [String(i + 1), () => setPicked(d)])),
+    ...Object.fromEntries(allowed.filter((d) => RANK[d] >= RANK[floor]).map((d) => [String(allowed.indexOf(d) + 1), () => setPicked(d)])),
   });
 
   if (showPassport) return <Passport save={save} onClose={() => setShowPassport(false)} />;
@@ -99,11 +127,17 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               {(s.newMedals ?? []).map((m) => <p key={`${m.regionId}-${m.track}-${m.level}`} className="medal-new"><MedalIcon level={m.level} />New {LEVEL_NAME[m.level]} medal: <strong>{MEDAL_TRACKS.find((t) => t.id === m.track)?.label} of {region(m.regionId).label}</strong> <small>+{MEDAL_POINTS[m.level]} Trail Points next trail</small></p>)}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
+              {shinyJoined && <ShinyReveal />}
               {s.tamedIds?.map((id) => <p key={id}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
+              {[...(s.reward.kind === 'creature' ? [s.reward.speciesId] : []), ...(s.tamedIds ?? [])].map((id) => {
+                const joined = save.companions.find((c) => c.speciesId === id && c.bondXp === 0 && !c.freedOnce);
+                return joined && save.companions.length > 1 ? <button key={`home-${id}`} type="button" className="link" onClick={() => { playSound('free'); dispatch({ type: 'freeCompanion', instanceId: joined.instanceId }); }}>Not for me: send {species(id).displayName} home (+{FREE_POINTS} Trail Points, call it back any time)</button> : null;
+              })}
+              {s.correct >= Math.max(1, s.answered * 0.8) && s.difficulty !== 'expert' && <p className="nudge">Great tracking! {s.difficulty === 'ranger' ? 'Expert' : 'Ranger'} trails hide creatures you can't meet here. Try {s.difficulty === 'ranger' ? 'Expert' : 'Ranger'} next time!</p>}
               {s.souvenirId && <p>Found on the trail: <strong>{souvenir(s.souvenirId)?.displayName}</strong></p>}
               <p className="muted">{s.correct} of {s.answered} answers correct{s.xpGained ? ` · ${s.xpGained} bonus XP` : ''}{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
             </div>
-            {s.reward.kind === 'creature' && <Sprite id={species(s.reward.speciesId).artId} size={96} />}
+            {s.reward.kind === 'creature' && <Sprite id={species(s.reward.speciesId).artId} size={96} shiny={shinyJoined} />}
           </div>
           <button type="button" className="link" onClick={() => dispatch({ type: 'dismissSummary' })}>Dismiss</button>
         </section>
@@ -114,7 +148,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
-          {sightings.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => setOfferId(o.id)} />)}
+          {sightings.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => { if (o.reward.kind === 'creature' && species(o.reward.speciesId).minDifficulty) playSound('locked'); setOfferId(o.id); }} />)}
         </div>
         <div className="picker" role="group" aria-label="Region">
           <span className="muted">Where <Key k="R" /></span>
@@ -145,9 +179,16 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
           <div className="picker" role="group" aria-label="Difficulty">
             <span className="muted">How hard</span>
             {allowed.map((d, i) => (
-              <button key={d} type="button" aria-pressed={d === difficulty} onClick={(e) => { setPicked(d); e.currentTarget.blur(); }}><Key k={i + 1} />{title(d)}</button>
+              <button key={d} type="button" disabled={RANK[d] < RANK[floor]} title={RANK[d] < RANK[floor] ? `This creature only shows up on ${title(floor)} trails` : undefined} aria-pressed={d === difficulty} onClick={(e) => { setPicked(d); e.currentTarget.blur(); }}><Key k={i + 1} />{title(d)}</button>
             ))}
-            <span className="muted">{DESCRIPTIONS[difficulty]}</span>
+            <span className="muted">{DESCRIPTIONS[difficulty]}{difficulty !== 'scout' ? ` · +${difficulty === 'expert' ? 4 : 2} Trail Points to start` : ''}</span>
+          </div>
+        )}
+        {floor !== 'scout' && <p className="muted">This creature hides from easier trails, so this trip is {title(floor)} or harder.</p>}
+        {hidden.length > 0 && (
+          <div className="hidden-hint">
+            {hidden.map((o) => <Sprite key={o.id} id={o.artId} size={48} className="silhouette" />)}
+            <span>{hidden.length === 1 ? '1 creature' : `${hidden.length} creatures`} in {region(regionId).label} only show up on harder trails: {[...new Set(hidden.map((o) => title(lowestFor(o))))].join(' and ')}.</span>
           </div>
         )}
         <button type="button" className="primary" onClick={start}>Start expedition <Key k="Enter" /></button>
@@ -158,6 +199,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <h2>Your stable</h2>
         <Stable companions={save.companions} activeId={save.activeCompanionId} dispatch={dispatch} />
       </section>
+      <Wild wild={save.wild ?? []} dispatch={dispatch} />
 
       <section className="panel">
         <h2>Explorer's Map: {found.length} of {places.length} in {region(regionId).label}</h2>

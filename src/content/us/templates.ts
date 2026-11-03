@@ -12,6 +12,7 @@ import midwest from './midwest.json';
 import northeast from './northeast.json';
 import south from './south.json';
 import west from './west.json';
+import { animalsOf } from '../animals';
 
 /** One reviewed record per state or country. Questions and clues are generated from these. */
 export interface PlaceRecord {
@@ -213,6 +214,17 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
       objectiveId: `fact-${s.id}-${i}`,
     });
     out.push(fact('scout', namesOf(far)), fact('ranger', namesOf(near)), fact('expert', clickPlace, 'map-click'));
+  });
+  // Animal questions are asked straight away, and their fact is shown after the answer.
+  animalsOf(s.id).forEach((a, i) => {
+    const animal = (difficulty: Difficulty, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
+      ...q(difficulty, 'animal', i, 'animal', a.ask, a.fact, answer, inputType),
+      objectiveId: `animal-${s.id}-${i}`,
+      fieldNote: a.fact,
+      noteId: `animal-${s.id}-${i}`,
+      sourceUrl: a.source,
+    });
+    out.push(animal('scout', namesOf(far)), animal('ranger', namesOf(near)), animal('expert', clickPlace, 'map-click'));
   });
   return out;
 }

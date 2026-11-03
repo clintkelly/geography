@@ -1,6 +1,6 @@
 import { PACK } from '../content/pack';
 import { hasCardsAtLeast } from '../engine/cards';
-import { isRegionComplete, bossUnlocked, type SaveData } from '../engine/game';
+import { isRegionComplete, bossUnlocked, knownSpecies, lowestFor, type SaveData } from '../engine/game';
 import { artUrl, Sprite } from './art';
 import { Key, useKeys } from './keys';
 
@@ -18,13 +18,17 @@ export function Passport({ save, onClose }: { save: SaveData; onClose: () => voi
   useKeys({ v: onClose, escape: onClose });
   const stamped = PACK.regions.filter((r) => save.stampedRegions?.includes(r.id)).length;
   const continents = [...new Set(PACK.regions.map((r) => r.continent))];
-  const owned = save.companions.map((c) => c.speciesId);
+  const known = knownSpecies(save);
+  const owned = [...known];
+  const found = PACK.species.filter((o) => !o.boss && o.homes.length > 0 && known.has(o.id)).length;
+  const total = PACK.species.filter((o) => !o.boss && o.homes.length > 0).length;
   return (
     <div className="stack passport">
       <section className="panel">
         <h1>Explorer's Passport</h1>
         <p>{stamped} of {PACK.regions.length} regions stamped.{stamped === PACK.regions.length ? ' You have explored the whole world!' : ' Finish a trail in a region to earn its stamp.'}</p>
         <div className="xp-track"><div className="xp-fill" style={{ width: `${(stamped / PACK.regions.length) * 100}%` }} /></div>
+        <p>Creature log: {found} of {total} befriended. Dark shapes are still out there. A lock means it only shows up on harder trails.</p>
         <button type="button" onClick={onClose}>Back to camp <Key k="V" /></button>
       </section>
       {continents.map((continent) => {
@@ -43,6 +47,29 @@ export function Passport({ save, onClose }: { save: SaveData; onClose: () => voi
                     <img src={artUrl(`stamp-${r.id}`)} alt="" width={64} height={64} />
                     <strong>{r.label}</strong>
                     <small>{WORDS[level]}</small>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul className="creature-log">
+              {regions.map((r) => {
+                const here = PACK.species.filter((o) => !o.boss && o.homes[0] === r.id);
+                if (here.length === 0) return null;
+                return (
+                  <li key={r.id}>
+                    <small>{r.label}</small>
+                    <span className="log-row">
+                      {here.map((o) => {
+                        const has = known.has(o.id);
+                        const lock = !has && o.minDifficulty ? lowestFor(o) : null;
+                        return (
+                          <span key={o.id} className={`log-entry${has ? '' : ' unknown'}${lock ? ` locked lock-${lock}` : ''}${o.rare ? ' rare' : ''}`} title={has ? o.displayName : lock ? `Only on ${lock[0]?.toUpperCase()}${lock.slice(1)} trails` : o.rare ? 'A rare creature' : 'Not found yet'}>
+                            <Sprite id={o.artId} size={48} className={has ? '' : 'silhouette'} />
+                            {lock && <i aria-hidden="true">{lock === 'expert' ? 'E' : 'R'}</i>}
+                          </span>
+                        );
+                      })}
+                    </span>
                   </li>
                 );
               })}

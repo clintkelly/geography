@@ -42,7 +42,7 @@ export const cardFor = (placeId: string) => PACK.cards.find((c) => c.placeId ===
 export function companionView(c: Companion) {
   const s = species(c.speciesId);
   const form = formOf(s, c.bondXp);
-  return { species: s, stage: form.stage, artId: form.artId, formName: form.name, name: c.nickname || form.name };
+  return { species: s, stage: form.stage, artId: form.artId, formName: form.name, name: c.nickname || form.name, shiny: !!c.shiny };
 }
 
 export function rewardLabel(r: Reward): string {

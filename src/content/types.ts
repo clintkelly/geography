@@ -1,5 +1,5 @@
 import type { Moves } from './moves';
-export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost';
+export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost' | 'volt';
 export type Difficulty = 'scout' | 'ranger' | 'expert';
 export const DIFFICULTIES: readonly Difficulty[] = ['scout', 'ranger', 'expert'];
 
@@ -37,7 +37,7 @@ export interface Question {
   /** This question tests a Field Note, and appears only after the child has seen it. */
   recallOf?: string;
   /** What it asks about, for the Camp focus setting. */
-  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics';
+  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics' | 'animal';
   /** A flag shown with the question. */
   flag?: string;
   /** Destination this question is local to, if any. */
@@ -101,9 +101,13 @@ export interface Species {
   evolutions?: readonly { name: string; artId: string }[];
   /** Offered only once a child has found every place in its region. */
   rare?: boolean;
+  /** Met only on trails at this difficulty or harder. */
+  minDifficulty?: Exclude<Difficulty, 'scout'>;
   /** A continent boss, offered once every region on its continent is stamped. */
   boss?: { move: string; warning: string };
   type: CreatureType;
+  /** A second type. A dual-type creature attacks with whichever type works best. */
+  secondType?: CreatureType;
   /** The way the art faces, so a companion can be mirrored to face its opponent. */
   facing: 'left' | 'right';
 }

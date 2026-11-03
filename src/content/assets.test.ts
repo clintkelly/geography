@@ -2,7 +2,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TRAIL_EVENTS } from '../engine/events';
 import { TYPE_LOOP } from '../engine/types';
-import { TRACKS } from '../ui/music';
+import { MUSIC_FILES, takeFile, TRACKS } from '../ui/music';
+import { SOUND_FILES } from '../ui/sound';
 import { PACK } from './pack';
 
 const ART = 'public/art';
@@ -39,7 +40,7 @@ describe('flags', () => {
 describe('music', () => {
   it('has a file for every track', () => {
     for (const track of TRACKS) expect(existsSync(`public/music/${track}.mp3`), track).toBe(true);
-    expect(readdirSync('public/music').sort()).toEqual(TRACKS.map((t) => `${t}.mp3`).sort());
+    expect(readdirSync('public/music').sort()).toEqual(MUSIC_FILES.map((t) => `${t}.mp3`).sort());
   });
 });
 
@@ -82,10 +83,14 @@ describe('art', () => {
 
 describe('sound', () => {
   it('has a file for every sound the game plays, and no extras', () => {
-    const source = readFileSync('src/ui/sound.ts', 'utf8');
-    const block = source.slice(source.indexOf('LENGTH_MS = {'), source.indexOf('} as const'));
-    const ids = [...block.matchAll(/^\s*'?([a-z-]+)'?: \d+/gm)].map((m) => m[1] as string);
-    expect(ids.length).toBeGreaterThan(5);
-    expect(readdirSync('public/sfx').map((f) => f.replace('.mp3', '')).sort()).toEqual([...ids].sort());
+    expect(SOUND_FILES.length).toBeGreaterThan(5);
+    expect(readdirSync('public/sfx').map((f) => f.replace('.mp3', '')).sort()).toEqual([...SOUND_FILES].sort());
+  });
+
+  it('has every take of every music track', () => {
+    for (const t of TRACKS) for (let n = 0; n < 3; n++) {
+      const file = takeFile(t, n / 3 + 0.01);
+      expect(existsSync(`public/music/${file}.mp3`), file).toBe(true);
+    }
   });
 });

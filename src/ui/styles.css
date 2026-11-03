@@ -172,7 +172,13 @@ kbd { font: 600 0.7em/1 ui-monospace, Menlo, monospace; display: inline-block; p
 .card-award .card-new { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #9a6b00; }
 .card-art { border-radius: 6px; }
 
-.trailbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 14px; }
+.trailbar { position: sticky; top: 0; z-index: 30; display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 0 0 10px 10px; padding: 6px 14px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+.hud-cell { display: flex; flex-direction: column; justify-content: center; gap: 1px; min-width: 0; line-height: 1.2; }
+.hud-cell small { color: var(--muted); font-size: 0.76rem; white-space: nowrap; }
+.hud-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); white-space: nowrap; }
+.score-row { display: inline-flex; align-items: center; gap: 6px; }
+.stop-guardian { border-radius: 3px; transform: rotate(45deg) scale(0.9); }
+.stop-event { border-style: dashed; }
 .stops { display: inline-flex; gap: 5px; }
 .stop { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--land-edge); }
 .stop.now { border-color: var(--accent); background: var(--candidate); }
@@ -366,7 +372,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .continent-name { font-size: 0.78rem; font-weight: 700; color: var(--muted); min-width: 104px; }
 .row.spread { justify-content: space-between; align-items: center; }
 .type-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--type-bg, #eee); color: #2b2a26; white-space: nowrap; }
-.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; }
+.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; } .type-volt { --type-bg: #fbeea0; }
 .type-line { display: block; line-height: 1.25; } .type-line small { display: block; color: var(--muted); }
 .type-guide { background: #f6f3ea; border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
 .type-guide summary { font-weight: 700; cursor: pointer; }
@@ -450,6 +456,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 @keyframes fx-arc { 0% { opacity: 1; transform: translate(0, 0) scale(0.5) rotate(0); } 45% { opacity: 1; transform: translate(calc(var(--dx) * 0.7), calc(var(--dy) - 30px)) scale(1) rotate(calc(var(--spin) / 2)); } 100% { opacity: 0; transform: translate(var(--dx), calc(var(--dy) + 70px)) scale(0.8) rotate(var(--spin)); } }
 .fx-flame.type-hit img { filter: drop-shadow(0 0 4px #ffb03a); }
 .fx-frost.type-hit img { filter: drop-shadow(0 0 4px #c8f0ff); }
+.fx-volt.type-hit img { filter: drop-shadow(0 0 5px #fff27a); }
 
 .type-special { inset: 0; overflow: hidden; z-index: 3; }
 .type-special img { animation: 1000ms ease-in forwards; }
@@ -461,6 +468,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .fx-stone .type-wash { background: linear-gradient(to bottom, #8a6a3f99, #b8956a55 60%, #8a6a3f00); }
 .fx-gale .type-wash { background: repeating-linear-gradient(170deg, #ffffff00 0 28px, #e8faffaa 28px 32px); }
 .fx-frost .type-wash { box-shadow: inset 0 0 60px 20px #c8f0ffdd; background: #e8f8ff44; }
+/* Lightning flashes the whole scene. */
+.fx-volt .type-wash { background: #fff6b0; animation-name: flash; }
+@keyframes flash { 0%, 30%, 60% { opacity: 0; } 10%, 45% { opacity: 0.6; } 75% { opacity: 0.35; } 100% { opacity: 0; } }
 /* Water rolls in as a wave. */
 .type-special.fx-tide img { left: -12%; top: calc(45% + var(--y) / 2); animation-name: storm-sweep; animation-timing-function: ease-out; }
 /* Embers rise from the ground. */
@@ -473,6 +483,8 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .type-special.fx-gale img { left: -14%; top: var(--y); animation-name: storm-sweep; animation-duration: 600ms; animation-timing-function: linear; }
 /* Snow and ice drift down. */
 .type-special.fx-frost img { left: var(--x); top: -14%; animation-name: storm-fall; animation-duration: 1100ms; animation-timing-function: linear; }
+/* Sparks strike down fast, like lightning. */
+.type-special.fx-volt img { left: var(--x); top: -14%; animation-name: storm-fall; animation-duration: 380ms; animation-timing-function: cubic-bezier(0.6, 0, 1, 1); filter: drop-shadow(0 0 5px #fff27a); }
 @keyframes storm-sweep { 0% { opacity: 1; transform: translateX(0) rotate(0); } 50% { transform: translateX(420px) translateY(-14px) rotate(var(--spin)); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(860px) rotate(var(--spin)); } }
 @keyframes storm-rise { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-300px) scale(1.1) rotate(var(--spin)); } }
 @keyframes storm-diag { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translate(260px, 320px) rotate(var(--spin)); } }
@@ -500,3 +512,76 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .mastery-end { display: grid; justify-items: center; text-align: center; gap: 10px; }
 .mastery-passed .medal-icon { animation: stamp-slam 700ms cubic-bezier(0.2, 0.9, 0.3, 1.2); filter: drop-shadow(0 0 10px #9fe8ff); }
 @media (prefers-reduced-motion: reduce) { .medal-new, .mastery-passed .medal-icon { animation: none; } }
+
+/* Stable tools: find, sort and filter a big stable. */
+.stable-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+.stable-tools input[type='search'] { min-width: 160px; }
+.type-filter { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.type-filter button { padding: 2px 6px; }
+.type-filter button[aria-pressed='true'] { outline: 2px solid var(--accent); }
+.free-confirm { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 6px; }
+.free-confirm p { margin: 0 0 6px; font-size: 0.9rem; }
+.stable.wild .stable-card { opacity: 0.9; }
+
+/* Locked creatures: hints of what harder trails hold. */
+.lock-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: #3a4a6a; color: #fff; }
+.lock-tag::before { content: '🔒 '; }
+.lock-tag.lock-expert { background: #6a2a5a; }
+.dual-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: linear-gradient(90deg, #f0b040, #60a0e0); color: #1a1a1a; }
+.hidden-hint { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0; padding: 6px 10px; border: 1px dashed var(--line); border-radius: 8px; }
+.hidden-hint .sprite, .hidden-hint img { animation: hint-bob 2.4s ease-in-out infinite; }
+@keyframes hint-bob { 50% { transform: translateY(-3px); } }
+.nudge { font-weight: 600; color: var(--accent); }
+.creature-log { list-style: none; padding: 0; display: grid; gap: 6px; }
+.creature-log li { display: grid; gap: 2px; }
+.log-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.log-entry { position: relative; display: inline-block; }
+.log-entry.unknown { opacity: 0.6; }
+.log-entry.locked i { position: absolute; right: -2px; bottom: -2px; font-style: normal; font-size: 0.65rem; font-weight: 800; color: #fff; background: #3a4a6a; border-radius: 4px; padding: 0 3px; }
+.log-entry.lock-expert i { background: #6a2a5a; }
+.log-entry.rare.unknown { filter: drop-shadow(0 0 3px gold); }
+
+/* Streak counter heats up, and blazes when a reward lands. */
+.streak-warm strong { color: #e07a20; }
+.streak-hot strong { color: #e03a20; text-shadow: 0 0 6px #ffb040; }
+.streak-blaze { animation: blaze 700ms ease-out; }
+@keyframes blaze { 0% { transform: scale(1); box-shadow: 0 0 0 #ff9a30; } 30% { transform: scale(1.18); box-shadow: 0 0 18px #ff9a30; } 100% { transform: scale(1); box-shadow: 0 0 0 #ff9a30; } }
+
+/* Evolution: the old form glows, a white flash, then the new form. */
+.evolve-stage { position: relative; overflow: hidden; }
+.evolve-rays { position: absolute; inset: -40%; background: repeating-conic-gradient(from 0deg, #fff5 0 10deg, #fff0 10deg 20deg); animation: rays 6s linear infinite; pointer-events: none; }
+@keyframes rays { to { transform: rotate(360deg); } }
+.evolve-glow { animation: evolve-glow 2.2s ease-in forwards; }
+@keyframes evolve-glow { 0% { filter: none; } 60% { filter: brightness(2.2) saturate(0); transform: scale(1.05); } 85% { filter: brightness(6) saturate(0); transform: scale(0.9); } 100% { filter: brightness(10) saturate(0); transform: scale(1.15); } }
+.evolve-flash { position: absolute; inset: 0; background: #fff; animation: evolve-flash 700ms ease-out forwards; pointer-events: none; }
+@keyframes evolve-flash { from { opacity: 0.95; } to { opacity: 0; } }
+.evolve-reveal { animation: evolve-reveal 700ms cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes evolve-reveal { from { transform: scale(0.4); filter: brightness(4); } to { transform: scale(1); filter: none; } }
+.evolve-pair { display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hidden-hint img, .streak-blaze, .evolve-rays, .evolve-glow, .evolve-flash, .evolve-reveal { animation: none !important; }
+}
+
+/* Shiny creatures: a new color, a golden glow, and stars that twinkle around them. */
+.sprite.shiny { filter: hue-rotate(150deg) saturate(1.5) brightness(1.08) drop-shadow(0 0 3px #ffe27a) drop-shadow(0 0 7px #ffd04088); animation: shiny-glow 2.2s ease-in-out infinite; }
+@keyframes shiny-glow { 50% { filter: hue-rotate(150deg) saturate(1.7) brightness(1.2) drop-shadow(0 0 6px #fff3b0) drop-shadow(0 0 12px #ffd040aa); } }
+.shiny-wrap { position: relative; display: inline-block; line-height: 0; }
+.actor { position: relative; }
+.twinkle { position: absolute; color: #fff6b8; text-shadow: 0 0 4px #ffd040, 0 0 8px #ffb000; font-size: 16px; line-height: 1; pointer-events: none; animation: twinkle 1.6s ease-in-out infinite; opacity: 0; }
+.twinkle-0 { top: 4%; left: 10%; animation-delay: 0s; }
+.twinkle-1 { top: 18%; right: 6%; animation-delay: 0.4s; font-size: 12px; }
+.twinkle-2 { bottom: 14%; left: 2%; animation-delay: 0.8s; font-size: 11px; }
+.twinkle-3 { bottom: 6%; right: 16%; animation-delay: 1.2s; }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); } 40% { opacity: 1; transform: scale(1.2) rotate(45deg); } 60% { opacity: 0.9; transform: scale(0.9) rotate(70deg); } }
+.shiny-tag { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 1px 8px; border-radius: 999px; color: #5a3a00; background: linear-gradient(90deg, #fff3b0, #ffd040, #fff3b0); background-size: 200% 100%; animation: shiny-sheen 1.8s linear infinite; }
+@keyframes shiny-sheen { to { background-position: -200% 0; } }
+.shiny-filter[aria-pressed='true'] { outline: 2px solid #e0b020; }
+.shiny-reveal { position: relative; padding: 10px 14px; border-radius: 10px; background: linear-gradient(90deg, #fff8d0, #ffe68a, #fff8d0); background-size: 200% 100%; animation: shiny-sheen 1.8s linear infinite, shiny-pop 600ms cubic-bezier(.2, 1.6, .4, 1); color: #4a3000; }
+.shiny-reveal strong { font-size: 1.3rem; }
+@keyframes shiny-pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.shiny-banner strong { background: linear-gradient(90deg, #fff3b0, #ffd040, #fff3b0); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; filter: drop-shadow(0 0 6px #ffb000); }
+@media (prefers-reduced-motion: reduce) {
+  .sprite.shiny, .twinkle, .shiny-tag, .shiny-reveal { animation: none !important; }
+  .twinkle { opacity: 1; }
+}

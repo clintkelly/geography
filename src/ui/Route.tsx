@@ -14,7 +14,6 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
   useKeys({ enter: () => dispatch({ type: 'enterEncounter' }) });
   const index = currentSlotIndex(e);
   const slot = e.slots[index];
-  const owned = save.companions.map((c) => c.speciesId);
   // Only stops already reached are drawn, so the map doesn't give away where the trail goes.
   const reached = e.slots.slice(0, index + 1);
   const highlights = useMemo(
@@ -43,7 +42,7 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
 
   return (
     <div className="stack">
-      <TrailBar e={e} owned={owned} />
+      <TrailBar e={e} save={save} />
       <div className="discovery">
         <section className="panel clues">
           {e.retreated
@@ -66,7 +65,7 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
           <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : event ? 'Take a look' : 'Begin encounter'} <Key k="Enter" /></button>
         </section>
         <section className="discovery-map">
-          <WorldMap map={map} label={`Route map. Now at ${here.name}`} highlights={highlights}>
+          <WorldMap map={map} label={`Route map. Now at ${here.name}`} highlights={highlights} {...(e.retreated ? {} : { zoomTo: here.featureId, zoomDelay: 1100, onZoom: () => playSound('zoom') })}>
             {(scale) => (
               <>
                 <polyline points={line} className="route-line" strokeWidth={2.5 * scale} strokeDasharray={`${6 * scale} ${5 * scale}`} />

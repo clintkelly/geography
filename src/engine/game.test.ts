@@ -161,6 +161,21 @@ describe('content', () => {
     expect(finalForm('toothling')).toBe('Megalodon');
   });
 
+  it('the platypus is a rare in Oceania and is not Tide type', () => {
+    const p = PACK.species.find((s) => s.id === 'platybolt')!;
+    expect(p.rare).toBe(true);
+    expect(p.homes).toEqual(['oceania']);
+    expect(p.type).not.toBe('tide');
+  });
+
+  it('the rare shark is a Flame hammerhead in South America', () => {
+    const shark = PACK.species.find((s) => s.id === 'emberhead')!;
+    expect(shark.rare).toBe(true);
+    expect(shark.type).toBe('flame');
+    expect(shark.homes).toEqual(['south-america']);
+    expect(shark.evolutions).toHaveLength(2);
+  });
+
   it('every creature that can be hunted or fought has a Special', () => {
     for (const s of PACK.species) expect(s.special.name, s.id).toBeTruthy();
   });
@@ -529,13 +544,14 @@ describe('levels and evolution', () => {
     expect(stageOf(xpForLevel(10))).toBe(3);
   });
 
-  it('rare creatures do not evolve', () => {
-    const rare = PACK.species.find((s) => s.rare)!;
-    expect(stageOf(99999, rare)).toBe(1);
+  it('rare creatures evolve twice, and bosses never do', () => {
+    for (const rare of PACK.species.filter((s) => s.rare)) expect(stageOf(99999, rare), rare.id).toBe(3);
+    const boss = PACK.species.find((s) => s.boss)!;
+    expect(stageOf(99999, boss)).toBe(1);
   });
 
-  it('every other creature has two evolved forms', () => {
-    for (const s of PACK.species.filter((o) => !o.rare && !o.boss)) expect(s.evolutions, s.id).toHaveLength(2);
+  it('every creature but the bosses has two evolved forms', () => {
+    for (const s of PACK.species.filter((o) => !o.boss)) expect(s.evolutions, s.id).toHaveLength(2);
   });
 
   it('a win gives XP once, and a retry gives none for a loss', () => {
@@ -621,9 +637,10 @@ describe("Explorer's Map, rare creatures and badges", () => {
       const has = (s: SaveData) => s.offers.some((o) => o.reward.kind === 'creature' && o.reward.speciesId === rare.id);
       for (let seed = 1; seed < 10; seed++) expect(has(fresh(seed))).toBe(false);
     }
-    let s: SaveData = { ...fresh(), foundPlaces: allPlaces('us-west'), companions: [...fresh().companions, ...['barkknight', 'sandwhisk', 'cindermite', 'cragmaw'].map((speciesId, i) => ({ instanceId: `c${i}`, speciesId, bondXp: 0 }))] };
+    let s: SaveData = { ...fresh(), foundPlaces: allPlaces('us-west'), companions: [...fresh().companions, ...PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare && !o.boss).map((o, i) => ({ instanceId: `c${i}`, speciesId: o.id, bondXp: 0 }))] };
     s = stepRare(start(s, 'us-west'), { type: 'abandon' });
-    expect(s.offers.some((o) => o.regionId === 'us-west' && o.reward.kind === 'creature' && o.reward.speciesId === 'thunderhoof')).toBe(true);
+    const westRares = PACK.species.filter((o) => o.rare && o.homes.includes('us-west')).map((o) => o.id);
+    expect(s.offers.some((o) => o.regionId === 'us-west' && o.reward.kind === 'creature' && westRares.includes(o.reward.speciesId))).toBe(true);
   });
 
   it('badges are earned and announced once', () => {
@@ -793,7 +810,7 @@ describe('rare encounters', () => {
 describe('teams and switching', () => {
   const withTeam = (n: number) => {
     const base = fresh();
-    const ids = ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk'].slice(0, n - 1);
+    const ids = ['brinefin', 'thistlehop', 'cindermite', 'sandwhisk', 'lobsnap', 'pengwee', 'zebrisk', 'llamist', 'galewing'].slice(0, n - 1);
     const companions = [...base.companions, ...ids.map((speciesId, i) => ({ instanceId: `m${i}`, speciesId, bondXp: 0 }))];
     let s: SaveData = start({ ...base, companions });
     for (const id of companions.slice(1)) s = step(s, { type: 'toggleTeam', instanceId: id.instanceId });
@@ -801,10 +818,10 @@ describe('teams and switching', () => {
   };
   const fight = (n: number) => step(find(step(withTeam(n), { type: 'depart' })), { type: 'enterEncounter' });
 
-  it('takes up to five creatures and always at least one', () => {
-    const s = withTeam(5);
-    expect(s.expedition!.teamIds).toHaveLength(5);
-    const extra = { ...s, companions: [...s.companions, { instanceId: 'x', speciesId: 'lobsnap', bondXp: 0 }] };
+  it('takes up to ten creatures and always at least one', () => {
+    const s = withTeam(10);
+    expect(s.expedition!.teamIds).toHaveLength(10);
+    const extra = { ...s, companions: [...s.companions, { instanceId: 'x', speciesId: 'reefling', bondXp: 0 }] };
     expect(step(extra, { type: 'toggleTeam', instanceId: 'x' })).toBe(extra);
     let one = start(fresh());
     one = { ...one };
@@ -871,8 +888,11 @@ describe('teams and switching', () => {
 
   it('the finisher gets full XP and the rest half', () => {
     let s = fight(3);
+    // One hit finishes it, so which opponent the trail deals doesn't matter.
+    const b = s.expedition!.battle!;
+    s = { ...s, expedition: { ...s.expedition!, battle: { ...b, combat: { ...b.combat, opponentHp: 1 } } } };
     const lead = s.expedition!.companionId;
-    while (s.expedition!.battle) s = turn(s, true);
+    for (let i = 0; i < 5 && s.expedition!.battle; i++) s = turn(s, true);
     expect(s.companions.find((c) => c.instanceId === lead)!.bondXp).toBe(10);
     expect(s.companions.find((c) => c.instanceId === 'm0')!.bondXp).toBe(5);
   });
@@ -883,6 +903,10 @@ describe('teams and switching', () => {
     expect(full.opponentMaxHp).toBe(solo.opponentMaxHp + 8);
     expect(full.maxTurns).toBe(solo.maxTurns + 4);
     expect(enemyIntent(full)).toBe(enemyIntent(solo) + 1);
+    const ten = fight(10).expedition!.battle!.combat;
+    expect(ten.opponentMaxHp).toBe(solo.opponentMaxHp + 13);
+    expect(ten.maxTurns).toBe(solo.maxTurns + 9);
+    expect(enemyIntent(ten)).toBe(enemyIntent(solo) + 2);
   });
 
   it('home turf adds to Attack only, where the landscape matches', () => {
@@ -1332,12 +1356,15 @@ describe('types', () => {
       expect(typeEdge(t, t)).toBe(0);
       expect(beats(losesTo(t))).toBe(t);
     }
-    expect(beats('frost')).toBe('tide');
+    expect(beats('volt')).toBe('tide');
+    expect(beats('stone')).toBe('volt');
+    expect(beats('frost')).toBe('stone');
+    expect(beats('leaf')).toBe('gale');
   });
 
   it('every creature has a type', () => {
     for (const s of PACK.species) expect(TYPE_LOOP, s.id).toContain(s.type);
-    expect(new Set(PACK.species.map((s) => s.type)).size).toBe(6);
+    expect(new Set(PACK.species.map((s) => s.type)).size).toBe(TYPE_LOOP.length);
   });
 
   const base = { playerMaxHp: 12, playerAttack: 3, special: 'strong' as const, opponentMaxHp: 20, enemyPattern: [2, 2, 4], maxTurns: 8 };

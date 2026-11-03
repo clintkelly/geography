@@ -5,6 +5,18 @@ export const TRAIL_TRACKS = ['trail-us', 'trail-europe', 'trail-africa', 'trail-
 export const TRACKS = ['camp', 'battle', 'boss', 'rare', 'event', 'victory', ...TRAIL_TRACKS] as const;
 export type Track = (typeof TRACKS)[number] | null;
 
+/** Extra takes of each track, -2 and -3, so long play doesn't hear the same loop every time. */
+const TAKES: Partial<Record<NonNullable<Track>, number>> = Object.fromEntries(TRACKS.map((t) => [t, t === 'camp' || t === 'battle' ? 3 : 2]));
+
+/** Every music file, takes included. */
+export const MUSIC_FILES = TRACKS.flatMap((t) => Array.from({ length: TAKES[t] ?? 1 }, (_, i) => (i === 0 ? t : `${t}-${i + 1}`)));
+
+/** Each time a track starts, one of its takes is picked. Exported for tests. */
+export function takeFile(track: NonNullable<Track>, random = Math.random()): string {
+  const n = Math.floor(random * (TAKES[track] ?? 1)) + 1;
+  return n > 1 ? `${track}-${n}` : track;
+}
+
 const trailTrack = (regionId: string): Track => {
   const continent = regionId.split('-')[0];
   return `trail-${continent === 'south' ? 'south-america' : continent}` as Track;
@@ -27,6 +39,7 @@ export function trackFor(save: SaveData | null | undefined): Track {
 export function useMusic(track: Track, volume: number, muted: boolean) {
   const audio = useRef<HTMLAudioElement | null>(null);
   const wanted = useRef({ track, volume, muted });
+  const playing = useRef<{ track: NonNullable<Track>; file: string } | null>(null);
   wanted.current = { track, volume, muted };
 
   useEffect(() => {
@@ -42,7 +55,8 @@ export function useMusic(track: Track, volume: number, muted: boolean) {
         el.pause();
         return;
       }
-      const src = `${import.meta.env.BASE_URL}music/${t}.mp3`;
+      if (playing.current?.track !== t) playing.current = { track: t, file: takeFile(t) };
+      const src = `${import.meta.env.BASE_URL}music/${playing.current.file}.mp3`;
       if (!el.src.endsWith(src)) el.src = src;
       void el.play().catch(() => undefined);
     };
@@ -60,7 +74,8 @@ export function useMusic(track: Track, volume: number, muted: boolean) {
     const el = audio.current;
     if (!el) return;
     el.volume = volume;
-    const src = `${import.meta.env.BASE_URL}music/${track}.mp3`;
+    if (track && playing.current?.track !== track) playing.current = { track, file: takeFile(track) };
+    const src = `${import.meta.env.BASE_URL}music/${playing.current?.file ?? track}.mp3`;
     if (!track || muted || volume === 0) el.pause();
     else {
       if (!el.src.endsWith(src)) el.src = src;

@@ -57,6 +57,146 @@
     },
     "crit": {
       "generationId": "uq7lhv5VMTkybGV8KCTk"
+    },
+    "correct-2": {
+      "generationId": "aKjZ8vQBRCI4lVm4bImJ",
+      "prompt": "Very short bright cheerful rising two-note xylophone chime for a correct answer in a children's adventure game, clean, no voice, under one second",
+      "note": "take 1 of 2, +4.5 dB; audible to 220 ms of 1000 ms; peak -2 dBFS, loudest 50 ms -11.3 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "correct-3": {
+      "generationId": "U7WYLZkIezNbJQOzwjOS",
+      "prompt": "Very short happy bright bell ding with a tiny sparkle for a correct answer in a children's adventure game, clean, no voice, under one second",
+      "note": "take 2 of 2, +12 dB; audible to 480 ms of 1000 ms; peak -1.1 dBFS, loudest 50 ms -13.3 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "attack-2": {
+      "generationId": "PzrsWrGC9Yr2QBAJmDKR",
+      "prompt": "Single quick cartoon whoosh and soft pop for a small creature dashing to attack in a children's game, no voice, very short",
+      "note": "take 2 of 2; audible to 510 ms of 1000 ms; peak -1 dBFS, loudest 50 ms -8.2 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "attack-3": {
+      "generationId": "HCIDSvHB39BrmPjYH9kX",
+      "prompt": "Single quick airy cartoon swipe with a light bouncy thump, small creature attacking in a children's game, no voice, very short",
+      "note": "take 2 of 2, -1.5 dB; audible to 300 ms of 1000 ms; peak -0.5 dBFS, loudest 50 ms -9.2 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "hit-2": {
+      "generationId": "qSaXAYcLaLHMyt9vsPgM",
+      "prompt": "Deep punchy 8-bit retro video game hit impact, low square-wave bump with a short crunchy noise burst, 1980s console game, short and bassy, no voice",
+      "note": "take 1 of 2; audible to 140 ms of 680 ms; peak -0.9 dBFS, loudest 50 ms -7.2 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "hit-3": {
+      "generationId": "ZhAhWy2hemXlc5WO3uv7",
+      "prompt": "Heavy 8-bit retro video game body hit, low thumping square-wave thud with a quick downward pitch drop, 1980s console game, short and bassy, no voice",
+      "note": "take 2 of 2; audible to 440 ms of 680 ms; peak 0 dBFS, loudest 50 ms -5.5 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "guard-2": {
+      "generationId": "oLoq6BABCzb3vT8Idvrs",
+      "prompt": "Deep 8-bit retro video game block, dull low thud against a shield with a short bright metallic clank, 1980s console game, short and bassy, no voice",
+      "note": "take 1 of 2; audible to 240 ms of 600 ms; peak -0.4 dBFS, loudest 50 ms -7.9 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "guard-3": {
+      "generationId": "6KEDUiwEk8wgcCWL4i3j",
+      "prompt": "8-bit retro video game parry, low muffled bump followed by a tiny high metallic tink, 1980s console game, short and bassy, no voice",
+      "note": "take 1 of 2; audible to 270 ms of 600 ms; peak -0.4 dBFS, loudest 50 ms -4.8 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "win-2": {
+      "generationId": "dcjDpsRirWnnBA2OmdQ9",
+      "prompt": "Short triumphant rising four-note xylophone and chime fanfare for winning a battle in a children's adventure game, no voice, about one second",
+      "note": "take 2 of 2; audible to 760 ms of 1480 ms; peak -1.5 dBFS, loudest 50 ms -11.5 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "win-3": {
+      "generationId": "U0scBEjryQDLA6ezGvd7",
+      "prompt": "Short cheerful rising glockenspiel and marimba flourish ending on a bright bell, winning a battle in a children's adventure game, no voice, about one second",
+      "note": "take 2 of 2; audible to 780 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -12.7 dBFS, 5 clipped samples; measured only, not listened to."
+    },
+    "befriend-2": {
+      "generationId": "hKaukaKu1Z6sdHDUKTV5",
+      "prompt": "Warm joyful rising harp glissando with a happy twinkle, a new friend joins, children's adventure game, no voice, about one second",
+      "note": "take 1 of 2; audible to 770 ms of 1480 ms; peak -0.3 dBFS, loudest 50 ms -6.9 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "befriend-3": {
+      "generationId": "MnEUK0xMC9AptbDD30jp",
+      "prompt": "Warm happy three-note music box chime with a soft sparkle, a new friend joins, children's adventure game, no voice, about one second",
+      "note": "take 2 of 2, +3 dB; audible to 610 ms of 1480 ms; peak -4.3 dBFS, loudest 50 ms -13 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-2": {
+      "generationId": "Olri1jZotiQubJMqWEJy",
+      "prompt": "Short powerful magical charge-up hum rising into a bright shimmering burst, special attack in a children's game, no voice, about one second",
+      "note": "take 1 of 2, +1.5 dB; audible to 1420 ms of 2000 ms; peak -1.1 dBFS, loudest 50 ms -14.3 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-3": {
+      "generationId": "5sFIL1fJetFY1zWpd4xv",
+      "prompt": "Short swirling magical whoosh spiraling upward and ending in a twinkling sparkle pop, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 730 ms of 2000 ms; peak 0 dBFS, loudest 50 ms -13.5 dBFS, 2 clipped samples; measured only, not listened to."
+    },
+    "special-flame": {
+      "generationId": "WlkdGH8OgPFIUP6Uzume",
+      "prompt": "Short magical fire burst, quick whoosh of flames igniting into a bright crackling puff, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 720 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -5.3 dBFS, 1 clipped samples; measured only, not listened to."
+    },
+    "special-tide": {
+      "generationId": "gdl1HjvTljar1pNwO5zH",
+      "prompt": "Short magical water burst, rushing wave swell ending in a bright bubbly splash, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 750 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -12 dBFS, 1 clipped samples; measured only, not listened to."
+    },
+    "special-frost": {
+      "generationId": "mrJUVkfrlPz8j0E1Unm7",
+      "prompt": "Short magical ice burst, crisp crackle of freezing frost with glassy tinkling chimes, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 800 ms of 1480 ms; peak -0.5 dBFS, loudest 50 ms -16.3 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-gale": {
+      "generationId": "BLKFYuf5wUWiOW1H70s6",
+      "prompt": "Short magical gust of wind, fast swirling whoosh with an airy whistle, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 690 ms of 1480 ms; peak -0.3 dBFS, loudest 50 ms -7.4 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-stone": {
+      "generationId": "Yg3GUMzMa76SdGhjBAEb",
+      "prompt": "Short magical rock burst, deep rumble ending in a chunky pebble crunch, special attack in a children's game, no voice, about one second",
+      "note": "take 1 of 2; audible to 850 ms of 1480 ms; peak -0.5 dBFS, loudest 50 ms -9.6 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-volt": {
+      "generationId": "ivsD6ljQonwHoayX9wsQ",
+      "prompt": "Short magical electric zap, bright crackling spark burst with a quick fizz, gentle not harsh, special attack in a children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 460 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -9.3 dBFS, 3 clipped samples; measured only, not listened to."
+    },
+    "coin": {
+      "generationId": "SIO2rBfujT5PbAc2ooYU",
+      "prompt": "Single tiny bright coin clink, high and sparkly, collecting points in a children's game, no voice, very short",
+      "note": "take 1 of 2, +9 dB; audible to 110 ms of 480 ms; peak -2 dBFS, loudest 50 ms -14.8 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "zoom": {
+      "generationId": "sFYTANF9q5teXTeXiz49",
+      "prompt": "Soft gentle airy whoosh, smooth swoosh gliding forward, children's game, no voice, under one second",
+      "note": "take 2 of 2; audible to 420 ms of 1000 ms; peak -0.1 dBFS, loudest 50 ms -13.7 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "super": {
+      "generationId": "FMPObXPjMqc7R5ilNWEd",
+      "prompt": "Short punchy bright brass-like synth sting, two quick rising notes, strong hit in a children's game, upbeat, no voice, under one second",
+      "note": "take 2 of 2; audible to 420 ms of 1000 ms; peak -0.4 dBFS, loudest 50 ms -12.6 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "streak": {
+      "generationId": "aEFRiiXoQvnM4kVwtZSU",
+      "prompt": "Quick fiery whoosh rising upward with a bright crackle at the top, reward in a children's game, no voice, about one second",
+      "note": "take 1 of 2; audible to 390 ms of 1200 ms; peak 0 dBFS, loudest 50 ms -9.3 dBFS, 1 clipped samples; measured only, not listened to."
+    },
+    "free": {
+      "generationId": "cJ2akhocLVwFXxBA3svW",
+      "prompt": "Gentle happy wind chime twinkle with a soft little songbird chirp, peaceful farewell, children's game, no voice, about one and a half seconds",
+      "note": "take 2 of 2; audible to 1270 ms of 2000 ms; peak -1.8 dBFS, loudest 50 ms -13.6 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "recall": {
+      "generationId": "9jR4B6diK8hUqXv98hvY",
+      "prompt": "Warm soft two-note wooden flute call, rising and friendly, children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 1150 ms of 1480 ms; peak -0.4 dBFS, loudest 50 ms -6.2 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "locked": {
+      "generationId": "OjRckUtPV2vci10tOVqO",
+      "prompt": "Soft mysterious magical shimmer, quiet twinkling sparkle over a low airy hum, gentle, children's game, no voice, about one second",
+      "note": "take 2 of 2, +3 dB; audible to 690 ms of 1480 ms; peak -4 dBFS, loudest 50 ms -15.5 dBFS, 0 clipped samples; measured only, not listened to."
+    },
+    "special-leaf": {
+      "generationId": "MbadVZD1Psu6Pvq0usst",
+      "prompt": "Magical burst of swirling leaves, a whooshing gust full of rustling leaves with a bright woody chime that rings out, special attack in a children's game, no voice, about one second",
+      "note": "take 1 of 2; audible to 370 ms of 1480 ms; peak 0 dBFS, loudest 50 ms -12.8 dBFS, 2 clipped samples; measured only, not listened to. Second prompt; the first prompt gave two takes that were too short and quiet."
     }
   },
   "music": {
@@ -115,6 +255,86 @@
     "victory": {
       "generationId": "iC8CLk4FeOGYfBeKXFEX",
       "note": "48.36s; take 1 of 2, -1.5 dB, 0.3s lead silence and 1.4s fading tail cut; 0.1s of silence remains at the start; RMS -15.9 dBFS, peak -1.9 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "camp-2": {
+      "generationId": "sSywv0G2V7YeVzZheDEs",
+      "prompt": "Instrumental, no vocals. Warm, calm acoustic adventure theme for a children's geography game camp screen, a fresh melody: gentle strummed ukulele and soft fingerpicked guitar, light shaker and brushed hand drum, a mellow whistle-like lead with a light chiptune sparkle on top. Relaxed, unhurried, low dynamic range, seamlessly loopable with no intro build and no big ending, no fade-out, gentle enough to play for 20 minutes without being tiring. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2, +1.5 dB; RMS -15.5 dBFS, peak 0.0 dBFS, 2 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "camp-3": {
+      "generationId": "NNQQ2Talwo1XsshutxSU",
+      "prompt": "Instrumental, no vocals. Cozy campfire acoustic theme for a children's geography game camp screen, a new tune: warm fingerpicked acoustic guitar with soft glockenspiel and kalimba melody, gentle upright bass and light hand percussion, a soft chiptune twinkle. Calm and friendly, steady easy tempo, low dynamic range, seamlessly loopable with no intro build and no big ending, no fade-out, gentle enough to play for 20 minutes without being tiring. Original composition, about 50 seconds.",
+      "note": "50s; take 1 of 2; RMS -15.8 dBFS, peak -0.6 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "battle-2": {
+      "generationId": "FKoLtdHgfheQ3wEwJwIp",
+      "prompt": "Instrumental, no vocals. Upbeat retro 8-bit chiptune adventure battle loop for a children's geography game, a new melody: hopping pulse-wave lead with quick arpeggios, bouncy triangle bass line and light noise-channel drums. Energetic but not stressful, friendly and playful, steady moderate tempo, even dynamics, not harsh or shrill, seamlessly loopable with no intro build and no big ending, no fade-out, gentle enough to play for 20 minutes without being tiring. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2; RMS -15.7 dBFS, peak -0.9 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "battle-3": {
+      "generationId": "MlBrSEYKduHDDLEUJJBt",
+      "prompt": "Instrumental, no vocals. Cheerful retro 8-bit chiptune battle loop for a children's geography game, a fresh tune: two square-wave leads trading a catchy call-and-response melody, rolling triangle bass and crisp light noise drums with a skipping shuffle. Energetic but not stressful, friendly and playful, steady moderate tempo, even dynamics, not harsh or shrill, seamlessly loopable with no intro build and no big ending, no fade-out, gentle enough to play for 20 minutes without being tiring. Original composition, about 50 seconds.",
+      "note": "50s; take 1 of 2; RMS -15.2 dBFS, peak -1.1 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "boss-2": {
+      "generationId": "NuAUTMbOeC2230C2HmVq",
+      "prompt": "Instrumental, no vocals. Big urgent final-showdown chiptune, a new melody: fast heroic square-wave lead with rapid arpeggio runs, driving octave-jumping bass, bold rising chord turns from minor to major and tight noise-channel drums at a quick tempo. Exciting and heroic, never scary or dark, kid-friendly, not harsh or shrill, steady energy all the way through, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 1 of 2, -1.5 dB; RMS -15.8 dBFS, peak -1.6 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "rare-2": {
+      "generationId": "ypaqr5Z6e7h8J2pHgSw3",
+      "prompt": "Instrumental, no vocals. Magical 16-bit retro game encounter theme, a new melody: twinkling music box and glassy bell arpeggios, a soft breathy flute line, a quiet pulsing synth heartbeat ostinato and slowly rising awed chords at a medium tempo. Mysterious, gently tense and full of wonder, not scary, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "48.312s; take 1 of 2, +1.5 dB, 1.75s fading tail cut; RMS -15.9 dBFS, peak 0.0 dBFS, 11 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "event-2": {
+      "generationId": "GenSHQobbzyL5bpZHtDq",
+      "prompt": "Instrumental, no vocals. Light curious 16-bit retro game tune, a new melody: tiptoeing staccato clarinet-like lead, plucky pizzicato strings, playful xylophone and soft temple-block ticks, short repeating questioning phrases at a sprightly medium tempo. Playful, inquisitive and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "48.792s; take 2 of 2, +1.5 dB, 1.25s fading tail cut; RMS -17.4 dBFS, peak 0.0 dBFS, 286 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "victory-2": {
+      "generationId": "j1506cfrGn5t8alg5kN0",
+      "prompt": "Instrumental, no vocals. Joyful triumphant 16-bit retro game homecoming theme, a new melody: a short bright synth-trumpet flourish at the very start that settles straight into a bouncy celebratory parade groove with handclaps, chimes and a cheerful whistling lead at an upbeat tempo. Proud, happy and kid-friendly, even dynamics after the opening, seamlessly loopable with no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 1 of 2, -1.5 dB; RMS -16.4 dBFS, peak -1.7 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-us-2": {
+      "generationId": "2PmvvY5m0BfVsdv8HTbf",
+      "prompt": "Instrumental, no vocals. Adventurous Americana in a 16-bit retro game style, a new melody: twangy picked acoustic guitar and fiddle-like lead, rolling banjo backing, FM synth bass and a light clip-clop shuffle beat at a brisk moderate tempo. Cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 1 of 2, -1.5 dB; RMS -16.2 dBFS, peak -2.0 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-europe-2": {
+      "generationId": "SOfqO2WJqj9G6Vw8FZj6",
+      "prompt": "Instrumental, no vocals. Storybook folk dance in a 16-bit retro game style, a new melody: bright tin whistle and mandolin lead over gentle accordion chords, plucked strings and a soft music-box countermelody, lilting skipping rhythm at a moderate tempo. Whimsical, cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2; RMS -16.1 dBFS, peak -0.2 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-africa-2": {
+      "generationId": "XdKImlHwbfML6pkwOIqB",
+      "prompt": "Instrumental, no vocals. Bright balafon and kora-like plucked melody over rolling djembe and talking-drum patterns with shakers, in a 16-bit retro game style with warm soft synth bass, steady mid-tempo dancing groove, a new tune. Sunny, cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "48.048s; take 2 of 2, 2s fading tail cut; RMS -15.8 dBFS, peak -0.7 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-asia-2": {
+      "generationId": "nY5nGgE1psO7QK5rBW3D",
+      "prompt": "Instrumental, no vocals. Graceful pentatonic melody on a bowed erhu-like lead and plucked guzheng in a 16-bit retro game style, soft FM bells, warm pad and a light steady hand-drum pulse at a flowing medium tempo, a new tune. Serene yet cheerful and kid-friendly, full and present, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2, -1.5 dB; RMS -16.7 dBFS, peak -2.3 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-america-2": {
+      "generationId": "aN8aGQ4chlvcKaDGF6oK",
+      "prompt": "Instrumental, no vocals. Bright Caribbean island groove in a 16-bit retro game style, a new melody: sunny steel drum lead with a vibraphone countermelody, offbeat skank guitar chops, bouncy synth bass and light bongos and shaker at an upbeat tempo. Sunny, cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2; RMS -15.3 dBFS, peak -0.4 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-south-america-2": {
+      "generationId": "GE0iKwB1GRCADrVlsg5K",
+      "prompt": "Instrumental, no vocals. Andean folk in a 16-bit retro game style, a new melody: breathy quena flute lead with a pan flute echo, bright plucked charango and nylon guitar, bombo drum and shakers in a lively bouncing rhythm at a moderate tempo. Breezy, cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2; RMS -16.1 dBFS, peak -1.0 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-oceania-2": {
+      "generationId": "7quPO8Eonb5cvjQs1FVJ",
+      "prompt": "Instrumental, no vocals. Laid-back island tune in a 16-bit retro game style, a new melody: plucked ukulele melody with soft marimba, warm low didgeridoo-like drone, round synth bass and gentle rolling hand percussion at a relaxed swaying tempo. Easygoing, cheerful and kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2; RMS -16.0 dBFS, peak -0.3 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "trail-antarctica-2": {
+      "generationId": "s1MxQQAd1QiUqrhlUbyC",
+      "prompt": "Instrumental, no vocals. Sparse icy ambient tune in a 16-bit retro game style, a new melody: slow glassy celesta melody, soft twinkling crystal chimes and gently pulsing sine-wave arpeggios over warm sustained pads, slow unhurried tempo with no drums, continuous sound with no gaps. Calm, wondrous, gently cheerful and kid-friendly, even dynamics from start to end, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "50s; take 2 of 2, +1.5 dB; RMS -15.8 dBFS, peak -0.4 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
     }
   }
 }

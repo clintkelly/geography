@@ -1,0 +1,1013 @@
+{
+  "algeria": [
+    {
+      "fact": "The fennec fox, a tiny desert fox with giant ears, is Algeria's national animal, and its football team is nicknamed Les Fennecs.",
+      "ask": "Which country's national animal is the big-eared fennec fox, which also gives its football team a nickname?",
+      "source": "https://en.wikipedia.org/wiki/Fennec_fox"
+    }
+  ],
+  "egypt": [
+    {
+      "fact": "Wadi Al-Hitan, the Valley of the Whales in Egypt's desert, holds hundreds of fossils of ancient whales, some with tiny back legs and feet.",
+      "ask": "Which country's Wadi Al-Hitan, the Valley of the Whales, holds fossils of ancient whales that still had little back legs?",
+      "source": "https://en.wikipedia.org/wiki/Wadi_El_Hitan"
+    }
+  ],
+  "libya": [
+    {
+      "fact": "Ancient rock art in the Tadrart Acacus mountains of Libya shows giraffes, elephants and ostriches from a time when the Sahara was green.",
+      "ask": "In which country's Tadrart Acacus mountains do ancient rock paintings show giraffes and elephants in what is now desert?",
+      "source": "https://en.wikipedia.org/wiki/Tadrart_Acacus"
+    }
+  ],
+  "mauritania": [
+    {
+      "fact": "More than two million wading birds from Europe, Siberia and Greenland spend the winter on the mudflats of Banc d'Arguin National Park in Mauritania.",
+      "ask": "Which country's Banc d'Arguin National Park is a winter home for more than two million wading birds?",
+      "source": "https://en.wikipedia.org/wiki/Banc_d%27Arguin_National_Park"
+    },
+    {
+      "fact": "Imraguen fishermen in Mauritania once whistled to wild dolphins, which drove schools of mullet toward the shore and their nets.",
+      "ask": "In which country did Imraguen fishermen call wild dolphins to help drive fish toward the shore?",
+      "source": "https://en.wikipedia.org/wiki/Imraguen_people"
+    }
+  ],
+  "morocco": [
+    {
+      "fact": "Almost all the wild northern bald ibises left in the world nest in Morocco, mostly in Souss-Massa National Park.",
+      "ask": "In which country do almost all the world's wild northern bald ibises nest?",
+      "source": "https://en.wikipedia.org/wiki/Northern_bald_ibis"
+    }
+  ],
+  "sudan": [
+    {
+      "fact": "A secretary bird, a long-legged bird of prey that stomps on snakes, is the symbol on Sudan's national emblem.",
+      "ask": "Which country's national emblem shows a secretary bird, the long-legged hawk that stomps on snakes?",
+      "source": "https://en.wikipedia.org/wiki/Emblem_of_Sudan"
+    }
+  ],
+  "tunisia": [
+    {
+      "fact": "Hundreds of thousands of migrating ducks, geese, storks and flamingos stop at Ichkeul Lake in Tunisia every year.",
+      "ask": "Which country's Ichkeul Lake is a stopover for hundreds of thousands of migrating ducks, geese and flamingos?",
+      "source": "https://en.wikipedia.org/wiki/Lake_Ichkeul"
+    }
+  ],
+  "benin": [
+    {
+      "fact": "Pendjari National Park in Benin shelters some of the last lions, elephants and hippos in West Africa.",
+      "ask": "Which country's Pendjari National Park is one of the last homes of lions in West Africa?",
+      "source": "https://en.wikipedia.org/wiki/Pendjari_National_Park"
+    }
+  ],
+  "burkina-faso": [
+    {
+      "fact": "In the village of Bazoulé in Burkina Faso, people treat the crocodiles in the village pond as sacred, and some even sit right next to them.",
+      "ask": "In which country do villagers at Bazoulé treat the crocodiles in their pond as sacred?",
+      "source": "https://www.arabnews.com/node/1323861"
+    }
+  ],
+  "cabo-verde": [
+    {
+      "fact": "The Raso lark lives only on Raso, one tiny dry islet in Cabo Verde.",
+      "ask": "Which island country off West Africa is the only home of the Raso lark?",
+      "source": "https://en.wikipedia.org/wiki/Raso_lark"
+    }
+  ],
+  "cote-divoire": [
+    {
+      "fact": "The head of a forest elephant is the centerpiece of Côte d'Ivoire's coat of arms, and the country's football team is called the Elephants.",
+      "ask": "Which West African country has an elephant's head on its coat of arms and a football team called the Elephants?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Ivory_Coast"
+    },
+    {
+      "fact": "Chimpanzees in Taï National Park in Côte d'Ivoire are famous for using tools, such as stones to crack open hard nuts.",
+      "ask": "Which country's Taï National Park is famous for chimpanzees that use tools?",
+      "source": "https://en.wikipedia.org/wiki/Ta%C3%AF_National_Park"
+    }
+  ],
+  "gambia": [
+    {
+      "fact": "Rescued chimpanzees have been returned to the wild on the Baboon Islands in Gambia's River Gambia National Park since 1979.",
+      "ask": "In which country have rescued chimpanzees been set free on the Baboon Islands since 1979?",
+      "source": "https://en.wikipedia.org/wiki/River_Gambia_National_Park"
+    }
+  ],
+  "ghana": [
+    {
+      "fact": "Mole National Park is Ghana's largest wildlife refuge, home to hundreds of elephants plus hippos, buffalo and warthogs.",
+      "ask": "Which country's largest wildlife refuge is Mole National Park, home to hundreds of elephants?",
+      "source": "https://en.wikipedia.org/wiki/Mole_National_Park"
+    }
+  ],
+  "guinea": [
+    {
+      "fact": "Guinea has the largest population of western chimpanzees, with many thousands living in its Fouta Djallon highlands.",
+      "ask": "Which country has more western chimpanzees than any other?",
+      "source": "https://www.rewild.org/blog/mining-threatens-largest-population-of-western-chimpanzees"
+    },
+    {
+      "fact": "The chimpanzees of the Bossou Hills in Guinea are so used to people that it is one of the best places in West Africa to watch them.",
+      "ask": "In which country do chimpanzees of the Bossou Hills live close to a small town?",
+      "source": "https://en.wikipedia.org/wiki/Bossou"
+    }
+  ],
+  "guinea-bissau": [
+    {
+      "fact": "Thousands of green sea turtles nest each year on the tiny island of Poilão in Guinea-Bissau, one of the most important turtle beaches in the Atlantic.",
+      "ask": "Which country's tiny island of Poilão is one of the most important nesting beaches for green sea turtles?",
+      "source": "https://en.wikipedia.org/wiki/Poil%C3%A3o"
+    }
+  ],
+  "liberia": [
+    {
+      "fact": "Sapo National Park in Liberia's rainforest is a stronghold of the shy, endangered pygmy hippo.",
+      "ask": "Which country's Sapo National Park is a stronghold of the shy pygmy hippo?",
+      "source": "https://en.wikipedia.org/wiki/Sapo_National_Park"
+    }
+  ],
+  "mali": [
+    {
+      "fact": "Desert elephants live in the dry Gourma region of Mali, near the great bend of the Niger River, and may walk 70 km in one night to reach water.",
+      "ask": "Which country's Gourma region is home to desert elephants that may walk 70 km in a night to find water?",
+      "source": "https://en.wikipedia.org/wiki/Desert_elephant"
+    }
+  ],
+  "niger": [
+    {
+      "fact": "The only known wild herd of addax, a desert antelope with long twisting horns, that keeps itself going lives in the Termit Massif Reserve in Niger.",
+      "ask": "Which country's Termit Massif Reserve holds the last self-sustaining wild herd of addax antelope?",
+      "source": "https://en.wikipedia.org/wiki/Addax"
+    },
+    {
+      "fact": "The last wild West African giraffes live in Niger, and many can be seen near the village of Kouré.",
+      "ask": "Which country is the last home of wild West African giraffes, often seen near the village of Kouré?",
+      "source": "https://en.wikipedia.org/wiki/Kour%C3%A9,_Niger"
+    }
+  ],
+  "nigeria": [
+    {
+      "fact": "Cross River gorillas, the rarest great apes on Earth, live only in the hills along the Nigeria–Cameroon border.",
+      "ask": "Which West African country is home to the rare Cross River gorilla?",
+      "source": "https://en.wikipedia.org/wiki/Cross_River_gorilla"
+    }
+  ],
+  "senegal": [
+    {
+      "fact": "Nearly three million birds, including crowds of pelicans and flamingos, have been counted at Djoudj National Bird Sanctuary in Senegal.",
+      "ask": "Which country's Djoudj National Bird Sanctuary hosts millions of birds, including great flocks of pelicans?",
+      "source": "https://en.wikipedia.org/wiki/Djoudj_National_Bird_Sanctuary"
+    }
+  ],
+  "sierra-leone": [
+    {
+      "fact": "Tiwai Island in Sierra Leone has 11 kinds of primates, one of the highest mixes of monkeys and apes anywhere, plus pygmy hippos.",
+      "ask": "Which country's Tiwai Island is home to 11 kinds of primates and pygmy hippos?",
+      "source": "https://en.wikipedia.org/wiki/Tiwai_Island"
+    }
+  ],
+  "angola": [
+    {
+      "fact": "The giant sable antelope is Angola's national symbol, and the national football team is called the Palancas Negras, the Black Antelopes.",
+      "ask": "Which country's football team is called the Black Antelopes, after the rare giant sable?",
+      "source": "https://en.wikipedia.org/wiki/Giant_sable_antelope"
+    }
+  ],
+  "cameroon": [
+    {
+      "fact": "Cross River gorillas, the rarest great apes on Earth, live only in the hills along the Cameroon–Nigeria border.",
+      "ask": "Which Central African country shares the rare Cross River gorilla with Nigeria?",
+      "source": "https://en.wikipedia.org/wiki/Cross_River_gorilla"
+    }
+  ],
+  "central-african-republic": [
+    {
+      "fact": "Forest elephants and western lowland gorillas live in Dzanga-Sangha in the Central African Republic, where elephants gather to drink at the Dzanga Bai clearing.",
+      "ask": "In which country do forest elephants gather at the Dzanga Bai clearing in Dzanga-Sangha?",
+      "source": "https://en.wikipedia.org/wiki/Dzanga-Sangha_Special_Reserve"
+    }
+  ],
+  "chad": [
+    {
+      "fact": "Scimitar-horned oryx, once extinct in the wild, have roamed free again in Chad's Ouadi Rimé–Ouadi Achim reserve since 2016.",
+      "ask": "In which country did scimitar-horned oryx return to the wild in 2016, after dying out there?",
+      "source": "https://en.wikipedia.org/wiki/Ouadi_Rim%C3%A9-Ouadi_Achim_Faunal_Reserve"
+    }
+  ],
+  "congo": [
+    {
+      "fact": "Western lowland gorillas live in Odzala-Kokoua National Park in the Republic of the Congo, which was first protected in 1935.",
+      "ask": "Which country's Odzala-Kokoua National Park, first protected in 1935, is home to western lowland gorillas?",
+      "source": "https://en.wikipedia.org/wiki/Odzala-Kokoua_National_Park"
+    }
+  ],
+  "dr-congo": [
+    {
+      "fact": "The okapi, a striped forest cousin of the giraffe, lives in the wild only in DR Congo.",
+      "ask": "Which country is the only place where wild okapis live?",
+      "source": "https://en.wikipedia.org/wiki/Okapi"
+    },
+    {
+      "fact": "Bonobos, close cousins of chimpanzees, live in the wild only in the Congo Basin forests of DR Congo.",
+      "ask": "Which country is the only place where wild bonobos live?",
+      "source": "https://en.wikipedia.org/wiki/Bonobo"
+    }
+  ],
+  "equatorial-guinea": [
+    {
+      "fact": "Pennant's red colobus, a very rare monkey, survives only on Bioko Island in Equatorial Guinea.",
+      "ask": "Which country's island of Bioko is the last home of Pennant's red colobus monkey?",
+      "source": "https://en.wikipedia.org/wiki/Bioko"
+    }
+  ],
+  "gabon": [
+    {
+      "fact": "Gabon is home to more than half of all the African forest elephants left in the world.",
+      "ask": "Which country is home to more than half of the world's African forest elephants?",
+      "source": "https://en.wikipedia.org/wiki/Gabon"
+    },
+    {
+      "fact": "Gabon's national symbol is the black panther.",
+      "ask": "Which Central African country has the black panther as its national symbol?",
+      "source": "https://en.wikipedia.org/wiki/Gabon"
+    }
+  ],
+  "sao-tome-and-principe": [
+    {
+      "fact": "The giant sunbird, a big sunbird with a long curved bill, lives only in the mountain forests of São Tomé island.",
+      "ask": "Which island country in the Gulf of Guinea is the only home of the giant sunbird?",
+      "source": "https://en.wikipedia.org/wiki/Giant_sunbird"
+    }
+  ],
+  "comoros": [
+    {
+      "fact": "Livingstone's fruit bat, a huge flying fox, lives only on the islands of Anjouan and Mohéli in the Comoros.",
+      "ask": "Which island country is the only home of Livingstone's fruit bat, a huge flying fox?",
+      "source": "https://en.wikipedia.org/wiki/Livingstone%27s_fruit_bat"
+    }
+  ],
+  "djibouti": [
+    {
+      "fact": "The Djibouti spurfowl, a rare ground bird, lives only in Djibouti and nowhere else on Earth.",
+      "ask": "Which country is the only home of a rare ground bird called a spurfowl that is named after it?",
+      "source": "https://en.wikipedia.org/wiki/Djibouti_spurfowl"
+    },
+    {
+      "fact": "Young whale sharks, the biggest fish in the sea, come close to shore in the Gulf of Tadjoura off Djibouti.",
+      "ask": "Which country's Gulf of Tadjoura is famous for snorkeling with young whale sharks?",
+      "source": "https://en.wikipedia.org/wiki/Gulf_of_Tadjoura"
+    }
+  ],
+  "eritrea": [
+    {
+      "fact": "In 2001 a herd of about 30 elephants was found near the Gash River in Eritrea, after almost 50 years with no elephants seen there.",
+      "ask": "In which country was a lost herd of elephants found near the Gash River in 2001?",
+      "source": "https://en.wikipedia.org/wiki/Eritrea"
+    }
+  ],
+  "ethiopia": [
+    {
+      "fact": "The Ethiopian wolf, Africa's most endangered meat-eater, lives only in the high mountains of Ethiopia, especially the Bale Mountains.",
+      "ask": "Which country is the only home of a rare red wolf that lives high in the Bale Mountains?",
+      "source": "https://en.wikipedia.org/wiki/Ethiopian_wolf"
+    },
+    {
+      "fact": "The walia ibex, a wild goat with huge curved horns, lives only in the Simien Mountains of Ethiopia.",
+      "ask": "Which country's Simien Mountains are the only home of the walia ibex?",
+      "source": "https://en.wikipedia.org/wiki/Walia_ibex"
+    }
+  ],
+  "kenya": [
+    {
+      "fact": "The last two northern white rhinos on Earth live under guard at Ol Pejeta Conservancy in Kenya.",
+      "ask": "Which country's Ol Pejeta Conservancy looks after the last two northern white rhinos on Earth?",
+      "source": "https://en.wikipedia.org/wiki/Ol_Pejeta_Conservancy"
+    },
+    {
+      "fact": "Lake Nakuru in Kenya is famous for thousands, sometimes millions, of pink flamingos along its shores.",
+      "ask": "Which country's Lake Nakuru is famous for its huge crowds of pink flamingos?",
+      "source": "https://en.wikipedia.org/wiki/Lake_Nakuru"
+    }
+  ],
+  "madagascar": [
+    {
+      "fact": "The fossa, a sleek cat-like hunter that chases lemurs through the trees, lives only in Madagascar.",
+      "ask": "Which island country is the only home of the fossa, a cat-like hunter of lemurs?",
+      "source": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+    },
+    {
+      "fact": "The aye-aye of Madagascar taps on trees and pulls out grubs with a long, extra-thin middle finger.",
+      "ask": "Which country is home to the aye-aye, a lemur that digs out grubs with a long, thin middle finger?",
+      "source": "https://en.wikipedia.org/wiki/Aye-aye"
+    }
+  ],
+  "mauritius": [
+    {
+      "fact": "In 1974 only four wild Mauritius kestrels were left, making it the rarest bird in the world, but careful breeding saved it.",
+      "ask": "Which island country's own kestrel fell to just four wild birds in 1974, the rarest bird in the world?",
+      "source": "https://en.wikipedia.org/wiki/Mauritius_kestrel"
+    }
+  ],
+  "rwanda": [
+    {
+      "fact": "Every year Rwanda holds Kwita Izina, a ceremony to give names to newborn baby mountain gorillas.",
+      "ask": "Which country holds Kwita Izina, a yearly ceremony to name baby gorillas?",
+      "source": "https://en.wikipedia.org/wiki/Kwita_Izina"
+    }
+  ],
+  "seychelles": [
+    {
+      "fact": "Aldabra Atoll in the Seychelles is home to about 100,000 giant tortoises, the biggest group in the world.",
+      "ask": "Which island country's Aldabra Atoll has the world's largest group of giant tortoises?",
+      "source": "https://en.wikipedia.org/wiki/Aldabra_giant_tortoise"
+    },
+    {
+      "fact": "The white-throated rail on Aldabra, in the Seychelles, is the last flightless rail left in the Indian Ocean.",
+      "ask": "Which country's Aldabra Atoll is home to the last flightless rail bird in the Indian Ocean?",
+      "source": "https://en.wikipedia.org/wiki/Aldabra"
+    }
+  ],
+  "somalia": [
+    {
+      "fact": "Two leopards stand on spears and hold up the blue shield with a white star on Somalia's coat of arms.",
+      "ask": "Which country's coat of arms shows two leopards holding a blue shield with a white star?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Somalia"
+    }
+  ],
+  "south-sudan": [
+    {
+      "fact": "Huge herds of antelope migrate through Badingilo National Park in South Sudan, one of the largest wildlife migrations in the world.",
+      "ask": "Which country's Badingilo and Boma national parks see one of the world's largest antelope migrations?",
+      "source": "https://en.wikipedia.org/wiki/South_Sudan"
+    },
+    {
+      "fact": "An African fish eagle holding a spear and a spade is on South Sudan's coat of arms.",
+      "ask": "Which East African country's coat of arms shows an African fish eagle holding a spear and a spade?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_South_Sudan"
+    }
+  ],
+  "tanzania": [
+    {
+      "fact": "Jane Goodall made her famous studies of wild chimpanzees at Gombe, a national park in Tanzania on the shore of Lake Tanganyika.",
+      "ask": "In which country did Jane Goodall study the wild chimpanzees of Gombe?",
+      "source": "https://en.wikipedia.org/wiki/Gombe_Stream_National_Park"
+    },
+    {
+      "fact": "The tiny Kihansi spray toad lived only in the mist of waterfalls in Tanzania's Kihansi Gorge, and it now survives in zoos.",
+      "ask": "Which country's Kihansi Gorge was the only wild home of a tiny toad that lived in waterfall spray?",
+      "source": "https://en.wikipedia.org/wiki/Kihansi_spray_toad"
+    }
+  ],
+  "uganda": [
+    {
+      "fact": "Lions in the Ishasha area of Queen Elizabeth National Park in Uganda are famous for climbing and resting in trees.",
+      "ask": "In which country do the tree-climbing lions of Ishasha live?",
+      "source": "https://en.wikipedia.org/wiki/Queen_Elizabeth_National_Park"
+    },
+    {
+      "fact": "A kob antelope and a crested crane stand on either side of the shield on Uganda's coat of arms.",
+      "ask": "Which country's coat of arms shows a kob antelope and a crested crane on either side of a shield?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Uganda"
+    }
+  ],
+  "botswana": [
+    {
+      "fact": "Botswana has more African bush elephants than any other country, about 130,000.",
+      "ask": "Which country has more African elephants than any other, about 130,000?",
+      "source": "https://en.wikipedia.org/wiki/African_bush_elephant"
+    }
+  ],
+  "eswatini": [
+    {
+      "fact": "A lion for the king and an elephant for the queen mother hold up the shield on eSwatini's coat of arms.",
+      "ask": "Which country's coat of arms has a lion for the king and an elephant for the queen mother?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Eswatini"
+    }
+  ],
+  "lesotho": [
+    {
+      "fact": "The Maloti minnow is the only freshwater fish found nowhere else but Lesotho.",
+      "ask": "Which mountain country's only fish of its own is the Maloti minnow?",
+      "source": "https://en.wikipedia.org/wiki/Pseudobarbus_quathlambae"
+    }
+  ],
+  "malawi": [
+    {
+      "fact": "In 2017 seven cheetahs were brought to Liwonde National Park in Malawi, the country's first wild cheetahs in about 20 years.",
+      "ask": "In which country did cheetahs return to Liwonde National Park in 2017?",
+      "source": "https://en.wikipedia.org/wiki/Liwonde_National_Park"
+    }
+  ],
+  "mozambique": [
+    {
+      "fact": "So many elephants were hunted for ivory during a war that about half of the elephants in Gorongosa National Park in Mozambique are born without tusks.",
+      "ask": "In which country's Gorongosa National Park are about half the elephants born without tusks?",
+      "source": "https://en.wikipedia.org/wiki/Gorongosa_National_Park"
+    }
+  ],
+  "namibia": [
+    {
+      "fact": "Cape Cross in Namibia has one of the largest colonies of Cape fur seals in the world.",
+      "ask": "Which country's Cape Cross Seal Reserve has one of the world's biggest colonies of Cape fur seals?",
+      "source": "https://en.wikipedia.org/wiki/Cape_Cross"
+    },
+    {
+      "fact": "Two gemsbok, a kind of oryx with long straight horns, hold up the shield on Namibia's coat of arms.",
+      "ask": "Which country's coat of arms shows two gemsbok antelopes and an African fish eagle?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Namibia"
+    }
+  ],
+  "south-africa": [
+    {
+      "fact": "The springbok is South Africa's national animal and gives the national rugby team its name.",
+      "ask": "Which country's national animal is the springbok, which also names its rugby team?",
+      "source": "https://en.wikipedia.org/wiki/Springbok"
+    },
+    {
+      "fact": "A colony of African penguins has lived at Boulders Beach in South Africa since 1982, right next to people's homes.",
+      "ask": "Which country's Boulders Beach is home to a colony of African penguins?",
+      "source": "https://en.wikipedia.org/wiki/Boulders_Beach"
+    }
+  ],
+  "zambia": [
+    {
+      "fact": "Thornicroft's giraffe lives only in Zambia's South Luangwa Valley.",
+      "ask": "Which country's South Luangwa Valley is the only home of Thornicroft's giraffe?",
+      "source": "https://en.wikipedia.org/wiki/Thornicroft%27s_giraffe"
+    },
+    {
+      "fact": "Close to ten million straw-colored fruit bats fly into Kasanka National Park in Zambia from October to December.",
+      "ask": "Which country's Kasanka National Park fills with nearly ten million fruit bats each year?",
+      "source": "https://en.wikipedia.org/wiki/Kasanka_National_Park"
+    }
+  ],
+  "zimbabwe": [
+    {
+      "fact": "Two kudu antelopes with spiral horns stand on either side of Zimbabwe's coat of arms.",
+      "ask": "Which country's coat of arms has two kudu antelopes standing on either side?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Zimbabwe"
+    },
+    {
+      "fact": "Mana Pools National Park in Zimbabwe has the country's biggest gathering of hippos and crocodiles along the Zambezi River.",
+      "ask": "Which country's Mana Pools National Park has its biggest gathering of hippos and crocodiles?",
+      "source": "https://en.wikipedia.org/wiki/Mana_Pools_National_Park"
+    }
+  ],
+  "armenia": [
+    {
+      "fact": "Rare Persian leopards prowl Khosrov Forest Reserve in Armenia, one of the oldest protected areas in the world, first set aside about 1,700 years ago.",
+      "ask": "Which country's Khosrov Forest, protected for about 1,700 years, is a home of the Persian leopard?",
+      "source": "https://en.wikipedia.org/wiki/Khosrov_Forest_State_Reserve"
+    }
+  ],
+  "azerbaijan": [
+    {
+      "fact": "Shirvan National Park in Azerbaijan was set up to protect herds of goitered gazelles, which have dark, lyre-shaped horns.",
+      "ask": "Which country's Shirvan National Park protects herds of goitered gazelles?",
+      "source": "https://en.wikipedia.org/wiki/Shirvan_National_Park"
+    }
+  ],
+  "bahrain": [
+    {
+      "fact": "Bahrain's Hawar Islands host the largest known breeding colony of Socotra cormorants in the world, with hundreds of thousands of birds.",
+      "ask": "Which country's Hawar Islands have the world's largest known breeding colony of a seabird called a cormorant?",
+      "source": "https://en.wikipedia.org/wiki/Hawar_Islands"
+    }
+  ],
+  "cyprus": [
+    {
+      "fact": "The Cyprus mouflon, a wild sheep with curling horns, lives only in the mountain forests of Cyprus and is the island's biggest wild animal.",
+      "ask": "Which island country is the only home of a wild mountain sheep that is also its largest wild animal?",
+      "source": "https://en.wikipedia.org/wiki/Cyprus_mouflon"
+    }
+  ],
+  "georgia-country": [
+    {
+      "fact": "More than a million eagles, hawks and other birds of prey fly past Batumi, in Georgia, every autumn on their way south.",
+      "ask": "In which country do more than a million birds of prey fly past the Black Sea city of Batumi each autumn?",
+      "source": "https://www.gbif.org/dataset/d19c0287-15ee-45fd-b810-d30e8026a785"
+    }
+  ],
+  "iraq": [
+    {
+      "fact": "A special kind of smooth-coated otter lives near the Tigris River in Iraq, far from its cousins in South Asia, and it is named after writer Gavin Maxwell.",
+      "ask": "In which country do Maxwell's smooth-coated otters live along the Tigris River?",
+      "source": "https://en.wikipedia.org/wiki/Smooth-coated_otter"
+    }
+  ],
+  "israel": [
+    {
+      "fact": "About 500 million migrating birds pass through the Hula Valley in Israel every year.",
+      "ask": "Which country's Hula Valley sees about 500 million migrating birds each year?",
+      "source": "https://en.wikipedia.org/wiki/Hula_Valley"
+    },
+    {
+      "fact": "The hoopoe, a bird with a fan-shaped crest, was voted Israel's national bird in 2008.",
+      "ask": "Which country chose the crested hoopoe as its national bird in a 2008 vote?",
+      "source": "https://en.wikipedia.org/wiki/Hoopoe"
+    }
+  ],
+  "jordan": [
+    {
+      "fact": "The Sinai rosefinch, a small rosy-pink desert finch, is the national bird of Jordan.",
+      "ask": "Which country's national bird is the Sinai rosefinch?",
+      "source": "https://en.wikipedia.org/wiki/Sinai_rosefinch"
+    }
+  ],
+  "kuwait": [
+    {
+      "fact": "Bubiyan Island in Kuwait has the world's largest breeding colony of crab-plovers, shorebirds that dig nesting burrows in the sand.",
+      "ask": "Which country's Bubiyan Island has the world's largest breeding colony of crab-plovers?",
+      "source": "https://en.wikipedia.org/wiki/Bubiyan_Island"
+    }
+  ],
+  "lebanon": [
+    {
+      "fact": "The striped hyena is the national animal of Lebanon.",
+      "ask": "Which country's national animal is the striped hyena?",
+      "source": "https://en.wikipedia.org/wiki/Striped_hyena"
+    }
+  ],
+  "oman": [
+    {
+      "fact": "Green sea turtles crawl ashore to nest at Ras al-Jinz in Oman, the easternmost point of the Arabian Peninsula.",
+      "ask": "Which country's Ras al-Jinz turtle reserve sits at the easternmost tip of the Arabian Peninsula?",
+      "source": "https://en.wikipedia.org/wiki/Ras_al-Jinz"
+    },
+    {
+      "fact": "In 2007 Oman's Arabian Oryx Sanctuary became the first place ever removed from UNESCO's World Heritage list, after the protected land was shrunk.",
+      "ask": "Which country's Arabian Oryx Sanctuary was the first site ever removed from the World Heritage list?",
+      "source": "https://en.wikipedia.org/wiki/Al_Wusta_Wildlife_Reserve"
+    }
+  ],
+  "palestine": [
+    {
+      "fact": "In 2015 Palestine adopted the Palestine sunbird, a tiny shimmering nectar-drinking bird, as its national bird.",
+      "ask": "Which place adopted a tiny shimmering sunbird as its national bird in 2015?",
+      "source": "https://en.wikipedia.org/wiki/Palestine_sunbird"
+    }
+  ],
+  "qatar": [
+    {
+      "fact": "The Arabian oryx is Qatar's national animal, and it appears as the logo of the country's airline.",
+      "ask": "Which country's national airline uses the Arabian oryx, its national animal, as its logo?",
+      "source": "https://en.wikipedia.org/wiki/Qatar_Airways"
+    }
+  ],
+  "saudi-arabia": [
+    {
+      "fact": "Saudi Arabia led the call for 10 February to become the International Day of the Arabian Leopard, which the United Nations agreed to in 2023.",
+      "ask": "Which country led the push for a United Nations day, on 10 February, for a rare desert leopard?",
+      "source": "https://www.arabnews.com/node/2326556"
+    },
+    {
+      "fact": "Arabian gazelles live on the Farasan Islands of Saudi Arabia, and whale sharks and manta rays swim in the sea around them.",
+      "ask": "Which country's Farasan Islands in the Red Sea are home to wild gazelles?",
+      "source": "https://en.wikipedia.org/wiki/Farasan_Islands"
+    }
+  ],
+  "syria": [
+    {
+      "fact": "In 2002 scientists found a tiny hidden colony of northern bald ibises in the desert near Palmyra in Syria, 70 years after the bird was thought gone there.",
+      "ask": "In which country was a hidden colony of northern bald ibises found near Palmyra in 2002?",
+      "source": "https://en.wikipedia.org/wiki/Northern_bald_ibis"
+    }
+  ],
+  "turkey": [
+    {
+      "fact": "The pearl mullet lives only in the basin of Lake Van in Turkey, a lake so salty and full of soda that it was long thought to have no other fish at all.",
+      "ask": "Which country's Lake Van is the only home of the pearl mullet, a fish that can live in soda-filled water?",
+      "source": "https://en.wikipedia.org/wiki/Alburnus_tarichi"
+    },
+    {
+      "fact": "Loggerhead sea turtles nest on İztuzu Beach in Turkey, which people call Turtle Beach.",
+      "ask": "Which country's İztuzu Beach, called Turtle Beach, is a main nesting place for loggerhead turtles?",
+      "source": "https://en.wikipedia.org/wiki/%C4%B0ztuzu_Beach"
+    }
+  ],
+  "united-arab-emirates": [
+    {
+      "fact": "The United Arab Emirates has the second-largest group of dugongs in the world after Australia, with thousands of these sea cows grazing on seagrass.",
+      "ask": "Which country has the world's second-largest group of dugongs, after Australia?",
+      "source": "https://gulfnews.com/uae/environment/uae-proud-to-have-worlds-second-largest-dugong-population-1.1531427"
+    }
+  ],
+  "yemen": [
+    {
+      "fact": "About 90 percent of the reptiles on Yemen's Socotra islands live nowhere else on Earth.",
+      "ask": "Which country's Socotra islands have reptiles that are almost all found nowhere else?",
+      "source": "https://en.wikipedia.org/wiki/Socotra"
+    }
+  ],
+  "afghanistan": [
+    {
+      "fact": "Snow leopards and Marco Polo sheep live high in the mountains of Wakhan National Park in Afghanistan.",
+      "ask": "Which country's Wakhan National Park is home to snow leopards and Marco Polo sheep?",
+      "source": "https://en.wikipedia.org/wiki/Wakhan_National_Park"
+    }
+  ],
+  "bangladesh": [
+    {
+      "fact": "The oriental magpie-robin, a black-and-white songbird called the doyel, is the national bird of Bangladesh.",
+      "ask": "Which country's national bird is the oriental magpie-robin, called the doyel?",
+      "source": "https://en.wikipedia.org/wiki/Oriental_magpie-robin"
+    }
+  ],
+  "bhutan": [
+    {
+      "fact": "The takin, a shaggy animal that looks a bit like a cross between a goat and a moose, is Bhutan's national animal.",
+      "ask": "Which country's national animal is the takin, a shaggy goat-antelope?",
+      "source": "https://en.wikipedia.org/wiki/Takin"
+    },
+    {
+      "fact": "Black-necked cranes fly in each winter to the Phobjikha Valley in Bhutan, and people hold a festival to celebrate them.",
+      "ask": "Which country's Phobjikha Valley welcomes black-necked cranes each winter?",
+      "source": "https://en.wikipedia.org/wiki/Phobjikha_Valley"
+    }
+  ],
+  "india": [
+    {
+      "fact": "Asiatic lions live in the wild only in and around Gir National Park in western India.",
+      "ask": "Which country's Gir National Park is the last wild home of the Asiatic lion?",
+      "source": "https://en.wikipedia.org/wiki/Asiatic_lion"
+    },
+    {
+      "fact": "The Indian peafowl, the peacock with the dazzling tail, is India's national bird.",
+      "ask": "Which country's national bird is the peacock?",
+      "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+    }
+  ],
+  "iran": [
+    {
+      "fact": "The Asiatic cheetah now survives only in Iran, where just a small number are left in the dry middle of the country.",
+      "ask": "Which country is the last home of the Asiatic cheetah?",
+      "source": "https://en.wikipedia.org/wiki/Asiatic_cheetah"
+    }
+  ],
+  "kazakhstan": [
+    {
+      "fact": "About 99 percent of the world's saiga antelopes, which have big droopy noses, live in Kazakhstan.",
+      "ask": "Which country is home to about 99 percent of the world's saiga antelopes?",
+      "source": "https://en.wikipedia.org/wiki/Saiga_antelope"
+    },
+    {
+      "fact": "A golden steppe eagle soars under a sun on Kazakhstan's turquoise flag.",
+      "ask": "Which country's turquoise flag shows a steppe eagle flying under a golden sun?",
+      "source": "https://en.wikipedia.org/wiki/Flag_of_Kazakhstan"
+    }
+  ],
+  "kyrgyzstan": [
+    {
+      "fact": "In 2023 Kyrgyzstan made the snow leopard an official national symbol.",
+      "ask": "Which mountain country made the snow leopard its official national symbol in 2023?",
+      "source": "https://24.kg/english/342804__Snow_leopard_officially_declared_national_symbol_of_Kyrgyzstan"
+    }
+  ],
+  "maldives": [
+    {
+      "fact": "Hanifaru Bay in the Maldives has some of the biggest gatherings of manta rays in the world, with up to a hundred feeding in one small bay.",
+      "ask": "Which country's Hanifaru Bay draws up to a hundred manta rays at once?",
+      "source": "https://en.wikipedia.org/wiki/Baa_Atoll"
+    }
+  ],
+  "nepal": [
+    {
+      "fact": "The Himalayan monal, a rainbow-colored pheasant called the danphe, is the national bird of Nepal.",
+      "ask": "Which country's national bird is the rainbow-colored Himalayan monal, called the danphe?",
+      "source": "https://en.wikipedia.org/wiki/Himalayan_monal"
+    },
+    {
+      "fact": "Chitwan National Park holds most of Nepal's one-horned rhinos, about 600 of them.",
+      "ask": "Which country's Chitwan National Park is home to hundreds of one-horned rhinos?",
+      "source": "https://en.wikipedia.org/wiki/Chitwan_National_Park"
+    }
+  ],
+  "pakistan": [
+    {
+      "fact": "The markhor, a wild goat with long corkscrew horns, is Pakistan's national animal.",
+      "ask": "Which country's national animal is the markhor, a wild goat with corkscrew horns?",
+      "source": "https://en.wikipedia.org/wiki/Markhor"
+    }
+  ],
+  "sri-lanka": [
+    {
+      "fact": "In the dry season, large numbers of elephants gather to graze by the reservoir in Minneriya National Park in Sri Lanka.",
+      "ask": "In which country do elephants gather in big numbers at Minneriya National Park in the dry season?",
+      "source": "https://en.wikipedia.org/wiki/Minneriya_National_Park"
+    },
+    {
+      "fact": "The junglefowl, a wild relative of the chicken found only on the island, is Sri Lanka's national bird.",
+      "ask": "Which island country's national bird is a junglefowl, a wild cousin of the chicken found only there?",
+      "source": "https://en.wikipedia.org/wiki/Sri_Lankan_junglefowl"
+    }
+  ],
+  "tajikistan": [
+    {
+      "fact": "Tigrovaya Balka, meaning Tiger Gully, in Tajikistan was one of the last homes of the Caspian tiger, last seen there in 1953, and rare Bactrian deer still live there.",
+      "ask": "Which country's Tigrovaya Balka reserve was one of the last homes of the Caspian tiger?",
+      "source": "https://en.wikipedia.org/wiki/Tigrovaya_Balka_Nature_Reserve"
+    }
+  ],
+  "turkmenistan": [
+    {
+      "fact": "Badhyz Nature Reserve in Turkmenistan was once the last place where the Turkmenian kulan, a wild donkey, still lived.",
+      "ask": "Which country's Badhyz reserve was once the last home of the kulan, a wild donkey?",
+      "source": "https://en.wikipedia.org/wiki/Badhyz_State_Nature_Reserve"
+    }
+  ],
+  "uzbekistan": [
+    {
+      "fact": "Rare Bactrian deer have been brought back to the Zarafshan reserve in Uzbekistan.",
+      "ask": "Which country's Zarafshan reserve has seen rare Bactrian deer brought back?",
+      "source": "https://en.wikipedia.org/wiki/Bactrian_deer"
+    }
+  ],
+  "brunei": [
+    {
+      "fact": "Eastern grey gibbons swing through the treetops of Ulu Temburong National Park in Brunei, where rhinoceros hornbills also fly.",
+      "ask": "Which country's Ulu Temburong National Park is home to grey gibbons and rhinoceros hornbills?",
+      "source": "https://en.wikipedia.org/wiki/Ulu_Temburong_National_Park"
+    }
+  ],
+  "cambodia": [
+    {
+      "fact": "The giant ibis, the largest ibis in the world, is Cambodia's national bird, and most of the few left live there.",
+      "ask": "Which country's national bird is the giant ibis?",
+      "source": "https://www.wcs.org/our-work/species/giant-ibis"
+    },
+    {
+      "fact": "Rare Irrawaddy dolphins live in the Mekong River in Cambodia, where a 180-km stretch from Kratié to the Laos border is protected for them.",
+      "ask": "In which country is a stretch of the Mekong River from Kratié protected for rare Irrawaddy dolphins?",
+      "source": "https://en.wikipedia.org/wiki/Irrawaddy_dolphin"
+    }
+  ],
+  "china": [
+    {
+      "fact": "Golden snub-nosed monkeys, with bright orange fur and blue faces, live only in the mountain forests of China.",
+      "ask": "Which country is the only home of the golden snub-nosed monkey?",
+      "source": "https://en.wikipedia.org/wiki/Golden_snub-nosed_monkey"
+    },
+    {
+      "fact": "The South China giant salamander may be the largest amphibian in the world.",
+      "ask": "Which country is home to a giant salamander that may be the largest amphibian in the world?",
+      "source": "https://en.wikipedia.org/wiki/South_China_giant_salamander"
+    }
+  ],
+  "indonesia": [
+    {
+      "fact": "The only wild Javan rhinos left, about 74 of them, live in Ujung Kulon National Park in Indonesia.",
+      "ask": "Which country's Ujung Kulon National Park holds the last wild Javan rhinos?",
+      "source": "https://en.wikipedia.org/wiki/Javan_rhinoceros"
+    },
+    {
+      "fact": "Sumatran tigers live only on the island of Sumatra in Indonesia.",
+      "ask": "Which country is the only home of the Sumatran tiger?",
+      "source": "https://en.wikipedia.org/wiki/Sumatran_tiger"
+    }
+  ],
+  "japan": [
+    {
+      "fact": "Japanese macaques, the snow monkeys, are the northernmost monkeys on Earth, and at Jigokudani they soak in hot springs.",
+      "ask": "Which country's snow monkeys, the world's northernmost monkeys, bathe in hot springs?",
+      "source": "https://en.wikipedia.org/wiki/Japanese_macaque"
+    },
+    {
+      "fact": "The green pheasant is the national bird of Japan.",
+      "ask": "Which country's national bird is the green pheasant?",
+      "source": "https://en.wikipedia.org/wiki/Green_pheasant"
+    }
+  ],
+  "laos": [
+    {
+      "fact": "Laos was once a kingdom called Lan Xang, the Land of a Million Elephants.",
+      "ask": "Which country was once a kingdom called the Land of a Million Elephants?",
+      "source": "https://en.wikipedia.org/wiki/Lan_Xang"
+    }
+  ],
+  "malaysia": [
+    {
+      "fact": "Orphaned orangutans learn to live in the wild at the Sepilok Orangutan Rehabilitation Centre in Sabah, Malaysia, on the island of Borneo.",
+      "ask": "Which country's Sepilok center in Sabah helps orphaned orangutans return to the forest?",
+      "source": "https://en.wikipedia.org/wiki/Sepilok_Orangutan_Rehabilitation_Centre"
+    }
+  ],
+  "mongolia": [
+    {
+      "fact": "Przewalski's horses, the only truly wild horses, were brought back to Hustai National Park in Mongolia starting in 1992.",
+      "ask": "Which country's Hustai National Park welcomed back wild Przewalski's horses in 1992?",
+      "source": "https://en.wikipedia.org/wiki/Hustai_National_Park"
+    },
+    {
+      "fact": "The Gobi bear, a rare desert brown bear, lives in the Gobi Desert of Mongolia, and fewer than 50 may be left.",
+      "ask": "Which country is home to the Gobi bear, a rare desert bear called the mazaalai?",
+      "source": "https://en.wikipedia.org/wiki/Gobi_bear"
+    }
+  ],
+  "myanmar": [
+    {
+      "fact": "The Burmese star tortoise, with star patterns on its shell, lives naturally only in the dry forests of Myanmar.",
+      "ask": "Which Southeast Asian country is the only home of a tortoise with bright star patterns on its shell?",
+      "source": "https://en.wikipedia.org/wiki/Burmese_star_tortoise"
+    }
+  ],
+  "philippines": [
+    {
+      "fact": "The Philippine eagle, one of the largest eagles in the world, lives only in the Philippines and is its national bird.",
+      "ask": "Which country's national bird is a huge, shaggy-crested eagle found nowhere else?",
+      "source": "https://en.wikipedia.org/wiki/Philippine_eagle"
+    },
+    {
+      "fact": "The tiny, huge-eyed Philippine tarsier lives only in the Philippines, on islands such as Bohol.",
+      "ask": "Which country's island of Bohol is home to a tiny primate with enormous eyes called a tarsier?",
+      "source": "https://en.wikipedia.org/wiki/Philippine_tarsier"
+    }
+  ],
+  "singapore": [
+    {
+      "fact": "The Singapore freshwater crab, only about 3 cm wide, lives in a few hill streams in Singapore and nowhere else on Earth.",
+      "ask": "Which tiny island country is the only home of a rare stream crab only about 3 cm wide?",
+      "source": "https://en.wikipedia.org/wiki/Johora_singaporensis"
+    }
+  ],
+  "south-korea": [
+    {
+      "fact": "In 2013 South Korea released Indo-Pacific bottlenose dolphins that had been illegally caught back into the sea off Jeju Island.",
+      "ask": "Which country released rescued bottlenose dolphins back into the sea off Jeju Island in 2013?",
+      "source": "https://en.wikipedia.org/wiki/Indo-Pacific_bottlenose_dolphin"
+    }
+  ],
+  "taiwan": [
+    {
+      "fact": "The long-tailed Taiwan blue magpie lives only in Taiwan.",
+      "ask": "Which island is the only home of a long-tailed blue magpie with a red bill?",
+      "source": "https://en.wikipedia.org/wiki/Taiwan_blue_magpie"
+    },
+    {
+      "fact": "In 2001 people in Taiwan voted the Formosan black bear the animal that best represents the island.",
+      "ask": "Where did people vote in 2001 for a black bear with a white V on its chest as their most representative wild animal?",
+      "source": "https://en.wikipedia.org/wiki/Formosan_black_bear"
+    }
+  ],
+  "thailand": [
+    {
+      "fact": "The Siamese fighting fish, or betta, is the national aquatic animal of Thailand.",
+      "ask": "Which country's national aquatic animal is the betta, a colorful fighting fish?",
+      "source": "https://en.wikipedia.org/wiki/Siamese_fighting_fish"
+    }
+  ],
+  "vietnam": [
+    {
+      "fact": "The saola, a rare forest animal nicknamed the Asian unicorn, was discovered by scientists in 1992 in Vu Quang National Park in Vietnam.",
+      "ask": "In which country's Vu Quang National Park was the saola, the Asian unicorn, discovered in 1992?",
+      "source": "https://en.wikipedia.org/wiki/Saola"
+    },
+    {
+      "fact": "The Tonkin snub-nosed monkey, with a pink nose and blue patches around its eyes, lives only in northern Vietnam.",
+      "ask": "Which country is the only home of the Tonkin snub-nosed monkey?",
+      "source": "https://en.wikipedia.org/wiki/Tonkin_snub-nosed_monkey"
+    }
+  ],
+  "australia": [
+    {
+      "fact": "The platypus, a duck-billed mammal that lays eggs, lives only in eastern Australia.",
+      "ask": "Which country is the only home of the platypus, an egg-laying mammal with a duck-like bill?",
+      "source": "https://en.wikipedia.org/wiki/Platypus"
+    }
+  ],
+  "new-zealand": [
+    {
+      "fact": "The kākāpō of New Zealand is the world's only flightless parrot and also the heaviest parrot.",
+      "ask": "Which country is home to the kākāpō, the world's only flightless parrot?",
+      "source": "https://en.wikipedia.org/wiki/K%C4%81k%C4%81p%C5%8D"
+    },
+    {
+      "fact": "The tuatara looks like a lizard but is the last survivor of an ancient group of reptiles, and it lives only in New Zealand.",
+      "ask": "Which country is the only home of the tuatara, a reptile from an ancient family?",
+      "source": "https://en.wikipedia.org/wiki/Tuatara"
+    }
+  ],
+  "papua-new-guinea": [
+    {
+      "fact": "Queen Alexandra's birdwing, the largest butterfly in the world, lives only in the forests of Oro Province in Papua New Guinea.",
+      "ask": "Which country's Oro Province is the only home of the world's largest butterfly?",
+      "source": "https://en.wikipedia.org/wiki/Queen_Alexandra%27s_birdwing"
+    },
+    {
+      "fact": "The hooded pitohui of New Guinea is one of the few poisonous birds, with toxins in its skin and feathers.",
+      "ask": "Which Pacific country is home to the hooded pitohui, one of the few poisonous birds?",
+      "source": "https://en.wikipedia.org/wiki/Hooded_pitohui"
+    }
+  ],
+  "fiji": [
+    {
+      "fact": "The Fiji crested iguana, a green lizard with white stripes, lives only on a few dry islands of Fiji, such as Yadua Taba.",
+      "ask": "Which island country is the only home of the crested iguana of Yadua Taba?",
+      "source": "https://en.wikipedia.org/wiki/Fiji_crested_iguana"
+    }
+  ],
+  "solomon-islands": [
+    {
+      "fact": "The Arnavon Islands in the Solomon Islands are the largest nesting place for hawksbill turtles in the oceanic South Pacific.",
+      "ask": "Which country's Arnavon Islands are the biggest hawksbill turtle nesting place in the South Pacific islands?",
+      "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4390367/"
+    }
+  ],
+  "vanuatu": [
+    {
+      "fact": "The Vanuatu megapode, a chicken-like bird that buries its eggs instead of sitting on them, is found only in Vanuatu.",
+      "ask": "Which island country is the only home of a megapode called the New Hebrides scrubfowl?",
+      "source": "https://en.wikipedia.org/wiki/Vanuatu_megapode"
+    }
+  ],
+  "samoa": [
+    {
+      "fact": "The tooth-billed pigeon, or manumea, is Samoa's national bird and lives nowhere else.",
+      "ask": "Which island country's national bird is the manumea, a tooth-billed pigeon found nowhere else?",
+      "source": "https://en.wikipedia.org/wiki/Tooth-billed_pigeon"
+    }
+  ],
+  "tonga": [
+    {
+      "fact": "The malau, a megapode bird of Tonga, buries its eggs in warm volcanic sand on the island of Niuafo'ou and lets the heat hatch them.",
+      "ask": "Which country's island of Niuafo'ou is home to the malau, a bird that lets warm volcanic sand hatch its eggs?",
+      "source": "https://en.wikipedia.org/wiki/Tongan_megapode"
+    }
+  ],
+  "kiribati": [
+    {
+      "fact": "The bokikokiko, a small reed warbler, lives only on Kiritimati and Washington Island in Kiribati.",
+      "ask": "Which country's Kiritimati island is the only home of a small warbler called the bokikokiko?",
+      "source": "https://en.wikipedia.org/wiki/Bokikokiko"
+    }
+  ],
+  "nauru": [
+    {
+      "fact": "The Nauru reed warbler is the only songbird on Nauru and lives nowhere else.",
+      "ask": "Which tiny island country's only songbird is a reed warbler found nowhere else?",
+      "source": "https://en.wikipedia.org/wiki/Nauru_reed_warbler"
+    }
+  ],
+  "marshall-islands": [
+    {
+      "fact": "In 2011 the Marshall Islands made nearly 2 million square km of its ocean a shark sanctuary, the largest in the world at the time.",
+      "ask": "Which country made nearly 2 million square km of ocean a shark sanctuary in 2011?",
+      "source": "https://en.wikipedia.org/wiki/Marshall_Islands"
+    }
+  ],
+  "micronesia": [
+    {
+      "fact": "Reef manta rays live around the island of Yap in Micronesia all year, and many gather in Mi'l Channel.",
+      "ask": "Which country's island of Yap has manta rays living around it all year round?",
+      "source": "https://sharkrayareas.org/?p=7973"
+    }
+  ],
+  "palau": [
+    {
+      "fact": "Millions of golden jellyfish swim across Jellyfish Lake in Palau every day.",
+      "ask": "Which country's Jellyfish Lake sees millions of golden jellyfish swim across it every day?",
+      "source": "https://en.wikipedia.org/wiki/Jellyfish_Lake"
+    }
+  ],
+  "south-pole": [
+    {
+      "fact": "South polar skuas, tough brown seabirds, have been seen at the geographic South Pole itself, far from any sea.",
+      "ask": "Which spot in the middle of the ice, far from any sea, has had visits from south polar skuas?",
+      "source": "https://en.wikipedia.org/wiki/South_polar_skua"
+    }
+  ],
+  "ross-ice-shelf": [
+    {
+      "fact": "In 2015 scientists drilled through about 740 meters of the Ross Ice Shelf and filmed fish swimming in the dark water far beneath it.",
+      "ask": "Through which great sheet of floating ice did scientists drill in 2015 to find fish living in the dark below?",
+      "source": "https://antarcticsun.usap.gov/science/4113"
+    }
+  ],
+  "antarctic-peninsula": [
+    {
+      "fact": "Gentoo penguins nest right around the old British base at Port Lockroy, a museum and post office off the Antarctic Peninsula.",
+      "ask": "Off which part of Antarctica do gentoo penguins nest around Port Lockroy's penguin post office?",
+      "source": "https://www.discoverwildlife.com/holidays-days-out/antarctica/penguin-post-office"
+    }
+  ],
+  "deception-island": [
+    {
+      "fact": "Baily Head on Deception Island has a huge colony of chinstrap penguins, counted at about 100,000 pairs.",
+      "ask": "Which Antarctic island's Baily Head has a huge colony of chinstrap penguins?",
+      "source": "https://en.wikipedia.org/wiki/Baily_Head"
+    }
+  ],
+  "weddell-sea": [
+    {
+      "fact": "In 2021 scientists found a giant icefish breeding colony on the floor of the Weddell Sea, with about 60 million fish covering some 240 square km.",
+      "ask": "In which Antarctic sea did scientists find a giant icefish breeding colony of about 60 million fish in 2021?",
+      "source": "https://en.wikipedia.org/wiki/Weddell_Sea"
+    }
+  ],
+  "cape-denison": [
+    {
+      "fact": "In 2010 a giant iceberg got stuck near Cape Denison, making it much harder for the cape's Adélie penguins to reach the sea.",
+      "ask": "Which windy Antarctic cape had its Adélie penguins blocked from the sea by a stuck iceberg in 2010?",
+      "source": "https://en.wikipedia.org/wiki/Cape_Denison"
+    }
+  ]
+}

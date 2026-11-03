@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { PACK } from '../content/pack';
 import { ECONOMY } from '../engine/economy';
-import { currentSlotIndex, type Command, type Expedition } from '../engine/game';
+import { currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
 import { mapFor, place } from './content';
 import { Key, useKeys } from './keys';
 import { useMapCursor } from './mapCursor';
@@ -9,7 +9,7 @@ import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { Dot, Marker, WorldMap, type Highlight } from './WorldMap';
 
-export function Discovery({ e, owned, dispatch }: { e: Expedition; owned: readonly string[]; dispatch: (c: Command) => void }) {
+export function Discovery({ e, save, dispatch }: { e: Expedition; save: SaveData; dispatch: (c: Command) => void }) {
   const [atlasOpen, setAtlasOpen] = useState(false);
   const [atlasPlace, setAtlasPlace] = useState<string | null>(null);
 
@@ -69,7 +69,7 @@ export function Discovery({ e, owned, dispatch }: { e: Expedition; owned: readon
 
   return (
     <div className="stack">
-      <TrailBar e={e} owned={owned} />
+      <TrailBar e={e} save={save} />
       <div className="discovery">
         <section className="panel clues">
           <h1>{previous ? 'Where did it go next?' : 'Where was it seen?'}</h1>

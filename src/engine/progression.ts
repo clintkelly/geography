@@ -55,12 +55,14 @@ export function formOf(species: Species, xp: number): { name: string; artId: str
   return { name: form?.name ?? species.displayName, artId: form?.artId ?? species.artId, stage };
 }
 
-export const MAX_TEAM = 5;
+export const MAX_TEAM = 10;
 export const TURF_BONUS = 1;
-/** A bigger team faces tougher opponents, or five health bars would make every fight safe. */
+/** A bigger team faces tougher opponents, or ten health bars would make every fight safe.
+ * Members past the fifth add less HP, so a full team doesn't make every fight drag. */
 export const teamScaling = (size: number) => {
   const extra = Math.max(size - 1, 0);
-  return { hp: extra * 2, turns: extra, damage: size >= 4 ? 1 : 0 };
+  const early = Math.min(extra, 4);
+  return { hp: early * 2 + (extra - early), turns: extra, damage: size >= 8 ? 2 : size >= 4 ? 1 : 0 };
 };
 
 export const speciesOf = (pack: Pack, id: string) => pack.species.find((s) => s.id === id) as Species;

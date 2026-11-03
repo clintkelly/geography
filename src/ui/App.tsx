@@ -42,8 +42,8 @@ export function App() {
   else if (!e && evolving) body = <Evolution key={evolving.instanceId} companion={evolving} dispatch={dispatch} />;
   else if (!e) body = <Camp save={save} dispatch={dispatch} onSwitch={() => setActiveProfile(null)} onSettings={() => setSettingsOpen(true)} />;
   else if (!e.prepared) body = <Prep e={e} save={save} dispatch={dispatch} />;
-  else if (e.event) body = <Event key={e.event.id} e={e} event={e.event} owned={save.companions.map((c) => c.speciesId)} dispatch={dispatch} />;
-  else if (e.discovery === 'searching') body = <Discovery key={e.id} e={e} owned={save.companions.map((c) => c.speciesId)} dispatch={dispatch} />;
+  else if (e.event) body = <Event key={e.event.id} e={e} event={e.event} save={save} dispatch={dispatch} />;
+  else if (e.discovery === 'searching') body = <Discovery key={e.id} e={e} save={save} dispatch={dispatch} />;
   else if (e.battle) body = <Battle key={e.battle.id} e={e} battle={e.battle} save={save} dispatch={dispatch} />;
   else if (isExpeditionComplete(e)) body = <ExpeditionComplete e={e} dispatch={dispatch} />;
   else body = <Route key={e.id} e={e} save={save} dispatch={dispatch} />;

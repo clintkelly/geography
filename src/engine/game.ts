@@ -1,5 +1,5 @@
 import { degreesApart, spaced } from '../content/geo';
-import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region } from '../content/types';
+import { DIFFICULTIES, type Clue, type Difficulty, type Pack, type Place, type Question, type Region, type Species } from '../content/types';
 import { canUse, enemyStrikes, heal, MAX_CHARGE, resolveTurn, startCombat, type CombatAction, type CombatState, type TurnEvents } from './combat';
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
 import { TRAIL_EVENTS, type TrailEvent } from './events';
@@ -8,7 +8,7 @@ import { levelOf, MAX_TEAM, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS,
 import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { earnedBadges } from './badges';
 import { cardLevelOf, type CardLevel } from './cards';
-import { typeEdge } from './types';
+import { matchup } from './types';
 import { availableRare, rareChance, trailScore } from './luck';
 import { streakReward } from './streak';
 import { Rng } from './rng';
@@ -18,8 +18,8 @@ import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail
 
 export const SCHEMA_VERSION = 7;
 /** What questions a trail asks. */
-export type Focus = 'all' | 'basics' | 'flags';
-export const FOCUSES: readonly Focus[] = ['all', 'basics', 'flags'];
+export type Focus = 'all' | 'basics' | 'flags' | 'animals';
+export const FOCUSES: readonly Focus[] = ['all', 'basics', 'flags', 'animals'];
 const RECALL_CHANCE = 0.4;
 const REVIEW_CHANCE = 0.5;
 const ATTEMPT_LIMIT = 500;
@@ -186,6 +186,7 @@ export interface Summary {
   tamedIds?: string[];
   /** Medals this trip earned, and the Trail Points they banked. */
   newMedals?: MedalEarned[];
+  difficulty?: Difficulty;
 }
 
 /** A short quiz with no battle: one question per place, at most one miss, for Platinum. */
@@ -233,6 +234,10 @@ export interface Companion {
   nickname?: string;
   /** The evolution stage last celebrated, so each evolution shows exactly once. */
   stageSeen?: number;
+  /** Freed once already, so freeing it again earns nothing. */
+  freedOnce?: boolean;
+  /** A rare different-colored, sparkling form. Harder trails find more. */
+  shiny?: boolean;
 }
 
 /** A saved game for one child. */
@@ -260,8 +265,12 @@ export interface SaveData {
   rareFound?: boolean;
   /** Mastery medals by region and track. Older saves have none. */
   medals?: Medals;
-  /** Trail Points from medals, added to the next trail. */
+  /** Trail Points from medals and freed creatures, added to the next trail. */
   bankedPoints?: number;
+  /** Creatures set free. They still count as found, and can be called back for free. */
+  wild?: Companion[];
+  /** How many creatures have been freed for a reward. */
+  freedCount?: number;
   masteryTest?: MasteryTest | null;
   completedExpeditions: number;
   nextId: number;
@@ -301,6 +310,8 @@ export type Command =
   | { type: 'dismissSummary' }
   | { type: 'updateSettings'; patch: Partial<Settings> }
   | { type: 'renameCompanion'; instanceId: string; nickname: string }
+  | { type: 'freeCompanion'; instanceId: string }
+  | { type: 'recallCompanion'; instanceId: string }
   | { type: 'ackEvolution'; instanceId: string }
   | { type: 'resetProfile' }
   | { type: 'updateProfile'; patch: Partial<Pick<SaveData['profile'], 'displayName' | 'avatarId'>> };
@@ -328,9 +339,32 @@ export function allowedDifficulties(settings: Settings, region: Region): Difficu
   return allowed.length > 0 ? allowed : [region.difficulties[0] as Difficulty];
 }
 
+const RANK: Record<Difficulty, number> = { scout: 0, ranger: 1, expert: 2 };
+/** A locked creature is met only on trails at its difficulty or harder. */
+export const metOn = (s: Pick<Species, 'minDifficulty'>, difficulty: Difficulty) => RANK[difficulty] >= RANK[s.minDifficulty ?? 'scout'];
+/** The easiest difficulty a creature can be met on. */
+export const lowestFor = (s: Pick<Species, 'minDifficulty'>): Difficulty => s.minDifficulty ?? 'scout';
+/** Harder trails start with more Trail Points. */
+export const DIFFICULTY_POINTS: Record<Difficulty, number> = { scout: 0, ranger: 2, expert: 4 };
+/** The chance a newly befriended creature is shiny, by the trail's difficulty. */
+export const SHINY_CHANCE: Record<Difficulty, number> = { scout: 0.03, ranger: 0.08, expert: 0.2 };
+/** A fixed roll from the creature's id, so a reload never changes the result. */
+export function rollShiny(instanceId: string, difficulty: Difficulty): boolean {
+  let h = 2166136261;
+  for (const ch of `shiny:${instanceId}`) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  return h / 2 ** 32 < SHINY_CHANCE[difficulty];
+}
+const joining = (instanceId: string, speciesId: string, difficulty: Difficulty): Companion => ({ instanceId, speciesId, bondXp: 0, ...(rollShiny(instanceId, difficulty) ? { shiny: true } : {}) });
+
+/** Trail Points banked for the first time a creature is set free. */
+export const FREE_POINTS = 3;
+/** Every species this child has befriended, including those set free. */
+export const knownSpecies = (save: Pick<SaveData, 'companions' | 'wild'>): Set<string> => new Set([...save.companions, ...(save.wild ?? [])].map((c) => c.speciesId));
+
 const inFocus = (focus: Focus | undefined) => (q: Question) => {
   if (focus === 'basics') return q.topic === 'location' || q.topic === 'capital';
   if (focus === 'flags') return q.topic === 'flag';
+  if (focus === 'animals') return q.topic === 'animal';
   return true;
 };
 
@@ -364,16 +398,21 @@ export function isRegionComplete(found: readonly string[], pack: Pack, regionId:
 }
 
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
-  const owned = new Set(save.companions.map((c) => c.speciesId));
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+  const owned = knownSpecies(save);
   let nextId = save.nextId;
   const offers = pack.regions.flatMap((region) => {
     const mapDone = !!save.foundPlaces && isRegionComplete(save.foundPlaces, pack, region.id);
     const bossReady = bossUnlocked(save, pack, region.id);
     const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady)).map((s) => s.id));
     const isBoss = (id: string) => !!pack.species.find((s) => s.id === id)?.boss;
+    const locked = (id: string) => !!pack.species.find((s) => s.id === id)?.minDifficulty;
     const ordered = [...unowned.filter(isBoss), ...unowned.filter((id) => id === pack.featuredSpeciesId), ...unowned.filter((id) => id !== pack.featuredSpeciesId && !isBoss(id))];
-    const rewards: Reward[] = ordered.slice(0, 2).map((speciesId) => ({ kind: 'creature', speciesId }));
+    // One sighting is for any trail; the other shows a locked creature when there is one, as a hint of what harder trails hold.
+    const open = ordered.filter((id) => !locked(id));
+    const picks = [...open.slice(0, 1), ...ordered.filter(locked).slice(0, 1)];
+    const chosen = [...picks, ...ordered.filter((id) => !picks.includes(id))].slice(0, 2);
+    const rewards: Reward[] = chosen.map((speciesId) => ({ kind: 'creature', speciesId }));
     if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
     return rewards.map((reward): Offer => ({ id: `offer-${nextId++}`, regionId: region.id, reward }));
   });
@@ -452,7 +491,12 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   if (!region || !offer || offer.regionId !== cmd.regionId) return save;
   const focus: Focus = cmd.focus && regionHasFocus(pack, cmd.regionId, cmd.focus) ? cmd.focus : 'all';
   const allowed = allowedDifficulties(save.settings, region);
-  const difficulty = allowed.includes(cmd.difficulty) ? cmd.difficulty : (allowed[0] as Difficulty);
+  const asked = allowed.includes(cmd.difficulty) ? cmd.difficulty : (allowed[0] as Difficulty);
+  // A locked creature's trail is always at least its difficulty.
+  const { reward: sighting } = offer;
+  const sought = sighting.kind === 'creature' ? pack.species.find((s) => s.id === sighting.speciesId) : undefined;
+  const floor = sought ? lowestFor(sought) : 'scout';
+  const difficulty: Difficulty = RANK[asked] >= RANK[floor] ? asked : floor;
 
   const rng = new Rng(save.rngState);
   const id = `expedition-${save.nextId}`;
@@ -463,7 +507,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   const route = walkTrail(places, kinds.length, rng);
   // A small region shortens the trail from the middle, keeping the final showdown.
   const stops = kinds.length > route.length ? [...kinds.slice(0, route.length - 1), 'guardian' as const] : kinds;
-  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss).map((s) => s.id);
+  const locals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss && metOn(s, difficulty)).map((s) => s.id);
   const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
   const opponents = rng.shuffle(locals.filter((id) => id !== target));
   const events = rng.shuffle(TRAIL_EVENTS);
@@ -490,7 +534,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     companionId: team[0] as string,
     teamIds: team,
     prepared: false,
-    points: ECONOMY.startingPoints + (save.bankedPoints ?? 0),
+    points: ECONOMY.startingPoints + DIFFICULTY_POINTS[difficulty] + (save.bankedPoints ?? 0),
     sturdy: false,
     extraCharge: false,
     snack: false,
@@ -578,7 +622,7 @@ function memberStats(save: SaveData, e: Expedition, instanceId: string, slot: Sl
       specialBonus: stats.specialBonus,
       turf: species.habitats.includes(biome) ? TURF_BONUS : 0,
       // A lone creature can't switch, so a weak matchup never costs it the fight.
-      typeEdge: Math.max(typeEdge(species.type, speciesOf(pack, slot.opponentId).type), teamOf(e).length > 1 ? -1 : 0),
+      typeEdge: Math.max(matchup(species, speciesOf(pack, slot.opponentId)).edge, teamOf(e).length > 1 ? -1 : 0),
     },
   };
 }
@@ -616,7 +660,7 @@ function rollRare(save: SaveData, e: Expedition, slotIndex: number, pack: Pack):
   const slot = e.slots[slotIndex];
   if (!slot || slot.kind !== 'regular' || slot.rareRolled) return e;
   const rng = new Rng(e.rngState);
-  const rare = availableRare(pack, e.regionId, save.companions.map((c) => c.speciesId));
+  const rare = availableRare(pack, e.regionId, [...knownSpecies(save)]);
   const hit = !!rare && rng.next() < rareChance(trailScore(e));
   const rolled: Slot = hit && rare ? { ...slot, rareRolled: true, rare: true, opponentId: rare.id } : { ...slot, rareRolled: true };
   return { ...e, rngState: rng.state, slots: e.slots.map((s, i) => (i === slotIndex ? rolled : s)) };
@@ -686,7 +730,7 @@ export const TAME_HITS = 2;
 /** Bold Befriend: an unowned creature at half HP or less, for 2 charge. Once started, it can continue at no cost. */
 export function canTame(save: SaveData, b: Battle, slot: Slot): boolean {
   if (slot.kind !== 'regular' || slot.rare || b.befriending || b.mustSwitch || b.combat.outcome !== 'active') return false;
-  if (save.companions.some((c) => c.speciesId === slot.opponentId)) return false;
+  if (knownSpecies(save).has(slot.opponentId)) return false;
   if ((b.tameHits ?? 0) > 0) return true;
   return b.combat.charge >= TAME_COST && b.combat.opponentHp * 2 <= b.combat.opponentMaxHp;
 }
@@ -800,7 +844,7 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
         return teamOf(e).includes(c.instanceId) ? { ...c, bondXp: c.bondXp + Math.floor(winXp / 2) } : c;
       })
     : save.companions;
-  const companions = joined ? [...paidXp, { instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: slot.opponentId, bondXp: 0 }] : paidXp;
+  const companions = joined ? [...paidXp, joining(`${save.profile.id}-companion-${save.nextId}`, slot.opponentId, e.difficulty)] : paidXp;
   return {
     ...save,
     attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
@@ -950,7 +994,7 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
 
   const { reward } = e;
   const applied = save.appliedRewardIds.includes(e.id);
-  const owned = save.companions.some((c) => reward.kind === 'creature' && c.speciesId === reward.speciesId);
+  const owned = reward.kind === 'creature' && knownSpecies(save).has(reward.speciesId);
   const leftoverXp = applied ? 0 : e.points * ECONOMY.xpPerLeftoverPoint;
   const bonus = !applied && reward.kind === 'bond' ? reward.xp : 0;
   const finishXp = applied ? 0 : xpFor(XP.expeditionDone, e.difficulty);
@@ -962,7 +1006,7 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
   const gained = companions.filter((c) => team.includes(c.instanceId) && levelOf(c.bondXp) > levelOf(e.xpAtStart?.[c.instanceId] ?? c.bondXp));
   const levelAfter = Math.max(0, ...gained.map((c) => levelOf(c.bondXp)));
   if (!applied && reward.kind === 'creature' && !owned) {
-    companions.push({ instanceId: `${save.profile.id}-companion-${save.nextId}`, speciesId: reward.speciesId, bondXp: 0 });
+    companions.push(joining(`${save.profile.id}-companion-${save.nextId}`, reward.speciesId, e.difficulty));
   }
 
   const stamped = save.stampedRegions ?? [];
@@ -982,6 +1026,7 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
       recentQuestionIds: [...save.recentQuestionIds, ...e.askedQuestionIds].slice(-RECENT_QUESTION_LIMIT),
       lastSummary: {
         expeditionId: e.id,
+        difficulty: e.difficulty,
         ...(newStamp ? { newStamp } : {}),
         reward,
         answered: e.answered,
@@ -1048,6 +1093,24 @@ function closeMastery(save: SaveData, now: number): SaveData {
   if (!t) return save;
   const ended = t.outcome ? save : failMastery(save, t, now);
   return { ...ended, masteryTest: null };
+}
+
+/** Sets a creature free. It keeps its level in the wild and can be called back any time. The first time pays Trail Points. */
+function freeCompanion(save: SaveData, pack: Pack, instanceId: string): SaveData {
+  const c = save.companions.find((o) => o.instanceId === instanceId);
+  if (!c || save.expedition || save.companions.length <= 1) return save;
+  const companions = save.companions.filter((o) => o !== c);
+  const pays = !c.freedOnce;
+  const freed: SaveData = {
+    ...save,
+    companions,
+    wild: [...(save.wild ?? []), { ...c, freedOnce: true }],
+    activeCompanionId: save.activeCompanionId === instanceId ? (companions[0] as Companion).instanceId : save.activeCompanionId,
+    ...(save.lastTeamIds ? { lastTeamIds: save.lastTeamIds.filter((id) => id !== instanceId) } : {}),
+    bankedPoints: (save.bankedPoints ?? 0) + (pays ? FREE_POINTS : 0),
+    freedCount: (save.freedCount ?? 0) + (pays ? 1 : 0),
+  };
+  return { ...freed, badges: earnedBadges(freed, pack) };
 }
 
 /** The single state transition. Pure: an invalid or repeated command returns the same object, and callers skip the save. */
@@ -1126,6 +1189,13 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       return save.lastSummary ? { ...save, lastSummary: null } : save;
     case 'updateSettings':
       return { ...save, settings: { ...save.settings, ...cmd.patch } };
+    case 'freeCompanion':
+      return freeCompanion(save, pack, cmd.instanceId);
+    case 'recallCompanion': {
+      const c = (save.wild ?? []).find((o) => o.instanceId === cmd.instanceId);
+      if (!c || e) return save;
+      return { ...save, wild: (save.wild ?? []).filter((o) => o !== c), companions: [...save.companions, c] };
+    }
     case 'renameCompanion':
       return { ...save, companions: save.companions.map((c) => (c.instanceId === cmd.instanceId ? { ...c, nickname: cmd.nickname.slice(0, 20) } : c)) };
     case 'ackEvolution': {

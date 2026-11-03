@@ -16,6 +16,8 @@ const MOTION: Record<CreatureType, { arc: boolean; spin: number; spread: [number
   gale: { arc: false, spin: 20, spread: [130, 14], lift: 0, ms: 600 },
   // Ice shards shatter outward, spinning.
   frost: { arc: false, spin: 270, spread: [75, 75], lift: 0, ms: 640 },
+  // Sparks crackle out fast in every direction.
+  volt: { arc: false, spin: 120, spread: [90, 90], lift: 0, ms: 420 },
 };
 
 /** A fixed scatter, so particles don't jump around between renders. */
@@ -48,7 +50,7 @@ export function TypeHit({ type, toward }: { type: CreatureType; toward: 1 | -1 }
   );
 }
 
-/** A Special fills the whole scene with its type: a wave, rising embers, a leaf storm, falling rocks, wind or snow. */
+/** A Special fills the whole scene with its type: a wave, rising embers, a leaf storm, falling rocks, wind, snow or lightning. */
 export function TypeSpecial({ type }: { type: CreatureType }) {
   return (
     <div className={`type-fx type-special fx-${type}`} aria-hidden="true">

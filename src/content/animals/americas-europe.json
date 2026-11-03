@@ -1,0 +1,931 @@
+{
+  "alaska": [
+    {
+      "fact": "Alaska's official land mammal is the moose, the biggest member of the deer family.",
+      "ask": "Which Western state's official land mammal is the moose?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "Alaska's state bird is the willow ptarmigan, which turns snowy white in winter.",
+      "ask": "Which state's state bird is the willow ptarmigan, a bird that turns white in winter?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "arizona": [
+    {
+      "fact": "Arizona's state mammal is the ringtail, a big-eyed night hunter with a striped tail.",
+      "ask": "Which state's state mammal is the ringtail, a night hunter with a striped tail?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "Arizona's state bird is the cactus wren, which builds its nest inside prickly cactus.",
+      "ask": "Which state's state bird is the cactus wren?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "california": [
+    {
+      "fact": "California's state bird is the California quail, with a funny feather plume bobbing on its head.",
+      "ask": "Which state's state bird is a quail with a curly feather plume on its head?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "California's state marine mammal is the gray whale, which swims past its coast on one of the longest migrations of any mammal.",
+      "ask": "Which state's official marine mammal is the gray whale?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "colorado": [
+    {
+      "fact": "Colorado's state bird is the lark bunting, a black songbird with bright white wing patches.",
+      "ask": "Which state's state bird is the lark bunting?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "hawaii": [
+    {
+      "fact": "Hawaii's state bird is the nēnē, a goose found nowhere else in the world.",
+      "ask": "Which state's state bird is the nēnē, a goose found nowhere else on Earth?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "The Hawaiian monk seal, Hawaii's state mammal, is one of the rarest seals on Earth.",
+      "ask": "Which state's state mammal is a rare monk seal that lives only around its islands?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "idaho": [
+    {
+      "fact": "The southern Idaho ground squirrel lives only in a small patch of Idaho and nowhere else in the world.",
+      "ask": "Which state is the only home in the world of a rare ground squirrel named after that state?",
+      "source": "https://idfg.idaho.gov/species/taxa/80667"
+    }
+  ],
+  "montana": [
+    {
+      "fact": "In Montana's Glacier National Park, mountain goats climb cliffs that are almost straight up and down.",
+      "ask": "Which state is home to Glacier National Park, where mountain goats climb nearly straight-up cliffs?",
+      "source": "https://www.nps.gov/thingstodo/mountain-goats.htm"
+    }
+  ],
+  "nevada": [
+    {
+      "fact": "The Devils Hole pupfish lives in just one water-filled cave pool in Nevada, the smallest home of any fish species.",
+      "ask": "Which state has Devils Hole, the one tiny cave pool where the rare Devils Hole pupfish lives?",
+      "source": "https://en.wikipedia.org/wiki/Devils_Hole_pupfish"
+    },
+    {
+      "fact": "Nevada's state animal is the desert bighorn sheep, which can climb steep, rocky desert mountains.",
+      "ask": "Which state's state animal is the desert bighorn sheep?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "new-mexico": [
+    {
+      "fact": "New Mexico's state bird is the greater roadrunner, which can sprint about 20 miles per hour.",
+      "ask": "Which state's state bird is the roadrunner?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "Every summer evening, hundreds of thousands of free-tailed bats swirl out of Carlsbad Cavern in New Mexico.",
+      "ask": "Which state has Carlsbad Caverns, where huge clouds of bats fly out every summer evening?",
+      "source": "https://www.nps.gov/cave/learn/nature/bft_bat_outflight.htm"
+    }
+  ],
+  "oregon": [
+    {
+      "fact": "Oregon's state animal is the American beaver, and a beaver appears on the back of its state flag.",
+      "ask": "Which Western state's state animal is the beaver, which also appears on the back of its flag?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "utah": [
+    {
+      "fact": "Utah's state bird is the California gull, honored with a monument for eating crickets that were destroying early settlers' crops.",
+      "ask": "Which state's state bird is a gull, honored with a monument for eating crickets that attacked settlers' crops?",
+      "source": "https://en.wikipedia.org/wiki/California_gull"
+    }
+  ],
+  "washington": [
+    {
+      "fact": "Washington's state marine mammal is the orca, the black-and-white killer whale.",
+      "ask": "Which state's official marine mammal is the orca?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "The Olympic marmot lives only on the Olympic Peninsula in Washington.",
+      "ask": "Which state is the only home of the Olympic marmot?",
+      "source": "https://en.wikipedia.org/wiki/Olympic_marmot"
+    }
+  ],
+  "wyoming": [
+    {
+      "fact": "Wyoming's state mammal is the American bison, the heaviest land animal in North America.",
+      "ask": "Which Western state's state mammal is the American bison?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "illinois": [
+    {
+      "fact": "Illinois's state fish is the bluegill, a small sunfish with a blue patch on its gill cover.",
+      "ask": "Which Midwest state's state fish is the bluegill?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_fish"
+    }
+  ],
+  "indiana": [
+    {
+      "fact": "Indiana's state insect is Say's firefly, chosen in 2018 after a campaign by elementary school kids.",
+      "ask": "Which state's state insect is Say's firefly, chosen after schoolkids asked for it?",
+      "source": "https://www.in.gov/dnr/entomology/resources-and-links/says-firefly"
+    }
+  ],
+  "iowa": [
+    {
+      "fact": "Iowa's state bird is the eastern goldfinch, a bright yellow songbird.",
+      "ask": "Which Midwest state's state bird is the eastern goldfinch?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "kansas": [
+    {
+      "fact": "Kansas's state animal is the American bison, which once roamed its prairies in huge herds.",
+      "ask": "Which Midwest state's state animal is the American bison?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "michigan": [
+    {
+      "fact": "On Michigan's Isle Royale, in Lake Superior, wolves and moose have been studied for over 60 years.",
+      "ask": "Which state is home to Isle Royale, an island park famous for its wolves and moose?",
+      "source": "https://home.nps.gov/isro/learn/nature/wolf-moose-populations.htm"
+    }
+  ],
+  "minnesota": [
+    {
+      "fact": "Minnesota's state bird is the common loon, famous for its eerie, wailing call over lakes.",
+      "ask": "Which state's state bird is the common loon?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "missouri": [
+    {
+      "fact": "Missouri's state bird is the eastern bluebird.",
+      "ask": "Which Midwest state's state bird is the eastern bluebird?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "Missouri's state aquatic animal is the paddlefish, a fish with a long, flat snout like a paddle.",
+      "ask": "Which state's official aquatic animal is the paddlefish?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_fish"
+    }
+  ],
+  "nebraska": [
+    {
+      "fact": "Each spring, hundreds of thousands of sandhill cranes stop to rest and feed along the Platte River in Nebraska.",
+      "ask": "In which state do huge flocks of sandhill cranes stop along the Platte River each spring?",
+      "source": "https://en.wikipedia.org/wiki/Platte_River"
+    }
+  ],
+  "north-dakota": [
+    {
+      "fact": "North Dakota's state fish is the northern pike, a long fish with sharp teeth.",
+      "ask": "Which state's state fish is the northern pike?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_fish"
+    }
+  ],
+  "ohio": [
+    {
+      "fact": "Ohio's state reptile is the black racer, a fast, shiny black snake.",
+      "ask": "Which state's state reptile is the black racer snake?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_reptiles"
+    }
+  ],
+  "south-dakota": [
+    {
+      "fact": "South Dakota's state animal is the coyote.",
+      "ask": "Which state's state animal is the coyote?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "South Dakota's state bird is the ring-necked pheasant.",
+      "ask": "Which state's state bird is the ring-necked pheasant?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "wisconsin": [
+    {
+      "fact": "Wisconsin's state animal is the American badger, a fierce digger.",
+      "ask": "Which state's state animal is the badger?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "Wisconsin's state fish is the muskellunge, or muskie, a huge fish with sharp teeth.",
+      "ask": "Which state's state fish is the muskellunge, or muskie?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_fish"
+    }
+  ],
+  "alabama": [
+    {
+      "fact": "Alabama's state bird is the yellowhammer, a woodpecker also called the northern flicker.",
+      "ask": "Which state's state bird is the yellowhammer?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "The Red Hills salamander, Alabama's state amphibian, lives only in a small area of Alabama.",
+      "ask": "Which state's state amphibian is the Red Hills salamander, found only in that state?",
+      "source": "https://en.wikipedia.org/wiki/Red_Hills_salamander"
+    }
+  ],
+  "arkansas": [
+    {
+      "fact": "Arkansas's state primitive fish is the alligator gar, a giant fish with a snout full of teeth.",
+      "ask": "Which state's official primitive fish is the alligator gar?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_fish"
+    }
+  ],
+  "delaware": [
+    {
+      "fact": "Delaware's state marine animal is the horseshoe crab, whose family has lived on Earth for over 400 million years.",
+      "ask": "Which state's official marine animal is the horseshoe crab?",
+      "source": "https://statesymbolsusa.org/node/1333"
+    },
+    {
+      "fact": "Delaware's state wildlife animal is the gray fox, a fox that can climb trees.",
+      "ask": "Which Southern state's state mammal is the gray fox?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "florida": [
+    {
+      "fact": "South Florida is the only place in the world where wild alligators and crocodiles live side by side.",
+      "ask": "Which state is the only place where wild alligators and crocodiles live together?",
+      "source": "https://www.usgs.gov/media/images/florida-everglades-1"
+    },
+    {
+      "fact": "Florida's state animal is the Florida panther, a rare wild cat of the swamps.",
+      "ask": "Which state's state animal is a rare panther that lives in its swamps?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "georgia": [
+    {
+      "fact": "Georgia's state bird is the brown thrasher, a songbird that can sing over 1,000 different songs.",
+      "ask": "Which state's state bird is the brown thrasher?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "kentucky": [
+    {
+      "fact": "The Kentucky cave shrimp is see-through and eyeless, and lives only in the waters around Mammoth Cave.",
+      "ask": "Which state is home to Mammoth Cave, the only home of a tiny eyeless cave shrimp?",
+      "source": "https://www.nps.gov/articles/000/kentucky-cave-shrimp-endangered-species-of-mammoth-cave.htm"
+    }
+  ],
+  "louisiana": [
+    {
+      "fact": "Louisiana's state bird is the brown pelican, which dives headfirst into the water to catch fish.",
+      "ask": "Which state's state bird is the brown pelican?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "maryland": [
+    {
+      "fact": "Maryland's state crustacean is the blue crab, caught in the Chesapeake Bay.",
+      "ask": "Which state's state crustacean is the blue crab?",
+      "source": "https://msa.maryland.gov/msa/mdmanual/01glance/html/symbols/crab.html"
+    }
+  ],
+  "mississippi": [
+    {
+      "fact": "The only wild Mississippi sandhill cranes live in one county of Mississippi, on a refuge made for them.",
+      "ask": "Which state has a refuge that protects the only wild flock of its own kind of sandhill crane?",
+      "source": "https://www.fws.gov/refuge/mississippi-sandhill-crane/about-us"
+    }
+  ],
+  "north-carolina": [
+    {
+      "fact": "The only wild red wolves in the world live in eastern North Carolina.",
+      "ask": "Which state is the only place in the world where wild red wolves live?",
+      "source": "https://www.selc.org/press-release/u-s-fish-wildlife-service-plan-dooms-only-wild-red-wolves-to-extinction/"
+    }
+  ],
+  "oklahoma": [
+    {
+      "fact": "Oklahoma's state bird is the scissor-tailed flycatcher, which has a very long forked tail.",
+      "ask": "Which state's state bird is the scissor-tailed flycatcher?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "Oklahoma's state reptile is the collared lizard, nicknamed the mountain boomer, which can run on its back legs.",
+      "ask": "Which state's state reptile is the collared lizard, or mountain boomer?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_reptiles"
+    }
+  ],
+  "south-carolina": [
+    {
+      "fact": "South Carolina's state amphibian is the spotted salamander, a black salamander with yellow spots.",
+      "ask": "Which Southern state's state amphibian is the spotted salamander?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_amphibians"
+    }
+  ],
+  "tennessee": [
+    {
+      "fact": "Tennessee's state wild animal is the raccoon, with its black mask and ringed tail.",
+      "ask": "Which state's state wild animal is the raccoon?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "texas": [
+    {
+      "fact": "Texas's state small mammal is the nine-banded armadillo, which wears a shell of bony armor.",
+      "ask": "Which state's state small mammal is the armadillo?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "Texas's state sea turtle is the Kemp's ridley, the smallest and rarest sea turtle.",
+      "ask": "Which state's official sea turtle is the Kemp's ridley?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_reptiles"
+    }
+  ],
+  "virginia": [
+    {
+      "fact": "Virginia's state snake is the eastern garter snake, chosen in 2016 after an 11-year-old suggested it.",
+      "ask": "Which Southern state's official snake is the eastern garter snake?",
+      "source": "https://en.wikipedia.org/wiki/List_of_Virginia_state_symbols"
+    }
+  ],
+  "west-virginia": [
+    {
+      "fact": "The Cheat Mountain salamander lives only on a few high mountains in West Virginia.",
+      "ask": "Which state is the only home of the Cheat Mountain salamander?",
+      "source": "https://en.wikipedia.org/wiki/Cheat_Mountain_salamander"
+    }
+  ],
+  "connecticut": [
+    {
+      "fact": "Connecticut's state animal is the sperm whale, the biggest toothed animal on Earth.",
+      "ask": "Which state's state animal is the sperm whale?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    },
+    {
+      "fact": "Connecticut's state bird is the American robin.",
+      "ask": "Which Northeast state's state bird is the American robin?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "maine": [
+    {
+      "fact": "Maine's coastal islands are the only places in the United States where Atlantic puffins nest.",
+      "ask": "Which state is the only one where Atlantic puffins nest?",
+      "source": "https://en.wikipedia.org/wiki/Project_Puffin"
+    },
+    {
+      "fact": "Maine's state animal is the moose.",
+      "ask": "Which Northeast state's state animal is the moose?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "massachusetts": [
+    {
+      "fact": "Massachusetts's state marine mammal is the North Atlantic right whale, one of the rarest whales.",
+      "ask": "Which Northeast state's official marine mammal is the right whale?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "new-hampshire": [
+    {
+      "fact": "New Hampshire's state bird is the purple finch, though the males look more raspberry-red than purple.",
+      "ask": "Which state's state bird is the purple finch?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "new-jersey": [
+    {
+      "fact": "New Jersey's state bird is the eastern goldfinch.",
+      "ask": "Which Northeast state's state bird is the eastern goldfinch?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    },
+    {
+      "fact": "New Jersey's state reptile is the bog turtle, one of the smallest turtles in North America.",
+      "ask": "Which state's state reptile is the tiny bog turtle?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_reptiles"
+    }
+  ],
+  "new-york": [
+    {
+      "fact": "New York's state animal is the beaver, which builds dams and lodges out of sticks.",
+      "ask": "Which Northeast state's state animal is the beaver?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "pennsylvania": [
+    {
+      "fact": "Pennsylvania's state amphibian is the eastern hellbender, a giant salamander that can grow over 2 feet long.",
+      "ask": "Which state's state amphibian is the hellbender, a giant salamander?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_amphibians"
+    },
+    {
+      "fact": "Pennsylvania has no state bird, but its state game bird is the ruffed grouse.",
+      "ask": "Which state's official game bird is the ruffed grouse?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "rhode-island": [
+    {
+      "fact": "Rhode Island's state marine mammal is the harbor seal, which visits its shores in winter.",
+      "ask": "Which state's official marine mammal is the harbor seal?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_mammals"
+    }
+  ],
+  "vermont": [
+    {
+      "fact": "Vermont's state bird is the hermit thrush, known for its beautiful flute-like song.",
+      "ask": "Which state's state bird is the hermit thrush?",
+      "source": "https://en.wikipedia.org/wiki/List_of_U.S._state_birds"
+    }
+  ],
+  "denmark": [
+    {
+      "fact": "Denmark's national bird is the mute swan, chosen in 1984.",
+      "ask": "Which country's national bird is the mute swan?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "estonia": [
+    {
+      "fact": "Estonia's national bird is the barn swallow.",
+      "ask": "Which country's national bird is the barn swallow?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "finland": [
+    {
+      "fact": "The Saimaa ringed seal lives only in Finland's Lake Saimaa, one of the only seals in the world that lives in fresh water.",
+      "ask": "Which country is the only home of the Saimaa ringed seal, a freshwater seal?",
+      "source": "https://en.wikipedia.org/wiki/Saimaa_ringed_seal"
+    },
+    {
+      "fact": "Finland's national animal is the brown bear.",
+      "ask": "Which country's national animal is the brown bear?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_animals"
+    }
+  ],
+  "iceland": [
+    {
+      "fact": "The Arctic fox is the only land mammal native to Iceland.",
+      "ask": "Which country's only native land mammal is the Arctic fox?",
+      "source": "https://en.wikipedia.org/wiki/Fauna_of_Iceland"
+    },
+    {
+      "fact": "Iceland's Westman Islands have one of the biggest Atlantic puffin colonies on Earth.",
+      "ask": "Which country owns the Westman Islands, home to one of the world's biggest puffin colonies?",
+      "source": "https://www.guinnessworldrecords.com/world-records/594921-largest-super-colon-of-puffins"
+    }
+  ],
+  "ireland": [
+    {
+      "fact": "Ireland has no native snakes; its only native land reptile is the common lizard.",
+      "ask": "Which country has no native snakes, and the common lizard as its only native land reptile?",
+      "source": "https://en.wikipedia.org/wiki/List_of_reptiles_of_Ireland"
+    }
+  ],
+  "latvia": [
+    {
+      "fact": "Latvia's national bird is the white wagtail, a little bird that wags its long tail.",
+      "ask": "Which country's national bird is the white wagtail?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "lithuania": [
+    {
+      "fact": "Lithuania's national bird is the white stork.",
+      "ask": "Which country's national bird is the white stork?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "norway": [
+    {
+      "fact": "Norway's national bird is the white-throated dipper, a songbird that walks underwater to find food.",
+      "ask": "Which country's national bird is the white-throated dipper?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    },
+    {
+      "fact": "The short-legged Svalbard reindeer lives only on Norway's Arctic islands of Svalbard.",
+      "ask": "Which country owns Svalbard, the only home of the Svalbard reindeer?",
+      "source": "https://en.wikipedia.org/wiki/Svalbard_reindeer"
+    }
+  ],
+  "sweden": [
+    {
+      "fact": "Sweden's national bird is the common blackbird.",
+      "ask": "Which country's national bird is the common blackbird?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "uk": [
+    {
+      "fact": "In 2015, more than 200,000 people voted the robin the national bird of Britain.",
+      "ask": "In which country did people vote the robin their national bird in 2015?",
+      "source": "https://britishbirds.co.uk/article/robin-voted-britains-national-bird/"
+    }
+  ],
+  "austria": [
+    {
+      "fact": "Austria's Hohe Tauern, the largest national park in the Alps, is home to ibex, marmots and huge bearded vultures.",
+      "ask": "Which country has Hohe Tauern, the biggest national park in the Alps?",
+      "source": "https://www.nationalparksaustria.at/en/nationalpark-hohe-tauern.html"
+    }
+  ],
+  "belgium": [
+    {
+      "fact": "Belgium's national bird is the common kestrel, a small falcon that hovers in the air.",
+      "ask": "Which country's national bird is the common kestrel?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "france": [
+    {
+      "fact": "The Camargue wetlands in France are the only regular nesting place of pink greater flamingos in the country.",
+      "ask": "Which country has the Camargue, a wetland where thousands of flamingos nest?",
+      "source": "https://birdingplaces.eu/de/in-the-spotlight/the-camargue"
+    }
+  ],
+  "germany": [
+    {
+      "fact": "The little island of Düne, next to Heligoland, has Germany's largest colony of grey seals.",
+      "ask": "Which country owns Heligoland, where grey seals raise fluffy white pups on the beach?",
+      "source": "https://www.frs-helgoline.de/en/discover-heligoland-dune-seals"
+    }
+  ],
+  "luxembourg": [
+    {
+      "fact": "Luxembourg's national bird is the goldcrest, one of Europe's smallest birds.",
+      "ask": "Which country's national bird is the tiny goldcrest?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "netherlands": [
+    {
+      "fact": "The Netherlands' national bird is the black-tailed godwit, a wading bird with a long beak.",
+      "ask": "Which country's national bird is the black-tailed godwit?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "switzerland": [
+    {
+      "fact": "Alpine ibex had vanished from Switzerland, so in 1906 young ibex were secretly smuggled in from Italy to bring them back.",
+      "ask": "Which country got its wild ibex back after young ibex were smuggled in from Italy in 1906?",
+      "source": "https://www.swissinfo.ch/eng/long-live-the--king-of-the-alps-/5352038"
+    }
+  ],
+  "albania": [
+    {
+      "fact": "Albania's national bird is the golden eagle.",
+      "ask": "Which country's national bird is the golden eagle?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "croatia": [
+    {
+      "fact": "Croatia's old money, the kuna, was named after the pine marten, whose furs were once used to pay for things.",
+      "ask": "Which country's old money, the kuna, was named after the pine marten?",
+      "source": "https://nc.cnb.cz/pub/en/from-the-world-of-the-money/The-pine-marten-and-the-Croatian-currency"
+    }
+  ],
+  "greece": [
+    {
+      "fact": "Loggerhead sea turtles nest on the beaches of Laganas Bay on the Greek island of Zakynthos.",
+      "ask": "Which country owns Zakynthos, an island where loggerhead sea turtles nest?",
+      "source": "https://en.wikipedia.org/wiki/National_Marine_Park_of_Zakynthos"
+    }
+  ],
+  "italy": [
+    {
+      "fact": "The Marsican brown bear lives only in the mountains of central Italy.",
+      "ask": "Which country is the only home of the Marsican brown bear?",
+      "source": "https://en.wikipedia.org/wiki/Marsican_brown_bear"
+    }
+  ],
+  "malta": [
+    {
+      "fact": "Malta's national bird is the blue rock thrush.",
+      "ask": "Which country's national bird is the blue rock thrush?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "portugal": [
+    {
+      "fact": "Zino's petrel, Europe's rarest seabird, nests only on high mountain ledges on Portugal's island of Madeira.",
+      "ask": "Which country owns Madeira, the only place where Zino's petrel nests?",
+      "source": "https://en.wikipedia.org/wiki/Zino%27s_petrel"
+    }
+  ],
+  "slovenia": [
+    {
+      "fact": "Postojna Cave in Slovenia is famous for the olm, a blind, pale cave salamander nicknamed the human fish.",
+      "ask": "Which country has Postojna Cave, famous for the blind cave salamander called the olm?",
+      "source": "https://en.wikipedia.org/wiki/Olm"
+    }
+  ],
+  "spain": [
+    {
+      "fact": "Doñana National Park in Spain is one of the last strongholds of the Iberian lynx, one of the rarest cats in the world.",
+      "ask": "Which country has Doñana National Park, a home of the rare Iberian lynx?",
+      "source": "https://en.wikipedia.org/wiki/Iberian_lynx"
+    }
+  ],
+  "bulgaria": [
+    {
+      "fact": "Srebarna Nature Reserve in Bulgaria is famous for its nesting Dalmatian pelicans.",
+      "ask": "Which country has the Srebarna Nature Reserve, famous for nesting Dalmatian pelicans?",
+      "source": "https://en.wikipedia.org/wiki/Srebarna_Nature_Reserve"
+    }
+  ],
+  "hungary": [
+    {
+      "fact": "Hungary's national bird is the saker falcon, a fast hunting falcon.",
+      "ask": "Which country's national bird is the saker falcon?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "poland": [
+    {
+      "fact": "Poland's national bird is the white-tailed eagle, the white eagle on its coat of arms.",
+      "ask": "Which country's national bird is the white-tailed eagle?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "romania": [
+    {
+      "fact": "Romania has more wild brown bears than any other country in the European Union.",
+      "ask": "Which country has the most wild brown bears in the European Union?",
+      "source": "https://www.bta.bg/en/news/1057206-romania-has-most-brown-bears-in-europe-or-three-times-more-than-it-should-stud"
+    }
+  ],
+  "russia": [
+    {
+      "fact": "The Baikal seal lives only in Russia's Lake Baikal and is the only seal that lives just in fresh water.",
+      "ask": "Which country is the only home of the Baikal seal, a freshwater seal?",
+      "source": "https://en.wikipedia.org/wiki/Baikal_seal"
+    },
+    {
+      "fact": "Most of the world's wild Amur tigers, also called Siberian tigers, live in Russia's far east.",
+      "ask": "Which country is home to most of the world's wild Siberian tigers?",
+      "source": "https://en.wikipedia.org/wiki/Siberian_tiger"
+    }
+  ],
+  "belize": [
+    {
+      "fact": "Belize's national animal is Baird's tapir, a big plant-eater with a short, bendy snout.",
+      "ask": "Which country's national animal is Baird's tapir?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_animals"
+    },
+    {
+      "fact": "Belize's national bird is the keel-billed toucan, with a giant rainbow-colored beak.",
+      "ask": "Which country's national bird is the keel-billed toucan?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "canada": [
+    {
+      "fact": "Canada's national animal is the North American beaver.",
+      "ask": "Which country's national animal is the beaver?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_animals"
+    }
+  ],
+  "costa-rica": [
+    {
+      "fact": "In 2021, Costa Rica made both two-toed and three-toed sloths national symbols.",
+      "ask": "Which country made sloths a national symbol in 2021?",
+      "source": "https://toucanrescueranch.org/2021/07/the-sloth-becomes-a-national-symbol-of-costa-rica/"
+    }
+  ],
+  "guatemala": [
+    {
+      "fact": "Guatemala's national bird is the resplendent quetzal, and its money is named the quetzal too.",
+      "ask": "Which country's national bird is the resplendent quetzal, which its money is named after?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "honduras": [
+    {
+      "fact": "Honduras's national bird is the scarlet macaw, a big red, yellow and blue parrot.",
+      "ask": "Which country's national bird is the scarlet macaw?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "mexico": [
+    {
+      "fact": "The only wild axolotls in the world live in the canals of Xochimilco, in Mexico.",
+      "ask": "Which country is the only wild home of the axolotl?",
+      "source": "https://en.wikipedia.org/wiki/Axolotl"
+    },
+    {
+      "fact": "Mexico's flag shows a golden eagle, its national bird, eating a snake on a cactus.",
+      "ask": "Which country's flag shows a golden eagle eating a snake on a cactus?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "nicaragua": [
+    {
+      "fact": "Bull sharks swim from the Caribbean Sea up the San Juan River into Lake Nicaragua, a freshwater lake.",
+      "ask": "Which country's biggest lake has bull sharks that swim in from the sea up a river?",
+      "source": "https://en.wikipedia.org/wiki/San_Juan_River_(Nicaragua)"
+    }
+  ],
+  "panama": [
+    {
+      "fact": "Panama's national bird is the harpy eagle, one of the most powerful eagles on Earth.",
+      "ask": "Which country's national bird is the harpy eagle?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "usa": [
+    {
+      "fact": "The United States has two national animals: the bald eagle as its national bird and the American bison as its national mammal.",
+      "ask": "Which country's national bird is the bald eagle?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    },
+    {
+      "fact": "In 2016, the American bison became the national mammal of the United States.",
+      "ask": "Which country named the American bison its national mammal in 2016?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_animals"
+    }
+  ],
+  "antigua-and-barbuda": [
+    {
+      "fact": "Codrington Lagoon on Barbuda has the largest frigatebird colony in the Caribbean; the frigatebird is also the national bird.",
+      "ask": "Which country has the Caribbean's largest frigatebird colony, and the frigatebird as its national bird?",
+      "source": "https://en.wikipedia.org/wiki/Codrington_Lagoon"
+    }
+  ],
+  "bahamas": [
+    {
+      "fact": "Inagua National Park in the Bahamas has the world's largest breeding colony of West Indian flamingos, the national bird.",
+      "ask": "Which country's national bird is the flamingo, with the world's biggest flamingo colony on Inagua?",
+      "source": "https://bnt.bs/parks/inagua-national-park/"
+    }
+  ],
+  "barbados": [
+    {
+      "fact": "The Barbados threadsnake, maybe the world's smallest snake, lives only on Barbados and is only about 10 centimeters long, small enough to curl up on a coin.",
+      "ask": "Which island country is the only home of what may be the world's smallest snake?",
+      "source": "https://www.rewild.org/press/barbados-threadsnake-rediscovery"
+    }
+  ],
+  "cuba": [
+    {
+      "fact": "The bee hummingbird, the smallest bird in the world, lives only in Cuba.",
+      "ask": "Which country is the only home of the bee hummingbird, the world's smallest bird?",
+      "source": "https://en.wikipedia.org/wiki/Bee_hummingbird"
+    },
+    {
+      "fact": "Cuba's national bird is the tocororo, or Cuban trogon, whose red, white and blue feathers match the country's flag.",
+      "ask": "Which country's national bird is the tocororo, whose colors match its flag?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "dominica": [
+    {
+      "fact": "Dominica's national bird, the sisserou parrot, is shown on the country's flag and lives nowhere else.",
+      "ask": "Which country has a purple-chested parrot, the sisserou, on its flag?",
+      "source": "https://en.wikipedia.org/wiki/Flag_of_Dominica"
+    }
+  ],
+  "dominican-republic": [
+    {
+      "fact": "The Dominican Republic's national bird is the palmchat, which builds big shared nests in palm trees.",
+      "ask": "Which country's national bird is the palmchat?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "grenada": [
+    {
+      "fact": "Grenada's national bird is the Grenada dove, one of the rarest doves in the world, found only on its main island.",
+      "ask": "Which country's national bird is a rare dove named after it?",
+      "source": "https://en.wikipedia.org/wiki/Grenada_dove"
+    }
+  ],
+  "haiti": [
+    {
+      "fact": "Haiti's national bird is the Hispaniolan trogon, a bird with a red belly and green back.",
+      "ask": "Which country's national bird is the Hispaniolan trogon?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "jamaica": [
+    {
+      "fact": "Jamaica's national bird is the doctor bird, a hummingbird with long streamer tail feathers that lives only there.",
+      "ask": "Which country's national bird is the doctor bird, a long-tailed hummingbird?",
+      "source": "https://en.wikipedia.org/wiki/Red-billed_streamertail"
+    }
+  ],
+  "saint-lucia": [
+    {
+      "fact": "Saint Lucia's national bird is a blue-faced parrot that islanders call the Jacquot, found nowhere else.",
+      "ask": "Which country's national bird is a parrot nicknamed the Jacquot?",
+      "source": "https://en.wikipedia.org/wiki/Saint_Lucia_amazon"
+    }
+  ],
+  "saint-vincent-and-the-grenadines": [
+    {
+      "fact": "The Union Island gecko, a tiny jewel-colored lizard, lives only in one forest on Union Island in the Grenadines.",
+      "ask": "Which country is the only home of the tiny, sparkly Union Island gecko?",
+      "source": "https://en.wikipedia.org/wiki/Gonatodes_daudini"
+    }
+  ],
+  "trinidad-and-tobago": [
+    {
+      "fact": "At sunset, flocks of bright red scarlet ibises, a national bird, fly in to roost in the Caroni Swamp on Trinidad.",
+      "ask": "Which country's national birds include the scarlet ibis, which roosts in the Caroni Swamp?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "argentina": [
+    {
+      "fact": "Argentina's national bird is the rufous hornero, which builds a round mud nest that looks like an oven.",
+      "ask": "Which country's national bird is the hornero, which builds oven-shaped mud nests?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    },
+    {
+      "fact": "Southern right whales gather each year to have their calves off Península Valdés in Argentina.",
+      "ask": "Which country has Península Valdés, where southern right whales raise their calves?",
+      "source": "https://en.wikipedia.org/wiki/Valdes_Peninsula"
+    }
+  ],
+  "bolivia": [
+    {
+      "fact": "Laguna Colorada, a red lake high in Bolivia's Andes, is the biggest nesting site of the rare James's flamingo.",
+      "ask": "Which country has Laguna Colorada, a red lake where rare James's flamingos nest?",
+      "source": "https://datazone.birdlife.org/species/factsheet/puna-flamingo-phoenicoparrus-jamesi/text"
+    }
+  ],
+  "brazil": [
+    {
+      "fact": "The golden lion tamarin, a little monkey with a fiery orange mane, lives only in Brazil's Atlantic Forest.",
+      "ask": "Which country is the only wild home of the golden lion tamarin?",
+      "source": "https://en.wikipedia.org/wiki/Golden_lion_tamarin"
+    }
+  ],
+  "chile": [
+    {
+      "fact": "Chile's national animal is the huemul, a rare mountain deer shown on its coat of arms.",
+      "ask": "Which country's national animal is the huemul, a deer on its coat of arms?",
+      "source": "https://en.wikipedia.org/wiki/Coat_of_arms_of_Chile"
+    }
+  ],
+  "colombia": [
+    {
+      "fact": "Colombia has more kinds of birds than any other country, over 1,800 species.",
+      "ask": "Which country has more bird species than any other country in the world?",
+      "source": "https://guinnessworldrecords.com/world-records/684249-most-bird-species-country"
+    }
+  ],
+  "ecuador": [
+    {
+      "fact": "Giant tortoises that can live over 100 years roam Ecuador's Galápagos Islands.",
+      "ask": "Which country owns the Galápagos Islands, home of giant tortoises?",
+      "source": "https://en.wikipedia.org/wiki/Galápagos_tortoise"
+    }
+  ],
+  "guyana": [
+    {
+      "fact": "Guyana's national bird is the hoatzin, a smelly-feathered bird whose chicks have claws on their wings.",
+      "ask": "Which country's national bird is the hoatzin, whose chicks have wing claws?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "paraguay": [
+    {
+      "fact": "Paraguay's national bird is the bare-throated bellbird, whose call sounds like a ringing bell.",
+      "ask": "Which country's national bird is the bare-throated bellbird?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ],
+  "peru": [
+    {
+      "fact": "Peru's national bird is the Andean cock-of-the-rock, a bright orange bird with a feather crest.",
+      "ask": "Which country's national bird is the Andean cock-of-the-rock?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    },
+    {
+      "fact": "The vicuña, a wild relative of the llama, appears on Peru's coat of arms as its national animal.",
+      "ask": "Which country's coat of arms shows a vicuña, its national animal?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_animals"
+    }
+  ],
+  "uruguay": [
+    {
+      "fact": "Isla de Lobos, a small island off Uruguay, is home to one of the world's largest sea lion colonies.",
+      "ask": "Which country has Isla de Lobos, an island home to one of the world's biggest sea lion colonies?",
+      "source": "https://en.wikipedia.org/wiki/Isla_de_Lobos"
+    }
+  ],
+  "venezuela": [
+    {
+      "fact": "Venezuela's national bird is the Venezuelan troupial, a black and orange songbird.",
+      "ask": "Which country's national bird is the troupial?",
+      "source": "https://en.wikipedia.org/wiki/List_of_national_birds"
+    }
+  ]
+}

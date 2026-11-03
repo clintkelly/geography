@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type PointerEvent, type ReactNode, type WheelEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type PointerEvent, type ReactNode, type WheelEvent } from 'react';
 import { clampView, type MapDef, type View } from '../content/maps';
 import { useKeys } from './keys';
 
@@ -14,14 +14,50 @@ interface Props {
   interactive?: boolean;
   /** Off when the arrow keys are choosing a place instead of panning. */
   arrowPan?: boolean;
+  /** A feature to swoop in on, such as the place just found. */
+  zoomTo?: string;
+  /** Called when the swoop starts, for a sound. */
+  onZoom?: () => void;
+  /** How long to show the whole map before swooping. */
+  zoomDelay?: number;
 }
 
-export function WorldMap({ map, highlights = {}, onFeatureClick, children, label, interactive = true, arrowPan = true }: Props) {
+const ZOOM_MS = 900;
+const ease = (t: number) => 1 - (1 - t) ** 3;
+
+export function WorldMap({ map, highlights = {}, onFeatureClick, children, label, interactive = true, arrowPan = true, zoomTo, onZoom, zoomDelay = 350 }: Props) {
   const home = (map.presets[0] as { view: View }).view;
   const [view, setView] = useState<View>(() => clampView(home, map));
   const drag = useRef<{ x: number; y: number; view: View; moved: boolean } | null>(null);
   const ratio = map.height / map.width;
   const scale = view.w / map.width;
+  const svg = useRef<SVGSVGElement>(null);
+
+  // Swoop in on the place: a short eased zoom, framing it with room around it. Reduced motion jumps straight there.
+  useEffect(() => {
+    if (!zoomTo || !svg.current) return;
+    const path = svg.current.querySelector<SVGGraphicsElement>(`[data-feature="${CSS.escape(zoomTo)}"]`);
+    if (!path) return;
+    const box = path.getBBox();
+    const w = Math.min(map.width, Math.max(160, box.width * 3, (box.height / ratio) * 3));
+    const target = clampView({ w, x: box.x + box.width / 2 - w / 2, y: box.y + box.height / 2 - (w * ratio) / 2 }, map);
+    const from = clampView(home, map);
+    const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (still) {
+      setView(target);
+      return;
+    }
+    let frame = 0;
+    const started = performance.now();
+    const step = (now: number) => {
+      const t = ease(Math.min(1, (now - started) / ZOOM_MS));
+      setView({ w: from.w + (target.w - from.w) * t, x: from.x + (target.x - from.x) * t, y: from.y + (target.y - from.y) * t });
+      if (t < 1) frame = requestAnimationFrame(step);
+    };
+    // A beat on the whole map first, so the child sees where the place sits.
+    const wait = setTimeout(() => { onZoom?.(); frame = requestAnimationFrame(step); }, zoomDelay);
+    return () => { clearTimeout(wait); cancelAnimationFrame(frame); };
+  }, [zoomTo, map]); // eslint-disable-line
 
   const shapes = useMemo(
     () =>
@@ -92,6 +128,7 @@ export function WorldMap({ map, highlights = {}, onFeatureClick, children, label
   return (
     <div className="map">
       <svg
+        ref={svg}
         role="img"
         aria-label={label}
         viewBox={`${view.x} ${view.y} ${view.w} ${view.w * ratio}`}

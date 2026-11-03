@@ -200,7 +200,7 @@ Opponents scale with the companion's evolution stage, so growth feels good witho
 | 2 | 14 | 4 | 12 | 16 |
 | 3 | 16 | 5 | 15 | 20 |
 
-A battle should take at least 3 correct answers at any stage. Growth may shorten a battle slightly but must not remove practice. Trail difficulty does not change combat numbers, because learning difficulty and combat difficulty stay independent.
+A battle should take at least 3 correct answers at any stage. Growth may shorten a battle slightly but must not remove practice. Trail difficulty does not change combat numbers, because learning difficulty and combat difficulty stay independent. Harder trails pay off in access and treats instead: locked creatures, more Trail Points at the start, more shiny finds, and the existing XP, rare-chance and medal boosts.
 
 ### Feedback and timing
 
@@ -297,11 +297,11 @@ Every fact has a question whose answer is that state or country. A child never s
 
 ### Explorer's Map
 
-Each region has a map at camp that fills in as places are found. A full map reveals a rare creature for that region. Rare creatures don't evolve. Badges mark filled maps, groups of places such as New England, and other milestones.
+Each region has a map at camp that fills in as places are found. A full map reveals a rare creature for that region. Rare creatures evolve twice, like regular ones; Continent Bosses don't evolve. Badges mark filled maps, groups of places such as New England, and other milestones.
 
 ### Teams
 
-A trip takes up to 5 creatures, each with its own HP and charge. Switching uses the turn and the opponent hits the newcomer, except when replacing a fainted creature, which is free. The trip retreats only when the whole team is down. The finisher earns full XP and the rest half. Each extra member adds 2 opponent HP and a turn, and teams of 4 or more face +1 enemy damage. A creature gets +1 Attack, not Special, in its home landscapes.
+A trip takes up to 10 creatures, each with its own HP and charge. Switching uses the turn and the opponent hits the newcomer, except when replacing a fainted creature, which is free. The trip retreats only when the whole team is down. The finisher earns full XP and the rest half. Each extra member adds a turn. Members 2 to 5 add 2 opponent HP each and members 6 to 10 add 1 each. Teams of 4 to 7 face +1 enemy damage and teams of 8 or more face +2. A creature gets +1 Attack, not Special, in its home landscapes.
 
 ### Harder ways to win creatures
 
@@ -510,6 +510,8 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 
 **Wolves and sea creatures:** Howlpup (evolves to Moonfang) and Toothling (evolves to the Megalodon) are regular creatures across several regions. Emberwolf and Inkraken are rare. Pebbletort (Stone, evolves to the Mount Tortoise) and Lilyhop (Leaf, evolves to the Lily Monarch) are regular creatures added later. A region with two rares offers the second after the first is befriended.
 
+**Prehistoric sea creatures and dogs:** Plesiling (Tide plesiosaur, evolves to the Loch Legend) and Spiralite (Stone ammonite, evolves to the Ammonarch) are regular creatures. Mosaroar (Tide mosasaur) is rare in Western Europe and the US Midwest. The dogs are Spotspark (Flame Dalmatian), Corgust (Gale Corgi), Bernasnow (Frost Saint Bernard), Doxdig (Stone Dachshund) and Poodlebloom (Leaf poodle), each living in its breed's home region and a few others. Platybolt is a rare Volt platypus in Oceania. Each flavor line carries a real fact about the animal or breed's home.
+
 **Moves:** every creature has its own Attack and Guard names, listed in src/content/moves.ts. Attacks are steady (+1 charge) or fierce (+1 damage, no charge, and a miss takes 1 extra damage). Guards are steady (1 damage, block 3), spiky (2 damage, block 2), wall (block 5) or focus (1 damage, block 2, +2 charge). A simulation across many opponents put every combination within a few points of steady. The battle team row shows each member's type.
 
 **Type effects:** a hit sprays the attacker's type particles where it lands: water splashes, embers rise, leaves twirl, rocks drop, wind streaks or ice shatters. A Special fills the scene with its type: a wave, rising embers, a leaf storm, falling rocks, wind or snow. The effects are decorative only, and reduced-motion settings hide them.
@@ -522,8 +524,51 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 
 **Flags:** 196 accurate flags from the MIT-licensed flag-icons set, used in questions and on cards.
 
-**Types:** six types in a loop: Tide beats Flame, Flame beats Leaf, Leaf beats Stone, Stone beats Gale, Gale beats Frost, Frost beats Tide. A strong matchup adds 1 damage to Attack and strong Specials, and a weak one takes 1 away, never below 1. A creature traveling alone has no weak matchups, so right answers always win. Types never change the opponent's damage.
+**Types:** seven types in a loop, each with a real-world reason: Tide beats Flame (water puts out fire), Flame beats Leaf, Leaf beats Gale (windbreaks), Gale beats Frost (warm wind melts it), Frost beats Stone (ice splits rock), Stone beats Volt (grounding, like a lightning rod), Volt beats Tide (electricity zaps through water). Volt creatures: Thunderhoof and Platybolt (rare), Zapeel, Glowbug, Sparkemur, Catatumboa (rare, South America), Zapwhisker, Krillume and Torpezap. A strong matchup adds 1 damage to Attack and strong Specials, and a weak one takes 1 away, never below 1. A creature traveling alone has no weak matchups, so right answers always win. Types never change the opponent's damage.
 
 **Passport:** a stamp for each region. Bronze for a finished trail, silver for a full map, gold when every card there is Gold.
 
 **Continent Bosses:** eight bosses, one per picker heading, appear as sightings once every region under that heading is stamped. They have 8 more HP, 4 more turns, a big hit every third turn that Guard softens, and questions from the whole continent.
+
+**Twenty more creatures:** each is based on a real animal, and its flavor text gives a true fact about where it lives. Emberhead is a rare Flame hammerhead shark from the Galápagos (South America). It is not a great white. The regulars are Humpyre (camel), Ostrigust (ostrich), Zapwhisker (electric catfish), Gorilith (mountain gorilla), Monarflit (monarch butterfly), Flaminglow (flamingo), Rockguana (rock iguana), Albasoar (albatross), Krillume (krill), Snowmonk (snow monkey), Embertig (Bengal tiger), Peakprowl (snow leopard), Pangoroll (pangolin), Puffgust (puffin), Torpezap (electric ray), Roozoom (red kangaroo), Scorchdevil (Tasmanian devil), Toucanopy (toucan) and Burrowbark (prairie dog). They fill the regions that had the fewest creatures, and add Flame, Gale, Stone and Volt, the types that had the fewest. Each one evolves twice.
+
+## Reasons to play harder trails
+
+The owner may set difficulty limits per profile but chose not to cap anyone. These rewards pull children toward Ranger and Expert without forcing them.
+
+- **Locked creatures.** Every region has a Ranger creature, met only on Ranger or Expert trails. Ten Expert creatures are met only on Expert trails, and all of them have two types. Each is based on a real animal with a true fact about where it lives.
+- **Hints everywhere.**
+  - At Camp, one of each region's two sightings is a locked creature when one is left, marked with a lock tag. Choosing it raises the trail to its difficulty, and easier difficulty buttons are disabled.
+  - Camp lists the region's locked creatures as dark shapes.
+  - The Passport's creature log shows every creature by region, with locked ones marked R or E.
+  - After a trail with 80% or more right on Scout or Ranger, Camp suggests the next difficulty up.
+- **Trail Points.** Ranger trails start with +2 and Expert trails with +4.
+- **Shiny creatures.** A newly befriended creature may be shiny: 3% on Scout, 8% on Ranger, 20% on Expert. The roll comes from the creature's id, so a reload never changes it. Shiny creatures have a different color, a golden glow and twinkling stars. They get a reveal at Camp, a banner in battle, and the Sparkle Finder badge.
+- **Badges:** Ranger Tracker, Expert Tracker, Double Trouble (a dual-type creature), Sparkle Finder and Friend of the Wild.
+
+## Dual types
+
+A dual-type creature attacks with whichever of its types works best. When it is hit, both of its types count and are added together, limited to plus or minus 1. So a matchup that is strong against one type and weak against the other is even. Strikewing, a peregrine falcon (Gale and Volt, Western Asia), is a dual-type creature open to every difficulty.
+
+## Stable management
+
+- **Sort and filter.** The stable can be sorted (newest, oldest, highest level, name, type), filtered by type (counting both types) or by shiny, and searched by name or nickname.
+- **Setting creatures free.** At Camp, a creature can be set free. It moves to "In the wild", keeps its level, and can be called back for free at any time.
+  - The first time a creature is freed banks 3 Trail Points for the next trail. Freeing it again pays nothing, so the reward can't be farmed.
+  - A freed creature still counts as found: it is not offered again, and badges are never taken away.
+  - A creature that just joined can be sent home from the trip summary, for the same reward.
+  - The last creature can't be freed, and nothing can be freed mid-trip.
+
+## Animal questions
+
+Each place can have animal questions, stored in `src/content/animals/*.json` with a source link for each. They are asked at all three difficulties, like fact questions, but don't wait for a Field Note. Camp has an "Animals" focus. Each claim must be true of its place and of no other place in the same region, because the wrong answers come from that region.
+
+## Juice and sound
+
+- **Map zoom.** Arriving at a place, the route map swoops in on it.
+- **Evolution scene.** The old form glows white, then a flash, then the new form springs out over spinning rays.
+- **Sound effects.** Coins clink into the Trail Points counter, and the streak counter blazes at each streak reward.
+  - Specials have type-themed sounds, and strong hits have their own sting.
+  - Freeing, calling back and locked sightings each have a sound.
+- **Variety.** Common sounds have three takes, and every music track has a second take (camp and battle have three). One take is picked at random.
+

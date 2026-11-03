@@ -120,6 +120,15 @@ export function migrateV6Save(old: SaveData, pack: Pack): SaveData {
   return { ...s, schemaVersion: SCHEMA_VERSION, stampedRegions: stamped, settings: { ...s.settings, lastFocus: 'all' } };
 }
 
+/** New creatures arrived: camp sightings are redrawn so they can show up. A trip in progress keeps its own. */
+export function refreshForContent(s: SaveData, pack: Pack): SaveData {
+  if (s.contentVersion === pack.version) return s;
+  if (s.expedition) return s;
+  const rng = new Rng(s.rngState);
+  const { offers, nextId } = makeOffers(s, pack, rng);
+  return { ...s, contentVersion: pack.version, offers, nextId, rngState: rng.state };
+}
+
 function upgrade(h: Household, pack: Pack): Household {
   const v = h.meta.schemaVersion;
   const older = v === 2 ? (s: SaveData) => migrateV2Save(s as unknown as V2Save, pack) : v === 3 ? (s: SaveData) => migrateV3Save(s, pack) : v === 4 ? migrateV4Save : (s: SaveData) => s;
@@ -156,9 +165,11 @@ async function loadOrCreate(store: SaveStore, pack: Pack, env: Env): Promise<Hou
 }
 
 export async function openHousehold(store: SaveStore, pack: Pack, env: Env): Promise<Household> {
-  const h = await loadOrCreate(store, pack, env);
+  const loaded = await loadOrCreate(store, pack, env);
+  const profiles = Object.fromEntries(Object.entries(loaded.profiles).map(([id, s]) => [id, refreshForContent(s, pack)]));
+  const h = Object.entries(profiles).some(([id, s]) => s !== loaded.profiles[id]) ? { ...loaded, profiles } : loaded;
   const complete = withTestProfile(h, pack, env);
-  if (complete !== h) await store.replace(complete);
+  if (complete !== loaded) await store.replace(complete);
   return complete;
 }
 
