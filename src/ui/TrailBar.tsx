@@ -83,6 +83,7 @@ function Rare({ e, save }: { e: Expedition; save: SaveData }) {
   const places = PACK.places.filter((p) => p.regionId === e.regionId);
   const found = places.filter((p) => save.foundPlaces.includes(p.id)).length;
   const hot = score >= 70;
+  const again = !!rare && knownSpecies(save).has(rare.id);
   if (!rare) {
     return (
       <span className="hud-cell">
@@ -99,7 +100,7 @@ function Rare({ e, save }: { e: Expedition; save: SaveData }) {
         <span className="score-track" role="img" aria-label={`Trail Score ${score} of 100`}><span className="score-fill" style={{ width: `${score}%` }} /></span>
         <span className="score-chance" key={percent}>{percent}%</span>
       </span>
-      <small>{found === places.length ? 'Map full: a rare waits at camp' : `Map: ${found} of ${places.length} found`}</small>
+      <small>{again ? `Meet ${rare.displayName} again!` : found === places.length ? 'Map full: a rare waits at camp' : `Map: ${found} of ${places.length} found`}</small>
     </span>
   );
 }

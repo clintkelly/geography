@@ -309,7 +309,7 @@ A trip takes up to 10 creatures, each with its own HP and charge. Switching uses
 
 **Changing a move:** before answering, the child can go back and pick another move. The question stays dealt, including a Bold Befriend question if they return to that move, so changing moves can't swap a hard question for an easier one.
 
-**Rare encounters:** a Trail Score from 0 to 100 reflects accuracy, streak, and difficulty, and sets the chance (2 to 25 percent) that a battle stop is a rare creature. The roll is made once per stop.
+**Rare encounters:** a Trail Score from 0 to 100 reflects accuracy, streak, and difficulty, and sets the chance (2 to 25 percent) that a battle stop is a rare creature. The roll is made once per stop. A rare the child hasn't befriended comes first. Once they own every rare in a region, rare encounters keep happening with ones they already have, so the same rare can be befriended again, each time as a new creature with its own shiny roll.
 
 ### Card levels
 

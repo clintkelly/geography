@@ -781,6 +781,23 @@ describe('rare encounters', () => {
     expect(s.rareFound).toBe(true);
   });
 
+  it('a rare can be met and befriended again after it joins', () => {
+    const base = toRare();
+    const rareId = base.expedition!.slots[0]!.opponentId;
+    const regionId = base.expedition!.regionId;
+    const owned = (x: SaveData) => [...x.companions, ...(x.wild ?? [])].map((c) => c.speciesId);
+    const others = PACK.species.filter((o) => o.rare && o.homes.includes(regionId)).map((o) => o.id);
+    const allRares = others.map((id, i) => ({ instanceId: `r${i}`, speciesId: id, bondXp: 0 }));
+    expect(availableRare(PACK, regionId, [...owned(base), ...others])?.id).toBe(rareId);
+    let s: SaveData = { ...base, companions: [...base.companions, ...allRares] };
+    const count = s.companions.length;
+    s = { ...s, expedition: { ...s.expedition!, battle: { ...s.expedition!.battle!, combat: { ...s.expedition!.battle!.combat, opponentHp: 3 } } } };
+    const rareTurn = (x: SaveData, action: 'attack' | 'befriend') => stepRare(stepRare(stepRare(x, { type: 'chooseAction', action }), { type: 'answer', optionId: stepRare(x, { type: 'chooseAction', action }).expedition!.battle!.question.acceptedId }), { type: 'continue' });
+    s = rareTurn(rareTurn(s, 'attack'), 'befriend');
+    expect(s.companions).toHaveLength(count + 1);
+    expect(s.companions.filter((c) => c.speciesId === rareId).length).toBe(2);
+  });
+
   it('the roll holds through a retreat and retry', () => {
     let s = toRare();
     const id = s.expedition!.slots[0]!.opponentId;
@@ -796,14 +813,18 @@ describe('rare encounters', () => {
     expect(availableRare(PACK, 'us-west', s.companions.map((c) => c.speciesId))?.id).toBe('emberwolf');
   });
 
-  it('never appears once owned, and never at an event or final showdown', () => {
+  it('comes back once every rare is owned, and never at an event or final showdown', () => {
     const owned = rigged();
     const rares = PACK.species.filter((o) => o.rare && o.homes.includes('us-west'));
     const s = { ...owned, companions: [...owned.companions, ...rares.map((o) => ({ instanceId: o.id, speciesId: o.id, bondXp: 0 }))] };
+    let hits = 0;
     for (let seed = 1; seed < 60; seed++) {
-      const t = stepRare({ ...s, expedition: { ...s.expedition!, rngState: seed } }, { type: 'enterEncounter' });
-      expect(t.expedition!.slots[0]!.rare).toBeUndefined();
+      const slot = stepRare({ ...s, expedition: { ...s.expedition!, rngState: seed } }, { type: 'enterEncounter' }).expedition!.slots[0]!;
+      if (slot.rare) { hits++; expect(rares.map((o) => o.id)).toContain(slot.opponentId); }
     }
+    expect(hits).toBeGreaterThan(0);
+    const events = s.expedition!.slots.filter((x) => x.kind !== 'regular');
+    for (const x of events) expect(x.rare).toBeUndefined();
   });
 });
 
