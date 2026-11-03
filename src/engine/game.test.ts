@@ -13,9 +13,9 @@ import { enemyIntent, resolveTurn } from './combat';
 import { ECONOMY } from './economy';
 import { cardProgress } from './cards';
 import { isDue, isFamiliar, localDay, recordAnswer, type Learning } from './learning';
-import { availableRare, rareChance, trailScore } from './luck';
+import { rareChance, rarePool, trailScore } from './luck';
 import { formOf, levelOf, speciesOf, STAGES, stageOf, xpForLevel } from './progression';
-import { activeCompanion, allowedDifficulties, DEFAULT_SETTINGS, isExpeditionComplete, makeOffers, newSave, reduce, regionHasFocus, type Command, type Focus, type Reward, type SaveData } from './game';
+import { activeCompanion, allowedDifficulties, canTame, DEFAULT_SETTINGS, isExpeditionComplete, makeOffers, newSave, reduce, regionHasFocus, type Command, type Focus, type Reward, type SaveData } from './game';
 import { pickQuestion } from './questions';
 import { Rng } from './rng';
 import { streakReward } from './streak';
@@ -788,7 +788,7 @@ describe('rare encounters', () => {
     const owned = (x: SaveData) => [...x.companions, ...(x.wild ?? [])].map((c) => c.speciesId);
     const others = PACK.species.filter((o) => o.rare && o.homes.includes(regionId)).map((o) => o.id);
     const allRares = others.map((id, i) => ({ instanceId: `r${i}`, speciesId: id, bondXp: 0 }));
-    expect(availableRare(PACK, regionId, [...owned(base), ...others])?.id).toBe(rareId);
+    expect(rarePool(PACK, regionId, [...owned(base), ...others]).map((o) => o.id)).toContain(rareId);
     let s: SaveData = { ...base, companions: [...base.companions, ...allRares] };
     const count = s.companions.length;
     s = { ...s, expedition: { ...s.expedition!, battle: { ...s.expedition!.battle!, combat: { ...s.expedition!.battle!.combat, opponentHp: 3 } } } };
@@ -810,7 +810,28 @@ describe('rare encounters', () => {
   it('offers a region\'s next rare creature once the first is owned', () => {
     const owned = rigged();
     const s = { ...owned, companions: [...owned.companions, { instanceId: 'r', speciesId: 'thunderhoof', bondXp: 0 }] };
-    expect(availableRare(PACK, 'us-west', s.companions.map((c) => c.speciesId))?.id).toBe('emberwolf');
+    expect(rarePool(PACK, 'us-west', s.companions.map((c) => c.speciesId)).map((o) => o.id)).toEqual(['emberwolf']);
+  });
+
+  it('any of a region\'s rares can appear, so Oceania brings the platypus as well as the kiwi', () => {
+    const seen = new Set<string>();
+    for (let seed = 1; seed < 400; seed++) {
+      let s = find(ready(fresh(seed), 'oceania'));
+      s = { ...s, expedition: { ...s.expedition!, rngState: seed * 7919, answered: 20, correct: 20, streak: 10, difficulty: 'expert' as const } };
+      const slot = stepRare(s, { type: 'enterEncounter' }).expedition!.slots[0]!;
+      if (slot.rare) seen.add(slot.opponentId);
+    }
+    expect(seen).toEqual(new Set(['kiwisp', 'platybolt']));
+  });
+
+  it('Bold Befriend works on a creature the child already has', () => {
+    let s = find(ready(fresh()));
+    s = stepRare(s, { type: 'enterEncounter' });
+    const slot = s.expedition!.slots[0]!;
+    s = { ...s, companions: [...s.companions, { instanceId: 'dup', speciesId: slot.opponentId, bondXp: 0 }] };
+    const b = s.expedition!.battle!;
+    const ready2 = { ...b, combat: { ...b.combat, charge: 2, opponentHp: 1 } };
+    expect(canTame(s, ready2, slot)).toBe(true);
   });
 
   it('comes back once every rare is owned, and never at an event or final showdown', () => {
@@ -1101,10 +1122,10 @@ describe('Bold Befriend', () => {
     expect(attacked.expedition!.battle!.heldQuestions).toBeUndefined();
   });
 
-  it('does not work on a creature already owned, or in the final showdown', () => {
+  it('works on a creature already owned, adding a second one', () => {
     const s = inBattle();
     const owned = { ...s, companions: [...s.companions, { instanceId: 'x', speciesId: s.expedition!.slots[0]!.opponentId, bondXp: 0 }] };
-    expect(go(owned)).toBe(owned);
+    expect(go(owned)).not.toBe(owned);
   });
 });
 

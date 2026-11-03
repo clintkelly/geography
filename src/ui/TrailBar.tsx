@@ -3,7 +3,7 @@ import type { Difficulty } from '../content/types';
 import { currentSlotIndex, type Expedition, type SaveData, knownSpecies } from '../engine/game';
 import type { StopKind } from '../engine/trail';
 import { PACK } from '../content/pack';
-import { availableRare, rareChance, trailScore } from '../engine/luck';
+import { rareChance, rarePool, trailScore } from '../engine/luck';
 import { streakReward } from '../engine/streak';
 import { Fx } from './art';
 import { region } from './content';
@@ -77,13 +77,15 @@ function Streak({ streak }: { streak: number }) {
 
 /** Both ways to meet a rare creature: a lucky battle on this trail, or a full map, which brings one to camp. */
 function Rare({ e, save }: { e: Expedition; save: SaveData }) {
-  const rare = availableRare(PACK, e.regionId, [...knownSpecies(save)]);
+  const pool = rarePool(PACK, e.regionId, [...knownSpecies(save)]);
+  const rare = pool[0];
   const score = trailScore(e);
   const percent = Math.round(rareChance(score) * 100);
   const places = PACK.places.filter((p) => p.regionId === e.regionId);
   const found = places.filter((p) => save.foundPlaces.includes(p.id)).length;
   const hot = score >= 70;
   const again = !!rare && knownSpecies(save).has(rare.id);
+  const names = pool.map((o) => o.displayName).join(' or ');
   if (!rare) {
     return (
       <span className="hud-cell">
@@ -100,7 +102,7 @@ function Rare({ e, save }: { e: Expedition; save: SaveData }) {
         <span className="score-track" role="img" aria-label={`Trail Score ${score} of 100`}><span className="score-fill" style={{ width: `${score}%` }} /></span>
         <span className="score-chance" key={percent}>{percent}%</span>
       </span>
-      <small>{again ? `Meet ${rare.displayName} again!` : found === places.length ? 'Map full: a rare waits at camp' : `Map: ${found} of ${places.length} found`}</small>
+      <small>{again ? `Meet ${names} again!` : found === places.length ? 'Map full: a rare waits at camp' : `Map: ${found} of ${places.length} found`}</small>
     </span>
   );
 }

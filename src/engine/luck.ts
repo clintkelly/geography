@@ -22,8 +22,9 @@ export function trailScore(e: TrailStats): number {
 /** The chance the next battle is a rare encounter. */
 export const rareChance = (score: number) => BASE_CHANCE + (score / 100) * (MAX_CHANCE - BASE_CHANCE);
 
-/** The rare creature a lucky battle brings: one the child doesn't have yet, or else one they do, so a rare can be befriended again. */
-export function availableRare(pack: Pack, regionId: string, owned: readonly string[]): Species | undefined {
+/** The rares a lucky battle can bring: the region's rares the child doesn't have yet, or else all of them, so a rare can be befriended again. */
+export function rarePool(pack: Pack, regionId: string, owned: readonly string[]): Species[] {
   const rares = pack.species.filter((s) => s.rare && s.homes.includes(regionId));
-  return rares.find((s) => !owned.includes(s.id)) ?? rares[0];
+  const fresh = rares.filter((s) => !owned.includes(s.id));
+  return fresh.length > 0 ? fresh : rares;
 }

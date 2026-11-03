@@ -9,7 +9,7 @@ import { isCorrect, pickQuestion, presentQuestion } from './questions';
 import { earnedBadges } from './badges';
 import { cardLevelOf, type CardLevel } from './cards';
 import { matchup } from './types';
-import { availableRare, rareChance, trailScore } from './luck';
+import { rareChance, rarePool, trailScore } from './luck';
 import { streakReward } from './streak';
 import { Rng } from './rng';
 import { awardMedals, MASTERY_MISSES_ALLOWED, masteryQuestions, medalKey, medalPoints, medalView, type MedalEarned, type Medals, type MedalTrack } from './medals';
@@ -660,8 +660,10 @@ function rollRare(save: SaveData, e: Expedition, slotIndex: number, pack: Pack):
   const slot = e.slots[slotIndex];
   if (!slot || slot.kind !== 'regular' || slot.rareRolled) return e;
   const rng = new Rng(e.rngState);
-  const rare = availableRare(pack, e.regionId, [...knownSpecies(save)]);
-  const hit = !!rare && rng.next() < rareChance(trailScore(e));
+  const pool = rarePool(pack, e.regionId, [...knownSpecies(save)]);
+  const hit = pool.length > 0 && rng.next() < rareChance(trailScore(e));
+  // Any of the region's rares can show up, not always the first one listed.
+  const rare = hit ? pool[Math.floor(rng.next() * pool.length)] : undefined;
   const rolled: Slot = hit && rare ? { ...slot, rareRolled: true, rare: true, opponentId: rare.id } : { ...slot, rareRolled: true };
   return { ...e, rngState: rng.state, slots: e.slots.map((s, i) => (i === slotIndex ? rolled : s)) };
 }
@@ -727,10 +729,9 @@ const RARE_EXTRA_HP = 4;
 const TAME_COST = 2;
 export const TAME_HITS = 2;
 
-/** Bold Befriend: an unowned creature at half HP or less, for 2 charge. Once started, it can continue at no cost. */
+/** Bold Befriend: a creature at half HP or less, for 2 charge, even one the child already has. Once started, it can continue at no cost. */
 export function canTame(save: SaveData, b: Battle, slot: Slot): boolean {
   if (slot.kind !== 'regular' || slot.rare || b.befriending || b.mustSwitch || b.combat.outcome !== 'active') return false;
-  if (knownSpecies(save).has(slot.opponentId)) return false;
   if ((b.tameHits ?? 0) > 0) return true;
   return b.combat.charge >= TAME_COST && b.combat.opponentHp * 2 <= b.combat.opponentMaxHp;
 }
