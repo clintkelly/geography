@@ -6,6 +6,7 @@ import { exportBackup, parseBackup } from '../persistence/household';
 import type { Household, SaveStore } from '../persistence/store';
 import { Key, useKeys } from './keys';
 import { Parent } from './Parent';
+import { StudySettings } from './StudySettings';
 import { playSound } from './sound';
 
 const label = (d: Difficulty) => d[0]?.toUpperCase() + d.slice(1);
@@ -86,6 +87,8 @@ export function Settings({ save, household, store, dispatch, restore, onClose }:
           <input type="range" min={0} max={1} step={0.05} value={settings.musicVolume} onChange={(e) => dispatch({ type: 'updateSettings', patch: { musicVolume: Number(e.target.value) } })} />
         </label>
       </section>
+
+      <StudySettings save={save} dispatch={dispatch} />
 
       <Parent save={save} dispatch={dispatch} />
 

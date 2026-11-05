@@ -1,0 +1,401 @@
+{
+  "id": "vv-list-15",
+  "title": "Vocabulary Virtuoso List 15",
+  "order": 16,
+  "words": [
+    {
+      "word": "symmetrical",
+      "partOfSpeech": "adjective",
+      "definition": "Having matching halves on each side of a center line",
+      "sentence": "A butterfly's wings are ____, with the same spots and colors on the left and the right.",
+      "wrongDefinitions": [
+        "Having many bright colors mixed together",
+        "Shaped like a long, thin tube",
+        "Changing shape every few minutes"
+      ],
+      "synonym": {
+        "right": "balanced",
+        "wrong": [
+          "noisy",
+          "hollow",
+          "sticky"
+        ]
+      },
+      "antonym": {
+        "right": "lopsided",
+        "wrong": [
+          "shiny",
+          "quiet",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "metr",
+        "meaning": "measure",
+        "wrongMeanings": [
+          "fire",
+          "sound",
+          "earth"
+        ]
+      }
+    },
+    {
+      "word": "chagrin",
+      "partOfSpeech": "noun",
+      "definition": "A feeling of being annoyed and embarrassed, often after a mistake",
+      "sentence": "To the explorer's ____, the monkey stole his map and waved it from a tall tree.",
+      "wrongDefinitions": [
+        "A happy feeling after winning a prize",
+        "A calm feeling of being sleepy",
+        "A brave feeling before a big adventure"
+      ],
+      "synonym": {
+        "right": "embarrassment",
+        "wrong": [
+          "hunger",
+          "curiosity",
+          "sleepiness"
+        ]
+      },
+      "antonym": {
+        "right": "delight",
+        "wrong": [
+          "boredom",
+          "hunger",
+          "sleepiness"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "nullify",
+      "partOfSpeech": "verb",
+      "definition": "To cancel something so it no longer counts or works",
+      "sentence": "The referee had to ____ the goal because the penguin team's player was offside.",
+      "wrongDefinitions": [
+        "To make something twice as strong",
+        "To decorate something with bright paint",
+        "To count things out loud slowly"
+      ],
+      "synonym": {
+        "right": "cancel",
+        "wrong": [
+          "decorate",
+          "carry",
+          "whisper"
+        ]
+      },
+      "antonym": {
+        "right": "approve",
+        "wrong": [
+          "paint",
+          "jump",
+          "borrow"
+        ]
+      },
+      "root": {
+        "part": "null",
+        "meaning": "none, nothing",
+        "wrongMeanings": [
+          "many",
+          "bright",
+          "water"
+        ]
+      }
+    },
+    {
+      "word": "ornate",
+      "partOfSpeech": "adjective",
+      "definition": "Decorated with lots of fancy, detailed patterns",
+      "sentence": "The palace had ____ golden doors covered with carved dragons, flowers and twisting vines.",
+      "wrongDefinitions": [
+        "Plain and simple with no decoration",
+        "Very old and falling apart",
+        "Made entirely of soft wool"
+      ],
+      "synonym": {
+        "right": "fancy",
+        "wrong": [
+          "muddy",
+          "tiny",
+          "sleepy"
+        ]
+      },
+      "antonym": {
+        "right": "plain",
+        "wrong": [
+          "loud",
+          "wet",
+          "fast"
+        ]
+      },
+      "root": {
+        "part": "orn",
+        "meaning": "decorate",
+        "wrongMeanings": [
+          "break",
+          "sleep",
+          "swim"
+        ]
+      }
+    },
+    {
+      "word": "parody",
+      "partOfSpeech": "noun",
+      "definition": "A funny copy of something that pokes fun at the original",
+      "sentence": "Our class wrote a silly ____ of a famous pirate song, singing about lost socks instead of treasure.",
+      "wrongDefinitions": [
+        "A serious report full of true facts",
+        "A large march of people down a street",
+        "A map that shows mountains and rivers"
+      ],
+      "synonym": {
+        "right": "spoof",
+        "wrong": [
+          "lecture",
+          "recipe",
+          "storm"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "ody",
+        "meaning": "song",
+        "wrongMeanings": [
+          "shape",
+          "light",
+          "journey"
+        ]
+      }
+    },
+    {
+      "word": "timorous",
+      "partOfSpeech": "adjective",
+      "definition": "Shy and easily frightened",
+      "sentence": "The ____ little rabbit froze and hid in the grass every time a shadow passed overhead.",
+      "wrongDefinitions": [
+        "Bold and ready to face any danger",
+        "Very hungry after a long day",
+        "Able to tell what time it is"
+      ],
+      "synonym": {
+        "right": "timid",
+        "wrong": [
+          "angry",
+          "sleepy",
+          "proud"
+        ]
+      },
+      "antonym": {
+        "right": "brave",
+        "wrong": [
+          "hungry",
+          "tall",
+          "wet"
+        ]
+      },
+      "root": {
+        "part": "tim",
+        "meaning": "fear",
+        "wrongMeanings": [
+          "time",
+          "joy",
+          "speed"
+        ]
+      }
+    },
+    {
+      "word": "redolent",
+      "partOfSpeech": "adjective",
+      "definition": "Full of a strong, pleasant smell",
+      "sentence": "The bakery was ____ of warm cinnamon rolls, and the hungry bear sniffed at the window.",
+      "wrongDefinitions": [
+        "Painted a deep, bright red color",
+        "Completely silent and still",
+        "Very slow and lazy"
+      ],
+      "synonym": {
+        "right": "fragrant",
+        "wrong": [
+          "silent",
+          "frozen",
+          "crowded"
+        ]
+      },
+      "antonym": {
+        "right": "odorless",
+        "wrong": [
+          "noisy",
+          "bright",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "ol",
+        "meaning": "smell",
+        "wrongMeanings": [
+          "color",
+          "sound",
+          "taste"
+        ]
+      }
+    },
+    {
+      "word": "taciturn",
+      "partOfSpeech": "adjective",
+      "definition": "Quiet and not liking to talk much",
+      "sentence": "The ____ old sailor just nodded when we asked about his trip, saying not a single word.",
+      "wrongDefinitions": [
+        "Chatty and always telling stories",
+        "Clever at planning battles",
+        "Spinning around in circles"
+      ],
+      "synonym": {
+        "right": "quiet",
+        "wrong": [
+          "clumsy",
+          "greedy",
+          "sunny"
+        ]
+      },
+      "antonym": {
+        "right": "talkative",
+        "wrong": [
+          "hungry",
+          "short",
+          "careful"
+        ]
+      },
+      "root": {
+        "part": "tac",
+        "meaning": "be silent",
+        "wrongMeanings": [
+          "touch",
+          "run fast",
+          "build"
+        ]
+      }
+    },
+    {
+      "word": "tacit",
+      "partOfSpeech": "adjective",
+      "definition": "Understood without being said out loud",
+      "sentence": "The two cats had a ____ agreement, made without a single meow, to take turns napping in the sunny window.",
+      "wrongDefinitions": [
+        "Shouted loudly for everyone to hear",
+        "Written down and signed by everyone",
+        "Sharp and pointy like a tack"
+      ],
+      "synonym": {
+        "right": "unspoken",
+        "wrong": [
+          "sticky",
+          "sudden",
+          "angry"
+        ]
+      },
+      "antonym": {
+        "right": "spoken",
+        "wrong": [
+          "soft",
+          "early",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "tac",
+        "meaning": "be silent",
+        "wrongMeanings": [
+          "be sharp",
+          "be long",
+          "be wet"
+        ]
+      }
+    },
+    {
+      "word": "wane",
+      "partOfSpeech": "verb",
+      "definition": "To slowly get smaller, weaker, or less",
+      "sentence": "As the long hike went on, the explorers' energy began to ____ until they needed a snack break.",
+      "wrongDefinitions": [
+        "To slowly grow bigger and stronger",
+        "To wave your hand to say hello",
+        "To wish for something very much"
+      ],
+      "synonym": {
+        "right": "fade",
+        "wrong": [
+          "shout",
+          "climb",
+          "bake"
+        ]
+      },
+      "antonym": {
+        "right": "grow",
+        "wrong": [
+          "sing",
+          "sneeze",
+          "paint"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "stymie",
+      "partOfSpeech": "verb",
+      "definition": "To block someone from making progress",
+      "sentence": "The thick fog seemed to ____ the explorers, who could not find their way forward for hours.",
+      "wrongDefinitions": [
+        "To help someone finish a job quickly",
+        "To cook food slowly with steam",
+        "To cheer loudly for a team"
+      ],
+      "synonym": {
+        "right": "block",
+        "wrong": [
+          "tickle",
+          "paint",
+          "feed"
+        ]
+      },
+      "antonym": {
+        "right": "help",
+        "wrong": [
+          "sleep",
+          "sing",
+          "fold"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "subpoena",
+      "partOfSpeech": "noun",
+      "definition": "An official paper ordering a person to come to court",
+      "sentence": "The judge sent a ____ ordering the zookeeper to come to court and explain how the parrot escaped.",
+      "wrongDefinitions": [
+        "A small boat that travels underwater",
+        "A birthday card sent through the mail",
+        "A song sung at a sports game"
+      ],
+      "synonym": {
+        "right": "summons",
+        "wrong": [
+          "recipe",
+          "menu",
+          "poem"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "sub",
+        "meaning": "under",
+        "wrongMeanings": [
+          "over",
+          "after",
+          "around"
+        ]
+      }
+    }
+  ]
+}

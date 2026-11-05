@@ -2,7 +2,8 @@ import { clampView, MAPS, type MapDef, type View } from '../content/maps';
 import { PACK } from '../content/pack';
 import type { Place, Region, Species, StateCard } from '../content/types';
 import type { Companion, Reward } from '../engine/game';
-import { formOf } from '../engine/progression';
+import { companionSpecies, formOf } from '../engine/progression';
+import { shinyLook } from './shiny';
 
 export const place = (id: string) => PACK.places.find((p) => p.id === id) as Place;
 export const species = (id: string) => PACK.species.find((s) => s.id === id) as Species;
@@ -40,11 +41,17 @@ export const cardFor = (placeId: string) => PACK.cards.find((c) => c.placeId ===
 
 /** How a companion looks and what it's called right now. */
 export function companionView(c: Companion) {
-  const s = species(c.speciesId);
+  const s = companionSpecies(PACK, c);
   const form = formOf(s, c.bondXp);
-  return { species: s, stage: form.stage, artId: form.artId, formName: form.name, name: c.nickname || form.name, shiny: !!c.shiny };
+  return { species: s, stage: form.stage, artId: form.artId, formName: form.name, name: c.nickname || form.name, shiny: c.shiny ? shinyLook(c.instanceId, c.shinyColors) : undefined };
 }
 
 export function rewardLabel(r: Reward): string {
   return r.kind === 'creature' ? species(r.speciesId).displayName : `${r.xp} bond XP for your companion`;
+}
+
+/** A Lodge creature's name and art at the stage its ranger raised it to. */
+export function foeForm(s: Species, stage?: number): { name: string; artId: string } {
+  const form = stage && stage > 1 ? s.evolutions?.[stage - 2] : undefined;
+  return { name: form?.name ?? s.displayName, artId: form?.artId ?? s.artId };
 }

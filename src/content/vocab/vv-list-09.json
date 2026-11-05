@@ -1,0 +1,350 @@
+{
+  "id": "vv-list-09",
+  "title": "Vocabulary Virtuoso List 9",
+  "order": 10,
+  "words": [
+    {
+      "word": "unprecedented",
+      "partOfSpeech": "adjective",
+      "definition": "Never having happened or been done before",
+      "sentence": "The ____ snowstorm in the desert surprised the camels, since no one had ever seen snow there.",
+      "wrongDefinitions": [
+        "Happening every single day without any change",
+        "Planned very carefully a long time ahead",
+        "Very small and easy to miss"
+      ],
+      "synonym": {
+        "right": "first-ever",
+        "wrong": [
+          "common",
+          "quiet",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "usual",
+        "wrong": [
+          "new",
+          "strange",
+          "loud"
+        ]
+      },
+      "root": {
+        "part": "pre",
+        "meaning": "before",
+        "wrongMeanings": [
+          "after",
+          "against",
+          "under"
+        ]
+      }
+    },
+    {
+      "word": "slovenly",
+      "partOfSpeech": "adjective",
+      "definition": "Messy and careless about how you look or keep things",
+      "sentence": "The ____ explorer left muddy boots, crumbs and crumpled maps scattered all over the tent floor.",
+      "wrongDefinitions": [
+        "Moving very slowly and carefully",
+        "Kind and gentle to everyone you meet",
+        "Very proud of the place you live"
+      ],
+      "synonym": {
+        "right": "messy",
+        "wrong": [
+          "speedy",
+          "brave",
+          "polite"
+        ]
+      },
+      "antonym": {
+        "right": "tidy",
+        "wrong": [
+          "sloppy",
+          "hungry",
+          "loud"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "vulnerable",
+      "partOfSpeech": "adjective",
+      "definition": "Easy to hurt or harm because it is not well protected",
+      "sentence": "Without its hard shell, the hermit crab is ____ to hungry seagulls, so it hurries to find a new one.",
+      "wrongDefinitions": [
+        "Very strong and hard to damage",
+        "Able to change color to hide",
+        "Covered in sharp spikes or thorns"
+      ],
+      "synonym": {
+        "right": "unprotected",
+        "wrong": [
+          "angry",
+          "famous",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "protected",
+        "wrong": [
+          "helpless",
+          "sleepy",
+          "hungry"
+        ]
+      },
+      "root": {
+        "part": "vulner",
+        "meaning": "wound",
+        "wrongMeanings": [
+          "light",
+          "water",
+          "voice"
+        ]
+      }
+    },
+    {
+      "word": "diversion",
+      "partOfSpeech": "noun",
+      "definition": "Something that pulls attention away from something else",
+      "sentence": "While one monkey made a noisy ____, the others sneaked into the tent and grabbed the bananas.",
+      "wrongDefinitions": [
+        "A tool used for digging deep holes",
+        "A promise you make to a friend",
+        "A long list of rules to follow"
+      ],
+      "synonym": {
+        "right": "distraction",
+        "wrong": [
+          "agreement",
+          "shelter",
+          "ladder"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "vers",
+        "meaning": "turn",
+        "wrongMeanings": [
+          "see",
+          "write",
+          "carry"
+        ]
+      }
+    },
+    {
+      "word": "humane",
+      "partOfSpeech": "adjective",
+      "definition": "Kind and gentle, causing as little pain as possible",
+      "sentence": "The wildlife park uses ____ traps that catch lost foxes without hurting them, then sets them free outside.",
+      "wrongDefinitions": [
+        "Very funny and full of silly jokes",
+        "Damp and sticky like hot summer air",
+        "Very loud and hard to ignore"
+      ],
+      "synonym": {
+        "right": "kind",
+        "wrong": [
+          "proud",
+          "sleepy",
+          "rich"
+        ]
+      },
+      "antonym": {
+        "right": "cruel",
+        "wrong": [
+          "gentle",
+          "tall",
+          "busy"
+        ]
+      },
+      "root": {
+        "part": "human",
+        "meaning": "person",
+        "wrongMeanings": [
+          "water",
+          "light",
+          "speed"
+        ]
+      }
+    },
+    {
+      "word": "feign",
+      "partOfSpeech": "verb",
+      "definition": "To pretend to feel or be something",
+      "sentence": "When a fox comes near, the clever opossum will ____ death by lying perfectly still with its tongue out.",
+      "wrongDefinitions": [
+        "To rule over a kingdom as king or queen",
+        "To shout loudly for help",
+        "To dig a tunnel underground"
+      ],
+      "synonym": {
+        "right": "pretend",
+        "wrong": [
+          "sleep",
+          "build",
+          "growl"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "maudlin",
+      "partOfSpeech": "adjective",
+      "definition": "Sad and teary in a silly, overly emotional way",
+      "sentence": "After three bowls of ice cream, Uncle Leo grew ____ and sobbed while singing sad songs about his old dog.",
+      "wrongDefinitions": [
+        "Calm and sensible about every problem",
+        "Covered in thick, sticky mud",
+        "Brave and ready for any adventure"
+      ],
+      "synonym": {
+        "right": "weepy",
+        "wrong": [
+          "muddy",
+          "clever",
+          "fearless"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "quandary",
+      "partOfSpeech": "noun",
+      "definition": "A puzzling situation where you are not sure what to do",
+      "sentence": "The explorer was in a ____: cross the shaky bridge or take the long trail through bear country?",
+      "wrongDefinitions": [
+        "A deep pit where people dig out stone",
+        "A loud argument between two friends",
+        "A large flock of singing birds"
+      ],
+      "synonym": {
+        "right": "puzzle",
+        "wrong": [
+          "party",
+          "treasure",
+          "journey"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "gestation",
+      "partOfSpeech": "noun",
+      "definition": "The time a baby grows inside its mother before birth",
+      "sentence": "An elephant's ____ lasts nearly two years, so the herd waits a long time for each new calf.",
+      "wrongDefinitions": [
+        "Moving your hands to show what you mean",
+        "The time an animal sleeps through winter",
+        "A long trip animals take each season"
+      ],
+      "synonym": {
+        "right": "pregnancy",
+        "wrong": [
+          "migration",
+          "hibernation",
+          "digestion"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "gest",
+        "meaning": "carry",
+        "wrongMeanings": [
+          "eat",
+          "sleep",
+          "run"
+        ]
+      }
+    },
+    {
+      "word": "dystopia",
+      "partOfSpeech": "noun",
+      "definition": "An imaginary place where life is scary, unfair and miserable",
+      "sentence": "In the book, robots rule a gray ____ where nobody may laugh, play outside or eat dessert.",
+      "wrongDefinitions": [
+        "A perfect, happy world where everyone gets along",
+        "A sandy desert with no water at all",
+        "A map showing mountains and rivers"
+      ],
+      "synonym": null,
+      "antonym": {
+        "right": "utopia",
+        "wrong": [
+          "desert",
+          "nightmare",
+          "island"
+        ]
+      },
+      "root": {
+        "part": "dys",
+        "meaning": "bad",
+        "wrongMeanings": [
+          "good",
+          "two",
+          "far"
+        ]
+      }
+    },
+    {
+      "word": "kismet",
+      "partOfSpeech": "noun",
+      "definition": "Fate, or something that seems meant to happen",
+      "sentence": "Finding the lost puppy on the very day we wished for a pet felt like ____ to my whole family.",
+      "wrongDefinitions": [
+        "A small kiss on the cheek",
+        "A carpet woven by hand",
+        "A careful plan made in secret"
+      ],
+      "synonym": {
+        "right": "fate",
+        "wrong": [
+          "hunger",
+          "rain",
+          "anger"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "grandiloquent",
+      "partOfSpeech": "adjective",
+      "definition": "Using fancy, showy words to sound important",
+      "sentence": "The ____ parrot squawked, 'Behold my magnificent, splendiferous feathers!' instead of just saying, 'Hello there!'",
+      "wrongDefinitions": [
+        "Very large and heavy, like a boulder",
+        "Quiet and shy around new people",
+        "Having to do with grandparents and family"
+      ],
+      "synonym": {
+        "right": "showy",
+        "wrong": [
+          "shy",
+          "sleepy",
+          "muddy"
+        ]
+      },
+      "antonym": {
+        "right": "plain",
+        "wrong": [
+          "fancy",
+          "hungry",
+          "brave"
+        ]
+      },
+      "root": {
+        "part": "loqu",
+        "meaning": "speak",
+        "wrongMeanings": [
+          "walk",
+          "see",
+          "build"
+        ]
+      }
+    }
+  ]
+}

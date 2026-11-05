@@ -1,0 +1,294 @@
+{
+  "usa": [
+    {
+      "fact": "The United States declared its independence from Britain on July 4, 1776, which Americans celebrate as Independence Day.",
+      "ask": "Which country declared its independence from Britain on July 4, 1776?",
+      "source": "https://en.wikipedia.org/wiki/Independence_Day_(United_States)"
+    },
+    {
+      "fact": "In 1969 astronauts Neil Armstrong and Buzz Aldrin of the United States became the first people to walk on the Moon.",
+      "ask": "Which country's astronauts were the first people to walk on the Moon, in 1969?",
+      "source": "https://en.wikipedia.org/wiki/Apollo_11"
+    }
+  ],
+  "canada": [
+    {
+      "fact": "L'Anse aux Meadows in Newfoundland, Canada, is the only known Viking settlement in North America, from about 1,000 years ago.",
+      "ask": "Which country's L'Anse aux Meadows is the only known Viking settlement in North America?",
+      "source": "https://en.wikipedia.org/wiki/L%27Anse_aux_Meadows"
+    },
+    {
+      "fact": "Canada celebrates Canada Day on July 1, the day in 1867 when it became a country.",
+      "ask": "Which country celebrates its birthday on July 1, marking its founding in 1867?",
+      "source": "https://en.wikipedia.org/wiki/Canada_Day"
+    },
+    {
+      "fact": "Basketball was invented in 1891 by James Naismith, a teacher born in Canada.",
+      "ask": "Which country was James Naismith born in, the teacher who invented basketball in 1891?",
+      "source": "https://en.wikipedia.org/wiki/James_Naismith"
+    }
+  ],
+  "mexico": [
+    {
+      "fact": "Teotihuacan, in Mexico, was one of the largest cities in the world about 1,500 years ago and is home to the giant Pyramid of the Sun.",
+      "ask": "Which country's ancient city of Teotihuacan has the giant Pyramid of the Sun?",
+      "source": "https://en.wikipedia.org/wiki/Teotihuacan"
+    },
+    {
+      "fact": "Mexico's capital, Mexico City, was built on top of Tenochtitlan, the Aztec capital that stood on an island in a lake.",
+      "ask": "Which country's capital was built on top of the Aztec city of Tenochtitlan, once on a lake island?",
+      "source": "https://en.wikipedia.org/wiki/Tenochtitlan"
+    },
+    {
+      "fact": "At the Maya city of Chichén Itzá in Mexico, the shadow of a snake seems to slither down the El Castillo pyramid at the spring and fall equinoxes.",
+      "ask": "Which country's Chichén Itzá has a Maya pyramid where a snake-shaped shadow appears at the equinoxes?",
+      "source": "https://en.wikipedia.org/wiki/El_Castillo,_Chichen_Itza"
+    }
+  ],
+  "guatemala": [
+    {
+      "fact": "El Mirador, in Guatemala's rainforest, was a huge Maya city more than 2,000 years ago, with La Danta, one of the largest pyramids in the world.",
+      "ask": "Which country's El Mirador has La Danta, one of the largest pyramids in the world?",
+      "source": "https://en.wikipedia.org/wiki/El_Mirador"
+    }
+  ],
+  "belize": [
+    {
+      "fact": "Belize was called British Honduras until 1973 and became independent in 1981.",
+      "ask": "Which country was called British Honduras until 1973?",
+      "source": "https://en.wikipedia.org/wiki/Belize"
+    },
+    {
+      "fact": "Caracol, in Belize, was a huge Maya city. Its Caana pyramid is still one of the tallest buildings in Belize.",
+      "ask": "Which country's ancient Maya city of Caracol has a pyramid still among the tallest buildings there?",
+      "source": "https://en.wikipedia.org/wiki/Caracol"
+    }
+  ],
+  "el-salvador": [
+    {
+      "fact": "Joya de Cerén, in El Salvador, is a Maya farming village that was buried by volcanic ash about 1,400 years ago and is called the \"Pompeii of the Americas.\"",
+      "ask": "Which country's Joya de Cerén is a Maya village buried by volcanic ash, the \"Pompeii of the Americas\"?",
+      "source": "https://en.wikipedia.org/wiki/Joya_de_Cer%C3%A9n"
+    }
+  ],
+  "nicaragua": [
+    {
+      "fact": "The ruins of León Viejo in Nicaragua are one of the oldest Spanish colonial towns in the Americas, founded in 1524.",
+      "ask": "Which country's León Viejo ruins are one of the oldest Spanish towns in the Americas, from 1524?",
+      "source": "https://en.wikipedia.org/wiki/Le%C3%B3n_Viejo"
+    }
+  ],
+  "costa-rica": [
+    {
+      "fact": "Costa Rica got rid of its army in 1948.",
+      "ask": "Which country got rid of its army in 1948?",
+      "source": "https://en.wikipedia.org/wiki/Costa_Rica"
+    },
+    {
+      "fact": "In Costa Rica's Diquís Delta, people carved hundreds of nearly perfect stone spheres more than 1,000 years ago.",
+      "ask": "Which country's Diquís Delta has hundreds of nearly perfect stone balls carved long ago?",
+      "source": "https://en.wikipedia.org/wiki/Stone_spheres_of_Costa_Rica"
+    }
+  ],
+  "panama": [
+    {
+      "fact": "In 1513 Vasco Núñez de Balboa crossed the land of Panama and became the first European to see the Pacific Ocean from the Americas.",
+      "ask": "Across which country did Balboa hike in 1513 to become the first European to see the Pacific from the Americas?",
+      "source": "https://en.wikipedia.org/wiki/Vasco_N%C3%BA%C3%B1ez_de_Balboa"
+    }
+  ],
+  "bahamas": [
+    {
+      "fact": "Christopher Columbus first landed in the Americas in October 1492 on an island in the Bahamas that the Lucayan people called Guanahani.",
+      "ask": "On which country's island, called Guanahani by the Lucayan people, did Columbus first land in 1492?",
+      "source": "https://en.wikipedia.org/wiki/Guanahani"
+    }
+  ],
+  "jamaica": [
+    {
+      "fact": "Port Royal in Jamaica, once a famous pirate town, partly sank into the sea during an earthquake in 1692.",
+      "ask": "Which country's old pirate town of Port Royal partly sank into the sea in a 1692 earthquake?",
+      "source": "https://en.wikipedia.org/wiki/Port_Royal"
+    }
+  ],
+  "haiti": [
+    {
+      "fact": "Haiti became independent on January 1, 1804, after a revolution led by formerly enslaved people, making it the first Black-led republic.",
+      "ask": "Which country became independent in 1804 after a revolution led by formerly enslaved people?",
+      "source": "https://en.wikipedia.org/wiki/Haitian_Revolution"
+    },
+    {
+      "fact": "The Citadelle Laferrière, a huge mountaintop fortress in Haiti, was built in the early 1800s after independence.",
+      "ask": "Which country's Citadelle Laferrière is a huge mountaintop fortress built in the early 1800s?",
+      "source": "https://en.wikipedia.org/wiki/Citadelle_Laferri%C3%A8re"
+    }
+  ],
+  "dominican-republic": [
+    {
+      "fact": "Santo Domingo, the capital of the Dominican Republic, founded in 1496, is the oldest city still lived in that Europeans founded in the Americas.",
+      "ask": "Which country's capital, founded in 1496, is the oldest European-founded city in the Americas still lived in?",
+      "source": "https://en.wikipedia.org/wiki/Santo_Domingo"
+    }
+  ],
+  "antigua-and-barbuda": [
+    {
+      "fact": "Nelson's Dockyard in Antigua and Barbuda is a British navy dockyard from the 1700s, named after Admiral Horatio Nelson.",
+      "ask": "Which country's Nelson's Dockyard is an 18th-century British navy base named after Admiral Nelson?",
+      "source": "https://en.wikipedia.org/wiki/Nelson%27s_Dockyard"
+    }
+  ],
+  "dominica": [
+    {
+      "fact": "Christopher Columbus named Dominica in 1493 after the day he saw it, a Sunday, called domingo in Spanish.",
+      "ask": "Which island country did Columbus name in 1493 after the day of the week he spotted it, a Sunday?",
+      "source": "https://en.wikipedia.org/wiki/Dominica"
+    }
+  ],
+  "saint-lucia": [
+    {
+      "fact": "The small island of Saint Lucia is the birthplace of two Nobel Prize winners: economist Arthur Lewis and poet Derek Walcott.",
+      "ask": "Which small island country is the birthplace of Nobel Prize winners Arthur Lewis and Derek Walcott?",
+      "source": "https://en.wikipedia.org/wiki/Saint_Lucia"
+    }
+  ],
+  "barbados": [
+    {
+      "fact": "Barbados became a republic in 2021, replacing the British queen as its head of state.",
+      "ask": "Which island country became a republic in 2021, replacing the British queen as head of state?",
+      "source": "https://en.wikipedia.org/wiki/Barbados"
+    },
+    {
+      "fact": "In 1751 a young George Washington visited Barbados, the only trip outside mainland North America he ever made.",
+      "ask": "Which island country did a young George Washington visit in 1751, his only trip abroad?",
+      "source": "https://en.wikipedia.org/wiki/George_Washington_House_(Barbados)"
+    }
+  ],
+  "brazil": [
+    {
+      "fact": "Brazil, once a colony of Portugal, declared its independence on September 7, 1822.",
+      "ask": "Which South American country, once ruled by Portugal, declared independence on September 7, 1822?",
+      "source": "https://en.wikipedia.org/wiki/Independence_of_Brazil"
+    },
+    {
+      "fact": "The giant Christ the Redeemer statue looking over Rio de Janeiro, Brazil, was finished in 1931.",
+      "ask": "Which country's giant Christ the Redeemer statue, finished in 1931, looks over Rio de Janeiro?",
+      "source": "https://en.wikipedia.org/wiki/Christ_the_Redeemer_(statue)"
+    },
+    {
+      "fact": "Brazil built a brand-new capital city, Brasília, in the middle of the country and moved its government there in 1960.",
+      "ask": "Which country built a brand-new capital in the middle of the land and moved there in 1960?",
+      "source": "https://en.wikipedia.org/wiki/Bras%C3%ADlia"
+    }
+  ],
+  "argentina": [
+    {
+      "fact": "The Cave of the Hands in Argentina has hundreds of hand outlines painted on the rock, the oldest more than 9,000 years ago.",
+      "ask": "Which country's Cave of the Hands has hundreds of hand outlines, the oldest painted over 9,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Cueva_de_las_Manos"
+    },
+    {
+      "fact": "Argentina declared its independence from Spain on July 9, 1816.",
+      "ask": "Which country declared independence from Spain on July 9, 1816?",
+      "source": "https://en.wikipedia.org/wiki/Argentine_Declaration_of_Independence"
+    }
+  ],
+  "chile": [
+    {
+      "fact": "The Chinchorro people of northern Chile began making mummies about 7,000 years ago, some of the oldest known mummies in the world.",
+      "ask": "Which country's ancient Chinchorro people made some of the world's oldest mummies, about 7,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Chinchorro_mummies"
+    }
+  ],
+  "peru": [
+    {
+      "fact": "Caral, in Peru, is about 5,000 years old and is one of the oldest known cities in the Americas.",
+      "ask": "Which country's Caral, about 5,000 years old, is one of the oldest cities in the Americas?",
+      "source": "https://en.wikipedia.org/wiki/Caral"
+    },
+    {
+      "fact": "Cusco, high in the Andes of Peru, was the capital of the Inca Empire.",
+      "ask": "Which country's mountain city of Cusco was the capital of the Inca Empire?",
+      "source": "https://en.wikipedia.org/wiki/Cusco"
+    }
+  ],
+  "bolivia": [
+    {
+      "fact": "Tiwanaku, near Lake Titicaca in Bolivia, was the center of a great empire more than 1,000 years ago and has the carved Gateway of the Sun.",
+      "ask": "Which country's ancient city of Tiwanaku has the carved Gateway of the Sun?",
+      "source": "https://en.wikipedia.org/wiki/Tiwanaku"
+    },
+    {
+      "fact": "Cerro Rico, a mountain above the city of Potosí in Bolivia, gave the Spanish Empire huge amounts of silver starting in the 1540s.",
+      "ask": "Which country's Cerro Rico mountain at Potosí gave the Spanish Empire huge amounts of silver?",
+      "source": "https://en.wikipedia.org/wiki/Cerro_Rico"
+    }
+  ],
+  "colombia": [
+    {
+      "fact": "Ciudad Perdida, the \"Lost City\" in Colombia's mountains, was built around the year 800, about 650 years before Machu Picchu.",
+      "ask": "Which country's Ciudad Perdida, the \"Lost City,\" was built about 650 years before Machu Picchu?",
+      "source": "https://en.wikipedia.org/wiki/Ciudad_Perdida"
+    },
+    {
+      "fact": "Lake Guatavita in Colombia inspired the legend of El Dorado, about a Muisca chief covered in gold dust who offered gold to the lake.",
+      "ask": "Which country's Lake Guatavita inspired the legend of El Dorado, the man of gold?",
+      "source": "https://en.wikipedia.org/wiki/Lake_Guatavita"
+    }
+  ],
+  "ecuador": [
+    {
+      "fact": "In 1978 Quito, the capital of Ecuador, was one of the very first places named a UNESCO World Heritage Site.",
+      "ask": "Which country's capital was one of the first places named a UNESCO World Heritage Site, in 1978?",
+      "source": "https://en.wikipedia.org/wiki/Quito"
+    }
+  ],
+  "venezuela": [
+    {
+      "fact": "Simón Bolívar, called \"the Liberator\" for leading much of South America to independence from Spain, was born in Caracas, Venezuela, in 1783.",
+      "ask": "In which country was Simón Bolívar born, \"the Liberator\" of much of South America?",
+      "source": "https://en.wikipedia.org/wiki/Sim%C3%B3n_Bol%C3%ADvar"
+    }
+  ],
+  "suriname": [
+    {
+      "fact": "In a 1667 peace treaty, the Dutch kept Suriname while the English kept New Netherland, which became New York.",
+      "ask": "Which country did the Dutch keep in a 1667 treaty that let England keep New Netherland, now New York?",
+      "source": "https://en.wikipedia.org/wiki/Treaty_of_Breda_(1667)"
+    }
+  ],
+  "paraguay": [
+    {
+      "fact": "In Paraguay, the mission towns of La Santísima Trinidad de Paraná and Jesús de Tavarangue were built by Jesuits and Guaraní people in the 1700s.",
+      "ask": "Which country's mission town of La Santísima Trinidad was built by Jesuits and Guaraní people?",
+      "source": "https://en.wikipedia.org/wiki/Jesuit_Missions_of_La_Sant%C3%ADsima_Trinidad_de_Paran%C3%A1_and_Jes%C3%BAs_de_Tavarangue"
+    }
+  ],
+  "honduras": [
+    {
+      "fact": "Christopher Columbus reached the coast of Honduras in 1502. The name Honduras means \"depths\" in Spanish, possibly after the deep waters off its coast.",
+      "ask": "Which country's name means \"depths\" in Spanish, possibly after the deep coastal waters Columbus found in 1502?",
+      "source": "https://en.wikipedia.org/wiki/Honduras"
+    }
+  ],
+  "trinidad-and-tobago": [
+    {
+      "fact": "Christopher Columbus named the island of Trinidad, now part of Trinidad and Tobago, in 1498, after the Holy Trinity, when he saw three peaks on the land.",
+      "ask": "Which country's main island did Columbus name in 1498, after spotting three peaks on its coast?",
+      "source": "https://en.wikipedia.org/wiki/Trinidad"
+    }
+  ],
+  "uruguay": [
+    {
+      "fact": "Uruguay's football team won the Olympic gold medal in both 1924 and 1928.",
+      "ask": "Which country's football team won the Olympic gold medal in both 1924 and 1928?",
+      "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team"
+    }
+  ],
+  "saint-kitts-and-nevis": [
+    {
+      "fact": "Brimstone Hill Fortress in Saint Kitts and Nevis, a well-kept British fortress on a steep hill, is a UNESCO World Heritage Site.",
+      "ask": "Which country's Brimstone Hill Fortress, high on a steep hill, is a World Heritage Site?",
+      "source": "https://en.wikipedia.org/wiki/Brimstone_Hill_Fortress_National_Park"
+    }
+  ]
+}

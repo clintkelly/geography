@@ -1,0 +1,395 @@
+{
+  "id": "vv-list-14",
+  "title": "Vocabulary Virtuoso List 14",
+  "order": 15,
+  "words": [
+    {
+      "word": "cajole",
+      "partOfSpeech": "verb",
+      "definition": "To gently talk someone into something using sweet words or praise",
+      "sentence": "The zookeeper tried to ____ the stubborn penguin into the pool by offering it a shiny fish.",
+      "wrongDefinitions": [
+        "To yell at someone until they give up",
+        "To build a cage for a wild animal",
+        "To draw a map of a faraway land"
+      ],
+      "synonym": {
+        "right": "coax",
+        "wrong": [
+          "shout",
+          "hide",
+          "forget"
+        ]
+      },
+      "antonym": {
+        "right": "force",
+        "wrong": [
+          "sleep",
+          "paint",
+          "swim"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "fraudulent",
+      "partOfSpeech": "adjective",
+      "definition": "Dishonest and meant to trick people, often to get money",
+      "sentence": "The explorer's map turned out to be ____, because the island of gold on it did not exist at all.",
+      "wrongDefinitions": [
+        "Very old and falling apart",
+        "Full of bright, cheerful colors",
+        "Shy and afraid of strangers"
+      ],
+      "synonym": {
+        "right": "fake",
+        "wrong": [
+          "sleepy",
+          "huge",
+          "gentle"
+        ]
+      },
+      "antonym": {
+        "right": "honest",
+        "wrong": [
+          "noisy",
+          "tiny",
+          "hungry"
+        ]
+      },
+      "root": {
+        "part": "fraud",
+        "meaning": "trickery",
+        "wrongMeanings": [
+          "water",
+          "light",
+          "sound"
+        ]
+      }
+    },
+    {
+      "word": "inaugurate",
+      "partOfSpeech": "verb",
+      "definition": "To begin something officially with a special ceremony",
+      "sentence": "The mayor cut a giant red ribbon to ____ the town's brand-new aquarium full of sharks and sea turtles.",
+      "wrongDefinitions": [
+        "To close something down forever",
+        "To paint a building a new color",
+        "To travel slowly across a desert"
+      ],
+      "synonym": {
+        "right": "start",
+        "wrong": [
+          "break",
+          "hide",
+          "forget"
+        ]
+      },
+      "antonym": {
+        "right": "close",
+        "wrong": [
+          "eat",
+          "climb",
+          "sing"
+        ]
+      },
+      "root": {
+        "part": "augur",
+        "meaning": "read good omens",
+        "wrongMeanings": [
+          "build roads",
+          "carry water",
+          "plant seeds"
+        ]
+      }
+    },
+    {
+      "word": "coherent",
+      "partOfSpeech": "adjective",
+      "definition": "Clear and sensible, with all the parts fitting together well",
+      "sentence": "After a long nap, the sleepy explorer finally gave a ____ explanation of where he had hidden the treasure map.",
+      "wrongDefinitions": [
+        "Very loud and hard to ignore",
+        "Shaped like a perfect circle",
+        "Brave in the face of danger"
+      ],
+      "synonym": {
+        "right": "clear",
+        "wrong": [
+          "loud",
+          "brave",
+          "round"
+        ]
+      },
+      "antonym": {
+        "right": "confusing",
+        "wrong": [
+          "hungry",
+          "golden",
+          "quick"
+        ]
+      },
+      "root": {
+        "part": "here",
+        "meaning": "to stick",
+        "wrongMeanings": [
+          "to see",
+          "to carry",
+          "to run"
+        ]
+      }
+    },
+    {
+      "word": "catharsis",
+      "partOfSpeech": "noun",
+      "definition": "A release of strong feelings that leaves you feeling better",
+      "sentence": "Screaming happily at the top of the roller coaster gave Leo a wonderful feeling of ____ after his stressful week of tests.",
+      "wrongDefinitions": [
+        "A type of tall church window",
+        "A deep cave filled with bats",
+        "A long and boring speech"
+      ],
+      "synonym": {
+        "right": "release",
+        "wrong": [
+          "puzzle",
+          "mountain",
+          "storm"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "cathar",
+        "meaning": "clean or purify",
+        "wrongMeanings": [
+          "dark",
+          "fast",
+          "heavy"
+        ]
+      }
+    },
+    {
+      "word": "envy",
+      "partOfSpeech": "noun",
+      "definition": "A jealous feeling of wanting what someone else has",
+      "sentence": "Sam felt a pang of ____ when his cousin showed off photos from her trip to see the pyramids in Egypt.",
+      "wrongDefinitions": [
+        "A happy feeling of pride in a friend",
+        "A fear of very tall places",
+        "Tiredness after a long hike"
+      ],
+      "synonym": {
+        "right": "jealousy",
+        "wrong": [
+          "joy",
+          "fear",
+          "hunger"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "discord",
+      "partOfSpeech": "noun",
+      "definition": "Disagreement or fighting between people or groups",
+      "sentence": "There was loud ____ among the hungry seagulls when one of them grabbed the last french fry on the beach.",
+      "wrongDefinitions": [
+        "A round, flat object used in a game",
+        "A strong rope used for climbing",
+        "A song that everyone sings together"
+      ],
+      "synonym": {
+        "right": "conflict",
+        "wrong": [
+          "sunshine",
+          "rope",
+          "pillow"
+        ]
+      },
+      "antonym": {
+        "right": "harmony",
+        "wrong": [
+          "hunger",
+          "speed",
+          "thunder"
+        ]
+      },
+      "root": {
+        "part": "cord",
+        "meaning": "heart",
+        "wrongMeanings": [
+          "foot",
+          "eye",
+          "voice"
+        ]
+      }
+    },
+    {
+      "word": "mercurial",
+      "partOfSpeech": "adjective",
+      "definition": "Changing moods or minds quickly and without warning",
+      "sentence": "Our ____ cat purrs happily on my lap one minute and swats at my toes the next.",
+      "wrongDefinitions": [
+        "Very slow and careful",
+        "Kind to every animal",
+        "Made of soft wool"
+      ],
+      "synonym": {
+        "right": "moody",
+        "wrong": [
+          "tall",
+          "sleepy",
+          "wise"
+        ]
+      },
+      "antonym": {
+        "right": "steady",
+        "wrong": [
+          "hungry",
+          "bright",
+          "shy"
+        ]
+      },
+      "root": {
+        "part": "mercur",
+        "meaning": "swift messenger god",
+        "wrongMeanings": [
+          "god of the sea",
+          "goddess of love",
+          "god of war"
+        ]
+      }
+    },
+    {
+      "word": "chronological",
+      "partOfSpeech": "adjective",
+      "definition": "Arranged in the order that events happened in time",
+      "sentence": "Ava put her photos of famous explorers in ____ order, from the oldest voyage to the newest one.",
+      "wrongDefinitions": [
+        "Sorted by size from biggest to smallest",
+        "Sorted into groups by color",
+        "Arranged from A to Z by name"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "chron",
+        "meaning": "time",
+        "wrongMeanings": [
+          "color",
+          "size",
+          "earth"
+        ]
+      }
+    },
+    {
+      "word": "narcissism",
+      "partOfSpeech": "noun",
+      "definition": "Too much love and admiration for yourself",
+      "sentence": "The peacock's ____ showed as it strutted past the pond, admiring its own shiny feathers in the water.",
+      "wrongDefinitions": [
+        "A deep fear of flowers",
+        "Kindness shown to strangers",
+        "The study of sleep"
+      ],
+      "synonym": {
+        "right": "vanity",
+        "wrong": [
+          "hunger",
+          "courage",
+          "sadness"
+        ]
+      },
+      "antonym": {
+        "right": "humility",
+        "wrong": [
+          "laughter",
+          "speed",
+          "darkness"
+        ]
+      },
+      "root": {
+        "part": "Narciss",
+        "meaning": "self-admiring Greek youth",
+        "wrongMeanings": [
+          "brave Greek sailor",
+          "wise Greek teacher",
+          "strong Greek wrestler"
+        ]
+      }
+    },
+    {
+      "word": "nemesis",
+      "partOfSpeech": "noun",
+      "definition": "An enemy or rival who is very hard to beat",
+      "sentence": "The clever raccoon was the farmer's ____, sneaking into the corn patch every single night no matter what.",
+      "wrongDefinitions": [
+        "A best friend who always helps you",
+        "A small boat for crossing rivers",
+        "A map of the night sky"
+      ],
+      "synonym": {
+        "right": "enemy",
+        "wrong": [
+          "pillow",
+          "sailor",
+          "teacher"
+        ]
+      },
+      "antonym": {
+        "right": "friend",
+        "wrong": [
+          "river",
+          "cook",
+          "ladder"
+        ]
+      },
+      "root": {
+        "part": "Nemesis",
+        "meaning": "goddess of payback",
+        "wrongMeanings": [
+          "goddess of harvest",
+          "god of music",
+          "goddess of dawn"
+        ]
+      }
+    },
+    {
+      "word": "tantalize",
+      "partOfSpeech": "verb",
+      "definition": "To tease someone with something they want but cannot have",
+      "sentence": "The smell of fresh pizza drifting from the kitchen began to ____ the hungry campers waiting outside.",
+      "wrongDefinitions": [
+        "To calm someone with a soft song",
+        "To scare an animal away",
+        "To clean a room from top to bottom"
+      ],
+      "synonym": {
+        "right": "tease",
+        "wrong": [
+          "scrub",
+          "measure",
+          "bury"
+        ]
+      },
+      "antonym": {
+        "right": "satisfy",
+        "wrong": [
+          "climb",
+          "paint",
+          "borrow"
+        ]
+      },
+      "root": {
+        "part": "Tantal",
+        "meaning": "tempted Greek king",
+        "wrongMeanings": [
+          "king who loved gold",
+          "king of the sea",
+          "king who built mazes"
+        ]
+      }
+    }
+  ]
+}

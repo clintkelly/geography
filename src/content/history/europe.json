@@ -1,0 +1,390 @@
+{
+  "greece": [
+    {
+      "fact": "The ancient Olympic Games began at Olympia in Greece, traditionally dated to 776 BC, more than 2,700 years ago.",
+      "ask": "In which country did the ancient Olympic Games begin at Olympia, more than 2,700 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Ancient_Olympic_Games"
+    },
+    {
+      "fact": "The Parthenon, a marble temple on the Acropolis of Athens in Greece, was built nearly 2,500 years ago.",
+      "ask": "Which country's Acropolis is crowned by the Parthenon, a marble temple built nearly 2,500 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Parthenon"
+    },
+    {
+      "fact": "Ancient Athens, in Greece, is famous as the birthplace of democracy, where citizens voted on laws about 2,500 years ago.",
+      "ask": "Which country's ancient city-states are famous for inventing democracy, voting on laws 2,500 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Athenian_democracy"
+    }
+  ],
+  "italy": [
+    {
+      "fact": "The Colosseum in Rome, Italy, opened nearly 2,000 years ago and could hold about 50,000 people watching shows.",
+      "ask": "Which country is home to the Colosseum, an arena that opened nearly 2,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Colosseum"
+    },
+    {
+      "fact": "The Roman town of Pompeii, in Italy, was buried in ash when Mount Vesuvius erupted in the year 79, keeping it preserved for archaeologists.",
+      "ask": "Which country's Roman town of Pompeii was buried by volcanic ash in the year 79?",
+      "source": "https://en.wikipedia.org/wiki/Pompeii"
+    },
+    {
+      "fact": "Marco Polo, a merchant from Venice in Italy, traveled to China in the 1200s and wrote a famous book about his journey.",
+      "ask": "Which country was Marco Polo from, the merchant who traveled to China in the 1200s?",
+      "source": "https://en.wikipedia.org/wiki/Marco_Polo"
+    }
+  ],
+  "vatican": [
+    {
+      "fact": "Michelangelo painted the ceiling of the Sistine Chapel in Vatican City between 1508 and 1512.",
+      "ask": "In which tiny country did Michelangelo paint the Sistine Chapel ceiling, from 1508 to 1512?",
+      "source": "https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling"
+    }
+  ],
+  "malta": [
+    {
+      "fact": "The oldest Megalithic Temples of Malta were built around 3600 BC, more than 5,000 years ago, and were long thought to be the oldest free-standing buildings on Earth.",
+      "ask": "Which island country's Megalithic Temples, over 5,000 years old, were long thought the oldest free-standing buildings?",
+      "source": "https://en.wikipedia.org/wiki/Megalithic_Temples_of_Malta"
+    }
+  ],
+  "spain": [
+    {
+      "fact": "King Ferdinand and Queen Isabella of Spain paid for Christopher Columbus's voyage across the Atlantic in 1492.",
+      "ask": "Which country's king and queen paid for Christopher Columbus's 1492 voyage across the Atlantic?",
+      "source": "https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+    },
+    {
+      "fact": "The Alhambra, a palace and fortress in Granada, Spain, was built mostly by Nasrid rulers in the 1200s and 1300s.",
+      "ask": "Which country's Alhambra palace in Granada was built by Nasrid rulers in the 1200s and 1300s?",
+      "source": "https://en.wikipedia.org/wiki/Alhambra"
+    }
+  ],
+  "portugal": [
+    {
+      "fact": "Prince Henry the Navigator of Portugal backed many sea voyages along the coast of Africa in the 1400s, starting the Age of Discovery.",
+      "ask": "Which country's Prince Henry the Navigator sent sailors along Africa's coast in the 1400s?",
+      "source": "https://en.wikipedia.org/wiki/Prince_Henry_the_Navigator"
+    }
+  ],
+  "france": [
+    {
+      "fact": "Joan of Arc, a teenage farm girl from France, helped lead the French army to an important victory at Orléans in 1429.",
+      "ask": "Which country did teenage hero Joan of Arc help lead to victory at Orléans in 1429?",
+      "source": "https://en.wikipedia.org/wiki/Joan_of_Arc"
+    },
+    {
+      "fact": "The walls of Lascaux Cave in France are covered with paintings of horses, deer and bulls made about 17,000 years ago.",
+      "ask": "Which country's Lascaux Cave has animal paintings made about 17,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Lascaux"
+    }
+  ],
+  "uk": [
+    {
+      "fact": "Stonehenge, a great circle of standing stones in England in the United Kingdom, was built in stages starting about 5,000 years ago.",
+      "ask": "Which country is home to Stonehenge, a giant ring of standing stones about 5,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/Stonehenge"
+    },
+    {
+      "fact": "In 1215 King John of England, now part of the United Kingdom, agreed to the Magna Carta, a famous charter saying even the king had to follow the law.",
+      "ask": "In which country did King John agree to the Magna Carta in 1215?",
+      "source": "https://en.wikipedia.org/wiki/Magna_Carta"
+    },
+    {
+      "fact": "Hadrian's Wall was built across what is now northern England, in the United Kingdom, by Roman soldiers starting in the year 122, on the orders of Emperor Hadrian.",
+      "ask": "Which country has a wall built across it by Roman soldiers starting in the year 122?",
+      "source": "https://en.wikipedia.org/wiki/Hadrian%27s_Wall"
+    }
+  ],
+  "ireland": [
+    {
+      "fact": "Newgrange in Ireland is a huge stone tomb about 5,200 years old, older than Stonehenge and the pyramids of Giza. Sunlight fills its inner room on the shortest days of winter.",
+      "ask": "Which country's Newgrange tomb, older than the pyramids, fills with sunlight on winter's shortest days?",
+      "source": "https://en.wikipedia.org/wiki/Newgrange"
+    },
+    {
+      "fact": "The Book of Kells, a beautifully decorated book made by monks around the year 800, is kept at Trinity College in Dublin, Ireland.",
+      "ask": "Which country keeps the Book of Kells, a decorated book made by monks around the year 800?",
+      "source": "https://en.wikipedia.org/wiki/Book_of_Kells"
+    }
+  ],
+  "iceland": [
+    {
+      "fact": "Iceland's parliament, the Althing, first met in the open air in the year 930, making it one of the oldest parliaments in the world.",
+      "ask": "Which country's parliament, the Althing, first met outdoors in the year 930?",
+      "source": "https://en.wikipedia.org/wiki/Althing"
+    },
+    {
+      "fact": "Viking explorer Leif Erikson, who reached North America about 1,000 years ago, was born in Iceland.",
+      "ask": "Which country was Viking explorer Leif Erikson born in, before he sailed to North America?",
+      "source": "https://en.wikipedia.org/wiki/Leif_Erikson"
+    }
+  ],
+  "norway": [
+    {
+      "fact": "The Oseberg ship, a Viking ship buried in a grave mound in Norway around the year 834, is one of the best-kept Viking ships ever found.",
+      "ask": "Which country's Oseberg ship is a well-kept Viking ship buried nearly 1,200 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Oseberg_ship"
+    },
+    {
+      "fact": "Roald Amundsen, an explorer from Norway, led the first team to reach the South Pole, in December 1911.",
+      "ask": "Which country was Roald Amundsen from, the explorer who first reached the South Pole in 1911?",
+      "source": "https://en.wikipedia.org/wiki/Roald_Amundsen"
+    }
+  ],
+  "denmark": [
+    {
+      "fact": "Bluetooth wireless technology is named after Harald Bluetooth, a Viking king of Denmark more than 1,000 years ago.",
+      "ask": "Which country's Viking king, Harald Bluetooth, gave his name to wireless Bluetooth technology?",
+      "source": "https://en.wikipedia.org/wiki/Harald_Bluetooth"
+    },
+    {
+      "fact": "The Jelling stones in Denmark, carved runestones set up by King Gorm and his son Harald Bluetooth over 1,000 years ago, became a World Heritage Site in 1994.",
+      "ask": "Which country's Jelling stones, runestones carved for Viking King Gorm and his son, became a World Heritage Site in 1994?",
+      "source": "https://en.wikipedia.org/wiki/Jelling_stones"
+    }
+  ],
+  "sweden": [
+    {
+      "fact": "Alfred Nobel, an inventor from Sweden, left his fortune to create the Nobel Prizes, first given out in 1901.",
+      "ask": "Which country was Alfred Nobel from, the inventor who started the Nobel Prizes?",
+      "source": "https://en.wikipedia.org/wiki/Alfred_Nobel"
+    },
+    {
+      "fact": "The Swedish warship Vasa sank on its very first voyage in 1628. It was raised in 1961 and is now in a museum in Stockholm, Sweden.",
+      "ask": "Which country's warship Vasa sank on its first voyage in 1628 and now sits in a museum?",
+      "source": "https://en.wikipedia.org/wiki/Vasa_(ship)"
+    },
+    {
+      "fact": "Sweden has more Viking-age runestones, stones carved with runic letters, than any other country.",
+      "ask": "Which country has the most Viking-age runestones, stones carved with runic letters?",
+      "source": "https://en.wikipedia.org/wiki/Runestone"
+    }
+  ],
+  "finland": [
+    {
+      "fact": "In 1906 Finland became the first country in Europe to give women the right to vote, and the first in the world to let women run for parliament.",
+      "ask": "Which country, in 1906, became the first in Europe to give women the vote?",
+      "source": "https://en.wikipedia.org/wiki/Women%27s_suffrage_in_Finland"
+    }
+  ],
+  "estonia": [
+    {
+      "fact": "Estonian programmers helped build Skype, the internet calling program, which was launched in 2003.",
+      "ask": "Which country's programmers helped build Skype, the internet calling program, in 2003?",
+      "source": "https://en.wikipedia.org/wiki/Skype"
+    }
+  ],
+  "latvia": [
+    {
+      "fact": "Jacob Davis, the tailor who came up with riveted blue jeans with Levi Strauss, was born in Riga, Latvia.",
+      "ask": "Which country was Jacob Davis born in, the tailor who helped invent riveted blue jeans?",
+      "source": "https://en.wikipedia.org/wiki/Jacob_W._Davis"
+    }
+  ],
+  "poland": [
+    {
+      "fact": "The Wieliczka Salt Mine in Poland was mined for about 700 years and has chapels and statues carved out of salt.",
+      "ask": "Which country's Wieliczka Salt Mine has chapels and statues carved out of rock salt?",
+      "source": "https://en.wikipedia.org/wiki/Wieliczka_Salt_Mine"
+    },
+    {
+      "fact": "Poland's Constitution of 3 May 1791 was the first modern written national constitution in Europe.",
+      "ask": "Which country adopted Europe's first modern written national constitution, on May 3, 1791?",
+      "source": "https://en.wikipedia.org/wiki/Constitution_of_3_May_1791"
+    }
+  ],
+  "germany": [
+    {
+      "fact": "Around 1440 Johannes Gutenberg built a printing press with movable metal type in Mainz, Germany, making books much easier to produce.",
+      "ask": "In which country did Johannes Gutenberg build his printing press with movable type around 1440?",
+      "source": "https://en.wikipedia.org/wiki/Johannes_Gutenberg"
+    },
+    {
+      "fact": "Neuschwanstein Castle in Germany, begun in 1869 for King Ludwig II, inspired Disney's Sleeping Beauty Castle.",
+      "ask": "Which country's Neuschwanstein Castle, begun in 1869, inspired Disney's Sleeping Beauty Castle?",
+      "source": "https://en.wikipedia.org/wiki/Neuschwanstein_Castle"
+    }
+  ],
+  "netherlands": [
+    {
+      "fact": "Dutch settlers from the Netherlands founded New Amsterdam in the 1620s, the town that later became New York City.",
+      "ask": "Which country's settlers founded the colony town that later grew into New York City?",
+      "source": "https://en.wikipedia.org/wiki/New_Amsterdam"
+    },
+    {
+      "fact": "The 19 windmills of Kinderdijk in the Netherlands were built around 1740 to pump water off low farmland.",
+      "ask": "Which country's Kinderdijk has 19 windmills built around 1740 to pump water off the land?",
+      "source": "https://en.wikipedia.org/wiki/Kinderdijk"
+    }
+  ],
+  "belgium": [
+    {
+      "fact": "The Atomium in Brussels, Belgium, shaped like a giant iron crystal, was built for the 1958 World's Fair.",
+      "ask": "Which country's Atomium, shaped like a giant iron crystal, was built for the 1958 World's Fair?",
+      "source": "https://en.wikipedia.org/wiki/Atomium"
+    },
+    {
+      "fact": "Adolphe Sax, an instrument maker from Belgium, invented the saxophone in the 1840s.",
+      "ask": "Which country was Adolphe Sax from, who invented the saxophone in the 1840s?",
+      "source": "https://en.wikipedia.org/wiki/Adolphe_Sax"
+    }
+  ],
+  "luxembourg": [
+    {
+      "fact": "Luxembourg's history began in 963, when Count Siegfried got a small castle on a rocky cliff that grew into today's capital.",
+      "ask": "Which tiny country traces its start to 963, when Count Siegfried got a small cliff-top castle?",
+      "source": "https://en.wikipedia.org/wiki/Luxembourg"
+    }
+  ],
+  "switzerland": [
+    {
+      "fact": "The Red Cross was founded in Geneva, Switzerland, in 1863, inspired by Henry Dunant's work helping wounded soldiers.",
+      "ask": "In which country was the Red Cross founded, in 1863?",
+      "source": "https://en.wikipedia.org/wiki/International_Committee_of_the_Red_Cross"
+    },
+    {
+      "fact": "Switzerland celebrates its national day on August 1, remembering a pact made by three regions in 1291.",
+      "ask": "Which country celebrates its birthday on August 1, remembering a pact made in 1291?",
+      "source": "https://en.wikipedia.org/wiki/Swiss_National_Day"
+    }
+  ],
+  "austria": [
+    {
+      "fact": "Schönbrunn Zoo in Vienna, Austria, opened in 1752 and is the oldest zoo still running in the world.",
+      "ask": "Which country's Schönbrunn Zoo, opened in 1752, is the oldest zoo still running in the world?",
+      "source": "https://en.wikipedia.org/wiki/Tiergarten_Sch%C3%B6nbrunn"
+    }
+  ],
+  "liechtenstein": [
+    {
+      "fact": "Liechtenstein is named after the princely Liechtenstein family, whose lands there became a principality in 1719.",
+      "ask": "Which tiny country is named after the princely family whose land became a principality in 1719?",
+      "source": "https://en.wikipedia.org/wiki/Liechtenstein"
+    }
+  ],
+  "monaco": [
+    {
+      "fact": "Monaco has been ruled by the Grimaldi family since 1297, making it one of the longest-ruling royal families in Europe.",
+      "ask": "Which tiny country has been ruled by the Grimaldi family since 1297?",
+      "source": "https://en.wikipedia.org/wiki/House_of_Grimaldi"
+    }
+  ],
+  "andorra": [
+    {
+      "fact": "Andorra has two co-princes who share the role of head of state: the Bishop of Urgell in Spain and the President of France. This arrangement goes back to 1278.",
+      "ask": "Which tiny country has two co-princes, a Spanish bishop and the president of France?",
+      "source": "https://en.wikipedia.org/wiki/Co-princes_of_Andorra"
+    }
+  ],
+  "czechia": [
+    {
+      "fact": "The word \"robot\" first appeared in a 1920 play called R.U.R. by Czech writer Karel Čapek, from Czechia.",
+      "ask": "Which country's writer Karel Čapek gave the world the word \"robot\" in a 1920 play?",
+      "source": "https://en.wikipedia.org/wiki/R.U.R."
+    },
+    {
+      "fact": "The astronomical clock in Prague, Czechia, was first installed in 1410 and is the oldest such clock in the world still working.",
+      "ask": "Which country's capital has an astronomical clock from 1410, the oldest one still working?",
+      "source": "https://en.wikipedia.org/wiki/Prague_astronomical_clock"
+    }
+  ],
+  "slovakia": [
+    {
+      "fact": "The huge hilltop ruins of Spiš Castle in Slovakia date back to the early 1100s and became a UNESCO World Heritage Site in 1993.",
+      "ask": "Which country's huge hilltop Spiš Castle ruins, begun in the 1100s, became a World Heritage Site in 1993?",
+      "source": "https://en.wikipedia.org/wiki/Spi%C5%A1_Castle"
+    }
+  ],
+  "hungary": [
+    {
+      "fact": "László Bíró, an inventor from Hungary, created the modern ballpoint pen in the 1930s.",
+      "ask": "Which country was László Bíró from, the inventor of the modern ballpoint pen?",
+      "source": "https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_B%C3%ADr%C3%B3"
+    }
+  ],
+  "romania": [
+    {
+      "fact": "The painted churches of northern Moldavia in Romania are covered inside and out with colorful paintings from the 1400s and 1500s.",
+      "ask": "Which country's painted monasteries of Bucovina are covered outside with colorful pictures from the 1500s?",
+      "source": "https://en.wikipedia.org/wiki/Painted_churches_of_Northern_Moldavia"
+    }
+  ],
+  "bulgaria": [
+    {
+      "fact": "The Cyrillic alphabet, now used to write Russian, Bulgarian and other languages, was developed in the First Bulgarian Empire in the 800s and 900s.",
+      "ask": "In which country's medieval empire was the Cyrillic alphabet first developed, over 1,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Cyrillic_script"
+    },
+    {
+      "fact": "Gold objects found at the Varna Necropolis in Bulgaria are about 6,500 years old, the oldest gold treasure ever found.",
+      "ask": "Which country's Varna Necropolis held the oldest gold treasure ever found, about 6,500 years old?",
+      "source": "https://en.wikipedia.org/wiki/Varna_Necropolis"
+    }
+  ],
+  "serbia": [
+    {
+      "fact": "Lepenski Vir, beside the Danube in Serbia, was a village of fishing people more than 8,000 years ago, with stone sculptures with fish-like faces.",
+      "ask": "Which country's Lepenski Vir is a riverside village site more than 8,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/Lepenski_Vir"
+    }
+  ],
+  "croatia": [
+    {
+      "fact": "The old town of Split, Croatia, grew up inside the walls of a palace built for Roman emperor Diocletian about 1,700 years ago.",
+      "ask": "Which country's city of Split grew up inside a Roman emperor's palace?",
+      "source": "https://en.wikipedia.org/wiki/Diocletian%27s_Palace"
+    }
+  ],
+  "slovenia": [
+    {
+      "fact": "The world's oldest known wooden wheel, about 5,150 years old, was found in the Ljubljana Marshes in Slovenia.",
+      "ask": "In which country was the world's oldest known wooden wheel found, about 5,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/Ljubljana_Marshes_Wooden_Wheel"
+    }
+  ],
+  "albania": [
+    {
+      "fact": "The ancient city of Butrint in Albania has ruins from Greek, Roman and Venetian times, and is a UNESCO World Heritage Site.",
+      "ask": "Which country's ancient city of Butrint has ruins from Greek, Roman and Venetian times?",
+      "source": "https://en.wikipedia.org/wiki/Butrint"
+    }
+  ],
+  "ukraine": [
+    {
+      "fact": "Saint Sophia Cathedral in Kyiv, Ukraine, was begun about 1,000 years ago and is a UNESCO World Heritage Site.",
+      "ask": "Which country's Saint Sophia Cathedral, begun about 1,000 years ago, stands in its capital?",
+      "source": "https://en.wikipedia.org/wiki/Saint_Sophia_Cathedral,_Kyiv"
+    }
+  ],
+  "belarus": [
+    {
+      "fact": "Mir Castle in Belarus was begun in the early 1500s and is a UNESCO World Heritage Site.",
+      "ask": "Which country's Mir Castle, begun in the 1500s, is a UNESCO World Heritage Site?",
+      "source": "https://en.wikipedia.org/wiki/Mir_Castle_Complex"
+    }
+  ],
+  "russia": [
+    {
+      "fact": "Yuri Gagarin, from Russia, became the first person to travel into space, on April 12, 1961, flying for the Soviet Union.",
+      "ask": "Which country was Yuri Gagarin from, the first person to travel into space?",
+      "source": "https://en.wikipedia.org/wiki/Yuri_Gagarin"
+    },
+    {
+      "fact": "Saint Basil's Cathedral, with its colorful onion-shaped domes, was finished in 1561 on Red Square in Moscow, Russia.",
+      "ask": "Which country's colorful onion-domed Saint Basil's Cathedral was finished in 1561?",
+      "source": "https://en.wikipedia.org/wiki/Saint_Basil%27s_Cathedral"
+    },
+    {
+      "fact": "Peter the Great founded the city of Saint Petersburg in Russia in 1703.",
+      "ask": "Which country's ruler Peter the Great founded the city of Saint Petersburg in 1703?",
+      "source": "https://en.wikipedia.org/wiki/Saint_Petersburg"
+    }
+  ],
+  "lithuania": [
+    {
+      "fact": "In the 1400s the Grand Duchy of Lithuania was the largest country in Europe, stretching from the Baltic Sea toward the Black Sea.",
+      "ask": "Which country's medieval Grand Duchy was the largest country in Europe in the 1400s?",
+      "source": "https://en.wikipedia.org/wiki/Grand_Duchy_of_Lithuania"
+    }
+  ]
+}

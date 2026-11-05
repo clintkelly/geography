@@ -22,6 +22,14 @@ const MOTION: Record<CreatureType, { arc: boolean; spin: number; spread: [number
   light: { arc: false, spin: 90, spread: [100, 100], lift: -10, ms: 680 },
   // Wisps drift slowly upward, swaying.
   spirit: { arc: false, spin: 30, spread: [55, 40], lift: -70, ms: 1000 },
+  // Rings of sound pulse straight out.
+  sound: { arc: false, spin: 0, spread: [95, 95], lift: 0, ms: 560 },
+  // Metal shards clang out and drop.
+  metal: { arc: true, spin: 360, spread: [70, 40], lift: -10, ms: 560 },
+  // Dirt clods spray up and fall back.
+  burrow: { arc: true, spin: 120, spread: [55, 25], lift: -50, ms: 700 },
+  // Chi swirls spin out fast in a ring, like a spinning kick.
+  kungfu: { arc: false, spin: 540, spread: [85, 60], lift: -20, ms: 520 },
 };
 
 /** A fixed scatter, so particles don't jump around between renders. */

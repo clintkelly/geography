@@ -1,0 +1,5152 @@
+{
+ "slatepaw": {
+  "kind": "myth",
+  "basedOn": "Golem",
+  "scientific": null,
+  "when": null,
+  "where": "Jewish folk tales from Central Europe, best known from Prague",
+  "size": null,
+  "story": "In old Jewish folk tales, a golem is a figure shaped from clay or mud and brought to life to protect people. The most famous story says a rabbi in Prague made one from river clay to guard his neighborhood.",
+  "facts": [
+   {
+    "text": "In some tellings, the word for 'truth' was written on the golem's forehead to wake it up.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   },
+   {
+    "text": "Legend says the Prague golem still rests in the attic of an old synagogue, which visitors are not allowed to enter.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   },
+   {
+    "text": "Golem stories may have helped inspire later tales about built creatures, like Frankenstein's monster.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   }
+  ]
+ },
+ "barkknight": {
+  "kind": "real",
+  "basedOn": "Rottweiler",
+  "scientific": "Canis familiaris",
+  "when": null,
+  "where": "Bred in the town of Rottweil in southern Germany; now kept around the world",
+  "size": "About as heavy as a 5th grader, or more",
+  "story": null,
+  "facts": [
+   {
+    "text": "Rottweilers are named after Rottweil, an old town in Germany.",
+    "source": "https://en.wikipedia.org/wiki/Rottweiler"
+   },
+   {
+    "text": "Long ago they drove cattle to market and pulled carts full of meat for butchers.",
+    "source": "https://en.wikipedia.org/wiki/Rottweiler"
+   },
+   {
+    "text": "Today many Rottweilers work as police dogs and search-and-rescue dogs.",
+    "source": "https://en.wikipedia.org/wiki/Rottweiler"
+   }
+  ]
+ },
+ "sandwhisk": {
+  "kind": "real",
+  "basedOn": "Kit Fox",
+  "scientific": "Vulpes macrotis",
+  "when": null,
+  "where": "Deserts of the southwestern United States and northern Mexico",
+  "size": "Smaller than most house cats",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the smallest members of the dog family in North America, weighing only about 4 to 6 pounds.",
+    "source": "https://en.wikipedia.org/wiki/Kit_fox"
+   },
+   {
+    "text": "Its huge ears help it hear prey and also let extra body heat escape in the desert.",
+    "source": "https://en.wikipedia.org/wiki/Kit_fox"
+   },
+   {
+    "text": "It hides from the daytime heat in underground dens and hunts mostly at night.",
+    "source": "https://en.wikipedia.org/wiki/Kit_fox"
+   }
+  ]
+ },
+ "cindermite": {
+  "kind": "real",
+  "basedOn": "Western Hercules Beetle",
+  "scientific": "Dynastes grantii",
+  "when": null,
+  "where": "Mountain forests of Arizona, Utah, New Mexico and northern Mexico",
+  "size": "About as long as your thumb",
+  "story": null,
+  "facts": [
+   {
+    "text": "Only the males have the long horns; females have none.",
+    "source": "https://en.wikipedia.org/wiki/Dynastes_grantii"
+   },
+   {
+    "text": "Its wing covers are pale gray with black spots, but can look black when the air is very humid.",
+    "source": "https://en.wikipedia.org/wiki/Dynastes_grantii"
+   },
+   {
+    "text": "Adults peel bark off ash tree twigs to sip the sap underneath.",
+    "source": "https://en.wikipedia.org/wiki/Dynastes_grantii"
+   }
+  ]
+ },
+ "cragmaw": {
+  "kind": "myth",
+  "basedOn": "Troll",
+  "scientific": null,
+  "when": null,
+  "where": "Old Norse myths and Scandinavian folk tales",
+  "size": null,
+  "story": "In Scandinavian folk tales, trolls live in lonely mountains, rocks and caves far from people. Many stories say sunlight turns a troll to stone, which is how some big rocks got their shapes.",
+  "facts": [
+   {
+    "text": "Some giant stones in Scandinavia are said, in folk tales, to have been thrown there by trolls.",
+    "source": "https://en.wikipedia.org/wiki/Troll"
+   },
+   {
+    "text": "Norway named its research station in Antarctica 'Troll' because the rugged mountains around it look like trolls.",
+    "source": "https://en.wikipedia.org/wiki/Troll"
+   }
+  ]
+ },
+ "galewing": {
+  "kind": "real",
+  "basedOn": "Swainson's Hawk",
+  "scientific": "Buteo swainsoni",
+  "when": null,
+  "where": "Prairies and grasslands of western North America in summer; South America in winter",
+  "size": "Its wings stretch about as wide as a kid is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "Some fly up to 7,000 miles one way between the prairies and the grasslands of Argentina.",
+    "source": "https://en.wikipedia.org/wiki/Swainson%27s_hawk"
+   },
+   {
+    "text": "It is nicknamed the 'grasshopper hawk' because it eats so many grasshoppers and crickets.",
+    "source": "https://en.wikipedia.org/wiki/Swainson%27s_hawk"
+   },
+   {
+    "text": "It likes wild prairie and hayfields, where small animals are easy to spot.",
+    "source": "https://en.wikipedia.org/wiki/Swainson%27s_hawk"
+   }
+  ]
+ },
+ "lakeshell": {
+  "kind": "real",
+  "basedOn": "Painted Turtle",
+  "scientific": "Chrysemys picta",
+  "when": null,
+  "where": "Ponds, lakes and slow rivers across much of North America, including the Great Lakes",
+  "size": "About as long as a dollar bill",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the most widespread native turtle in North America.",
+    "source": "https://en.wikipedia.org/wiki/Painted_turtle"
+   },
+   {
+    "text": "It cannot make its own body heat, so it warms up by basking on logs and rocks.",
+    "source": "https://en.wikipedia.org/wiki/Painted_turtle"
+   },
+   {
+    "text": "While it sleeps underwater all winter, it can soak up a little oxygen through its skin.",
+    "source": "https://en.wikipedia.org/wiki/Painted_turtle"
+   }
+  ]
+ },
+ "thistlehop": {
+  "kind": "real",
+  "basedOn": "Eastern Cottontail",
+  "scientific": "Sylvilagus floridanus",
+  "when": null,
+  "where": "Fields, woods and backyards across the eastern United States and beyond",
+  "size": "About as long as a ruler and a half",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its fluffy white tail looks like a cotton ball, which is how it got its name.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_cottontail"
+   },
+   {
+    "text": "When chased, it runs in a zigzag at up to about 18 miles per hour.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_cottontail"
+   },
+   {
+    "text": "It is most active at dawn, dusk and night.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_cottontail"
+   }
+  ]
+ },
+ "bayouchomp": {
+  "kind": "real",
+  "basedOn": "American Alligator",
+  "scientific": "Alligator mississippiensis",
+  "when": null,
+  "where": "Swamps, rivers and marshes of the southeastern United States",
+  "size": "Big males can be longer than a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "An alligator has about 80 teeth and grows new ones to replace old ones.",
+    "source": "https://en.wikipedia.org/wiki/American_alligator"
+   },
+   {
+    "text": "A mother alligator gently carries her hatchlings to the water in her mouth.",
+    "source": "https://en.wikipedia.org/wiki/American_alligator"
+   },
+   {
+    "text": "It is the official state reptile of Florida, Louisiana and Mississippi.",
+    "source": "https://en.wikipedia.org/wiki/American_alligator"
+   }
+  ]
+ },
+ "dillopod": {
+  "kind": "real",
+  "basedOn": "Nine-banded Armadillo",
+  "scientific": "Dasypus novemcinctus",
+  "when": null,
+  "where": "The southern United States through Central and South America",
+  "size": "About the size of a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "Surprise: this armadillo cannot roll into a ball. Only the three-banded armadillos of South America can.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   },
+   {
+    "text": "A mother almost always has four identical babies at once.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   },
+   {
+    "text": "When frightened, it can jump about 3 to 4 feet straight up into the air.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   }
+  ]
+ },
+ "brinefin": {
+  "kind": "real",
+  "basedOn": "Mudskipper",
+  "scientific": null,
+  "when": null,
+  "where": "Muddy tropical shores and mangroves of Africa, Asia and Australia",
+  "size": "About as long as a pencil",
+  "story": null,
+  "facts": [
+   {
+    "text": "Mudskippers are fish that can spend up to three quarters of their lives out of the water.",
+    "source": "https://en.wikipedia.org/wiki/Mudskipper"
+   },
+   {
+    "text": "They can breathe through their wet skin and the lining of their mouths.",
+    "source": "https://en.wikipedia.org/wiki/Mudskipper"
+   },
+   {
+    "text": "They skip across the mud using their fins and can leap about 2 feet.",
+    "source": "https://en.wikipedia.org/wiki/Mudskipper"
+   }
+  ]
+ },
+ "lobsnap": {
+  "kind": "real",
+  "basedOn": "American Lobster",
+  "scientific": "Homarus americanus",
+  "when": null,
+  "where": "Rocky Atlantic coast of North America, from Labrador to North Carolina",
+  "size": "Big ones can be as long as your arm",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its two claws are different: a big 'crusher' and a sharper 'cutter'.",
+    "source": "https://en.wikipedia.org/wiki/American_lobster"
+   },
+   {
+    "text": "About 1 in 2 million lobsters is bright blue.",
+    "source": "https://en.wikipedia.org/wiki/American_lobster"
+   },
+   {
+    "text": "The heaviest one ever caught weighed about 44 pounds, the heaviest crustacean on record.",
+    "source": "https://en.wikipedia.org/wiki/American_lobster"
+   }
+  ]
+ },
+ "mapleclop": {
+  "kind": "real",
+  "basedOn": "White-tailed Deer",
+  "scientific": "Odocoileus virginianus",
+  "when": null,
+  "where": "Forests and fields across most of North America, down into South America",
+  "size": "About as tall as a kitchen table at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "When it senses danger, it flips up its white tail like a warning flag.",
+    "source": "https://en.wikipedia.org/wiki/White-tailed_deer"
+   },
+   {
+    "text": "Males grow a brand-new set of antlers every year.",
+    "source": "https://en.wikipedia.org/wiki/White-tailed_deer"
+   },
+   {
+    "text": "It can leap about 9 feet high and run up to about 40 miles per hour.",
+    "source": "https://en.wikipedia.org/wiki/White-tailed_deer"
+   }
+  ]
+ },
+ "fjordling": {
+  "kind": "real",
+  "basedOn": "Harbor Seal",
+  "scientific": "Phoca vitulina",
+  "when": null,
+  "where": "Cold coasts of the Northern Hemisphere, including the fjords of Norway",
+  "size": "About as long as a grown-up is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "Harbor seal pups can swim and dive within hours of being born.",
+    "source": "https://en.wikipedia.org/wiki/Harbor_seal"
+   },
+   {
+    "text": "Harbor seals have been recorded diving deeper than 1,600 feet.",
+    "source": "https://en.wikipedia.org/wiki/Harbor_seal"
+   }
+  ]
+ },
+ "alpenhorn": {
+  "kind": "real",
+  "basedOn": "Alpine Ibex",
+  "scientific": "Capra ibex",
+  "when": null,
+  "where": "High rocky slopes of the Alps in Europe",
+  "size": "About as tall as a kitchen table at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "By the 1800s only about 100 were left, all in one area of northern Italy.",
+    "source": "https://en.wikipedia.org/wiki/Alpine_ibex"
+   },
+   {
+    "text": "Ibex have been seen climbing a nearly sheer dam wall in Italy to lick salt off the stones.",
+    "source": "https://en.wikipedia.org/wiki/Alpine_ibex"
+   },
+   {
+    "text": "A male's curved horns can grow up to about 3 feet long.",
+    "source": "https://en.wikipedia.org/wiki/Alpine_ibex"
+   }
+  ]
+ },
+ "thunderhoof": {
+  "kind": "real",
+  "basedOn": "American Bison",
+  "scientific": "Bison bison",
+  "when": null,
+  "where": "Prairies and parks of North America, such as Yellowstone",
+  "size": "As heavy as a small car",
+  "story": null,
+  "facts": [
+   {
+    "text": "The bison is the national mammal of the United States.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   },
+   {
+    "text": "Even though it is huge, a bison can run up to about 40 miles per hour.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   },
+   {
+    "text": "By 1889 only about 500 were left, but today tens of thousands live in the wild again.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   }
+  ]
+ },
+ "aurorawl": {
+  "kind": "real",
+  "basedOn": "Snowy Owl",
+  "scientific": "Bubo scandiacus",
+  "when": null,
+  "where": "Arctic tundra in summer; some fly south to places like the Great Lakes in winter",
+  "size": "Its wings stretch about as wide as a grown-up is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "Unlike most owls, snowy owls are often active during the day.",
+    "source": "https://en.wikipedia.org/wiki/Snowy_owl"
+   },
+   {
+    "text": "Males are almost pure white, while females have more dark brown flecks.",
+    "source": "https://en.wikipedia.org/wiki/Snowy_owl"
+   },
+   {
+    "text": "Its toes are covered in thick white feathers, like built-in slippers.",
+    "source": "https://en.wikipedia.org/wiki/Snowy_owl"
+   }
+  ]
+ },
+ "stormray": {
+  "kind": "real",
+  "basedOn": "Giant Oceanic Manta Ray",
+  "scientific": "Mobula birostris",
+  "when": null,
+  "where": "Warm oceans around the world, including the Gulf of Mexico",
+  "size": "Wider than a car is long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest ray in the world, up to about 23 feet from wingtip to wingtip.",
+    "source": "https://en.wikipedia.org/wiki/Giant_oceanic_manta_ray"
+   },
+   {
+    "text": "It has the largest brain of any fish.",
+    "source": "https://en.wikipedia.org/wiki/Giant_oceanic_manta_ray"
+   },
+   {
+    "text": "It visits coral reef 'cleaning stations' where little fish pick off loose skin and pests.",
+    "source": "https://en.wikipedia.org/wiki/Giant_oceanic_manta_ray"
+   }
+  ]
+ },
+ "lanternwhale": {
+  "kind": "real",
+  "basedOn": "Humpback Whale",
+  "scientific": "Megaptera novaeangliae",
+  "when": null,
+  "where": "Oceans worldwide; many feed off New England in summer",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "Male humpbacks sing long, complex songs that can last up to about 30 minutes.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   },
+   {
+    "text": "Groups blow rings of bubbles to trap fish, a kind of tool use.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   },
+   {
+    "text": "Scientists tell humpbacks apart by the patterns and marks on the underside of their tails.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   }
+  ]
+ },
+ "castlewyrm": {
+  "kind": "myth",
+  "basedOn": "European Dragon",
+  "scientific": null,
+  "when": null,
+  "where": "Folk tales and legends from across Europe",
+  "size": null,
+  "story": "In European legends, dragons were huge winged reptiles that breathed fire and guarded caves or castles full of gold. Famous stories include Saint George and the Dragon and the dragon in the Old English poem Beowulf.",
+  "facts": [
+   {
+    "text": "A red dragon is on the national flag of Wales.",
+    "source": "https://en.wikipedia.org/wiki/European_dragon"
+   },
+   {
+    "text": "The story of Saint George and the Dragon was written down more than 1,400 years ago.",
+    "source": "https://en.wikipedia.org/wiki/European_dragon"
+   },
+   {
+    "text": "In the old poem Beowulf, a thief takes treasure from a dragon's hoard and makes it furious.",
+    "source": "https://en.wikipedia.org/wiki/European_dragon"
+   }
+  ]
+ },
+ "baobun": {
+  "kind": "real",
+  "basedOn": "Baobab Tree",
+  "scientific": "Adansonia digitata",
+  "when": null,
+  "where": "Dry savannas across much of Africa",
+  "size": "Its trunk can be wider than a car is long",
+  "story": null,
+  "facts": [
+   {
+    "text": "A big baobab can store more than 30,000 gallons of water in its trunk and branches.",
+    "source": "https://en.wikipedia.org/wiki/Adansonia_digitata"
+   },
+   {
+    "text": "It is nicknamed the 'upside-down tree' because its bare branches look like roots.",
+    "source": "https://en.wikipedia.org/wiki/Adansonia_digitata"
+   },
+   {
+    "text": "Its flowers stay open for just one night and are pollinated mostly by fruit bats.",
+    "source": "https://en.wikipedia.org/wiki/Adansonia_digitata"
+   }
+  ]
+ },
+ "zebrisk": {
+  "kind": "real",
+  "basedOn": "Plains Zebra",
+  "scientific": "Equus quagga",
+  "when": null,
+  "where": "Grasslands and savannas of eastern and southern Africa",
+  "size": "About as tall as a 4th grader at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "Every zebra's stripe pattern is unique, so no two look exactly alike.",
+    "source": "https://en.wikipedia.org/wiki/Plains_zebra"
+   },
+   {
+    "text": "Scientists think the stripes may help keep biting flies away.",
+    "source": "https://en.wikipedia.org/wiki/Zebra"
+   },
+   {
+    "text": "It can run about 40 miles per hour to escape lions.",
+    "source": "https://en.wikipedia.org/wiki/Plains_zebra"
+   }
+  ]
+ },
+ "bambloom": {
+  "kind": "real",
+  "basedOn": "Giant Panda",
+  "scientific": "Ailuropoda melanoleuca",
+  "when": null,
+  "where": "Bamboo forests in the mountains of central China",
+  "size": "About as heavy as a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "A panda eats more than 20 pounds of bamboo shoots every day.",
+    "source": "https://en.wikipedia.org/wiki/Giant_panda"
+   },
+   {
+    "text": "It has a special wrist bone that works like a thumb for holding bamboo.",
+    "source": "https://en.wikipedia.org/wiki/Giant_panda"
+   },
+   {
+    "text": "In 2016 pandas were moved from 'endangered' to 'vulnerable' as their numbers grew.",
+    "source": "https://en.wikipedia.org/wiki/Giant_panda"
+   }
+  ]
+ },
+ "lanternox": {
+  "kind": "history",
+  "basedOn": "Ox",
+  "scientific": "Bos taurus",
+  "when": null,
+  "where": "Farms across Asia; the Ox is the second animal of the Chinese zodiac",
+  "size": "About as heavy as a small car",
+  "story": "Oxen have pulled plows across Asia for thousands of years, and the Ox is one of the twelve animals of the Chinese zodiac. Lunar New Year celebrations end with the Lantern Festival, when people hang glowing lanterns.",
+  "facts": [
+   {
+    "text": "The Ox is the second animal in the 12-year Chinese zodiac, right after the Rat.",
+    "source": "https://en.wikipedia.org/wiki/Ox_(zodiac)"
+   },
+   {
+    "text": "In the folk tale of the Great Race, the Rat rode on the Ox's back and hopped off first at the finish.",
+    "source": "https://en.wikipedia.org/wiki/Ox_(zodiac)"
+   },
+   {
+    "text": "The most recent Year of the Ox began in 2021; the next starts in 2033.",
+    "source": "https://en.wikipedia.org/wiki/Ox_(zodiac)"
+   }
+  ]
+ },
+ "moosedrift": {
+  "kind": "real",
+  "basedOn": "Moose",
+  "scientific": "Alces alces",
+  "when": null,
+  "where": "Northern forests of North America, Europe and Asia",
+  "size": "About as tall as a grown-up at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "The moose is the tallest and heaviest deer in the world.",
+    "source": "https://en.wikipedia.org/wiki/Moose"
+   },
+   {
+    "text": "Moose can dive about 18 feet underwater to eat plants on lake bottoms.",
+    "source": "https://en.wikipedia.org/wiki/Moose"
+   },
+   {
+    "text": "A big bull's antlers can be more than 6 feet across, and he grows new ones every spring.",
+    "source": "https://en.wikipedia.org/wiki/Moose"
+   }
+  ]
+ },
+ "conchling": {
+  "kind": "real",
+  "basedOn": "Caribbean Hermit Crab",
+  "scientific": "Coenobita clypeatus",
+  "when": null,
+  "where": "Beaches and coastal forests of the Caribbean, southern Florida and Belize",
+  "size": "About the size of a tennis ball",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its big purple claw gives it the nickname 'purple pincher'.",
+    "source": "https://en.wikipedia.org/wiki/Caribbean_hermit_crab"
+   },
+   {
+    "text": "It lives on land, but females return to the sea to release their eggs.",
+    "source": "https://en.wikipedia.org/wiki/Caribbean_hermit_crab"
+   },
+   {
+    "text": "It blocks the opening of its shell with its big claw to stay safe.",
+    "source": "https://en.wikipedia.org/wiki/Caribbean_hermit_crab"
+   }
+  ]
+ },
+ "capyboop": {
+  "kind": "real",
+  "basedOn": "Capybara",
+  "scientific": "Hydrochoerus hydrochaeris",
+  "when": null,
+  "where": "Rivers, lakes and marshes across South America",
+  "size": "About as heavy as a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "The capybara is the largest rodent in the world.",
+    "source": "https://en.wikipedia.org/wiki/Capybara"
+   },
+   {
+    "text": "It has slightly webbed feet and can hold its breath underwater for up to five minutes.",
+    "source": "https://en.wikipedia.org/wiki/Capybara"
+   },
+   {
+    "text": "Birds often ride on capybaras, and the capybaras hardly seem to mind.",
+    "source": "https://en.wikipedia.org/wiki/Capybara"
+   }
+  ]
+ },
+ "llamist": {
+  "kind": "real",
+  "basedOn": "Llama",
+  "scientific": "Lama glama",
+  "when": null,
+  "where": "The Andes Mountains of South America",
+  "size": "Taller than a grown-up to the top of its head",
+  "story": null,
+  "facts": [
+   {
+    "text": "In the Inca Empire, llamas were the only animals used to carry heavy loads.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   },
+   {
+    "text": "Llamas hum to each other to talk.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   },
+   {
+    "text": "Some farmers keep llamas to guard sheep from coyotes and other predators.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   }
+  ]
+ },
+ "koalump": {
+  "kind": "real",
+  "basedOn": "Koala",
+  "scientific": "Phascolarctos cinereus",
+  "when": null,
+  "where": "Eucalyptus forests of eastern and southern Australia",
+  "size": "About as long as a baseball bat",
+  "story": null,
+  "facts": [
+   {
+    "text": "Koalas are not bears; they are marsupials that raise their babies in a pouch.",
+    "source": "https://en.wikipedia.org/wiki/Koala"
+   },
+   {
+    "text": "Eucalyptus leaves give little energy, so koalas sleep about 20 hours a day.",
+    "source": "https://en.wikipedia.org/wiki/Koala"
+   },
+   {
+    "text": "Koalas get most of their water from leaves and rarely need to drink.",
+    "source": "https://en.wikipedia.org/wiki/Koala"
+   }
+  ]
+ },
+ "reefling": {
+  "kind": "real",
+  "basedOn": "Seahorse",
+  "scientific": null,
+  "when": null,
+  "where": "Shallow warm seas around the world, including Australia's reefs",
+  "size": "From fingernail-sized to about as long as a ruler, depending on the kind",
+  "story": null,
+  "facts": [
+   {
+    "text": "Seahorse dads carry the eggs in a pouch until the babies hatch.",
+    "source": "https://en.wikipedia.org/wiki/Seahorse"
+   },
+   {
+    "text": "Its eyes can move separately, like a chameleon's.",
+    "source": "https://en.wikipedia.org/wiki/Seahorse"
+   },
+   {
+    "text": "A seahorse has no stomach, so it has to eat very often.",
+    "source": "https://en.wikipedia.org/wiki/Seahorse"
+   }
+  ]
+ },
+ "pengwee": {
+  "kind": "real",
+  "basedOn": "Emperor Penguin",
+  "scientific": "Aptenodytes forsteri",
+  "when": null,
+  "where": "The sea ice and coasts of Antarctica",
+  "size": "About as tall as a 6-year-old",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the tallest and heaviest penguin in the world.",
+    "source": "https://en.wikipedia.org/wiki/Emperor_penguin"
+   },
+   {
+    "text": "Dads keep the egg warm on their feet all winter without eating.",
+    "source": "https://en.wikipedia.org/wiki/Emperor_penguin"
+   },
+   {
+    "text": "Penguins huddle together and take turns moving into the warm middle of the group.",
+    "source": "https://en.wikipedia.org/wiki/Emperor_penguin"
+   }
+  ]
+ },
+ "floeseal": {
+  "kind": "real",
+  "basedOn": "Weddell Seal",
+  "scientific": "Leptonychotes weddellii",
+  "when": null,
+  "where": "Sea ice all around Antarctica",
+  "size": "Longer than a grown-up is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "It can dive about 2,000 feet deep and stay under for up to an hour.",
+    "source": "https://en.wikipedia.org/wiki/Weddell_seal"
+   },
+   {
+    "text": "It keeps breathing holes open in the ice so it can come up for air.",
+    "source": "https://en.wikipedia.org/wiki/Weddell_seal"
+   },
+   {
+    "text": "Its calls are so loud they can be felt through the ice.",
+    "source": "https://en.wikipedia.org/wiki/Weddell_seal"
+   }
+  ]
+ },
+ "sunmane": {
+  "kind": "real",
+  "basedOn": "Lion",
+  "scientific": "Panthera leo",
+  "when": null,
+  "where": "Savannas and grasslands of Africa, plus one national park in western India",
+  "size": "Big males weigh as much as two or three grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "Lions are the most social wild cats, living in family groups called prides.",
+    "source": "https://en.wikipedia.org/wiki/Lion"
+   },
+   {
+    "text": "Lions rest for about 20 hours a day.",
+    "source": "https://en.wikipedia.org/wiki/Lion"
+   },
+   {
+    "text": "The females of a pride usually do the hunting together.",
+    "source": "https://en.wikipedia.org/wiki/Lion"
+   }
+  ]
+ },
+ "jadewyrm": {
+  "kind": "myth",
+  "basedOn": "Chinese Dragon",
+  "scientific": null,
+  "when": null,
+  "where": "Legends and art from China and across East Asia",
+  "size": null,
+  "story": "In Chinese legends, dragons are wise, lucky creatures that rule rivers, seas and rain. For centuries the dragon was a symbol of China's emperors.",
+  "facts": [
+   {
+    "text": "Most Chinese dragons have no wings, yet stories say they can still fly up into the sky.",
+    "source": "https://en.wikipedia.org/wiki/Chinese_dragon"
+   },
+   {
+    "text": "At Chinese New Year, teams of dancers carry long dragon puppets on poles.",
+    "source": "https://en.wikipedia.org/wiki/Chinese_dragon"
+   },
+   {
+    "text": "People once called fossil bones 'dragon bones'; many turned out to be from ancient horses.",
+    "source": "https://en.wikipedia.org/wiki/Chinese_dragon"
+   }
+  ]
+ },
+ "quetzalight": {
+  "kind": "myth",
+  "basedOn": "Quetzalcoatl",
+  "scientific": null,
+  "when": null,
+  "where": "Aztec, Maya and other Mesoamerican stories from Mexico and Central America",
+  "size": null,
+  "story": "In Aztec stories, Quetzalcoatl was the Feathered Serpent, linked with wind and learning; the Maya told of a similar figure called Kukulkan. His name joins the shining quetzal bird with the Nahuatl word for serpent.",
+  "facts": [
+   {
+    "text": "The real resplendent quetzal is the national bird of Guatemala, and Guatemala's money is called the quetzal.",
+    "source": "https://en.wikipedia.org/wiki/Resplendent_quetzal"
+   },
+   {
+    "text": "A male quetzal's tail streamers can be longer than 2 feet.",
+    "source": "https://en.wikipedia.org/wiki/Resplendent_quetzal"
+   },
+   {
+    "text": "Quetzals swallow wild avocados whole, then spit out the pits.",
+    "source": "https://en.wikipedia.org/wiki/Resplendent_quetzal"
+   }
+  ]
+ },
+ "jagglow": {
+  "kind": "real",
+  "basedOn": "Jaguar",
+  "scientific": "Panthera onca",
+  "when": null,
+  "where": "Rainforests and wetlands from Mexico to Argentina",
+  "size": "As heavy as a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the biggest cat in the Americas and the third largest in the world.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   },
+   {
+    "text": "Its bite is strong enough to crack turtle shells.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   },
+   {
+    "text": "Jaguars are good swimmers and like to hunt in water.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   }
+  ]
+ },
+ "kiwisp": {
+  "kind": "real",
+  "basedOn": "Kiwi",
+  "scientific": null,
+  "when": null,
+  "where": "Forests of New Zealand",
+  "size": "About the size of a chicken",
+  "story": null,
+  "facts": [
+   {
+    "text": "Kiwi are the only birds with nostrils at the tip of their beaks.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "A kiwi egg can weigh up to a quarter of its mother's weight.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "Its wings are so tiny that they are hidden under its hair-like feathers.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   }
+  ]
+ },
+ "glaciarch": {
+  "kind": "real",
+  "basedOn": "Blue Whale",
+  "scientific": "Balaenoptera musculus",
+  "when": null,
+  "where": "Oceans worldwide, including the cold seas around Antarctica",
+  "size": "Longer than two school buses",
+  "story": null,
+  "facts": [
+   {
+    "text": "The blue whale is the largest animal known to have ever lived.",
+    "source": "https://en.wikipedia.org/wiki/Blue_whale"
+   },
+   {
+    "text": "It eats about 4 tons of food, mostly tiny krill, every day.",
+    "source": "https://en.wikipedia.org/wiki/Blue_whale"
+   },
+   {
+    "text": "Its calls are some of the loudest and lowest sounds made by any animal.",
+    "source": "https://en.wikipedia.org/wiki/Blue_whale"
+   }
+  ]
+ },
+ "howlpup": {
+  "kind": "real",
+  "basedOn": "Gray Wolf",
+  "scientific": "Canis lupus",
+  "when": null,
+  "where": "Forests, mountains and tundra of North America, Europe and Asia",
+  "size": "About as long as a grown-up is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The wolf is the largest wild member of the dog family.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "A wolf pack is usually a family: two parents and their pups.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "In good conditions, a wolf's howl can be heard across about 50 square miles.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   }
+  ]
+ },
+ "toothling": {
+  "kind": "prehistoric",
+  "basedOn": "Megalodon",
+  "scientific": "Otodus megalodon",
+  "when": "About 23 million to 3.6 million years ago",
+  "where": "Warm oceans all over the world",
+  "size": "About as long as a school bus, maybe longer",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its name means 'big tooth', and some teeth are longer than 7 inches.",
+    "source": "https://en.wikipedia.org/wiki/Otodus_megalodon"
+   },
+   {
+    "text": "Its skeleton was made of cartilage, so mostly its teeth became fossils.",
+    "source": "https://en.wikipedia.org/wiki/Otodus_megalodon"
+   },
+   {
+    "text": "Long ago, people thought its fossil teeth were stone tongues and called them 'tongue stones'.",
+    "source": "https://en.wikipedia.org/wiki/Otodus_megalodon"
+   }
+  ]
+ },
+ "pebbletort": {
+  "kind": "real",
+  "basedOn": "Tortoise",
+  "scientific": null,
+  "when": null,
+  "where": "Warm lands of the Americas, Africa, Europe and Asia",
+  "size": "From palm-sized to bigger than a suitcase, depending on the kind",
+  "story": null,
+  "facts": [
+   {
+    "text": "Galápagos tortoises can live more than 150 years.",
+    "source": "https://en.wikipedia.org/wiki/Tortoise"
+   },
+   {
+    "text": "A tortoise named Jonathan, living on the island of St Helena, may be nearly 200 years old.",
+    "source": "https://en.wikipedia.org/wiki/Tortoise"
+   },
+   {
+    "text": "Tortoises pull their heads straight back into their shells to stay safe.",
+    "source": "https://en.wikipedia.org/wiki/Tortoise"
+   }
+  ]
+ },
+ "lilyhop": {
+  "kind": "real",
+  "basedOn": "Frog",
+  "scientific": null,
+  "when": null,
+  "where": "Ponds, rivers and rainforests on every continent except Antarctica",
+  "size": "From smaller than a fingernail to bigger than a dinner plate",
+  "story": null,
+  "facts": [
+   {
+    "text": "There are more than 7,700 kinds of frogs.",
+    "source": "https://en.wikipedia.org/wiki/Frog"
+   },
+   {
+    "text": "Many frogs soak up water and oxygen right through their skin.",
+    "source": "https://en.wikipedia.org/wiki/Frog"
+   },
+   {
+    "text": "A frog pulls its eyes down into its head to help push food down its throat.",
+    "source": "https://en.wikipedia.org/wiki/Frog"
+   }
+  ]
+ },
+ "plesiling": {
+  "kind": "prehistoric",
+  "basedOn": "Plesiosaurus",
+  "scientific": "Plesiosaurus dolichodeirus",
+  "when": "About 199 to 193 million years ago",
+  "where": "Ancient seas covering what is now England",
+  "size": "About as long as a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "Plesiosaurs were sea reptiles, not dinosaurs.",
+    "source": "https://en.wikipedia.org/wiki/Plesiosaur"
+   },
+   {
+    "text": "It swam with four long flippers and had a small head on a long neck.",
+    "source": "https://en.wikipedia.org/wiki/Plesiosaurus"
+   },
+   {
+    "text": "It probably ate fish and squid-like animals called belemnites.",
+    "source": "https://en.wikipedia.org/wiki/Plesiosaurus"
+   }
+  ]
+ },
+ "spiralite": {
+  "kind": "prehistoric",
+  "basedOn": "Ammonite",
+  "scientific": null,
+  "when": "From about 400 million to 66 million years ago",
+  "where": "Ancient seas all over the world; fossils are found on every continent",
+  "size": "From coin-sized to about 6 feet across",
+  "story": null,
+  "facts": [
+   {
+    "text": "Ammonites were more closely related to octopuses and squid than to the nautilus.",
+    "source": "https://en.wikipedia.org/wiki/Ammonoidea"
+   },
+   {
+    "text": "They died out about 66 million years ago, around the same time as the big dinosaurs.",
+    "source": "https://en.wikipedia.org/wiki/Ammonoidea"
+   },
+   {
+    "text": "Long ago, people thought ammonite fossils were snakes turned to stone.",
+    "source": "https://en.wikipedia.org/wiki/Ammonoidea"
+   }
+  ]
+ },
+ "spotspark": {
+  "kind": "real",
+  "basedOn": "Dalmatian",
+  "scientific": "Canis familiaris",
+  "when": null,
+  "where": "Named for Dalmatia in Croatia; now kept around the world",
+  "size": "About thigh-high on a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "Dalmatian puppies are born pure white, and their spots appear later.",
+    "source": "https://en.wikipedia.org/wiki/Dalmatian_dog"
+   },
+   {
+    "text": "Their spots are usually black or liver brown.",
+    "source": "https://en.wikipedia.org/wiki/Dalmatian_dog"
+   },
+   {
+    "text": "They have great stamina and were trained to run ahead of carriages to clear the way.",
+    "source": "https://en.wikipedia.org/wiki/Dalmatian_dog"
+   }
+  ]
+ },
+ "corgust": {
+  "kind": "real",
+  "basedOn": "Pembroke Welsh Corgi",
+  "scientific": "Canis familiaris",
+  "when": null,
+  "where": "Pembrokeshire, Wales; now kept around the world",
+  "size": "About as tall as a ruler",
+  "story": null,
+  "facts": [
+   {
+    "text": "The name 'corgi' comes from Welsh words for 'dwarf' and 'dog'.",
+    "source": "https://en.wikipedia.org/wiki/Pembroke_Welsh_Corgi"
+   },
+   {
+    "text": "Queen Elizabeth II owned more than 30 corgis during her reign.",
+    "source": "https://en.wikipedia.org/wiki/Pembroke_Welsh_Corgi"
+   },
+   {
+    "text": "A Welsh folk tale says fairies once rode corgis like tiny horses.",
+    "source": "https://en.wikipedia.org/wiki/Pembroke_Welsh_Corgi"
+   }
+  ]
+ },
+ "bernasnow": {
+  "kind": "real",
+  "basedOn": "Saint Bernard",
+  "scientific": null,
+  "when": null,
+  "where": "The Great St Bernard Pass in the Swiss Alps",
+  "size": "Big dogs that can weigh about as much as a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "The most famous rescue dog, Barry, is said to have saved at least 40 people in the snow.",
+    "source": "https://en.wikipedia.org/wiki/St._Bernard_(dog)"
+   },
+   {
+    "text": "Monks at the mountain pass have kept these dogs for more than 300 years.",
+    "source": "https://en.wikipedia.org/wiki/St._Bernard_(dog)"
+   },
+   {
+    "text": "The little barrel on a cartoon Saint Bernard's collar comes from an old painting; the monks say real rescue dogs never carried one.",
+    "source": "https://en.wikipedia.org/wiki/St._Bernard_(dog)"
+   }
+  ]
+ },
+ "doxdig": {
+  "kind": "real",
+  "basedOn": "Dachshund",
+  "scientific": null,
+  "when": null,
+  "where": "Bred in Germany, now kept as pets around the world",
+  "size": "About as long as a skateboard",
+  "story": null,
+  "facts": [
+   {
+    "text": "Dachshunds come in three coat types: smooth, long-haired, and wire-haired.",
+    "source": "https://en.wikipedia.org/wiki/Dachshund"
+   },
+   {
+    "text": "A dachshund named Waldi was the very first official Olympic mascot, in Munich in 1972.",
+    "source": "https://en.wikipedia.org/wiki/Dachshund"
+   },
+   {
+    "text": "The miniature dachshund was bred to hunt smaller animals, like rabbits.",
+    "source": "https://en.wikipedia.org/wiki/Dachshund"
+   }
+  ]
+ },
+ "poodlebloom": {
+  "kind": "real",
+  "basedOn": "Poodle",
+  "scientific": null,
+  "when": null,
+  "where": "First bred in Germany as a water dog, later made famous in France",
+  "size": "Standard poodles stand about as tall as a kitchen table is high, or less",
+  "story": null,
+  "facts": [
+   {
+    "text": "The classic poodle haircut kept wet fur from weighing the dog down while swimming, but left its joints covered.",
+    "source": "https://en.wikipedia.org/wiki/Poodle"
+   },
+   {
+    "text": "Poodles come in several sizes, from big standard poodles to tiny toy poodles.",
+    "source": "https://en.wikipedia.org/wiki/Poodle"
+   },
+   {
+    "text": "A famous dog expert ranked poodles the second smartest dog breed.",
+    "source": "https://en.wikipedia.org/wiki/Poodle"
+   }
+  ]
+ },
+ "mosaroar": {
+  "kind": "prehistoric",
+  "basedOn": "Mosasaurus",
+  "scientific": "Mosasaurus hoffmannii",
+  "when": "About 70 million years ago",
+  "where": "Shallow seas that covered parts of Europe and North America",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "The first Mosasaurus skull was found in 1764 in a chalk quarry near Maastricht, and at first people thought it was a whale.",
+    "source": "https://en.wikipedia.org/wiki/Mosasaurus"
+   },
+   {
+    "text": "Mosasaurus was not a dinosaur. It was a giant sea reptile related to today's lizards and snakes.",
+    "source": "https://en.wikipedia.org/wiki/Mosasaurus"
+   },
+   {
+    "text": "Besides the teeth in its jaws, it had extra small teeth on the roof of its mouth to grip prey.",
+    "source": "https://en.wikipedia.org/wiki/Mosasaurus"
+   }
+  ]
+ },
+ "platybolt": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "The platypus is one of only a few mammals that lay eggs.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Male platypuses have a venomous spur on each back ankle.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Under ultraviolet light, platypus fur glows a blue-green color.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "zapeel": {
+  "kind": "real",
+  "basedOn": "Electric Eel",
+  "scientific": "Electrophorus electricus",
+  "when": null,
+  "where": "Rivers and swamps of the Amazon basin in South America",
+  "size": "Can grow about 2 meters long, longer than a tall adult",
+  "story": null,
+  "facts": [
+   {
+    "text": "Despite its name, the electric eel is not a true eel. It is a kind of knifefish.",
+    "source": "https://en.wikipedia.org/wiki/Electric_eel"
+   },
+   {
+    "text": "It breathes air, so it swims up to the surface to gulp a breath every couple of minutes.",
+    "source": "https://en.wikipedia.org/wiki/Electric_eel"
+   },
+   {
+    "text": "In 2019, scientists discovered there are three species of electric eel, not just one.",
+    "source": "https://en.wikipedia.org/wiki/Electric_eel"
+   }
+  ]
+ },
+ "glowbug": {
+  "kind": "real",
+  "basedOn": "Firefly",
+  "scientific": null,
+  "when": null,
+  "where": "Warm, damp places on every continent except Antarctica",
+  "size": "Smaller than a paperclip",
+  "story": null,
+  "facts": [
+   {
+    "text": "Fireflies are not flies at all. They are beetles.",
+    "source": "https://en.wikipedia.org/wiki/Firefly"
+   },
+   {
+    "text": "There are more than 2,000 kinds of fireflies, and many flash their own special pattern to find a mate.",
+    "source": "https://en.wikipedia.org/wiki/Firefly"
+   },
+   {
+    "text": "In the Great Smoky Mountains, one kind of firefly flashes all together at the same time.",
+    "source": "https://www.nps.gov/grsm/learn/nature/fireflies.htm"
+   }
+  ]
+ },
+ "sparkemur": {
+  "kind": "real",
+  "basedOn": "Ring-tailed Lemur",
+  "scientific": "Lemur catta",
+  "when": null,
+  "where": "Dry forests and scrub of southern Madagascar",
+  "size": "About as big as a house cat, with a tail longer than its body",
+  "story": null,
+  "facts": [
+   {
+    "text": "Ring-tailed lemurs sit up and spread their arms to sunbathe on cool mornings.",
+    "source": "https://en.wikipedia.org/wiki/Ring-tailed_lemur"
+   },
+   {
+    "text": "In ring-tailed lemur groups, the females are in charge.",
+    "source": "https://en.wikipedia.org/wiki/Ring-tailed_lemur"
+   },
+   {
+    "text": "Its striped black-and-white tail is longer than its head and body together.",
+    "source": "https://en.wikipedia.org/wiki/Ring-tailed_lemur"
+   }
+  ]
+ },
+ "catatumboa": {
+  "kind": "real",
+  "basedOn": "Boa Constrictor",
+  "scientific": "Boa constrictor",
+  "when": null,
+  "where": "Forests and grasslands of Central and South America, including Venezuela",
+  "size": "Can grow about 3 meters long, longer than a sofa",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its common name and its scientific name are the same: Boa constrictor.",
+    "source": "https://en.wikipedia.org/wiki/Boa_constrictor"
+   },
+   {
+    "text": "Boa constrictors are not venomous. They squeeze their prey instead.",
+    "source": "https://en.wikipedia.org/wiki/Boa_constrictor"
+   },
+   {
+    "text": "Instead of laying eggs, mother boas give birth to live babies.",
+    "source": "https://en.wikipedia.org/wiki/Boa_constrictor"
+   }
+  ]
+ },
+ "emberwolf": {
+  "kind": "real",
+  "basedOn": "Gray Wolf",
+  "scientific": "Canis lupus",
+  "when": null,
+  "where": "Forests, mountains, and deserts of North America, Europe, and Asia",
+  "size": "About as big as a large dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "A wolf pack is usually a family: two parents and their pups of different ages.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "Wolves howl to keep in touch with their pack and warn other packs to stay away.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "Gray wolves were brought back to Yellowstone National Park in 1995 after being gone for about 70 years.",
+    "source": "https://www.nps.gov/yell/learn/nature/wolves.htm"
+   }
+  ]
+ },
+ "inkraken": {
+  "kind": "myth",
+  "basedOn": "Kraken",
+  "scientific": null,
+  "when": null,
+  "where": "Old sea stories from Norway and the North Atlantic",
+  "size": null,
+  "story": "In Norse and Scandinavian sailors' tales, the kraken was a sea monster big enough to pull down ships. Many scientists think real giant squid, rarely seen and sometimes washed ashore, inspired the stories.",
+  "facts": [
+   {
+    "text": "A writer in 1752 claimed the kraken was so big that sailors mistook its back for an island.",
+    "source": "https://en.wikipedia.org/wiki/Kraken"
+   },
+   {
+    "text": "Real giant squid have some of the biggest eyes of any animal, about as wide as a dinner plate.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   },
+   {
+    "text": "A giant squid was first filmed alive in its deep-sea home in 2012, near Japan.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   }
+  ]
+ },
+ "emberhead": {
+  "kind": "real",
+  "basedOn": "Scalloped Hammerhead",
+  "scientific": "Sphyrna lewini",
+  "when": null,
+  "where": "Warm coastal seas around the world, including the Galápagos Islands",
+  "size": "Can grow longer than 4 meters, longer than a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its wide, flat head helps it pin stingrays down on the sea floor.",
+    "source": "https://en.wikipedia.org/wiki/Scalloped_hammerhead"
+   },
+   {
+    "text": "Scalloped hammerheads may use Earth's magnetic field to find their way.",
+    "source": "https://en.wikipedia.org/wiki/Scalloped_hammerhead"
+   },
+   {
+    "text": "Hammerhead pups are born alive instead of hatching from eggs.",
+    "source": "https://en.wikipedia.org/wiki/Scalloped_hammerhead"
+   }
+  ]
+ },
+ "humpyre": {
+  "kind": "real",
+  "basedOn": "Dromedary Camel",
+  "scientific": "Camelus dromedarius",
+  "when": null,
+  "where": "Deserts of North Africa and the Middle East",
+  "size": "Taller than a grown-up at the hump",
+  "story": null,
+  "facts": [
+   {
+    "text": "A thirsty camel can drink more than 100 liters of water in one go.",
+    "source": "https://en.wikipedia.org/wiki/Dromedary"
+   },
+   {
+    "text": "A double row of eyelashes and bushy eyebrows keep blowing sand out of its eyes.",
+    "source": "https://en.wikipedia.org/wiki/Dromedary"
+   },
+   {
+    "text": "Camels can close their nostrils at will to keep out sand and save water.",
+    "source": "https://en.wikipedia.org/wiki/Dromedary"
+   }
+  ]
+ },
+ "ostrigust": {
+  "kind": "real",
+  "basedOn": "Common Ostrich",
+  "scientific": "Struthio camelus",
+  "when": null,
+  "where": "Savannas and deserts of Africa",
+  "size": "Taller than a grown-up, the biggest bird alive",
+  "story": null,
+  "facts": [
+   {
+    "text": "Ostriches have the largest eyes of any land animal with a backbone, about 5 centimeters across.",
+    "source": "https://en.wikipedia.org/wiki/Common_ostrich"
+   },
+   {
+    "text": "Ostriches lay the biggest eggs of any living bird, each weighing about 1.4 kilograms.",
+    "source": "https://en.wikipedia.org/wiki/Common_ostrich"
+   },
+   {
+    "text": "Most birds have four toes, but an ostrich has only two on each foot.",
+    "source": "https://en.wikipedia.org/wiki/Common_ostrich"
+   }
+  ]
+ },
+ "zapwhisker": {
+  "kind": "real",
+  "basedOn": "Electric Catfish",
+  "scientific": "Malapterurus electricus",
+  "when": null,
+  "where": "Rivers and lakes of West and Central Africa, and the Nile",
+  "size": "Can grow more than 1 meter long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Electric catfish are active at night and stun small fish with their shocks.",
+    "source": "https://en.wikipedia.org/wiki/Malapterurus_electricus"
+   },
+   {
+    "text": "Its electric organ wraps around almost its whole body, like a jacket.",
+    "source": "https://en.wikipedia.org/wiki/Malapterurus_electricus"
+   }
+  ]
+ },
+ "gorilith": {
+  "kind": "real",
+  "basedOn": "Mountain Gorilla",
+  "scientific": "Gorilla beringei beringei",
+  "when": null,
+  "where": "Volcano forests where Rwanda, Uganda and the Democratic Republic of the Congo meet",
+  "size": "A big male can weigh more than two grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "Every evening, gorillas build a fresh nest of leaves and branches to sleep in.",
+    "source": "https://www.worldwildlife.org/species/mountain-gorilla"
+   },
+   {
+    "text": "Grown-up males are called silverbacks because of the silver hair on their backs.",
+    "source": "https://en.wikipedia.org/wiki/Mountain_gorilla"
+   },
+   {
+    "text": "Thanks to protection, there are now more than 1,000 mountain gorillas in the wild.",
+    "source": "https://www.worldwildlife.org/species/mountain-gorilla"
+   }
+  ]
+ },
+ "monarflit": {
+  "kind": "real",
+  "basedOn": "Monarch Butterfly",
+  "scientific": "Danaus plexippus",
+  "when": null,
+  "where": "Fields and meadows across North America, wintering in Mexico",
+  "size": "Wings about as wide as a grown-up's palm",
+  "story": null,
+  "facts": [
+   {
+    "text": "No single monarch makes the whole round trip; it takes several generations each year.",
+    "source": "https://en.wikipedia.org/wiki/Monarch_butterfly_migration"
+   },
+   {
+    "text": "Caterpillars eat milkweed, which makes the butterflies taste bad to birds.",
+    "source": "https://en.wikipedia.org/wiki/Monarch_butterfly"
+   },
+   {
+    "text": "The monarchs that fly south can live about eight months, much longer than summer monarchs.",
+    "source": "https://en.wikipedia.org/wiki/Monarch_butterfly_migration"
+   }
+  ]
+ },
+ "flaminglow": {
+  "kind": "real",
+  "basedOn": "American Flamingo",
+  "scientific": "Phoenicopterus ruber",
+  "when": null,
+  "where": "Salty lagoons and mudflats of the Caribbean, including the Bahamas",
+  "size": "About as tall as a grown-up",
+  "story": null,
+  "facts": [
+   {
+    "text": "Flamingos eat with their heads upside down, straining food out of the water with their bills.",
+    "source": "https://en.wikipedia.org/wiki/Flamingo"
+   },
+   {
+    "text": "Flamingo chicks hatch with gray or white feathers, not pink ones.",
+    "source": "https://en.wikipedia.org/wiki/Flamingo"
+   },
+   {
+    "text": "Flamingos often rest standing on just one leg.",
+    "source": "https://en.wikipedia.org/wiki/Flamingo"
+   }
+  ]
+ },
+ "rockguana": {
+  "kind": "real",
+  "basedOn": "Rock Iguana",
+  "scientific": "Cyclura nubila",
+  "when": null,
+  "where": "Rocky, dry islands of the Caribbean, such as Cuba and the Bahamas",
+  "size": "About as long as a grown-up's arm span",
+  "story": null,
+  "facts": [
+   {
+    "text": "Rock iguanas eat mostly plants and help spread seeds around their islands.",
+    "source": "https://en.wikipedia.org/wiki/Cyclura"
+   },
+   {
+    "text": "The blue iguana of Grand Cayman once dropped to only about five in the wild before people helped it recover.",
+    "source": "https://en.wikipedia.org/wiki/Blue_iguana"
+   }
+  ]
+ },
+ "albasoar": {
+  "kind": "real",
+  "basedOn": "Wandering Albatross",
+  "scientific": "Diomedea exulans",
+  "when": null,
+  "where": "The Southern Ocean around Antarctica",
+  "size": "Wings wider than a car is long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Wandering albatrosses spend most of their lives flying, landing only to breed and feed.",
+    "source": "https://en.wikipedia.org/wiki/Wandering_albatross"
+   },
+   {
+    "text": "They can glide for hours without flapping their wings.",
+    "source": "https://en.wikipedia.org/wiki/Wandering_albatross"
+   },
+   {
+    "text": "Some fly more than 120,000 kilometers in a single year.",
+    "source": "https://en.wikipedia.org/wiki/Wandering_albatross"
+   }
+  ]
+ },
+ "krillume": {
+  "kind": "real",
+  "basedOn": "Antarctic Krill",
+  "scientific": "Euphausia superba",
+  "when": null,
+  "where": "The Southern Ocean around Antarctica",
+  "size": "About as long as your little finger",
+  "story": null,
+  "facts": [
+   {
+    "text": "The biggest krill swarms are so large they can be seen from space.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_krill"
+   },
+   {
+    "text": "When food runs out, krill can shrink in size each time they molt.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_krill"
+   },
+   {
+    "text": "Antarctic krill can live up to six years.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_krill"
+   }
+  ]
+ },
+ "snowmonk": {
+  "kind": "real",
+  "basedOn": "Japanese Macaque",
+  "scientific": "Macaca fuscata",
+  "when": null,
+  "where": "Mountains and forests of Japan",
+  "size": "About as big as a medium dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives farther north than any other primate besides humans.",
+    "source": "https://en.wikipedia.org/wiki/Japanese_macaque"
+   },
+   {
+    "text": "Japanese macaques have been seen rolling snowballs just for fun.",
+    "source": "https://en.wikipedia.org/wiki/Japanese_macaque"
+   },
+   {
+    "text": "On Koshima island, one young monkey started washing sweet potatoes, and her troop learned to copy her.",
+    "source": "https://en.wikipedia.org/wiki/Japanese_macaque"
+   }
+  ]
+ },
+ "embertig": {
+  "kind": "real",
+  "basedOn": "Bengal Tiger",
+  "scientific": "Panthera tigris tigris",
+  "when": null,
+  "where": "Forests and mangrove swamps of India and Bangladesh, including the Sundarbans",
+  "size": "Longer than a grown-up is tall, not counting the tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "The tiger is the largest wild cat in the world.",
+    "source": "https://en.wikipedia.org/wiki/Tiger"
+   },
+   {
+    "text": "A tiger's stripes are on its skin too, and no two tigers have the same pattern.",
+    "source": "https://en.wikipedia.org/wiki/Tiger"
+   },
+   {
+    "text": "The tiger is the national animal of both India and Bangladesh.",
+    "source": "https://en.wikipedia.org/wiki/Bengal_tiger"
+   }
+  ]
+ },
+ "peakprowl": {
+  "kind": "real",
+  "basedOn": "Snow Leopard",
+  "scientific": "Panthera uncia",
+  "when": null,
+  "where": "High mountains of Central and South Asia, including the Himalayas",
+  "size": "About as big as a large dog, with a very long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Snow leopards cannot roar. They make a soft puffing sound called a chuff.",
+    "source": "https://en.wikipedia.org/wiki/Snow_leopard"
+   },
+   {
+    "text": "Big furry paws work like snowshoes to keep them from sinking in snow.",
+    "source": "https://en.wikipedia.org/wiki/Snow_leopard"
+   }
+  ]
+ },
+ "pangoroll": {
+  "kind": "real",
+  "basedOn": "Pangolin",
+  "scientific": null,
+  "when": null,
+  "where": "Forests and grasslands of Asia and Africa",
+  "size": "About as big as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "Pangolin scales are made of keratin, the same stuff as your fingernails.",
+    "source": "https://en.wikipedia.org/wiki/Pangolin"
+   },
+   {
+    "text": "Pangolins have no teeth, so they swallow small stones to help grind up ants in their stomachs.",
+    "source": "https://en.wikipedia.org/wiki/Pangolin"
+   },
+   {
+    "text": "Large pangolins can stick their tongues out about 40 centimeters.",
+    "source": "https://en.wikipedia.org/wiki/Pangolin"
+   }
+  ]
+ },
+ "puffgust": {
+  "kind": "real",
+  "basedOn": "Atlantic Puffin",
+  "scientific": "Fratercula arctica",
+  "when": null,
+  "where": "Sea cliffs of the North Atlantic, especially Iceland",
+  "size": "About as tall as a water bottle",
+  "story": null,
+  "facts": [
+   {
+    "text": "A puffin's bright beak colors fall off after nesting season and grow back the next spring.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_puffin"
+   },
+   {
+    "text": "On Iceland's island of Heimaey, children rescue lost baby puffins and set them free at sea.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_puffin"
+   },
+   {
+    "text": "Puffins beat their wings several times a second and can fly about 80 kilometers an hour.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_puffin"
+   }
+  ]
+ },
+ "torpezap": {
+  "kind": "real",
+  "basedOn": "Electric Ray",
+  "scientific": "Torpedo marmorata",
+  "when": null,
+  "where": "Sandy sea floors of the Mediterranean Sea and eastern Atlantic",
+  "size": "About as long as a grown-up's arm",
+  "story": null,
+  "facts": [
+   {
+    "text": "The torpedo weapon was named after this ray, whose name comes from a Latin word meaning numb.",
+    "source": "https://en.wikipedia.org/wiki/Electric_ray"
+   },
+   {
+    "text": "It hides buried in the sand and shocks small fish that swim too close.",
+    "source": "https://en.wikipedia.org/wiki/Electric_ray"
+   },
+   {
+    "text": "Its electric organs are made of stacked plates, set up a lot like a battery.",
+    "source": "https://en.wikipedia.org/wiki/Electric_ray"
+   }
+  ]
+ },
+ "roozoom": {
+  "kind": "real",
+  "basedOn": "Red Kangaroo",
+  "scientific": "Osphranter rufus",
+  "when": null,
+  "where": "Dry grasslands and deserts of the Australian Outback",
+  "size": "Taller than a grown-up when standing up",
+  "story": null,
+  "facts": [
+   {
+    "text": "The red kangaroo is the largest marsupial, a mammal that carries its baby in a pouch.",
+    "source": "https://en.wikipedia.org/wiki/Red_kangaroo"
+   },
+   {
+    "text": "When moving slowly, kangaroos use their strong tail like a fifth leg.",
+    "source": "https://en.wikipedia.org/wiki/Kangaroo"
+   },
+   {
+    "text": "A group of kangaroos is called a mob.",
+    "source": "https://en.wikipedia.org/wiki/Kangaroo"
+   }
+  ]
+ },
+ "scorchdevil": {
+  "kind": "real",
+  "basedOn": "Tasmanian Devil",
+  "scientific": "Sarcophilus harrisii",
+  "when": null,
+  "where": "Forests and farmland of Tasmania, Australia",
+  "size": "About as big as a small dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest meat-eating marsupial alive today.",
+    "source": "https://en.wikipedia.org/wiki/Tasmanian_devil"
+   },
+   {
+    "text": "For its size, it has the most powerful bite of any living meat-eating mammal.",
+    "source": "https://en.wikipedia.org/wiki/Tasmanian_devil"
+   },
+   {
+    "text": "Devils store fat in their tails, so a healthy devil has a fat tail.",
+    "source": "https://en.wikipedia.org/wiki/Tasmanian_devil"
+   }
+  ]
+ },
+ "toucanopy": {
+  "kind": "real",
+  "basedOn": "Toco Toucan",
+  "scientific": "Ramphastos toco",
+  "when": null,
+  "where": "Forests and woodlands of South America",
+  "size": "About as long as a grown-up's arm, bill included",
+  "story": null,
+  "facts": [
+   {
+    "text": "Compared to its body size, the toco toucan has the biggest bill of any bird.",
+    "source": "https://en.wikipedia.org/wiki/Toco_toucan"
+   },
+   {
+    "text": "Toucans may tuck their bills under their wings while sleeping, which may help keep them warm.",
+    "source": "https://en.wikipedia.org/wiki/Toco_toucan"
+   },
+   {
+    "text": "Toco toucans eat mostly fruit, like figs and guavas, but also some insects.",
+    "source": "https://en.wikipedia.org/wiki/Toco_toucan"
+   }
+  ]
+ },
+ "burrowbark": {
+  "kind": "real",
+  "basedOn": "Black-tailed Prairie Dog",
+  "scientific": "Cynomys ludovicianus",
+  "when": null,
+  "where": "Grasslands of the Great Plains in the United States",
+  "size": "About as big as a guinea pig",
+  "story": null,
+  "facts": [
+   {
+    "text": "One prairie dog town in Texas was said to cover a huge area and hold about 400 million prairie dogs.",
+    "source": "https://en.wikipedia.org/wiki/Black-tailed_prairie_dog"
+   },
+   {
+    "text": "In a jump-yip, a prairie dog leaps up, throws its arms in the air and calls, and its neighbors copy it.",
+    "source": "https://en.wikipedia.org/wiki/Black-tailed_prairie_dog"
+   },
+   {
+    "text": "Prairie dogs are not dogs. They are rodents in the squirrel family.",
+    "source": "https://en.wikipedia.org/wiki/Prairie_dog"
+   }
+  ]
+ },
+ "gilablaze": {
+  "kind": "real",
+  "basedOn": "Gila Monster",
+  "scientific": "Heloderma suspectum",
+  "when": null,
+  "where": "Deserts of the southwestern United States and northern Mexico",
+  "size": "About as long as a grown-up's arm",
+  "story": null,
+  "facts": [
+   {
+    "text": "Gila monsters spend about 90 percent of their lives underground.",
+    "source": "https://en.wikipedia.org/wiki/Gila_monster"
+   },
+   {
+    "text": "They store fat in their tails, so a few big meals in spring can last a whole season.",
+    "source": "https://en.wikipedia.org/wiki/Gila_monster"
+   },
+   {
+    "text": "A medicine for diabetes was made from a protein found in Gila monster venom.",
+    "source": "https://en.wikipedia.org/wiki/Gila_monster"
+   }
+  ]
+ },
+ "cranewind": {
+  "kind": "real",
+  "basedOn": "Sandhill Crane",
+  "scientific": "Antigone canadensis",
+  "when": null,
+  "where": "Wetlands and prairies of North America, stopping along Nebraska's Platte River",
+  "size": "About as tall as a 4th grader",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sandhill cranes dance by jumping, bowing and flapping their wings, often with a partner.",
+    "source": "https://bonnersferryherald.com/news/2020/apr/23/sandhill-cranes-among-natures-greatest-11"
+   },
+   {
+    "text": "The oldest known sandhill crane fossil is about 2.5 million years old.",
+    "source": "https://en.wikipedia.org/wiki/Sandhill_crane"
+   }
+  ]
+ },
+ "seagrazer": {
+  "kind": "real",
+  "basedOn": "West Indian Manatee",
+  "scientific": "Trichechus manatus",
+  "when": null,
+  "where": "Warm coastal waters, rivers and springs of Florida and the Caribbean",
+  "size": "About as long as a small car",
+  "story": null,
+  "facts": [
+   {
+    "text": "A manatee's closest living relatives are elephants.",
+    "source": "https://en.wikipedia.org/wiki/West_Indian_manatee"
+   },
+   {
+    "text": "Manatees grab plants with their bendy snouts, a bit like an elephant uses its trunk.",
+    "source": "https://en.wikipedia.org/wiki/West_Indian_manatee"
+   },
+   {
+    "text": "The manatee is Florida's official state marine mammal.",
+    "source": "https://en.wikipedia.org/wiki/List_of_Florida_state_symbols"
+   }
+  ]
+ },
+ "hoofshell": {
+  "kind": "real",
+  "basedOn": "Atlantic Horseshoe Crab",
+  "scientific": "Limulus polyphemus",
+  "when": null,
+  "where": "Beaches and shallow bays of the U.S. Atlantic coast and Gulf of Mexico",
+  "size": "About as long as a large dinner plate",
+  "story": null,
+  "facts": [
+   {
+    "text": "Horseshoe crabs are not true crabs. They are more closely related to spiders and scorpions.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_horseshoe_crab"
+   },
+   {
+    "text": "Their blood is blue, and doctors use it to test medicines for germs.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_horseshoe_crab"
+   },
+   {
+    "text": "Horseshoe crab relatives have been around for more than 400 million years.",
+    "source": "https://en.wikipedia.org/wiki/Horseshoe_crab"
+   }
+  ]
+ },
+ "reinfrost": {
+  "kind": "real",
+  "basedOn": "Reindeer",
+  "scientific": "Rangifer tarandus",
+  "when": null,
+  "where": "Arctic tundra and forests of northern Europe, Asia and North America",
+  "size": "About as tall as a grown-up's chest at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "Both male and female reindeer can grow antlers.",
+    "source": "https://en.wikipedia.org/wiki/Reindeer"
+   },
+   {
+    "text": "The back of a reindeer's eye changes from gold in summer to blue in winter to see in the dark.",
+    "source": "https://en.wikipedia.org/wiki/Reindeer"
+   },
+   {
+    "text": "Reindeer knees click as they walk, and the sound can be heard hundreds of meters away.",
+    "source": "https://en.wikipedia.org/wiki/Reindeer"
+   }
+  ]
+ },
+ "salamblaze": {
+  "kind": "real",
+  "basedOn": "Fire Salamander",
+  "scientific": "Salamandra salamandra",
+  "when": null,
+  "where": "Damp, leafy forests of Europe",
+  "size": "About as long as a pencil",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its bright yellow and black colors warn predators that its skin is poisonous.",
+    "source": "https://en.wikipedia.org/wiki/Fire_salamander"
+   },
+   {
+    "text": "One fire salamander lived more than 50 years in a German museum.",
+    "source": "https://en.wikipedia.org/wiki/Fire_salamander"
+   },
+   {
+    "text": "The fire legend may come from salamanders crawling out of logs that people put on the fire.",
+    "source": "https://en.wikipedia.org/wiki/Salamander_(legendary_creature)"
+   }
+  ]
+ },
+ "logshell": {
+  "kind": "real",
+  "basedOn": "Loggerhead Sea Turtle",
+  "scientific": "Caretta caretta",
+  "when": null,
+  "where": "Warm oceans worldwide, nesting on beaches like Zakynthos in Greece",
+  "size": "Shell about 1 meter long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Loggerheads are named for their big heads, which hold strong jaws for crunching shellfish.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_sea_turtle"
+   },
+   {
+    "text": "The warmth of the sand decides whether baby turtles hatch as boys or girls.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_sea_turtle"
+   },
+   {
+    "text": "Females return to nest on the same beaches where they hatched years before.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_sea_turtle"
+   }
+  ]
+ },
+ "bisolith": {
+  "kind": "real",
+  "basedOn": "European Bison",
+  "scientific": "Bison bonasus",
+  "when": null,
+  "where": "Forests of Europe, especially Białowieża Forest in Poland and Belarus",
+  "size": "A big male can weigh as much as a small car",
+  "story": null,
+  "facts": [
+   {
+    "text": "By 1927 there were no wild European bison left anywhere.",
+    "source": "https://en.wikipedia.org/wiki/European_bison"
+   },
+   {
+    "text": "Every European bison today comes from just 12 animals kept in zoos.",
+    "source": "https://en.wikipedia.org/wiki/European_bison"
+   },
+   {
+    "text": "In 1929, the first two bison were set free again in Białowieża Forest.",
+    "source": "https://en.wikipedia.org/wiki/European_bison"
+   }
+  ]
+ },
+ "sunscarab": {
+  "kind": "history",
+  "basedOn": "Sacred Scarab",
+  "scientific": "Scarabaeus sacer",
+  "when": null,
+  "where": "Deserts and dry lands around the Mediterranean, including Egypt",
+  "size": "About as long as a grape",
+  "story": "Ancient Egyptians saw scarab beetles rolling balls of dung and linked them to Khepri, the god of the rising sun, who was said to roll the sun across the sky.",
+  "facts": [
+   {
+    "text": "Some dung beetles find their way at night using the Milky Way.",
+    "source": "https://en.wikipedia.org/wiki/Dung_beetle"
+   },
+   {
+    "text": "Ancient Egyptians made scarab-shaped charms and seals in huge numbers.",
+    "source": "https://en.wikipedia.org/wiki/Scarab_(artifact)"
+   },
+   {
+    "text": "One kind of dung beetle can pull more than 1,000 times its own weight.",
+    "source": "https://en.wikipedia.org/wiki/Dung_beetle"
+   }
+  ]
+ },
+ "pygmippo": {
+  "kind": "real",
+  "basedOn": "Pygmy Hippopotamus",
+  "scientific": "Choeropsis liberiensis",
+  "when": null,
+  "where": "Rainforests and swamps of West Africa, mostly Liberia",
+  "size": "About as tall as a kitchen table and as heavy as two grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "A pygmy hippo weighs less than a quarter as much as a common hippo.",
+    "source": "https://en.wikipedia.org/wiki/Pygmy_hippopotamus"
+   },
+   {
+    "text": "Its skin makes a special liquid that may work like sunscreen.",
+    "source": "https://en.wikipedia.org/wiki/Pygmy_hippopotamus"
+   },
+   {
+    "text": "A baby pygmy hippo named Moo Deng became famous online in 2024.",
+    "source": "https://en.wikipedia.org/wiki/Pygmy_hippopotamus"
+   }
+  ]
+ },
+ "okaleaf": {
+  "kind": "real",
+  "basedOn": "Okapi",
+  "scientific": "Okapia johnstoni",
+  "when": null,
+  "where": "Rainforests of the Democratic Republic of the Congo, like the Ituri Forest",
+  "size": "About as tall as a grown-up at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its tongue is about 46 centimeters long, long enough to clean its own ears and eyes.",
+    "source": "https://en.wikipedia.org/wiki/Okapi"
+   },
+   {
+    "text": "Scientists outside Africa did not describe the okapi until 1901.",
+    "source": "https://en.wikipedia.org/wiki/Okapi"
+   },
+   {
+    "text": "Only male okapis have the short horn-like bumps called ossicones.",
+    "source": "https://en.wikipedia.org/wiki/Okapi"
+   }
+  ]
+ },
+ "cheetgale": {
+  "kind": "real",
+  "basedOn": "Cheetah",
+  "scientific": "Acinonyx jubatus",
+  "when": null,
+  "where": "Savannas and grasslands of Africa, like the Serengeti",
+  "size": "About as big as a large dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "Cheetahs purr like house cats, only much louder, and they also make chirping sounds.",
+    "source": "https://en.wikipedia.org/wiki/Cheetah"
+   },
+   {
+    "text": "The black tear lines on a cheetah's face may help protect its eyes from the sun's glare.",
+    "source": "https://en.wikipedia.org/wiki/Cheetah"
+   },
+   {
+    "text": "A cheetah's long tail works like a rudder when it turns at high speed.",
+    "source": "https://en.wikipedia.org/wiki/Cheetah"
+   }
+  ]
+ },
+ "sentrikat": {
+  "kind": "real",
+  "basedOn": "Meerkat",
+  "scientific": "Suricata suricatta",
+  "when": null,
+  "where": "Dry grasslands and deserts of southern Africa, like the Kalahari",
+  "size": "About as long as a ruler and a half",
+  "story": null,
+  "facts": [
+   {
+    "text": "Meerkats are a kind of small mongoose.",
+    "source": "https://en.wikipedia.org/wiki/Meerkat"
+   },
+   {
+    "text": "Meerkats eat scorpions and are not harmed by their venom.",
+    "source": "https://en.wikipedia.org/wiki/Meerkat"
+   },
+   {
+    "text": "Meerkats sunbathe on warm rocks to warm up on chilly mornings.",
+    "source": "https://en.wikipedia.org/wiki/Meerkat"
+   }
+  ]
+ },
+ "oryxflare": {
+  "kind": "real",
+  "basedOn": "Arabian Oryx",
+  "scientific": "Oryx leucoryx",
+  "when": null,
+  "where": "Deserts of the Arabian Peninsula, including Oman",
+  "size": "About as tall as a grown-up's chest at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "Arabian oryx can sense rain from far away and walk toward the fresh plants it brings.",
+    "source": "https://en.wikipedia.org/wiki/Arabian_oryx"
+   },
+   {
+    "text": "In 2011 it became the first animal to go from extinct in the wild back to vulnerable.",
+    "source": "https://en.wikipedia.org/wiki/Arabian_oryx"
+   },
+   {
+    "text": "Some think the unicorn legend began with oryx that had lost one horn.",
+    "source": "https://en.wikipedia.org/wiki/Arabian_oryx"
+   }
+  ]
+ },
+ "peavolt": {
+  "kind": "real",
+  "basedOn": "Indian Peafowl",
+  "scientific": "Pavo cristatus",
+  "when": null,
+  "where": "Forests and farmland of India, Sri Lanka and nearby countries",
+  "size": "About as long as a grown-up is tall, tail included",
+  "story": null,
+  "facts": [
+   {
+    "text": "Peacocks call more often just before the monsoon rains arrive.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   },
+   {
+    "text": "Peafowl fly up into tall trees to sleep at night.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   },
+   {
+    "text": "Only the males are peacocks. The females are called peahens.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   }
+  ]
+ },
+ "komodrake": {
+  "kind": "real",
+  "basedOn": "Komodo Dragon",
+  "scientific": "Varanus komodoensis",
+  "when": null,
+  "where": "Komodo, Rinca, Flores and a few nearby islands of Indonesia",
+  "size": "Up to about 3 meters (10 feet) long, longer than a couch",
+  "story": null,
+  "facts": [
+   {
+    "text": "A Komodo dragon flicks its long, forked yellow tongue to taste and smell the air.",
+    "source": "https://en.wikipedia.org/wiki/Komodo_dragon"
+   },
+   {
+    "text": "Young Komodo dragons spend their first few years living in trees, where they are safer.",
+    "source": "https://en.wikipedia.org/wiki/Komodo_dragon"
+   },
+   {
+    "text": "Some female Komodo dragons in zoos have laid eggs that hatched with no father at all.",
+    "source": "https://en.wikipedia.org/wiki/Komodo_dragon"
+   }
+  ]
+ },
+ "axoglow": {
+  "kind": "real",
+  "basedOn": "Axolotl",
+  "scientific": "Ambystoma mexicanum",
+  "when": null,
+  "where": "Lake Xochimilco and its canals, in Mexico City, Mexico",
+  "size": "About as long as a new pencil",
+  "story": null,
+  "facts": [
+   {
+    "text": "Axolotls never really grow up: adults keep their feathery outside gills and stay in the water their whole lives.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   },
+   {
+    "text": "Besides legs, axolotls can regrow gills and even parts of their eyes and brains.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   },
+   {
+    "text": "Wild axolotls are critically endangered, with only a small number left in the canals.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   }
+  ]
+ },
+ "zippabee": {
+  "kind": "real",
+  "basedOn": "Bee Hummingbird",
+  "scientific": "Mellisuga helenae",
+  "when": null,
+  "where": "Cuba and the nearby Isla de la Juventud",
+  "size": "About as long as your thumb and lighter than a penny",
+  "story": null,
+  "facts": [
+   {
+    "text": "A bee hummingbird beats its wings about 80 to 200 times every second, so it can hover in place.",
+    "source": "https://en.wikipedia.org/wiki/Bee_hummingbird"
+   },
+   {
+    "text": "A mother lays just two eggs at a time, each about the size of a coffee bean.",
+    "source": "https://en.wikipedia.org/wiki/Bee_hummingbird"
+   },
+   {
+    "text": "Male bee hummingbirds get a shiny reddish-pink head and throat during mating season.",
+    "source": "https://en.wikipedia.org/wiki/Bee_hummingbird"
+   }
+  ]
+ },
+ "slothmoss": {
+  "kind": "real",
+  "basedOn": "Brown-Throated Sloth",
+  "scientific": "Bradypus variegatus",
+  "when": null,
+  "where": "Rainforests of Central and South America, including the Amazon",
+  "size": "About as big as a small dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sloths climb down from their trees only about once a week, to poop on the ground.",
+    "source": "https://en.wikipedia.org/wiki/Brown-throated_sloth"
+   },
+   {
+    "text": "Three-toed sloths have extra neck bones, so they can turn their heads about 270 degrees.",
+    "source": "https://en.wikipedia.org/wiki/Brown-throated_sloth"
+   },
+   {
+    "text": "Sloths are slow in trees, but they are strong swimmers.",
+    "source": "https://en.wikipedia.org/wiki/Brown-throated_sloth"
+   }
+  ]
+ },
+ "wombrick": {
+  "kind": "real",
+  "basedOn": "Common Wombat",
+  "scientific": "Vombatus ursinus",
+  "when": null,
+  "where": "Forests and hills of southeastern Australia and Tasmania",
+  "size": "About as big as a medium-sized dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "A wombat's pouch opens toward its back legs, so dirt doesn't get on the baby while mom digs.",
+    "source": "https://en.wikipedia.org/wiki/Wombat"
+   },
+   {
+    "text": "A wombat's rear end is tough and stiff, and it can block its burrow with its bottom to keep enemies out.",
+    "source": "https://en.wikipedia.org/wiki/Wombat"
+   },
+   {
+    "text": "Wombats dig long tunnel systems using their strong claws and front teeth.",
+    "source": "https://en.wikipedia.org/wiki/Wombat"
+   }
+  ]
+ },
+ "glassfin": {
+  "kind": "real",
+  "basedOn": "Antarctic Icefish",
+  "scientific": "Chaenocephalus aceratus",
+  "when": null,
+  "where": "The icy Southern Ocean around Antarctica",
+  "size": "Up to about as long as your arm",
+  "story": null,
+  "facts": [
+   {
+    "text": "Icefish make antifreeze proteins that stop ice crystals from forming inside their bodies.",
+    "source": "https://en.wikipedia.org/wiki/Channichthyidae"
+   },
+   {
+    "text": "In 2021, scientists found about 60 million icefish nests on the seafloor of Antarctica's Weddell Sea.",
+    "source": "https://en.wikipedia.org/wiki/Channichthyidae"
+   },
+   {
+    "text": "Most icefish have no myoglobin, the protein that makes most animals' muscles red.",
+    "source": "https://en.wikipedia.org/wiki/Channichthyidae"
+   }
+  ]
+ },
+ "nightfinger": {
+  "kind": "real",
+  "basedOn": "Aye-Aye",
+  "scientific": "Daubentonia madagascariensis",
+  "when": null,
+  "where": "Rainforests of Madagascar",
+  "size": "About as big as a house cat, with a long bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "An aye-aye's front teeth never stop growing, just like a rodent's teeth.",
+    "source": "https://en.wikipedia.org/wiki/Aye-aye"
+   },
+   {
+    "text": "Because of those teeth, early scientists thought the aye-aye was a rodent, but it is really a kind of lemur.",
+    "source": "https://en.wikipedia.org/wiki/Aye-aye"
+   },
+   {
+    "text": "After tapping, it gnaws a small hole in the wood and pokes in its skinny finger to pull out grubs.",
+    "source": "https://en.wikipedia.org/wiki/Aye-aye"
+   }
+  ]
+ },
+ "shoestone": {
+  "kind": "real",
+  "basedOn": "Shoebill",
+  "scientific": "Balaeniceps rex",
+  "when": null,
+  "where": "Papyrus swamps of East Africa, such as in South Sudan, Uganda and Zambia",
+  "size": "Taller than many kids, about 4 feet (over 1 meter) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The shoebill is named for its giant bill, which is shaped like a big shoe.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   },
+   {
+    "text": "Shoebills are mostly quiet, but at the nest they clatter their bills loudly and can even moo like a cow.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   },
+   {
+    "text": "One of the shoebill's favorite foods is the lungfish, a fish that can breathe air.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   }
+  ]
+ },
+ "thornback": {
+  "kind": "real",
+  "basedOn": "Thorny Devil",
+  "scientific": "Moloch horridus",
+  "when": null,
+  "where": "Deserts and dry scrublands of central and western Australia",
+  "size": "About as long as a grown-up's hand",
+  "story": null,
+  "facts": [
+   {
+    "text": "A thorny devil has a spiky bump on its neck called a false head, which it shows to enemies while tucking its real head down.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   },
+   {
+    "text": "Thorny devils eat mostly ants, often thousands of them in a single day.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   },
+   {
+    "text": "Its colors change from pale when it is warm to darker when it is cold.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   }
+  ]
+ },
+ "saigasnoot": {
+  "kind": "real",
+  "basedOn": "Saiga Antelope",
+  "scientific": "Saiga tatarica",
+  "when": null,
+  "where": "Dry grasslands called steppes in Kazakhstan, Russia and Mongolia",
+  "size": "About as big as a goat",
+  "story": null,
+  "facts": [
+   {
+    "text": "During the Ice Age, saigas roamed from England all the way to Alaska, alongside woolly mammoths.",
+    "source": "https://en.wikipedia.org/wiki/Saiga_antelope"
+   },
+   {
+    "text": "Saigas nearly died out, but by 2022 there were more than a million in Kazakhstan.",
+    "source": "https://en.wikipedia.org/wiki/Saiga_antelope"
+   },
+   {
+    "text": "Scientists say the saiga has barely changed in shape since prehistoric times.",
+    "source": "https://en.wikipedia.org/wiki/Saiga_antelope"
+   }
+  ]
+ },
+ "noseling": {
+  "kind": "real",
+  "basedOn": "Proboscis Monkey",
+  "scientific": "Nasalis larvatus",
+  "when": null,
+  "where": "Mangrove, river and swamp forests on the island of Borneo",
+  "size": "About as big as a medium-sized dog, with a long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Many of a proboscis monkey's toes are webbed, which helps it swim.",
+    "source": "https://en.wikipedia.org/wiki/Proboscis_monkey"
+   },
+   {
+    "text": "Proboscis monkeys have big round bellies that look like pot bellies, from their large leaf-filled stomachs.",
+    "source": "https://en.wikipedia.org/wiki/Proboscis_monkey"
+   },
+   {
+    "text": "Only the males grow the giant floppy nose; females have much smaller noses.",
+    "source": "https://en.wikipedia.org/wiki/Proboscis_monkey"
+   }
+  ]
+ },
+ "clawhatch": {
+  "kind": "real",
+  "basedOn": "Hoatzin",
+  "scientific": "Opisthocomus hoazin",
+  "when": null,
+  "where": "Swamps and riverside forests of the Amazon and Orinoco river basins in South America",
+  "size": "About as big as a chicken",
+  "story": null,
+  "facts": [
+   {
+    "text": "Hoatzins eat leaves and break them down in their gut a bit like cows do.",
+    "source": "https://en.wikipedia.org/wiki/Hoatzin"
+   },
+   {
+    "text": "All that fermenting food makes hoatzins smell bad, so people call them stinkbirds.",
+    "source": "https://en.wikipedia.org/wiki/Hoatzin"
+   },
+   {
+    "text": "The hoatzin is the national bird of Guyana, where it is called the Canje pheasant.",
+    "source": "https://en.wikipedia.org/wiki/Hoatzin"
+   }
+  ]
+ },
+ "clearhop": {
+  "kind": "real",
+  "basedOn": "Glass Frog",
+  "scientific": null,
+  "when": null,
+  "where": "Rainforests of Central and South America, including Costa Rica",
+  "size": "About as long as a paperclip",
+  "story": null,
+  "facts": [
+   {
+    "text": "When a glass frog sleeps, it hides most of its red blood inside its liver, making it even harder to see.",
+    "source": "https://en.wikipedia.org/wiki/Glass_frog"
+   },
+   {
+    "text": "Glass frogs live in trees and bushes along streams in the rainforest.",
+    "source": "https://en.wikipedia.org/wiki/Glass_frog"
+   },
+   {
+    "text": "Glass frog eggs are laid on a leaf hanging over a stream, and the father often guards them.",
+    "source": "https://en.wikipedia.org/wiki/Glass_frog"
+   }
+  ]
+ },
+ "narspire": {
+  "kind": "real",
+  "basedOn": "Narwhal",
+  "scientific": "Monodon monoceros",
+  "when": null,
+  "where": "Arctic waters around Greenland, Canada, Norway and Russia",
+  "size": "Body about as long as a car, plus a tusk up to about 3 meters (10 feet)",
+  "story": null,
+  "facts": [
+   {
+    "text": "A narwhal's tusk grows in a spiral out of the left side of its upper jaw, mostly in males.",
+    "source": "https://en.wikipedia.org/wiki/Narwhal"
+   },
+   {
+    "text": "Narwhals are among the deepest-diving whales, going down more than 2,000 meters.",
+    "source": "https://en.wikipedia.org/wiki/Narwhal"
+   },
+   {
+    "text": "Long ago in Europe, narwhal tusks were sold as unicorn horns.",
+    "source": "https://en.wikipedia.org/wiki/Narwhal"
+   }
+  ]
+ },
+ "condorise": {
+  "kind": "real",
+  "basedOn": "California Condor",
+  "scientific": "Gymnogyps californianus",
+  "when": null,
+  "where": "Mountains and canyons of California, Arizona, Utah and Baja California",
+  "size": "Wings stretch about 3 meters (nearly 10 feet), about as wide as a basketball hoop is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The California condor has the widest wings of any bird in North America.",
+    "source": "https://en.wikipedia.org/wiki/California_condor"
+   },
+   {
+    "text": "California condors can live up to about 60 years, longer than most birds.",
+    "source": "https://en.wikipedia.org/wiki/California_condor"
+   },
+   {
+    "text": "Condors are scavengers that eat dead animals, and lead poisoning is one of their biggest dangers.",
+    "source": "https://en.wikipedia.org/wiki/California_condor"
+   }
+  ]
+ },
+ "goliathop": {
+  "kind": "real",
+  "basedOn": "Goliath Frog",
+  "scientific": "Conraua goliath",
+  "when": null,
+  "where": "Fast rivers and waterfalls in Cameroon and Equatorial Guinea",
+  "size": "About as long as a ruler from nose to rump",
+  "story": null,
+  "facts": [
+   {
+    "text": "Goliath frogs have no vocal sac, so they don't croak to call mates like most frogs.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_frog"
+   },
+   {
+    "text": "Goliath frogs build nests by clearing or digging out little pools beside rivers for their eggs.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_frog"
+   },
+   {
+    "text": "The goliath frog is endangered because of forest loss and hunting.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_frog"
+   }
+  ]
+ },
+ "strikewing": {
+  "kind": "real",
+  "basedOn": "Peregrine Falcon",
+  "scientific": "Falco peregrinus",
+  "when": null,
+  "where": "Almost everywhere on Earth, including the deserts and cities of the Middle East",
+  "size": "About as big as a crow",
+  "story": null,
+  "facts": [
+   {
+    "text": "The peregrine falcon is the most widespread bird of prey in the world.",
+    "source": "https://en.wikipedia.org/wiki/Peregrine_falcon"
+   },
+   {
+    "text": "Its name means wandering falcon, because many peregrines migrate long distances.",
+    "source": "https://en.wikipedia.org/wiki/Peregrine_falcon"
+   },
+   {
+    "text": "Many peregrines now nest in cities, on skyscraper ledges and cathedrals.",
+    "source": "https://en.wikipedia.org/wiki/Peregrine_falcon"
+   }
+  ]
+ },
+ "sunbeary": {
+  "kind": "real",
+  "basedOn": "Sun Bear",
+  "scientific": "Helarctos malayanus",
+  "when": null,
+  "where": "Tropical forests of Southeast Asia, from Myanmar to Borneo and Sumatra",
+  "size": "About as big as a large dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sun bears are also called honey bears, because they love to eat honey.",
+    "source": "https://en.wikipedia.org/wiki/Sun_bear"
+   },
+   {
+    "text": "A sun bear's extra-long tongue helps it lick insects and honey out of trees.",
+    "source": "https://en.wikipedia.org/wiki/Sun_bear"
+   },
+   {
+    "text": "Sun bears are the best climbers of all bears and often sunbathe or sleep up in trees.",
+    "source": "https://en.wikipedia.org/wiki/Sun_bear"
+   }
+  ]
+ },
+ "jellume": {
+  "kind": "real",
+  "basedOn": "Crystal Jelly",
+  "scientific": "Aequorea victoria",
+  "when": null,
+  "where": "The Pacific coast of North America",
+  "size": "About as wide as your hand",
+  "story": null,
+  "facts": [
+   {
+    "text": "The crystal jelly is almost completely clear and colorless, so it can be hard to see.",
+    "source": "https://en.wikipedia.org/wiki/Aequorea_victoria"
+   },
+   {
+    "text": "It makes a flash of blue light, and a second protein, called GFP, turns that light green.",
+    "source": "https://en.wikipedia.org/wiki/Aequorea_victoria"
+   },
+   {
+    "text": "Scientists now use GFP from this jelly to make cells glow so they can watch them under a microscope.",
+    "source": "https://en.wikipedia.org/wiki/Green_fluorescent_protein"
+   }
+  ]
+ },
+ "cavestar": {
+  "kind": "real",
+  "basedOn": "New Zealand Glowworm",
+  "scientific": "Arachnocampa luminosa",
+  "when": null,
+  "where": "Caves and shady, damp forests of New Zealand",
+  "size": "Up to about as long as a paperclip",
+  "story": null,
+  "facts": [
+   {
+    "text": "The New Zealand glowworm is not a worm at all; it is the young stage of a small fly called a fungus gnat.",
+    "source": "https://en.wikipedia.org/wiki/Arachnocampa_luminosa"
+   },
+   {
+    "text": "In 1886, a teacher in Christchurch proved the glowworm was a gnat, not a beetle as people thought.",
+    "source": "https://en.wikipedia.org/wiki/Arachnocampa_luminosa"
+   },
+   {
+    "text": "Grown-up glowworm gnats live only about three or four days.",
+    "source": "https://en.wikipedia.org/wiki/Arachnocampa_luminosa"
+   }
+  ]
+ },
+ "lumangler": {
+  "kind": "real",
+  "basedOn": "Humpback Anglerfish",
+  "scientific": "Melanocetus johnsonii",
+  "when": null,
+  "where": "The dark deep sea of the Atlantic and other oceans",
+  "size": "About as big as a grapefruit",
+  "story": null,
+  "facts": [
+   {
+    "text": "Some deep-sea anglerfish can swallow prey up to twice as big as their own bodies.",
+    "source": "https://en.wikipedia.org/wiki/Anglerfish"
+   },
+   {
+    "text": "In many deep-sea anglerfish, the tiny male clings onto the much bigger female, and sometimes they even join together.",
+    "source": "https://en.wikipedia.org/wiki/Anglerfish"
+   },
+   {
+    "text": "The humpback anglerfish was named after James Yate Johnson, who found the first one near Madeira in 1863.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_anglerfish"
+   }
+  ]
+ },
+ "kermoon": {
+  "kind": "real",
+  "basedOn": "Kermode Bear",
+  "scientific": "Ursus americanus kermodei",
+  "when": null,
+  "where": "The Great Bear Rainforest on the coast of British Columbia, Canada",
+  "size": "A big male can weigh as much as three grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "A spirit bear is white only if it gets the white-fur gene from both parents, so black bears can have white cubs.",
+    "source": "https://en.wikipedia.org/wiki/Spirit_bear"
+   },
+   {
+    "text": "The spirit bear is the official animal of British Columbia.",
+    "source": "https://en.wikipedia.org/wiki/Spirit_bear"
+   },
+   {
+    "text": "White spirit bears catch more salmon in the daytime than black bears, maybe because fish don't notice them as easily.",
+    "source": "https://en.wikipedia.org/wiki/Spirit_bear"
+   }
+  ]
+ },
+ "hushowl": {
+  "kind": "real",
+  "basedOn": "Barn Owl",
+  "scientific": "Tyto alba",
+  "when": null,
+  "where": "Farmland and open country across Europe, Africa and West Asia",
+  "size": "About as tall as a bowling pin",
+  "story": null,
+  "facts": [
+   {
+    "text": "A barn owl's heart-shaped face helps gather sounds toward its ears.",
+    "source": "https://en.wikipedia.org/wiki/Western_barn_owl"
+   },
+   {
+    "text": "Its ears sit at different heights on its head, which helps it hunt by sound without needing to see.",
+    "source": "https://en.wikipedia.org/wiki/Western_barn_owl"
+   },
+   {
+    "text": "Barn owls don't hoot; they make a long, eerie screech instead.",
+    "source": "https://en.wikipedia.org/wiki/Western_barn_owl"
+   }
+  ]
+ },
+ "spectrab": {
+  "kind": "real",
+  "basedOn": "Horned Ghost Crab",
+  "scientific": "Ocypode ceratophthalma",
+  "when": null,
+  "where": "Sandy beaches of East Africa and across the Indian and Pacific Oceans",
+  "size": "Its shell is about as wide as a tennis ball",
+  "story": null,
+  "facts": [
+   {
+    "text": "Some ghost crabs have little horns on the tips of their eye stalks.",
+    "source": "https://en.wikipedia.org/wiki/Ocypode"
+   },
+   {
+    "text": "Ghost crabs talk to each other by rubbing ridges on their claws to make sounds.",
+    "source": "https://en.wikipedia.org/wiki/Ocypode"
+   },
+   {
+    "text": "A ghost crab has one claw that is much bigger than the other.",
+    "source": "https://en.wikipedia.org/wiki/Ocypode"
+   }
+  ]
+ },
+ "tarspook": {
+  "kind": "real",
+  "basedOn": "Philippine Tarsier",
+  "scientific": "Carlito syrichta",
+  "when": null,
+  "where": "Forests of Bohol and other islands in the southern Philippines",
+  "size": "Small enough to sit in your hand",
+  "story": null,
+  "facts": [
+   {
+    "text": "Philippine tarsiers can call in ultrasound, a sound too high-pitched for people to hear.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_tarsier"
+   },
+   {
+    "text": "Thanks to long ankle bones, a tarsier can jump about 3 meters from tree to tree.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_tarsier"
+   },
+   {
+    "text": "Tarsiers mostly hunt live insects, and also eat spiders and small lizards.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_tarsier"
+   }
+  ]
+ },
+ "armorfin": {
+  "kind": "prehistoric",
+  "basedOn": "Dunkleosteus",
+  "scientific": "Dunkleosteus terrelli",
+  "when": "About 360 million years ago",
+  "where": "Shallow seas that covered what is now Ohio, Morocco and other places",
+  "size": "At least as long as a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "Dunkleosteus was a placoderm, which means plate-skinned, a group of armored fish that died out long ago.",
+    "source": "https://en.wikipedia.org/wiki/Dunkleosteus"
+   },
+   {
+    "text": "Its name honors David Dunkle, who worked at the Cleveland Museum of Natural History.",
+    "source": "https://en.wikipedia.org/wiki/Dunkleosteus"
+   },
+   {
+    "text": "Only its armored head and front were hard enough to fossilize well, so scientists still argue about its true length.",
+    "source": "https://en.wikipedia.org/wiki/Dunkleosteus"
+   }
+  ]
+ },
+ "clubclank": {
+  "kind": "prehistoric",
+  "basedOn": "Ankylosaurus",
+  "scientific": "Ankylosaurus magniventris",
+  "when": "About 68 million years ago",
+  "where": "Western North America, in what is now Montana, Wyoming and Alberta, Canada",
+  "size": "About as long as two cars parked end to end",
+  "story": null,
+  "facts": [
+   {
+    "text": "The name Ankylosaurus means fused lizard, because many bones in its skull and body were joined together.",
+    "source": "https://en.wikipedia.org/wiki/Ankylosaurus"
+   },
+   {
+    "text": "Ankylosaurus lived at the same time and place as Tyrannosaurus rex and Triceratops.",
+    "source": "https://en.wikipedia.org/wiki/Ankylosaurus"
+   },
+   {
+    "text": "Ankylosaurus was one of the very last dinosaurs before they died out.",
+    "source": "https://en.wikipedia.org/wiki/Ankylosaurus"
+   }
+  ]
+ },
+ "ferrosnail": {
+  "kind": "real",
+  "basedOn": "Scaly-Foot Snail",
+  "scientific": "Chrysomallon squamiferum",
+  "when": null,
+  "where": "Hot deep-sea vents in the Indian Ocean, more than 2,000 meters down",
+  "size": "About as big as a golf ball",
+  "story": null,
+  "facts": [
+   {
+    "text": "This snail gets its food from helpful bacteria living inside a special gland in its throat.",
+    "source": "https://en.wikipedia.org/wiki/Scaly-foot_gastropod"
+   },
+   {
+    "text": "In 2019, it became the first animal listed as endangered because of the risk of deep-sea mining.",
+    "source": "https://en.wikipedia.org/wiki/Scaly-foot_gastropod"
+   },
+   {
+    "text": "Scientists first discovered it in 2001, living at the base of deep-sea chimneys called black smokers.",
+    "source": "https://en.wikipedia.org/wiki/Scaly-foot_gastropod"
+   }
+  ]
+ },
+ "hornclank": {
+  "kind": "real",
+  "basedOn": "Hercules Beetle",
+  "scientific": "Dynastes hercules",
+  "when": null,
+  "where": "Rainforests of southern Mexico, Central America, South America and the Lesser Antilles",
+  "size": "With its horn, about as long as a dollar bill",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its wing covers can be greenish-yellow when the air is dry but turn black when the air is damp.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   },
+   {
+    "text": "Male Hercules beetles fight by grabbing rivals between their horns, then lifting and throwing them.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   },
+   {
+    "text": "Its grub can stay a grub for up to two years and is one of the biggest insect larvae.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   }
+  ]
+ },
+ "goldgriff": {
+  "kind": "myth",
+  "basedOn": "Griffin",
+  "scientific": null,
+  "when": null,
+  "where": "Stories from ancient Greece, Persia and the Middle East",
+  "size": null,
+  "story": "In ancient Greek stories, griffins guarded gold in the faraway mountains of Central Asia. Some historians think nomads who found beaked dinosaur skulls, like Protoceratops, in the Gobi Desert helped start the legend.",
+  "facts": [
+   {
+    "text": "About 2,500 years ago, the Greek historian Herodotus wrote about gold-guarding griffins said to live far to the north.",
+    "source": "https://en.wikipedia.org/wiki/Griffin"
+   },
+   {
+    "text": "Protoceratops was a small plant-eating dinosaur with a parrot-like beak.",
+    "source": "https://en.wikipedia.org/wiki/Protoceratops"
+   }
+  ]
+ },
+ "domeplod": {
+  "kind": "prehistoric",
+  "basedOn": "Glyptodon",
+  "scientific": "Glyptodon clavipes",
+  "when": "From about 2 million to about 11,000 years ago",
+  "where": "Grasslands of South America, especially Argentina, Uruguay and Brazil",
+  "size": "About 2 meters long and as heavy as a grand piano",
+  "story": null,
+  "facts": [
+   {
+    "text": "A Glyptodon's shell was made of hundreds of bony plates fitted together.",
+    "source": "https://en.wikipedia.org/wiki/Glyptodon"
+   },
+   {
+    "text": "It also had a bony shield on top of its head, a bit like a helmet.",
+    "source": "https://en.wikipedia.org/wiki/Glyptodon"
+   },
+   {
+    "text": "Glyptodon was a plant-eater that lived on grassy plains called the Pampas.",
+    "source": "https://en.wikipedia.org/wiki/Glyptodon"
+   }
+  ]
+ },
+ "sabrefang": {
+  "kind": "prehistoric",
+  "basedOn": "Saber-Toothed Cat",
+  "scientific": "Smilodon fatalis",
+  "when": "From about 2.5 million to about 10,000 years ago",
+  "where": "North and South America, including the La Brea Tar Pits in Los Angeles",
+  "size": "About as big as a lion, but heavier and stockier",
+  "story": null,
+  "facts": [
+   {
+    "text": "People call it a saber-toothed tiger, but it was not closely related to tigers or any living cats.",
+    "source": "https://en.wikipedia.org/wiki/Smilodon"
+   },
+   {
+    "text": "Smilodon is the official state fossil of California.",
+    "source": "https://en.wikipedia.org/wiki/Smilodon"
+   },
+   {
+    "text": "Smilodon could open its jaws much wider than modern cats can.",
+    "source": "https://en.wikipedia.org/wiki/Smilodon"
+   }
+  ]
+ },
+ "glimmerhorn": {
+  "kind": "myth",
+  "basedOn": "Unicorn",
+  "scientific": null,
+  "when": null,
+  "where": "Stories from ancient Greece, India and medieval Europe, and the royal symbols of Scotland",
+  "size": null,
+  "story": "Ancient Greek writers described the unicorn as a real wild animal living in faraway India. Some people think travelers' tales of rhinos helped shape the legend.",
+  "facts": [
+   {
+    "text": "In the Middle Ages, narwhal tusks were sold in Europe as unicorn horns.",
+    "source": "https://en.wikipedia.org/wiki/Unicorn"
+   },
+   {
+    "text": "In 1638, a Danish doctor named Ole Worm showed that so-called unicorn horns were really narwhal tusks.",
+    "source": "https://en.wikipedia.org/wiki/Unicorn"
+   },
+   {
+    "text": "In coats of arms, the unicorn is often shown with a broken chain, meaning it has broken free.",
+    "source": "https://en.wikipedia.org/wiki/Unicorn"
+   }
+  ]
+ },
+ "seaneck": {
+  "kind": "prehistoric",
+  "basedOn": "Elasmosaurus",
+  "scientific": "Elasmosaurus platyurus",
+  "when": "About 80 million years ago",
+  "where": "A shallow sea that covered what is now Kansas and the middle of North America",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "Elasmosaurus had 72 bones in its neck, one of the most of any animal ever.",
+    "source": "https://en.wikipedia.org/wiki/Elasmosaurus"
+   },
+   {
+    "text": "The scientist who first built its skeleton put the head on the end of the tail by mistake.",
+    "source": "https://en.wikipedia.org/wiki/Elasmosaurus"
+   },
+   {
+    "text": "Elasmosaurus was not a dinosaur; it was a sea reptile called a plesiosaur.",
+    "source": "https://en.wikipedia.org/wiki/Elasmosaurus"
+   }
+  ]
+ },
+ "howlero": {
+  "kind": "real",
+  "basedOn": "Mantled Howler Monkey",
+  "scientific": "Alouatta palliata",
+  "when": null,
+  "where": "Rainforests of Central America, from Mexico to Colombia and Ecuador",
+  "size": "About as big as a medium-sized dog, plus a long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Male howlers have a big hollow bone in the throat that makes their howls extra loud.",
+    "source": "https://en.wikipedia.org/wiki/Mantled_howler"
+   },
+   {
+    "text": "A howler's tail can grab branches like an extra hand.",
+    "source": "https://en.wikipedia.org/wiki/Mantled_howler"
+   },
+   {
+    "text": "Mantled howlers eat lots of leaves, so they spend most of the day resting and sleeping.",
+    "source": "https://en.wikipedia.org/wiki/Mantled_howler"
+   }
+  ]
+ },
+ "songfluke": {
+  "kind": "real",
+  "basedOn": "Humpback Whale",
+  "scientific": "Megaptera novaeangliae",
+  "when": null,
+  "where": "Oceans all over the world; some spend winters in the warm waters around Tonga",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "Humpbacks have the longest flippers of any whale, each about one third as long as the whole body.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   },
+   {
+    "text": "Their scientific name means giant wing, because of those huge flippers.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   },
+   {
+    "text": "Male humpbacks change their songs over time, and new songs can spread from one group of whales to another.",
+    "source": "https://en.wikipedia.org/wiki/Humpback_whale"
+   }
+  ]
+ },
+ "trumpasaur": {
+  "kind": "prehistoric",
+  "basedOn": "Parasaurolophus",
+  "scientific": "Parasaurolophus walkeri",
+  "when": "About 75 million years ago",
+  "where": "Western North America, in what is now Alberta, Utah and New Mexico",
+  "size": "Nearly as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "Parasaurolophus was a duck-billed dinosaur, a kind called a hadrosaur.",
+    "source": "https://en.wikipedia.org/wiki/Parasaurolophus"
+   },
+   {
+    "text": "It could walk on two legs or four, probably eating on four and running on two.",
+    "source": "https://en.wikipedia.org/wiki/Parasaurolophus"
+   },
+   {
+    "text": "Parasaurolophus was a plant-eater that could weigh more than 5 tons.",
+    "source": "https://en.wikipedia.org/wiki/Parasaurolophus"
+   }
+  ]
+ },
+ "echobat": {
+  "kind": "real",
+  "basedOn": "Mexican Free-Tailed Bat",
+  "scientific": "Tadarida brasiliensis",
+  "when": null,
+  "where": "The southern United States, Mexico, Central America and South America",
+  "size": "Weighs about as much as five pennies",
+  "story": null,
+  "facts": [
+   {
+    "text": "This bat may be one of the fastest flyers in the world, with a record of about 160 kilometers an hour.",
+    "source": "https://en.wikipedia.org/wiki/Mexican_free-tailed_bat"
+   },
+   {
+    "text": "It is the official flying mammal of Texas and Oklahoma.",
+    "source": "https://en.wikipedia.org/wiki/Mexican_free-tailed_bat"
+   },
+   {
+    "text": "About 1.5 million of these bats live under just one bridge in Austin, Texas.",
+    "source": "https://en.wikipedia.org/wiki/Mexican_free-tailed_bat"
+   }
+  ]
+ },
+ "mimilyre": {
+  "kind": "real",
+  "basedOn": "Superb Lyrebird",
+  "scientific": "Menura novaehollandiae",
+  "when": null,
+  "where": "Rainforests and wet forests of southeastern Australia",
+  "size": "About as big as a chicken, with a very long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "A male superb lyrebird appears on the back of Australia's 10-cent coin.",
+    "source": "https://en.wikipedia.org/wiki/Superb_lyrebird"
+   },
+   {
+    "text": "Males build round mounds of bare dirt on the forest floor to sing and dance on.",
+    "source": "https://en.wikipedia.org/wiki/Superb_lyrebird"
+   },
+   {
+    "text": "Its scientific name, Menura, means moon tail in Ancient Greek.",
+    "source": "https://en.wikipedia.org/wiki/Superb_lyrebird"
+   }
+  ]
+ },
+ "coquito": {
+  "kind": "real",
+  "basedOn": "Common Coqui",
+  "scientific": "Eleutherodactylus coqui",
+  "when": null,
+  "where": "Forests and mountains of Puerto Rico",
+  "size": "About as big as a quarter",
+  "story": null,
+  "facts": [
+   {
+    "text": "Coqui eggs are laid on land and hatch straight into tiny froglets, skipping the tadpole stage.",
+    "source": "https://en.wikipedia.org/wiki/Common_coqu%C3%AD"
+   },
+   {
+    "text": "Only the males sing: the co warns other males away, and the qui calls to females.",
+    "source": "https://en.wikipedia.org/wiki/Common_coqu%C3%AD"
+   },
+   {
+    "text": "Coquis have sticky toe pads that help them hold onto wet, slippery leaves.",
+    "source": "https://en.wikipedia.org/wiki/Common_coqu%C3%AD"
+   }
+  ]
+ },
+ "rumbelph": {
+  "kind": "real",
+  "basedOn": "African Bush Elephant",
+  "scientific": "Loxodonta africana",
+  "when": null,
+  "where": "Savannas and forests of Africa south of the Sahara, including Kenya",
+  "size": "A big male can stand about as tall as a basketball hoop",
+  "story": null,
+  "facts": [
+   {
+    "text": "The African bush elephant is the largest land animal alive today.",
+    "source": "https://en.wikipedia.org/wiki/African_bush_elephant"
+   },
+   {
+    "text": "Its huge ears help it cool off in the hot sun.",
+    "source": "https://en.wikipedia.org/wiki/African_bush_elephant"
+   },
+   {
+    "text": "The tip of its trunk has two finger-like parts for picking things up.",
+    "source": "https://en.wikipedia.org/wiki/African_bush_elephant"
+   }
+  ]
+ },
+ "rexroar": {
+  "kind": "prehistoric",
+  "basedOn": "Tyrannosaurus Rex",
+  "scientific": "Tyrannosaurus rex",
+  "when": "About 67 million years ago",
+  "where": "Western North America, including South Dakota, Montana and Wyoming",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sue is named after Sue Hendrickson, the fossil hunter who found it.",
+    "source": "https://en.wikipedia.org/wiki/Sue_(dinosaur)"
+   },
+   {
+    "text": "In 1997, Sue was sold at an auction for about 8 million dollars.",
+    "source": "https://en.wikipedia.org/wiki/Sue_(dinosaur)"
+   },
+   {
+    "text": "Today Sue stands in the Field Museum in Chicago.",
+    "source": "https://en.wikipedia.org/wiki/Sue_(dinosaur)"
+   }
+  ]
+ },
+ "krakling": {
+  "kind": "myth",
+  "basedOn": "Kraken",
+  "scientific": null,
+  "when": null,
+  "where": "Old sailors' stories from Norway and the seas around Scandinavia",
+  "size": null,
+  "story": "In Scandinavian sea stories, the kraken was a monster so huge that sailors could mistake it for islands. Many people think sightings of real giant squid helped start the legend.",
+  "facts": [
+   {
+    "text": "In the 1750s, a bishop named Erik Pontoppidan wrote that the kraken was sometimes mistaken for a group of small islands.",
+    "source": "https://en.wikipedia.org/wiki/Kraken"
+   },
+   {
+    "text": "Giant squid have some of the largest eyes of any animal, at least 27 centimeters across.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   },
+   {
+    "text": "In 2004, a Japanese team took the first pictures of a living giant squid in the deep sea.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   }
+  ]
+ },
+ "starnoze": {
+  "kind": "real",
+  "basedOn": "Star-Nosed Mole",
+  "scientific": "Condylura cristata",
+  "when": null,
+  "where": "Wet meadows, marshes and stream banks of the northeastern United States and eastern Canada",
+  "size": "About as long as a hot dog, counting its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "The star-nosed mole is the fastest-eating mammal, finding and gulping a bite of food in as little as 120 milliseconds.",
+    "source": "https://en.wikipedia.org/wiki/Star-nosed_mole"
+   },
+   {
+    "text": "It can smell underwater by blowing tiny bubbles onto things and sniffing them back in.",
+    "source": "https://en.wikipedia.org/wiki/Star-nosed_mole"
+   },
+   {
+    "text": "It is a good swimmer and even swims in ice-covered streams in winter.",
+    "source": "https://en.wikipedia.org/wiki/Star-nosed_mole"
+   }
+  ]
+ },
+ "nudig": {
+  "kind": "real",
+  "basedOn": "Naked Mole-Rat",
+  "scientific": "Heterocephalus glaber",
+  "when": null,
+  "where": "Dry grasslands of East Africa, in Kenya, Ethiopia and Somalia",
+  "size": "About as long as a crayon",
+  "story": null,
+  "facts": [
+   {
+    "text": "Naked mole-rats can live more than 37 years, longer than any other rodent.",
+    "source": "https://en.wikipedia.org/wiki/Naked_mole-rat"
+   },
+   {
+    "text": "Their lips close behind their big front teeth, so they can dig without getting a mouthful of dirt.",
+    "source": "https://en.wikipedia.org/wiki/Naked_mole-rat"
+   },
+   {
+    "text": "In tests, they survived 18 minutes with no oxygen at all.",
+    "source": "https://en.wikipedia.org/wiki/Naked_mole-rat"
+   }
+  ]
+ },
+ "aardig": {
+  "kind": "real",
+  "basedOn": "Aardvark",
+  "scientific": "Orycteropus afer",
+  "when": null,
+  "where": "Grasslands, savannas and woodlands across Africa south of the Sahara",
+  "size": "About as heavy as a grown-up person",
+  "story": null,
+  "facts": [
+   {
+    "text": "An aardvark can slurp up as many as 50,000 insects in one night with its sticky tongue.",
+    "source": "https://en.wikipedia.org/wiki/Aardvark"
+   },
+   {
+    "text": "Its tongue can be about 30 centimeters (1 foot) long.",
+    "source": "https://en.wikipedia.org/wiki/Aardvark"
+   },
+   {
+    "text": "Empty aardvark burrows become homes for warthogs, wild dogs, owls and many other animals.",
+    "source": "https://en.wikipedia.org/wiki/Aardvark"
+   }
+  ]
+ },
+ "prairiepup": {
+  "kind": "real",
+  "basedOn": "Black-tailed Prairie Dog",
+  "scientific": "Cynomys ludovicianus",
+  "when": null,
+  "where": "Grasslands of the Great Plains of North America",
+  "size": "About as long as a ruler, plus a short tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Prairie dogs aren't dogs at all. They are a kind of ground squirrel.",
+    "source": "https://en.wikipedia.org/wiki/Prairie_dog"
+   },
+   {
+    "text": "One giant prairie dog town in Texas was once thought to hold about 400 million prairie dogs.",
+    "source": "https://en.wikipedia.org/wiki/Black-tailed_prairie_dog"
+   },
+   {
+    "text": "Family members greet each other by touching their front teeth together, a bit like a kiss.",
+    "source": "https://en.wikipedia.org/wiki/Black-tailed_prairie_dog"
+   }
+  ]
+ },
+ "spiralbore": {
+  "kind": "prehistoric",
+  "basedOn": "Palaeocastor",
+  "scientific": "Palaeocastor fossor",
+  "when": "More than 18 million years ago",
+  "where": "Ancient plains of Nebraska and Wyoming",
+  "size": "About the size of a prairie dog",
+  "story": null,
+  "facts": [
+   {
+    "text": "It dug its corkscrew burrows with its big front teeth, not its claws.",
+    "source": "https://en.wikipedia.org/wiki/Daemonelix"
+   },
+   {
+    "text": "Some of its spiral burrows go down nearly 10 feet into the ground.",
+    "source": "https://en.wikipedia.org/wiki/Daemonelix"
+   },
+   {
+    "text": "When the spirals were first found, a scientist thought they were giant fossil sponges or plants.",
+    "source": "https://en.wikipedia.org/wiki/Daemonelix"
+   }
+  ]
+ },
+ "cavewyrm": {
+  "kind": "myth",
+  "basedOn": "Welsh Red Dragon",
+  "scientific": null,
+  "when": null,
+  "where": "Wales, in the United Kingdom",
+  "size": null,
+  "story": "In an old Welsh legend, a king's tower kept falling down because a red dragon and a white dragon were fighting in a pool under the hill. The red dragon won, and it became a symbol of Wales.",
+  "facts": [
+   {
+    "text": "In Welsh, the red dragon is called Y Ddraig Goch, which means 'the red dragon.'",
+    "source": "https://en.wikipedia.org/wiki/Welsh_Dragon"
+   },
+   {
+    "text": "In the legend, the red dragon stood for the Welsh people and the white dragon stood for the Saxons.",
+    "source": "https://en.wikipedia.org/wiki/Welsh_Dragon"
+   },
+   {
+    "text": "The red dragon flag became the official flag of Wales in 1959.",
+    "source": "https://en.wikipedia.org/wiki/Flag_of_Wales"
+   }
+  ]
+ },
+ "olmling": {
+  "kind": "real",
+  "basedOn": "Olm",
+  "scientific": "Proteus anguinus",
+  "when": null,
+  "where": "Underground cave rivers of Slovenia, Croatia and nearby countries",
+  "size": "About as long as a ruler",
+  "story": null,
+  "facts": [
+   {
+    "text": "Olms may live more than 100 years.",
+    "source": "https://en.wikipedia.org/wiki/Olm"
+   },
+   {
+    "text": "An olm can survive up to 10 years without eating.",
+    "source": "https://en.wikipedia.org/wiki/Olm"
+   },
+   {
+    "text": "Its tiny eyes are covered by skin, so it finds its way by smell and by sensing weak electric fields.",
+    "source": "https://en.wikipedia.org/wiki/Olm"
+   }
+  ]
+ },
+ "gophshell": {
+  "kind": "real",
+  "basedOn": "Gopher Tortoise",
+  "scientific": "Gopherus polyphemus",
+  "when": null,
+  "where": "Sandy longleaf pine forests of the southeastern United States",
+  "size": "Shell about as long as a shoebox",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its burrows average about 15 feet long, and some are more than 40 feet long.",
+    "source": "https://en.wikipedia.org/wiki/Gopher_tortoise"
+   },
+   {
+    "text": "It is Georgia's state reptile and Florida's state tortoise.",
+    "source": "https://en.wikipedia.org/wiki/Gopher_tortoise"
+   },
+   {
+    "text": "Gopher tortoises can live more than 40 years.",
+    "source": "https://en.wikipedia.org/wiki/Gopher_tortoise"
+   }
+  ]
+ },
+ "tuskfrost": {
+  "kind": "prehistoric",
+  "basedOn": "Woolly Mammoth",
+  "scientific": "Mammuthus primigenius",
+  "when": "From about 400,000 to about 4,000 years ago",
+  "where": "Cold, grassy plains of North America, Europe and Asia",
+  "size": "About as tall as a basketball hoop",
+  "story": null,
+  "facts": [
+   {
+    "text": "The last woolly mammoths lived on Wrangel Island, near Russia, until about 4,000 years ago, after Egypt's Great Pyramid was built.",
+    "source": "https://en.wikipedia.org/wiki/Woolly_mammoth"
+   },
+   {
+    "text": "Its small ears and short tail helped it lose less heat in the freezing cold.",
+    "source": "https://en.wikipedia.org/wiki/Woolly_mammoth"
+   },
+   {
+    "text": "Its curved tusks could grow more than 10 feet long.",
+    "source": "https://en.wikipedia.org/wiki/Woolly_mammoth"
+   }
+  ]
+ },
+ "coatimo": {
+  "kind": "real",
+  "basedOn": "White-nosed Coati",
+  "scientific": "Nasua narica",
+  "when": null,
+  "where": "Forests of the southwestern United States, Mexico and Central America",
+  "size": "About as long as a house cat, with a tail just as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Coatis can turn their ankles all the way around, so they can climb down trees head first.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   },
+   {
+    "text": "Females and young coatis travel together in groups called bands.",
+    "source": "https://en.wikipedia.org/wiki/White-nosed_coati"
+   },
+   {
+    "text": "A coati's long, wiggly snout sniffs out insects and other food hidden in the leaves.",
+    "source": "https://en.wikipedia.org/wiki/White-nosed_coati"
+   }
+  ]
+ },
+ "spinosail": {
+  "kind": "prehistoric",
+  "basedOn": "Spinosaurus",
+  "scientific": "Spinosaurus aegyptiacus",
+  "when": "About 95 million years ago",
+  "where": "Rivers of North Africa, in what is now Egypt and Morocco",
+  "size": "About as long as a school bus",
+  "story": null,
+  "facts": [
+   {
+    "text": "The first Spinosaurus fossils were destroyed during World War II, so scientists had to work from old drawings.",
+    "source": "https://en.wikipedia.org/wiki/Spinosaurus"
+   },
+   {
+    "text": "It had cone-shaped teeth like a crocodile's, good for grabbing slippery fish.",
+    "source": "https://en.wikipedia.org/wiki/Spinosaurus"
+   },
+   {
+    "text": "It may have been even longer than Tyrannosaurus rex.",
+    "source": "https://en.wikipedia.org/wiki/Spinosaurus"
+   }
+  ]
+ },
+ "athenowl": {
+  "kind": "history",
+  "basedOn": "Little Owl",
+  "scientific": "Athene noctua",
+  "when": null,
+  "where": "Farmland and open country of Europe, North Africa and Asia, including Greece",
+  "size": "A bit smaller than a pigeon",
+  "story": "In ancient Greece, the little owl was the bird of Athena, goddess of wisdom and protector of Athens. Athens stamped it on its silver coins, and the owl became a symbol of wisdom.",
+  "facts": [
+   {
+    "text": "Its scientific name, Athene noctua, comes from the name of the goddess Athena.",
+    "source": "https://en.wikipedia.org/wiki/Little_owl"
+   },
+   {
+    "text": "Unlike many owls, little owls are often out hunting in the daytime.",
+    "source": "https://en.wikipedia.org/wiki/Little_owl"
+   },
+   {
+    "text": "Greece's one-euro coin today shows the same owl that was on ancient Athenian coins.",
+    "source": "https://en.wikipedia.org/wiki/Greek_euro_coins"
+   }
+  ]
+ },
+ "pegawing": {
+  "kind": "myth",
+  "basedOn": "Pegasus",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Greece",
+  "size": null,
+  "story": "In Greek myths, Pegasus was a magical white horse with wings. The hero Bellerophon rode him, and in the end Pegasus was placed among the stars.",
+  "facts": [
+   {
+    "text": "In the myth, Bellerophon tamed Pegasus using a golden bridle from the goddess Athena.",
+    "source": "https://en.wikipedia.org/wiki/Bellerophon"
+   },
+   {
+    "text": "One story says that where Pegasus struck the ground with his hoof, a spring called Hippocrene began to flow.",
+    "source": "https://en.wikipedia.org/wiki/Pegasus"
+   },
+   {
+    "text": "A constellation in the night sky is named Pegasus, and four of its stars make a shape called the Great Square.",
+    "source": "https://en.wikipedia.org/wiki/Pegasus_(constellation)"
+   }
+  ]
+ },
+ "lupina": {
+  "kind": "history",
+  "basedOn": "Italian Wolf",
+  "scientific": "Canis lupus italicus",
+  "when": null,
+  "where": "Apennine Mountains of Italy and the Alps",
+  "size": "About the size of a German shepherd dog",
+  "story": "According to Roman legend, a she-wolf cared for the baby twins Romulus and Remus, and Romulus grew up to found the city of Rome. The bronze Capitoline Wolf statue shows this story.",
+  "facts": [
+   {
+    "text": "The Italian wolf is often thought of as Italy's national animal.",
+    "source": "https://en.wikipedia.org/wiki/Italian_wolf"
+   },
+   {
+    "text": "In the 1970s only about 100 wolves were left in Italy, but now there are more than 3,000.",
+    "source": "https://en.wikipedia.org/wiki/Italian_wolf"
+   },
+   {
+    "text": "The twin babies under the famous bronze wolf were added about 550 years ago, long after the wolf was made.",
+    "source": "https://en.wikipedia.org/wiki/Capitoline_Wolf"
+   }
+  ]
+ },
+ "honkonius": {
+  "kind": "history",
+  "basedOn": "Domestic Goose",
+  "scientific": "Anser anser",
+  "when": null,
+  "where": "Farms of ancient Rome; wild greylag geese live across Europe and Asia",
+  "size": "About as long as a baseball bat",
+  "story": "The Roman historian Livy wrote that when enemies tried to sneak up Rome's Capitoline Hill at night, the honking of Juno's sacred geese woke the defenders.",
+  "facts": [
+   {
+    "text": "Most farm geese in Europe come from wild greylag geese that people tamed thousands of years ago.",
+    "source": "https://en.wikipedia.org/wiki/Greylag_goose"
+   },
+   {
+    "text": "Geese are noisy and alert, and people still keep them as 'guard animals' today.",
+    "source": "https://en.wikipedia.org/wiki/Domestic_goose"
+   },
+   {
+    "text": "The story of the geese of Rome was written down by the historian Livy about 2,000 years ago.",
+    "source": "https://en.wikipedia.org/wiki/Livy"
+   }
+  ]
+ },
+ "maukit": {
+  "kind": "history",
+  "basedOn": "Egyptian Mau Cat",
+  "scientific": "Felis catus",
+  "when": null,
+  "where": "Ancient Egypt, along the Nile River",
+  "size": "About the size of a house cat",
+  "story": "Ancient Egyptians honored cats and linked them with Bastet, a goddess often shown as a cat or with a cat's head. The Egyptian Mau breed is named after the old Egyptian word for cat.",
+  "facts": [
+   {
+    "text": "The ancient Egyptian word for cat was 'miu' or 'mau', which sounds like a meow.",
+    "source": "https://en.wikipedia.org/wiki/Cats_in_ancient_Egypt"
+   },
+   {
+    "text": "The Egyptian Mau is one of the fastest pet cat breeds and has natural spots.",
+    "source": "https://en.wikipedia.org/wiki/Egyptian_Mau"
+   },
+   {
+    "text": "Bastet's most important temple was in the Egyptian city of Bubastis.",
+    "source": "https://en.wikipedia.org/wiki/Bastet"
+   }
+  ]
+ },
+ "ibiscribe": {
+  "kind": "history",
+  "basedOn": "African Sacred Ibis",
+  "scientific": "Threskiornis aethiopicus",
+  "when": null,
+  "where": "Wetlands of Africa south of the Sahara; once also Egypt",
+  "size": "About as long as a skateboard",
+  "story": "Ancient Egyptians linked the sacred ibis with Thoth, god of writing and knowledge, who was often shown with an ibis head.",
+  "facts": [
+   {
+    "text": "Sacred ibises no longer live in the wild in Egypt, though they are still common farther south in Africa.",
+    "source": "https://en.wikipedia.org/wiki/African_sacred_ibis"
+   },
+   {
+    "text": "Archaeologists have found millions of ibis mummies in ancient Egyptian burial tunnels.",
+    "source": "https://en.wikipedia.org/wiki/African_sacred_ibis"
+   },
+   {
+    "text": "In Egyptian stories, Thoth was said to have invented writing.",
+    "source": "https://en.wikipedia.org/wiki/Thoth"
+   }
+  ]
+ },
+ "nilesnap": {
+  "kind": "history",
+  "basedOn": "Nile Crocodile",
+  "scientific": "Crocodylus niloticus",
+  "when": null,
+  "where": "Rivers, lakes and swamps across much of Africa, including the Nile",
+  "size": "About as long as a car",
+  "story": "Ancient Egyptians worshipped Sobek, a god with a crocodile's head, linked to the Nile's power. Crocodiles were kept and honored at his temples, such as Kom Ombo.",
+  "facts": [
+   {
+    "text": "Baby Nile crocodiles call from inside their eggs when they are ready to hatch.",
+    "source": "https://en.wikipedia.org/wiki/Nile_crocodile"
+   },
+   {
+    "text": "A mother Nile crocodile gently carries her babies to the water in her mouth.",
+    "source": "https://en.wikipedia.org/wiki/Nile_crocodile"
+   }
+  ]
+ },
+ "bennuflare": {
+  "kind": "myth",
+  "basedOn": "Bennu (Egyptian Sun Bird)",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Egypt, especially the city of Heliopolis",
+  "size": null,
+  "story": "In ancient Egyptian stories, the bennu was a heron-like bird linked with the sun god and with creation. Some historians think it inspired the Greek legend of the phoenix, and scientists think a real giant heron may have been its model.",
+  "facts": [
+   {
+    "text": "Bones of a giant, human-sized heron, now extinct, were found in the United Arab Emirates and named the Bennu heron.",
+    "source": "https://en.wikipedia.org/wiki/Bennu"
+   },
+   {
+    "text": "In Egyptian stories, the bennu was tied to Heliopolis, the city of the sun gods Ra and Atum.",
+    "source": "https://en.wikipedia.org/wiki/Bennu"
+   },
+   {
+    "text": "An asteroid named Bennu was visited by NASA's OSIRIS-REx spacecraft, which brought bits of it back to Earth in 2023.",
+    "source": "https://en.wikipedia.org/wiki/101955_Bennu"
+   }
+  ]
+ },
+ "lamassling": {
+  "kind": "myth",
+  "basedOn": "Lamassu",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Assyria, in what is now northern Iraq",
+  "size": null,
+  "story": "Ancient Assyrians believed protective spirits guarded their palaces and cities. Giant stone lamassu, with a human head, wings and a bull's or lion's body, stood at gates to keep them safe.",
+  "facts": [
+   {
+    "text": "Many lamassu were carved with five legs, so they look like they're standing still from the front and walking from the side.",
+    "source": "https://en.wikipedia.org/wiki/Lamassu"
+   },
+   {
+    "text": "Real lamassu statues can be seen today in the British Museum, the Louvre and the Metropolitan Museum of Art.",
+    "source": "https://en.wikipedia.org/wiki/Lamassu"
+   }
+  ]
+ },
+ "tiledrake": {
+  "kind": "myth",
+  "basedOn": "Mushhushshu (Dragon of Babylon)",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Babylon, in what is now Iraq",
+  "size": null,
+  "story": "The mushhushshu was a dragon-like creature from ancient Mesopotamian stories. It was the special animal of Marduk, the main god of Babylon, and rows of them decorate the Ishtar Gate.",
+  "facts": [
+   {
+    "text": "Its old name means 'reddish snake' or 'fierce snake.'",
+    "source": "https://en.wikipedia.org/wiki/Mušḫuššu"
+   },
+   {
+    "text": "It has a scaly body, front legs like a lion and back feet like an eagle's talons.",
+    "source": "https://en.wikipedia.org/wiki/Mušḫuššu"
+   },
+   {
+    "text": "The Ishtar Gate was built by King Nebuchadnezzar II about 2,600 years ago.",
+    "source": "https://en.wikipedia.org/wiki/Ishtar_Gate"
+   }
+  ]
+ },
+ "simurling": {
+  "kind": "myth",
+  "basedOn": "Simurgh",
+  "scientific": null,
+  "when": null,
+  "where": "Persia, now Iran",
+  "size": null,
+  "story": "The Simurgh is a giant, kind bird from Persian legends, said to be very old and wise. It appears in the Shahnameh, the 'Book of Kings,' and in many later poems.",
+  "facts": [
+   {
+    "text": "In the Shahnameh, the Simurgh finds a baby named Zal on a mountain and raises him as her own.",
+    "source": "https://en.wikipedia.org/wiki/Simurgh"
+   },
+   {
+    "text": "She gives Zal golden feathers to burn whenever he needs her help.",
+    "source": "https://en.wikipedia.org/wiki/Simurgh"
+   },
+   {
+    "text": "In Persian, 'si morgh' means 'thirty birds,' and a famous poem tells of thirty birds searching for the Simurgh.",
+    "source": "https://en.wikipedia.org/wiki/Simurgh"
+   }
+  ]
+ },
+ "dashpurr": {
+  "kind": "real",
+  "basedOn": "Asiatic Cheetah",
+  "scientific": "Acinonyx jubatus venaticus",
+  "when": null,
+  "where": "Deserts and dry hills of central Iran",
+  "size": "About as long as a sofa, counting its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Fewer than 50 Asiatic cheetahs are thought to be left in the wild.",
+    "source": "https://en.wikipedia.org/wiki/Asiatic_cheetah"
+   },
+   {
+    "text": "Cheetahs can't roar. Instead they purr, chirp and make bird-like sounds.",
+    "source": "https://en.wikipedia.org/wiki/Cheetah"
+   },
+   {
+    "text": "Cheetahs are the fastest land animals and can sprint about 60 miles per hour.",
+    "source": "https://en.wikipedia.org/wiki/Cheetah"
+   }
+  ]
+ },
+ "peacrest": {
+  "kind": "history",
+  "basedOn": "Indian Peafowl",
+  "scientific": "Pavo cristatus",
+  "when": null,
+  "where": "Forests and farmland of India and Sri Lanka",
+  "size": "With its long train, longer than a grown-up is tall",
+  "story": "The Mughal emperor Shah Jahan had a jeweled golden throne made in the 1600s, named the Peacock Throne after the peacocks shown on it.",
+  "facts": [
+   {
+    "text": "The Indian peafowl is the national bird of India.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   },
+   {
+    "text": "Only the male, called a peacock, has the long, shiny train. The female is called a peahen.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   },
+   {
+    "text": "A peacock's train isn't really his tail. It's made of long feathers that grow from his back, over the tail.",
+    "source": "https://en.wikipedia.org/wiki/Indian_peafowl"
+   }
+  ]
+ },
+ "longlet": {
+  "kind": "myth",
+  "basedOn": "Chinese Dragon",
+  "scientific": null,
+  "when": null,
+  "where": "China",
+  "size": null,
+  "story": "In Chinese tradition, dragons are powerful, friendly creatures that control water, rain and weather, and they stand for good luck and strength. Emperors once used the dragon as their symbol.",
+  "facts": [
+   {
+    "text": "Old Chinese writings describe dragons as a mix of animals, like a deer's antlers, a fish's scales and an eagle's claws.",
+    "source": "https://en.wikipedia.org/wiki/Chinese_dragon"
+   },
+   {
+    "text": "The dragon is the only legendary animal among the 12 animals of the Chinese zodiac.",
+    "source": "https://en.wikipedia.org/wiki/Chinese_zodiac"
+   },
+   {
+    "text": "The Dragon Boat Festival falls on the fifth day of the fifth month of the Chinese calendar.",
+    "source": "https://en.wikipedia.org/wiki/Dragon_Boat_Festival"
+   }
+  ]
+ },
+ "terracolt": {
+  "kind": "history",
+  "basedOn": "Horse",
+  "scientific": "Equus caballus",
+  "when": null,
+  "where": "Near Xi'an, in Shaanxi Province, China",
+  "size": "Life-size, about as big as a real small horse",
+  "story": "China's first emperor, Qin Shi Huang, had a huge army of clay soldiers, horses and chariots buried near his tomb more than 2,200 years ago to protect him in the afterlife.",
+  "facts": [
+   {
+    "text": "Farmers digging a well found the Terracotta Army by accident in 1974.",
+    "source": "https://en.wikipedia.org/wiki/Terracotta_Army"
+   },
+   {
+    "text": "The army includes more than 600 clay horses that pulled chariots or carried riders.",
+    "source": "https://en.wikipedia.org/wiki/Terracotta_Army"
+   },
+   {
+    "text": "The clay figures were once painted in bright colors, but most of the paint has worn away.",
+    "source": "https://en.wikipedia.org/wiki/Terracotta_Army"
+   }
+  ]
+ },
+ "kitsulit": {
+  "kind": "myth",
+  "basedOn": "Kitsune",
+  "scientific": null,
+  "when": null,
+  "where": "Japan",
+  "size": null,
+  "story": "In Japanese folklore, kitsune are magical foxes that grow wiser and more powerful with age and can sometimes take human shape. The stories are based on the real red fox.",
+  "facts": [
+   {
+    "text": "In the stories, a fox can grow up to nine tails, and a nine-tailed fox is said to be about 1,000 years old.",
+    "source": "https://en.wikipedia.org/wiki/Kitsune"
+   },
+   {
+    "text": "In Japanese tradition, foxes are messengers of Inari, the spirit of rice and farming.",
+    "source": "https://en.wikipedia.org/wiki/Inari_Ōkami"
+   },
+   {
+    "text": "Fushimi Inari Shrine in Kyoto has thousands of bright orange gates lined up along its mountain paths.",
+    "source": "https://en.wikipedia.org/wiki/Fushimi_Inari-taisha"
+   }
+  ]
+ },
+ "huginnet": {
+  "kind": "history",
+  "basedOn": "Common Raven",
+  "scientific": "Corvus corax",
+  "when": null,
+  "where": "Forests, mountains and coasts across the Northern Hemisphere, including Scandinavia",
+  "size": "Wings spread about 4 feet wide",
+  "story": "In Norse myths, the god Odin had two ravens, Huginn and Muninn, that flew over the world each day and told him what they saw. Ravens were also a symbol on some Viking banners.",
+  "facts": [
+   {
+    "text": "Ravens are among the smartest birds and can solve puzzles to get food.",
+    "source": "https://en.wikipedia.org/wiki/Common_raven"
+   },
+   {
+    "text": "Ravens can copy many sounds, including human words.",
+    "source": "https://en.wikipedia.org/wiki/Common_raven"
+   },
+   {
+    "text": "A legend says that if the ravens ever leave the Tower of London, the kingdom will fall, so ravens are kept there.",
+    "source": "https://en.wikipedia.org/wiki/Ravens_of_the_Tower_of_London"
+   }
+  ]
+ },
+ "boltgoat": {
+  "kind": "myth",
+  "basedOn": "Thor's Goats",
+  "scientific": null,
+  "when": null,
+  "where": "Scandinavia, from Norse myths told by the Vikings",
+  "size": null,
+  "story": "In Norse myths, the thunder god Thor rode a chariot pulled by two goats, and people said thunder was the sound of his chariot. Real goats were important farm animals for Viking families.",
+  "facts": [
+   {
+    "text": "The goats are named Tanngrisnir and Tanngnjóstr, which mean 'teeth-barer' and 'teeth-grinder.'",
+    "source": "https://en.wikipedia.org/wiki/Tanngrisnir_and_Tanngnjóstr"
+   },
+   {
+    "text": "The Yule goat, a straw goat decoration at Christmas in Scandinavia, may go back to Thor's goats.",
+    "source": "https://en.wikipedia.org/wiki/Yule_goat"
+   },
+   {
+    "text": "Thursday is named after Thor. It means 'Thor's day.'",
+    "source": "https://en.wikipedia.org/wiki/Thursday"
+   }
+  ]
+ },
+ "chalkpony": {
+  "kind": "history",
+  "basedOn": "Uffington White Horse",
+  "scientific": null,
+  "when": null,
+  "where": "White Horse Hill in Oxfordshire, England",
+  "size": "About as long as a football field",
+  "story": "People in Bronze Age Britain dug trenches into a hillside and filled them with white chalk to make a giant horse about 3,000 years ago. No one knows for sure why they made it.",
+  "facts": [
+   {
+    "text": "The horse is best seen from the air or from far across the valley.",
+    "source": "https://en.wikipedia.org/wiki/Uffington_White_Horse"
+   },
+   {
+    "text": "The horse would disappear under grass if people didn't clean it and add fresh chalk every few years.",
+    "source": "https://en.wikipedia.org/wiki/Uffington_White_Horse"
+   }
+  ]
+ },
+ "wawelet": {
+  "kind": "myth",
+  "basedOn": "Wawel Dragon",
+  "scientific": null,
+  "when": null,
+  "where": "Kraków, Poland",
+  "size": null,
+  "story": "A legend from Kraków tells of a dragon living in a cave under Wawel Hill that troubled the town until a clever young shoemaker named Skuba tricked it.",
+  "facts": [
+   {
+    "text": "In the story, Skuba left a sheep stuffed with sulfur outside the cave, and the dragon got so thirsty it drank from the Vistula River.",
+    "source": "https://en.wikipedia.org/wiki/Wawel_Dragon"
+   },
+   {
+    "text": "The fire-breathing dragon statue was made by sculptor Bronisław Chromy and was put up in 1972.",
+    "source": "https://en.wikipedia.org/wiki/Wawel_Dragon"
+   },
+   {
+    "text": "Visitors can walk through the Dragon's Den, a real cave under Wawel Castle.",
+    "source": "https://en.wikipedia.org/wiki/Wawel_Dragon"
+   }
+  ]
+ },
+ "balamcub": {
+  "kind": "history",
+  "basedOn": "Jaguar",
+  "scientific": "Panthera onca",
+  "when": null,
+  "where": "Rain forests and wetlands of Mexico, Central America and South America",
+  "size": "About as long as a grown-up is tall, plus a long tail",
+  "story": "The ancient Maya saw the jaguar as a powerful animal linked with rulers and the night. 'Balam' is a Maya word for jaguar, and some kings had it in their names.",
+  "facts": [
+   {
+    "text": "The jaguar is the biggest cat in the Americas and the third-biggest cat in the world.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   },
+   {
+    "text": "Unlike most cats, jaguars love water and are strong swimmers.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   },
+   {
+    "text": "A jaguar's bite is strong enough to crack a turtle's shell.",
+    "source": "https://en.wikipedia.org/wiki/Jaguar"
+   }
+  ]
+ },
+ "pumastone": {
+  "kind": "history",
+  "basedOn": "Puma",
+  "scientific": "Puma concolor",
+  "when": null,
+  "where": "Mountains and forests from Canada to the southern Andes, including Peru",
+  "size": "About as long as a grown-up is tall, plus a long tail",
+  "story": "The Inca saw the puma as a symbol of strength. Their capital, Cusco, is said to have been planned in the shape of a puma.",
+  "facts": [
+   {
+    "text": "The puma has more names than almost any animal, including cougar, mountain lion and panther.",
+    "source": "https://en.wikipedia.org/wiki/Cougar"
+   },
+   {
+    "text": "Pumas can't roar, but they can purr, hiss and make chirping sounds.",
+    "source": "https://en.wikipedia.org/wiki/Cougar"
+   },
+   {
+    "text": "A puma can leap more than 15 feet straight up.",
+    "source": "https://en.wikipedia.org/wiki/Cougar"
+   }
+  ]
+ },
+ "llamble": {
+  "kind": "history",
+  "basedOn": "Llama",
+  "scientific": "Lama glama",
+  "when": null,
+  "where": "The Andes Mountains of South America",
+  "size": "About as tall as a grown-up, measured to the top of its head",
+  "story": "The Inca kept huge herds of llamas to carry goods on their mountain roads and to provide wool. Llamas were so important that they were part of Inca ceremonies.",
+  "facts": [
+   {
+    "text": "A llama can carry about a quarter of its own weight for many miles.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   },
+   {
+    "text": "Llamas were tamed from wild guanacos thousands of years ago.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   },
+   {
+    "text": "Llamas talk to each other with soft humming sounds.",
+    "source": "https://en.wikipedia.org/wiki/Llama"
+   }
+  ]
+ },
+ "primecada": {
+  "kind": "real",
+  "basedOn": "Periodical Cicada",
+  "scientific": "Magicicada septendecim",
+  "when": null,
+  "where": "Forests of the eastern United States",
+  "size": "About an inch long",
+  "story": null,
+  "facts": [
+   {
+    "text": "In 2024, a 13-year group and a 17-year group came out together for the first time since 1803.",
+    "source": "https://en.wikipedia.org/wiki/Periodical_cicadas"
+   },
+   {
+    "text": "More than a million cicadas can come out of the ground in a single acre.",
+    "source": "https://en.wikipedia.org/wiki/Periodical_cicadas"
+   },
+   {
+    "text": "Periodical cicadas have bright red eyes.",
+    "source": "https://en.wikipedia.org/wiki/Periodical_cicadas"
+   }
+  ]
+ },
+ "hexhive": {
+  "kind": "real",
+  "basedOn": "Western Honey Bee",
+  "scientific": "Apis mellifera",
+  "when": null,
+  "where": "Native to Europe, Africa and West Asia; now kept all over the world",
+  "size": "About half an inch long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Worker bees make wax from special glands on their bellies.",
+    "source": "https://en.wikipedia.org/wiki/Beeswax"
+   },
+   {
+    "text": "Honeybees do a 'waggle dance' to tell their hive mates which way to fly to find flowers.",
+    "source": "https://en.wikipedia.org/wiki/Waggle_dance"
+   }
+  ]
+ },
+ "octofract": {
+  "kind": "real",
+  "basedOn": "Common Octopus",
+  "scientific": "Octopus vulgaris",
+  "when": null,
+  "where": "Warm and mild coastal oceans, including the Mediterranean and the Atlantic",
+  "size": "About as long as a baseball bat with its arms stretched out",
+  "story": null,
+  "facts": [
+   {
+    "text": "Octopus blood is blue, not red.",
+    "source": "https://en.wikipedia.org/wiki/Octopus"
+   },
+   {
+    "text": "Most of an octopus's nerve cells are in its arms, not its head.",
+    "source": "https://en.wikipedia.org/wiki/Octopus"
+   },
+   {
+    "text": "An octopus can change its color and skin texture in less than a second to hide.",
+    "source": "https://en.wikipedia.org/wiki/Octopus"
+   }
+  ]
+ },
+ "minusfox": {
+  "kind": "real",
+  "basedOn": "Arctic Fox",
+  "scientific": "Vulpes lagopus",
+  "when": null,
+  "where": "Arctic tundra of North America, Europe and Asia",
+  "size": "About the size of a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "Many Arctic foxes are brown or gray in summer and turn white in winter.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   },
+   {
+    "text": "An Arctic fox can hear lemmings moving under the snow, then pounce through it to catch them.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   },
+   {
+    "text": "Arctic foxes sometimes follow polar bears to eat their leftovers.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   }
+  ]
+ },
+ "parrolex": {
+  "kind": "real",
+  "basedOn": "Grey Parrot",
+  "scientific": "Psittacus erithacus",
+  "when": null,
+  "where": "Rain forests of West and Central Africa",
+  "size": "About as long as a ruler",
+  "story": null,
+  "facts": [
+   {
+    "text": "Scientist Irene Pepperberg worked with Alex the parrot for about 30 years.",
+    "source": "https://en.wikipedia.org/wiki/Alex_(parrot)"
+   },
+   {
+    "text": "Grey parrots can live 40 to 60 years in people's care.",
+    "source": "https://en.wikipedia.org/wiki/Grey_parrot"
+   },
+   {
+    "text": "A grey parrot is mostly gray, but its tail feathers are bright red.",
+    "source": "https://en.wikipedia.org/wiki/Grey_parrot"
+   }
+  ]
+ },
+ "whistlefin": {
+  "kind": "real",
+  "basedOn": "Bottlenose Dolphin",
+  "scientific": "Tursiops truncatus",
+  "when": null,
+  "where": "Warm and mild oceans all around the world",
+  "size": "Longer than a grown-up is tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "Dolphins can recognize a friend's whistle even after being apart for more than 20 years.",
+    "source": "https://en.wikipedia.org/wiki/Common_bottlenose_dolphin"
+   },
+   {
+    "text": "Dolphins find food by echolocation: they make clicks and listen for the echoes.",
+    "source": "https://en.wikipedia.org/wiki/Common_bottlenose_dolphin"
+   }
+  ]
+ },
+ "pagegrub": {
+  "kind": "real",
+  "basedOn": "Bookworm (Book-eating Insects)",
+  "scientific": null,
+  "when": null,
+  "where": "Old libraries and storerooms all over the world",
+  "size": "Tiny, about as long as a grain of rice",
+  "story": null,
+  "facts": [
+   {
+    "text": "A bookworm isn't a worm. It's an insect larva that eats books.",
+    "source": "https://en.wikipedia.org/wiki/Bookworm"
+   },
+   {
+    "text": "The drugstore beetle is one tiny insect that eats books and old papers.",
+    "source": "https://en.wikipedia.org/wiki/Drugstore_beetle"
+   },
+   {
+    "text": "Booklice, about as long as a pinhead is wide, nibble the paste used to bind books.",
+    "source": "https://en.wikipedia.org/wiki/Psocoptera"
+   }
+  ]
+ },
+ "ironbison": {
+  "kind": "real",
+  "basedOn": "American Bison",
+  "scientific": "Bison bison",
+  "when": null,
+  "where": "Grasslands and parks of North America, like Yellowstone",
+  "size": "Taller than a grown-up at the shoulder, and as heavy as a small car",
+  "story": null,
+  "facts": [
+   {
+    "text": "The bison is the national mammal of the United States.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   },
+   {
+    "text": "Millions of bison once roamed, but by 1889 only about 541 were left.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   },
+   {
+    "text": "Bison can run as fast as 40 miles per hour.",
+    "source": "https://en.wikipedia.org/wiki/American_bison"
+   }
+  ]
+ },
+ "bastion": {
+  "kind": "myth",
+  "basedOn": "Golem",
+  "scientific": null,
+  "when": null,
+  "where": "Jewish folklore from Prague, in what is now the Czech Republic",
+  "size": null,
+  "story": "In a famous Jewish folk tale from Prague, Rabbi Judah Loew shaped a giant figure out of clay and brought it to life to protect his community. The golem later became a common idea in stories about giant guardians made of earth or stone.",
+  "facts": [
+   {
+    "text": "The word 'golem' comes from a Hebrew word meaning a shapeless mass.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   },
+   {
+    "text": "The most famous golem story is set in Prague in the 1500s.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   },
+   {
+    "text": "The legend says the golem's body was put away in the attic of Prague's Old New Synagogue.",
+    "source": "https://en.wikipedia.org/wiki/Golem"
+   }
+  ]
+ },
+ "sphinxar": {
+  "kind": "myth",
+  "basedOn": "Sphinx",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Egypt and ancient Greece",
+  "size": null,
+  "story": "In ancient Egypt, sphinxes with a lion's body and a king's head guarded temples and tombs. In Greek myths, a sphinx asked travelers a riddle, and the hero Oedipus solved it.",
+  "facts": [
+   {
+    "text": "The Great Sphinx of Giza was carved from one giant piece of rock about 4,500 years ago.",
+    "source": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza"
+   },
+   {
+    "text": "The Great Sphinx is about 240 feet long, one of the biggest statues in the world.",
+    "source": "https://en.wikipedia.org/wiki/Great_Sphinx_of_Giza"
+   },
+   {
+    "text": "The Greek sphinx asked: what walks on four legs in the morning, two at noon and three at night? The answer is a person.",
+    "source": "https://en.wikipedia.org/wiki/Sphinx"
+   }
+  ]
+ },
+ "typhoondrake": {
+  "kind": "myth",
+  "basedOn": "Dragon King",
+  "scientific": null,
+  "when": null,
+  "where": "China and East Asia",
+  "size": null,
+  "story": "In Chinese folklore, Dragon Kings rule the seas and control rain and storms. Fishermen and farmers once prayed to them for good weather.",
+  "facts": [
+   {
+    "text": "In the stories, there are four Dragon Kings, one for each of the four seas.",
+    "source": "https://en.wikipedia.org/wiki/Dragon_King"
+   },
+   {
+    "text": "People held ceremonies for the Dragon Kings to ask for rain during dry times.",
+    "source": "https://en.wikipedia.org/wiki/Dragon_King"
+   },
+   {
+    "text": "The word 'typhoon' may come partly from Chinese words meaning 'great wind.'",
+    "source": "https://en.wikipedia.org/wiki/Typhoon"
+   }
+  ]
+ },
+ "hurricoil": {
+  "kind": "myth",
+  "basedOn": "Feathered Serpent",
+  "scientific": null,
+  "when": null,
+  "where": "Mexico and Central America",
+  "size": null,
+  "story": "The Aztecs called the feathered serpent god Quetzalcoatl, and the Maya called him Kukulkan. He was linked with wind, learning and creation.",
+  "facts": [
+   {
+    "text": "The name Quetzalcoatl means 'feathered serpent,' from the colorful quetzal bird.",
+    "source": "https://en.wikipedia.org/wiki/Quetzalcoatl"
+   },
+   {
+    "text": "At the El Castillo pyramid in Chichén Itzá, shadows on the steps look like a snake sliding down during the spring and fall equinoxes.",
+    "source": "https://en.wikipedia.org/wiki/El_Castillo,_Chichen_Itza"
+   },
+   {
+    "text": "The word 'hurricane' comes from Juracán, a storm spirit of the Taíno people of the Caribbean.",
+    "source": "https://en.wikipedia.org/wiki/Juracán"
+   }
+  ]
+ },
+ "amazorn": {
+  "kind": "real",
+  "basedOn": "Green Anaconda",
+  "scientific": "Eunectes murinus",
+  "when": null,
+  "where": "Rivers and swamps of the Amazon rain forest and other parts of South America",
+  "size": "Big ones are longer than a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "The green anaconda is the heaviest snake in the world.",
+    "source": "https://en.wikipedia.org/wiki/Green_anaconda"
+   },
+   {
+    "text": "Its eyes and nostrils are on top of its head, so it can see and breathe while almost hidden underwater.",
+    "source": "https://en.wikipedia.org/wiki/Green_anaconda"
+   },
+   {
+    "text": "Anacondas give birth to live babies instead of laying eggs.",
+    "source": "https://en.wikipedia.org/wiki/Green_anaconda"
+   }
+  ]
+ },
+ "coralcolossus": {
+  "kind": "real",
+  "basedOn": "Green Sea Turtle",
+  "scientific": "Chelonia mydas",
+  "when": null,
+  "where": "Warm oceans worldwide, including Australia's Great Barrier Reef",
+  "size": "Shell about 3 feet long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Green sea turtles are named for the green color of their fat, which comes from eating seagrass and algae.",
+    "source": "https://en.wikipedia.org/wiki/Green_sea_turtle"
+   },
+   {
+    "text": "Raine Island, on the Great Barrier Reef, is the world's biggest green sea turtle nesting site.",
+    "source": "https://en.wikipedia.org/wiki/Raine_Island"
+   },
+   {
+    "text": "Female sea turtles swim back to the beach where they hatched to lay their own eggs.",
+    "source": "https://en.wikipedia.org/wiki/Green_sea_turtle"
+   }
+  ]
+ },
+ "frostmaw": {
+  "kind": "real",
+  "basedOn": "Walrus",
+  "scientific": "Odobenus rosmarus",
+  "when": null,
+  "where": "Icy seas around the Arctic (walruses don't live in Antarctica)",
+  "size": "Big males can weigh as much as a small car",
+  "story": null,
+  "facts": [
+   {
+    "text": "Walruses use their tusks to pull themselves out of the water onto the ice.",
+    "source": "https://en.wikipedia.org/wiki/Walrus"
+   },
+   {
+    "text": "Its scientific name comes from Greek words for 'tooth' and 'walk.'",
+    "source": "https://en.wikipedia.org/wiki/Walrus"
+   },
+   {
+    "text": "A walrus has about 400 to 700 stiff whiskers that help it find clams on the dark seafloor.",
+    "source": "https://en.wikipedia.org/wiki/Walrus"
+   }
+  ]
+ },
+ "rustlepaw": {
+  "kind": "real",
+  "basedOn": "Red Panda",
+  "scientific": "Ailurus fulgens",
+  "when": null,
+  "where": "Mountain forests of Nepal, India, Bhutan, Myanmar and China",
+  "size": "A little bigger than a house cat, with a long bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "A red panda has a \"false thumb\" on each front paw. It is really a stretched-out wrist bone.",
+    "source": "https://en.wikipedia.org/wiki/Red_panda"
+   },
+   {
+    "text": "Red pandas are not close relatives of giant pandas. Giant pandas are bears, but red pandas are not.",
+    "source": "https://en.wikipedia.org/wiki/Red_panda"
+   },
+   {
+    "text": "Red pandas eat mostly bamboo.",
+    "source": "https://en.wikipedia.org/wiki/Red_panda"
+   }
+  ]
+ },
+ "aquilift": {
+  "kind": "real",
+  "basedOn": "Golden Eagle",
+  "scientific": "Aquila chrysaetos",
+  "when": null,
+  "where": "Mountains and open country of North America, Europe, Asia and North Africa",
+  "size": "Wings up to about 2.3 meters (over 7 feet) from tip to tip",
+  "story": null,
+  "facts": [
+   {
+    "text": "The flag of Mexico shows a golden eagle standing on a cactus and eating a snake.",
+    "source": "https://en.wikipedia.org/wiki/Flag_of_Mexico"
+   },
+   {
+    "text": "When it dives after prey, a golden eagle can zoom faster than 240 kilometers (150 miles) per hour.",
+    "source": "https://en.wikipedia.org/wiki/Golden_eagle"
+   },
+   {
+    "text": "Golden eagles build big nests on cliffs. They may come back to the same nests for several years.",
+    "source": "https://en.wikipedia.org/wiki/Golden_eagle"
+   }
+  ]
+ },
+ "screepip": {
+  "kind": "real",
+  "basedOn": "American Pika",
+  "scientific": "Ochotona princeps",
+  "when": null,
+  "where": "Rocky mountain slopes of western North America",
+  "size": "About as long as a pencil",
+  "story": null,
+  "facts": [
+   {
+    "text": "Pikas are close relatives of rabbits and hares.",
+    "source": "https://en.wikipedia.org/wiki/American_pika"
+   },
+   {
+    "text": "Pikas do not hibernate. In summer, they gather plants into \"haypiles\" to eat during the winter.",
+    "source": "https://en.wikipedia.org/wiki/American_pika"
+   },
+   {
+    "text": "Pikas are very sensitive to heat. They need cool hiding places among the rocks on warm days.",
+    "source": "https://en.wikipedia.org/wiki/American_pika"
+   }
+  ]
+ },
+ "chucklebeak": {
+  "kind": "real",
+  "basedOn": "Laughing Kookaburra",
+  "scientific": "Dacelo novaeguineae",
+  "when": null,
+  "where": "Eastern Australia, and brought by people to parts of New Zealand, Tasmania and Western Australia",
+  "size": "About 41 to 47 centimeters (16 to 19 inches) long, longer than a school ruler",
+  "story": null,
+  "facts": [
+   {
+    "text": "The laughing kookaburra is the biggest kind of kingfisher in the world.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_kookaburra"
+   },
+   {
+    "text": "Kookaburras laugh most often at dawn and dusk. A family often laughs together to show that the land is theirs.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_kookaburra"
+   },
+   {
+    "text": "Kookaburras sit on a perch and wait for prey. They eat insects, lizards, mice and even snakes.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_kookaburra"
+   }
+  ]
+ },
+ "rivethorn": {
+  "kind": "real",
+  "basedOn": "Indian Rhinoceros",
+  "scientific": "Rhinoceros unicornis",
+  "when": null,
+  "where": "Grasslands of northern India and southern Nepal",
+  "size": "About as heavy as a car",
+  "story": null,
+  "facts": [
+   {
+    "text": "An Indian rhino has just one horn. It is made of keratin, the same stuff as your fingernails.",
+    "source": "https://en.wikipedia.org/wiki/Indian_rhinoceros"
+   },
+   {
+    "text": "Indian rhinos are excellent swimmers.",
+    "source": "https://en.wikipedia.org/wiki/Indian_rhinoceros"
+   },
+   {
+    "text": "Thanks to protection, their numbers grew from fewer than 2,000 in the early 1990s to more than 4,000 by 2025.",
+    "source": "https://en.wikipedia.org/wiki/Indian_rhinoceros"
+   }
+  ]
+ },
+ "gleamarin": {
+  "kind": "real",
+  "basedOn": "Golden Lion Tamarin",
+  "scientific": "Leontopithecus rosalia",
+  "when": null,
+  "where": "Atlantic Forest of Rio de Janeiro state, Brazil",
+  "size": "Body shorter than a school ruler, and about as heavy as a basketball",
+  "story": null,
+  "facts": [
+   {
+    "text": "Golden lion tamarins have long, thin fingers. They reach into cracks to grab small animals hiding inside.",
+    "source": "https://en.wikipedia.org/wiki/Golden_lion_tamarin"
+   },
+   {
+    "text": "Twins are common. Other members of the family help raise the babies.",
+    "source": "https://en.wikipedia.org/wiki/Golden_lion_tamarin"
+   },
+   {
+    "text": "Only about 560 lived in the wild in the early 1990s. Thanks to conservation work, there are now more than 4,800.",
+    "source": "https://en.wikipedia.org/wiki/Golden_lion_tamarin"
+   }
+  ]
+ },
+ "lazarine": {
+  "kind": "real",
+  "basedOn": "West Indian Ocean Coelacanth",
+  "scientific": "Latimeria chalumnae",
+  "when": null,
+  "where": "Deep waters off eastern Africa, from South Africa to Kenya, the Comoros and Madagascar",
+  "size": "Up to about 2 meters (6.5 feet) long, taller than most grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "Scientists once thought coelacanths had died out about 66 million years ago. They knew them only from fossils.",
+    "source": "https://en.wikipedia.org/wiki/Coelacanth"
+   },
+   {
+    "text": "In December 1938, Marjorie Courtenay-Latimer, who worked at a museum in East London, South Africa, found a strange fish in a fishing boat's catch. It was a living coelacanth!",
+    "source": "https://en.wikipedia.org/wiki/Marjorie_Courtenay-Latimer"
+   },
+   {
+    "text": "Its scientific name, Latimeria, honors Marjorie Courtenay-Latimer.",
+    "source": "https://en.wikipedia.org/wiki/West_Indian_Ocean_coelacanth"
+   }
+  ]
+ },
+ "floecub": {
+  "kind": "real",
+  "basedOn": "Polar Bear",
+  "scientific": "Ursus maritimus",
+  "when": null,
+  "where": "Sea ice and coasts of the Arctic, in Canada, Alaska, Greenland, Russia and Norway",
+  "size": "Big males can weigh up to about 800 kilograms (1,760 pounds), as much as ten grown-ups",
+  "story": null,
+  "facts": [
+   {
+    "text": "Under its white-looking fur, a polar bear has black skin. Its outer hairs are see-through and hollow.",
+    "source": "https://en.wikipedia.org/wiki/Polar_bear"
+   },
+   {
+    "text": "Polar bears count as marine mammals because they depend so much on the ocean.",
+    "source": "https://en.wikipedia.org/wiki/Polar_bear"
+   },
+   {
+    "text": "Polar bears are strong swimmers. On long swims, they can keep going for days.",
+    "source": "https://en.wikipedia.org/wiki/Polar_bear"
+   }
+  ]
+ },
+ "frostbill": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "Platypuses live all the way from warm Queensland to the cold, high mountains of Tasmania and the Australian Alps.",
+    "source": "https://australian.museum/learn/animals/mammals/platypus/"
+   },
+   {
+    "text": "Its thick, waterproof fur traps a layer of air that keeps it warm in chilly water.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "A platypus's body stays at about 32 °C (90 °F), a little cooler than yours.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "emberbill": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "A platypus can spend 10 to 12 hours a day hunting for food.",
+    "source": "https://australian.museum/learn/animals/mammals/platypus/"
+   },
+   {
+    "text": "Its flat tail stores fat, like a backpack full of snacks for later.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Surprisingly, the platypus has no working stomach.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "glowbill": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "In 2020, scientists reported that platypus fur shines cyan and green under ultraviolet light.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "When a platypus dives, its eyes and ears close up, so it hunts by sensing tiny electric signals with its bill.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Platypuses are mostly active at night.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "digbill": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "A platypus spends most of its time in a burrow dug into the bank of a river, creek or pond.",
+    "source": "https://australian.museum/learn/animals/mammals/platypus/"
+   },
+   {
+    "text": "A mother's nesting burrow can be as long as 30 meters (98 feet).",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "As she goes in to lay her eggs, the mother blocks the tunnel behind her with thin plugs of soil.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "pebblenose": {
+  "kind": "real",
+  "basedOn": "White-nosed Coati",
+  "scientific": "Nasua narica",
+  "when": null,
+  "where": "Forests of the southwestern United States, Mexico and Central America",
+  "size": "About as long as a house cat, with a tail just as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "White-nosed coatis can live anywhere from sea level up to about 3,000 meters (9,800 feet) high.",
+    "source": "https://en.wikipedia.org/wiki/White-nosed_coati"
+   },
+   {
+    "text": "A mother coati may build a nest in a tree or tucked into a rocky nook before her babies are born.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   },
+   {
+    "text": "Unlike a cat, a coati cannot pull its claws back in.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   }
+  ]
+ },
+ "breezenose": {
+  "kind": "real",
+  "basedOn": "White-nosed Coati",
+  "scientific": "Nasua narica",
+  "when": null,
+  "where": "Forests of the southwestern United States, Mexico and Central America",
+  "size": "About as long as a house cat, with a tail just as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Coatis often hold their tails straight up, which helps the group stay together in tall plants.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   },
+   {
+    "text": "Coatis talk to each other with chirps, snorts and grunts.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   },
+   {
+    "text": "Most of the raccoon family comes out at night, but coatis are busy mostly during the day.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   }
+  ]
+ },
+ "sparkiwi": {
+  "kind": "real",
+  "basedOn": "Kiwi",
+  "scientific": null,
+  "when": null,
+  "where": "Forests of New Zealand",
+  "size": "About the size of a chicken",
+  "story": null,
+  "facts": [
+   {
+    "text": "Kiwi have a very strong sense of smell, which is unusual for a bird.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "In most kinds of kiwi, the father is the one who sits on the egg.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "The kiwi is a symbol of New Zealand, and people from New Zealand are nicknamed Kiwis.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   }
+  ]
+ },
+ "gearbill": {
+  "kind": "real",
+  "basedOn": "Shoebill",
+  "scientific": "Balaeniceps rex",
+  "when": null,
+  "where": "Papyrus swamps of East Africa, such as in South Sudan, Uganda and Zambia",
+  "size": "Taller than many kids, about 4 feet (over 1 meter) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "While hunting, a shoebill walks very slowly and often stands perfectly still.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   },
+   {
+    "text": "The edges of its huge bill are sharp.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   },
+   {
+    "text": "Its wings stretch about 2.3 to 2.6 meters (7.5 to 8.5 feet) from tip to tip.",
+    "source": "https://en.wikipedia.org/wiki/Shoebill"
+   }
+  ]
+ },
+ "pentastar": {
+  "kind": "real",
+  "basedOn": "Sea star",
+  "scientific": null,
+  "when": null,
+  "where": "Oceans all over the world, from tide pools to the deep sea",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "Most sea stars have five arms spread evenly around a center, a pattern called five-part symmetry.",
+    "source": "https://en.wikipedia.org/wiki/Starfish"
+   },
+   {
+    "text": "A sea star has a simple eyespot at the tip of each arm.",
+    "source": "https://en.wikipedia.org/wiki/Starfish"
+   },
+   {
+    "text": "Some sea stars can regrow a whole arm if they lose one.",
+    "source": "https://en.wikipedia.org/wiki/Starfish"
+   }
+  ]
+ },
+ "centipod": {
+  "kind": "real",
+  "basedOn": "Centipede",
+  "scientific": null,
+  "when": null,
+  "where": "Soil, leaf litter and under logs and rocks almost everywhere on land",
+  "size": "The largest kinds grow to about 30 cm (12 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The name centipede means 'hundred feet,' but no centipede has exactly 100 legs.",
+    "source": "https://en.wikipedia.org/wiki/Centipede"
+   },
+   {
+    "text": "Centipedes always have an odd number of pairs of legs, from 15 pairs to 191 pairs.",
+    "source": "https://en.wikipedia.org/wiki/Centipede"
+   },
+   {
+    "text": "A centipede's first pair of legs became venom claws for catching food.",
+    "source": "https://en.wikipedia.org/wiki/Centipede"
+   }
+  ]
+ },
+ "stepant": {
+  "kind": "real",
+  "basedOn": "Saharan silver ant",
+  "scientific": "Cataglyphis bombycina",
+  "when": null,
+  "where": "The Sahara Desert of North Africa",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "When scientists gave a related Saharan desert ant tiny stilts, it walked past its nest, which showed it keeps track of its steps.",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2430559"
+   },
+   {
+    "text": "Silver ants are covered in shiny hairs that reflect sunlight and help them shed heat.",
+    "source": "https://en.wikipedia.org/wiki/Cataglyphis_bombycina"
+   },
+   {
+    "text": "They come out of the nest for only about ten minutes a day, in heat of around 47 °C (117 °F).",
+    "source": "https://en.wikipedia.org/wiki/Cataglyphis_bombycina"
+   }
+  ]
+ },
+ "webangle": {
+  "kind": "real",
+  "basedOn": "Orb-weaver spider",
+  "scientific": null,
+  "when": null,
+  "where": "Gardens, fields and forests around the world",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "An orb web has straight spokes going out from the middle and a sticky spiral laid on top.",
+    "source": "https://en.wikipedia.org/wiki/Orb-weaver_spider"
+   },
+   {
+    "text": "The spider builds the spokes first from non-sticky silk and adds the sticky spiral last.",
+    "source": "https://en.wikipedia.org/wiki/Orb-weaver_spider"
+   },
+   {
+    "text": "Many orb-weavers eat their old web and spin a brand-new one each day.",
+    "source": "https://en.wikipedia.org/wiki/Orb-weaver_spider"
+   }
+  ]
+ },
+ "spiralnaut": {
+  "kind": "real",
+  "basedOn": "Chambered nautilus",
+  "scientific": "Nautilus pompilius",
+  "when": null,
+  "where": "Deep waters near coral reefs of the western Pacific Ocean, such as off Australia and Japan",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "As it grows, a chambered nautilus builds new, bigger chambers in its spiral shell and moves into them.",
+    "source": "https://en.wikipedia.org/wiki/Chambered_nautilus"
+   },
+   {
+    "text": "Many people say the nautilus shell follows the golden ratio, but measurements show it does not.",
+    "source": "https://en.wikipedia.org/wiki/Chambered_nautilus"
+   },
+   {
+    "text": "A nautilus has about 90 tentacles, and none of them have suckers.",
+    "source": "https://en.wikipedia.org/wiki/Chambered_nautilus"
+   }
+  ]
+ },
+ "numbanzee": {
+  "kind": "real",
+  "basedOn": "Chimpanzee",
+  "scientific": "Pan troglodytes",
+  "when": null,
+  "where": "Forests and savannas of equatorial Africa",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "A chimpanzee named Ayumu at Kyoto University remembered the order of numbers on a touch screen better than university students.",
+    "source": "https://en.wikipedia.org/wiki/Ayumu_(chimpanzee)"
+   },
+   {
+    "text": "Some scientists point out that Ayumu had practiced the game much more than the students had.",
+    "source": "https://en.wikipedia.org/wiki/Ayumu_(chimpanzee)"
+   },
+   {
+    "text": "Some wild chimpanzees in West Africa crack open hard nuts with stones.",
+    "source": "https://en.wikipedia.org/wiki/Chimpanzee"
+   }
+  ]
+ },
+ "lexibo": {
+  "kind": "real",
+  "basedOn": "Bonobo",
+  "scientific": "Pan paniscus",
+  "when": null,
+  "where": "Rainforests of the Democratic Republic of the Congo, south of the Congo River",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "A bonobo named Kanzi learned to talk using a keyboard with over 300 picture symbols called lexigrams.",
+    "source": "https://en.wikipedia.org/wiki/Kanzi"
+   },
+   {
+    "text": "Researchers were teaching Kanzi's mother, but Kanzi picked up the symbols on his own.",
+    "source": "https://en.wikipedia.org/wiki/Kanzi"
+   },
+   {
+    "text": "Bonobos share food with others, even strangers.",
+    "source": "https://en.wikipedia.org/wiki/Bonobo"
+   }
+  ]
+ },
+ "wordcollie": {
+  "kind": "real",
+  "basedOn": "Border Collie",
+  "scientific": null,
+  "when": null,
+  "where": "First bred near the border of England and Scotland, now found worldwide",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "A border collie named Chaser learned the names of 1,022 toys.",
+    "source": "https://en.wikipedia.org/wiki/Chaser_(dog)"
+   },
+   {
+    "text": "Chaser could figure out a new toy's name by ruling out all the names she already knew.",
+    "source": "https://en.wikipedia.org/wiki/Chaser_(dog)"
+   },
+   {
+    "text": "Border collies were bred to herd sheep, and they use a hard stare called 'the eye' to move the flock.",
+    "source": "https://en.wikipedia.org/wiki/Border_Collie"
+   }
+  ]
+ },
+ "chirpuga": {
+  "kind": "real",
+  "basedOn": "Beluga whale",
+  "scientific": "Delphinapterus leucas",
+  "when": null,
+  "where": "Cold Arctic and sub-Arctic seas",
+  "size": "Males can grow up to 5.5 meters (18 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Belugas are nicknamed 'sea canaries' because of their high-pitched calls.",
+    "source": "https://en.wikipedia.org/wiki/Beluga_whale"
+   },
+   {
+    "text": "The round bump on a beluga's head, called the melon, changes shape as it makes sounds.",
+    "source": "https://en.wikipedia.org/wiki/Beluga_whale"
+   },
+   {
+    "text": "Baby belugas are born gray and slowly turn white as they grow up.",
+    "source": "https://en.wikipedia.org/wiki/Beluga_whale"
+   }
+  ]
+ },
+ "mynatter": {
+  "kind": "real",
+  "basedOn": "Common hill myna",
+  "scientific": "Gracula religiosa",
+  "when": null,
+  "where": "Forests of South and Southeast Asia, from India to southern China and the Philippines",
+  "size": null,
+  "story": null,
+  "facts": [
+   {
+    "text": "Hill mynas kept by people are famous for copying sounds, especially the human voice.",
+    "source": "https://en.wikipedia.org/wiki/Common_hill_myna"
+   },
+   {
+    "text": "Many people think wild hill mynas copy other birds, but they do not.",
+    "source": "https://en.wikipedia.org/wiki/Common_hill_myna"
+   },
+   {
+    "text": "Hill mynas have bright yellow patches of skin, called wattles, on their heads.",
+    "source": "https://en.wikipedia.org/wiki/Common_hill_myna"
+   }
+  ]
+ },
+ "qiloom": {
+  "kind": "myth",
+  "basedOn": "Qilin",
+  "scientific": null,
+  "when": null,
+  "where": "China, with similar stories in Japan and Korea",
+  "size": null,
+  "story": "In Chinese legend, the qilin is a rare and gentle creature with hooves and shimmering scales. When a qilin appears, it is said to be a sign that a wise and good leader or teacher is coming.",
+  "facts": [
+   {
+    "text": "In the stories, a qilin's feet never harm any living thing, not even grass.",
+    "source": "https://www.worldhistory.org/Qilin/"
+   },
+   {
+    "text": "One legend says a qilin appeared to the mother of the great teacher Confucius just before he was born.",
+    "source": "https://www.worldhistory.org/Qilin/"
+   },
+   {
+    "text": "In the 1400s, a giraffe brought to China after Zheng He's voyages was thought to be a qilin, and today 'kirin' is the Japanese word for giraffe.",
+    "source": "https://en.wikipedia.org/wiki/Qilin"
+   }
+  ]
+ },
+ "rocquill": {
+  "kind": "myth",
+  "basedOn": "Roc",
+  "scientific": null,
+  "when": null,
+  "where": "Arabic and Persian tales of the Middle East",
+  "size": null,
+  "story": "The roc is a giant bird from Middle Eastern tales, so big it was said to carry off elephants. It appears in the stories of Sinbad the Sailor in One Thousand and One Nights.",
+  "facts": [
+   {
+    "text": "On his second voyage, Sinbad finds a roc egg so big it looks like a huge white dome, 50 paces around.",
+    "source": "https://en.wikipedia.org/wiki/Roc_(mythology)"
+   },
+   {
+    "text": "The traveler Marco Polo also wrote about the roc, and people later linked it to the island of Madagascar.",
+    "source": "https://en.wikipedia.org/wiki/Roc_(mythology)"
+   },
+   {
+    "text": "Some think the giant eggs of Madagascar's elephant bird, which could not fly, helped inspire the legend.",
+    "source": "https://en.wikipedia.org/wiki/Roc_(mythology)"
+   }
+  ]
+ },
+ "gargrim": {
+  "kind": "myth",
+  "basedOn": "Gargoyle",
+  "scientific": null,
+  "when": null,
+  "where": "Old churches and buildings of Europe, especially France",
+  "size": null,
+  "story": "Gargoyles are carved stone creatures that perch on old European churches. People said they guarded the building against evil, and a French legend tells of a dragon named La Gargouille near the city of Rouen.",
+  "facts": [
+   {
+    "text": "Many gargoyles are rain spouts that carry water off the roof so it does not wear away the walls.",
+    "source": "https://en.wikipedia.org/wiki/Gargoyle"
+   },
+   {
+    "text": "The word gargoyle comes from the French word gargouille, which is linked to the throat and to a gurgling sound.",
+    "source": "https://en.wikipedia.org/wiki/Gargoyle"
+   },
+   {
+    "text": "Carved creatures that do not spout water are more properly called grotesques.",
+    "source": "https://en.wikipedia.org/wiki/Gargoyle"
+   }
+  ]
+ },
+ "sirenade": {
+  "kind": "myth",
+  "basedOn": "Siren",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Greece",
+  "size": null,
+  "story": "In Greek myths, the sirens were magical singers who lived on a rocky island. Their songs were so beautiful that sailors would steer toward them and forget about going home.",
+  "facts": [
+   {
+    "text": "In early Greek art, sirens were shown as large birds with human faces.",
+    "source": "https://en.wikipedia.org/wiki/Siren_(mythology)"
+   },
+   {
+    "text": "In the Odyssey, the hero Odysseus has his sailors plug their ears with beeswax and tie him to the mast so he can hear the song safely.",
+    "source": "https://en.wikipedia.org/wiki/Siren_(mythology)"
+   },
+   {
+    "text": "In another story, the musician Orpheus played his music more beautifully than the sirens, so the sailors could not hear them.",
+    "source": "https://en.wikipedia.org/wiki/Siren_(mythology)"
+   }
+  ]
+ },
+ "talosteel": {
+  "kind": "myth",
+  "basedOn": "Talos",
+  "scientific": null,
+  "when": null,
+  "where": "Ancient Greece, on the island of Crete",
+  "size": null,
+  "story": "In Greek myth, Talos was a huge man made of bronze who guarded the island of Crete. He ran around the whole island three times every day and threw boulders at ships that came too close.",
+  "facts": [
+   {
+    "text": "One version of the myth says the god Zeus gave Talos to Europa, the mother of King Minos, to protect the island.",
+    "source": "https://en.wikipedia.org/wiki/Talos"
+   },
+   {
+    "text": "Talos had a single vein running from his neck to his ankle, closed with a bronze nail.",
+    "source": "https://en.wikipedia.org/wiki/Talos"
+   },
+   {
+    "text": "Ancient coins from Phaistos, a city on Crete, show Talos with wings, throwing a stone.",
+    "source": "https://en.wikipedia.org/wiki/Talos"
+   }
+  ]
+ },
+ "glowplume": {
+  "kind": "myth",
+  "basedOn": "Firebird",
+  "scientific": null,
+  "when": null,
+  "where": "Slavic folk tales of Russia and Eastern Europe",
+  "size": null,
+  "story": "In Slavic folk tales, the firebird is a glowing bird from a faraway land that comes at night to eat golden apples in the tsar's garden. Brave heroes go on long quests to find it.",
+  "facts": [
+   {
+    "text": "In the stories, one firebird feather keeps glowing and can light up a large room.",
+    "source": "https://en.wikipedia.org/wiki/Firebird_(Slavic_folklore)"
+   },
+   {
+    "text": "A firebird quest usually begins when someone finds one of its lost tail feathers.",
+    "source": "https://en.wikipedia.org/wiki/Firebird_(Slavic_folklore)"
+   },
+   {
+    "text": "The composer Igor Stravinsky wrote a famous ballet called The Firebird, first performed in Paris in 1910.",
+    "source": "https://en.wikipedia.org/wiki/The_Firebird"
+   }
+  ]
+ },
+ "bakumist": {
+  "kind": "myth",
+  "basedOn": "Baku",
+  "scientific": null,
+  "when": null,
+  "where": "Japan, based on older stories from China",
+  "size": null,
+  "story": "In Japanese folklore, the baku is a gentle spirit that eats bad dreams. A child who wakes from a nightmare can say 'Baku-san, come eat my dream' three times.",
+  "facts": [
+   {
+    "text": "A book from the early 1600s describes the baku with an elephant's trunk, a cow's tail and a tiger's paws.",
+    "source": "https://en.wikipedia.org/wiki/Baku_(mythology)"
+   },
+   {
+    "text": "The Japanese baku comes from an older Chinese creature called the mo.",
+    "source": "https://en.wikipedia.org/wiki/Baku_(mythology)"
+   },
+   {
+    "text": "Today, baku is also the Japanese word for the tapir, a real animal with a short trunk.",
+    "source": "https://en.wikipedia.org/wiki/Baku_(mythology)"
+   }
+  ]
+ },
+ "yetitan": {
+  "kind": "myth",
+  "basedOn": "Yeti",
+  "scientific": null,
+  "when": null,
+  "where": "Himalayan folklore of Nepal, Tibet and Bhutan",
+  "size": null,
+  "story": "In Himalayan folklore, the yeti is a big, hairy creature said to roam the high snowy mountains. It is a legend, and there is no proof that yetis are real.",
+  "facts": [
+   {
+    "text": "The nickname 'Abominable Snowman' came from a mistranslation in a 1921 newspaper story.",
+    "source": "https://en.wikipedia.org/wiki/Yeti"
+   },
+   {
+    "text": "In 1951, explorer Eric Shipton photographed large footprints in the snow, but many think melting snow made ordinary tracks look bigger.",
+    "source": "https://en.wikipedia.org/wiki/Yeti"
+   },
+   {
+    "text": "When scientists tested the DNA of hair and bones said to come from yetis, they turned out to be from bears and even a dog.",
+    "source": "https://en.wikipedia.org/wiki/Yeti"
+   }
+  ]
+ },
+ "mantido": {
+  "kind": "real",
+  "basedOn": "Chinese Mantis",
+  "scientific": "Tenodera sinensis",
+  "when": null,
+  "where": "Native to China, Japan, Korea and the far east of Russia. People later brought it to North America too.",
+  "size": "Up to about 11 cm (4 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "A kung fu style called Northern Praying Mantis is named after this kind of insect. Stories say it began in Shandong, China, when a fighter watched a brave mantis.",
+    "source": "https://en.wikipedia.org/wiki/Northern_Praying_Mantis"
+   },
+   {
+    "text": "Chinese mantises can be green or brown, which helps them hide among plants.",
+    "source": "https://en.wikipedia.org/wiki/Tenodera_sinensis"
+   },
+   {
+    "text": "A mother mantis makes a foamy egg case that can hold up to 300 eggs.",
+    "source": "https://en.wikipedia.org/wiki/Tenodera_sinensis"
+   }
+  ]
+ },
+ "cranekick": {
+  "kind": "real",
+  "basedOn": "Red-crowned Crane",
+  "scientific": "Grus japonensis",
+  "when": null,
+  "where": "Wetlands of China, Japan, Korea and the far east of Russia",
+  "size": "About 1.5 m (5 feet) tall, with wings more than 2 m (7 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "White Crane kung fu comes from Fujian, China. The legend says a young woman named Fang Qiniang learned it by watching a crane move. The story does not say which kind of crane it was.",
+    "source": "https://en.wikipedia.org/wiki/Fujian_White_Crane"
+   },
+   {
+    "text": "The red on its head is bare skin, not feathers. It gets brighter in mating season.",
+    "source": "https://en.wikipedia.org/wiki/Red-crowned_crane"
+   },
+   {
+    "text": "Crane pairs call and dance together. This helps them stay a team and tells other cranes the area is taken.",
+    "source": "https://en.wikipedia.org/wiki/Red-crowned_crane"
+   }
+  ]
+ },
+ "monkido": {
+  "kind": "real",
+  "basedOn": "Golden Snub-nosed Monkey",
+  "scientific": "Rhinopithecus roxellana",
+  "when": null,
+  "where": "Mountain forests in four provinces of central China: Sichuan, Gansu, Shaanxi and Hubei",
+  "size": "Males are about 58 to 68 cm (2 feet) long, not counting the tail. Females are smaller.",
+  "story": null,
+  "facts": [
+   {
+    "text": "Monkey style kung fu copies the way monkeys move. Fighters squat, roll, tumble and even make monkey faces.",
+    "source": "https://en.wikipedia.org/wiki/Monkey_Kung_Fu"
+   },
+   {
+    "text": "Its home gets lots of snow. Scientists think it can handle the cold better than any other monkey or ape, not counting people.",
+    "source": "https://en.wikipedia.org/wiki/Golden_snub-nosed_monkey"
+   },
+   {
+    "text": "Its main food is lichen that grows on trees. It also eats leaves, buds, fruits, seeds and bark.",
+    "source": "https://en.wikipedia.org/wiki/Golden_snub-nosed_monkey"
+   }
+  ]
+ },
+ "tigrifu": {
+  "kind": "real",
+  "basedOn": "South China Tiger",
+  "scientific": "Panthera tigris tigris",
+  "when": null,
+  "where": "Once lived across the forests and hills of southern China. Today it lives only in zoos and breeding parks.",
+  "size": "A big male can be about 2.3 to 2.6 m (8 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Tiger is one of the five animal styles of Southern Chinese kung fu. The others are crane, leopard, snake and dragon.",
+    "source": "https://en.wikipedia.org/wiki/Five_Animals"
+   },
+   {
+    "text": "No one has found a wild South China tiger since the 1980s. It may be gone from the wild. But in 2019, about 150 lived in care in China, and people are working to help them.",
+    "source": "https://en.wikipedia.org/wiki/South_China_tiger"
+   },
+   {
+    "text": "It is the smallest tiger on the mainland of Asia.",
+    "source": "https://en.wikipedia.org/wiki/South_China_tiger"
+   }
+  ]
+ },
+ "paddlet": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and streams of eastern Australia and Tasmania",
+  "size": "About as long as a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "The platypus is one of only a few mammals that lay eggs.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Male platypuses have a venomous spur on each back ankle.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Under ultraviolet light, platypus fur glows a blue-green color.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "coatikit": {
+  "kind": "real",
+  "basedOn": "White-nosed Coati",
+  "scientific": "Nasua narica",
+  "when": null,
+  "where": "Forests of the southwestern United States, Mexico and Central America",
+  "size": "About as long as a house cat, with a tail just as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Coatis can turn their ankles all the way around, so they can climb down trees head first.",
+    "source": "https://en.wikipedia.org/wiki/Coati"
+   },
+   {
+    "text": "Females and young coatis travel together in groups called bands.",
+    "source": "https://en.wikipedia.org/wiki/White-nosed_coati"
+   },
+   {
+    "text": "A coati's long, wiggly snout sniffs out insects and other food hidden in the leaves.",
+    "source": "https://en.wikipedia.org/wiki/White-nosed_coati"
+   }
+  ]
+ },
+ "kiwikin": {
+  "kind": "real",
+  "basedOn": "Kiwi",
+  "scientific": null,
+  "when": null,
+  "where": "Forests of New Zealand",
+  "size": "About the size of a chicken",
+  "story": null,
+  "facts": [
+   {
+    "text": "Kiwi are the only birds with nostrils at the tip of their beaks.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "A kiwi egg can weigh up to a quarter of its mother's weight.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   },
+   {
+    "text": "Its wings are so tiny that they are hidden under its hair-like feathers.",
+    "source": "https://en.wikipedia.org/wiki/Kiwi_(bird)"
+   }
+  ]
+ },
+ "voltewe": {
+  "kind": "real",
+  "basedOn": "Merino Sheep",
+  "scientific": "Ovis aries",
+  "when": null,
+  "where": "First bred in Spain and Portugal, and now raised around the world, especially in Australia and New Zealand",
+  "size": "A Merino fleece usually weighs about 4 kg",
+  "story": null,
+  "facts": [
+   {
+    "text": "Merino sheep were first bred in Spain and Portugal about 800 years ago. For a long time, Spain would not let anyone take them out of the country.",
+    "source": "https://en.wikipedia.org/wiki/Merino"
+   },
+   {
+    "text": "Merino wool is very fine. Each hair is usually thinner than 24 micrometers, which is why it feels so soft.",
+    "source": "https://en.wikipedia.org/wiki/Merino"
+   },
+   {
+    "text": "A Merino named Shrek hid in caves in New Zealand for six years to dodge shearing. When he was finally caught, his fleece weighed 27 kg.",
+    "source": "https://en.wikipedia.org/wiki/Shrek_(sheep)"
+   }
+  ]
+ }
+}

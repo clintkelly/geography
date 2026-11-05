@@ -3,23 +3,31 @@ import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
 import { cardProgress } from '../engine/cards';
-import { allowedDifficulties, FOCUSES, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
+import { allowedDifficulties, FOCUSES, studySubject, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { artUrl, CardArt, Fx, Sprite } from './art';
 import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { Passport } from './Passport';
+import { Lodges, PatchIcon } from './Lodges';
+import { EggNest, StudyRanks } from './Eggs';
+import { eggName } from '../engine/eggs';
+import { lodgeById, lodgesOf, nextLodge, patchOf } from '../engine/lodges';
 import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
 import { playSound } from './sound';
 import { Stable, Wild } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
+import { shinyLook, shinyName } from './shiny';
 
 const FOCUS_LABELS: Record<Focus, { name: string; text: string }> = {
-  all: { name: 'Everything', text: 'Places, capitals, flags, nicknames and fun facts' },
+  all: { name: 'Everything', text: 'Places, capitals, flags, nicknames, animals, history and fun facts' },
   basics: { name: 'Places and capitals', text: 'Just where it is and its capital' },
   flags: { name: 'Flags', text: 'Just flags. US states and Antarctica have none yet.' },
   animals: { name: 'Animals', text: 'Which place is home to which wild animal' },
+  history: { name: 'History', text: 'Ancient peoples, famous firsts and how places got their stories' },
+  math: { name: 'Math', text: 'Factors, fractions and integers. Harder trails mean typing answers.' },
+  words: { name: 'Words', text: 'Vocabulary: meanings, sentences, roots, and spelling on Expert' },
 };
 
 const DESCRIPTIONS: Record<Difficulty, string> = {
@@ -37,7 +45,7 @@ export function LockTag({ difficulty }: { difficulty: Difficulty }) {
 }
 
 /** The big moment: the new friend turned out shiny. */
-function ShinyReveal() {
+function ShinyReveal({ color }: { color: string }) {
   useEffect(() => {
     playSound('card');
     const t = setTimeout(() => playSound('levelup'), 450);
@@ -46,7 +54,7 @@ function ShinyReveal() {
   return (
     <p className="shiny-reveal" role="status">
       {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}
-      <strong>✦ It's SHINY! ✦</strong> <span>A rare sparkling color. Harder trails find more of these.</span>
+      <strong>✦ It's SHINY! ✦</strong> <span>{color}! Every shiny has its own color. Harder trails find more of these.</span>
     </p>
   );
 }
@@ -59,6 +67,53 @@ function Sighting({ offer, selected, onPick }: { offer: Offer; selected: boolean
         ? <><Sprite id={species(reward.speciesId).artId} size={96} className="silhouette" /><strong>{species(reward.speciesId).boss ? 'Continent Boss!' : species(reward.speciesId).rare ? 'Rare creature!' : species(reward.speciesId).minDifficulty ? 'Hidden creature!' : 'Mystery creature'}</strong>{species(reward.speciesId).minDifficulty && <LockTag difficulty={lowestFor(species(reward.speciesId))} />}{species(reward.speciesId).secondType && <span className="dual-tag">Two types!</span>}<span className="muted">{species(reward.speciesId).flavor}</span></>
         : <><strong>Rival hunt</strong><span className="muted">Every creature is in your stable. Reward: {rewardLabel(reward)}</span></>}
     </button>
+  );
+}
+
+/** The next Lodge to beat, so the ladder is never far from mind. */
+function LodgeTeaser({ save, onOpen }: { save: SaveData; onOpen: () => void }) {
+  const beaten = save.lodgesBeaten ?? [];
+  const next = nextLodge(PACK, beaten);
+  return (
+    <button type="button" className="lodge-teaser" onClick={onOpen}>
+      <span className="patch-row">{lodgesOf(PACK).map((l) => <PatchIcon key={l.id} lodge={l} earned={beaten.includes(l.id)} size={24} />)}</span>
+      <span>{next ? <>Next Ranger Lodge: <strong>{next.name}</strong> · {next.subjectName}</> : <>You beat every Ranger Lodge. Grand Ranger!</>}</span>
+    </button>
+  );
+}
+
+/** Creatures just added to the game that this child hasn't met, and where to find them. */
+function NewInTheWild({ known, onGo }: { known: Set<string>; onGo: (regionId: string) => void }) {
+  const fresh = PACK.species.filter((o) => o.fresh && !known.has(o.id));
+  if (fresh.length === 0) return null;
+  const homes = [...new Set(fresh.map((o) => o.homes[0]!))];
+  return (
+    <div className="new-wild">
+      <strong>✨ New creatures in the wild!</strong>
+      {homes.map((h) => {
+        const here = fresh.filter((o) => o.homes[0] === h);
+        const kungfu = here.some((o) => o.type === 'kungfu');
+        return (
+          <button key={h} type="button" className="new-wild-region" onClick={() => onGo(h)}>
+            <span className="new-wild-row">{here.map((o) => <Sprite key={o.id} id={o.artId} size={40} />)}</span>
+            <span>{kungfu ? <><strong>Kung Fu type</strong> in </> : ''}{region(h).label} →</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Who lives on Math and Words trails, so a child knows what they might meet. */
+function StudyCreatures({ subject, known }: { subject: 'math' | 'words'; known: Set<string> }) {
+  const scholars = PACK.species.filter((o) => o.subject === subject);
+  if (scholars.length === 0) return null;
+  const met = scholars.filter((o) => known.has(o.id)).length;
+  return (
+    <div className="study-creatures">
+      <span>{subject === 'math' ? 'Math' : 'Words'} creatures live on these trails{met > 0 ? ` (${met} of ${scholars.length} befriended)` : ''}. Win them over with Bold Befriend!</span>
+      {scholars.map((o) => <Sprite key={o.id} id={o.artId} size={48} className={known.has(o.id) ? 'idle-sprite' : 'silhouette'} />)}
+    </div>
   );
 }
 
@@ -109,13 +164,14 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const mapHighlights = Object.fromEntries(found.map((p): [string, Highlight] => [p.featureId, mapLevel(p.id)]));
 
   const [focusPick, setFocusPick] = useState<Focus>(save.settings.lastFocus ?? 'all');
-  const focuses = FOCUSES.filter((f) => regionHasFocus(PACK, regionId, f));
+  const focuses = FOCUSES.filter((f) => regionHasFocus(PACK, regionId, f, save.settings.study));
   const focus = focuses.includes(focusPick) ? focusPick : 'all';
   const [showPassport, setShowPassport] = useState(false);
   const [showMedals, setShowMedals] = useState(false);
+  const [showLodges, setShowLodges] = useState(false);
   const start = () => dispatch({ type: 'start', offerId: offer.id, regionId, difficulty, trail, focus });
   const cycle = <T,>(list: readonly T[], now: T) => list[(list.indexOf(now) + 1) % list.length] as T;
-  useKeys(showPassport || showMedals ? {} : {
+  useKeys(showPassport || showMedals || showLodges ? {} : {
     enter: start,
     r: () => setRegionId(cycle(regions.map((r) => r.id), regionId)),
     l: () => setTrail(cycle(TRAIL_LENGTHS, trail)),
@@ -123,12 +179,14 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
     f: () => setFocusPick(cycle(focuses, focus)),
     v: () => setShowPassport(true),
     m: () => setShowMedals(true),
+    g: () => setShowLodges(true),
     p: onSwitch,
     o: onSettings,
     ...Object.fromEntries(allowed.filter((d) => RANK[d] >= RANK[floor]).map((d) => [String(allowed.indexOf(d) + 1), () => setPicked(d)])),
   });
 
   if (showPassport) return <Passport save={save} onClose={() => setShowPassport(false)} />;
+  if (showLodges) return <Lodges save={save} dispatch={dispatch} onClose={() => setShowLodges(false)} />;
   if (showMedals) return <Medals save={save} dispatch={dispatch} onClose={() => setShowMedals(false)} />;
 
   return (
@@ -141,9 +199,12 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
               {s.newStamp && <div className="stamp-slam"><img src={artUrl(`stamp-${s.newStamp}`)} alt="" width={96} height={96} /><span>New Passport stamp: <strong>{region(s.newStamp).label}</strong></span></div>}
               {(s.newMedals ?? []).map((m) => <p key={`${m.regionId}-${m.track}-${m.level}`} className="medal-new"><MedalIcon level={m.level} />New {LEVEL_NAME[m.level]} medal: <strong>{MEDAL_TRACKS.find((t) => t.id === m.track)?.label} of {region(m.regionId).label}</strong> <small>+{MEDAL_POINTS[m.level]} Trail Points next trail</small></p>)}
+              {s.lodgeId && lodgeById(PACK, s.lodgeId) && <div className="stamp-slam"><PatchIcon lodge={lodgeById(PACK, s.lodgeId)!} earned tier={s.newPatch ?? patchOf(save, s.lodgeId)} size={64} /><span>{s.newPatch ? <>New {s.newPatch === 'bronze' ? '' : `${s.newPatch === 'gold' ? 'Gold' : 'Silver'} `}patch: <strong>{lodgeById(PACK, s.lodgeId)!.name.replace(' Lodge', '')} Patch</strong>{s.newPatch === 'gold' && <> · the legendary <strong>{species(lodgeById(PACK, s.lodgeId)!.legendaryId).displayName}</strong> joined you!</>}</> : <>You beat <strong>{lodgeById(PACK, s.lodgeId)!.name}</strong> again!</>}</span></div>}
+              {s.eggLaid && <div className="stamp-slam"><img src={artUrl(`egg-${s.eggLaid}`)} alt="" width={64} height={64} className="sprite egg-wobble" /><span>You got a <strong>{eggName[s.eggLaid]}</strong>! Answer {s.eggLaid === 'words' ? 'vocabulary' : s.eggLaid === 'math' ? 'math' : 'math or vocabulary'} questions to hatch it.</span></div>}
+              {s.collected && <p className="collect-milestone"><Fx id="badge" /> <strong>{s.collected} creatures found!</strong> Keep collecting!</p>}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
-              {shinyJoined && <ShinyReveal />}
+              {shinyJoined && newest && <ShinyReveal color={shinyName(shinyLook(newest.instanceId))} />}
               {s.tamedIds?.map((id, i) => <p key={`${id}-${i}`}><strong>{species(id).displayName}</strong> joined you mid-fight!</p>)}
               {newcomers(save, [...(s.reward.kind === 'creature' ? [s.reward.speciesId] : []), ...(s.tamedIds ?? [])]).map((joined) => (
                 save.companions.length > 1 ? <button key={`home-${joined.instanceId}`} type="button" className="link" onClick={() => { playSound('free'); dispatch({ type: 'freeCompanion', instanceId: joined.instanceId }); }}>Not for me: send {species(joined.speciesId).displayName} home (+{FREE_POINTS} Trail Points, call it back any time)</button> : null
@@ -152,14 +213,16 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
               {s.souvenirId && <p>Found on the trail: <strong>{souvenir(s.souvenirId)?.displayName}</strong></p>}
               <p className="muted">{s.correct} of {s.answered} answers correct{s.xpGained ? ` · ${s.xpGained} bonus XP` : ''}{s.discoveryAssisted ? ' · used some research along the way' : ' · found every place on your own'}</p>
             </div>
-            {s.reward.kind === 'creature' && <Sprite id={species(s.reward.speciesId).artId} size={96} shiny={shinyJoined} />}
+            {s.reward.kind === 'creature' && <Sprite id={species(s.reward.speciesId).artId} size={96} shiny={shinyJoined && newest ? shinyLook(newest.instanceId) : undefined} />}
           </div>
           <button type="button" className="link" onClick={() => dispatch({ type: 'dismissSummary' })}>Dismiss</button>
         </section>
       )}
 
       <section className="panel">
-        <div className="row spread"><h1>Base Camp</h1><span className="row"><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
+        <div className="row spread"><span><h1>Base Camp</h1><span className="collected">Creatures found: <strong>{known.size}</strong> of {PACK.species.length}</span><StudyRanks save={save} /></span><span className="row"><button type="button" onClick={() => setShowLodges(true)}>Ranger Lodges <Key k="G" /></button><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
+        <LodgeTeaser save={save} onOpen={() => setShowLodges(true)} />
+        <NewInTheWild known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
@@ -183,6 +246,8 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
           ))}
           <span className="muted">{FOCUS_LABELS[focus].text}</span>
         </div>
+        <p className="study-pitch">✦ <strong>Math</strong> and <strong>Words</strong> trails: <strong>double shiny chance</strong>, an easier map search, and every <strong>8 right answers lays an egg</strong> that hatches special creatures, like new platypuses and coatis!</p>
+        {studySubject(focus) && <StudyCreatures subject={studySubject(focus) as 'math' | 'words'} known={known} />}
         <div className="picker" role="group" aria-label="Trail length">
           <span className="muted">How far <Key k="L" /></span>
           {TRAIL_LENGTHS.map((t) => (
@@ -209,6 +274,8 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <button type="button" className="primary" onClick={start}>Start expedition <Key k="Enter" /></button>
         {(save.bankedPoints ?? 0) > 0 && <p className="muted">Medal bonus: +{save.bankedPoints} Trail Points on this trail.</p>}
       </section>
+
+      <EggNest save={save} dispatch={dispatch} />
 
       <section className="panel">
         <h2>Your stable</h2>

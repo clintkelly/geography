@@ -2,7 +2,7 @@ import { IDBFactory } from 'fake-indexeddb';
 import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
 import { DEFAULT_SETTINGS, newSave, reduce, SCHEMA_VERSION, type Expedition, type SaveData } from '../engine/game';
-import { exportBackup, freshHousehold, migrateV1, migrateV2Save, migrateV3Save, migrateV5Save, openHousehold, parseBackup, type V2Save } from './household';
+import { exportBackup, freshHousehold, migrateV1, migrateV2Save, migrateV3Save, migrateV5Save, openHousehold, parseBackup, refreshForContent, type V2Save } from './household';
 import { indexedDbStore, UnsupportedSaveError, type Household } from './store';
 
 let n = 0;
@@ -291,5 +291,22 @@ describe('splitting Europe', () => {
     expect(ended.expedition).toBeNull();
     expect(ended.recentQuestionIds).toContain('q1');
     expect(migrateV5Save(trip('us-west'), pack).expedition?.regionId).toBe('us-west');
+  });
+});
+
+describe('removed creatures', () => {
+  it('a save that met a removed creature still loads, with its replacement', () => {
+    const base = newSave(PACK, 3, 'p1');
+    const offer = base.offers.find((o) => o.reward.kind === 'creature')!;
+    const old: SaveData = {
+      ...base,
+      companions: [...base.companions, { instanceId: 'x1', speciesId: 'wombore', bondXp: 0 }],
+      offers: base.offers.map((o) => (o === offer ? { ...o, reward: { kind: 'creature' as const, speciesId: 'pangoplate' } } : o)),
+    };
+    const s = refreshForContent(old, PACK);
+    expect(s.companions.find((c) => c.instanceId === 'x1')!.speciesId).toBe('prairiepup');
+    const ids = new Set(PACK.species.map((o) => o.id));
+    for (const o of s.offers) if (o.reward.kind === 'creature') expect(ids.has(o.reward.speciesId)).toBe(true);
+    expect(refreshForContent(base, PACK).offers).toEqual(base.offers);
   });
 });

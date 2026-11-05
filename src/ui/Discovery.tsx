@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { PACK } from '../content/pack';
 import { ECONOMY } from '../engine/economy';
-import { currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
+import { blankMapSearch, currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
 import { mapFor, place } from './content';
 import { Key, useKeys } from './keys';
 import { useMapCursor } from './mapCursor';
@@ -13,7 +13,7 @@ export function Discovery({ e, save, dispatch }: { e: Expedition; save: SaveData
   const [atlasOpen, setAtlasOpen] = useState(false);
   const [atlasPlace, setAtlasPlace] = useState<string | null>(null);
 
-  const expert = e.difficulty === 'expert';
+  const expert = blankMapSearch(e);
   const map = mapFor(e.regionId);
   const clues = e.clueIds.slice(0, e.cluesShown).map((id) => PACK.clues.find((c) => c.id === id));
   const lastGuess = e.guesses.at(-1);

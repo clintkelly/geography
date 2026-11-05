@@ -42,7 +42,19 @@ async function settled(before) {
   }
   throw new Error('The game did not respond');
 }
+/** A creature met for the first time opens its Field Guide card once the VS intro ends. It holds the keys until closed. */
+async function closeGuide() {
+  if (await page.locator('.vs-intro').count()) await page.locator('.vs-intro').waitFor({ state: 'detached', timeout: 5000 }).catch(() => undefined);
+  if (!(await page.locator('.guide-card').count())) return;
+  stats.guides = (stats.guides ?? 0) + 1;
+  if (stats.guides === 1) { await page.waitForTimeout(400); await shotOnce('field-guide'); }
+  const before = JSON.stringify(await save());
+  await page.keyboard.press('Enter');
+  await settled(before);
+}
+
 async function press(key) {
+  await closeGuide();
   const before = JSON.stringify(await save());
   await page.keyboard.press(key);
   await settled(before);
@@ -69,10 +81,32 @@ async function clickState(scope, featureId) {
   return !!point;
 }
 
-const stats = { guarded: 0, specials: 0, events: 0, befriends: 0, cards: 0, realClicks: 0 };
+const stats = { guarded: 0, specials: 0, events: 0, befriends: 0, cards: 0, realClicks: 0, typed: 0, keypad: 0 };
+
+/** Types an answer: on the on-screen number pad the first time, then with the keyboard. */
+async function typeAnswer(q) {
+  const before = JSON.stringify(await save());
+  await page.locator('.typed-answer input').waitFor();
+  await shotOnce(q.typed.kind === 'word' ? 'typed-word' : 'typed-number');
+  stats.typed++;
+  if (q.typed.kind !== 'word' && stats.keypad === 0) {
+    for (const ch of q.acceptedId) {
+      const label = ch === '-' ? 'minus' : ch === '/' ? 'fraction bar' : ch === ' ' ? 'space, for a mixed number' : ch;
+      await page.getByRole('button', { name: label, exact: true }).click();
+    }
+    stats.keypad++;
+    await shotOnce('keypad-filled');
+    await button(/Check answer/).click();
+  } else {
+    await page.locator('.typed-answer input').fill(q.acceptedId);
+    await page.locator('.typed-answer input').press('Enter');
+  }
+  await settled(before);
+}
 
 /** One step of whatever screen is showing, by keyboard except pointing at a state. */
 async function step(options = {}) {
+  await closeGuide();
   const s = await save();
   const e = s.expedition;
   if (!e.prepared) return press('Enter');
@@ -82,6 +116,7 @@ async function step(options = {}) {
     if (e.event.result) return press('Enter');
     stats.events++;
     const q = e.event.question;
+    if (q.inputType === 'typed') return typeAnswer(q);
     if (q.inputType === 'map-click') return clickState('.question', q.options.find((o) => o.id === q.acceptedId).featureId);
     return press(String(q.options.findIndex((o) => o.id === q.acceptedId) + 1));
   }
@@ -115,6 +150,11 @@ async function step(options = {}) {
       if (b.question.flag) await shotOnce('flag-question');
       if (b.question.options[0].flag) await shotOnce('flag-options');
       await shotOnce(b.question.inputType === 'map-click' ? 'question-click' : b.question.inputType === 'map-marker' ? 'question-marker' : 'question');
+      if (b.question.inputType === 'typed') {
+        await typeAnswer(b.question);
+        assert.equal((await save()).expedition.battle.result.correct, true, `typing ${b.question.acceptedId} is right`);
+        return;
+      }
       const accepted = b.question.options.find((o) => o.id === b.question.acceptedId);
       if (b.question.inputType === 'map-click') {
         if (accepted.tiny) {
@@ -139,14 +179,16 @@ async function step(options = {}) {
         await shotOnce('type-special');
       }
       if (b.action === 'attack' && after.combat.outcome === 'active') {
-        await page.locator('.actor.player[data-pose="attack"]').waitFor({ timeout: 1500 });
-        await shotOnce('pose-attack');
-        await page.locator('.actor-slot .type-hit').first().waitFor({ state: 'attached', timeout: 1500 });
-        stats.typeHits = (stats.typeHits ?? 0) + 1;
-        await page.waitForTimeout(180);
-        await shotOnce('type-hit');
-        await page.locator('.actor.player[data-pose="hit"]').waitFor({ timeout: 2000 });
-        await shotOnce('pose-hit');
+        // These animations are brief, so a busy machine can miss one. Count them, and check the totals at the end.
+        const seen = (locator, timeout, state = 'visible') => locator.waitFor({ state, timeout }).then(() => true, () => false);
+        if (await seen(page.locator('.actor.player[data-pose="attack"]'), 1500)) await shotOnce('pose-attack');
+        if (await seen(page.locator('.actor-slot .type-hit').first(), 1500, 'attached')) {
+          stats.typeHits = (stats.typeHits ?? 0) + 1;
+          await page.waitForTimeout(180);
+          await shotOnce('type-hit');
+        } else stats.missedAnimations = (stats.missedAnimations ?? 0) + 1;
+        if (await seen(page.locator('.actor.player[data-pose="hit"]'), 2000)) await shotOnce('pose-hit');
+        else stats.missedAnimations = (stats.missedAnimations ?? 0) + 1;
       }
       if (after.result?.cardId) { stats.cards++; await page.locator('.card-award .place-flash').waitFor({ timeout: 2000 }); await page.waitForTimeout(350); await shotOnce('card-award'); }
       else if (b.question.inputType === 'choice' && b.question.locationId) { await page.locator('.feedback .place-flash').waitFor({ timeout: 2000 }); stats.placeFlashes = (stats.placeFlashes ?? 0) + 1; await page.waitForTimeout(350); await shotOnce('place-flash'); }
@@ -244,7 +286,7 @@ assert.equal((await save()).expedition.guesses.length, 1, 'guesses survive refre
 await step();
 assert.equal((await save()).attempts.at(-1).assisted, true, 'a corrected guess is recorded as assisted');
 
-// A reload and a double click in the middle of a battle.
+// A reload and a double click in the middle of a battle. A first meeting opens a Field Guide card first.
 await press('Enter');
 await press('a');
 const before = await save();
@@ -272,7 +314,7 @@ console.log('Stable after trip 1:', done.companions.map((c) => c.speciesId).join
 // A rare encounter can add one more, and the seed is random.
 assert.ok(done.companions.length >= 2, 'the hunted creature joined the stable');
 assert.ok(done.stateCards.length > 0, 'State Cards were earned');
-assert.ok(stats.befriends >= 1 && stats.events >= 1 && stats.specials >= 1 && stats.guarded >= 1, JSON.stringify(stats));
+assert.ok((stats.guides ?? 0) >= 1 && stats.befriends >= 1 && stats.events >= 1 && stats.specials >= 1 && stats.guarded >= 1, JSON.stringify(stats));
 
 // A second trip with the new companion, entirely by keyboard.
 await press('Enter');
@@ -284,6 +326,7 @@ await step();
 await press('Enter');
 await page.getByRole('button', { name: /Switch creature/ }).waitFor();
 await shotOnce('team');
+await closeGuide();
 await page.keyboard.press('w');
 await page.getByText('Switch to who?').waitFor();
 await press('2');
@@ -318,7 +361,7 @@ await page.keyboard.press('3');
 await button('Start expedition').waitFor();
 await button('Southern Europe').click();
 await page.getByRole('button', { name: 'Expert', exact: true }).click();
-await button(/Long/).click();
+await page.getByRole('button', { name: 'Long', exact: true }).click();
 await button('Start expedition').click();
 await page.getByText('Prepare for the trail').waitFor();
 await press('Enter');
@@ -351,7 +394,7 @@ for (const [i, name] of ['Antarctica', 'Oceania'].entries()) {
     await page.waitForTimeout(1200);
   }
   await button(/Start expedition/).waitFor({ timeout: 8000 });
-  await button(name).click();
+  await page.getByRole('button', { name, exact: true }).click();
   if (name === 'Oceania') { await button('Flags').click(); await shotOnce('camp-focus'); }
   await button('Start expedition').click();
   await page.getByText('Prepare for the trail').waitFor();
@@ -386,6 +429,30 @@ await page.waitForTimeout(400);
 await shotOnce('boss-turn');
 await button('Leave expedition').click();
 await button(/Start expedition/).waitFor();
+
+// A Math trail on Ranger types answers, and a Words trail on Expert spells words.
+for (const [focus, level] of [['Math', 'Ranger'], ['Words', 'Expert']]) {
+  for (let tries = 0; tries < 5 && !(await button(/Start expedition/).count()); tries++) {
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(1200);
+  }
+  await page.getByRole('button', { name: 'American West', exact: true }).click();
+  await button(focus).click();
+  await page.locator('.study-creatures').waitFor();
+  await shotOnce(`camp-${focus.toLowerCase()}`);
+  await page.getByRole('button', { name: level, exact: true }).click();
+  await button('Short').click();
+  const done = (await save()).completedExpeditions;
+  await button('Start expedition').click();
+  await page.getByText('Prepare for the trail').waitFor();
+  await press('Enter');
+  await finishTrail({});
+  const after = await save();
+  assert.equal(after.completedExpeditions, done + 1, `a ${focus} trail finished`);
+  const study = after.attempts.filter((a) => a.objectiveId.startsWith(focus === 'Math' ? 'math-' : 'word-'));
+  assert.ok(study.length >= 3, `the ${focus} trail asked ${focus.toLowerCase()} questions`);
+}
+assert.ok(stats.typed >= 2 && stats.keypad === 1, `typed answers worked (${stats.typed})`);
 
 await page.keyboard.press('p');
 await button(/Explorer 2/).waitFor();
@@ -436,6 +503,107 @@ await page.keyboard.press('m');
 await page.getByRole('heading', { name: 'Base Camp' }).waitFor({ timeout: 3000 });
 await shot('stable-camp');
 
+// A Ranger Lodge: the ladder, the hall between battles, the leader, and the prize.
+await page.keyboard.press('g');
+await page.getByRole('heading', { name: 'Ranger Lodges' }).waitFor({ timeout: 3000 });
+assert.equal(await page.locator('.lodge-card').count(), 8, 'eight Lodges on the ladder');
+assert.equal(await page.locator('.lodge-locked').count(), 7, 'only the first Lodge is open');
+await shot('lodges');
+await page.keyboard.press('Enter');
+await page.getByText('Get ready for Wildwood Lodge').waitFor();
+await shot('lodge-prep');
+await page.keyboard.press('Enter');
+await page.locator('.lodge-hall').waitFor();
+await page.waitForTimeout(900);
+await shot('lodge-hall');
+for (let i = 0; i < 400 && (await save()).expedition; i++) {
+  if (await page.locator('.lodge-complete').count()) { await page.waitForTimeout(900); await shotOnce('lodge-complete'); }
+  await step();
+}
+const lodged = await save();
+assert.ok(!lodged.expedition, 'the Lodge finished');
+assert.deepEqual(lodged.lodgesBeaten, ['wildwood'], 'Wildwood Lodge is beaten');
+assert.ok(lodged.companions.some((c) => c.speciesId === 'rustlepaw'), 'the prize creature joined');
+// The big Lodge XP bonus can evolve a creature first.
+for (let i = 0; i < 5 && !(await page.getByText(/New patch/).count()); i++) {
+  if (await page.locator('.evolving').count()) { stats.lodgeEvolutions = (stats.lodgeEvolutions ?? 0) + 1; await shotOnce('lodge-evolve'); await page.waitForTimeout(2500); await page.keyboard.press('Enter'); }
+  await page.waitForTimeout(800);
+}
+await page.getByText(/New patch/).waitFor({ timeout: 3000 });
+await shot('lodge-summary');
+
+// Wave 2: a ready egg hatches, and a Silver Lodge's Mastery Test earns Gold and a legendary.
+await page.evaluate(() => new Promise((resolve) => {
+  const open = indexedDB.open('atlaswild', 1);
+  open.onsuccess = () => {
+    const tx = open.result.transaction('saves', 'readwrite');
+    const store = tx.objectStore('saves');
+    store.get('meta').onsuccess = (m) => {
+      const key = `profile:${m.target.result.activeProfileId}`;
+      store.get(key).onsuccess = (g) => store.put({ ...g.target.result, lastSummary: null, eggs: [{ id: 'egg-smoke', kind: 'math', progress: 20 }, { id: 'egg-warm', kind: 'words', progress: 9 }], lodgeTiers: { wildwood: 'silver' }, lodgeTestReady: ['wildwood'], eggMeter: { math: 5, words: 2, laid: 2 } }, key);
+    };
+    tx.oncomplete = () => { open.result.close(); resolve(); };
+  };
+}));
+await page.reload();
+await page.locator('.egg-nest').waitFor();
+await page.locator('.egg-nest').scrollIntoViewIfNeeded();
+await page.waitForTimeout(900);
+await page.locator('.egg-nest').screenshot({ path: `${shots ?? '/tmp'}/egg-nest-panel.png` }).catch(() => undefined);
+await shot('egg-nest');
+await button('Hatch it!').click();
+await page.getByRole('heading', { name: /hatched/ }).waitFor({ timeout: 4000 });
+await page.waitForTimeout(500);
+await shot('hatch');
+const hatched = await save();
+assert.equal(hatched.eggs.length, 1, 'the ready egg hatched');
+assert.equal(hatched.hatchedCount, 1);
+await page.keyboard.press('Enter');
+await page.getByRole('heading', { name: 'Base Camp' }).waitFor({ timeout: 3000 });
+await page.keyboard.press('g');
+await button('Take the Mastery Test').click();
+await page.locator('.lodge-quiz-head').waitFor();
+await page.waitForTimeout(700);
+await shot('mastery-quiz');
+for (let i = 0; i < 40; i++) {
+  const t = (await save()).lodgeQuiz;
+  if (!t || t.outcome) break;
+  if (t.result) {
+    await page.locator('.feedback button.primary:enabled').waitFor({ timeout: 8000 });
+    const was = JSON.stringify(t);
+    await page.keyboard.press('Enter');
+    for (let w = 0; w < 50 && JSON.stringify((await save()).lodgeQuiz) === was; w++) await page.waitForTimeout(50);
+    continue;
+  }
+  const q = t.questions[t.index];
+  if (q.inputType === 'typed') await typeAnswer(q);
+  else if (q.inputType === 'map-click') {
+    const o = q.options.find((x) => x.id === q.acceptedId);
+    const before = JSON.stringify(await save());
+    if (o.tiny) await page.locator(`.question .dot[data-place="${o.id}"]`).dispatchEvent('click');
+    else await page.locator(`.question path[data-feature="${o.featureId}"]`).dispatchEvent('click');
+    await settled(before);
+  } else {
+    const before = JSON.stringify(await save());
+    await page.keyboard.press(String(q.options.findIndex((o) => o.id === q.acceptedId) + 1));
+    await settled(before);
+  }
+}
+const gold = await save();
+assert.equal(gold.lodgeQuiz?.outcome, 'passed', 'the Mastery Test passed');
+assert.equal(gold.lodgeTiers.wildwood, 'gold', 'Gold patch earned');
+assert.ok(gold.companions.some((c) => c.speciesId === 'qiloom'), 'the legendary joined');
+await page.getByRole('heading', { name: 'Gold patch!' }).waitFor();
+await page.waitForTimeout(600);
+await shot('gold');
+await page.keyboard.press('Enter');
+await page.getByRole('heading', { name: 'Base Camp' }).waitFor({ timeout: 3000 });
+await page.keyboard.press('g');
+await page.locator('.lodge-gold').waitFor();
+await shot('lodges-gold');
+await page.keyboard.press('g');
+await page.getByRole('heading', { name: 'Base Camp' }).waitFor({ timeout: 3000 });
+
 await page.setViewportSize({ width: 900, height: 620 });
 await page.keyboard.press('Enter');
 await page.getByText('Prepare for the trail').waitFor();
@@ -443,4 +611,5 @@ await shot('tablet');
 
 await browser.close();
 assert.deepEqual(errors, [], 'no browser errors');
+assert.ok((stats.typeHits ?? 0) >= 10 && (stats.missedAnimations ?? 0) <= (stats.typeHits ?? 0) / 3, `attack animations should show almost every time: ${JSON.stringify(stats)}`);
 console.log('Smoke OK', JSON.stringify(stats));

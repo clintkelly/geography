@@ -13,6 +13,7 @@ import northeast from './northeast.json';
 import south from './south.json';
 import west from './west.json';
 import { animalsOf } from '../animals';
+import { historyOf } from '../history';
 
 /** One reviewed record per state or country. Questions and clues are generated from these. */
 export interface PlaceRecord {
@@ -225,6 +226,17 @@ function buildQuestions(s: PlaceRecord, all: readonly PlaceRecord[], regionId: s
       sourceUrl: a.source,
     });
     out.push(animal('scout', namesOf(far)), animal('ranger', namesOf(near)), animal('expert', clickPlace, 'map-click'));
+  });
+  // History questions work the same way: asked straight away, with the fact shown after the answer.
+  historyOf(s.id).forEach((h, i) => {
+    const history = (difficulty: Difficulty, answer: Answer, inputType: Question['inputType'] = 'choice'): Question => ({
+      ...q(difficulty, 'history', i, 'history', h.ask, h.fact, answer, inputType),
+      objectiveId: `history-${s.id}-${i}`,
+      fieldNote: h.fact,
+      noteId: `history-${s.id}-${i}`,
+      sourceUrl: h.source,
+    });
+    out.push(history('scout', namesOf(far)), history('ranger', namesOf(near)), history('expert', clickPlace, 'map-click'));
   });
   return out;
 }

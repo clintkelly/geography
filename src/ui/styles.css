@@ -372,7 +372,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .continent-name { font-size: 0.78rem; font-weight: 700; color: var(--muted); min-width: 104px; }
 .row.spread { justify-content: space-between; align-items: center; }
 .type-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--type-bg, #eee); color: #2b2a26; white-space: nowrap; }
-.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; } .type-volt { --type-bg: #fbeea0; } .type-light { --type-bg: #fff3c4; } .type-spirit { --type-bg: #e4dcfa; }
+.type-tide { --type-bg: #bfe0f5; } .type-flame { --type-bg: #fbcfae; } .type-leaf { --type-bg: #cdeab5; } .type-stone { --type-bg: #ded6c4; } .type-gale { --type-bg: #d8f0ea; } .type-frost { --type-bg: #dfeafc; } .type-volt { --type-bg: #fbeea0; } .type-light { --type-bg: #fff3c4; } .type-spirit { --type-bg: #e4dcfa; } .type-sound { --type-bg: #fbd6ea; } .type-metal { --type-bg: #d6dde6; } .type-burrow { --type-bg: #e8d2b4; } .type-kungfu { --type-bg: #f8d0c0; }
 .type-line { display: block; line-height: 1.25; } .type-line small { display: block; color: var(--muted); }
 .type-guide { background: #f6f3ea; border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
 .type-guide summary { font-weight: 700; cursor: pointer; }
@@ -403,9 +403,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 /* Streaks. */
 .streak-big { font-size: 1.15em; }
 .streak-max { font-size: 1.3em; color: #d4300c; }
-.streak-low .actor.player img { filter: drop-shadow(0 0 5px #ffb340); }
-.streak-mid .actor.player img { filter: drop-shadow(0 0 9px #ff8a1f); }
-.streak-high .actor.player img { filter: drop-shadow(0 0 14px #ff4a1f) drop-shadow(0 0 4px #ffe066); }
+.streak-low .actor.player img { filter: var(--look, brightness(1)) drop-shadow(0 0 5px #ffb340); }
+.streak-mid .actor.player img { filter: var(--look, brightness(1)) drop-shadow(0 0 9px #ff8a1f); }
+.streak-high .actor.player img { filter: var(--look, brightness(1)) drop-shadow(0 0 14px #ff4a1f) drop-shadow(0 0 4px #ffe066); }
 .streak-high { box-shadow: 0 0 0 3px #ff8a1f, 0 0 22px rgba(255, 120, 30, 0.7); }
 @keyframes streak-pop { 0% { opacity: 0; transform: translateX(-50%) scale(0.4) rotate(-5deg); } 18% { opacity: 1; transform: translateX(-50%) scale(1.15); } 30% { transform: translateX(-50%) scale(1); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(-50%) translateY(-14px); } }
 .streak-banner { position: fixed; z-index: 40; top: 150px; left: 50%; display: flex; align-items: center; gap: 8px; white-space: nowrap; background: #fff4d6; border: 3px solid #ff8a1f; border-radius: 12px; padding: 8px 20px; font-size: 1.5rem; pointer-events: none; animation: streak-pop 1600ms ease-out forwards; }
@@ -459,6 +459,8 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .fx-volt.type-hit img { filter: drop-shadow(0 0 5px #fff27a); }
 .fx-light.type-hit img { filter: drop-shadow(0 0 6px #fff4c0); }
 .fx-spirit.type-hit img { filter: drop-shadow(0 0 6px #d8c8ff); opacity: 0.9; }
+.fx-metal.type-hit img { filter: drop-shadow(0 0 4px #eef4ff); }
+.fx-sound.type-hit img { filter: drop-shadow(0 0 5px #ffb8e0); }
 
 .type-special { inset: 0; overflow: hidden; z-index: 3; }
 .type-special img { animation: 1000ms ease-in forwards; }
@@ -474,6 +476,16 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .fx-light .type-wash { background: radial-gradient(ellipse at 50% -10%, #fffbe0ee, #ffe68a88 40%, #ffe68a00 75%); }
 /* A soft lavender mist rolls in. */
 .fx-spirit .type-wash { background: radial-gradient(circle, #b8a0ff00 25%, #9a86d8aa); animation-duration: 1300ms; }
+/* A silver gleam shines across the scene. */
+.fx-metal .type-wash { background: linear-gradient(115deg, #c8d4e000 30%, #f4f8ffdd 48%, #c8d4e000 66%); animation-duration: 800ms; }
+/* Rings of sound pulse out from the middle. */
+.fx-sound .type-wash { background: repeating-radial-gradient(circle, #f07ab800 0 26px, #f07ab866 26px 32px); animation-name: pulse-wash; }
+@keyframes pulse-wash { 0% { opacity: 0; transform: scale(0.6); } 25% { opacity: 1; } 100% { opacity: 0; transform: scale(1.4); } }
+/* The ground shakes and dirt bursts up. */
+.fx-burrow .type-wash { background: linear-gradient(to top, #7a5a34cc, #a07a4a55 45%, #7a5a3400); }
+.type-special.fx-burrow { animation: quake 500ms linear 2; }
+.fx-kungfu .type-wash { background: radial-gradient(circle, #ffd86acc, #e0503a55 50%, #e0503a00 75%); }
+@keyframes quake { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-4px, 2px); } 50% { transform: translate(3px, -2px); } 75% { transform: translate(-2px, 1px); } }
 /* Lightning flashes the whole scene. */
 .fx-volt .type-wash { background: #fff6b0; animation-name: flash; }
 @keyframes flash { 0%, 30%, 60% { opacity: 0; } 10%, 45% { opacity: 0.6; } 75% { opacity: 0.35; } 100% { opacity: 0; } }
@@ -495,6 +507,12 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .type-special.fx-light img { left: var(--x); top: var(--y); animation-name: storm-twinkle; animation-duration: 900ms; filter: drop-shadow(0 0 6px #fff4c0); }
 /* Wisps float up from the ground, swaying. */
 .type-special.fx-spirit img { left: var(--x); top: 100%; animation-name: storm-wisp; animation-duration: 1400ms; animation-timing-function: ease-out; filter: drop-shadow(0 0 6px #d8c8ff); }
+/* Metal shards streak across fast. */
+.type-special.fx-metal img { left: -14%; top: var(--y); animation-name: storm-sweep; animation-duration: 520ms; animation-timing-function: linear; filter: drop-shadow(0 0 4px #eef4ff); }
+/* Sound rings pop out all over. */
+.type-special.fx-sound img { left: var(--x); top: var(--y); animation-name: storm-twinkle; animation-duration: 800ms; filter: drop-shadow(0 0 5px #ffb8e0); }
+/* Dirt bursts up out of the ground. */
+.type-special.fx-burrow img { left: var(--x); top: 100%; animation-name: storm-rise; animation-duration: 800ms; }
 @keyframes storm-twinkle { 0% { opacity: 0; transform: scale(0.2) rotate(0); } 35% { opacity: 1; transform: scale(1.2) rotate(calc(var(--spin) / 2)); } 100% { opacity: 0; transform: scale(0.6) rotate(var(--spin)); } }
 @keyframes storm-wisp { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 0.9; } 50% { transform: translate(18px, -150px); } 100% { opacity: 0; transform: translate(-14px, -320px); } }
 @keyframes storm-sweep { 0% { opacity: 1; transform: translateX(0) rotate(0); } 50% { transform: translateX(420px) translateY(-14px) rotate(var(--spin)); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(860px) rotate(var(--spin)); } }
@@ -576,8 +594,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 }
 
 /* Shiny creatures: a new color, a golden glow, and stars that twinkle around them. */
-.sprite.shiny { filter: hue-rotate(150deg) saturate(1.5) brightness(1.08) drop-shadow(0 0 3px #ffe27a) drop-shadow(0 0 7px #ffd04088); animation: shiny-glow 2.2s ease-in-out infinite; }
-@keyframes shiny-glow { 50% { filter: hue-rotate(150deg) saturate(1.7) brightness(1.2) drop-shadow(0 0 6px #fff3b0) drop-shadow(0 0 12px #ffd040aa); } }
+/* Each shiny sets --look to its own color, so the glow keeps that color as it pulses. */
+.sprite.shiny { --look: hue-rotate(150deg) saturate(1.5); filter: var(--look) drop-shadow(0 0 3px #ffe27a) drop-shadow(0 0 7px #ffd04088); animation: shiny-glow 2.2s ease-in-out infinite; }
+@keyframes shiny-glow { 50% { filter: var(--look) brightness(1.12) drop-shadow(0 0 6px #fff3b0) drop-shadow(0 0 12px #ffd040aa); } }
 .shiny-wrap { position: relative; display: inline-block; line-height: 0; }
 .actor { position: relative; }
 .twinkle { position: absolute; color: #fff6b8; text-shadow: 0 0 4px #ffd040, 0 0 8px #ffb000; font-size: 16px; line-height: 1; pointer-events: none; animation: twinkle 1.6s ease-in-out infinite; opacity: 0; }
@@ -597,3 +616,183 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
   .sprite.shiny, .twinkle, .shiny-tag, .shiny-reveal { animation: none !important; }
   .twinkle { opacity: 1; }
 }
+
+/* Typed answers: a number pad for math and a text box for spelling. */
+.typed-answer { display: grid; gap: 10px; justify-items: center; max-width: 360px; margin: 0 auto; }
+.typed-answer input { width: 100%; font-size: 2rem; font-weight: 700; text-align: center; padding: 10px 12px; border: 3px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); letter-spacing: 0.05em; }
+.typed-answer input:focus { outline: none; border-color: #4a7fd0; box-shadow: 0 0 0 4px rgba(74, 127, 208, 0.25); }
+.typed-word input { text-transform: lowercase; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.keypad button { font-size: 1.5rem; font-weight: 700; padding: 10px 0; min-height: 52px; }
+.keypad .wide { grid-column: span 2; font-size: 1.1rem; }
+.typed-result { text-align: center; font-size: 1.4rem; }
+.typed-result.correct strong { color: #2f7a40; }
+.typed-result.wrong strong { color: #a5602a; text-decoration: line-through; }
+
+/* Who lives on Math and Words trails. */
+.study-creatures { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 8px 12px; border: 2px dashed var(--line); border-radius: 10px; }
+.study-creatures span { flex-basis: 100%; font-weight: 600; }
+
+.study-settings h3 { margin: 14px 0 4px; }
+.study-progress { list-style: none; padding: 0; display: grid; gap: 4px; }
+.study-progress li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding: 2px 0; }
+.study-progress .good { color: #2f7a40; font-weight: 600; }
+.study-progress .weak { color: #a5602a; font-weight: 600; }
+
+/* Picking a shiny's colors in the stable. */
+.shiny-picker { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
+.swatch-row { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; align-items: center; }
+.swatch-row > .muted { width: 100%; text-align: center; font-size: 0.8rem; }
+.swatch { width: 26px; height: 26px; min-height: 0; padding: 0; border-radius: 50%; border: 2px solid #8a7a5a; cursor: pointer; }
+.swatch[aria-pressed='true'] { outline: 3px solid #1a1a1a; outline-offset: 2px; }
+.swatch-none { background: #fff; font-size: 0.8rem; line-height: 1; color: #8a7a5a; }
+.tame-button:disabled { background: #f6eef1; border-style: dashed; color: #7a6070; }
+
+/* Field Guide: the real animal or legend behind a creature. */
+.kind-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: #eef0e6; color: #3a4a2a; }
+.kind-tag.kind-prehistoric { background: #f3e6d2; color: #6a4a20; }
+.kind-tag.kind-myth { background: #efe4fb; color: #5a3a8a; }
+.kind-tag.kind-history { background: #e4ecf7; color: #2a4a7a; }
+.guide-link { font-size: 0.9rem; }
+.guide-backdrop { position: fixed; inset: 0; z-index: 1000; background: #1a1a1a88; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.guide-card { background: #fffdf6; border: 3px solid #3f6f55; border-radius: 14px; max-width: 520px; width: 100%; max-height: calc(100vh - 32px); overflow-y: auto; padding: 18px 20px; box-shadow: 0 12px 40px #0006; animation: guide-in 260ms ease-out; }
+.guide-card.kind-prehistoric { border-color: #a07a40; }
+.guide-card.kind-myth { border-color: #7a5ab0; }
+.guide-card.kind-history { border-color: #3a6aa8; }
+@keyframes guide-in { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+.guide-eyebrow { margin: 0 0 6px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #6a7a60; }
+.guide-head { display: flex; gap: 14px; align-items: center; }
+.guide-head h2 { margin: 0 0 4px; }
+.guide-based { margin: 6px 0 0; }
+.guide-rows { margin: 12px 0; display: grid; gap: 4px; }
+.guide-rows div { display: grid; grid-template-columns: 6.5em 1fr; gap: 8px; }
+.guide-rows dt { font-weight: 700; color: #5a6a50; }
+.guide-rows dd { margin: 0; }
+.guide-story { background: #f6f0ff; border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
+.guide-card.kind-history .guide-story { background: #eef3fb; }
+.guide-facts { padding-left: 1.2em; margin: 8px 0 14px; display: grid; gap: 6px; }
+.guide-source { font-size: 0.72rem; color: #7a8a70; }
+@media (prefers-reduced-motion: reduce) { .guide-card { animation: none; } }
+.log-guide { padding: 0; border: 0; background: none; min-height: 0; cursor: pointer; border-radius: 8px; }
+.log-guide:hover, .log-guide:focus-visible { outline: 2px solid #3f6f55; }
+
+/* What Trail Points are for: a hover tip on the trail bar, and a fuller guide. */
+.hud-button { position: relative; background: none; border: 0; padding: 0; min-height: 0; font: inherit; color: inherit; text-align: inherit; cursor: help; border-radius: 6px; }
+.hud-button:hover .hud-label, .hud-button:focus-visible .hud-label { text-decoration: underline dotted; }
+.hud-help { display: inline-block; width: 1.25em; height: 1.25em; line-height: 1.25em; border-radius: 50%; background: #3f6f55; color: #fff; font-size: 0.7rem; text-align: center; font-weight: 800; margin-left: 2px; }
+.hud-tip { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 40; width: 280px; padding: 10px 12px; background: #fffdf6; border: 2px solid #3f6f55; border-radius: 10px; box-shadow: 0 6px 20px #0003; font-size: 0.85rem; font-weight: 400; line-height: 1.4; text-transform: none; letter-spacing: 0; color: #2a2a2a; }
+.hud-tip em { display: block; margin-top: 4px; color: #5a6a50; }
+.hud-button:hover .hud-tip, .hud-button:focus-visible .hud-tip { display: block; }
+.hud-button[aria-expanded='true'] .hud-tip { display: none; }
+.points-guide { margin: 10px 0; background: #fffbea; border: 2px solid #e6c860; border-radius: 10px; padding: 8px 12px; }
+.points-guide summary { font-weight: 700; cursor: pointer; }
+.points-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.points-cols h3 { margin: 6px 0 2px; font-size: 1rem; }
+.points-cols ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; font-size: 0.92rem; }
+
+/* Ranger Lodges */
+.patch-icon { image-rendering: pixelated; vertical-align: middle; }
+.patch-empty { display: inline-block; border-radius: 50%; border: 2px dashed var(--line); box-sizing: border-box; }
+.patch-sash { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; margin: 8px 0 12px; background: #7a3b2e; border-radius: 22px; width: fit-content; max-width: 100%; }
+.patch-sash .patch-empty { border-color: #c99a8c; }
+.lodge-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.lodge-card { display: grid; grid-template-columns: 96px 1fr auto; gap: 16px; align-items: center; }
+.lodge-card.lodge-next { border: 3px solid var(--accent); background: #eef6f1; }
+.lodge-card.lodge-won { background: #fbf6e6; }
+.lodge-card.lodge-locked { opacity: 0.7; }
+.lodge-card h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.lodge-body p { margin-bottom: 0.3em; }
+.lodge-prize { display: grid; justify-items: center; gap: 4px; text-align: center; min-width: 90px; }
+.lodge-quote { font-style: italic; color: #4a5a52; }
+.lodge-status { font-weight: 600; }
+.lodge-path { list-style: none; padding: 0; margin: 10px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.lodge-path li { display: grid; justify-items: center; padding: 4px 6px; border: 1px solid var(--line); border-radius: 8px; min-width: 56px; }
+.lodge-path li.done { background: var(--good); }
+.lodge-path li.now { border: 2px solid var(--accent); }
+.lodge-teaser { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; text-align: left; margin: 0 0 12px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fbf6e6; cursor: pointer; font: inherit; color: inherit; }
+.patch-row { display: inline-flex; gap: 3px; }
+.lodge-win { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .lodge-card { grid-template-columns: 64px 1fr; }
+  .lodge-card .lodge-leader img { width: 64px; height: 64px; }
+  .lodge-prize { grid-column: 1 / -1; grid-auto-flow: column; justify-content: start; }
+}
+.shiny-original { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; padding: 6px 8px; margin: 6px 0; font-size: 0.9rem; }
+.shiny-original[aria-pressed='true'] { border: 2px solid var(--accent); background: #eef6f1; }
+.shiny-original span { display: grid; }
+
+/* Wave 2: tiers, quizzes, eggs, ranks and combos */
+.patch-silver { border-radius: 50%; box-shadow: 0 0 0 3px #c9d2dc, 0 0 8px #e8eef5; }
+.patch-gold { border-radius: 50%; box-shadow: 0 0 0 3px #e8b830, 0 0 12px #ffd86a; }
+.lodge-tiers-key { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 6px; }
+.lodge-tiers-key li { display: flex; gap: 8px; align-items: baseline; }
+.tier-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.tier-bronze { background: #c98a4a; }
+.tier-dot.tier-silver { background: #c9d2dc; }
+.tier-dot.tier-gold { background: #e8b830; }
+.tier-button.tier-silver { border-color: #9aa6b2; }
+.tier-button.tier-gold { border-color: #d9a520; }
+.tier-button.tier-gold.primary { background: #b8860b; border-color: #8a6408; }
+.tier-label { margin-left: 10px; font-size: 0.8rem; padding: 2px 8px; border-radius: 10px; vertical-align: middle; color: #2b2a26; }
+.tier-label.tier-silver { background: #dfe5eb; }
+.tier-label.tier-gold { background: #f5d66b; }
+.lodge-card.lodge-gold { background: #fff6d6; border-color: #e8b830; }
+.legend-glow { filter: drop-shadow(0 0 6px #ffd86a); }
+.quiz-tag { font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: #e6e0ff; color: #4a3a8a; }
+.shield-note { background: #e8f1ff; border-radius: 8px; padding: 6px 10px; }
+.gate-pass { color: var(--accent); font-weight: 700; }
+.lodge-quiz-head { display: flex; gap: 14px; align-items: flex-start; }
+.lodge-quiz-head > div { flex: 1; }
+.brain-shield { margin-top: 4px; font-size: 0.8rem; font-weight: 700; color: #fff; background: #3a6ab0cc; border-radius: 8px; padding: 2px 8px; display: inline-flex; gap: 4px; align-items: center; }
+.shield-pip { width: 10px; height: 10px; border-radius: 3px; background: #a9d8ff; box-shadow: 0 0 4px #a9d8ff; }
+.combo-counter { position: absolute; left: 50%; top: 22%; transform: translateX(-50%); font-weight: 900; font-size: 1.6rem; color: #ffd866; text-shadow: 0 2px 0 #7a3b00, 0 0 10px #ff9a3a; pointer-events: none; animation: combo-pop 0.45s ease-out; z-index: 5; }
+.combo-big { font-size: 2.1rem; }
+.combo-huge { font-size: 2.6rem; color: #ffefa0; }
+@keyframes combo-pop { 0% { transform: translateX(-50%) scale(0.4); opacity: 0; } 60% { transform: translateX(-50%) scale(1.25); opacity: 1; } 100% { transform: translateX(-50%) scale(1); } }
+.egg-nest .eggs { list-style: none; padding: 0; margin: 10px 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.egg-slot { display: grid; justify-items: center; gap: 4px; width: 170px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; text-align: center; }
+.egg-slot.egg-ready { border: 3px solid var(--accent); background: #eef6f1; }
+.egg-fill { background: linear-gradient(90deg, #f0b04a, #ff6a3a); }
+.egg-wobble { animation: egg-wobble 2.4s ease-in-out infinite; transform-origin: 50% 85%; }
+.egg-warm { animation-duration: 1.4s; }
+.egg-hot, .egg-ready .egg-wobble { animation-duration: 0.7s; }
+@keyframes egg-wobble { 0%, 70%, 100% { transform: rotate(0); } 78% { transform: rotate(-8deg); } 86% { transform: rotate(7deg); } 93% { transform: rotate(-4deg); } }
+.egg-shake { animation: egg-shake 0.28s ease-in-out infinite; transform-origin: 50% 85%; }
+@keyframes egg-shake { 0%, 100% { transform: rotate(-10deg) scale(1); } 50% { transform: rotate(10deg) scale(1.05); } }
+.egg-pools { display: grid; gap: 6px; }
+.egg-pool { display: grid; gap: 4px; font-size: 0.9rem; }
+.egg-pool-row { display: flex; flex-wrap: wrap; gap: 2px; }
+.study-ranks { display: inline-flex; gap: 8px; flex-wrap: wrap; margin-left: 12px; vertical-align: middle; }
+.rank-chip { display: inline-grid; padding: 3px 10px; border-radius: 12px; background: #eef0ff; font-weight: 700; font-size: 0.85rem; }
+.rank-chip small { font-weight: 400; color: var(--muted); }
+.rank-adept { background: #dff3e4; }
+.rank-wizard { background: #efe0ff; }
+.rank-archmage { background: #fff0b8; }
+.collected { display: block; color: var(--muted); font-size: 0.9rem; }
+.study-pitch { background: #fff6d6; border: 1px solid #f0d890; border-radius: 8px; padding: 6px 10px; }
+.collect-milestone { font-size: 1.1rem; color: #8a5a00; }
+.new-tag { font-size: 0.7rem; font-weight: 800; color: #fff; background: #e0503a; border-radius: 8px; padding: 1px 6px; animation: combo-pop 0.6s ease-out; }
+.legend-tag { font-size: 0.75rem; font-weight: 700; color: #7a5a00; background: #fff0b8; border-radius: 8px; padding: 1px 6px; }
+@media (prefers-reduced-motion: reduce) { .egg-wobble, .egg-shake, .combo-counter, .new-tag { animation: none; } }
+.egg-how { background: #fff6d6; border: 1px solid #f0d890; border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+.egg-how h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.egg-meters { display: grid; gap: 6px; margin: 8px 0; }
+.egg-meter { display: grid; grid-template-columns: 32px 260px auto; justify-content: start; align-items: center; gap: 8px; }
+.nest-full { font-weight: 700; color: #a3401f; }
+.egg-banner { position: absolute; left: 50%; top: 18%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 14px; background: #fff6d6ee; border: 2px solid #e8b830; z-index: 6; animation: combo-pop 0.5s ease-out; font-size: 1.2rem; }
+.egg-cell small { white-space: nowrap; }
+@media (max-width: 640px) { .egg-meter { grid-template-columns: auto 1fr; } .egg-meter small { grid-column: 1 / -1; } }
+.egg-tag { font-size: 0.75rem; font-weight: 700; color: #6a4a00; background: #fde9b0; border-radius: 8px; padding: 1px 6px; }
+.path-progress { display: grid; justify-items: center; gap: 3px; }
+.path-progress small { color: var(--muted); font-size: 0.75rem; }
+.path-chip, .path-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; border-radius: 8px; padding: 1px 6px; margin: 0 2px; }
+.path-scholar { background: #fff3c4; color: #6a5200; }
+.path-ranger { background: #f8d0c0; color: #7a2a10; }
+.path-banner { background: #d8f0ea; color: #1e5a4a; }
+.path-chip.path-lead { outline: 2px solid currentColor; }
+.path-reveal { font-size: 1.1rem; }
+
+/* New creatures just added to the game */
+.new-wild { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 8px 12px; border: 2px dashed var(--accent); border-radius: 10px; background: #f3f8ee; }
+.new-wild-region { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font: inherit; }
+.new-wild-row { display: inline-flex; }

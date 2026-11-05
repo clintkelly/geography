@@ -1,0 +1,401 @@
+{
+  "id": "vv-list-10",
+  "title": "Vocabulary Virtuoso List 10",
+  "order": 11,
+  "words": [
+    {
+      "word": "vilify",
+      "partOfSpeech": "verb",
+      "definition": "To say cruel, unfair things to make someone seem bad",
+      "sentence": "The jealous pirate tried to ____ the brave captain by spreading lies about her across the island.",
+      "wrongDefinitions": [
+        "To praise someone loudly in front of a crowd",
+        "To make something cleaner and brighter",
+        "To travel quickly over rough land"
+      ],
+      "synonym": {
+        "right": "badmouth",
+        "wrong": [
+          "praise",
+          "carry",
+          "whisper"
+        ]
+      },
+      "antonym": {
+        "right": "praise",
+        "wrong": [
+          "insult",
+          "follow",
+          "build"
+        ]
+      },
+      "root": {
+        "part": "vil",
+        "meaning": "worthless or low",
+        "wrongMeanings": [
+          "life",
+          "village",
+          "strong"
+        ]
+      }
+    },
+    {
+      "word": "ubiquitous",
+      "partOfSpeech": "adjective",
+      "definition": "Found everywhere, or seeming to be everywhere at once",
+      "sentence": "Pigeons are so ____ in big cities that you can spot them on almost every rooftop and sidewalk.",
+      "wrongDefinitions": [
+        "Very rare and hard to find",
+        "Extremely loud and annoying",
+        "Living deep under the ocean"
+      ],
+      "synonym": {
+        "right": "widespread",
+        "wrong": [
+          "hidden",
+          "tiny",
+          "ancient"
+        ]
+      },
+      "antonym": {
+        "right": "rare",
+        "wrong": [
+          "common",
+          "noisy",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "ubiqu",
+        "meaning": "everywhere",
+        "wrongMeanings": [
+          "water",
+          "under",
+          "speed"
+        ]
+      }
+    },
+    {
+      "word": "traumatic",
+      "partOfSpeech": "adjective",
+      "definition": "Deeply upsetting and hard to forget, often causing lasting hurt",
+      "sentence": "Getting stuck in a scary storm at sea was ____ for the young sailor, who had nightmares for weeks.",
+      "wrongDefinitions": [
+        "Calm, peaceful and relaxing",
+        "Funny enough to make everyone laugh",
+        "Related to trains and railroad tracks"
+      ],
+      "synonym": {
+        "right": "upsetting",
+        "wrong": [
+          "cheerful",
+          "boring",
+          "wooden"
+        ]
+      },
+      "antonym": {
+        "right": "comforting",
+        "wrong": [
+          "shocking",
+          "distant",
+          "narrow"
+        ]
+      },
+      "root": {
+        "part": "trauma",
+        "meaning": "wound",
+        "wrongMeanings": [
+          "dream",
+          "travel",
+          "three"
+        ]
+      }
+    },
+    {
+      "word": "succumb",
+      "partOfSpeech": "verb",
+      "definition": "To give in to something too strong to fight",
+      "sentence": "After hiking all day through the jungle, the tired explorer had to ____ to sleep beside the campfire.",
+      "wrongDefinitions": [
+        "To climb to the top of a mountain",
+        "To fight back and refuse to quit",
+        "To share food with a friend"
+      ],
+      "synonym": {
+        "right": "give in",
+        "wrong": [
+          "resist",
+          "shout",
+          "explore"
+        ]
+      },
+      "antonym": {
+        "right": "resist",
+        "wrong": [
+          "surrender",
+          "giggle",
+          "measure"
+        ]
+      },
+      "root": {
+        "part": "cumb",
+        "meaning": "to lie down",
+        "wrongMeanings": [
+          "to run",
+          "to count",
+          "to sing"
+        ]
+      }
+    },
+    {
+      "word": "plethora",
+      "partOfSpeech": "noun",
+      "definition": "A huge amount, often more than is needed",
+      "sentence": "The coral reef held a ____ of colorful fish, from tiny clownfish to giant parrotfish.",
+      "wrongDefinitions": [
+        "A tiny amount, barely enough to notice",
+        "A flat dish used for serving food",
+        "A loud warning sound"
+      ],
+      "synonym": {
+        "right": "plenty",
+        "wrong": [
+          "shortage",
+          "puzzle",
+          "shadow"
+        ]
+      },
+      "antonym": {
+        "right": "shortage",
+        "wrong": [
+          "crowd",
+          "river",
+          "plenty"
+        ]
+      },
+      "root": {
+        "part": "pleth",
+        "meaning": "fullness",
+        "wrongMeanings": [
+          "emptiness",
+          "flat",
+          "speech"
+        ]
+      }
+    },
+    {
+      "word": "rancor",
+      "partOfSpeech": "noun",
+      "definition": "Bitter, long-lasting anger or hatred toward someone",
+      "sentence": "Even after losing the race, the hare felt no ____ toward the slow, steady tortoise and shook his paw.",
+      "wrongDefinitions": [
+        "A warm feeling of friendship and trust",
+        "A large farm where cattle are raised",
+        "A sudden burst of laughter"
+      ],
+      "synonym": {
+        "right": "bitterness",
+        "wrong": [
+          "kindness",
+          "hunger",
+          "speed"
+        ]
+      },
+      "antonym": {
+        "right": "goodwill",
+        "wrong": [
+          "hatred",
+          "distance",
+          "thunder"
+        ]
+      },
+      "root": {
+        "part": "ranc",
+        "meaning": "to be rotten",
+        "wrongMeanings": [
+          "to run",
+          "royal",
+          "to sing"
+        ]
+      }
+    },
+    {
+      "word": "neophyte",
+      "partOfSpeech": "noun",
+      "definition": "A person who is just starting to learn something",
+      "sentence": "As a ____ at rock climbing, Maya stayed close to the guide on her first trip up the cliff.",
+      "wrongDefinitions": [
+        "An expert with many years of practice",
+        "A shiny glowing gas used in signs",
+        "A plant that grows only in deserts"
+      ],
+      "synonym": {
+        "right": "beginner",
+        "wrong": [
+          "expert",
+          "teacher",
+          "giant"
+        ]
+      },
+      "antonym": {
+        "right": "expert",
+        "wrong": [
+          "newcomer",
+          "mountain",
+          "pencil"
+        ]
+      },
+      "root": {
+        "part": "neo",
+        "meaning": "new",
+        "wrongMeanings": [
+          "old",
+          "near",
+          "bright"
+        ]
+      }
+    },
+    {
+      "word": "steadfast",
+      "partOfSpeech": "adjective",
+      "definition": "Loyal and firm, never giving up or changing",
+      "sentence": "The ____ sled dogs kept pulling through the icy blizzard until they reached the cabin safely.",
+      "wrongDefinitions": [
+        "Moving very quickly from place to place",
+        "Easily scared and ready to quit",
+        "Hungry after a long day"
+      ],
+      "synonym": {
+        "right": "loyal",
+        "wrong": [
+          "fickle",
+          "sleepy",
+          "speedy"
+        ]
+      },
+      "antonym": {
+        "right": "unreliable",
+        "wrong": [
+          "faithful",
+          "purple",
+          "hungry"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "paltry",
+      "partOfSpeech": "adjective",
+      "definition": "So small or little that it hardly matters",
+      "sentence": "The greedy dragon laughed at the ____ pile of three copper coins the knight offered him.",
+      "wrongDefinitions": [
+        "Huge and impressive",
+        "Related to chickens and farm birds",
+        "Shining with bright colors"
+      ],
+      "synonym": {
+        "right": "measly",
+        "wrong": [
+          "enormous",
+          "gentle",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "huge",
+        "wrong": [
+          "tiny",
+          "quiet",
+          "early"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "incorrigible",
+      "partOfSpeech": "adjective",
+      "definition": "Too stubborn or naughty to be changed or fixed",
+      "sentence": "The ____ monkey kept stealing tourists' sunglasses, no matter how many times the zookeeper scolded him.",
+      "wrongDefinitions": [
+        "Always polite and quick to obey",
+        "Easy to bend and fold",
+        "Unable to be seen"
+      ],
+      "synonym": {
+        "right": "unruly",
+        "wrong": [
+          "obedient",
+          "silent",
+          "careful"
+        ]
+      },
+      "antonym": {
+        "right": "obedient",
+        "wrong": [
+          "naughty",
+          "rocky",
+          "sleepy"
+        ]
+      },
+      "root": {
+        "part": "corrig",
+        "meaning": "to correct",
+        "wrongMeanings": [
+          "to run",
+          "heart",
+          "to carry"
+        ]
+      }
+    },
+    {
+      "word": "angst",
+      "partOfSpeech": "noun",
+      "definition": "A strong feeling of worry or dread",
+      "sentence": "Waiting to hear if the lost puppy had been found filled the whole family with ____.",
+      "wrongDefinitions": [
+        "A feeling of calm and happiness",
+        "A sharp bend in a road",
+        "A loud cheer at a game"
+      ],
+      "synonym": {
+        "right": "worry",
+        "wrong": [
+          "joy",
+          "hunger",
+          "pride"
+        ]
+      },
+      "antonym": {
+        "right": "calm",
+        "wrong": [
+          "fear",
+          "speed",
+          "color"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "demagogue",
+      "partOfSpeech": "noun",
+      "definition": "A leader who stirs up people's fears to gain power",
+      "sentence": "The ____ shouted scary rumors to the angry crowd, hoping they would make him king of the island.",
+      "wrongDefinitions": [
+        "A wise ruler who always tells the truth",
+        "A teacher of young children",
+        "A building where people worship"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "dem",
+        "meaning": "people",
+        "wrongMeanings": [
+          "god",
+          "half",
+          "water"
+        ]
+      }
+    }
+  ]
+}

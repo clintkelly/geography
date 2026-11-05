@@ -9,15 +9,20 @@ export function validatePack(pack: Pack): string[] {
     if (seen.has(q.id)) problems.push(`duplicate question ${q.id}`);
     seen.add(q.id);
     const optionIds = q.options.map((o) => o.id);
-    if (q.inputType !== 'map-click' && q.options.length !== 4) problems.push(`${q.id}: needs 4 options`);
+    const study = q.topic === 'math' || q.topic === 'word';
+    if (q.inputType === 'typed') {
+      if (!q.typed || q.options.length !== 1) problems.push(`${q.id}: a typed question needs its answer and one option to show`);
+    } else if (q.inputType !== 'map-click' && q.options.length !== 4) problems.push(`${q.id}: needs 4 options`);
     if (new Set(optionIds).size !== optionIds.length) problems.push(`${q.id}: duplicate option ids`);
     if (new Set(q.options.map((o) => o.label)).size !== optionIds.length) problems.push(`${q.id}: duplicate option labels`);
     if (optionIds.filter((id) => id === q.acceptedId).length !== 1) problems.push(`${q.id}: needs exactly one accepted option`);
-    if (!q.explanation || !q.sourceUrl.startsWith('https://')) problems.push(`${q.id}: missing explanation or source`);
+    // Math is worked out, and vocabulary is reviewed by a parent, so only geography needs a web source.
+    if (!q.explanation || (!study && !q.sourceUrl.startsWith('https://'))) problems.push(`${q.id}: missing explanation or source`);
+    if (study && q.regionId !== 'study') problems.push(`${q.id}: study questions belong to the study region`);
     if (q.inputType === 'map-marker' && q.options.some((o) => !o.lonLat)) problems.push(`${q.id}: marker without coordinates`);
     if (q.inputType === 'map-click' && q.options.some((o) => !o.featureId)) problems.push(`${q.id}: clickable option without a map feature`);
     if (new Set(q.options.map((o) => o.label)).size !== q.options.length) problems.push(`${q.id}: repeated option`);
-    if (!pack.regions.some((r) => r.id === q.regionId)) problems.push(`${q.id}: unknown region`);
+    if (!study && !pack.regions.some((r) => r.id === q.regionId)) problems.push(`${q.id}: unknown region`);
   }
   const placeIds = new Set(pack.places.map((p) => p.id));
   for (const p of pack.places) {

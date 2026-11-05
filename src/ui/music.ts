@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import type { SaveData } from '../engine/game';
+import { isExpeditionComplete, type SaveData } from '../engine/game';
 
 export const TRAIL_TRACKS = ['trail-us', 'trail-europe', 'trail-africa', 'trail-asia', 'trail-america', 'trail-south-america', 'trail-oceania', 'trail-antarctica'] as const;
-export const TRACKS = ['camp', 'battle', 'boss', 'rare', 'event', 'victory', ...TRAIL_TRACKS] as const;
+export const TRACKS = ['camp', 'battle', 'boss', 'rare', 'event', 'victory', 'lodge', 'leader', 'summit', 'study', 'quiz', ...TRAIL_TRACKS] as const;
 export type Track = (typeof TRACKS)[number] | null;
 
 /** Extra takes of each track, -2 and -3, so long play doesn't hear the same loop every time. */
@@ -26,13 +26,22 @@ const trailTrack = (regionId: string): Track => {
 export function trackFor(save: SaveData | null | undefined): Track {
   if (!save) return null;
   const e = save.expedition;
-  if (!e) return save.lastSummary ? 'victory' : 'camp';
+  if (save.lodgeQuiz && !save.lodgeQuiz.outcome) return 'quiz';
+  if (!e) return save.lastSummary || save.hatched ? 'victory' : 'camp';
+  // Ranger Lodges have their own hall theme, a leader theme, and a theme for the last Lodge.
+  if (e.lodgeId) {
+    if (isExpeditionComplete(e)) return 'victory';
+    const role = e.battle ? e.slots[e.battle.slotIndex]?.role : undefined;
+    if (!role || role === 'junior') return e.battle ? 'battle' : 'lodge';
+    return e.lodgeId === 'summit' ? 'summit' : 'leader';
+  }
   if (e.battle) {
     const slot = e.slots[e.battle.slotIndex];
     if (slot?.rare) return 'rare';
     return slot?.kind === 'guardian' ? 'boss' : 'battle';
   }
-  return e.event ? 'event' : trailTrack(e.regionId);
+  // Math and Words trails have their own thinking theme.
+  return e.event ? 'event' : e.focus === 'math' || e.focus === 'words' ? 'study' : trailTrack(e.regionId);
 }
 
 /** Quiet looping music. It starts on the first key or click, which browsers require, and never interrupts play. */

@@ -1,5 +1,5 @@
 import type { CreatureType } from '../content/types';
-import { beatsAll, losesToAll, STRONG_BONUS, TYPE_INFO, TYPE_LOOP, TYPE_TRIANGLE, typesOf, why } from '../engine/types';
+import { beatsAll, losesToAll, STRONG_BONUS, TYPE_INFO, TYPE_LOOP, TYPE_TRIANGLE, TYPE_TRIANGLE_2, TYPE_TRIANGLE_3, typesOf, why } from '../engine/types';
 import { artUrl } from './art';
 
 export const flagUrl = (code: string) => `${import.meta.env.BASE_URL}flags/${code}.svg`;
@@ -36,6 +36,20 @@ export function TypeGuide({ open }: { open?: boolean }) {
       <ul>
         {TYPE_TRIANGLE.map((t, i) => {
           const next = TYPE_TRIANGLE[(i + 1) % TYPE_TRIANGLE.length] as CreatureType;
+          return <li key={t}><TypeBadge type={t} /> beats <TypeBadge type={next} /> <small>{why(t, next)}</small></li>;
+        })}
+      </ul>
+      <p>Sound, Metal and Burrow make a triangle of their own.</p>
+      <ul>
+        {TYPE_TRIANGLE_2.map((t, i) => {
+          const next = TYPE_TRIANGLE_2[(i + 1) % TYPE_TRIANGLE_2.length] as CreatureType;
+          return <li key={t}><TypeBadge type={t} /> beats <TypeBadge type={next} /> <small>{why(t, next)}</small></li>;
+        })}
+      </ul>
+      <p>Kung Fu makes a triangle with Stone and Gale.</p>
+      <ul>
+        {TYPE_TRIANGLE_3.map((t, i) => {
+          const next = TYPE_TRIANGLE_3[(i + 1) % TYPE_TRIANGLE_3.length] as CreatureType;
           return <li key={t}><TypeBadge type={t} /> beats <TypeBadge type={next} /> <small>{why(t, next)}</small></li>;
         })}
       </ul>

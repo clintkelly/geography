@@ -52,6 +52,16 @@ export const BADGES: readonly Badge[] = [
   { id: 'expert-find', name: 'Expert Tracker', hint: 'Befriend a creature found only on Expert trails', earned: (s, pack) => everyone(s).some((c) => speciesOf(pack, c.speciesId).minDifficulty === 'expert') },
   { id: 'dual-type', name: 'Double Trouble', hint: 'Befriend a creature with two types', earned: (s, pack) => everyone(s).some((c) => !!speciesOf(pack, c.speciesId).secondType) },
   { id: 'shiny-creature', name: 'Sparkle Finder', hint: 'Befriend a shiny creature. Harder trails find more!', earned: (s) => everyone(s).some((c) => c.shiny) },
+  { id: 'first-hatch', name: 'Egg Whisperer', hint: 'Hatch a study egg', earned: (s) => (s.hatchedCount ?? 0) >= 1 },
+  { id: 'hatch-ten', name: 'Hatchery', hint: 'Hatch 10 study eggs', earned: (s) => (s.hatchedCount ?? 0) >= 10 },
+  { id: 'math-adept', name: 'Math Adept', hint: 'Reach the Adept rank in Math', earned: (s) => (s.studyPoints?.math ?? 0) >= 150 },
+  { id: 'words-adept', name: 'Word Adept', hint: 'Reach the Adept rank in Words', earned: (s) => (s.studyPoints?.words ?? 0) >= 150 },
+  { id: 'math-wizard', name: 'Math Wizard', hint: 'Reach the Wizard rank in Math', earned: (s) => (s.studyPoints?.math ?? 0) >= 400 },
+  { id: 'gold-patch', name: 'Gold Standard', hint: 'Pass a Lodge Mastery Test for a Gold patch', earned: (s) => Object.values(s.lodgeTiers ?? {}).includes('gold') },
+  { id: 'legend-four', name: 'Legend Keeper', hint: 'Earn four Gold patches', earned: (s) => Object.values(s.lodgeTiers ?? {}).filter((t) => t === 'gold').length >= 4 },
+  { id: 'lodge-first', name: 'First Patch', hint: 'Beat your first Ranger Lodge', earned: (s) => (s.lodgesBeaten ?? []).length >= 1 },
+  { id: 'lodge-four', name: 'Halfway Up', hint: 'Beat four Ranger Lodges', earned: (s) => (s.lodgesBeaten ?? []).length >= 4 },
+  { id: 'grand-ranger', name: 'Grand Ranger', hint: 'Beat the Summit Lodge', earned: (s) => (s.lodgesBeaten ?? []).includes('summit') },
   { id: 'wild-friend', name: 'Friend of the Wild', hint: 'Set 3 creatures free', earned: (s) => (s.freedCount ?? 0) >= 3 },
 ];
 

@@ -1,0 +1,343 @@
+{
+  "id": "vv-list-05",
+  "title": "Vocabulary Virtuoso List 5",
+  "order": 6,
+  "words": [
+    {
+      "word": "levity",
+      "partOfSpeech": "noun",
+      "definition": "Lighthearted humor during a time that is usually serious",
+      "sentence": "The tour guide's silly penguin jokes added some ____ to the long, chilly hike across the glacier.",
+      "wrongDefinitions": [
+        "A tool used to lift heavy rocks",
+        "Deep sadness that lasts a long time",
+        "The height of a mountain above the sea"
+      ],
+      "synonym": {
+        "right": "humor",
+        "wrong": [
+          "anger",
+          "height",
+          "hunger"
+        ]
+      },
+      "antonym": {
+        "right": "seriousness",
+        "wrong": [
+          "speed",
+          "color",
+          "silliness"
+        ]
+      },
+      "root": {
+        "part": "lev",
+        "meaning": "light, not heavy",
+        "wrongMeanings": [
+          "heavy",
+          "water",
+          "voice"
+        ]
+      }
+    },
+    {
+      "word": "surfeit",
+      "partOfSpeech": "noun",
+      "definition": "An amount that is much more than is needed",
+      "sentence": "The orchard had such a ____ of apples that the farmers gave bushels away to every neighbor.",
+      "wrongDefinitions": [
+        "A small shortage of food",
+        "A wave that is good for surfing",
+        "A fee paid to cross a bridge"
+      ],
+      "synonym": {
+        "right": "excess",
+        "wrong": [
+          "silence",
+          "journey",
+          "puzzle"
+        ]
+      },
+      "antonym": {
+        "right": "shortage",
+        "wrong": [
+          "plenty",
+          "ocean",
+          "laughter"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "augment",
+      "partOfSpeech": "verb",
+      "definition": "To make something bigger or add more to it",
+      "sentence": "The explorers hoped to ____ their food supply by catching fish in the river.",
+      "wrongDefinitions": [
+        "To cut something into smaller pieces",
+        "To argue loudly with a friend",
+        "To guess what will happen next"
+      ],
+      "synonym": {
+        "right": "increase",
+        "wrong": [
+          "hide",
+          "borrow",
+          "paint"
+        ]
+      },
+      "antonym": {
+        "right": "decrease",
+        "wrong": [
+          "grow",
+          "sing",
+          "visit"
+        ]
+      },
+      "root": {
+        "part": "aug",
+        "meaning": "increase",
+        "wrongMeanings": [
+          "see",
+          "write",
+          "carry"
+        ]
+      }
+    },
+    {
+      "word": "heinous",
+      "partOfSpeech": "adjective",
+      "definition": "Shockingly evil or terribly wicked",
+      "sentence": "Stealing eggs from the endangered sea turtles' nests was a ____ act that angered the whole island.",
+      "wrongDefinitions": [
+        "Slightly messy but easy to clean",
+        "Very old and full of history",
+        "Loud and full of cheer"
+      ],
+      "synonym": {
+        "right": "wicked",
+        "wrong": [
+          "gentle",
+          "sleepy",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "good",
+        "wrong": [
+          "evil",
+          "tall",
+          "quick"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "olfactory",
+      "partOfSpeech": "adjective",
+      "definition": "Having to do with the sense of smell",
+      "sentence": "A bloodhound's amazing ____ powers let it follow a scent trail for miles through the forest.",
+      "wrongDefinitions": [
+        "Having to do with the sense of hearing",
+        "Having to do with old factories",
+        "Having to do with the sense of touch"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "olfact",
+        "meaning": "smell",
+        "wrongMeanings": [
+          "sight",
+          "hear",
+          "touch"
+        ]
+      }
+    },
+    {
+      "word": "incandescent",
+      "partOfSpeech": "adjective",
+      "definition": "Glowing brightly because it is very hot",
+      "sentence": "Lava poured down the volcano in an ____ stream that lit up the dark night sky.",
+      "wrongDefinitions": [
+        "Freezing cold and covered in frost",
+        "Hidden in deep shadows",
+        "Soft and fluffy like a cloud"
+      ],
+      "synonym": {
+        "right": "glowing",
+        "wrong": [
+          "muddy",
+          "quiet",
+          "frozen"
+        ]
+      },
+      "antonym": {
+        "right": "dark",
+        "wrong": [
+          "bright",
+          "heavy",
+          "round"
+        ]
+      },
+      "root": {
+        "part": "cand",
+        "meaning": "glow, shine",
+        "wrongMeanings": [
+          "freeze",
+          "sing",
+          "run"
+        ]
+      }
+    },
+    {
+      "word": "jargon",
+      "partOfSpeech": "noun",
+      "definition": "Special words used by a certain group that outsiders may not understand",
+      "sentence": "The sailors used so much ship ____, like 'port' and 'starboard,' that the young visitor felt confused.",
+      "wrongDefinitions": [
+        "A large clay jar for storing water",
+        "A loud argument between neighbors",
+        "A quick, short nap"
+      ],
+      "synonym": {
+        "right": "slang",
+        "wrong": [
+          "map",
+          "storm",
+          "song"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "breach",
+      "partOfSpeech": "noun",
+      "definition": "A break or hole in a wall or barrier",
+      "sentence": "Water rushed through a ____ in the beaver dam, flooding the quiet meadow below.",
+      "wrongDefinitions": [
+        "A sandy shore beside the ocean",
+        "A tall tower used for watching",
+        "A rope tied tightly around a post"
+      ],
+      "synonym": {
+        "right": "gap",
+        "wrong": [
+          "tower",
+          "river",
+          "song"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "canvass",
+      "partOfSpeech": "verb",
+      "definition": "To go around asking people for votes or opinions",
+      "sentence": "The mayor's team went door to door to ____ the village, asking which new park people wanted.",
+      "wrongDefinitions": [
+        "To paint a picture on thick cloth",
+        "To hide something where no one can find it",
+        "To row a boat across a lake"
+      ],
+      "synonym": {
+        "right": "poll",
+        "wrong": [
+          "paint",
+          "hide",
+          "row"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "unobtrusive",
+      "partOfSpeech": "adjective",
+      "definition": "Not easily noticed; quiet and staying in the background",
+      "sentence": "The wildlife photographer stayed ____ behind a bush so the shy deer would not run away.",
+      "wrongDefinitions": [
+        "Loud and impossible to ignore",
+        "Unable to be broken or opened",
+        "Very angry and quick to fight"
+      ],
+      "synonym": {
+        "right": "quiet",
+        "wrong": [
+          "broken",
+          "hungry",
+          "shiny"
+        ]
+      },
+      "antonym": {
+        "right": "noticeable",
+        "wrong": [
+          "hidden",
+          "sleepy",
+          "wet"
+        ]
+      },
+      "root": {
+        "part": "trus",
+        "meaning": "push",
+        "wrongMeanings": [
+          "see",
+          "hold",
+          "fall"
+        ]
+      }
+    },
+    {
+      "word": "claustrophobia",
+      "partOfSpeech": "noun",
+      "definition": "A strong fear of being in small, tight, or closed spaces",
+      "sentence": "The cave explorer's ____ made her nervous as the rocky tunnel grew narrower and narrower.",
+      "wrongDefinitions": [
+        "A strong fear of high places",
+        "A sickness caused by eating spoiled food",
+        "A great love of spiders and bugs"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "phob",
+        "meaning": "fear",
+        "wrongMeanings": [
+          "love",
+          "water",
+          "light"
+        ]
+      }
+    },
+    {
+      "word": "bibliophile",
+      "partOfSpeech": "noun",
+      "definition": "A person who loves books and enjoys collecting them",
+      "sentence": "The ____ packed twelve books for the camping trip and read by flashlight every night in the tent.",
+      "wrongDefinitions": [
+        "A person who draws maps",
+        "A person who is afraid of reading",
+        "A person who studies insects"
+      ],
+      "synonym": {
+        "right": "book lover",
+        "wrong": [
+          "map maker",
+          "bug collector",
+          "ship captain"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "biblio",
+        "meaning": "book",
+        "wrongMeanings": [
+          "water",
+          "life",
+          "star"
+        ]
+      }
+    }
+  ]
+}

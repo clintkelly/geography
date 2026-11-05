@@ -1,0 +1,379 @@
+{
+  "id": "vv-list-13",
+  "title": "Vocabulary Virtuoso List 13",
+  "order": 14,
+  "words": [
+    {
+      "word": "venue",
+      "partOfSpeech": "noun",
+      "definition": "The place where an event like a concert or game happens",
+      "sentence": "The old castle on the hill was the perfect ____ for the knights' grand jousting contest.",
+      "wrongDefinitions": [
+        "A small boat used to cross rivers",
+        "A loud song sung at a party",
+        "A tool for digging deep holes"
+      ],
+      "synonym": {
+        "right": "place",
+        "wrong": [
+          "speech",
+          "reason",
+          "color"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "ven",
+        "meaning": "to come",
+        "wrongMeanings": [
+          "to see",
+          "to write",
+          "to carry"
+        ]
+      }
+    },
+    {
+      "word": "sedentary",
+      "partOfSpeech": "adjective",
+      "definition": "Spending a lot of time sitting and not moving around much",
+      "sentence": "Unlike busy hummingbirds, the ____ sloth spends almost all day hanging quietly in one rainforest tree.",
+      "wrongDefinitions": [
+        "Moving quickly from place to place",
+        "Feeling very angry and upset",
+        "Covered in thick, soft fur"
+      ],
+      "synonym": {
+        "right": "inactive",
+        "wrong": [
+          "hungry",
+          "noisy",
+          "brave"
+        ]
+      },
+      "antonym": {
+        "right": "active",
+        "wrong": [
+          "sleepy",
+          "quiet",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "sed",
+        "meaning": "to sit",
+        "wrongMeanings": [
+          "to run",
+          "to hear",
+          "to build"
+        ]
+      }
+    },
+    {
+      "word": "accolade",
+      "partOfSpeech": "noun",
+      "definition": "Praise or an award given to someone for doing something great",
+      "sentence": "After mapping the icy coast, the explorer received the highest ____ from the king: a shiny golden medal.",
+      "wrongDefinitions": [
+        "A tall tower made of stone",
+        "A mistake that causes trouble",
+        "A sweet drink made from fruit"
+      ],
+      "synonym": {
+        "right": "praise",
+        "wrong": [
+          "blame",
+          "storm",
+          "journey"
+        ]
+      },
+      "antonym": {
+        "right": "criticism",
+        "wrong": [
+          "honor",
+          "prize",
+          "medal"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "indelible",
+      "partOfSpeech": "adjective",
+      "definition": "Impossible to erase, remove, or forget",
+      "sentence": "The marker left an ____ purple stain on the tablecloth that no amount of scrubbing could remove.",
+      "wrongDefinitions": [
+        "Very easy to wash away",
+        "Tasting sweet and delicious",
+        "Too heavy to lift"
+      ],
+      "synonym": {
+        "right": "permanent",
+        "wrong": [
+          "tiny",
+          "shiny",
+          "gentle"
+        ]
+      },
+      "antonym": {
+        "right": "temporary",
+        "wrong": [
+          "lasting",
+          "fixed",
+          "colorful"
+        ]
+      },
+      "root": {
+        "part": "del",
+        "meaning": "to erase",
+        "wrongMeanings": [
+          "to light",
+          "to eat",
+          "to grow"
+        ]
+      }
+    },
+    {
+      "word": "reprieve",
+      "partOfSpeech": "noun",
+      "definition": "A break or delay from something bad or unpleasant",
+      "sentence": "A sudden cool breeze gave the tired desert camels a welcome ____ from the blazing afternoon sun.",
+      "wrongDefinitions": [
+        "A loud cheer at a sports game",
+        "A sharp tool used for cutting rope",
+        "A long, boring speech"
+      ],
+      "synonym": {
+        "right": "relief",
+        "wrong": [
+          "anger",
+          "journey",
+          "puzzle"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "minute",
+      "partOfSpeech": "adjective",
+      "definition": "Extremely small, so it is hard to see",
+      "sentence": "The scientist used a microscope to study the ____ creatures swimming in a single drop of pond water.",
+      "wrongDefinitions": [
+        "Very loud and hard to ignore",
+        "Lasting for many long years",
+        "Huge and very heavy"
+      ],
+      "synonym": {
+        "right": "tiny",
+        "wrong": [
+          "loud",
+          "bright",
+          "angry"
+        ]
+      },
+      "antonym": {
+        "right": "huge",
+        "wrong": [
+          "little",
+          "narrow",
+          "quiet"
+        ]
+      },
+      "root": {
+        "part": "min",
+        "meaning": "small",
+        "wrongMeanings": [
+          "large",
+          "fast",
+          "loud"
+        ]
+      }
+    },
+    {
+      "word": "exacerbate",
+      "partOfSpeech": "verb",
+      "definition": "To make a bad problem or feeling even worse",
+      "sentence": "Scratching a mosquito bite will only ____ the itching, so try your best to leave it alone.",
+      "wrongDefinitions": [
+        "To make something heal faster",
+        "To dig a hole in the ground",
+        "To travel across a large ocean"
+      ],
+      "synonym": {
+        "right": "worsen",
+        "wrong": [
+          "fix",
+          "calm",
+          "praise"
+        ]
+      },
+      "antonym": {
+        "right": "improve",
+        "wrong": [
+          "harm",
+          "spread",
+          "break"
+        ]
+      },
+      "root": {
+        "part": "acerb",
+        "meaning": "harsh or bitter",
+        "wrongMeanings": [
+          "sweet and soft",
+          "bright and clear",
+          "quick and light"
+        ]
+      }
+    },
+    {
+      "word": "reticent",
+      "partOfSpeech": "adjective",
+      "definition": "Quiet and not willing to share your thoughts or feelings",
+      "sentence": "The new student was ____ at first, but she chattered happily once she joined the dolphin research club.",
+      "wrongDefinitions": [
+        "Eager to talk to everyone about everything",
+        "Very fast at running long races",
+        "Covered in bright stripes and spots"
+      ],
+      "synonym": {
+        "right": "quiet",
+        "wrong": [
+          "chatty",
+          "clumsy",
+          "greedy"
+        ]
+      },
+      "antonym": {
+        "right": "talkative",
+        "wrong": [
+          "shy",
+          "silent",
+          "reserved"
+        ]
+      },
+      "root": {
+        "part": "tic",
+        "meaning": "to be silent",
+        "wrongMeanings": [
+          "to shout",
+          "to throw",
+          "to look"
+        ]
+      }
+    },
+    {
+      "word": "vex",
+      "partOfSpeech": "verb",
+      "definition": "To annoy or bother someone, making them upset",
+      "sentence": "The noisy monkeys would ____ the sleepy tourists by stealing their hats and chattering all night.",
+      "wrongDefinitions": [
+        "To make someone feel calm and happy",
+        "To paint a picture of a mountain",
+        "To swim deep under water"
+      ],
+      "synonym": {
+        "right": "annoy",
+        "wrong": [
+          "help",
+          "feed",
+          "carry"
+        ]
+      },
+      "antonym": {
+        "right": "please",
+        "wrong": [
+          "bother",
+          "tease",
+          "pester"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "wary",
+      "partOfSpeech": "adjective",
+      "definition": "Careful and watchful because something might be dangerous",
+      "sentence": "The ____ deer lifted its head and sniffed the air, ready to dash away from any wolves.",
+      "wrongDefinitions": [
+        "Very sleepy after a long day",
+        "Not caring at all about danger",
+        "Happy to share food with others"
+      ],
+      "synonym": {
+        "right": "careful",
+        "wrong": [
+          "sleepy",
+          "hungry",
+          "proud"
+        ]
+      },
+      "antonym": {
+        "right": "careless",
+        "wrong": [
+          "alert",
+          "watchful",
+          "cautious"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "vociferous",
+      "partOfSpeech": "adjective",
+      "definition": "Shouting or speaking loudly and strongly about what you think",
+      "sentence": "The ____ crowd of penguin fans cheered and shouted so loudly that the whole zoo could hear them.",
+      "wrongDefinitions": [
+        "Speaking so softly that nobody can hear",
+        "Eating huge amounts of food very fast",
+        "Afraid of being in high places"
+      ],
+      "synonym": {
+        "right": "loud",
+        "wrong": [
+          "silent",
+          "tiny",
+          "sleepy"
+        ]
+      },
+      "antonym": {
+        "right": "quiet",
+        "wrong": [
+          "noisy",
+          "rowdy",
+          "shouting"
+        ]
+      },
+      "root": {
+        "part": "voc",
+        "meaning": "voice",
+        "wrongMeanings": [
+          "eye",
+          "hand",
+          "fire"
+        ]
+      }
+    },
+    {
+      "word": "xenophobia",
+      "partOfSpeech": "noun",
+      "definition": "Fear or dislike of people from other countries",
+      "sentence": "Learning about different cultures and making friends around the world is a great way to fight ____.",
+      "wrongDefinitions": [
+        "Love of exploring new places",
+        "Fear of tall buildings",
+        "The study of rocks and minerals"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "xeno",
+        "meaning": "stranger or foreigner",
+        "wrongMeanings": [
+          "water",
+          "sunlight",
+          "earth"
+        ]
+      }
+    }
+  ]
+}

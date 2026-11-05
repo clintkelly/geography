@@ -532,6 +532,14 @@ Keep these adjustable: trail lengths, prices, starting points, XP curve, whether
 
 **Light and Spirit types:** two more types, asked for by a player. They sit outside the seven-type loop in a small triangle with Stone: Light beats Spirit (light chases away the shadows Spirits hide in), Spirit beats Stone (Spirits float through Stone walls), and Stone beats Light (Stone blocks Light and makes shade). Every type still has as many strengths as weaknesses; Stone, in both groups, has two of each. Light creatures: Sunbeary (sun bear, East and Southeast Asia), Jellume (crystal jelly, US West), Cavestar (Waitomo glowworm, Oceania) and Lumangler (Light and Tide anglerfish, Expert only, Caribbean and West Africa). Spirit creatures: Kermoon (Kermode spirit bear, North and Central America), Hushowl (barn owl, Western Europe), Spectrab (ghost crab, East Africa) and Tarspook (tarsier, Ranger and up, East and Southeast Asia). Spirit creatures are ghostly but friendly, never scary.
 
+**Sound, Metal and Burrow types:** three more types, asked for by a player, in a triangle of their own: Sound beats Metal (a loud, high note makes Metal shake and rattle), Metal beats Burrow (Metal drills dig through tunnels) and Burrow beats Sound (deep underground, Sound can't reach). They are even against every other type. Burrow is an underground type, separate from Stone. Metal: Armorfin (Dunkleosteus, Midwest), Clubclank (Ankylosaurus, Metal and Stone, Expert, US West), Ferrosnail (scaly-foot snail, Metal and Tide, Expert, East Africa), Hornclank (Hercules beetle, North and Central America), Goldgriff (griffin, Metal and Gale, rare, East and Southeast Asia), Domeplod (glyptodont, Ranger, South America) and Sabrefang (saber-toothed cat, Ranger, US West). Sound: Howlero (howler monkey), Songfluke (humpback whale, Sound and Tide), Trumpasaur (Parasaurolophus, Sound and Leaf, Expert), Echobat (free-tailed bat, Sound and Burrow), Mimilyre (lyrebird, Sound and Gale, Expert), Coquito (coquí frog, Caribbean), Rumbelph (African elephant, Sound and Stone, Expert) and Rexroar (T. rex, Stone and Sound, Expert, Midwest). Burrow: Starnoze (star-nosed mole), Nudig (naked mole-rat), Aardig (aardvark), Prairiepup (prairie dog), Spiralbore (Palaeocastor, Burrow and Stone), Cavewyrm (Welsh red dragon, Burrow and Flame, rare), Olmling (olm, Burrow and Tide) and Gophshell (gopher tortoise). The same batch added Glimmerhorn (unicorn, Light, rare, Northern Europe), Krakling (kraken, Tide and Spirit, Expert, Northern Europe), Seaneck (Elasmosaurus, Tide, Midwest), Tuskfrost (woolly mammoth, Frost, North and Central America) and, by request, Coatimundi (white-nosed coati, Leaf, North and Central America) and Spinosail (Spinosaurus, Tide and Stone, North Africa). Mythical creatures' facts say plainly that they are made up and tie them to the real place their story comes from.
+
+**History creatures:** animals and legends of ancient cultures, each fact tied to the real place: Athenowl (Athena's owl on Athens' coins) and Pegawing (Pegasus, rare) for Greece; Lupina (the bronze she-wolf of Romulus and Remus) and Honkonius (Juno's geese) for Rome; Maukit (Bastet's cats), Ibiscribe (Thoth's ibis), Nilesnap (Sobek's crocodiles) and Bennuflare (the bennu, rare) for Egypt; Lamassling (lamassu) and Tiledrake (the Ishtar Gate dragons) for Mesopotamia; Simurling (the Simurgh, rare) and Dashpurr (Asiatic cheetah) for Persia; Peacrest (the Peacock Throne) for India; Longlet (Chinese rain dragon, rare), Terracolt (Terracotta Army horse) and Kitsulit (kitsune) for China and Japan; Huginnet (Odin's raven), Boltgoat (Thor's goats) and Chalkpony (Uffington White Horse) for Scandinavia and Britain; Wawelet (Wawel Dragon) for Poland; Balamcub (Maya jaguar) for Mexico and Central America; Pumastone (Cusco) and Llamble (Inca llamas) for Peru. Native American sacred beings are deliberately left out. Legends are always worded as stories ("legend says", "in Norse myths").
+
+**Field Guide:** every creature has a card about the real animal, prehistoric animal, legend or historical animal behind it (src/content/guide/creatures.json): what it is based on, its scientific name, when (prehistoric only), where, a size comparison a child can picture, the story behind a legend, and two or three sourced facts. Kinds show as a small tag (🐾 real, 🦴 prehistoric, ✨ myth or legend, 🏛️ history) in the stable. The card opens by itself the first time a child meets a creature in battle, after the VS intro (remembered in the save as guideSeen), and any time from the battle screen, the stable, the passport, or the "Read about the real..." link after befriending. While open it holds the keyboard, and Enter or Escape closes it.
+
+**History questions:** a History trail focus and history questions mixed into Everything trails (src/content/history/*.json), built like the animal questions: the ask names a famous person, building or event, and the answer is the place. About 300 facts across every US state and most countries, each checked against its cited page. Topics a parent might want to see first are listed in docs/FACT_REVIEW.md.
+
 **Twenty more creatures:** each is based on a real animal, and its flavor text gives a true fact about where it lives. Emberhead is a rare Flame hammerhead shark from the Galápagos (South America). It is not a great white. The regulars are Humpyre (camel), Ostrigust (ostrich), Zapwhisker (electric catfish), Gorilith (mountain gorilla), Monarflit (monarch butterfly), Flaminglow (flamingo), Rockguana (rock iguana), Albasoar (albatross), Krillume (krill), Snowmonk (snow monkey), Embertig (Bengal tiger), Peakprowl (snow leopard), Pangoroll (pangolin), Puffgust (puffin), Torpezap (electric ray), Roozoom (red kangaroo), Scorchdevil (Tasmanian devil), Toucanopy (toucan) and Burrowbark (prairie dog). They fill the regions that had the fewest creatures, and add Flame, Gale, Stone and Volt, the types that had the fewest. Each one evolves twice.
 
 ## Reasons to play harder trails
@@ -574,3 +582,158 @@ Each place can have animal questions, stored in `src/content/animals/*.json` wit
   - Freeing, calling back and locked sightings each have a sound.
 - **Variety.** Common sounds have three takes, and every music track has a second take (camp and battle have three). One take is picked at random.
 
+
+## Math and vocabulary
+
+Math and Words are two more Camp focus choices. They work in every region: the trail still travels the region's map and finds its places, but battles and trail events ask math or vocabulary instead of geography. Battles on these trails are against study creatures, which live nowhere else.
+
+**Per-child settings.** In Settings, a parent picks which math topics and vocabulary units each child practices, and can mix math or vocabulary into ordinary geography trails at 15, 30 or 50 percent of questions (off by default). A "How it's going" list shows right answers per math skill and vocabulary unit, and the words a child has missed.
+
+**Math** follows a fourth-grade factors, fractions and integers unit. Problems are generated from their own numbers, so every answer is computed, and wrong choices come from common mistakes (adding the bottoms of fractions, flipping a sign). The bank is about 950 problems from 17 skills, made the same way every time so reviews and saves stay stable. Scout is multiple choice. Ranger and Expert ask for typed answers on most skills, using an on-screen pad with a fraction bar, a minus sign and a space for mixed numbers. Fractions must be in simplest form; 3/2 and 1 1/2 both count unless the question asks for one form. A few word problems use real places, like the temperature gap between Vostok Station and Death Valley.
+
+**Vocabulary** comes from word lists a parent adds with `npm run vocab -- --id unit-03 --title "Unit 3" words.txt`. The command asks Claude (`claude-opus-5-5`) for a kid-friendly definition, an example sentence, wrong definitions, a synonym, an antonym and a Latin or Greek root for each word. It checks the result (every word present, one blank per sentence, three wrong choices each) and writes `src/content/vocab/<id>.json`, which a parent reads before the kids play. Credentials come from the environment and never go in the repo. Scout asks what a word means. Ranger adds sentences, synonyms, antonyms and roots. Expert asks the child to type the word, which practices spelling. Missed words come back through the same review schedule as geography.
+
+**Study creatures** are original creatures based on real animals with a link to math or words: Primecada (periodical cicadas emerge every 13 or 17 years, both prime), Hexhive (honeybee hexagons), Octofract (an octopus's eight arms), Minusfox (Arctic foxes far below zero), Parrolex (Alex the African grey parrot), Whistlefin (dolphin signature whistles) and Pagegrub (bookworms). Camp shows who lives on each kind of trail, and the Passport has a Study creatures row. They join through Bold Befriend like any regular creature.
+
+## Ranger Lodges
+
+Ranger Lodges are this game's version of gym battles.
+
+**The ladder.** There are eight Lodges. Each child beats them in a fixed order, and each Lodge is harder than the one before. The first Lodge is always open. Beating one opens the next. Each child's progress is saved separately, in `lodgesBeaten` in their own save.
+
+| Rank | Lodge | Type | Subject | Leader | Prize creature (real animal) | Recommended level |
+|---|---|---|---|---|---|---|
+| 1 | Wildwood | Leaf | Animals | Ranger Hazel | Rustlepaw (red panda) | 1 |
+| 2 | Banner | Gale | Flags | Captain Soren | Aquilift (golden eagle) | 2 |
+| 3 | Compass | Stone | Places | Ranger Marisol | Screepip (American pika) | 3 |
+| 4 | Echo | Sound | Vocabulary | Maestro Kofi | Chucklebeak (laughing kookaburra) | 5 |
+| 5 | Gearworks | Metal | Math | Engineer Priya | Rivethorn (Indian rhinoceros) | 6 |
+| 6 | Lantern | Light | Capitals | Ranger Aurelio | Gleamarin (golden lion tamarin) | 7 |
+| 7 | Ancient | Spirit | History | Keeper Noor | Lazarine (coelacanth) | 8 |
+| 8 | Summit | Frost | A mix of everything | Grand Ranger Tova | Floecub (polar bear) | 10 |
+
+**Each Lodge.**
+- Every Lodge has its own primary type. Its junior rangers, its leader's team and its prize creature are all that type.
+- A visit has five or six battles in a row. First come two junior rangers with one creature each. Then the leader sends out three or four creatures. The last one is the ace.
+- From the third Lodge on, the ace makes a big boss-style hit every third turn.
+- Higher Lodges use evolved creatures. The art and names match each creature's stage.
+- There is a Prep Shop, but no map search.
+- Every question is about the Lodge's subject, drawn from every region the parent has turned on. No math or vocabulary is mixed in.
+- Question difficulty rises from Scout to Ranger to Expert as the ladder climbs. The parent's minimum and maximum difficulty still apply.
+
+**Fixed opponent strength.** On trails, opponents scale with your lead creature. In a Lodge, opponent strength is fixed by the Lodge's rank (`lodgeFoeStats`). That is what makes higher Lodges feel higher level: a creature below the recommended level has a hard time. Bigger teams still face tougher opponents, as on trails.
+
+**Tuning target.** A lone creature at the recommended level that gets about 80% of answers right should:
+- beat the junior rangers almost every time
+- usually beat the leader
+- beat the ace more often than not
+
+A simulation in `lodges.test.ts` checks this.
+
+**Losing and rewards.**
+- Losing a battle keeps your place in the Lodge. You can try that battle again right away.
+- Lodge creatures can't be befriended, and no rare creatures appear in Lodges.
+- The first win earns:
+  - the Lodge's patch, shown on the sash
+  - its prize creature, which lives nowhere else
+  - double the trail-finish XP, plus leftover Trail Points as XP
+- A rematch earns XP only.
+- There are three badges: First Patch, Halfway Up and Grand Ranger.
+
+**Lodge music.** The hall between battles plays a calm training-hall theme. Junior rangers use the regular battle music. The leader's creatures get their own heroic leader theme, and the Summit leader gets an epic snowy-summit theme. The win screen plays the victory tune. Each theme has two takes.
+
+## Study motivation: eggs, ranks, Lodge tiers and mastery (wave 2)
+
+**Why.** Save data showed the main player:
+- is a shiny hunter who frees almost everything that isn't shiny
+- loves platypuses, coatis and kiwis
+- plays only on Expert
+- never chose a Math or Words trail
+
+So math and vocabulary now pay out in the things he already chases: shinies, new versions of his favorite animals, and legendaries.
+
+**Study eggs** (`engine/eggs.ts`).
+- **Getting eggs:**
+  - Finishing a Math or Words trail lays an egg of that subject.
+  - An Expert study trail with at least 90% right lays a Rare Egg instead.
+  - The Gearworks and Echo Lodges lay eggs, and a new Silver patch lays a Rare Egg.
+  - The nest holds 3 eggs.
+- **Hatching:** only right math or vocabulary answers warm an egg: Scout +1, Ranger +2, Expert +3. Math and Word Eggs need 20 points, Rare Eggs 30. Eggs hatch at camp.
+- **What hatches:**
+  - A Math Egg hatches the math scholar creatures, plus Frostbill, Emberbill, Glowbill (platypus variants) and Gearbill (shoebill).
+  - A Word Egg hatches the vocabulary scholar creatures, plus Digbill (platypus), Pebblenose and Breezenose (coatis) and Sparkiwi (kiwi).
+  - A Rare Egg hatches anything from either pool.
+  - Unmet creatures are favored.
+  - The shiny chance is 15%, or 50% from a Rare Egg.
+
+**Other study rewards.**
+- **Double shiny chance:** Math and Words trails double the shiny chance for anything befriended there.
+- **Brain Blast:** a right *typed* math or vocabulary answer in battle gives +1 charge.
+- **Ranks:** Math and Words each have a rank, earned from study points: Apprentice at 30, Adept at 150, Wizard at 400, Archmage at 1000.
+
+**Lodge tiers.**
+- **Order:** each Lodge has Bronze, Silver and Gold. Silver opens after Bronze, and Gold after Silver.
+- **Strength:**
+  - Silver fights at the Lodge's rank + 2, on Ranger or harder, with creatures one stage more evolved.
+  - Gold fights at rank + 4, on Expert, with fully evolved creatures.
+- **Silver reward:** the Silver patch and a Rare Egg.
+- **Gold reward:**
+  - Winning the Gold battles leads to a **Mastery Test**: 10 Expert questions on the Lodge's subject, with 9 right (90%) needed.
+  - Passing gives the Gold patch, the Lodge's legendary creature and a shiny of its prize creature.
+  - A failed test can be retaken any time with new questions, and the battles still count.
+
+**Gate quiz and Brain Shield.**
+- **Gate quiz:** the Echo (vocabulary) and Gearworks (math) Lodges start with a gate quiz of 8 questions, with 6 right needed. Failing it means trying again with new questions.
+- **Brain Shield:**
+  - In those two Lodges, the leader's creatures carry a Brain Shield of 3.
+  - A right answer cracks it instead of doing damage, and the opponent can't hit back that turn.
+  - Shielded creatures have 1 less HP per point of shield.
+  - The balance simulation keeps them fair at the recommended level.
+- **The Summit** needs a Gold patch from Gearworks.
+
+**Legendaries** (myths, the Gold rewards):
+
+| Lodge | Legendary | Based on |
+|---|---|---|
+| Wildwood | Qiloom | Qilin |
+| Banner | Rocquill | Roc |
+| Compass | Gargrim | Gargoyle |
+| Echo | Sirenade | Siren |
+| Gearworks | Talosteel | Talos |
+| Lantern | Glowplume | Firebird |
+| Ancient | Bakumist | Baku |
+| Summit | Yetitan | Yeti |
+
+**Juice.**
+- **In battle:** a combo counter from 3 in a row, Brain Shield crack and Brain Blast pops with their own sounds.
+- **Eggs:** eggs wobble faster as they warm, and hatching has its own reveal and sound.
+- **Collection:** a "Creatures found" counter at camp, with a celebration every 10, plus NEW! and Legendary tags in the stable.
+- **Music:** a thinking theme for Math and Words trails, and a quiz theme for gate quizzes and Mastery Tests.
+
+## Kung Fu type, Wild Paths and idle animations
+
+**Kung Fu type.**
+- **Triangle:** Kung Fu, Stone and Gale form a triangle. Kung Fu beats Stone, Stone beats Gale, and Gale beats Kung Fu.
+- **Creatures:** four in East Asia, each a real animal with a kung fu style named after it: Mantido (mantis), Cranekick (red-crowned crane), Monkido (golden snub-nosed monkey) and Tigrifu (South China tiger).
+
+**Voltewe.**
+- A Volt and Metal Merino sheep in Oceania. It evolves into Sparkram, then Ironfleece Ram.
+
+**Wild Paths: branching evolution** (`Species.paths`, `progression.companionSpecies`).
+- **The creatures:** Paddlet (platypus, Oceania), Coatikit (coati, Central America) and Kiwikin (kiwi, Oceania).
+- **How the path is earned:** each baby counts how it is raised.
+  - **Scholar:** right math and vocabulary answers while it leads.
+  - **Ranger:** battles its team wins on Ranger or Expert trails.
+  - **Banner:** right flag answers while it leads.
+- **Evolving:**
+  - At level 5 it follows the highest count, with ties going Scholar, then Ranger, then Banner.
+  - Its path is fixed once the evolution has been shown.
+  - From stage 2 on it takes the path's type (Scholar is Light, Ranger is Kung Fu, Banner is Gale), plus that path's art and Special.
+- **On screen:** the stable shows the three counts before level 5. The evolution screen says which path it took and why.
+- **Art direction:** each path is a very different design (silhouette, palette and accessories), not a recolor.
+
+**Idle animations.**
+- **The sprites:** an art id in `content/animations.ts` has 4 frames, `<artId>-f1..f4.png` (128x128, lined up with the still).
+- **Where they play:** in the stable, at camp and in battle while standing.
+- **How they run:** on one shared 220 ms clock. Reduced-motion users see the still.
+- **Cost:** a 4-frame 128x128 animation costs 1 PixelLab generation.

@@ -1,0 +1,386 @@
+{
+  "id": "vv-list-08",
+  "title": "Vocabulary Virtuoso List 8",
+  "order": 9,
+  "words": [
+    {
+      "word": "refurbish",
+      "partOfSpeech": "verb",
+      "definition": "To clean, repair and make something look new again",
+      "sentence": "The town decided to ____ the old lighthouse, adding fresh paint and new windows for visitors.",
+      "wrongDefinitions": [
+        "To tear something down so nothing is left",
+        "To sell something for a much lower price",
+        "To move something to a faraway place"
+      ],
+      "synonym": {
+        "right": "restore",
+        "wrong": [
+          "destroy",
+          "borrow",
+          "hide"
+        ]
+      },
+      "antonym": {
+        "right": "ruin",
+        "wrong": [
+          "count",
+          "whisper",
+          "follow"
+        ]
+      },
+      "root": {
+        "part": "re",
+        "meaning": "again",
+        "wrongMeanings": [
+          "before",
+          "under",
+          "without"
+        ]
+      }
+    },
+    {
+      "word": "veracity",
+      "partOfSpeech": "noun",
+      "definition": "The quality of being true or honest",
+      "sentence": "The scientists checked the ____ of the explorer's story about a giant purple frog in the jungle.",
+      "wrongDefinitions": [
+        "The speed at which something moves",
+        "A strong feeling of anger",
+        "A large crowd of noisy people"
+      ],
+      "synonym": {
+        "right": "truth",
+        "wrong": [
+          "speed",
+          "courage",
+          "silence"
+        ]
+      },
+      "antonym": {
+        "right": "falsehood",
+        "wrong": [
+          "kindness",
+          "speed",
+          "size"
+        ]
+      },
+      "root": {
+        "part": "ver",
+        "meaning": "true",
+        "wrongMeanings": [
+          "green",
+          "turn",
+          "see"
+        ]
+      }
+    },
+    {
+      "word": "obsequious",
+      "partOfSpeech": "adjective",
+      "definition": "Too eager to please or obey others, in a fake way",
+      "sentence": "The ____ servant bowed again and again, praising the king's every word just to stay on his good side.",
+      "wrongDefinitions": [
+        "Very hard to see or understand",
+        "Refusing to listen to anyone at all",
+        "Feeling sleepy after a big meal"
+      ],
+      "synonym": {
+        "right": "flattering",
+        "wrong": [
+          "rude",
+          "sleepy",
+          "brave"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "sequ",
+        "meaning": "follow",
+        "wrongMeanings": [
+          "write",
+          "hear",
+          "carry"
+        ]
+      }
+    },
+    {
+      "word": "gustatory",
+      "partOfSpeech": "adjective",
+      "definition": "Having to do with tasting food",
+      "sentence": "The chef took us on a ____ adventure, letting us sample spicy, sweet and sour treats from ten countries.",
+      "wrongDefinitions": [
+        "Having to do with strong winds and storms",
+        "Having to do with hearing sounds",
+        "Having to do with climbing tall mountains"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "gust",
+        "meaning": "taste",
+        "wrongMeanings": [
+          "wind",
+          "sight",
+          "sound"
+        ]
+      }
+    },
+    {
+      "word": "detrimental",
+      "partOfSpeech": "adjective",
+      "definition": "Causing harm or damage",
+      "sentence": "Plastic trash floating in the sea is ____ to turtles, who sometimes mistake it for jellyfish.",
+      "wrongDefinitions": [
+        "Helping something grow strong and healthy",
+        "Very small and hard to notice",
+        "Easy to clean and fix"
+      ],
+      "synonym": {
+        "right": "harmful",
+        "wrong": [
+          "helpful",
+          "tiny",
+          "funny"
+        ]
+      },
+      "antonym": {
+        "right": "helpful",
+        "wrong": [
+          "harmful",
+          "risky",
+          "sleepy"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "adversity",
+      "partOfSpeech": "noun",
+      "definition": "Hard times or serious trouble",
+      "sentence": "Despite great ____, including frozen toes and fierce blizzards, the explorers finally reached the South Pole.",
+      "wrongDefinitions": [
+        "A happy party with lots of food",
+        "A short message sent to a friend",
+        "A machine used for digging"
+      ],
+      "synonym": {
+        "right": "hardship",
+        "wrong": [
+          "party",
+          "comfort",
+          "laughter"
+        ]
+      },
+      "antonym": {
+        "right": "good fortune",
+        "wrong": [
+          "hardship",
+          "rainfall",
+          "distance"
+        ]
+      },
+      "root": {
+        "part": "vers",
+        "meaning": "turn",
+        "wrongMeanings": [
+          "write",
+          "break",
+          "see"
+        ]
+      }
+    },
+    {
+      "word": "hapless",
+      "partOfSpeech": "adjective",
+      "definition": "Very unlucky, with one bad thing after another",
+      "sentence": "The ____ penguin slipped on the ice, dropped its fish, and then got splashed by a passing whale.",
+      "wrongDefinitions": [
+        "Very cheerful and full of jokes",
+        "Having no hair on the head",
+        "Careful and always well prepared"
+      ],
+      "synonym": {
+        "right": "unlucky",
+        "wrong": [
+          "lucky",
+          "clever",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "lucky",
+        "wrong": [
+          "unlucky",
+          "quiet",
+          "hungry"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "geriatric",
+      "partOfSpeech": "adjective",
+      "definition": "Having to do with old people or old age",
+      "sentence": "The ____ elephant at the sanctuary is over sixty years old and gets special soft food and gentle care.",
+      "wrongDefinitions": [
+        "Having to do with newborn babies",
+        "Having to do with rocks and soil",
+        "Having to do with fast race cars"
+      ],
+      "synonym": {
+        "right": "elderly",
+        "wrong": [
+          "young",
+          "angry",
+          "wet"
+        ]
+      },
+      "antonym": {
+        "right": "young",
+        "wrong": [
+          "aged",
+          "tall",
+          "shiny"
+        ]
+      },
+      "root": {
+        "part": "ger",
+        "meaning": "old age",
+        "wrongMeanings": [
+          "earth",
+          "birth",
+          "water"
+        ]
+      }
+    },
+    {
+      "word": "brusque",
+      "partOfSpeech": "adjective",
+      "definition": "Short and rude in the way someone speaks",
+      "sentence": "The ____ ship captain barked, 'No time to chat!' and stomped off without even saying goodbye.",
+      "wrongDefinitions": [
+        "Warm, gentle and very polite",
+        "Covered in thick, bushy fur",
+        "Moving slowly and quietly"
+      ],
+      "synonym": {
+        "right": "blunt",
+        "wrong": [
+          "gentle",
+          "fluffy",
+          "patient"
+        ]
+      },
+      "antonym": {
+        "right": "polite",
+        "wrong": [
+          "rude",
+          "hungry",
+          "loud"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "infamy",
+      "partOfSpeech": "noun",
+      "definition": "Being well known for something bad",
+      "sentence": "The pirate Blackbeard earned ____ for raiding ships and frightening sailors all along the coast.",
+      "wrongDefinitions": [
+        "Being well known for kind and brave deeds",
+        "A very young child",
+        "A feeling of great hunger"
+      ],
+      "synonym": {
+        "right": "disgrace",
+        "wrong": [
+          "honor",
+          "hunger",
+          "childhood"
+        ]
+      },
+      "antonym": {
+        "right": "honor",
+        "wrong": [
+          "disgrace",
+          "hunger",
+          "silence"
+        ]
+      },
+      "root": {
+        "part": "fam",
+        "meaning": "fame",
+        "wrongMeanings": [
+          "family",
+          "sleep",
+          "fire"
+        ]
+      }
+    },
+    {
+      "word": "parsimonious",
+      "partOfSpeech": "adjective",
+      "definition": "Very unwilling to spend money or share things",
+      "sentence": "The ____ dragon refused to give away even one gold coin from his enormous glittering pile.",
+      "wrongDefinitions": [
+        "Very generous and happy to share",
+        "Having to do with the city of Paris",
+        "Talking a great deal about nothing"
+      ],
+      "synonym": {
+        "right": "stingy",
+        "wrong": [
+          "generous",
+          "clumsy",
+          "brave"
+        ]
+      },
+      "antonym": {
+        "right": "generous",
+        "wrong": [
+          "stingy",
+          "tiny",
+          "sleepy"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "quiescent",
+      "partOfSpeech": "adjective",
+      "definition": "Still, calm and not active for now",
+      "sentence": "The volcano has been ____ for hundreds of years, but scientists still watch it closely for signs of waking.",
+      "wrongDefinitions": [
+        "Bursting with loud and constant activity",
+        "Asking lots of curious questions",
+        "Shaped like a curved moon"
+      ],
+      "synonym": {
+        "right": "still",
+        "wrong": [
+          "busy",
+          "curious",
+          "bright"
+        ]
+      },
+      "antonym": {
+        "right": "active",
+        "wrong": [
+          "round",
+          "hungry",
+          "silent"
+        ]
+      },
+      "root": {
+        "part": "quies",
+        "meaning": "rest",
+        "wrongMeanings": [
+          "question",
+          "five",
+          "crowd"
+        ]
+      }
+    }
+  ]
+}

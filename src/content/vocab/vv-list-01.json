@@ -1,0 +1,343 @@
+{
+  "id": "vv-list-01",
+  "title": "Vocabulary Virtuoso List 1",
+  "order": 2,
+  "words": [
+    {
+      "word": "yearn",
+      "partOfSpeech": "verb",
+      "definition": "To want something very much, often for a long time",
+      "sentence": "After months at sea, the tired sailors began to ____ for the green hills of home.",
+      "wrongDefinitions": [
+        "To shout loudly across a wide valley",
+        "To sleep deeply through a long winter",
+        "To fold something neatly into a square"
+      ],
+      "synonym": {
+        "right": "wish",
+        "wrong": [
+          "refuse",
+          "whisper",
+          "sneeze"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "appendage",
+      "partOfSpeech": "noun",
+      "definition": "A body part, like an arm, leg or tail, attached to something larger",
+      "sentence": "An octopus can use each long ____ to grab crabs from the rocky ocean floor.",
+      "wrongDefinitions": [
+        "A loud warning sound made by an angry animal",
+        "A small house built high in a tree",
+        "A long trip taken across a desert"
+      ],
+      "synonym": {
+        "right": "limb",
+        "wrong": [
+          "river",
+          "cloud",
+          "song"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "pend",
+        "meaning": "to hang",
+        "wrongMeanings": [
+          "to see",
+          "to run",
+          "to break"
+        ]
+      }
+    },
+    {
+      "word": "intervene",
+      "partOfSpeech": "verb",
+      "definition": "To step in to stop or change what is happening",
+      "sentence": "When two puppies started fighting over one bone, the park ranger had to ____ and separate them.",
+      "wrongDefinitions": [
+        "To hide quietly until danger has passed",
+        "To paint a picture of a mountain",
+        "To count the stars in the night sky"
+      ],
+      "synonym": {
+        "right": "step in",
+        "wrong": [
+          "fall asleep",
+          "run away",
+          "sing along"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "ven",
+        "meaning": "to come",
+        "wrongMeanings": [
+          "to write",
+          "to carry",
+          "to look"
+        ]
+      }
+    },
+    {
+      "word": "lethargy",
+      "partOfSpeech": "noun",
+      "definition": "A feeling of being very tired, slow and without energy",
+      "sentence": "After eating a huge meal, the lion lay in the shade, too full of ____ to chase anything.",
+      "wrongDefinitions": [
+        "A feeling of great excitement and wild joy",
+        "A heavy rainstorm that floods a valley",
+        "A map that shows hidden treasure"
+      ],
+      "synonym": {
+        "right": "tiredness",
+        "wrong": [
+          "anger",
+          "speed",
+          "bravery"
+        ]
+      },
+      "antonym": {
+        "right": "energy",
+        "wrong": [
+          "sadness",
+          "hunger",
+          "silence"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "denizen",
+      "partOfSpeech": "noun",
+      "definition": "A person or animal that lives in a certain place",
+      "sentence": "The sloth is a sleepy ____ of the rainforest, hanging upside down in the treetops all day.",
+      "wrongDefinitions": [
+        "A visitor who stays only one night",
+        "A tool used for digging deep holes",
+        "A loud song sung by birds at dawn"
+      ],
+      "synonym": {
+        "right": "resident",
+        "wrong": [
+          "builder",
+          "singer",
+          "painter"
+        ]
+      },
+      "antonym": {
+        "right": "visitor",
+        "wrong": [
+          "farmer",
+          "doctor",
+          "artist"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "intrepid",
+      "partOfSpeech": "adjective",
+      "definition": "Very brave and not afraid of danger",
+      "sentence": "The ____ explorer crossed frozen rivers and icy mountains to reach the South Pole.",
+      "wrongDefinitions": [
+        "Very sleepy and slow to wake up",
+        "Very tiny and hard to see",
+        "Very hungry after a long day"
+      ],
+      "synonym": {
+        "right": "fearless",
+        "wrong": [
+          "tiny",
+          "lazy",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "fearful",
+        "wrong": [
+          "hungry",
+          "tall",
+          "loud"
+        ]
+      },
+      "root": {
+        "part": "trepid",
+        "meaning": "alarmed or scared",
+        "wrongMeanings": [
+          "happy",
+          "quick",
+          "wet"
+        ]
+      }
+    },
+    {
+      "word": "digress",
+      "partOfSpeech": "verb",
+      "definition": "To wander away from the main topic while talking or writing",
+      "sentence": "Grandpa's story about the volcano was great, but he would often ____ and talk about his old dog.",
+      "wrongDefinitions": [
+        "To climb quickly to the top of a hill",
+        "To agree with everything someone says",
+        "To repair a broken boat"
+      ],
+      "synonym": {
+        "right": "stray",
+        "wrong": [
+          "build",
+          "swim",
+          "promise"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "gress",
+        "meaning": "to step or go",
+        "wrongMeanings": [
+          "to hear",
+          "to throw",
+          "to sleep"
+        ]
+      }
+    },
+    {
+      "word": "thwart",
+      "partOfSpeech": "verb",
+      "definition": "To stop someone's plan from working",
+      "sentence": "The clever squirrel managed to ____ every attempt we made to keep it out of the bird feeder.",
+      "wrongDefinitions": [
+        "To help someone's plan work perfectly",
+        "To draw a careful map",
+        "To bake bread in a hot oven"
+      ],
+      "synonym": {
+        "right": "block",
+        "wrong": [
+          "paint",
+          "carry",
+          "admire"
+        ]
+      },
+      "antonym": {
+        "right": "help",
+        "wrong": [
+          "sleep",
+          "count",
+          "jump"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "brevity",
+      "partOfSpeech": "noun",
+      "definition": "The quality of being short or quick",
+      "sentence": "The ____ of the hummingbird's visit surprised us; it sipped one flower and zoomed away in seconds.",
+      "wrongDefinitions": [
+        "The quality of being very loud",
+        "The quality of being very colorful",
+        "The quality of being very heavy"
+      ],
+      "synonym": {
+        "right": "shortness",
+        "wrong": [
+          "loudness",
+          "kindness",
+          "sweetness"
+        ]
+      },
+      "antonym": {
+        "right": "length",
+        "wrong": [
+          "color",
+          "weight",
+          "smell"
+        ]
+      },
+      "root": {
+        "part": "brev",
+        "meaning": "short",
+        "wrongMeanings": [
+          "bright",
+          "strong",
+          "wet"
+        ]
+      }
+    },
+    {
+      "word": "queue",
+      "partOfSpeech": "noun",
+      "definition": "A line of people or things waiting their turn",
+      "sentence": "At the zoo, we waited in a long ____ to see the baby panda eat bamboo.",
+      "wrongDefinitions": [
+        "A small boat used for fishing on a lake",
+        "A loud cheer at a sports game",
+        "A secret message written in code"
+      ],
+      "synonym": {
+        "right": "line",
+        "wrong": [
+          "bridge",
+          "storm",
+          "basket"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "segue",
+      "partOfSpeech": "noun",
+      "definition": "A smooth change from one topic or activity to the next",
+      "sentence": "The tour guide made a smooth ____ from talking about penguins to showing us real Antarctic ice.",
+      "wrongDefinitions": [
+        "A sudden stop in the middle of a race",
+        "A tall tower used to watch for fires",
+        "A sweet snack made from honey"
+      ],
+      "synonym": {
+        "right": "shift",
+        "wrong": [
+          "tower",
+          "snack",
+          "storm"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "segu",
+        "meaning": "to follow",
+        "wrongMeanings": [
+          "to break",
+          "to shout",
+          "to hide"
+        ]
+      }
+    },
+    {
+      "word": "agoraphobia",
+      "partOfSpeech": "noun",
+      "definition": "A strong fear of crowded or open public places",
+      "sentence": "Because of her ____, Aunt Rosa felt scared in busy markets, so we brought her fresh fruit at home.",
+      "wrongDefinitions": [
+        "A strong fear of spiders and other bugs",
+        "A love of farming and growing crops",
+        "A strong fear of high places"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "agora",
+        "meaning": "marketplace",
+        "wrongMeanings": [
+          "mountain",
+          "ocean",
+          "forest"
+        ]
+      }
+    }
+  ]
+}

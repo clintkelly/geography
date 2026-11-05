@@ -1,0 +1,408 @@
+{
+  "china": [
+    {
+      "fact": "The Terracotta Army, thousands of life-size clay soldiers buried with China's first emperor, Qin Shi Huang, was discovered by farmers in 1974.",
+      "ask": "Which country's Terracotta Army of clay soldiers was found by farmers digging a well in 1974?",
+      "source": "https://en.wikipedia.org/wiki/Terracotta_Army"
+    },
+    {
+      "fact": "Paper was invented in China, and a court official named Cai Lun improved the way it was made around the year 105.",
+      "ask": "In which country did Cai Lun improve papermaking about 1,900 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Cai_Lun"
+    },
+    {
+      "fact": "The magnetic compass was first used to find the way at sea in China about 1,000 years ago, during the Song dynasty.",
+      "ask": "In which country was the magnetic compass first used to steer ships, about 1,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Compass"
+    }
+  ],
+  "japan": [
+    {
+      "fact": "Hōryū-ji, a temple in Japan, has some of the oldest wooden buildings in the world, more than 1,300 years old.",
+      "ask": "Which country's Hōryū-ji temple has some of the world's oldest wooden buildings?",
+      "source": "https://en.wikipedia.org/wiki/H%C5%8Dry%C5%AB-ji"
+    },
+    {
+      "fact": "Himeji Castle in Japan, nicknamed the White Heron Castle, was finished in its present form in 1609.",
+      "ask": "Which country's Himeji Castle, nicknamed the White Heron Castle, was finished in 1609?",
+      "source": "https://en.wikipedia.org/wiki/Himeji_Castle"
+    },
+    {
+      "fact": "Japan's imperial family is the oldest continuing hereditary monarchy in the world.",
+      "ask": "Which country has the world's oldest continuing hereditary monarchy, led by an emperor?",
+      "source": "https://en.wikipedia.org/wiki/Imperial_House_of_Japan"
+    }
+  ],
+  "south-korea": [
+    {
+      "fact": "South Korea celebrates Hangul Day on October 9, honoring the Korean alphabet created by King Sejong the Great in the 1440s.",
+      "ask": "Which country celebrates Hangul Day on October 9, honoring King Sejong's alphabet?",
+      "source": "https://en.wikipedia.org/wiki/Hangul_Day"
+    },
+    {
+      "fact": "Cheomseongdae, a stone star-gazing tower in Gyeongju, South Korea, was built about 1,400 years ago under Queen Seondeok and is the oldest surviving observatory in Asia.",
+      "ask": "Which country's Cheomseongdae, built under Queen Seondeok, is the oldest surviving observatory in Asia?",
+      "source": "https://en.wikipedia.org/wiki/Cheomseongdae"
+    }
+  ],
+  "mongolia": [
+    {
+      "fact": "Genghis Khan united the peoples of the Mongolian steppe in 1206 and founded the Mongol Empire, the largest connected land empire in history.",
+      "ask": "Which country was the homeland of Genghis Khan, who founded the largest connected land empire in history?",
+      "source": "https://en.wikipedia.org/wiki/Mongol_Empire"
+    },
+    {
+      "fact": "Karakorum, in Mongolia, was the capital of Genghis Khan's empire in the 1200s.",
+      "ask": "Which country's ancient city of Karakorum was capital of Genghis Khan's empire in the 1200s?",
+      "source": "https://en.wikipedia.org/wiki/Karakorum"
+    }
+  ],
+  "india": [
+    {
+      "fact": "The Taj Mahal in India was built by Mughal emperor Shah Jahan in memory of his wife, Mumtaz Mahal, and finished in the mid-1600s.",
+      "ask": "Which country's Taj Mahal was built by emperor Shah Jahan in memory of his wife?",
+      "source": "https://en.wikipedia.org/wiki/Taj_Mahal"
+    },
+    {
+      "fact": "The numbers 0 to 9 that we use today were first developed by mathematicians in India, then spread through the Arab world to Europe.",
+      "ask": "In which country did mathematicians first develop the 0-to-9 numbers we use today?",
+      "source": "https://en.wikipedia.org/wiki/Hindu%E2%80%93Arabic_numeral_system"
+    },
+    {
+      "fact": "India won its independence on August 15, 1947, after a long movement of peaceful protest led by Mahatma Gandhi.",
+      "ask": "Which country, after peaceful protests led by Mahatma Gandhi, became independent on August 15, 1947?",
+      "source": "https://en.wikipedia.org/wiki/Indian_independence_movement"
+    }
+  ],
+  "pakistan": [
+    {
+      "fact": "Pakistan became independent on August 14, 1947, led by Muhammad Ali Jinnah.",
+      "ask": "Which country became independent on August 14, 1947, led by Muhammad Ali Jinnah?",
+      "source": "https://en.wikipedia.org/wiki/Muhammad_Ali_Jinnah"
+    }
+  ],
+  "bangladesh": [
+    {
+      "fact": "Bangladesh's 1952 Language Movement for the Bengali language led UNESCO to create International Mother Language Day, held every February 21.",
+      "ask": "Which country's 1952 Language Movement inspired International Mother Language Day on February 21?",
+      "source": "https://en.wikipedia.org/wiki/International_Mother_Language_Day"
+    }
+  ],
+  "sri-lanka": [
+    {
+      "fact": "In 1960 Sirimavo Bandaranaike of Sri Lanka became the world's first woman prime minister.",
+      "ask": "Which country chose the world's first woman prime minister, Sirimavo Bandaranaike, in 1960?",
+      "source": "https://en.wikipedia.org/wiki/Sirimavo_Bandaranaike"
+    }
+  ],
+  "afghanistan": [
+    {
+      "fact": "The Minaret of Jam in Afghanistan is a brick tower about 65 meters tall, built in the 1100s.",
+      "ask": "Which country's Minaret of Jam, a brick tower about 65 meters tall, was built in the 1100s?",
+      "source": "https://en.wikipedia.org/wiki/Minaret_of_Jam"
+    }
+  ],
+  "iran": [
+    {
+      "fact": "Iran was called Persia by most of the world until 1935, when it asked other countries to use the name Iran.",
+      "ask": "Which country asked the world in 1935 to stop calling it Persia?",
+      "source": "https://en.wikipedia.org/wiki/Name_of_Iran"
+    },
+    {
+      "fact": "For thousands of years, people in Iran have dug qanats, underground tunnels that carry water from hills to towns and farms.",
+      "ask": "Which country is famous for qanats, ancient underground tunnels that carry water to farms?",
+      "source": "https://en.wikipedia.org/wiki/Qanat"
+    },
+    {
+      "fact": "Cyrus the Great, from what is now Iran, founded the Achaemenid Persian Empire about 2,550 years ago, which became one of the largest empires of the ancient world.",
+      "ask": "Which country's ancient king Cyrus the Great founded one of the largest empires of the ancient world?",
+      "source": "https://en.wikipedia.org/wiki/Cyrus_the_Great"
+    }
+  ],
+  "iraq": [
+    {
+      "fact": "The ruins of Babylon are in Iraq. Its King Hammurabi wrote one of the first sets of laws, the Code of Hammurabi, about 3,800 years ago.",
+      "ask": "Which country is home to the ruins of Babylon, where King Hammurabi wrote down his laws?",
+      "source": "https://en.wikipedia.org/wiki/Babylon"
+    },
+    {
+      "fact": "The Great Mosque of Samarra in Iraq, built in the 800s, has a giant spiral minaret called the Malwiya.",
+      "ask": "Which country's city of Samarra has a giant spiral tower called the Malwiya, built in the 800s?",
+      "source": "https://en.wikipedia.org/wiki/Great_Mosque_of_Samarra"
+    }
+  ],
+  "syria": [
+    {
+      "fact": "At Ugarit, an ancient city in Syria, people wrote one of the earliest alphabets more than 3,000 years ago.",
+      "ask": "In which country was ancient Ugarit, where people wrote one of the earliest alphabets?",
+      "source": "https://en.wikipedia.org/wiki/Ugarit"
+    }
+  ],
+  "lebanon": [
+    {
+      "fact": "The ancient port of Byblos in Lebanon traded papyrus, and the Greek word for book, biblos, comes from its name.",
+      "ask": "Which country's ancient port of Byblos gave its name to the Greek word for book?",
+      "source": "https://en.wikipedia.org/wiki/Byblos"
+    }
+  ],
+  "israel": [
+    {
+      "fact": "Masada in Israel is a mountaintop fortress built by King Herod more than 2,000 years ago.",
+      "ask": "Which country's Masada is a desert mountaintop fortress built by King Herod over 2,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Masada"
+    },
+    {
+      "fact": "Modern drip irrigation, which drips water right onto plant roots to save water, was developed in Israel by Simcha Blass in the 1960s.",
+      "ask": "Which country's engineer Simcha Blass developed modern drip irrigation for farms?",
+      "source": "https://en.wikipedia.org/wiki/Drip_irrigation"
+    }
+  ],
+  "jordan": [
+    {
+      "fact": "Jerash in Jordan has some of the best-preserved ruins of a Roman city, with columned streets, temples and theaters.",
+      "ask": "Which country's Jerash has well-preserved Roman streets lined with columns, temples and theaters?",
+      "source": "https://en.wikipedia.org/wiki/Jerash"
+    },
+    {
+      "fact": "The Madaba Map, a floor mosaic in a church in Madaba, Jordan, made about 1,500 years ago, is the oldest surviving map of the Holy Land.",
+      "ask": "Which country's Madaba Map, a tiled floor mosaic about 1,500 years old, is an ancient map of the Holy Land?",
+      "source": "https://en.wikipedia.org/wiki/Madaba_Map"
+    }
+  ],
+  "united-arab-emirates": [
+    {
+      "fact": "The United Arab Emirates was formed on December 2, 1971, when six emirates joined together. A seventh joined in 1972.",
+      "ask": "Which country was formed on December 2, 1971, when six emirates joined together?",
+      "source": "https://en.wikipedia.org/wiki/United_Arab_Emirates"
+    }
+  ],
+  "bahrain": [
+    {
+      "fact": "Bahrain was the heart of Dilmun, an ancient trading land mentioned in writings from Sumer more than 4,000 years ago.",
+      "ask": "Which island country was the heart of Dilmun, an ancient trading land known to the Sumerians?",
+      "source": "https://en.wikipedia.org/wiki/Dilmun"
+    }
+  ],
+  "kuwait": [
+    {
+      "fact": "Kuwait's Failaka Island had an ancient Greek settlement called Ikaros more than 2,000 years ago.",
+      "ask": "Which country's Failaka Island had an ancient Greek settlement called Ikaros?",
+      "source": "https://en.wikipedia.org/wiki/Failaka_Island"
+    }
+  ],
+  "turkey": [
+    {
+      "fact": "The ruins of Troy, the city of the Trojan Horse legend, are in Turkey and were first dug up in the 1870s.",
+      "ask": "Which country is home to the ruins of Troy, the city of the Trojan Horse legend?",
+      "source": "https://en.wikipedia.org/wiki/Troy"
+    },
+    {
+      "fact": "Hagia Sophia in Istanbul, Turkey, was finished in the year 537 and was the world's largest church building for nearly 1,000 years.",
+      "ask": "Which country's Hagia Sophia, finished in 537, was the world's largest church for nearly 1,000 years?",
+      "source": "https://en.wikipedia.org/wiki/Hagia_Sophia"
+    },
+    {
+      "fact": "Göbekli Tepe in Turkey has huge carved stone pillars set up about 11,000 years ago, thousands of years before Stonehenge.",
+      "ask": "Which country's Göbekli Tepe has carved stone pillars about 11,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/G%C3%B6bekli_Tepe"
+    }
+  ],
+  "cyprus": [
+    {
+      "fact": "Copper gets its name from the island of Cyprus, which was a big source of copper in ancient Roman times.",
+      "ask": "Which island country gave its name to copper, mined there since ancient times?",
+      "source": "https://en.wikipedia.org/wiki/Copper"
+    },
+    {
+      "fact": "Choirokoitia in Cyprus is a stone-age village of round houses about 9,000 years old.",
+      "ask": "Which island country's Choirokoitia is a stone-age village of round houses about 9,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/Choirokoitia"
+    }
+  ],
+  "georgia-country": [
+    {
+      "fact": "Georgia, in the Caucasus Mountains, writes its language with its own curly alphabet called Mkhedruli.",
+      "ask": "Which country in the Caucasus writes with its own curly alphabet called Mkhedruli?",
+      "source": "https://en.wikipedia.org/wiki/Georgian_scripts"
+    }
+  ],
+  "armenia": [
+    {
+      "fact": "In the year 301, Armenia became the first country to make Christianity its official religion.",
+      "ask": "Which country, in the year 301, became the first to make Christianity its official religion?",
+      "source": "https://en.wikipedia.org/wiki/Christianization_of_Armenia"
+    },
+    {
+      "fact": "The Armenian alphabet was created by a scholar named Mesrop Mashtots around the year 405, and is still used in Armenia today.",
+      "ask": "Which country's alphabet was created by Mesrop Mashtots around the year 405?",
+      "source": "https://en.wikipedia.org/wiki/Armenian_alphabet"
+    }
+  ],
+  "azerbaijan": [
+    {
+      "fact": "Gobustan in Azerbaijan has more than 6,000 ancient rock carvings of people, animals and boats.",
+      "ask": "Which country's Gobustan has more than 6,000 ancient rock carvings of people, animals and boats?",
+      "source": "https://en.wikipedia.org/wiki/Gobustan_National_Park"
+    }
+  ],
+  "uzbekistan": [
+    {
+      "fact": "In the 1420s, ruler and astronomer Ulugh Beg built a giant observatory in Samarkand, Uzbekistan, to map the stars.",
+      "ask": "Which country's Ulugh Beg built a giant observatory in the 1420s to map the stars?",
+      "source": "https://en.wikipedia.org/wiki/Ulugh_Beg_Observatory"
+    }
+  ],
+  "turkmenistan": [
+    {
+      "fact": "The ancient city of Merv in Turkmenistan was a Silk Road oasis and was one of the largest cities in the world in the 1100s.",
+      "ask": "Which country's ancient Merv was a Silk Road oasis and one of the world's largest cities in the 1100s?",
+      "source": "https://en.wikipedia.org/wiki/Merv"
+    }
+  ],
+  "tajikistan": [
+    {
+      "fact": "Sarazm in Tajikistan is a town site about 5,500 years old, one of the earliest in Central Asia.",
+      "ask": "Which country's Sarazm is a town site about 5,500 years old, one of Central Asia's earliest?",
+      "source": "https://en.wikipedia.org/wiki/Sarazm"
+    }
+  ],
+  "kyrgyzstan": [
+    {
+      "fact": "The Epic of Manas, from Kyrgyzstan, is one of the longest poems in the world, traditionally sung from memory.",
+      "ask": "Which country's Epic of Manas is one of the longest poems in the world, sung from memory?",
+      "source": "https://en.wikipedia.org/wiki/Epic_of_Manas"
+    }
+  ],
+  "cambodia": [
+    {
+      "fact": "Angkor Wat in Cambodia, built in the early 1100s, is the largest religious monument in the world.",
+      "ask": "Which country's Angkor Wat, built in the 1100s, is the world's largest religious monument?",
+      "source": "https://en.wikipedia.org/wiki/Angkor_Wat"
+    },
+    {
+      "fact": "The Bayon temple at Angkor in Cambodia is famous for its many giant smiling stone faces.",
+      "ask": "Which country's Bayon temple at Angkor is famous for its many giant smiling stone faces?",
+      "source": "https://en.wikipedia.org/wiki/Bayon"
+    }
+  ],
+  "thailand": [
+    {
+      "fact": "Ayutthaya, Thailand's old royal capital, founded in 1351, was one of the world's biggest cities around the year 1700.",
+      "ask": "Which country's old royal capital, Ayutthaya, was one of the world's biggest cities around 1700?",
+      "source": "https://en.wikipedia.org/wiki/Ayutthaya_Kingdom"
+    }
+  ],
+  "vietnam": [
+    {
+      "fact": "Huế, in Vietnam, was the home of the Nguyễn emperors, the country's last royal family, from 1802 to 1945.",
+      "ask": "Which country's city of Huế was home to its last emperors, the Nguyễn, from 1802 to 1945?",
+      "source": "https://en.wikipedia.org/wiki/Hu%E1%BA%BF"
+    },
+    {
+      "fact": "Hội An, in Vietnam, has a famous Japanese Bridge with a little temple on top, built by Japanese merchants in the late 1500s.",
+      "ask": "Which country's old trading town of Hội An has a bridge built by Japanese merchants in the late 1500s?",
+      "source": "https://en.wikipedia.org/wiki/Japanese_Covered_Bridge"
+    }
+  ],
+  "malaysia": [
+    {
+      "fact": "Melaka, in Malaysia, was a busy port in the 1400s where traders from China, India and Arabia met to swap spices and silk.",
+      "ask": "Which country's port of Melaka was a busy spice trading center in the 1400s?",
+      "source": "https://en.wikipedia.org/wiki/Malacca_Sultanate"
+    }
+  ],
+  "singapore": [
+    {
+      "fact": "In 1819 Stamford Raffles set up a British trading post in Singapore, which grew into one of the world's busiest ports.",
+      "ask": "Which country began as a British trading post set up by Stamford Raffles in 1819?",
+      "source": "https://en.wikipedia.org/wiki/Singapore"
+    },
+    {
+      "fact": "Singapore's name comes from Sanskrit words meaning \"lion city.\"",
+      "ask": "Which country's name comes from Sanskrit words meaning \"lion city\"?",
+      "source": "https://en.wikipedia.org/wiki/Singapore"
+    }
+  ],
+  "indonesia": [
+    {
+      "fact": "Borobudur, on the island of Java in Indonesia, was built in the 800s and is the largest Buddhist temple in the world.",
+      "ask": "Which country's Borobudur, built in the 800s, is the world's largest Buddhist temple?",
+      "source": "https://en.wikipedia.org/wiki/Borobudur"
+    },
+    {
+      "fact": "Indonesia declared its independence on August 17, 1945, led by Sukarno.",
+      "ask": "Which country declared independence on August 17, 1945, led by Sukarno?",
+      "source": "https://en.wikipedia.org/wiki/Proclamation_of_Indonesian_Independence"
+    }
+  ],
+  "philippines": [
+    {
+      "fact": "Ferdinand Magellan's ships reached the Philippines in 1521, during the first voyage around the world.",
+      "ask": "Which island country did Ferdinand Magellan's ships reach in 1521, on the first voyage around the world?",
+      "source": "https://en.wikipedia.org/wiki/Ferdinand_Magellan"
+    }
+  ],
+  "nepal": [
+    {
+      "fact": "Nepal ended its monarchy in 2008 and became a republic.",
+      "ask": "Which Himalayan country ended its monarchy and became a republic in 2008?",
+      "source": "https://en.wikipedia.org/wiki/Nepal"
+    }
+  ],
+  "myanmar": [
+    {
+      "fact": "Myanmar's government changed the country's English name from Burma to Myanmar in 1989.",
+      "ask": "Which country changed its English name from Burma in 1989?",
+      "source": "https://en.wikipedia.org/wiki/Names_of_Myanmar"
+    }
+  ],
+  "laos": [
+    {
+      "fact": "Luang Prabang in Laos, a town with more than 30 Buddhist temples, became a UNESCO World Heritage Site in 1995.",
+      "ask": "Which country's town of Luang Prabang, with over 30 Buddhist temples, became a World Heritage Site in 1995?",
+      "source": "https://en.wikipedia.org/wiki/Luang_Prabang"
+    }
+  ],
+  "saudi-arabia": [
+    {
+      "fact": "Ibn Saud founded the modern Kingdom of Saudi Arabia in 1932.",
+      "ask": "Which country was founded as a kingdom by Ibn Saud in 1932?",
+      "source": "https://en.wikipedia.org/wiki/Ibn_Saud"
+    }
+  ],
+  "oman": [
+    {
+      "fact": "Bahla Fort in Oman, a huge mud-brick fort, is a UNESCO World Heritage Site.",
+      "ask": "Which country's huge mud-brick Bahla Fort is a UNESCO World Heritage Site?",
+      "source": "https://en.wikipedia.org/wiki/Bahla_Fort"
+    }
+  ],
+  "yemen": [
+    {
+      "fact": "The ancient Marib Dam in Yemen was first built by the Sabaeans about 2,700 years ago and was one of the engineering wonders of the ancient world.",
+      "ask": "Which country's ancient Marib Dam was first built by the Sabaeans about 2,700 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Marib_Dam"
+    }
+  ],
+  "kazakhstan": [
+    {
+      "fact": "The wild apple trees in the mountains of Kazakhstan are the main ancestor of the apples people eat today.",
+      "ask": "Which country's mountain forests hold the wild apple trees that are the main ancestor of today's apples?",
+      "source": "https://en.wikipedia.org/wiki/Malus_sieversii"
+    }
+  ],
+  "taiwan": [
+    {
+      "fact": "The National Palace Museum in Taiwan holds about 700,000 ancient Chinese treasures, many from China's old imperial palace.",
+      "ask": "Which country's National Palace Museum holds about 700,000 ancient Chinese treasures?",
+      "source": "https://en.wikipedia.org/wiki/National_Palace_Museum"
+    }
+  ],
+  "qatar": [
+    {
+      "fact": "Al Zubarah, in Qatar, was a busy pearl-diving and trading town in the 1700s and 1800s, and is now a UNESCO World Heritage Site.",
+      "ask": "Which country's ruined pearl-trading town of Al Zubarah is a UNESCO World Heritage Site?",
+      "source": "https://en.wikipedia.org/wiki/Al_Zubarah"
+    }
+  ]
+}

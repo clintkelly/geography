@@ -1,3 +1,4 @@
+import { ANIMATED_ART, idleFrames } from './animations';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TRAIL_EVENTS } from '../engine/events';
@@ -23,6 +24,11 @@ expect_(ALL_TYPES.map((t) => `type-${t}`), 32, 32, true);
 expect_(ALL_TYPES.map((t) => `fxtype-${t}`), 32, 32, true);
 expect_(['bronze', 'silver', 'gold', 'platinum'].map((l) => `medal-${l}`), 32, 32, true);
 expect_(TRAIL_EVENTS.map((e) => `event-${e.id}`), 128, 128, true);
+expect_((PACK.lodges ?? []).map((l) => l.leader.artId), 128, 128, true);
+expect_((PACK.lodges ?? []).map((l) => l.patchArtId), 32, 32, true);
+expect_(['math', 'words', 'rare'].map((k) => `egg-${k}`), 64, 64, true);
+expect_(ANIMATED_ART.flatMap(idleFrames), 128, 128, true);
+expect_(PACK.species.flatMap((s) => (s.paths ?? []).flatMap((p) => p.evolutions.map((e) => e.artId))), 128, 128, true);
 
 function png(id: string) {
   const b = readFileSync(`${ART}/${id}.png`);

@@ -1,0 +1,386 @@
+{
+  "id": "vv-list-03",
+  "title": "Vocabulary Virtuoso List 3",
+  "order": 4,
+  "words": [
+    {
+      "word": "vigilant",
+      "partOfSpeech": "adjective",
+      "definition": "Carefully watching for danger or trouble",
+      "sentence": "The ____ meerkat stood on its back legs, watching the sky for hungry hawks.",
+      "wrongDefinitions": [
+        "Feeling sleepy and slow after a big meal",
+        "Loud and eager to talk to everyone",
+        "Covered in bright spots or stripes"
+      ],
+      "synonym": {
+        "right": "watchful",
+        "wrong": [
+          "sleepy",
+          "careless",
+          "cheerful"
+        ]
+      },
+      "antonym": {
+        "right": "careless",
+        "wrong": [
+          "alert",
+          "hungry",
+          "tall"
+        ]
+      },
+      "root": {
+        "part": "vigil",
+        "meaning": "awake, watchful",
+        "wrongMeanings": [
+          "water",
+          "to carry",
+          "far away"
+        ]
+      }
+    },
+    {
+      "word": "pariah",
+      "partOfSpeech": "noun",
+      "definition": "Someone who is pushed away and avoided by everyone else",
+      "sentence": "After the skunk sprayed the campsite, it became a ____ that every hiker stayed far away from.",
+      "wrongDefinitions": [
+        "A leader everyone loves and follows",
+        "A small boat used on rivers",
+        "A tall bird with long pink legs"
+      ],
+      "synonym": {
+        "right": "outcast",
+        "wrong": [
+          "hero",
+          "champion",
+          "neighbor"
+        ]
+      },
+      "antonym": {
+        "right": "favorite",
+        "wrong": [
+          "outcast",
+          "river",
+          "blanket"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "quintessential",
+      "partOfSpeech": "adjective",
+      "definition": "Being the most perfect example of something",
+      "sentence": "With its sand, palm trees and turquoise water, the island was the ____ tropical paradise.",
+      "wrongDefinitions": [
+        "Happening five times in a row",
+        "Very small and hard to notice",
+        "Broken into many tiny pieces"
+      ],
+      "synonym": {
+        "right": "classic",
+        "wrong": [
+          "unusual",
+          "tiny",
+          "broken"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "quint",
+        "meaning": "fifth",
+        "wrongMeanings": [
+          "first",
+          "hundred",
+          "half"
+        ]
+      }
+    },
+    {
+      "word": "mundane",
+      "partOfSpeech": "adjective",
+      "definition": "Ordinary and dull, not exciting at all",
+      "sentence": "Folding socks felt ____ compared to the day we spotted wild dolphins leaping beside our boat.",
+      "wrongDefinitions": [
+        "Thrilling and full of surprises",
+        "Very old and falling apart",
+        "Shiny and made of gold"
+      ],
+      "synonym": {
+        "right": "ordinary",
+        "wrong": [
+          "thrilling",
+          "magical",
+          "dangerous"
+        ]
+      },
+      "antonym": {
+        "right": "exciting",
+        "wrong": [
+          "boring",
+          "wooden",
+          "hungry"
+        ]
+      },
+      "root": {
+        "part": "mund",
+        "meaning": "world",
+        "wrongMeanings": [
+          "mountain",
+          "water",
+          "money"
+        ]
+      }
+    },
+    {
+      "word": "rendition",
+      "partOfSpeech": "noun",
+      "definition": "A performance or version of a song, poem or artwork",
+      "sentence": "The parrot squawked a silly ____ of the birthday song, and everyone at the party laughed.",
+      "wrongDefinitions": [
+        "A tall tower built to guard a city",
+        "A promise to return something borrowed",
+        "A sudden storm with heavy rain"
+      ],
+      "synonym": {
+        "right": "version",
+        "wrong": [
+          "silence",
+          "tower",
+          "storm"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "clemency",
+      "partOfSpeech": "noun",
+      "definition": "Mercy shown by going easy on someone who did wrong",
+      "sentence": "The kind queen showed ____ and let the hungry thief go free with a basket of bread.",
+      "wrongDefinitions": [
+        "Harsh punishment for breaking a rule",
+        "Great skill at climbing steep cliffs",
+        "A loud cheer from a big crowd"
+      ],
+      "synonym": {
+        "right": "mercy",
+        "wrong": [
+          "cruelty",
+          "anger",
+          "speed"
+        ]
+      },
+      "antonym": {
+        "right": "cruelty",
+        "wrong": [
+          "mercy",
+          "sunshine",
+          "music"
+        ]
+      },
+      "root": {
+        "part": "clem",
+        "meaning": "mild, gentle",
+        "wrongMeanings": [
+          "harsh",
+          "to climb",
+          "loud"
+        ]
+      }
+    },
+    {
+      "word": "audacity",
+      "partOfSpeech": "noun",
+      "definition": "Bold daring that can be brave or a bit rude",
+      "sentence": "The squirrel had the ____ to snatch a sandwich right out of my hand at the park.",
+      "wrongDefinitions": [
+        "The ability to hear very quiet sounds",
+        "Fear of trying anything new",
+        "A large crowd watching a show"
+      ],
+      "synonym": {
+        "right": "boldness",
+        "wrong": [
+          "shyness",
+          "hearing",
+          "patience"
+        ]
+      },
+      "antonym": {
+        "right": "shyness",
+        "wrong": [
+          "boldness",
+          "hunger",
+          "color"
+        ]
+      },
+      "root": {
+        "part": "aud",
+        "meaning": "to dare",
+        "wrongMeanings": [
+          "to sleep",
+          "to build",
+          "to forget"
+        ]
+      }
+    },
+    {
+      "word": "deplete",
+      "partOfSpeech": "verb",
+      "definition": "To use up most or all of something",
+      "sentence": "The thirsty camels will ____ the desert well unless rain comes to fill it again.",
+      "wrongDefinitions": [
+        "To fill something up to the very top",
+        "To fold something into neat pleats",
+        "To decorate with colorful paint"
+      ],
+      "synonym": {
+        "right": "use up",
+        "wrong": [
+          "refill",
+          "decorate",
+          "explore"
+        ]
+      },
+      "antonym": {
+        "right": "refill",
+        "wrong": [
+          "empty",
+          "whisper",
+          "climb"
+        ]
+      },
+      "root": {
+        "part": "ple",
+        "meaning": "to fill",
+        "wrongMeanings": [
+          "to fold",
+          "to break",
+          "to fly"
+        ]
+      }
+    },
+    {
+      "word": "fidelity",
+      "partOfSpeech": "noun",
+      "definition": "Faithfulness and loyalty to a person, promise or duty",
+      "sentence": "The dog Hachiko showed amazing ____ by waiting at the train station for its owner every day.",
+      "wrongDefinitions": [
+        "A habit of breaking promises often",
+        "Skill at playing the fiddle",
+        "A feeling of being very tired"
+      ],
+      "synonym": {
+        "right": "loyalty",
+        "wrong": [
+          "betrayal",
+          "laziness",
+          "speed"
+        ]
+      },
+      "antonym": {
+        "right": "betrayal",
+        "wrong": [
+          "loyalty",
+          "music",
+          "height"
+        ]
+      },
+      "root": {
+        "part": "fid",
+        "meaning": "faith, trust",
+        "wrongMeanings": [
+          "fear",
+          "fire",
+          "finish"
+        ]
+      }
+    },
+    {
+      "word": "tentative",
+      "partOfSpeech": "adjective",
+      "definition": "Not certain or fixed; done carefully as a test",
+      "sentence": "The baby penguin took a ____ step onto the slippery ice before waddling forward with confidence.",
+      "wrongDefinitions": [
+        "Living in a tent while camping",
+        "Completely sure and final",
+        "Extremely loud and crashing"
+      ],
+      "synonym": {
+        "right": "unsure",
+        "wrong": [
+          "confident",
+          "noisy",
+          "final"
+        ]
+      },
+      "antonym": {
+        "right": "certain",
+        "wrong": [
+          "unsure",
+          "hungry",
+          "purple"
+        ]
+      },
+      "root": {
+        "part": "tent",
+        "meaning": "to try",
+        "wrongMeanings": [
+          "to sleep",
+          "to carry",
+          "to shout"
+        ]
+      }
+    },
+    {
+      "word": "serendipity",
+      "partOfSpeech": "noun",
+      "definition": "Finding something good by happy accident",
+      "sentence": "By pure ____, the explorer tripped over a rock and discovered a cave full of sparkling crystals.",
+      "wrongDefinitions": [
+        "A careful plan made weeks ahead",
+        "A calm feeling while sitting by a lake",
+        "Bad luck that ruins your day"
+      ],
+      "synonym": {
+        "right": "luck",
+        "wrong": [
+          "planning",
+          "sadness",
+          "danger"
+        ]
+      },
+      "antonym": {
+        "right": "misfortune",
+        "wrong": [
+          "good luck",
+          "thunder",
+          "breakfast"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "legerdemain",
+      "partOfSpeech": "noun",
+      "definition": "Quick, clever hand tricks, like a magician pulling coins from ears",
+      "sentence": "With amazing ____, the street magician in Paris made a dove appear from an empty hat.",
+      "wrongDefinitions": [
+        "A heavy chain used to anchor big ships",
+        "A long story about ancient heroes",
+        "A slow, clumsy way of walking"
+      ],
+      "synonym": {
+        "right": "trickery",
+        "wrong": [
+          "honesty",
+          "clumsiness",
+          "sleep"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    }
+  ]
+}

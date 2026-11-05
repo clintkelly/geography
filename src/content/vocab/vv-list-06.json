@@ -1,0 +1,357 @@
+{
+  "id": "vv-list-06",
+  "title": "Vocabulary Virtuoso List 6",
+  "order": 7,
+  "words": [
+    {
+      "word": "ambience",
+      "partOfSpeech": "noun",
+      "definition": "The special feeling or mood a place gives you",
+      "sentence": "The glowing lanterns and soft jungle sounds gave the rainforest camp a calm, magical ____ at night.",
+      "wrongDefinitions": [
+        "A loud siren used to call for help",
+        "A long walk through the countryside",
+        "A map showing mountains and rivers"
+      ],
+      "synonym": {
+        "right": "mood",
+        "wrong": [
+          "noise",
+          "price",
+          "distance"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "ambi",
+        "meaning": "around",
+        "wrongMeanings": [
+          "under",
+          "after",
+          "against"
+        ]
+      }
+    },
+    {
+      "word": "trite",
+      "partOfSpeech": "adjective",
+      "definition": "Used so often that it feels boring and not fresh",
+      "sentence": "The explorer's speech was full of ____ sayings like 'the early bird gets the worm,' so everyone yawned.",
+      "wrongDefinitions": [
+        "Very small and easy to carry",
+        "Ready to fight at any moment",
+        "Shiny and bright like new metal"
+      ],
+      "synonym": {
+        "right": "overused",
+        "wrong": [
+          "clever",
+          "secret",
+          "angry"
+        ]
+      },
+      "antonym": {
+        "right": "fresh",
+        "wrong": [
+          "tiny",
+          "wet",
+          "quiet"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "prolific",
+      "partOfSpeech": "adjective",
+      "definition": "Producing a lot of something, like work, fruit or babies",
+      "sentence": "Rabbits are so ____ that one pair can fill a whole meadow with babies in a single year.",
+      "wrongDefinitions": [
+        "Very careful about every small detail",
+        "Afraid of going outside",
+        "Speaking in a very soft voice"
+      ],
+      "synonym": {
+        "right": "productive",
+        "wrong": [
+          "sleepy",
+          "hungry",
+          "careful"
+        ]
+      },
+      "antonym": {
+        "right": "unproductive",
+        "wrong": [
+          "colorful",
+          "tall",
+          "noisy"
+        ]
+      },
+      "root": {
+        "part": "fic",
+        "meaning": "to make",
+        "wrongMeanings": [
+          "to see",
+          "to carry",
+          "to write"
+        ]
+      }
+    },
+    {
+      "word": "motif",
+      "partOfSpeech": "noun",
+      "definition": "A shape, idea or pattern that repeats in art, music or stories",
+      "sentence": "The sea turtle ____ appears on every blanket, basket and bowl made in the little island village.",
+      "wrongDefinitions": [
+        "A small boat used for fishing in rivers",
+        "A promise to pay money back later",
+        "A loud noise made by a machine"
+      ],
+      "synonym": {
+        "right": "theme",
+        "wrong": [
+          "price",
+          "engine",
+          "reward"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "mot",
+        "meaning": "to move",
+        "wrongMeanings": [
+          "to hear",
+          "to break",
+          "to sleep"
+        ]
+      }
+    },
+    {
+      "word": "pedestrian",
+      "partOfSpeech": "noun",
+      "definition": "A person who is walking instead of riding in something",
+      "sentence": "Every ____ on the sidewalk stopped to watch the huge whale splash in the harbor below.",
+      "wrongDefinitions": [
+        "A person who drives a big truck",
+        "A person who studies plants",
+        "A person who rides a horse"
+      ],
+      "synonym": {
+        "right": "walker",
+        "wrong": [
+          "singer",
+          "baker",
+          "swimmer"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "ped",
+        "meaning": "foot",
+        "wrongMeanings": [
+          "hand",
+          "head",
+          "eye"
+        ]
+      }
+    },
+    {
+      "word": "exemplary",
+      "partOfSpeech": "adjective",
+      "definition": "So good that others should copy it",
+      "sentence": "The ranger gave Maya a badge for her ____ work cleaning trash from the beach to protect the baby turtles.",
+      "wrongDefinitions": [
+        "Too tired to finish what you started",
+        "Full of tiny holes like a sponge",
+        "Done very quickly without thinking"
+      ],
+      "synonym": {
+        "right": "excellent",
+        "wrong": [
+          "strange",
+          "hidden",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "terrible",
+        "wrong": [
+          "sleepy",
+          "round",
+          "distant"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "deleterious",
+      "partOfSpeech": "adjective",
+      "definition": "Causing harm or damage",
+      "sentence": "Plastic trash has a ____ effect on sea birds, which can get sick if they swallow it.",
+      "wrongDefinitions": [
+        "Very tasty and good to eat",
+        "Slow and easy to forget",
+        "Bright and full of color"
+      ],
+      "synonym": {
+        "right": "harmful",
+        "wrong": [
+          "cheerful",
+          "tiny",
+          "sleepy"
+        ]
+      },
+      "antonym": {
+        "right": "helpful",
+        "wrong": [
+          "rare",
+          "sticky",
+          "loud"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "homage",
+      "partOfSpeech": "noun",
+      "definition": "Special respect or honor shown to someone",
+      "sentence": "The village built a statue to pay ____ to the brave explorer who crossed the scorching desert.",
+      "wrongDefinitions": [
+        "A small house built in the woods",
+        "A loud cheer at the end of a game",
+        "A long nap after a big meal"
+      ],
+      "synonym": {
+        "right": "honor",
+        "wrong": [
+          "hunger",
+          "journey",
+          "puzzle"
+        ]
+      },
+      "antonym": {
+        "right": "disrespect",
+        "wrong": [
+          "weather",
+          "ladder",
+          "music"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "debacle",
+      "partOfSpeech": "noun",
+      "definition": "A sudden, total failure or embarrassing mess",
+      "sentence": "The class picnic became a ____ when ants swarmed the cake and a goat ate everyone's sandwiches.",
+      "wrongDefinitions": [
+        "A friendly talk between two people",
+        "A small tool for fixing bikes",
+        "A quiet place to read books"
+      ],
+      "synonym": {
+        "right": "disaster",
+        "wrong": [
+          "breakfast",
+          "holiday",
+          "secret"
+        ]
+      },
+      "antonym": {
+        "right": "success",
+        "wrong": [
+          "ocean",
+          "pillow",
+          "whisper"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "catalyst",
+      "partOfSpeech": "noun",
+      "definition": "Something that causes a change or makes it happen faster",
+      "sentence": "A single lightning strike was the ____ that started the huge wildfire racing across the dry grassland.",
+      "wrongDefinitions": [
+        "A list of things for sale in a store",
+        "A person who takes care of cats",
+        "A tool for measuring the weather"
+      ],
+      "synonym": {
+        "right": "spark",
+        "wrong": [
+          "blanket",
+          "shadow",
+          "puddle"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "cata",
+        "meaning": "down",
+        "wrongMeanings": [
+          "up",
+          "with",
+          "far"
+        ]
+      }
+    },
+    {
+      "word": "disingenuous",
+      "partOfSpeech": "adjective",
+      "definition": "Pretending to be honest or innocent when you are not",
+      "sentence": "The fox gave a ____ smile and promised he only wanted to admire the hens, not eat them.",
+      "wrongDefinitions": [
+        "Extremely smart and good at inventing things",
+        "Too shy to speak in front of a crowd",
+        "Feeling sick after a long boat ride"
+      ],
+      "synonym": {
+        "right": "fake",
+        "wrong": [
+          "gentle",
+          "hungry",
+          "brave"
+        ]
+      },
+      "antonym": {
+        "right": "honest",
+        "wrong": [
+          "sleepy",
+          "tall",
+          "careful"
+        ]
+      },
+      "root": {
+        "part": "dis",
+        "meaning": "not",
+        "wrongMeanings": [
+          "very",
+          "again",
+          "before"
+        ]
+      }
+    },
+    {
+      "word": "recidivism",
+      "partOfSpeech": "noun",
+      "definition": "Going back to bad behavior, especially crime, after being punished",
+      "sentence": "The park ranger joked about the raccoon's ____ after it raided the same trash cans again the day after being caught.",
+      "wrongDefinitions": [
+        "Learning to read music on the piano",
+        "Saving old things to use again",
+        "Being kind to strangers you meet"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "re",
+        "meaning": "back",
+        "wrongMeanings": [
+          "under",
+          "across",
+          "against"
+        ]
+      }
+    }
+  ]
+}

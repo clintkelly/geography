@@ -1,0 +1,364 @@
+{
+  "id": "vv-list-11",
+  "title": "Vocabulary Virtuoso List 11",
+  "order": 12,
+  "words": [
+    {
+      "word": "myriad",
+      "partOfSpeech": "adjective",
+      "definition": "Too many to count; a huge number of",
+      "sentence": "On a clear night in the desert, explorers can see ____ stars sparkling across the dark sky.",
+      "wrongDefinitions": [
+        "Very small and hard to see",
+        "Bright and shiny like gold",
+        "Far away and very lonely"
+      ],
+      "synonym": {
+        "right": "countless",
+        "wrong": [
+          "few",
+          "tiny",
+          "quiet"
+        ]
+      },
+      "antonym": {
+        "right": "few",
+        "wrong": [
+          "bright",
+          "angry",
+          "loud"
+        ]
+      },
+      "root": {
+        "part": "myri",
+        "meaning": "ten thousand",
+        "wrongMeanings": [
+          "one hundred",
+          "light",
+          "sea"
+        ]
+      }
+    },
+    {
+      "word": "adulation",
+      "partOfSpeech": "noun",
+      "definition": "Very great praise and admiration, sometimes more than is deserved",
+      "sentence": "After the young explorer found the lost temple, she received ____ from cheering crowds in every town she visited.",
+      "wrongDefinitions": [
+        "A feeling of being very bored",
+        "A long trip across the water",
+        "Harsh blame for a mistake"
+      ],
+      "synonym": {
+        "right": "praise",
+        "wrong": [
+          "blame",
+          "sleep",
+          "fear"
+        ]
+      },
+      "antonym": {
+        "right": "criticism",
+        "wrong": [
+          "weather",
+          "distance",
+          "laughter"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "beckon",
+      "partOfSpeech": "verb",
+      "definition": "To signal someone to come closer with your hand or head",
+      "sentence": "The park ranger began to ____ the children over to watch a baby sea turtle crawl toward the ocean.",
+      "wrongDefinitions": [
+        "To shout angrily at someone",
+        "To run away very quickly",
+        "To fall asleep suddenly"
+      ],
+      "synonym": {
+        "right": "signal",
+        "wrong": [
+          "sleep",
+          "push",
+          "hide"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "capitulate",
+      "partOfSpeech": "verb",
+      "definition": "To give up and stop fighting or arguing",
+      "sentence": "After an hour of begging from her puppy, Mom finally had to ____ and share a piece of her toast.",
+      "wrongDefinitions": [
+        "To win a big battle",
+        "To build a large city",
+        "To climb to the very top"
+      ],
+      "synonym": {
+        "right": "surrender",
+        "wrong": [
+          "resist",
+          "win",
+          "travel"
+        ]
+      },
+      "antonym": {
+        "right": "resist",
+        "wrong": [
+          "give up",
+          "obey",
+          "paint"
+        ]
+      },
+      "root": {
+        "part": "capit",
+        "meaning": "head",
+        "wrongMeanings": [
+          "hand",
+          "foot",
+          "heart"
+        ]
+      }
+    },
+    {
+      "word": "emaciated",
+      "partOfSpeech": "adjective",
+      "definition": "Extremely thin and weak, usually from not getting enough food",
+      "sentence": "The rescue team fed the ____ stray dog every day, and soon it was healthy, strong and playful again.",
+      "wrongDefinitions": [
+        "Very strong and full of energy",
+        "Covered in thick, fluffy fur",
+        "Very loud and noisy"
+      ],
+      "synonym": {
+        "right": "skinny",
+        "wrong": [
+          "chubby",
+          "sleepy",
+          "angry"
+        ]
+      },
+      "antonym": {
+        "right": "plump",
+        "wrong": [
+          "bony",
+          "weak",
+          "quiet"
+        ]
+      },
+      "root": {
+        "part": "maci",
+        "meaning": "thin",
+        "wrongMeanings": [
+          "strong",
+          "round",
+          "cold"
+        ]
+      }
+    },
+    {
+      "word": "fallacious",
+      "partOfSpeech": "adjective",
+      "definition": "Based on a false idea or mistaken thinking",
+      "sentence": "The ____ idea that bats are blind was proven wrong when scientists saw bats use their eyes to find food.",
+      "wrongDefinitions": [
+        "True and supported by facts",
+        "Falling down from a high place",
+        "Very kind and helpful"
+      ],
+      "synonym": {
+        "right": "false",
+        "wrong": [
+          "true",
+          "brave",
+          "wet"
+        ]
+      },
+      "antonym": {
+        "right": "true",
+        "wrong": [
+          "mistaken",
+          "sleepy",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "fall",
+        "meaning": "to trick",
+        "wrongMeanings": [
+          "to drop",
+          "to build",
+          "to shine"
+        ]
+      }
+    },
+    {
+      "word": "goad",
+      "partOfSpeech": "verb",
+      "definition": "To push or tease someone into doing something",
+      "sentence": "My older cousin tried to ____ me into jumping off the tallest diving board at the lake.",
+      "wrongDefinitions": [
+        "To calm someone down gently",
+        "To dig a deep hole",
+        "To cook food over a fire"
+      ],
+      "synonym": {
+        "right": "urge",
+        "wrong": [
+          "calm",
+          "carry",
+          "forget"
+        ]
+      },
+      "antonym": {
+        "right": "discourage",
+        "wrong": [
+          "push",
+          "poke",
+          "paint"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "hiatus",
+      "partOfSpeech": "noun",
+      "definition": "A pause or break in something that was going on",
+      "sentence": "Our favorite nature show went on a summer ____, so we had to wait months for new episodes about sharks.",
+      "wrongDefinitions": [
+        "A large, noisy crowd",
+        "A very tall mountain peak",
+        "A quick burst of speed"
+      ],
+      "synonym": {
+        "right": "break",
+        "wrong": [
+          "race",
+          "storm",
+          "gift"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "iota",
+      "partOfSpeech": "noun",
+      "definition": "A very tiny amount",
+      "sentence": "The stubborn mule would not move one ____, no matter how many carrots the farmer held out.",
+      "wrongDefinitions": [
+        "A huge pile of something",
+        "A kind of small bird",
+        "A loud, sudden sound"
+      ],
+      "synonym": {
+        "right": "bit",
+        "wrong": [
+          "heap",
+          "crowd",
+          "mountain"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "iota",
+        "meaning": "smallest Greek letter",
+        "wrongMeanings": [
+          "ocean wave",
+          "brave hero",
+          "golden coin"
+        ]
+      }
+    },
+    {
+      "word": "novel",
+      "partOfSpeech": "adjective",
+      "definition": "New and different from anything seen before",
+      "sentence": "Using a giant kite to pull a sled across the frozen lake was a ____ idea that amazed everyone.",
+      "wrongDefinitions": [
+        "Old and used many times",
+        "Boring and hard to understand",
+        "Very small and easy to lose"
+      ],
+      "synonym": {
+        "right": "new",
+        "wrong": [
+          "old",
+          "dull",
+          "slow"
+        ]
+      },
+      "antonym": {
+        "right": "old",
+        "wrong": [
+          "fresh",
+          "unusual",
+          "original"
+        ]
+      },
+      "root": {
+        "part": "nov",
+        "meaning": "new",
+        "wrongMeanings": [
+          "nine",
+          "night",
+          "ship"
+        ]
+      }
+    },
+    {
+      "word": "foible",
+      "partOfSpeech": "noun",
+      "definition": "A small, harmless weakness or odd habit",
+      "sentence": "Grandpa's funny ____ is that he always hums old sea songs while flipping pancakes on Sunday mornings.",
+      "wrongDefinitions": [
+        "A large, dangerous storm",
+        "A great talent or special skill",
+        "A short story with talking animals"
+      ],
+      "synonym": {
+        "right": "quirk",
+        "wrong": [
+          "talent",
+          "prize",
+          "journey"
+        ]
+      },
+      "antonym": {
+        "right": "strength",
+        "wrong": [
+          "flaw",
+          "habit",
+          "oddity"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "kaleidoscope",
+      "partOfSpeech": "noun",
+      "definition": "A tube with mirrors and colored pieces that make changing patterns",
+      "sentence": "When Maya slowly turned her ____, bright shapes of blue and orange danced like fish on a coral reef.",
+      "wrongDefinitions": [
+        "A tool for looking at faraway stars",
+        "A machine that measures earthquakes",
+        "A map that shows ocean currents"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "scope",
+        "meaning": "to look at",
+        "wrongMeanings": [
+          "to listen",
+          "to write",
+          "to carry"
+        ]
+      }
+    }
+  ]
+}

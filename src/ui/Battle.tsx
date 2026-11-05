@@ -3,9 +3,10 @@ import type { CreatureType, Species } from '../content/types';
 import { attackCharge, attackDamage, canUse, guardOf, enemyIntent, isBossTurn, MAX_CHARGE, strongSpecialDamage, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, canTame, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
-import { artUrl, Fx, poseUrl } from './art';
+import { artUrl, Fx, poseUrl, ShinyImg, useIdleUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
-import { companionView, place, souvenir, species } from './content';
+import { companionView, foeForm, place, souvenir, species } from './content';
+import { lodgeOf } from './Lodges';
 import { Key, useKeys } from './keys';
 import { QuestionPanel } from './QuestionPanel';
 import { playSound } from './sound';
@@ -13,6 +14,9 @@ import { TrailBar } from './TrailBar';
 import { TypeBadges, TypeGuide } from './TypeGuide';
 import { TypeHit, TypeSpecial } from './TypeFx';
 import { beatsAll, losesToAll, matchup, TYPE_INFO, why } from '../engine/types';
+import type { ShinyLook } from './shiny';
+import { GuideCard } from './FieldGuide';
+import { guideFor } from '../content/guide';
 
 /** How long a win stays on screen after the last hit, before the trail can carry on. */
 const WIN_PAUSE_MS = 1400;
@@ -46,7 +50,7 @@ function specialText(c: CombatState): string {
 /** The sprite sits inside a moving wrapper, so mirroring and motion don't fight over `transform`. */
 function Actor({ creature, artId, pose, motion, side, floats, hits, flash, powered, shiny }: {
   creature: Species;
-  shiny?: boolean;
+  shiny?: ShinyLook | undefined;
   artId?: string;
   pose: Pose;
   motion?: Motion | undefined;
@@ -57,13 +61,16 @@ function Actor({ creature, artId, pose, motion, side, floats, hits, flash, power
   powered: boolean;
 }) {
   const faces = side === 'player' ? 'right' : 'left';
+  const idle = useIdleUrl(artId ?? creature.artId, poseUrl(creature, 'idle', artId));
   return (
     <div className="actor-slot">
       {floats.filter((f) => f.side === side).map((f) => <span key={f.id} className={`float float-${f.kind}${powered ? ' float-big' : ''}`}>{f.text}</span>)}
       {hits.filter((h) => h.side === side).map((h) => <TypeHit key={h.id} type={h.type} toward={side === 'player' ? 1 : -1} />)}
       {motion === 'shake' && <><Fx id="spark" className="spark" />{powered && <Fx id="spark" className="spark spark-2" />}</>}
       <div className={`actor ${side} ${motion ? `motion-${motion}` : ''}${flash && motion === 'shake' ? ' flash' : ''}`} data-pose={pose}>
-        <img src={poseUrl(creature, pose, artId)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}${shiny ? ' shiny' : ''}`} />
+        {shiny
+          ? <ShinyImg src={poseUrl(creature, pose, artId)} base={artUrl(artId ?? creature.artId)} look={shiny} width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />
+          : <img src={pose === 'idle' ? idle : poseUrl(creature, pose, artId)} alt="" width={128} height={128} className={`sprite ${creature.facing === faces ? '' : 'flip'}`} />}
         {shiny && [0, 1, 2, 3].map((i) => <span key={i} className={`twinkle twinkle-${i}`} aria-hidden="true">✦</span>)}
       </div>
     </div>
@@ -75,6 +82,10 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const view = companionView(activeCompanion(save));
   const companion = view.species;
   const opponent = species(slot?.opponentId ?? '');
+  // A Lodge ranger's creature may be evolved.
+  const lodge = lodgeOf(e);
+  const foe = foeForm(opponent, slot?.opponentStage);
+  const foeName = foe.name;
   const mine = matchup(companion, opponent);
   // A creature that just joined mid-fight may have turned out shiny.
   // The friend who just joined is always the last one added, so an older shiny of the same kind doesn't count.
@@ -82,6 +93,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const newShiny = !!battle.befriended && joined?.speciesId === opponent.id && !!joined.shiny;
   const theirs = matchup(opponent, companion);
   const [frame, setFrame] = useState<Frame | null>(null);
+  const [reading, setReading] = useState(false);
   const answered = battle.result ? `${e.answered}` : '';
   const lastTurn = useRef(answered);
   const [shownHp, setShownHp] = useState<{ player: number; opponent: number } | null>(null);
@@ -192,6 +204,17 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         }
       }
     }
+    // Extra pops for the newer rewards: a cracked Brain Shield, a Brain Blast charge, and a combo.
+    const pop = (at: number, side: Side, text: string, sound?: Parameters<typeof playSound>[0]) => timers.push(setTimeout(() => {
+      const added = { side, text, kind: 'strong' as const, id: ++floatId.current };
+      setFloats((all) => [...all, added]);
+      if (sound) playSound(sound);
+      timers.push(setTimeout(() => setFloats((all) => all.filter((x) => x !== added)), 1100));
+    }, at));
+    if (ev.shieldHit) pop(380, 'opponent', (battle.combat.shield ?? 0) > 0 ? 'Shield cracked!' : 'Shield broken!', 'shield');
+    if (battle.result.brainBlast) pop(200, 'player', 'Brain Blast! +1 charge', 'brainblast');
+    if (battle.result.eggLaid) timers.push(setTimeout(() => playSound('hatch'), 450));
+    if (correct && (e.streak ?? 0) >= 3) timers.push(setTimeout(() => playSound('combo'), 120));
     const end = frames.at(-1)?.at ?? 0;
     if (won) {
       timers.push(setTimeout(() => setCelebrating(!battle.befriended), end));
@@ -232,6 +255,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const special = canUse(combat, 'special');
   const snackReady = e.snack && combat.playerHp < combat.playerMaxHp;
   const tameable = !!slot && canTame(save, battle, slot);
+  // Why Bold Befriend isn't ready yet, so a child knows how to get there instead of knocking the creature out.
+  const tameWait = !tameable && slot?.kind === 'regular' && !slot.rare && !battle.befriending && battle.combat.outcome === 'active'
+    ? battle.combat.opponentHp * 2 > battle.combat.opponentMaxHp
+      ? `Get ${foeName} down to half HP first`
+      : `Needs 2 charge. Guard to build charge without knocking ${foeName} out`
+    : null;
   const tameHits = battle.tameHits ?? 0;
 
   const members = teamOf(e).map((id) => save.companions.find((c) => c.instanceId === id)).filter((c) => !!c);
@@ -284,19 +313,24 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     events.damageDealt > 0 && `${view.name} dealt ${events.damageDealt} damage.`,
     events.healed > 0 && `${view.name} healed ${events.healed}.`,
     events.blocked > 0 && `Blocked ${events.blocked} damage.`,
-    events.damageTaken > 0 && `${opponent.displayName} used ${opponentMove} for ${events.damageTaken} damage.`,
-    battle.befriended && `${opponent.displayName} wants to be your friend!`,
-    battle.action === 'befriend' && !result?.correct && `${opponent.displayName} is still deciding. Try another question.`,
-    battle.action === 'tame' && !result?.correct && `${opponent.displayName} backed away. The attempt is over.`,
-    battle.action === 'tame' && result?.correct && !battle.befriended && `${opponent.displayName} is listening. One more right answer!`,
-    battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'pending' && `${opponent.displayName} is worn out and watching you closely.`,
-    battle.action !== 'befriend' && battle.action !== 'tame' && combat.outcome === 'victory' && slot.status === 'won' && `${opponent.displayName} is impressed and steps aside!`,
-    combat.outcome === 'retreat' && `${view.name} retreats safely to the trail.`,
+    events.damageTaken > 0 && `${foeName} used ${opponentMove} for ${events.damageTaken} damage.`,
+    battle.befriended && `${foeName} wants to be your friend!`,
+    battle.action === 'befriend' && !result?.correct && `${foeName} is still deciding. Try another question.`,
+    battle.action === 'tame' && !result?.correct && `${foeName} backed away. The attempt is over.`,
+    battle.action === 'tame' && result?.correct && !battle.befriended && `${foeName} is listening. One more right answer!`,
+    battle.action !== 'befriend' && combat.outcome === 'victory' && slot.status === 'pending' && `${foeName} is worn out and watching you closely.`,
+    battle.action !== 'befriend' && battle.action !== 'tame' && combat.outcome === 'victory' && slot.status === 'won' && `${foeName} is impressed and steps aside!`,
+    combat.outcome === 'retreat' && (lodge ? `${view.name} needs a rest. You can try this battle again.` : `${view.name} retreats safely to the trail.`),
     slot.kind === 'regular' && slot.status === 'won' && e.foundSouvenirId && e.slots.filter((s) => s.kind === 'regular' && s.status === 'won').length === 2 && `You found something on the trail: ${souvenir(e.foundSouvenirId)?.displayName}!`,
   ].filter(Boolean).join(' ');
 
+  // The Field Guide pops up the first time a child meets a creature, once the intro is over.
+  const firstMeet = !intro && !!guideFor(opponent.id) && !(save.guideSeen ?? []).includes(opponent.id);
+
   return (
     <div className="battle">
+      {firstMeet && <GuideCard speciesId={opponent.id} artId={foe.artId} first onClose={() => dispatch({ type: 'seeGuide', speciesId: opponent.id })} />}
+      {reading && <GuideCard speciesId={opponent.id} artId={foe.artId} onClose={() => setReading(false)} />}
       <TrailBar e={e} save={save} />
       <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
         {storm && <TypeSpecial key={storm.id} type={storm.type} />}
@@ -304,16 +338,25 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
         {intro && (
           <div className={`vs-intro${rareFoe || bossFoe ? ' rare-intro' : ''}`} aria-hidden="true">
             {bossFoe && <em>Continent Boss!</em>}
+            {lodge && slot?.role !== 'junior' && <em>{slot?.role === 'ace' ? `${lodge.leader.name}'s ace!` : `Lodge Leader ${lodge.leader.name}!`}</em>}
             {rareFoe && <>{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}<em>Rare encounter!</em></>}
-            <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}${view.shiny ? ' shiny' : ''}`} />
+            {view.shiny
+              ? <ShinyImg src={poseUrl(companion, 'idle', view.artId)} base={artUrl(view.artId)} look={view.shiny} className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
+              : <img src={poseUrl(companion, 'idle', view.artId)} alt="" className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />}
             <strong>VS</strong>
-            <img src={poseUrl(opponent, 'idle')} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
+            <img src={poseUrl(opponent, 'idle', foe.artId)} alt="" className={`sprite vs-right ${opponent.facing === 'left' ? '' : 'flip'}`} />
           </div>
         )}
         {celebrating && (
           <div className="victory-banner">
             {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}
             <strong>Victory!</strong>
+          </div>
+        )}
+        {result?.eggLaid && (
+          <div className="egg-banner" key={`egg-${e.answered}`}>
+            <img src={artUrl(`egg-${result.eggLaid}`)} alt="" width={72} height={72} className="sprite egg-wobble" />
+            <strong>You got a {result.eggLaid === 'rare' ? 'Rare' : result.eggLaid === 'math' ? 'Math' : 'Word'} Egg!</strong>
           </div>
         )}
         {battle.befriended && (
@@ -333,14 +376,16 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           </div>
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
           <div>
-            <Hp label={bossFoe ? `Boss: ${opponent.displayName}` : rareFoe ? `Rare: ${opponent.displayName}` : opponent.displayName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
+            <Hp label={lodge && slot?.trainer ? `${slot.trainer.replace('Junior Ranger ', '')}'s ${foeName}` : bossFoe ? `Boss: ${foeName}` : rareFoe ? `Rare: ${foeName}` : foeName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
             <div className="scene-types"><TypeBadges species={opponent} /></div>
+            {(combat.shield ?? 0) > 0 && <div className="brain-shield" title="Brain Shield: right answers crack it">🛡️ Brain Shield {Array.from({ length: combat.shield ?? 0 }, (_, i) => <span key={i} className="shield-pip" />)}</div>}
           </div>
         </div>
+        {(e.streak ?? 0) >= 3 && combat.outcome === 'active' && <div key={e.streak} className={`combo-counter${(e.streak ?? 0) >= 10 ? ' combo-huge' : (e.streak ?? 0) >= 5 ? ' combo-big' : ''}`} aria-live="polite">×{e.streak} COMBO!</div>}
         <div className="scene-floor">
           <Actor key={e.companionId} creature={companion} artId={view.artId} shiny={view.shiny} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
           {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">{bossTurn ? 'BIG attack' : 'Next attack'}: {enemyIntent(combat)} damage</div>}
-          <Actor creature={opponent} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
+          <Actor creature={opponent} artId={foe.artId} side="opponent" pose={frame?.opponent ?? 'idle'} motion={stayGone ? 'slide' : frame?.opponentMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
         </div>
       </section>
 
@@ -351,7 +396,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             const hp = memberHp(c.instanceId);
             return (
               <span key={c.instanceId} className={`team-chip${c.instanceId === e.companionId ? ' active' : ''}${hp === 0 ? ' fainted' : ''}`}>
-                <img src={artUrl(v.artId)} alt="" width={32} height={32} className={`sprite${v.shiny ? ' shiny' : ''}`} />
+                {v.shiny ? <ShinyImg src={artUrl(v.artId)} look={v.shiny} width={32} height={32} className="sprite" /> : <img src={artUrl(v.artId)} alt="" width={32} height={32} className="sprite" />}
                 {v.name} <TypeBadges species={v.species} /> <small>{hp} HP · {c.instanceId === e.companionId ? combat.charge : battle.bench?.[c.instanceId]?.charge ?? 0} charge{edgeWord(matchup(v.species, opponent).edge)}</small>
               </span>
             );
@@ -379,14 +424,14 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       {battle.phase === 'choose' && !chooser && (
         <section className="panel question">
           <div className="actions">
-            <p className="muted">{place(slot.locationId).name} · {bossFoe ? 'Questions from the whole continent' : 'Local questions and expedition review'}</p>
+            <p className="muted">{lodge ? `${lodge.name} · ${lodge.subjectName}` : `${place(slot.locationId).name} · ${bossFoe ? 'Questions from the whole continent' : 'Local questions and expedition review'}`}</p>
             {bossTurn && <p className="boss-warning">{opponent.boss?.move}! {opponent.boss?.warning}</p>}
             {edge > 0 && <p className="matchup matchup-strong">Strong matchup! {TYPE_INFO[mine.mine].name} beats {TYPE_INFO[mine.theirs].name}: you hit 1 harder. {why(mine.mine, mine.theirs)}</p>}
             {edge < 0 && <p className="matchup matchup-weak">Weak matchup. {TYPE_INFO[mine.theirs].name} beats {TYPE_INFO[mine.mine].name}: you hit 1 softer.{helper ? ` Try switching to ${helper}!` : ` A ${names(losesToAll(opponent.type))} creature would be strong here.`}</p>}
             {edge === 0 && <p className="muted">{companion.secondType || opponent.secondType ? 'Even matchup. With two types in the mix, the strong and weak sides cancel out.' : companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${names(beatsAll(companion.type))}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${names(beatsAll(companion.type))}, and ${TYPE_INFO[opponent.type].name} beats ${names(beatsAll(opponent.type))}.`}</p>}
             {battle.befriending ? (
               <>
-                <p className="learn">{opponent.displayName} is worn out. Answer a question to befriend it!</p>
+                <p className="learn">{foeName} is worn out. Answer a question to befriend it!</p>
                 <button type="button" className="primary big" onClick={() => choose('befriend')}>Befriend <Key k="B" /></button>
               </>
             ) : (
@@ -398,6 +443,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
                 </div>
                 {canSwitch && <button type="button" onClick={() => setPicking(true)}>Switch creature <Key k="W" /></button>}
                 <TypeGuide />
+                {guideFor(opponent.id) && <button type="button" className="link guide-link" onClick={() => setReading(true)}>📖 Field Guide: {foeName}</button>}
+                {tameWait && <button type="button" className="tame-button" disabled>Bold Befriend <small>{tameWait}</small></button>}
                 {tameable && <button type="button" className="tame-button" onClick={() => choose('tame')}>{tameHits > 0 ? `Keep going: ${tameHits} of ${TAME_HITS}` : 'Bold Befriend'} <Key k="B" /><small>{tameHits > 0 ? 'One more right answer wins it over' : `Two right in a row on harder questions. Costs 2 charge.`}</small></button>}
                 {e.snack && <button type="button" disabled={!snackReady} onClick={() => dispatch({ type: 'useSnack' })}>Trail Snack: heal {SNACK_HEAL}, free <Key k="H" /></button>}
               </>
@@ -407,9 +454,12 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       )}
 
       {battle.phase !== 'choose' && (
-        <QuestionPanel question={q} regionId={q.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} hold={holding} log={log} move={battle.befriending ? undefined : { name: moveName, onChange: changeMove }} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
+        <>
+          <QuestionPanel question={q} regionId={q.regionId === 'study' ? e.regionId : q.regionId} result={result} onAnswer={onAnswer} onContinue={() => dispatch({ type: 'continue' })} hold={holding} log={log} move={battle.befriending ? undefined : { name: moveName, onChange: changeMove }} {...(battle.action === 'tame' ? { tag: `Bold Befriend: harder question ${Math.min((battle.tameHits ?? 0) + (result?.correct ? 0 : 1), TAME_HITS)} of ${TAME_HITS}` } : {})} />
+          {battle.befriended && guideFor(opponent.id) && <button type="button" className="link guide-link" onClick={() => setReading(true)}>📖 Read about the real {guideFor(opponent.id)!.basedOn}</button>}
+        </>
       )}
-      <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave expedition</button>
+      <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>{lodge ? 'Leave the Lodge' : 'Leave expedition'}</button>
     </div>
   );
 }

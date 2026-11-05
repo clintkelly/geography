@@ -1,0 +1,402 @@
+{
+  "id": "vv-list-12",
+  "title": "Vocabulary Virtuoso List 12",
+  "order": 13,
+  "words": [
+    {
+      "word": "acerbic",
+      "partOfSpeech": "adjective",
+      "definition": "Sharp and harsh in a way that stings, especially in words",
+      "sentence": "The grumpy parrot gave such ____ remarks about our singing that everyone in the jungle camp laughed.",
+      "wrongDefinitions": [
+        "Gentle and soothing, like a soft lullaby",
+        "Full of bright colors and swirly patterns",
+        "Very slow and careful when moving around"
+      ],
+      "synonym": {
+        "right": "harsh",
+        "wrong": [
+          "sweet",
+          "sleepy",
+          "shiny"
+        ]
+      },
+      "antonym": {
+        "right": "gentle",
+        "wrong": [
+          "loud",
+          "tall",
+          "hungry"
+        ]
+      },
+      "root": {
+        "part": "acerb",
+        "meaning": "bitter, harsh",
+        "wrongMeanings": [
+          "sweet",
+          "round",
+          "watery"
+        ]
+      }
+    },
+    {
+      "word": "upheaval",
+      "partOfSpeech": "noun",
+      "definition": "A sudden, big change that throws things into confusion",
+      "sentence": "When the volcano erupted, the island villagers faced a huge ____ as they moved to new homes.",
+      "wrongDefinitions": [
+        "A calm, quiet time when nothing changes",
+        "A heavy box used for carrying supplies",
+        "A friendly greeting between two neighbors"
+      ],
+      "synonym": {
+        "right": "chaos",
+        "wrong": [
+          "peace",
+          "breakfast",
+          "whisper"
+        ]
+      },
+      "antonym": {
+        "right": "calm",
+        "wrong": [
+          "ladder",
+          "shout",
+          "river"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "recalcitrant",
+      "partOfSpeech": "adjective",
+      "definition": "Stubbornly refusing to obey or cooperate",
+      "sentence": "The ____ mule planted its hooves and refused to cross the muddy river, no matter how we begged.",
+      "wrongDefinitions": [
+        "Eager to help and follow directions",
+        "Able to remember everything perfectly",
+        "Covered in soft, fluffy fur"
+      ],
+      "synonym": {
+        "right": "stubborn",
+        "wrong": [
+          "obedient",
+          "cheerful",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "obedient",
+        "wrong": [
+          "noisy",
+          "sleepy",
+          "hungry"
+        ]
+      },
+      "root": {
+        "part": "calcitr",
+        "meaning": "to kick",
+        "wrongMeanings": [
+          "to sing",
+          "to swim",
+          "to count"
+        ]
+      }
+    },
+    {
+      "word": "nostalgia",
+      "partOfSpeech": "noun",
+      "definition": "A happy-sad feeling of missing good times from the past",
+      "sentence": "Looking at old photos of our camping trip to the Grand Canyon filled Grandpa with ____.",
+      "wrongDefinitions": [
+        "A strong fear of tall mountains and cliffs",
+        "A sickness caused by eating spoiled food",
+        "A loud cheer at the start of a race"
+      ],
+      "synonym": {
+        "right": "longing",
+        "wrong": [
+          "anger",
+          "laughter",
+          "boredom"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "nost",
+        "meaning": "returning home",
+        "wrongMeanings": [
+          "far away",
+          "new beginning",
+          "bright light"
+        ]
+      }
+    },
+    {
+      "word": "quixotic",
+      "partOfSpeech": "adjective",
+      "definition": "Hopeful and daring in a way that is not realistic or practical",
+      "sentence": "Sam's ____ plan to dig a tunnel all the way to China with a spoon made everyone giggle.",
+      "wrongDefinitions": [
+        "Very careful, sensible and easy to carry out",
+        "Moving extremely fast, like a cheetah",
+        "Grumpy and unwilling to share"
+      ],
+      "synonym": {
+        "right": "unrealistic",
+        "wrong": [
+          "sensible",
+          "angry",
+          "heavy"
+        ]
+      },
+      "antonym": {
+        "right": "practical",
+        "wrong": [
+          "colorful",
+          "noisy",
+          "tiny"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "mellifluous",
+      "partOfSpeech": "adjective",
+      "definition": "Sounding sweet, smooth and pleasant to listen to",
+      "sentence": "The nightingale's ____ song drifted through the forest, making every tired hiker smile.",
+      "wrongDefinitions": [
+        "Harsh and scratchy, like nails on a chalkboard",
+        "Extremely heavy and hard to lift",
+        "Bright yellow, like a sunflower"
+      ],
+      "synonym": {
+        "right": "sweet-sounding",
+        "wrong": [
+          "screechy",
+          "silent",
+          "prickly"
+        ]
+      },
+      "antonym": {
+        "right": "harsh",
+        "wrong": [
+          "green",
+          "quick",
+          "tall"
+        ]
+      },
+      "root": {
+        "part": "melli",
+        "meaning": "honey",
+        "wrongMeanings": [
+          "milk",
+          "stone",
+          "sun"
+        ]
+      }
+    },
+    {
+      "word": "stigma",
+      "partOfSpeech": "noun",
+      "definition": "A mark of shame or unfair bad judgment about someone",
+      "sentence": "People once thought bats were creepy, but scientists helped erase that unfair ____ by showing how helpful bats are.",
+      "wrongDefinitions": [
+        "A prize given for great courage",
+        "A small map showing hidden treasure",
+        "A loud cheer from a happy crowd"
+      ],
+      "synonym": {
+        "right": "shame",
+        "wrong": [
+          "honor",
+          "pillow",
+          "river"
+        ]
+      },
+      "antonym": {
+        "right": "honor",
+        "wrong": [
+          "puddle",
+          "ladder",
+          "whisper"
+        ]
+      },
+      "root": {
+        "part": "stig",
+        "meaning": "mark",
+        "wrongMeanings": [
+          "light",
+          "water",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "word": "penury",
+      "partOfSpeech": "noun",
+      "definition": "Being extremely poor, with almost no money",
+      "sentence": "After losing their ship in a storm, the explorers lived in ____, eating only berries and sleeping in caves.",
+      "wrongDefinitions": [
+        "Having so much gold you cannot count it",
+        "A tool used for writing with ink",
+        "A feeling of great joy and pride"
+      ],
+      "synonym": {
+        "right": "poverty",
+        "wrong": [
+          "wealth",
+          "laughter",
+          "speed"
+        ]
+      },
+      "antonym": {
+        "right": "wealth",
+        "wrong": [
+          "music",
+          "forest",
+          "courage"
+        ]
+      },
+      "root": {
+        "part": "penur",
+        "meaning": "need, lack",
+        "wrongMeanings": [
+          "plenty",
+          "feather",
+          "strength"
+        ]
+      }
+    },
+    {
+      "word": "circumspect",
+      "partOfSpeech": "adjective",
+      "definition": "Careful to think about risks before acting",
+      "sentence": "The ____ explorer tested each icy step with her pole before crossing the frozen lake.",
+      "wrongDefinitions": [
+        "Rushing ahead without thinking about danger",
+        "Shaped exactly like a perfect circle",
+        "Able to see clearly in the dark"
+      ],
+      "synonym": {
+        "right": "careful",
+        "wrong": [
+          "reckless",
+          "sleepy",
+          "shiny"
+        ]
+      },
+      "antonym": {
+        "right": "reckless",
+        "wrong": [
+          "tired",
+          "round",
+          "friendly"
+        ]
+      },
+      "root": {
+        "part": "circum",
+        "meaning": "around",
+        "wrongMeanings": [
+          "under",
+          "before",
+          "against"
+        ]
+      }
+    },
+    {
+      "word": "cacophony",
+      "partOfSpeech": "noun",
+      "definition": "A loud, harsh mix of unpleasant sounds",
+      "sentence": "When the zookeeper arrived with breakfast, the monkeys, parrots and goats made a wild ____ of screeches and bleats.",
+      "wrongDefinitions": [
+        "A soft, gentle tune that helps you sleep",
+        "A tall stack of fluffy pancakes",
+        "A long period of total silence"
+      ],
+      "synonym": {
+        "right": "racket",
+        "wrong": [
+          "silence",
+          "melody",
+          "feather"
+        ]
+      },
+      "antonym": {
+        "right": "harmony",
+        "wrong": [
+          "pencil",
+          "mountain",
+          "hunger"
+        ]
+      },
+      "root": {
+        "part": "phon",
+        "meaning": "sound",
+        "wrongMeanings": [
+          "light",
+          "water",
+          "love"
+        ]
+      }
+    },
+    {
+      "word": "acrimony",
+      "partOfSpeech": "noun",
+      "definition": "Bitter, angry feelings between people",
+      "sentence": "After the argument over the last cookie, there was such ____ between the twins that they would not speak all afternoon.",
+      "wrongDefinitions": [
+        "Warm friendship and kindness between people",
+        "A large field used for growing crops",
+        "Great skill at climbing tall trees"
+      ],
+      "synonym": {
+        "right": "bitterness",
+        "wrong": [
+          "friendship",
+          "sunshine",
+          "laziness"
+        ]
+      },
+      "antonym": {
+        "right": "kindness",
+        "wrong": [
+          "speed",
+          "weather",
+          "height"
+        ]
+      },
+      "root": {
+        "part": "acri",
+        "meaning": "sharp, bitter",
+        "wrongMeanings": [
+          "sweet",
+          "field",
+          "bright"
+        ]
+      }
+    },
+    {
+      "word": "linguistic",
+      "partOfSpeech": "adjective",
+      "definition": "Having to do with words, speech and the ways people talk",
+      "sentence": "Our guide in Switzerland had amazing ____ skills, chatting in French, German and Italian on one train ride.",
+      "wrongDefinitions": [
+        "Having to do with numbers and counting",
+        "Having to do with plants and gardens",
+        "Having to do with weather and storms"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "lingu",
+        "meaning": "tongue, language",
+        "wrongMeanings": [
+          "light",
+          "leg",
+          "lake"
+        ]
+      }
+    }
+  ]
+}

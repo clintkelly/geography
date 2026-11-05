@@ -203,10 +203,55 @@
       "prompt": "Short magical burst of sunlight, bright rising shimmering chime swelling into a warm golden sparkle burst whoosh, special attack in a children's game, no voice, about one second",
       "note": "take 4 of 4; audible to 780 ms (-40 dB) / 690 ms (-30 dB) of 1000 ms; no leading silence, not trimmed (no ffmpeg); peak -2 dBFS, loudest 50 ms -12.6 dBFS, 0 clipped samples; measured only, not listened to."
     },
+    "special-sound": {
+      "generationId": "CJx0mFT1ZH8dz3hseNeL",
+      "prompt": "Short magical sound-wave special attack, a playful bright musical trumpet blast with a wobbly echoing whoomp of sound rings, friendly, children's game, no voice, about one second",
+      "note": "take 1 of 2; audible to 1350 ms (-40 dB) / 1200 ms (-30 dB) of 2000 ms; peak -0.1 dBFS, loudest 50 ms -6.8 dBFS, 0 clipped samples (take 2 clipped); played at gain 0.55; measured only, not listened to."
+    },
+    "special-metal": {
+      "generationId": "KD9aNRvUG9agVJX2FQvk",
+      "prompt": "Short magical metal special attack, a bright ringing steel clang with a shimmering metallic shing that rings out, friendly, children's game, no voice, about one second",
+      "note": "take 1 of 2; audible to 1000 ms (-40 dB) / 500 ms (-30 dB) of 2000 ms; peak 0 dBFS, loudest 50 ms -11.1 dBFS, 0 clipped samples; measured only, not listened to. Take 2 (Y4SbjJhopx2tLUnBzRiM) is shorter, to 600 ms."
+    },
+    "special-burrow": {
+      "generationId": "zihvJaN4yklUbVYBkVRT",
+      "prompt": "Short magical underground special attack, a quick rumbling dig and dirt burst erupting from the ground with a soft crystal sparkle, friendly, children's game, no voice, about one second",
+      "note": "take 2 of 2; audible to 500 ms (-40 dB) / 400 ms (-30 dB) of 1000 ms; peak -1.4 dBFS, loudest 50 ms -9.6 dBFS, 0 clipped samples; measured only, not listened to."
+    },
     "special-spirit": {
       "generationId": "vY0bYhZosBimTDRVMW6r",
       "prompt": "Short magical ghostly mist, soft airy swirling whoosh with a gentle ethereal twinkling chime, friendly and playful not spooky, special attack in a children's game, no voice, about one second",
       "note": "take 3 of 4; audible to 690 ms (-40 dB) / 560 ms (-30 dB) of 1000 ms; no leading silence, not trimmed (no ffmpeg); peak -4 dBFS, loudest 50 ms -13.8 dBFS, 0 clipped samples; measured only, not listened to. Take 4 (WzBTPNm7sPRJyuUthJyV) is louder (-11.2 dBFS) but runs to 1200 ms."
+    },
+    "hatch": {
+      "generationId": "DZfSYKROqyjvxP13qvIt",
+      "prompt": "Cute egg cracking open then a bright magical hatching sparkle and a happy little chime fanfare, a new baby creature is born, children's game, no voice, about one and a half seconds",
+      "note": "take 1 of 2; audible to 1730 ms of 2000; RMS 0.152, peak 0 dBFS; measured only, not listened to"
+    },
+    "egg": {
+      "generationId": "rQpdKzjLX2K3P10IUFzp",
+      "prompt": "Small cute egg wobbling and rattling with a soft tiny crack, playful, children's game, no voice, about half a second",
+      "note": "take 1 of 2; audible to 860 ms; quiet (RMS 0.047); measured only, not listened to"
+    },
+    "shield": {
+      "generationId": "5AdhALWHQbmezTsnOrJx",
+      "prompt": "Glassy magical shield cracking with a bright crystal shatter tinkle, satisfying, retro children's game, no voice, about half a second",
+      "note": "take 2 of 2, the shorter one; audible to 620 ms; measured only, not listened to"
+    },
+    "brainblast": {
+      "generationId": "1hGmCMlvsEXaW1ddQvIU",
+      "prompt": "Quick rising electric power-up zap with a bright sparkly ding, a clever idea charging up energy, retro children's game, no voice, about half a second",
+      "note": "take 1 of 2; audible to 710 ms; peak 0 dBFS, played at 0.8; measured only, not listened to"
+    },
+    "combo": {
+      "generationId": "WPSIYLzHIal5E0eGCsDH",
+      "prompt": "Punchy arcade combo hit sound, a quick rising three-note chiptune blip with a crisp snap, exciting, children's game, no voice, about half a second",
+      "note": "take 1 of 2; audible to 760 ms; peak 0 dBFS, played at 0.7; measured only, not listened to"
+    },
+    "special-kungfu": {
+      "generationId": "ICaiD7Zfu6dAjnyeskkc",
+      "prompt": "Martial arts special move: two quick whooshing kung fu strikes and a crisp punchy impact with a bright gong shimmer, energetic and friendly, children's game, no voice, about one second",
+      "note": "take 1 of 2 came back 14 s long; cut to its first 1.33 s with a 150 ms fade-out, audible to 1210 ms; peak 0 dBFS, played at 0.7; take 2 was only 140 ms of sound; measured only, not listened to"
     }
   },
   "music": {
@@ -345,6 +390,56 @@
       "generationId": "s1MxQQAd1QiUqrhlUbyC",
       "prompt": "Instrumental, no vocals. Sparse icy ambient tune in a 16-bit retro game style, a new melody: slow glassy celesta melody, soft twinkling crystal chimes and gently pulsing sine-wave arpeggios over warm sustained pads, slow unhurried tempo with no drums, continuous sound with no gaps. Calm, wondrous, gently cheerful and kid-friendly, even dynamics from start to end, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
       "note": "50s; take 2 of 2, +1.5 dB; RMS -15.8 dBFS, peak -0.4 dBFS, 0 clipped samples; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "lodge": {
+      "generationId": "JcxIMDfCdfaijeN3Bdi3",
+      "prompt": "Instrumental, no vocals. Proud, calm 16-bit retro game training-hall theme, a new melody: a steady marching snare and soft timpani under a warm brass-like synth lead, noble rising chords, gentle plucked harp arpeggios and a hint of a ranger's bugle call. Focused, dignified and encouraging, like getting ready for a big challenge, kid-friendly, medium tempo, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; -1.5 dB; louder second half (RMS about 2.5 dB up from 20s); RMS -15.5 dBFS, peak -1.8 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "lodge-2": {
+      "generationId": "28fcnTekadKU1wEHfy3W",
+      "prompt": "Instrumental, no vocals. Proud, calm 16-bit retro game training-hall theme, a new melody: a steady marching snare and soft timpani under a warm brass-like synth lead, noble rising chords, gentle plucked harp arpeggios and a hint of a ranger's bugle call. Focused, dignified and encouraging, like getting ready for a big challenge, kid-friendly, medium tempo, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; RMS -15.8 dBFS, peak -1.0 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "leader": {
+      "generationId": "RnSVTPAQPmI8KYPHgVi2",
+      "prompt": "Instrumental, no vocals. Heroic 16-bit retro game rival-leader battle theme, a new melody: a bold confident brass-synth fanfare lead trading phrases with a fast square-wave countermelody, galloping bass, punchy drums and dramatic stabs, at an energetic quick tempo. Determined and thrilling, a worthy opponent but friendly, never scary or dark, kid-friendly, not harsh or shrill, steady energy all the way through, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 49.06s; 1.0s silent tail cut; RMS -15.6 dBFS, peak -0.1 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "leader-2": {
+      "generationId": "JvuVgpFUpBvY3lZcccjB",
+      "prompt": "Instrumental, no vocals. Heroic 16-bit retro game rival-leader battle theme, a new melody: a bold confident brass-synth fanfare lead trading phrases with a fast square-wave countermelody, galloping bass, punchy drums and dramatic stabs, at an energetic quick tempo. Determined and thrilling, a worthy opponent but friendly, never scary or dark, kid-friendly, not harsh or shrill, steady energy all the way through, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 48.91s; 1.15s silent tail cut; quieter than the others, left as is to avoid clipping; RMS -16.7 dBFS, peak -0.9 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "summit": {
+      "generationId": "o82c5rDEoRQ6DHmecpnt",
+      "prompt": "Instrumental, no vocals. Epic final-challenge 16-bit retro game theme on a snowy mountain summit, a new melody: soaring heroic synth-strings and bright brass lead over crystalline sleigh-bell and glockenspiel sparkles, a driving bass and big confident drums, chords climbing higher and higher at a quick tempo. Grand, triumphant and exciting, the very top of the adventure, never scary or dark, kid-friendly, not harsh or shrill, steady energy all the way through, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; -1.5 dB; RMS -15.8 dBFS, peak -1.6 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "summit-2": {
+      "generationId": "e3qR7X6b1i4ywMgMBikp",
+      "prompt": "Instrumental, no vocals. Epic final-challenge 16-bit retro game theme on a snowy mountain summit, a new melody: soaring heroic synth-strings and bright brass lead over crystalline sleigh-bell and glockenspiel sparkles, a driving bass and big confident drums, chords climbing higher and higher at a quick tempo. Grand, triumphant and exciting, the very top of the adventure, never scary or dark, kid-friendly, not harsh or shrill, steady energy all the way through, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 48.79s; 1.25s silent tail cut; RMS -15.9 dBFS, peak 0 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "study": {
+      "generationId": "OzMd8IDE2FDeC8WGML5E",
+      "prompt": "Instrumental, no vocals. Clever curious 16-bit retro game puzzle-adventure theme, a new melody: bouncy pizzicato strings and a playful marimba lead, ticking clock-like hi-hats, light bubbly synth arpeggios that climb in steps like counting, warm bass, at a lively medium tempo. Smart, upbeat and encouraging, a fun thinking mood, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; -1.5 dB; RMS 0.151, peak -2.5 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "study-2": {
+      "generationId": "hY8XqE0DEZ0w46BJS6xq",
+      "prompt": "Instrumental, no vocals. Clever curious 16-bit retro game puzzle-adventure theme, a new melody: bouncy pizzicato strings and a playful marimba lead, ticking clock-like hi-hats, light bubbly synth arpeggios that climb in steps like counting, warm bass, at a lively medium tempo. Smart, upbeat and encouraging, a fun thinking mood, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; quieter first 10 s (RMS 0.11 rising to 0.16); 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "quiz": {
+      "generationId": "HJmTPp8rB9ISuM42E2Xk",
+      "prompt": "Instrumental, no vocals. Focused 16-bit retro game challenge-exam theme, a new melody: a steady confident pulse of soft synth bass and gentle drums, a thoughtful glassy bell lead, a quiet ticking rhythm and hopeful rising chords at a medium tempo. Concentrated and determined but calm and encouraging, not stressful, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 50s; -1.5 dB; RMS 0.165, peak -1.7 dBFS; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "quiz-2": {
+      "generationId": "9VfCPCnH6mmbjoiXyuZ1",
+      "prompt": "Instrumental, no vocals. Focused 16-bit retro game challenge-exam theme, a new melody: a steady confident pulse of soft synth bass and gentle drums, a thoughtful glassy bell lead, a quiet ticking rhythm and hopeful rising chords at a medium tempo. Concentrated and determined but calm and encouraging, not stressful, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5, instrumental; 48.36s; 1.7s fading tail cut; RMS 0.147; 48 ms fades at the loop point; measured only, not listened to"
     }
   }
 }

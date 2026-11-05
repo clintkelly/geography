@@ -3,6 +3,9 @@ import { hasCardsAtLeast } from '../engine/cards';
 import { isRegionComplete, bossUnlocked, knownSpecies, lowestFor, type SaveData } from '../engine/game';
 import { artUrl, Sprite } from './art';
 import { Key, useKeys } from './keys';
+import { useState } from 'react';
+import { GuideCard } from './FieldGuide';
+import { guideFor } from '../content/guide';
 
 type Level = 'none' | 'bronze' | 'silver' | 'gold';
 const WORDS: Record<Level, string> = { none: 'Finish a trail here', bronze: 'Bronze: trail finished. Fill the map for silver.', silver: 'Silver: map filled. Raise every card to Gold.', gold: 'Gold: every card is Gold!' };
@@ -20,17 +23,43 @@ export function Passport({ save, onClose }: { save: SaveData; onClose: () => voi
   const continents = [...new Set(PACK.regions.map((r) => r.continent))];
   const known = knownSpecies(save);
   const owned = [...known];
-  const found = PACK.species.filter((o) => !o.boss && o.homes.length > 0 && known.has(o.id)).length;
-  const total = PACK.species.filter((o) => !o.boss && o.homes.length > 0).length;
+  const logged = (o: (typeof PACK.species)[number]) => !o.boss && (o.homes.length > 0 || !!o.subject);
+  const found = PACK.species.filter((o) => logged(o) && known.has(o.id)).length;
+  const total = PACK.species.filter(logged).length;
+  const scholars = PACK.species.filter((o) => o.subject);
+  const [reading, setReading] = useState<string | null>(null);
+  const guides = PACK.species.filter((o) => guideFor(o.id));
+  const read = guides.filter((o) => (save.guideSeen ?? []).includes(o.id) || known.has(o.id)).length;
   return (
     <div className="stack passport">
+      {reading && <GuideCard speciesId={reading} onClose={() => setReading(null)} />}
       <section className="panel">
         <h1>Explorer's Passport</h1>
         <p>{stamped} of {PACK.regions.length} regions stamped.{stamped === PACK.regions.length ? ' You have explored the whole world!' : ' Finish a trail in a region to earn its stamp.'}</p>
         <div className="xp-track"><div className="xp-fill" style={{ width: `${(stamped / PACK.regions.length) * 100}%` }} /></div>
-        <p>Creature log: {found} of {total} befriended. Dark shapes are still out there. A lock means it only shows up on harder trails.</p>
+        <p>Creature log: {found} of {total} befriended. Dark shapes are still out there. A lock means it only shows up on harder trails.{guides.length > 0 && <> Tap a creature you've met to read its Field Guide card: {read} of {guides.length} unlocked.</>}</p>
         <button type="button" onClick={onClose}>Back to camp <Key k="V" /></button>
       </section>
+      {scholars.length > 0 && (
+        <section className="panel">
+          <h2>Study creatures</h2>
+          <p className="muted">They live on Math and Words trails, anywhere in the world.</p>
+          <ul className="creature-log">
+            {(['math', 'words'] as const).map((subject) => (
+              <li key={subject}>
+                <small>{subject === 'math' ? 'Math' : 'Words'}</small>
+                <span className="log-row">
+                  {scholars.filter((o) => o.subject === subject).map((o) => (
+                    <span key={o.id} className={`log-entry${known.has(o.id) ? '' : ' unknown'}`} title={known.has(o.id) ? o.displayName : 'Not found yet'}>
+                      <Sprite id={o.artId} size={48} className={known.has(o.id) ? '' : 'silhouette'} />
+                    </span>
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {continents.map((continent) => {
         const regions = PACK.regions.filter((r) => r.continent === continent);
         const boss = PACK.species.find((s) => s.boss && s.homes.includes(regions[0]?.id ?? ''));
@@ -64,7 +93,9 @@ export function Passport({ save, onClose }: { save: SaveData; onClose: () => voi
                         const lock = !has && o.minDifficulty ? lowestFor(o) : null;
                         return (
                           <span key={o.id} className={`log-entry${has ? '' : ' unknown'}${lock ? ` locked lock-${lock}` : ''}${o.rare ? ' rare' : ''}`} title={has ? o.displayName : lock ? `Only on ${lock[0]?.toUpperCase()}${lock.slice(1)} trails` : o.rare ? 'A rare creature' : 'Not found yet'}>
-                            <Sprite id={o.artId} size={48} className={has ? '' : 'silhouette'} />
+                            {(has || (save.guideSeen ?? []).includes(o.id)) && guideFor(o.id)
+                              ? <button type="button" className="log-guide" aria-label={`Field Guide: ${o.displayName}`} onClick={() => setReading(o.id)}><Sprite id={o.artId} size={48} className={has ? '' : 'silhouette'} /></button>
+                              : <Sprite id={o.artId} size={48} className={has ? '' : 'silhouette'} />}
                             {lock && <i aria-hidden="true">{lock === 'expert' ? 'E' : 'R'}</i>}
                           </span>
                         );

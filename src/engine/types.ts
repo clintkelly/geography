@@ -6,8 +6,14 @@ export const TYPE_LOOP: readonly CreatureType[] = ['tide', 'flame', 'leaf', 'gal
 /** Light and Spirit form a small triangle with Stone: Light beats Spirit, Spirit beats Stone, Stone beats Light. */
 export const TYPE_TRIANGLE: readonly CreatureType[] = ['light', 'spirit', 'stone'];
 
+/** Metal, Sound and Burrow form their own triangle: Sound beats Metal, Metal beats Burrow, Burrow beats Sound. */
+export const TYPE_TRIANGLE_2: readonly CreatureType[] = ['sound', 'metal', 'burrow'];
+
+/** Kung Fu makes a triangle with Stone and Gale: Kung Fu beats Stone, Stone beats Gale, Gale beats Kung Fu. */
+export const TYPE_TRIANGLE_3: readonly CreatureType[] = ['kungfu', 'stone', 'gale'];
+
 /** Every type, in the order the guide and stable list them. */
-export const ALL_TYPES: readonly CreatureType[] = [...TYPE_LOOP, 'light', 'spirit'];
+export const ALL_TYPES: readonly CreatureType[] = [...TYPE_LOOP, 'light', 'spirit', ...TYPE_TRIANGLE_2, 'kungfu'];
 
 export const STRONG_BONUS = 1;
 
@@ -21,11 +27,15 @@ export const TYPE_INFO: Record<CreatureType, { name: string }> = {
   volt: { name: 'Volt' },
   light: { name: 'Light' },
   spirit: { name: 'Spirit' },
+  sound: { name: 'Sound' },
+  metal: { name: 'Metal' },
+  burrow: { name: 'Burrow' },
+  kungfu: { name: 'Kung Fu' },
 };
 
 const after = (ring: readonly CreatureType[], t: CreatureType) => ring[(ring.indexOf(t) + 1) % ring.length] as CreatureType;
 const before = (ring: readonly CreatureType[], t: CreatureType) => ring[(ring.indexOf(t) + ring.length - 1) % ring.length] as CreatureType;
-const rings = (t: CreatureType) => [TYPE_LOOP, TYPE_TRIANGLE].filter((r) => r.includes(t));
+const rings = (t: CreatureType) => [TYPE_LOOP, TYPE_TRIANGLE, TYPE_TRIANGLE_2, TYPE_TRIANGLE_3].filter((r) => r.includes(t));
 
 /** The types this one is strong against. Stone, in both the loop and the triangle, beats two. */
 export const beatsAll = (type: CreatureType): CreatureType[] => rings(type).map((r) => after(r, type));
@@ -44,6 +54,12 @@ export const WHY: Record<string, string> = {
   'light>spirit': 'Light chases away the shadows Spirits hide in.',
   'spirit>stone': 'Spirits float right through Stone walls.',
   'stone>light': 'Stone blocks Light and makes shade.',
+  'sound>metal': 'A loud, high note makes Metal shake and rattle.',
+  'metal>burrow': 'Metal drills dig right through Burrow tunnels.',
+  'burrow>sound': 'Deep underground, Sound can\'t reach.',
+  'kungfu>stone': 'A kung fu master\'s chop can split a Stone brick.',
+  'stone>gale': 'Stone walls stand strong against the Gale.',
+  'gale>kungfu': 'A wild Gale knocks even a kung fu master off balance.',
 };
 export const why = (a: CreatureType, b: CreatureType) => WHY[`${a}>${b}`] ?? '';
 

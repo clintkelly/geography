@@ -1,0 +1,374 @@
+{
+  "id": "vv-list-07",
+  "title": "Vocabulary Virtuoso List 7",
+  "order": 8,
+  "words": [
+    {
+      "word": "propaganda",
+      "partOfSpeech": "noun",
+      "definition": "Messages spread to push people toward one idea, often in a tricky way",
+      "sentence": "The grumpy king's posters were pure ____, claiming his gloomy castle was the happiest place in the land.",
+      "wrongDefinitions": [
+        "A large gathering of people celebrating a holiday",
+        "A careful plan for building a bridge",
+        "A kind of tropical bird with bright feathers"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "propag",
+        "meaning": "to spread",
+        "wrongMeanings": [
+          "to fight",
+          "to hide",
+          "to build"
+        ]
+      }
+    },
+    {
+      "word": "resilient",
+      "partOfSpeech": "adjective",
+      "definition": "Able to bounce back quickly after something hard or hurtful",
+      "sentence": "After the storm flattened their garden, the ____ sunflowers stood back up and bloomed again within a week.",
+      "wrongDefinitions": [
+        "Very shy and quiet around new people",
+        "Shining brightly in the dark",
+        "Covered with a thin layer of ice"
+      ],
+      "synonym": {
+        "right": "tough",
+        "wrong": [
+          "sleepy",
+          "noisy",
+          "curious"
+        ]
+      },
+      "antonym": {
+        "right": "fragile",
+        "wrong": [
+          "sturdy",
+          "cheerful",
+          "quick"
+        ]
+      },
+      "root": {
+        "part": "re",
+        "meaning": "back, again",
+        "wrongMeanings": [
+          "before",
+          "under",
+          "around"
+        ]
+      }
+    },
+    {
+      "word": "anticipate",
+      "partOfSpeech": "verb",
+      "definition": "To expect something and get ready before it happens",
+      "sentence": "The clever squirrel seemed to ____ the cold winter, hiding hundreds of acorns all through the autumn.",
+      "wrongDefinitions": [
+        "To forget something that happened long ago",
+        "To argue loudly against an idea",
+        "To share food equally with friends"
+      ],
+      "synonym": {
+        "right": "expect",
+        "wrong": [
+          "forget",
+          "paint",
+          "borrow"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "anti",
+        "meaning": "before",
+        "wrongMeanings": [
+          "after",
+          "under",
+          "around"
+        ]
+      }
+    },
+    {
+      "word": "holistic",
+      "partOfSpeech": "adjective",
+      "definition": "Looking at the whole thing, not just its separate parts",
+      "sentence": "The park ranger took a ____ approach, caring for the soil, water, plants and animals all together.",
+      "wrongDefinitions": [
+        "Full of tiny holes like a sponge",
+        "Related to holidays and celebrations",
+        "Painted with many bright colors"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "hol",
+        "meaning": "whole",
+        "wrongMeanings": [
+          "empty",
+          "high",
+          "small"
+        ]
+      }
+    },
+    {
+      "word": "exonerate",
+      "partOfSpeech": "verb",
+      "definition": "To officially show that someone did not do anything wrong",
+      "sentence": "The muddy paw prints helped ____ the cat, proving the dog had knocked over the flower vase.",
+      "wrongDefinitions": [
+        "To blame someone for something they did",
+        "To exercise hard until very tired",
+        "To decorate a room for a party"
+      ],
+      "synonym": {
+        "right": "clear",
+        "wrong": [
+          "blame",
+          "hide",
+          "weigh"
+        ]
+      },
+      "antonym": {
+        "right": "blame",
+        "wrong": [
+          "excuse",
+          "sing",
+          "climb"
+        ]
+      },
+      "root": {
+        "part": "ex",
+        "meaning": "out of",
+        "wrongMeanings": [
+          "into",
+          "again",
+          "under"
+        ]
+      }
+    },
+    {
+      "word": "turmoil",
+      "partOfSpeech": "noun",
+      "definition": "A state of wild confusion, noise and upset",
+      "sentence": "When the monkeys escaped into the market, the whole village was in ____ for hours.",
+      "wrongDefinitions": [
+        "A calm and peaceful quiet time",
+        "A thick oil used for cooking",
+        "A tall tower made of stone"
+      ],
+      "synonym": {
+        "right": "chaos",
+        "wrong": [
+          "harvest",
+          "kindness",
+          "comfort"
+        ]
+      },
+      "antonym": {
+        "right": "peace",
+        "wrong": [
+          "mess",
+          "uproar",
+          "chaos"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "zealous",
+      "partOfSpeech": "adjective",
+      "definition": "Full of eager energy and strong devotion to a cause",
+      "sentence": "The ____ young explorer woke before sunrise every day, eager to map every river in the jungle.",
+      "wrongDefinitions": [
+        "Covered with stripes like a zebra",
+        "Very sleepy and bored with everything",
+        "Living in the ocean near coral reefs"
+      ],
+      "synonym": {
+        "right": "eager",
+        "wrong": [
+          "lazy",
+          "gloomy",
+          "polite"
+        ]
+      },
+      "antonym": {
+        "right": "half-hearted",
+        "wrong": [
+          "eager",
+          "passionate",
+          "keen"
+        ]
+      },
+      "root": {
+        "part": "zeal",
+        "meaning": "eagerness",
+        "wrongMeanings": [
+          "fear",
+          "sleep",
+          "sadness"
+        ]
+      }
+    },
+    {
+      "word": "volatile",
+      "partOfSpeech": "adjective",
+      "definition": "Likely to change suddenly and without warning, often for the worse",
+      "sentence": "The ____ volcano could rumble quietly one day and shoot fiery lava into the sky the next.",
+      "wrongDefinitions": [
+        "Calm and steady, never changing at all",
+        "Very loud and easy to hear far away",
+        "Made entirely of soft cotton"
+      ],
+      "synonym": {
+        "right": "unstable",
+        "wrong": [
+          "hollow",
+          "polite",
+          "sleepy"
+        ]
+      },
+      "antonym": {
+        "right": "stable",
+        "wrong": [
+          "explosive",
+          "unsteady",
+          "wild"
+        ]
+      },
+      "root": {
+        "part": "vol",
+        "meaning": "to fly",
+        "wrongMeanings": [
+          "to sing",
+          "to dig",
+          "to sleep"
+        ]
+      }
+    },
+    {
+      "word": "obdurate",
+      "partOfSpeech": "adjective",
+      "definition": "Stubbornly refusing to change your mind, no matter what",
+      "sentence": "The ____ mule refused to cross the bridge, no matter how many carrots the explorers offered him.",
+      "wrongDefinitions": [
+        "Happy to agree with whatever others suggest",
+        "Lasting only a very short time",
+        "Bright and easy to see from far away"
+      ],
+      "synonym": {
+        "right": "stubborn",
+        "wrong": [
+          "cheerful",
+          "hungry",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "flexible",
+        "wrong": [
+          "stubborn",
+          "firm",
+          "unbending"
+        ]
+      },
+      "root": {
+        "part": "dur",
+        "meaning": "hard",
+        "wrongMeanings": [
+          "soft",
+          "quick",
+          "bright"
+        ]
+      }
+    },
+    {
+      "word": "thrive",
+      "partOfSpeech": "verb",
+      "definition": "To grow strong and healthy, or to do very well",
+      "sentence": "Cactuses ____ in the hot, dry desert, where many other plants would quickly wilt and die.",
+      "wrongDefinitions": [
+        "To slowly weaken and fade away",
+        "To steal something when no one is looking",
+        "To count numbers by threes"
+      ],
+      "synonym": {
+        "right": "grow",
+        "wrong": [
+          "sleep",
+          "shout",
+          "wander"
+        ]
+      },
+      "antonym": {
+        "right": "wither",
+        "wrong": [
+          "flourish",
+          "bloom",
+          "grow"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "umbrage",
+      "partOfSpeech": "noun",
+      "definition": "A feeling of being insulted or hurt by something someone did",
+      "sentence": "The proud peacock took ____ when the zookeeper called the pigeon the prettiest bird in the park.",
+      "wrongDefinitions": [
+        "A large tool for keeping rain off your head",
+        "A feeling of great joy and pride",
+        "A small cabin built in the woods"
+      ],
+      "synonym": {
+        "right": "offense",
+        "wrong": [
+          "delight",
+          "shelter",
+          "hunger"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "umbr",
+        "meaning": "shadow",
+        "wrongMeanings": [
+          "light",
+          "rain",
+          "stone"
+        ]
+      }
+    },
+    {
+      "word": "paradigm",
+      "partOfSpeech": "noun",
+      "definition": "A model or pattern that shows how something is usually done",
+      "sentence": "Her clever new way of tracking whales became the ____ that scientists all over the world copied.",
+      "wrongDefinitions": [
+        "A pair of matching shiny coins",
+        "A sudden feeling of fear",
+        "A small boat used for crossing rivers"
+      ],
+      "synonym": {
+        "right": "model",
+        "wrong": [
+          "mistake",
+          "puzzle",
+          "storm"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "para",
+        "meaning": "beside",
+        "wrongMeanings": [
+          "under",
+          "after",
+          "against"
+        ]
+      }
+    }
+  ]
+}

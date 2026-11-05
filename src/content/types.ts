@@ -1,5 +1,7 @@
+import type { Lodge } from './lodges';
+import type { TypedAnswer } from '../engine/answers';
 import type { Moves } from './moves';
-export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost' | 'volt' | 'light' | 'spirit';
+export type CreatureType = 'tide' | 'flame' | 'leaf' | 'stone' | 'gale' | 'frost' | 'volt' | 'light' | 'spirit' | 'sound' | 'metal' | 'burrow' | 'kungfu';
 export type Difficulty = 'scout' | 'ranger' | 'expert';
 export const DIFFICULTIES: readonly Difficulty[] = ['scout', 'ranger', 'expert'];
 
@@ -22,7 +24,8 @@ export interface Question {
   id: string;
   version: number;
   objectiveId: string;
-  inputType: 'choice' | 'map-marker' | 'map-click';
+  /** 'typed' asks the child to type a number, such as a fraction, instead of picking one. */
+  inputType: 'choice' | 'map-marker' | 'map-click' | 'typed';
   prompt: string;
   options: QuestionOption[];
   acceptedId: string;
@@ -37,7 +40,11 @@ export interface Question {
   /** This question tests a Field Note, and appears only after the child has seen it. */
   recallOf?: string;
   /** What it asks about, for the Camp focus setting. */
-  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics' | 'animal';
+  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics' | 'animal' | 'history' | 'math' | 'word';
+  /** For a typed question: the value that counts as right. */
+  typed?: TypedAnswer;
+  /** A tip shown after a miss on a study question, like the trick to adding fractions. */
+  hint?: string;
   /** A flag shown with the question. */
   flag?: string;
   /** Destination this question is local to, if any. */
@@ -85,6 +92,16 @@ export interface Special {
   color: string;
 }
 
+/** A Wild Path: one way a branching creature can grow up, decided by how it was raised. */
+export type PathId = 'scholar' | 'ranger' | 'banner';
+export interface WildPath {
+  id: PathId;
+  /** The path's type, from stage 2 on. */
+  type: CreatureType;
+  evolutions: readonly [{ name: string; artId: string }, { name: string; artId: string }];
+  special: Special;
+}
+
 export interface Species {
   id: string;
   displayName: string;
@@ -103,6 +120,16 @@ export interface Species {
   rare?: boolean;
   /** Met only on trails at this difficulty or harder. */
   minDifficulty?: Exclude<Difficulty, 'scout'>;
+  /** A study creature: it lives on Math or Words trails instead of in a region. */
+  subject?: 'math' | 'words';
+  /** Hatches from this kind of study egg. Egg creatures live nowhere else. */
+  egg?: 'math' | 'words';
+  /** A Lodge legendary, given for a Gold patch. */
+  legendary?: boolean;
+  /** Just added to the game: shown first in sightings and on trails until befriended. */
+  fresh?: boolean;
+  /** Branching evolution: at stage 2 it follows one of these, and takes its type, look and Special. */
+  paths?: readonly WildPath[];
   /** A continent boss, offered once every region on its continent is stamped. */
   boss?: { move: string; warning: string };
   type: CreatureType;
@@ -142,4 +169,8 @@ export interface Pack {
   starterSpeciesId: string;
   /** Offered first in every region until it is befriended. */
   featuredSpeciesId: string;
+  /** Vocabulary units, for the Words settings. */
+  wordUnits?: readonly { id: string; title: string; words: number }[];
+  /** Ranger Lodges, taken in order. */
+  lodges?: readonly Lodge[];
 }

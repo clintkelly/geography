@@ -35,7 +35,8 @@ const find = (s: SaveData) => step(s, { type: 'guess', locationId: s.expedition!
 
 const answerWith = (s: SaveData, correct: boolean): SaveData => {
   const q = (s.expedition!.battle ?? s.expedition!.event)!.question;
-  return step(s, { type: 'answer', optionId: correct ? q.acceptedId : q.options.find((o) => o.id !== q.acceptedId)!.id });
+  const wrong = q.inputType === 'typed' ? '-987654' : q.options.find((o) => o.id !== q.acceptedId)!.id;
+  return step(s, { type: 'answer', optionId: correct ? q.acceptedId : wrong });
 };
 
 function turn(s: SaveData, correct: boolean): SaveData {
@@ -121,12 +122,15 @@ describe('content', () => {
     }
   });
 
+  // Animal questions are about real state animals, which can be official; they have their own checks.
+  const placeQuestions = usQuestions.filter((q) => q.topic !== 'animal' && q.topic !== 'history');
+
   it('never calls a nickname official', () => {
-    for (const q of usQuestions) expect(`${q.prompt} ${q.explanation}`.toLowerCase()).not.toContain('official');
+    for (const q of placeQuestions) expect(`${q.prompt} ${q.explanation}`.toLowerCase()).not.toContain('official');
   });
 
   it('every state question has a Field Note from its own record', () => {
-    for (const q of usQuestions) expect(STATES.find((s) => s.id === q.locationId)!.facts, q.id).toContain(q.fieldNote);
+    for (const q of placeQuestions) expect(STATES.find((s) => s.id === q.locationId)!.facts, q.id).toContain(q.fieldNote);
   });
 
   it('every fact has a question whose answer is that place', () => {
@@ -609,9 +613,38 @@ describe('levels and evolution', () => {
     expect(formOf(knight, xpForLevel(5))).toMatchObject({ name: 'Sir Bark Knight', artId: 'barkknight-2', stage: 2 });
   });
 
+  it('remembers which Field Guide cards a child has seen, once each', () => {
+    const once = step(fresh(), { type: 'seeGuide', speciesId: 'spinosail' });
+    expect(once.guideSeen).toEqual(['spinosail']);
+    expect(step(once, { type: 'seeGuide', speciesId: 'spinosail' })).toBe(once);
+  });
+
   it('nicknames stick to one creature', () => {
     const s = step(fresh(), { type: 'renameCompanion', instanceId: fresh().companions[0]!.instanceId, nickname: 'Rocky' });
     expect(s.companions[0]!.nickname).toBe('Rocky');
+  });
+
+  it('a shiny can have its colors picked, and go back to its own', () => {
+    const base = fresh();
+    const id = base.companions[0]!.instanceId;
+    const plain = step(base, { type: 'setShinyColors', instanceId: id, colors: ['yellow', 'red'] });
+    expect(plain.companions[0]!.shinyColors).toBeUndefined();
+    const shiny = { ...base, companions: base.companions.map((c) => ({ ...c, shiny: true })) };
+    const picked = step(shiny, { type: 'setShinyColors', instanceId: id, colors: ['yellow', 'red', 'blue', 'Bad!'] });
+    expect(picked.companions[0]!.shinyColors).toEqual(['yellow', 'red']);
+    expect('shinyColors' in step(picked, { type: 'setShinyColors', instanceId: id, colors: [] }).companions[0]!).toBe(false);
+  });
+
+  it('a shiny can always get the colors it was found with back', async () => {
+    const { companionView } = await import('../ui/content');
+    const { shinyLook } = await import('../ui/shiny');
+    const base = fresh();
+    const id = base.companions[0]!.instanceId;
+    const shiny = { ...base, companions: base.companions.map((c) => ({ ...c, shiny: true })) };
+    const edited = step(shiny, { type: 'setShinyColors', instanceId: id, colors: ['pink', 'green'] });
+    expect(companionView(edited.companions[0]!).shiny).not.toEqual(shinyLook(id));
+    const back = step(edited, { type: 'setShinyColors', instanceId: id, colors: [] });
+    expect(companionView(back.companions[0]!).shiny).toEqual(shinyLook(id));
   });
 });
 
@@ -1406,19 +1439,39 @@ describe('types', () => {
     expect(beatsAll('leaf')).toEqual(['gale']);
   });
 
+  it('Kung Fu beats Stone, Stone beats Gale, and Gale beats Kung Fu', () => {
+    expect(typeEdge('kungfu', 'stone')).toBe(1);
+    expect(typeEdge('stone', 'gale')).toBe(1);
+    expect(typeEdge('gale', 'kungfu')).toBe(1);
+    expect(typeEdge('kungfu', 'gale')).toBe(-1);
+    expect(typeEdge('kungfu', 'tide')).toBe(0);
+    expect(why('kungfu', 'stone')).toMatch(/brick/);
+  });
+
   it('Light beats Spirit, Spirit beats Stone, and Stone beats Light as well as Volt', () => {
     expect(typeEdge('light', 'spirit')).toBe(1);
     expect(typeEdge('spirit', 'stone')).toBe(1);
     expect(typeEdge('stone', 'light')).toBe(1);
     expect(typeEdge('spirit', 'light')).toBe(-1);
-    expect(beatsAll('stone')).toEqual(['volt', 'light']);
-    expect(losesToAll('stone')).toEqual(['frost', 'spirit']);
+    // Stone is also in the Kung Fu triangle.
+    expect(beatsAll('stone')).toEqual(['volt', 'light', 'gale']);
+    expect(losesToAll('stone')).toEqual(['frost', 'spirit', 'kungfu']);
     expect(typeEdge('light', 'tide')).toBe(0);
     expect(typeEdge('spirit', 'volt')).toBe(0);
     for (const t of ALL_TYPES) {
       expect(beatsAll(t).length, t).toBe(losesToAll(t).length);
       for (const b of beatsAll(t)) expect(why(t, b), `${t}>${b}`).not.toBe('');
     }
+  });
+
+  it('Sound beats Metal, Metal beats Burrow, and Burrow beats Sound', () => {
+    expect(typeEdge('sound', 'metal')).toBe(1);
+    expect(typeEdge('metal', 'burrow')).toBe(1);
+    expect(typeEdge('burrow', 'sound')).toBe(1);
+    expect(typeEdge('metal', 'sound')).toBe(-1);
+    expect(typeEdge('metal', 'stone')).toBe(0);
+    expect(typeEdge('burrow', 'tide')).toBe(0);
+    expect(beatsAll('metal')).toEqual(['burrow']);
   });
 
   it('a Light and Tide creature uses Light against Spirit', () => {
@@ -1432,6 +1485,7 @@ describe('types', () => {
     expect(new Set(PACK.species.flatMap((s) => (s.secondType ? [s.type, s.secondType] : [s.type])))).toEqual(new Set(ALL_TYPES));
     expect(PACK.species.filter((s) => s.type === 'light' || s.secondType === 'light').length).toBeGreaterThanOrEqual(4);
     expect(PACK.species.filter((s) => s.type === 'spirit' || s.secondType === 'spirit').length).toBeGreaterThanOrEqual(4);
+    for (const t of ['sound', 'metal', 'burrow'] as const) expect(PACK.species.filter((s) => s.type === t || s.secondType === t).length, t).toBeGreaterThanOrEqual(6);
   });
 
   const base = { playerMaxHp: 12, playerAttack: 3, special: 'strong' as const, opponentMaxHp: 20, enemyPattern: [2, 2, 4], maxTurns: 8 };

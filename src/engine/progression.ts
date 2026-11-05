@@ -1,4 +1,4 @@
-import type { Difficulty, Pack, Species } from '../content/types';
+import type { Difficulty, Pack, PathId, Species } from '../content/types';
 
 export const MAX_LEVEL = 10;
 export const STAGE_2_LEVEL = 5;
@@ -66,3 +66,31 @@ export const teamScaling = (size: number) => {
 };
 
 export const speciesOf = (pack: Pack, id: string) => pack.species.find((s) => s.id === id) as Species;
+
+/** How a branching creature has been raised: right study answers, Ranger and Expert wins, and right flag answers. */
+export type Raised = Partial<Record<PathId, number>>;
+export const PATH_ORDER: readonly PathId[] = ['scholar', 'ranger', 'banner'];
+export const PATH_INFO: Record<PathId, { name: string; how: string }> = {
+  scholar: { name: 'Scholar', how: 'right math and vocabulary answers' },
+  ranger: { name: 'Ranger', how: 'battles won on Ranger and Expert trails' },
+  banner: { name: 'Banner', how: 'right flag answers' },
+};
+
+/** The path a branching creature follows: the one it was raised most on, fixed once it evolves. Ties go in PATH_ORDER. */
+export function pathOf(c: { path?: PathId; raised?: Raised }): PathId {
+  if (c.path) return c.path;
+  const r = c.raised ?? {};
+  return PATH_ORDER.reduce((best, p) => ((r[p] ?? 0) > (r[best] ?? 0) ? p : best), PATH_ORDER[0] as PathId);
+}
+
+/**
+ * A companion's species as it is now. A branching creature takes its path's evolutions, and from stage 2 on
+ * its path's type and Special. Everything else is the species as written.
+ */
+export function companionSpecies(pack: Pack, c: { speciesId: string; bondXp: number; path?: PathId; raised?: Raised }): Species {
+  const s = speciesOf(pack, c.speciesId);
+  if (!s.paths?.length) return s;
+  const p = s.paths.find((x) => x.id === pathOf(c)) ?? s.paths[0]!;
+  const grown = levelOf(c.bondXp) >= STAGE_2_LEVEL;
+  return grown ? { ...s, type: p.type, evolutions: p.evolutions, special: p.special } : { ...s, evolutions: p.evolutions };
+}

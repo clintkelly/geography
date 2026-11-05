@@ -1,0 +1,122 @@
+{
+  "australia": [
+    {
+      "fact": "Aboriginal Australians have lived in Australia for at least 50,000 years and have one of the oldest continuing cultures on Earth.",
+      "ask": "Which country's Aboriginal peoples have one of the oldest continuing cultures, over 50,000 years?",
+      "source": "https://en.wikipedia.org/wiki/Aboriginal_Australians"
+    },
+    {
+      "fact": "The Sydney Opera House in Australia, with roofs shaped like sails, opened in 1973.",
+      "ask": "Which country's famous Opera House, with roofs shaped like sails, opened in 1973?",
+      "source": "https://en.wikipedia.org/wiki/Sydney_Opera_House"
+    },
+    {
+      "fact": "In 1770 Captain James Cook sailed along the east coast of Australia and landed at Botany Bay.",
+      "ask": "Which country's east coast did Captain James Cook sail along in 1770, landing at Botany Bay?",
+      "source": "https://en.wikipedia.org/wiki/James_Cook"
+    }
+  ],
+  "new-zealand": [
+    {
+      "fact": "Edmund Hillary of New Zealand and Tenzing Norgay were the first people known to reach the top of Mount Everest, in 1953.",
+      "ask": "Which country was Edmund Hillary from, one of the first two people to climb Mount Everest?",
+      "source": "https://en.wikipedia.org/wiki/Edmund_Hillary"
+    },
+    {
+      "fact": "Māori voyagers from eastern Polynesia sailed canoes to New Zealand and settled there in the 1200s and 1300s, among the last big lands people reached.",
+      "ask": "Which country was settled by Māori voyagers from Polynesia in the 1200s and 1300s?",
+      "source": "https://en.wikipedia.org/wiki/M%C4%81ori_people"
+    }
+  ],
+  "papua-new-guinea": [
+    {
+      "fact": "At Kuk Swamp in Papua New Guinea, people were farming crops like bananas and taro about 7,000 years ago or more, one of the earliest farming sites in the world.",
+      "ask": "Which country's Kuk Swamp shows that people there were farming about 7,000 years ago or more?",
+      "source": "https://en.wikipedia.org/wiki/Kuk_Swamp"
+    }
+  ],
+  "fiji": [
+    {
+      "fact": "Levuka, Fiji's first colonial capital, is a UNESCO World Heritage Site with old buildings from the 1800s.",
+      "ask": "Which country's town of Levuka, its first colonial capital, is a World Heritage Site?",
+      "source": "https://en.wikipedia.org/wiki/Levuka"
+    }
+  ],
+  "tonga": [
+    {
+      "fact": "Tonga is the only island kingdom in the Pacific that was never fully colonized by a foreign power.",
+      "ask": "Which island kingdom in the Pacific was never fully colonized by a foreign power?",
+      "source": "https://en.wikipedia.org/wiki/Tonga"
+    }
+  ],
+  "kiribati": [
+    {
+      "fact": "In 1995 Kiribati moved the International Date Line so all of its islands, spread over a huge stretch of ocean, would share the same calendar day.",
+      "ask": "Which country moved the International Date Line in 1995 so all its islands share the same day?",
+      "source": "https://en.wikipedia.org/wiki/Kiribati"
+    }
+  ],
+  "south-pole": [
+    {
+      "fact": "The Amundsen-Scott South Pole Station, first built by the United States in 1956, is named after Roald Amundsen and Robert Falcon Scott, the first two explorers to reach the South Pole.",
+      "ask": "Where did the US build a research station in 1956, named after explorers Amundsen and Scott?",
+      "source": "https://en.wikipedia.org/wiki/Amundsen%E2%80%93Scott_South_Pole_Station"
+    }
+  ],
+  "mount-vinson": [
+    {
+      "fact": "Mount Vinson was first climbed in December 1966 by an American team led by Nicholas Clinch. It is named after US congressman Carl Vinson.",
+      "ask": "Which Antarctic mountain was first climbed in 1966 and is named after a US congressman?",
+      "source": "https://en.wikipedia.org/wiki/Mount_Vinson"
+    }
+  ],
+  "mount-erebus": [
+    {
+      "fact": "Mount Erebus was first climbed in 1908 by members of Ernest Shackleton's expedition. It is named after HMS Erebus, one of James Clark Ross's ships.",
+      "ask": "Which Antarctic volcano was first climbed by members of Shackleton's team in 1908?",
+      "source": "https://en.wikipedia.org/wiki/Mount_Erebus"
+    }
+  ],
+  "ross-ice-shelf": [
+    {
+      "fact": "In 1929 Richard Byrd took off from his base, Little America, on the Ross Ice Shelf and made the first flight over the South Pole.",
+      "ask": "From a base on which ice shelf did Richard Byrd take off in 1929 to fly over the South Pole?",
+      "source": "https://en.wikipedia.org/wiki/Little_America_(exploration_base)"
+    }
+  ],
+  "antarctic-peninsula": [
+    {
+      "fact": "In January 1820 Edward Bransfield sighted the tip of the Antarctic Peninsula, one of the first sightings of the Antarctic mainland.",
+      "ask": "Which part of Antarctica did Edward Bransfield spot in 1820, among the first sightings of the continent?",
+      "source": "https://en.wikipedia.org/wiki/Edward_Bransfield"
+    }
+  ],
+  "deception-island": [
+    {
+      "fact": "In 1928 Hubert Wilkins made the first airplane flight in Antarctica, taking off from Deception Island.",
+      "ask": "From which Antarctic island did Hubert Wilkins make the first airplane flight in Antarctica, in 1928?",
+      "source": "https://en.wikipedia.org/wiki/Hubert_Wilkins"
+    }
+  ],
+  "lake-vostok": [
+    {
+      "fact": "Vostok Station, on the ice above Lake Vostok, recorded the coldest natural temperature ever measured on Earth: minus 89.2 degrees Celsius, in July 1983.",
+      "ask": "Above which hidden lake is the station that recorded Earth's coldest measured temperature, in 1983?",
+      "source": "https://en.wikipedia.org/wiki/Vostok_Station"
+    }
+  ],
+  "weddell-sea": [
+    {
+      "fact": "The Weddell Sea is named after James Weddell, a British sealer who sailed into it in 1823 and reached farther south than anyone before.",
+      "ask": "Which Antarctic sea did a British sealer sail into in 1823, getting farther south than anyone before?",
+      "source": "https://en.wikipedia.org/wiki/James_Weddell"
+    }
+  ],
+  "lambert-glacier": [
+    {
+      "fact": "After Australian expeditions mapped the area in 1956, the Lambert Glacier was named after Bruce Lambert, Australia's director of national mapping.",
+      "ask": "Which Antarctic glacier was named after an Australian mapmaker following Australian mapping in 1956?",
+      "source": "https://en.wikipedia.org/wiki/Lambert_Glacier"
+    }
+  ]
+}

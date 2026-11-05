@@ -34,12 +34,22 @@ const LENGTH_MS = {
   'special-volt': 460,
   'special-light': 780,
   'special-spirit': 700,
+  'special-sound': 1300,
+  'special-metal': 1000,
+  'special-burrow': 520,
+  'special-kungfu': 1210,
+  // Eggs, Lodge shields, Brain Blast and combos.
+  hatch: 1730,
+  egg: 860,
+  shield: 620,
+  brainblast: 710,
+  combo: 760,
 } as const;
 /** Sounds with extra takes, -2 and -3. One is picked at random each time, so they don't get old. */
 const TAKES: Partial<Record<keyof typeof LENGTH_MS, number>> = { correct: 3, attack: 3, hit: 3, guard: 3, win: 3, befriend: 3, special: 3 };
 const FADE_MS = 100;
 /** The retro effects are much louder than the others. */
-const GAIN: Partial<Record<keyof typeof LENGTH_MS, number>> = { guard: 0.55, hit: 0.8, crit: 0.7, levelup: 0.6, heartbeat: 0.7, super: 0.9, streak: 0.8, recall: 0.6, 'special-flame': 0.5, 'special-gale': 0.65, 'special-stone': 0.85, 'special-volt': 0.8 };
+const GAIN: Partial<Record<keyof typeof LENGTH_MS, number>> = { guard: 0.55, hit: 0.8, crit: 0.7, levelup: 0.6, heartbeat: 0.7, super: 0.9, streak: 0.8, recall: 0.6, 'special-flame': 0.5, 'special-gale': 0.65, 'special-stone': 0.85, 'special-volt': 0.8, 'special-sound': 0.55, combo: 0.7, brainblast: 0.8, 'special-kungfu': 0.7 };
 /** Extra takes have their own length and loudness, matched to the first take. */
 const TAKE: Record<string, [ms: number, gain: number]> = {
   'correct-2': [220, 1], 'correct-3': [480, 1], 'attack-2': [510, 0.65], 'attack-3': [300, 0.7], 'hit-2': [200, 0.95], 'hit-3': [440, 0.75],

@@ -25,6 +25,8 @@ export interface CombatConfig {
   typeEdge?: number;
   /** A boss adds this to every third attack. */
   bossPower?: number;
+  /** Brain Shield: each right answer that would deal damage cracks it instead, and the opponent can't hit back that turn. */
+  shield?: number;
   opponentMaxHp: number;
   enemyPattern: readonly number[];
   maxTurns: number;
@@ -44,6 +46,8 @@ export interface TurnEvents {
   damageTaken: number;
   blocked: number;
   healed: number;
+  /** A right answer cracked a Brain Shield instead of dealing damage. */
+  shieldHit?: boolean;
 }
 
 export const MAX_CHARGE = 2;
@@ -122,7 +126,11 @@ export function resolveTurn(
 ): { state: CombatState; events: TurnEvents } {
   if (!canUse(state, action)) return { state, events: { damageDealt: 0, damageTaken: 0, blocked: 0, healed: 0 } };
 
-  const effect = playerEffect(state, action, correct);
+  const raw = playerEffect(state, action, correct);
+  // A Brain Shield soaks a hit, but the move's charge, healing and blocking still work.
+  const shieldHit = (state.shield ?? 0) > 0 && raw.damage > 0;
+  const effect = shieldHit ? { ...raw, damage: 0 } : raw;
+  const shield = shieldHit ? { shield: (state.shield ?? 0) - 1 } : {};
   const opponentHp = Math.max(0, state.opponentHp - effect.damage);
   const healedHp = Math.min(state.playerMaxHp, state.playerHp + effect.heal);
   const healed = healedHp - state.playerHp;
@@ -134,7 +142,8 @@ export function resolveTurn(
   }
 
   // A missed fierce Attack leaves the creature open, so the opponent's hit lands 1 harder.
-  const intent = enemyIntent(state) + (action === 'attack' && !correct && state.attackStyle === 'fierce' ? FIERCE_BONUS : 0);
+  // Cracking a Brain Shield knocks the opponent off balance, so it doesn't hit back that turn.
+  const intent = shieldHit ? 0 : enemyIntent(state) + (action === 'attack' && !correct && state.attackStyle === 'fierce' ? FIERCE_BONUS : 0);
   const blocked = Math.min(intent, effect.block);
   const damageTaken = intent - blocked;
   const playerHp = Math.max(0, healedHp - damageTaken);
@@ -142,12 +151,13 @@ export function resolveTurn(
   return {
     state: {
       ...state,
+      ...shield,
       opponentHp,
       playerHp,
       charge: effect.charge,
       outcome: retreat ? 'retreat' : 'active',
       turn: retreat ? state.turn : state.turn + 1,
     },
-    events: { damageDealt: effect.damage, damageTaken, blocked, healed },
+    events: { damageDealt: effect.damage, damageTaken, blocked, healed, ...(shieldHit ? { shieldHit } : {}) },
   };
 }

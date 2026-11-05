@@ -120,9 +120,27 @@ export function migrateV6Save(old: SaveData, pack: Pack): SaveData {
   return { ...s, schemaVersion: SCHEMA_VERSION, stampedRegions: stamped, settings: { ...s.settings, lastFocus: 'all' } };
 }
 
-/** New creatures arrived: camp sightings are redrawn so they can show up. A trip in progress keeps its own. */
-export function refreshForContent(s: SaveData, pack: Pack): SaveData {
-  if (s.contentVersion === pack.version) return s;
+/** Creatures that were briefly in the game and then replaced, so a save that met one keeps it as its replacement. */
+const REPLACED: Record<string, string> = { pangoplate: 'armorfin', megachomp: 'seaneck', wombore: 'prairiepup' };
+
+/**
+ * New creatures arrived: camp sightings are redrawn so they can show up. A trip in progress keeps its own.
+ * Also redraws sightings of a creature no longer in the game, which would otherwise break the camp screen.
+ */
+export function refreshForContent(old: SaveData, pack: Pack): SaveData {
+  const known = new Set(pack.species.map((o) => o.id));
+  const replaced = [...old.companions, ...(old.wild ?? [])].some((c) => REPLACED[c.speciesId]);
+  const swap = (c: Companion): Companion => (REPLACED[c.speciesId] ? { ...c, speciesId: REPLACED[c.speciesId] as string } : c);
+  const swapped = replaced ? { ...old, companions: old.companions.map(swap), ...(old.wild ? { wild: old.wild.map(swap) } : {}) } : old;
+  // A trip or trip summary that meets a removed creature can't be shown, so it is dropped.
+  const mentions = (x: unknown) => x != null && Object.keys(REPLACED).some((id) => JSON.stringify(x).includes(`"${id}"`));
+  const s = {
+    ...swapped,
+    ...(mentions(swapped.expedition) ? { expedition: null } : {}),
+    ...(mentions(swapped.lastSummary) ? { lastSummary: null } : {}),
+  };
+  const stale = s.offers.some((o) => o.reward.kind === 'creature' && !known.has(o.reward.speciesId));
+  if (s.contentVersion === pack.version && !stale) return s;
   if (s.expedition) return s;
   const rng = new Rng(s.rngState);
   const { offers, nextId } = makeOffers(s, pack, rng);

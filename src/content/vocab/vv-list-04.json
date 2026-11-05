@@ -1,0 +1,380 @@
+{
+  "id": "vv-list-04",
+  "title": "Vocabulary Virtuoso List 4",
+  "order": 5,
+  "words": [
+    {
+      "word": "versatile",
+      "partOfSpeech": "adjective",
+      "definition": "Able to do many different things or be used in many ways",
+      "sentence": "A camel is a ____ animal because it can carry heavy loads, give milk, and cross hot deserts.",
+      "wrongDefinitions": [
+        "Very old and falling apart",
+        "Moving very slowly from place to place",
+        "Able to do only one single thing"
+      ],
+      "synonym": {
+        "right": "flexible",
+        "wrong": [
+          "fragile",
+          "sleepy",
+          "noisy"
+        ]
+      },
+      "antonym": {
+        "right": "limited",
+        "wrong": [
+          "hungry",
+          "bright",
+          "loud"
+        ]
+      },
+      "root": {
+        "part": "vers",
+        "meaning": "turn",
+        "wrongMeanings": [
+          "see",
+          "write",
+          "carry"
+        ]
+      }
+    },
+    {
+      "word": "neutral",
+      "partOfSpeech": "adjective",
+      "definition": "Not taking either side in an argument or contest",
+      "sentence": "Switzerland stayed ____ during many wars, choosing not to help or fight either side.",
+      "wrongDefinitions": [
+        "Strongly cheering for one team",
+        "Bright and full of many colors",
+        "Living deep under the ocean"
+      ],
+      "synonym": null,
+      "antonym": {
+        "right": "biased",
+        "wrong": [
+          "quiet",
+          "tiny",
+          "sleepy"
+        ]
+      },
+      "root": {
+        "part": "neutr",
+        "meaning": "neither one",
+        "wrongMeanings": [
+          "both together",
+          "new",
+          "night"
+        ]
+      }
+    },
+    {
+      "word": "egregious",
+      "partOfSpeech": "adjective",
+      "definition": "Shockingly bad and easy for everyone to notice",
+      "sentence": "Leaving the gate open at the zoo was an ____ mistake that let the monkeys escape.",
+      "wrongDefinitions": [
+        "Tiny and very hard to notice",
+        "Kind and very thoughtful",
+        "Happening once every hundred years"
+      ],
+      "synonym": {
+        "right": "awful",
+        "wrong": [
+          "gentle",
+          "tiny",
+          "careful"
+        ]
+      },
+      "antonym": {
+        "right": "minor",
+        "wrong": [
+          "wet",
+          "round",
+          "loud"
+        ]
+      },
+      "root": {
+        "part": "greg",
+        "meaning": "flock or herd",
+        "wrongMeanings": [
+          "egg",
+          "great",
+          "grain"
+        ]
+      }
+    },
+    {
+      "word": "banter",
+      "partOfSpeech": "noun",
+      "definition": "Friendly, playful joking back and forth between people",
+      "sentence": "The explorers shared cheerful ____ around the campfire, teasing each other about who snored loudest.",
+      "wrongDefinitions": [
+        "A heavy wooden club used for hunting",
+        "A long, angry argument that hurts feelings",
+        "A small boat with a flat bottom"
+      ],
+      "synonym": {
+        "right": "joking",
+        "wrong": [
+          "shouting",
+          "sleeping",
+          "digging"
+        ]
+      },
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "duplicity",
+      "partOfSpeech": "noun",
+      "definition": "Tricking people by saying one thing while secretly doing another",
+      "sentence": "The fox's ____ fooled the hens: it smiled sweetly while secretly planning to steal their eggs.",
+      "wrongDefinitions": [
+        "Making two copies of a drawing",
+        "Being honest and open with everyone",
+        "Great skill at climbing tall trees"
+      ],
+      "synonym": {
+        "right": "dishonesty",
+        "wrong": [
+          "kindness",
+          "laziness",
+          "bravery"
+        ]
+      },
+      "antonym": {
+        "right": "honesty",
+        "wrong": [
+          "sadness",
+          "speed",
+          "hunger"
+        ]
+      },
+      "root": {
+        "part": "dupl",
+        "meaning": "double, twofold",
+        "wrongMeanings": [
+          "light",
+          "water",
+          "small"
+        ]
+      }
+    },
+    {
+      "word": "languish",
+      "partOfSpeech": "verb",
+      "definition": "To grow weak or stay stuck in a bad, unhappy situation",
+      "sentence": "Without sunlight and water, the tomato plants began to ____ and droop in the dark shed.",
+      "wrongDefinitions": [
+        "To speak many languages at once",
+        "To grow quickly and become strong",
+        "To swim across a wide river"
+      ],
+      "synonym": {
+        "right": "weaken",
+        "wrong": [
+          "celebrate",
+          "explode",
+          "giggle"
+        ]
+      },
+      "antonym": {
+        "right": "thrive",
+        "wrong": [
+          "whisper",
+          "borrow",
+          "paint"
+        ]
+      },
+      "root": {
+        "part": "langu",
+        "meaning": "weak or faint",
+        "wrongMeanings": [
+          "tongue",
+          "long",
+          "land"
+        ]
+      }
+    },
+    {
+      "word": "impasse",
+      "partOfSpeech": "noun",
+      "definition": "A situation where no progress is possible, like a dead end",
+      "sentence": "The two teams reached an ____ because neither would agree on where to build the new bridge.",
+      "wrongDefinitions": [
+        "A secret tunnel through a mountain",
+        "A quick and easy shortcut home",
+        "A ticket that lets you enter a park"
+      ],
+      "synonym": {
+        "right": "dead end",
+        "wrong": [
+          "shortcut",
+          "festival",
+          "rainstorm"
+        ]
+      },
+      "antonym": {
+        "right": "breakthrough",
+        "wrong": [
+          "volcano",
+          "lunchbox",
+          "whisper"
+        ]
+      },
+      "root": {
+        "part": "im",
+        "meaning": "not",
+        "wrongMeanings": [
+          "again",
+          "before",
+          "around"
+        ]
+      }
+    },
+    {
+      "word": "unwieldy",
+      "partOfSpeech": "adjective",
+      "definition": "Hard to carry or handle because it is big, heavy, or awkward",
+      "sentence": "The explorers struggled to drag the ____ canoe through the thick jungle, bumping into every tree.",
+      "wrongDefinitions": [
+        "Light and very easy to carry",
+        "Shiny and brand new",
+        "Able to float high in the air"
+      ],
+      "synonym": {
+        "right": "awkward",
+        "wrong": [
+          "tiny",
+          "tasty",
+          "quiet"
+        ]
+      },
+      "antonym": {
+        "right": "manageable",
+        "wrong": [
+          "sleepy",
+          "golden",
+          "noisy"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "quarantine",
+      "partOfSpeech": "noun",
+      "definition": "Keeping sick people or animals apart so an illness won't spread",
+      "sentence": "The new puppy stayed in ____ for two weeks so it would not spread germs to the other dogs.",
+      "wrongDefinitions": [
+        "A coin worth one quarter of a dollar",
+        "A big party to welcome travelers home",
+        "A tall tower for watching ships"
+      ],
+      "synonym": {
+        "right": "isolation",
+        "wrong": [
+          "celebration",
+          "vacation",
+          "decoration"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "quarant",
+        "meaning": "forty",
+        "wrongMeanings": [
+          "four",
+          "sick",
+          "quiet"
+        ]
+      }
+    },
+    {
+      "word": "alacrity",
+      "partOfSpeech": "noun",
+      "definition": "Cheerful eagerness and speed in doing something",
+      "sentence": "When the bell rang for the hike, the campers grabbed their backpacks with ____ and raced outside.",
+      "wrongDefinitions": [
+        "Slow, grumpy unwillingness to help",
+        "A loud warning bell or siren",
+        "A bright red color found in sunsets"
+      ],
+      "synonym": {
+        "right": "eagerness",
+        "wrong": [
+          "sadness",
+          "darkness",
+          "silence"
+        ]
+      },
+      "antonym": {
+        "right": "reluctance",
+        "wrong": [
+          "thunder",
+          "kindness",
+          "music"
+        ]
+      },
+      "root": {
+        "part": "alacr",
+        "meaning": "lively, eager",
+        "wrongMeanings": [
+          "sleepy",
+          "heavy",
+          "old"
+        ]
+      }
+    },
+    {
+      "word": "juggernaut",
+      "partOfSpeech": "noun",
+      "definition": "A huge, powerful force that crushes everything in its way",
+      "sentence": "The huge avalanche roared down the mountain like a ____, flattening trees and boulders in its path.",
+      "wrongDefinitions": [
+        "A person who tosses balls in the air",
+        "A tiny, weak creature that hides easily",
+        "A sailor who explores icy seas"
+      ],
+      "synonym": null,
+      "antonym": {
+        "right": "weakling",
+        "wrong": [
+          "sandwich",
+          "painter",
+          "river"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "vertigo",
+      "partOfSpeech": "noun",
+      "definition": "A dizzy feeling, as if everything is spinning, often from heights",
+      "sentence": "Peering down from the top of the tall lighthouse gave Maya ____, so she gripped the railing tightly.",
+      "wrongDefinitions": [
+        "A strong love of climbing high mountains",
+        "A green plant that grows on walls",
+        "A feeling of being very calm and steady"
+      ],
+      "synonym": {
+        "right": "dizziness",
+        "wrong": [
+          "hunger",
+          "courage",
+          "boredom"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "vert",
+        "meaning": "turn",
+        "wrongMeanings": [
+          "climb",
+          "green",
+          "sleep"
+        ]
+      }
+    }
+  ]
+}

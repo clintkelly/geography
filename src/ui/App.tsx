@@ -13,6 +13,9 @@ import { ProfileSelect } from './ProfileSelect';
 import { Event } from './Event';
 import { Prep } from './Prep';
 import { ExpeditionComplete, Route } from './Route';
+import { LodgeComplete, LodgeHall } from './Lodges';
+import { LodgeQuiz } from './LodgeQuiz';
+import { HatchReveal } from './Eggs';
 import { Settings } from './Settings';
 import { Sprite } from './art';
 import { configureSound } from './sound';
@@ -39,18 +42,21 @@ export function App() {
   if (!save) body = <ProfileSelect household={household} onPick={setActiveProfile} />;
   else if (settingsOpen) body = <Settings save={save} household={household} store={store} dispatch={dispatch} restore={(h) => { setSettingsOpen(false); restore(h); }} onClose={() => setSettingsOpen(false)} />;
   else if (save.masteryTest) body = <MasteryTest test={save.masteryTest} dispatch={dispatch} />;
+  else if (save.lodgeQuiz) body = <LodgeQuiz quiz={save.lodgeQuiz} dispatch={dispatch} />;
+  else if (!e && save.hatched) body = <HatchReveal key={save.hatched.instanceId} save={save} dispatch={dispatch} />;
   else if (!e && evolving) body = <Evolution key={evolving.instanceId} companion={evolving} dispatch={dispatch} />;
   else if (!e) body = <Camp save={save} dispatch={dispatch} onSwitch={() => setActiveProfile(null)} onSettings={() => setSettingsOpen(true)} />;
   else if (!e.prepared) body = <Prep e={e} save={save} dispatch={dispatch} />;
   else if (e.event) body = <Event key={e.event.id} e={e} event={e.event} save={save} dispatch={dispatch} />;
   else if (e.discovery === 'searching') body = <Discovery key={e.id} e={e} save={save} dispatch={dispatch} />;
   else if (e.battle) body = <Battle key={e.battle.id} e={e} battle={e.battle} save={save} dispatch={dispatch} />;
-  else if (isExpeditionComplete(e)) body = <ExpeditionComplete e={e} dispatch={dispatch} />;
+  else if (isExpeditionComplete(e)) body = e.lodgeId ? <LodgeComplete e={e} save={save} dispatch={dispatch} /> : <ExpeditionComplete e={e} save={save} dispatch={dispatch} />;
+  else if (e.lodgeId) body = <LodgeHall key={e.id} e={e} save={save} dispatch={dispatch} />;
   else body = <Route key={e.id} e={e} save={save} dispatch={dispatch} />;
 
   if (save) configureSound(save.settings);
   // Each new kind of screen gets a quick wipe. Turns within a battle don't.
-  const screenKey = !save ? 'profiles' : settingsOpen ? 'settings' : save.masteryTest ? `mastery-${save.masteryTest.outcome ?? 'test'}` : !e ? 'camp' : e.battle ? e.battle.id : e.event ? e.event.id : `${e.discovery}-${e.slots.filter((s) => s.status === 'won').length}`;
+  const screenKey = !save ? 'profiles' : settingsOpen ? 'settings' : save.masteryTest ? `mastery-${save.masteryTest.outcome ?? 'test'}` : save.lodgeQuiz ? `quiz-${save.lodgeQuiz.kind}-${save.lodgeQuiz.outcome ?? 'test'}` : save.hatched ? 'hatch' : !e ? 'camp' : e.battle ? e.battle.id : e.event ? e.event.id : `${e.discovery}-${e.slots.filter((s) => s.status === 'won').length}`;
 
   return (
     <div className="app">

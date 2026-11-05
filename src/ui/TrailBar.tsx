@@ -8,6 +8,11 @@ import { streakReward } from '../engine/streak';
 import { Fx } from './art';
 import { region } from './content';
 import { playSound } from './sound';
+import { PointsGuide } from './PointsGuide';
+import { lodgeById } from '../engine/lodges';
+import { species } from './content';
+import { EGG_METER, RARE_EVERY } from '../engine/eggs';
+import { studySubject } from '../engine/game';
 
 /** Coins fly up into the counter, which ticks along to the new total. */
 function Points({ points }: { points: number }) {
@@ -124,6 +129,21 @@ function StreakBanner({ streak }: { streak: number }) {
   );
 }
 
+/** How many more right answers lay the next egg. */
+function EggCell({ save, subject }: { save: SaveData; subject: 'math' | 'words' }) {
+  const m = save.eggMeter ?? { math: 0, words: 0, laid: 0 };
+  const left = EGG_METER - m[subject];
+  const rare = (m.laid + 1) % RARE_EVERY === 0;
+  const full = (save.eggs?.length ?? 0) >= 3;
+  return (
+    <span className="hud-cell egg-cell" title={`Every ${EGG_METER} right ${subject === 'math' ? 'math' : 'vocabulary'} answers lay an egg.`}>
+      <span className="hud-label">Egg Meter</span>
+      <span className="score-row"><span className="score-track"><span className="score-fill egg-fill" style={{ width: `${(m[subject] / EGG_METER) * 100}%` }} /></span></span>
+      <small>{full ? 'Nest full: hatch one at camp' : `${left} more right for a${rare ? ' Rare' : subject === 'math' ? ' Math' : ' Word'} Egg`}</small>
+    </span>
+  );
+}
+
 const STOP_NAME: Record<StopKind, string> = { regular: 'Battle', event: 'Trail event', guardian: 'Final battle' };
 const LEVEL_NAME: Record<Difficulty, string> = { scout: 'Scout', ranger: 'Ranger', expert: 'Expert' };
 
@@ -133,27 +153,48 @@ export function TrailBar({ e, save }: { e: Expedition; save: SaveData }) {
   const stop = index === -1 ? e.slots.length : index + 1;
   const streak = e.streak ?? 0;
   const now = e.slots[index];
+  const [help, setHelp] = useState(false);
+  const lodge = lodgeById(PACK, e.lodgeId);
+  const stopName = (s: (typeof e.slots)[number]) => (lodge ? s.trainer ?? 'Battle' : STOP_NAME[s.kind]);
   return (
+    <>
     <div className="trailbar" role="status">
       <span className="hud-cell">
-        <span className="hud-label">{region(e.regionId).label} · {LEVEL_NAME[e.difficulty]}</span>
+        <span className="hud-label">{lodge ? `${lodge.name}${e.lodgeTier && e.lodgeTier !== 'bronze' ? ` (${e.lodgeTier === 'gold' ? 'Gold' : 'Silver'})` : ''}` : region(e.regionId).label} · {LEVEL_NAME[e.difficulty]}</span>
         <span className="stops" aria-label={`Stop ${stop} of ${e.slots.length}`}>
-          {e.slots.map((s, i) => <span key={i} title={STOP_NAME[s.kind]} className={`stop stop-${s.kind} ${s.status === 'won' ? 'done' : i === index ? 'now' : ''}`} />)}
+          {e.slots.map((s, i) => <span key={i} title={stopName(s)} className={`stop stop-${s.kind} ${s.status === 'won' ? 'done' : i === index ? 'now' : ''}`} />)}
         </span>
-        <small>Stop {stop} of {e.slots.length}{now ? `: ${STOP_NAME[now.kind]}` : ''}</small>
+        <small>{lodge ? 'Battle' : 'Stop'} {stop} of {e.slots.length}{now ? `: ${stopName(now)}` : ''}</small>
       </span>
-      <span className="hud-cell">
-        <span className="hud-label">Trail Points</span>
+      <button type="button" className="hud-cell hud-button" aria-expanded={help} aria-describedby="points-tip" onClick={() => setHelp(!help)}>
+        <span className="hud-label">Trail Points <span className="hud-help" aria-hidden="true">?</span></span>
         <Points points={e.points} />
         {e.snack && <small>Trail Snack packed</small>}
-      </span>
+        <span id="points-tip" role="tooltip" className="hud-tip">
+          <strong>Trail Points</strong> are your money for this trail. Win battles and get answers right to earn more. Spend them on {lodge ? 'the Prep Shop' : 'clues and the Prep Shop'}. Points left at the end become XP for your lead creature. <em>Click to learn more.</em>
+        </span>
+      </button>
       <Streak streak={streak} />
-      <Rare e={e} save={save} />
-      <span className="hud-cell">
-        <span className="hud-label">Hunting</span>
-        <strong>{e.reward.kind === 'creature' ? 'A mystery creature' : 'A rival'}</strong>
-      </span>
+      {lodge ? (
+        <span className="hud-cell">
+          <span className="hud-label">Lodge prize</span>
+          <strong>{(save.lodgesBeaten ?? []).includes(lodge.id) ? 'XP rematch' : `${lodge.name.replace(' Lodge', '')} Patch`}</strong>
+          {!(save.lodgesBeaten ?? []).includes(lodge.id) && <small>and {species(lodge.prizeSpeciesId).displayName}</small>}
+        </span>
+      ) : (
+        <>
+          <Rare e={e} save={save} />
+          {studySubject(e.focus) ? <EggCell save={save} subject={studySubject(e.focus)!} /> : (
+            <span className="hud-cell">
+              <span className="hud-label">Hunting</span>
+              <strong>{e.reward.kind === 'creature' ? 'A mystery creature' : 'A rival'}</strong>
+            </span>
+          )}
+        </>
+      )}
       <StreakBanner streak={streak} />
     </div>
+    {help && <PointsGuide open />}
+    </>
   );
 }

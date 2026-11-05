@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { activeCompanion, currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
 import { TRAIL_EVENTS } from '../engine/events';
 import { artUrl, Fx, Sprite } from './art';
-import { mapFor, place, rewardLabel, species } from './content';
+import { companionView, mapFor, place, rewardLabel, species } from './content';
 import { Key, useKeys } from './keys';
 import { playSound } from './sound';
 import { TrailBar } from './TrailBar';
@@ -92,7 +92,7 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
   );
 }
 
-export function ExpeditionComplete({ e, dispatch }: { e: Expedition; dispatch: (c: Command) => void }) {
+export function ExpeditionComplete({ e, save, dispatch }: { e: Expedition; save: SaveData; dispatch: (c: Command) => void }) {
   useKeys({ enter: () => dispatch({ type: 'claimReward' }) });
   const { reward } = e;
   return (
@@ -105,7 +105,8 @@ export function ExpeditionComplete({ e, dispatch }: { e: Expedition; dispatch: (
         </div>
       )}
       <p className="learn">{reward.kind === 'creature' ? <><strong>{rewardLabel(reward)}</strong> wants to join your stable!</> : <>You earned <strong>{rewardLabel(reward)}</strong>.</>}</p>
-      <p className="muted">{e.correct} of {e.answered} answers correct · {e.points} leftover Trail Points become XP</p>
+      <p className="muted">{e.correct} of {e.answered} answers correct</p>
+      {e.points > 0 && <p className="learn">Your {e.points} leftover Trail Points turn into <strong>{e.points} XP</strong> for {companionView(activeCompanion(save)).name}!</p>}
       <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{reward.kind === 'creature' ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>
     </section>
   );

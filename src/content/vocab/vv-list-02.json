@@ -1,0 +1,349 @@
+{
+  "id": "vv-list-02",
+  "title": "Vocabulary Virtuoso List 2",
+  "order": 3,
+  "words": [
+    {
+      "word": "whet",
+      "partOfSpeech": "verb",
+      "definition": "To sharpen a blade or make a feeling like hunger stronger",
+      "sentence": "The smell of grilled fish drifting across the harbor began to ____ the hungry sea lion's appetite.",
+      "wrongDefinitions": [
+        "To soak something completely in water",
+        "To weigh something carefully on a scale",
+        "To ruin a meal by burning it"
+      ],
+      "synonym": {
+        "right": "sharpen",
+        "wrong": [
+          "soak",
+          "freeze",
+          "hide"
+        ]
+      },
+      "antonym": {
+        "right": "dull",
+        "wrong": [
+          "paint",
+          "sing",
+          "count"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "calamity",
+      "partOfSpeech": "noun",
+      "definition": "A terrible event that causes great harm or loss",
+      "sentence": "The flood was a ____ for the village, but neighbors worked together to rebuild every home.",
+      "wrongDefinitions": [
+        "A big celebration with music and food",
+        "A calm and quiet place to rest",
+        "A small mistake that is easy to fix"
+      ],
+      "synonym": {
+        "right": "disaster",
+        "wrong": [
+          "party",
+          "victory",
+          "nap"
+        ]
+      },
+      "antonym": {
+        "right": "blessing",
+        "wrong": [
+          "ladder",
+          "pencil",
+          "journey"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "encore",
+      "partOfSpeech": "noun",
+      "definition": "An extra song or act performed because the audience asks for more",
+      "sentence": "The crowd cheered so loudly after the penguin parade that the zookeepers brought the penguins back for an ____.",
+      "wrongDefinitions": [
+        "The very first song at the start of a show",
+        "A ticket used to enter a theater",
+        "A quiet break when the audience leaves"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": null
+    },
+    {
+      "word": "flagrant",
+      "partOfSpeech": "adjective",
+      "definition": "So obviously wrong or bad that everyone can easily notice it",
+      "sentence": "Pushing past everyone to grab the last canoe was a ____ break of the camp's sharing rule.",
+      "wrongDefinitions": [
+        "Having a sweet and pleasant smell",
+        "Waving proudly like a flag in the wind",
+        "Done so secretly that nobody notices"
+      ],
+      "synonym": {
+        "right": "obvious",
+        "wrong": [
+          "hidden",
+          "gentle",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "hidden",
+        "wrong": [
+          "loud",
+          "angry",
+          "wooden"
+        ]
+      },
+      "root": {
+        "part": "flagr",
+        "meaning": "to burn",
+        "wrongMeanings": [
+          "to fly",
+          "to wave",
+          "to smell"
+        ]
+      }
+    },
+    {
+      "word": "glib",
+      "partOfSpeech": "adjective",
+      "definition": "Speaking smoothly and quickly but without real thought or honesty",
+      "sentence": "When the fox gave a ____ excuse about the missing eggs, the farmer knew he wasn't telling the truth.",
+      "wrongDefinitions": [
+        "Shy and unable to find the right words",
+        "Sticky and covered in glue",
+        "Deeply honest and carefully thought out"
+      ],
+      "synonym": {
+        "right": "slick",
+        "wrong": [
+          "honest",
+          "shy",
+          "clumsy"
+        ]
+      },
+      "antonym": {
+        "right": "sincere",
+        "wrong": [
+          "hungry",
+          "tall",
+          "noisy"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "hypothermia",
+      "partOfSpeech": "noun",
+      "definition": "A dangerous condition when the body gets far too cold",
+      "sentence": "Polar explorers wear thick layers of fur and wool to protect themselves from ____ in the freezing Arctic.",
+      "wrongDefinitions": [
+        "A dangerous condition when the body gets far too hot",
+        "Fear of going underground into dark places",
+        "A sickness caused by eating too much candy"
+      ],
+      "synonym": null,
+      "antonym": {
+        "right": "heatstroke",
+        "wrong": [
+          "frostbite",
+          "sunrise",
+          "sneezing"
+        ]
+      },
+      "root": {
+        "part": "therm",
+        "meaning": "heat",
+        "wrongMeanings": [
+          "water",
+          "skin",
+          "breath"
+        ]
+      }
+    },
+    {
+      "word": "jaunty",
+      "partOfSpeech": "adjective",
+      "definition": "Cheerful, lively and confident in the way someone moves or looks",
+      "sentence": "The little puffin waddled along the cliff with a ____ step, as if it owned the whole island.",
+      "wrongDefinitions": [
+        "Tired, slow and grumpy",
+        "Thin and pale from hunger",
+        "Scared of meeting new people"
+      ],
+      "synonym": {
+        "right": "cheerful",
+        "wrong": [
+          "gloomy",
+          "sleepy",
+          "angry"
+        ]
+      },
+      "antonym": {
+        "right": "gloomy",
+        "wrong": [
+          "fast",
+          "loud",
+          "small"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "malleable",
+      "partOfSpeech": "adjective",
+      "definition": "Easy to bend, press or shape without breaking",
+      "sentence": "Gold is so ____ that ancient artists hammered it into sheets thinner than a leaf.",
+      "wrongDefinitions": [
+        "Hard and likely to crack when hit",
+        "Shiny like a brand-new coin",
+        "Too heavy for one person to lift"
+      ],
+      "synonym": {
+        "right": "bendable",
+        "wrong": [
+          "brittle",
+          "shiny",
+          "heavy"
+        ]
+      },
+      "antonym": {
+        "right": "stiff",
+        "wrong": [
+          "soft",
+          "warm",
+          "golden"
+        ]
+      },
+      "root": {
+        "part": "malle",
+        "meaning": "hammer",
+        "wrongMeanings": [
+          "bad",
+          "metal",
+          "fire"
+        ]
+      }
+    },
+    {
+      "word": "nettle",
+      "partOfSpeech": "verb",
+      "definition": "To annoy or bother someone a little",
+      "sentence": "The buzzing mosquitoes began to ____ the campers, who swatted at them all night long.",
+      "wrongDefinitions": [
+        "To calm someone down with kind words",
+        "To sew two pieces of cloth together",
+        "To catch fish with a big net"
+      ],
+      "synonym": {
+        "right": "annoy",
+        "wrong": [
+          "calm",
+          "feed",
+          "praise"
+        ]
+      },
+      "antonym": {
+        "right": "soothe",
+        "wrong": [
+          "carry",
+          "follow",
+          "paint"
+        ]
+      },
+      "root": null
+    },
+    {
+      "word": "oxymoron",
+      "partOfSpeech": "noun",
+      "definition": "A phrase that puts two opposite words together, like 'jumbo shrimp'",
+      "sentence": "Calling the huge elephant a tiny giant is an ____, because tiny and giant are opposites.",
+      "wrongDefinitions": [
+        "A word that sounds like the noise it describes",
+        "A gas that animals need to breathe",
+        "A word that reads the same backward and forward"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "oxy",
+        "meaning": "sharp",
+        "wrongMeanings": [
+          "air",
+          "slow",
+          "round"
+        ]
+      }
+    },
+    {
+      "word": "spelunker",
+      "partOfSpeech": "noun",
+      "definition": "A person who explores caves for fun",
+      "sentence": "With a headlamp and helmet, the brave ____ squeezed through a narrow tunnel to find a glittering underground lake.",
+      "wrongDefinitions": [
+        "A person who studies stars through a telescope",
+        "A person who dives deep under the ocean",
+        "A person who checks spelling in books"
+      ],
+      "synonym": {
+        "right": "caver",
+        "wrong": [
+          "sailor",
+          "pilot",
+          "baker"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "spelunk",
+        "meaning": "cave",
+        "wrongMeanings": [
+          "mountain",
+          "river",
+          "lamp"
+        ]
+      }
+    },
+    {
+      "word": "zephyr",
+      "partOfSpeech": "noun",
+      "definition": "A soft, gentle breeze, often from the west",
+      "sentence": "A warm ____ drifted across the meadow, barely ruffling the butterflies' wings as they rested on flowers.",
+      "wrongDefinitions": [
+        "A fierce storm with crashing thunder",
+        "A striped animal from Africa",
+        "A tall mountain covered in snow"
+      ],
+      "synonym": {
+        "right": "breeze",
+        "wrong": [
+          "flood",
+          "boulder",
+          "blizzard"
+        ]
+      },
+      "antonym": {
+        "right": "hurricane",
+        "wrong": [
+          "puddle",
+          "pebble",
+          "sunbeam"
+        ]
+      },
+      "root": {
+        "part": "zephyr",
+        "meaning": "west wind",
+        "wrongMeanings": [
+          "north star",
+          "ocean wave",
+          "mountain peak"
+        ]
+      }
+    }
+  ]
+}

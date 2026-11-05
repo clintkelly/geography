@@ -1,0 +1,362 @@
+{
+  "id": "starter-roots",
+  "title": "Starter: roots",
+  "order": 0,
+  "words": [
+    {
+      "word": "benevolent",
+      "partOfSpeech": "adjective",
+      "definition": "Kind and wanting to help others",
+      "sentence": "The ____ queen gave every family in the village warm blankets and fresh bread for winter.",
+      "wrongDefinitions": [
+        "Very loud and hard to ignore",
+        "Afraid of going outside at night",
+        "Able to run very fast"
+      ],
+      "synonym": {
+        "right": "kind",
+        "wrong": [
+          "angry",
+          "sleepy",
+          "tiny"
+        ]
+      },
+      "antonym": {
+        "right": "cruel",
+        "wrong": [
+          "tall",
+          "hungry",
+          "early"
+        ]
+      },
+      "root": {
+        "part": "bene",
+        "meaning": "good, well",
+        "wrongMeanings": [
+          "bad",
+          "water",
+          "time"
+        ]
+      }
+    },
+    {
+      "word": "malevolent",
+      "partOfSpeech": "adjective",
+      "definition": "Wanting to cause harm or bad things to others",
+      "sentence": "In the story, a ____ wizard cast a spell to freeze the river so no ships could sail.",
+      "wrongDefinitions": [
+        "Happy to share with friends",
+        "Covered in thick fur",
+        "Too small to see"
+      ],
+      "synonym": {
+        "right": "evil",
+        "wrong": [
+          "kind",
+          "brave",
+          "sleepy"
+        ]
+      },
+      "antonym": {
+        "right": "kind",
+        "wrong": [
+          "loud",
+          "old",
+          "fast"
+        ]
+      },
+      "root": {
+        "part": "mal",
+        "meaning": "bad",
+        "wrongMeanings": [
+          "sea",
+          "light",
+          "many"
+        ]
+      }
+    },
+    {
+      "word": "audible",
+      "partOfSpeech": "adjective",
+      "definition": "Loud enough to be heard",
+      "sentence": "The tiny mouse's squeak was barely ____ over the roar of the waterfall.",
+      "wrongDefinitions": [
+        "Easy to see in the dark",
+        "Tasting sweet like honey",
+        "Soft and smooth to touch"
+      ],
+      "synonym": null,
+      "antonym": {
+        "right": "silent",
+        "wrong": [
+          "bright",
+          "heavy",
+          "early"
+        ]
+      },
+      "root": {
+        "part": "aud",
+        "meaning": "hear",
+        "wrongMeanings": [
+          "see",
+          "carry",
+          "write"
+        ]
+      }
+    },
+    {
+      "word": "credible",
+      "partOfSpeech": "adjective",
+      "definition": "Easy to believe or trust",
+      "sentence": "The explorer's story seemed ____ because she brought back photos of the giant footprints.",
+      "wrongDefinitions": [
+        "Very funny and silly",
+        "Hard to see through",
+        "Made of strong metal"
+      ],
+      "synonym": {
+        "right": "believable",
+        "wrong": [
+          "colorful",
+          "frozen",
+          "hungry"
+        ]
+      },
+      "antonym": {
+        "right": "unbelievable",
+        "wrong": [
+          "green",
+          "quick",
+          "heavy"
+        ]
+      },
+      "root": {
+        "part": "cred",
+        "meaning": "believe",
+        "wrongMeanings": [
+          "hear",
+          "look",
+          "carry"
+        ]
+      }
+    },
+    {
+      "word": "transport",
+      "partOfSpeech": "verb",
+      "definition": "To carry people or things from one place to another",
+      "sentence": "Camels can ____ heavy bags of salt across the hot Sahara Desert for many days.",
+      "wrongDefinitions": [
+        "To paint something a bright new color",
+        "To sleep through the winter",
+        "To break something into small pieces"
+      ],
+      "synonym": {
+        "right": "carry",
+        "wrong": [
+          "eat",
+          "hide",
+          "break"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "trans",
+        "meaning": "across",
+        "wrongMeanings": [
+          "under",
+          "before",
+          "against"
+        ]
+      }
+    },
+    {
+      "word": "portable",
+      "partOfSpeech": "adjective",
+      "definition": "Light and small enough to carry easily",
+      "sentence": "We packed a ____ stove so we could cook hot soup at our mountain campsite.",
+      "wrongDefinitions": [
+        "Too heavy to lift or move",
+        "Used only under water",
+        "Very old and falling apart"
+      ],
+      "synonym": {
+        "right": "movable",
+        "wrong": [
+          "broken",
+          "frozen",
+          "noisy"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "port",
+        "meaning": "carry",
+        "wrongMeanings": [
+          "throw",
+          "see",
+          "build"
+        ]
+      }
+    },
+    {
+      "word": "spectator",
+      "partOfSpeech": "noun",
+      "definition": "A person who watches an event, like a game or show",
+      "sentence": "Every ____ in the crowd cheered when the sled dogs raced across the snowy finish line.",
+      "wrongDefinitions": [
+        "A person who builds houses",
+        "A person who flies airplanes",
+        "A person who cooks food at a restaurant"
+      ],
+      "synonym": {
+        "right": "viewer",
+        "wrong": [
+          "cook",
+          "driver",
+          "builder"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "spect",
+        "meaning": "look",
+        "wrongMeanings": [
+          "carry",
+          "hear",
+          "write"
+        ]
+      }
+    },
+    {
+      "word": "inspect",
+      "partOfSpeech": "verb",
+      "definition": "To look at something closely and carefully",
+      "sentence": "The scientist used a magnifying glass to ____ the strange beetle she found in the jungle.",
+      "wrongDefinitions": [
+        "To throw something far away",
+        "To sing a song loudly",
+        "To hide something under the ground"
+      ],
+      "synonym": {
+        "right": "check",
+        "wrong": [
+          "throw",
+          "sing",
+          "bury"
+        ]
+      },
+      "antonym": {
+        "right": "ignore",
+        "wrong": [
+          "swim",
+          "build",
+          "cook"
+        ]
+      },
+      "root": {
+        "part": "spect",
+        "meaning": "look",
+        "wrongMeanings": [
+          "carry",
+          "believe",
+          "water"
+        ]
+      }
+    },
+    {
+      "word": "chronological",
+      "partOfSpeech": "adjective",
+      "definition": "Arranged in the order that things happened in time",
+      "sentence": "The museum showed the dinosaur fossils in ____ order, from the oldest to the newest.",
+      "wrongDefinitions": [
+        "Arranged by color, like a rainbow",
+        "Arranged from biggest to smallest",
+        "Mixed up with no order at all"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "chron",
+        "meaning": "time",
+        "wrongMeanings": [
+          "water",
+          "far",
+          "sound"
+        ]
+      }
+    },
+    {
+      "word": "autograph",
+      "partOfSpeech": "noun",
+      "definition": "A famous person's name written in their own handwriting",
+      "sentence": "After the talk, the famous ocean explorer signed her ____ on my map of the coral reef.",
+      "wrongDefinitions": [
+        "A picture taken from very high up",
+        "A machine that drives a car by itself",
+        "A chart that shows the weather"
+      ],
+      "synonym": {
+        "right": "signature",
+        "wrong": [
+          "photo",
+          "ticket",
+          "poster"
+        ]
+      },
+      "antonym": null,
+      "root": {
+        "part": "auto",
+        "meaning": "self",
+        "wrongMeanings": [
+          "far",
+          "many",
+          "water"
+        ]
+      }
+    },
+    {
+      "word": "telescope",
+      "partOfSpeech": "noun",
+      "definition": "A tool that makes faraway things look bigger and closer",
+      "sentence": "Through her ____, Maya could see the craters on the moon and the rings of Saturn.",
+      "wrongDefinitions": [
+        "A tool for measuring how hot it is",
+        "A machine that records sounds",
+        "A tool for digging deep holes"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "tele",
+        "meaning": "far",
+        "wrongMeanings": [
+          "small",
+          "sound",
+          "self"
+        ]
+      }
+    },
+    {
+      "word": "aquatic",
+      "partOfSpeech": "adjective",
+      "definition": "Living or growing in water",
+      "sentence": "Frogs, turtles and many other ____ animals live in the muddy pond behind our house.",
+      "wrongDefinitions": [
+        "Living high in the mountains",
+        "Able to fly long distances",
+        "Active only at night"
+      ],
+      "synonym": null,
+      "antonym": null,
+      "root": {
+        "part": "aqua",
+        "meaning": "water",
+        "wrongMeanings": [
+          "fire",
+          "sky",
+          "earth"
+        ]
+      }
+    }
+  ]
+}

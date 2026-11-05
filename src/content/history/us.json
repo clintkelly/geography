@@ -1,0 +1,437 @@
+{
+  "pennsylvania": [
+    {
+      "fact": "In 1863 Abraham Lincoln gave his short, famous Gettysburg Address in Gettysburg, Pennsylvania.",
+      "ask": "In which state did Abraham Lincoln give his famous Gettysburg Address in 1863?",
+      "source": "https://en.wikipedia.org/wiki/Gettysburg_Address"
+    }
+  ],
+  "georgia": [
+    {
+      "fact": "Georgia was the last of the 13 original colonies to be founded, in 1733, by James Oglethorpe.",
+      "ask": "Which was the last of the 13 original colonies to be founded, by James Oglethorpe in 1733?",
+      "source": "https://en.wikipedia.org/wiki/Province_of_Georgia"
+    }
+  ],
+  "connecticut": [
+    {
+      "fact": "Connecticut's Fundamental Orders of 1639 are often called one of the first written constitutions, which is why it is nicknamed the Constitution State.",
+      "ask": "Which state's 1639 Fundamental Orders are called one of the first written constitutions?",
+      "source": "https://en.wikipedia.org/wiki/Fundamental_Orders_of_Connecticut"
+    }
+  ],
+  "massachusetts": [
+    {
+      "fact": "Harvard, in Massachusetts, is the oldest college in the United States. It was founded in 1636.",
+      "ask": "Which state is home to Harvard, the oldest college in the US, founded in 1636?",
+      "source": "https://en.wikipedia.org/wiki/Harvard_University"
+    }
+  ],
+  "rhode-island": [
+    {
+      "fact": "Slater Mill in Pawtucket, Rhode Island, finished in 1793, was the first water-powered cotton-spinning mill in America to use the English Arkwright system.",
+      "ask": "Which state's Slater Mill, from 1793, was one of America's first water-powered cotton mills?",
+      "source": "https://en.wikipedia.org/wiki/Slater_Mill"
+    },
+    {
+      "fact": "On May 4, 1776, Rhode Island became the first of the 13 colonies to declare its independence from Britain.",
+      "ask": "Which colony was the first of the 13 to declare independence from Britain, on May 4, 1776?",
+      "source": "https://en.wikipedia.org/wiki/Rhode_Island"
+    }
+  ],
+  "new-hampshire": [
+    {
+      "fact": "Alan Shepard, the first American to travel into space in 1961, was born in Derry, New Hampshire.",
+      "ask": "Which state was Alan Shepard born in, the first American to fly into space?",
+      "source": "https://en.wikipedia.org/wiki/Alan_Shepard"
+    }
+  ],
+  "vermont": [
+    {
+      "fact": "Vermont was its own independent republic from 1777 to 1791, then joined the US as the 14th state.",
+      "ask": "Which state was its own independent republic before joining the US as the 14th state in 1791?",
+      "source": "https://en.wikipedia.org/wiki/Vermont"
+    }
+  ],
+  "maine": [
+    {
+      "fact": "Maine was part of Massachusetts until 1820, when it became the 23rd state.",
+      "ask": "Which state was part of Massachusetts until it became a state of its own in 1820?",
+      "source": "https://en.wikipedia.org/wiki/District_of_Maine"
+    }
+  ],
+  "new-york": [
+    {
+      "fact": "The Erie Canal opened across New York in 1825, letting boats travel from the Great Lakes to the Hudson River and the Atlantic.",
+      "ask": "Which state's Erie Canal, opened in 1825, linked the Great Lakes to the Hudson River?",
+      "source": "https://en.wikipedia.org/wiki/Erie_Canal"
+    },
+    {
+      "fact": "George Washington was sworn in as the first US president in 1789 at Federal Hall in New York City, which was then the nation's capital.",
+      "ask": "In which state was George Washington sworn in as the first president, in 1789?",
+      "source": "https://en.wikipedia.org/wiki/Federal_Hall"
+    }
+  ],
+  "virginia": [
+    {
+      "fact": "George Washington's home, Mount Vernon, sits beside the Potomac River in Virginia.",
+      "ask": "Which state is home to Mount Vernon, the plantation home of George Washington?",
+      "source": "https://en.wikipedia.org/wiki/Mount_Vernon"
+    }
+  ],
+  "maryland": [
+    {
+      "fact": "Harriet Tubman, who led many people to freedom on the Underground Railroad, was born in Dorchester County, Maryland.",
+      "ask": "In which state was Harriet Tubman born, the brave Underground Railroad conductor?",
+      "source": "https://en.wikipedia.org/wiki/Harriet_Tubman"
+    }
+  ],
+  "north-carolina": [
+    {
+      "fact": "The \"Lost Colony\" of Roanoke Island, North Carolina, was an English settlement from 1587 whose settlers had vanished by 1590.",
+      "ask": "Which state's Roanoke Island was home to the \"Lost Colony,\" whose settlers vanished by 1590?",
+      "source": "https://en.wikipedia.org/wiki/Roanoke_Colony"
+    }
+  ],
+  "florida": [
+    {
+      "fact": "St. Augustine, Florida, founded by Spain in 1565, is the oldest city started by Europeans in the mainland United States that people still live in.",
+      "ask": "Which state's St. Augustine, founded by Spain in 1565, is the oldest European-founded US city?",
+      "source": "https://en.wikipedia.org/wiki/St._Augustine,_Florida"
+    },
+    {
+      "fact": "Apollo 11, the mission that first landed people on the Moon in 1969, launched from Kennedy Space Center in Florida.",
+      "ask": "From which state did Apollo 11 launch in 1969, carrying the first astronauts to walk on the Moon?",
+      "source": "https://en.wikipedia.org/wiki/Apollo_11"
+    }
+  ],
+  "mississippi": [
+    {
+      "fact": "Rock and roll star Elvis Presley was born in a small house in Tupelo, Mississippi, in 1935.",
+      "ask": "In which state was Elvis Presley born, in the town of Tupelo in 1935?",
+      "source": "https://en.wikipedia.org/wiki/Elvis_Presley"
+    }
+  ],
+  "tennessee": [
+    {
+      "fact": "Sequoyah, who created a writing system for the Cherokee language that was finished in 1821, was born in what is now Tennessee.",
+      "ask": "In which state was Sequoyah born, the Cherokee man who created a way to write the Cherokee language?",
+      "source": "https://en.wikipedia.org/wiki/Sequoyah"
+    }
+  ],
+  "kentucky": [
+    {
+      "fact": "Abraham Lincoln, the 16th president, was born in a one-room log cabin in Kentucky in 1809.",
+      "ask": "In which state was Abraham Lincoln born in a log cabin in 1809?",
+      "source": "https://en.wikipedia.org/wiki/Abraham_Lincoln_Birthplace_National_Historical_Park"
+    },
+    {
+      "fact": "In 1775 Daniel Boone and his team blazed the Wilderness Road through the Cumberland Gap, opening a path for settlers into Kentucky.",
+      "ask": "Into which state did Daniel Boone blaze the Wilderness Road through the Cumberland Gap in 1775?",
+      "source": "https://en.wikipedia.org/wiki/Wilderness_Road"
+    }
+  ],
+  "louisiana": [
+    {
+      "fact": "Louisiana was named by French explorer La Salle in honor of King Louis XIV of France.",
+      "ask": "Which state was named in honor of King Louis XIV of France?",
+      "source": "https://en.wikipedia.org/wiki/Louisiana"
+    }
+  ],
+  "texas": [
+    {
+      "fact": "Texas was an independent country, the Republic of Texas, from 1836 until it joined the United States in 1845.",
+      "ask": "Which state was an independent republic for nearly ten years before joining the US in 1845?",
+      "source": "https://en.wikipedia.org/wiki/Republic_of_Texas"
+    },
+    {
+      "fact": "NASA's Mission Control, which guides astronauts in space, is at the Johnson Space Center in Houston, Texas.",
+      "ask": "Which state is home to NASA's Mission Control at the Johnson Space Center?",
+      "source": "https://en.wikipedia.org/wiki/Johnson_Space_Center"
+    }
+  ],
+  "oklahoma": [
+    {
+      "fact": "Oklahoma's name comes from the Choctaw words okla and humma, meaning \"red people.\"",
+      "ask": "Which state's name comes from Choctaw words meaning \"red people\"?",
+      "source": "https://en.wikipedia.org/wiki/Oklahoma"
+    }
+  ],
+  "illinois": [
+    {
+      "fact": "Cahokia Mounds, in Illinois, was the largest city of the Mississippian culture about 900 years ago, home to 15,000 people or more.",
+      "ask": "Which state is home to Cahokia Mounds, the largest city of the Mississippian culture?",
+      "source": "https://en.wikipedia.org/wiki/Cahokia"
+    },
+    {
+      "fact": "Chicago, Illinois, was home to the Home Insurance Building, finished in 1885 and often called the world's first skyscraper.",
+      "ask": "In which state was the Home Insurance Building, often called the world's first skyscraper, built in 1885?",
+      "source": "https://en.wikipedia.org/wiki/Home_Insurance_Building"
+    }
+  ],
+  "indiana": [
+    {
+      "fact": "Abraham Lincoln grew up in Indiana, living there from age 7 to 21.",
+      "ask": "In which state did young Abraham Lincoln grow up, from age 7 to 21?",
+      "source": "https://en.wikipedia.org/wiki/Lincoln_Boyhood_National_Memorial"
+    }
+  ],
+  "michigan": [
+    {
+      "fact": "In 1913 Henry Ford started the moving assembly line in Michigan, building Model T cars faster and cheaper than ever.",
+      "ask": "In which state did Henry Ford start a moving assembly line for Model T cars in 1913?",
+      "source": "https://en.wikipedia.org/wiki/Highland_Park_Ford_Plant"
+    }
+  ],
+  "wisconsin": [
+    {
+      "fact": "The first kindergarten in the United States was started by Margarethe Schurz in Watertown, Wisconsin, in 1856.",
+      "ask": "Which state had the first kindergarten in the United States, started in 1856?",
+      "source": "https://en.wikipedia.org/wiki/Margarethe_Schurz"
+    }
+  ],
+  "minnesota": [
+    {
+      "fact": "The Mayo Clinic, one of the world's most famous hospitals, grew from a doctor's practice in Rochester, Minnesota, and opened its first hospital in 1889.",
+      "ask": "Which state is home to the famous Mayo Clinic, which opened its first hospital in Rochester in 1889?",
+      "source": "https://en.wikipedia.org/wiki/Mayo_Clinic"
+    }
+  ],
+  "iowa": [
+    {
+      "fact": "Herbert Hoover, the 31st president, was born in West Branch, Iowa, in 1874.",
+      "ask": "In which state was Herbert Hoover, the 31st US president, born?",
+      "source": "https://en.wikipedia.org/wiki/Herbert_Hoover"
+    }
+  ],
+  "missouri": [
+    {
+      "fact": "In 1860 the Pony Express began carrying mail on horseback from St. Joseph, Missouri, to California.",
+      "ask": "From which state's town of St. Joseph did Pony Express riders start carrying mail west in 1860?",
+      "source": "https://en.wikipedia.org/wiki/Pony_Express"
+    }
+  ],
+  "kansas": [
+    {
+      "fact": "Amelia Earhart, the first woman to fly alone across the Atlantic Ocean, was born in Atchison, Kansas, in 1897.",
+      "ask": "In which state was Amelia Earhart born, the first woman to fly solo across the Atlantic?",
+      "source": "https://en.wikipedia.org/wiki/Amelia_Earhart"
+    },
+    {
+      "fact": "In 1954 a Kansas school case, Brown v. Board of Education, led the US Supreme Court to rule that separate schools for Black and white children were not allowed.",
+      "ask": "Which state's school case, Brown v. Board of Education, led the Supreme Court to end school segregation in 1954?",
+      "source": "https://en.wikipedia.org/wiki/Brown_v._Board_of_Education"
+    }
+  ],
+  "nebraska": [
+    {
+      "fact": "The very first Arbor Day, a holiday for planting trees, was held in Nebraska in 1872.",
+      "ask": "Which state held the very first Arbor Day, a tree-planting holiday, in 1872?",
+      "source": "https://en.wikipedia.org/wiki/Arbor_Day"
+    }
+  ],
+  "north-dakota": [
+    {
+      "fact": "Lewis and Clark spent the winter of 1804 to 1805 at Fort Mandan in North Dakota, where they met Sacagawea.",
+      "ask": "In which state did Lewis and Clark spend their first winter at Fort Mandan, where they met Sacagawea?",
+      "source": "https://en.wikipedia.org/wiki/Fort_Mandan"
+    }
+  ],
+  "montana": [
+    {
+      "fact": "In 1916 Montana elected Jeannette Rankin, the first woman ever to serve in the US Congress.",
+      "ask": "Which state elected Jeannette Rankin, the first woman in the US Congress, in 1916?",
+      "source": "https://en.wikipedia.org/wiki/Jeannette_Rankin"
+    },
+    {
+      "fact": "Montana's name comes from montaña, the Spanish word for \"mountain.\"",
+      "ask": "Which state's name comes from a Spanish word meaning \"mountain\"?",
+      "source": "https://en.wikipedia.org/wiki/Montana"
+    }
+  ],
+  "colorado": [
+    {
+      "fact": "Ancestral Puebloan people built about 600 cliff dwellings at Mesa Verde in Colorado, many of them in the 1200s.",
+      "ask": "Which state's Mesa Verde has cliff houses built by Ancestral Puebloan people about 800 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Mesa_Verde_National_Park"
+    },
+    {
+      "fact": "The view from Pikes Peak in Colorado inspired Katharine Lee Bates to write \"America the Beautiful\" in 1893.",
+      "ask": "Which state's Pikes Peak inspired the song \"America the Beautiful\" in 1893?",
+      "source": "https://en.wikipedia.org/wiki/Pikes_Peak"
+    }
+  ],
+  "utah": [
+    {
+      "fact": "The golden spike that finished the first railroad across the United States was hammered in at Promontory Summit, Utah, in 1869.",
+      "ask": "In which state was the golden spike driven in 1869, finishing the first railroad across the country?",
+      "source": "https://en.wikipedia.org/wiki/Golden_spike"
+    }
+  ],
+  "nevada": [
+    {
+      "fact": "The Comstock Lode, found in Nevada in 1859, was the first big discovery of silver in the United States.",
+      "ask": "Which state's Comstock Lode, found in 1859, was the first big silver discovery in the US?",
+      "source": "https://en.wikipedia.org/wiki/Comstock_Lode"
+    }
+  ],
+  "arizona": [
+    {
+      "fact": "Arizona became the 48th state on February 14, 1912, Valentine's Day, the last of the lower 48 states to join.",
+      "ask": "Which state was the last of the lower 48 to join the US, on Valentine's Day 1912?",
+      "source": "https://en.wikipedia.org/wiki/Arizona"
+    }
+  ],
+  "new-mexico": [
+    {
+      "fact": "Santa Fe, New Mexico, founded in 1610, is the oldest state capital city in the United States.",
+      "ask": "Which state's capital, founded in 1610, is the oldest state capital in the US?",
+      "source": "https://en.wikipedia.org/wiki/Santa_Fe,_New_Mexico"
+    },
+    {
+      "fact": "People of Taos Pueblo, in New Mexico, have lived in its many-storied adobe homes for about 1,000 years.",
+      "ask": "Which state's Taos Pueblo has adobe homes where people have lived for about 1,000 years?",
+      "source": "https://en.wikipedia.org/wiki/Taos_Pueblo"
+    }
+  ],
+  "california": [
+    {
+      "fact": "A gold find at Sutter's Mill in 1848 started the California Gold Rush, which brought about 300,000 people to California.",
+      "ask": "In which state did a gold find at Sutter's Mill in 1848 start a famous Gold Rush?",
+      "source": "https://en.wikipedia.org/wiki/California_Gold_Rush"
+    },
+    {
+      "fact": "The Golden Gate Bridge in San Francisco, California, opened in 1937 and was then the longest suspension bridge span in the world.",
+      "ask": "Which state's Golden Gate Bridge opened in 1937?",
+      "source": "https://en.wikipedia.org/wiki/Golden_Gate_Bridge"
+    }
+  ],
+  "oregon": [
+    {
+      "fact": "Lewis and Clark built Fort Clatsop near the Pacific Ocean in what is now Oregon and spent the winter of 1805 to 1806 there.",
+      "ask": "In which state did Lewis and Clark build Fort Clatsop, their winter camp near the Pacific?",
+      "source": "https://en.wikipedia.org/wiki/Fort_Clatsop"
+    },
+    {
+      "fact": "The Oregon Trail, about 2,000 miles long, led pioneer wagons to Oregon's fertile Willamette Valley in the 1840s and after.",
+      "ask": "Which state's Willamette Valley was the goal of pioneer wagons on a famous 2,000-mile trail?",
+      "source": "https://en.wikipedia.org/wiki/Oregon_Trail"
+    }
+  ],
+  "washington": [
+    {
+      "fact": "Seattle's Space Needle in Washington was built for the 1962 World's Fair.",
+      "ask": "Which state's Space Needle was built for the 1962 World's Fair?",
+      "source": "https://en.wikipedia.org/wiki/Space_Needle"
+    }
+  ],
+  "idaho": [
+    {
+      "fact": "Sacagawea, the Lemhi Shoshone woman who helped guide Lewis and Clark, was born in the Lemhi River Valley in what is now Idaho.",
+      "ask": "In which state was Sacagawea born, the Lemhi Shoshone guide of Lewis and Clark?",
+      "source": "https://en.wikipedia.org/wiki/Sacagawea"
+    },
+    {
+      "fact": "As a teenager on a farm in Rigby, Idaho, Philo Farnsworth came up with his idea for electronic television.",
+      "ask": "In which state did teenage Philo Farnsworth dream up electronic television while working on a farm?",
+      "source": "https://en.wikipedia.org/wiki/Philo_Farnsworth"
+    }
+  ],
+  "alaska": [
+    {
+      "fact": "The United States bought Alaska from Russia in 1867 for $7.2 million, about two cents an acre.",
+      "ask": "Which state did the US buy from Russia in 1867 for about 7 million dollars?",
+      "source": "https://en.wikipedia.org/wiki/Alaska_Purchase"
+    }
+  ],
+  "hawaii": [
+    {
+      "fact": "ʻIolani Palace in Honolulu, Hawaii, home of the last Hawaiian king and queen, is the only royal palace in the United States.",
+      "ask": "Which state is home to the only royal palace in the United States?",
+      "source": "https://en.wikipedia.org/wiki/%CA%BBIolani_Palace"
+    },
+    {
+      "fact": "Hawaii became the 50th state in 1959, the most recent state to join the US.",
+      "ask": "Which state became the 50th, the most recent to join the US, in 1959?",
+      "source": "https://en.wikipedia.org/wiki/Hawaii"
+    }
+  ],
+  "ohio": [
+    {
+      "fact": "Neil Armstrong, the first person to walk on the Moon, was born in Wapakoneta, Ohio, in 1930.",
+      "ask": "In which state was Neil Armstrong born, the first person to walk on the Moon?",
+      "source": "https://en.wikipedia.org/wiki/Neil_Armstrong"
+    }
+  ],
+  "delaware": [
+    {
+      "fact": "In 1638 Swedish settlers built Fort Christina in what is now Wilmington, Delaware, the first settlement of the New Sweden colony.",
+      "ask": "Which state's Fort Christina, built in 1638, was the first settlement of the New Sweden colony?",
+      "source": "https://en.wikipedia.org/wiki/Fort_Christina"
+    }
+  ],
+  "new-jersey": [
+    {
+      "fact": "One of the first recorded baseball games with organized rules was played at the Elysian Fields in Hoboken, New Jersey, in 1846.",
+      "ask": "Which state's Elysian Fields in Hoboken hosted one of the first organized baseball games, in 1846?",
+      "source": "https://en.wikipedia.org/wiki/Elysian_Fields,_Hoboken,_New_Jersey"
+    }
+  ],
+  "south-carolina": [
+    {
+      "fact": "Charleston, South Carolina, was founded in 1670 as Charles Town, named after King Charles II of England.",
+      "ask": "Which state's port city of Charleston was founded in 1670 and named after King Charles II?",
+      "source": "https://en.wikipedia.org/wiki/Charleston,_South_Carolina"
+    }
+  ],
+  "alabama": [
+    {
+      "fact": "Helen Keller, who became a famous author and speaker even though she could not see or hear, was born in Tuscumbia, Alabama, in 1880.",
+      "ask": "In which state was Helen Keller born, who learned to read and write though she could not see or hear?",
+      "source": "https://en.wikipedia.org/wiki/Helen_Keller"
+    },
+    {
+      "fact": "The Tuskegee Airmen, the first Black military pilots in the US armed forces, trained at Tuskegee, Alabama, during World War II.",
+      "ask": "Which state's town of Tuskegee trained the Tuskegee Airmen, the first Black military pilots in the US armed forces?",
+      "source": "https://en.wikipedia.org/wiki/Tuskegee_Airmen"
+    }
+  ],
+  "west-virginia": [
+    {
+      "fact": "Anna Jarvis held the first official Mother's Day service at a church in Grafton, West Virginia, in 1908.",
+      "ask": "In which state was the first official Mother's Day service held, in the town of Grafton in 1908?",
+      "source": "https://en.wikipedia.org/wiki/Mother%27s_Day_(United_States)"
+    }
+  ],
+  "south-dakota": [
+    {
+      "fact": "Sue, one of the largest and most complete Tyrannosaurus rex skeletons ever found, was discovered in South Dakota in 1990.",
+      "ask": "In which state was Sue, one of the biggest and most complete T. rex skeletons, discovered in 1990?",
+      "source": "https://en.wikipedia.org/wiki/Sue_(dinosaur)"
+    },
+    {
+      "fact": "Laura Ingalls Wilder's family settled in De Smet, South Dakota, the setting for several of her Little House books.",
+      "ask": "Which state's town of De Smet was the setting for several of Laura Ingalls Wilder's Little House books?",
+      "source": "https://en.wikipedia.org/wiki/De_Smet,_South_Dakota"
+    }
+  ],
+  "wyoming": [
+    {
+      "fact": "Devils Tower, a giant rock tower in Wyoming, became the first national monument in the United States in 1906.",
+      "ask": "Which state's Devils Tower became the very first US national monument, in 1906?",
+      "source": "https://en.wikipedia.org/wiki/Devils_Tower"
+    },
+    {
+      "fact": "In 1925 Nellie Tayloe Ross of Wyoming became the first woman to serve as governor of a US state.",
+      "ask": "Which state's Nellie Tayloe Ross became the first woman governor in the US, in 1925?",
+      "source": "https://en.wikipedia.org/wiki/Nellie_Tayloe_Ross"
+    }
+  ],
+  "arkansas": [
+    {
+      "fact": "In 1957 nine Black students, later called the Little Rock Nine, bravely became the first to attend Central High School in Little Rock, Arkansas, helping end school segregation.",
+      "ask": "In which state did nine brave Black students integrate Central High School in 1957?",
+      "source": "https://en.wikipedia.org/wiki/Little_Rock_Nine"
+    }
+  ]
+}

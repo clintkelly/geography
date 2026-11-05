@@ -1,4 +1,5 @@
 import type { Question } from '../content/types';
+import { typedCorrect } from './answers';
 import type { Rng } from './rng';
 
 /** How many recent questions must pass before a place can be the answer again. */
@@ -50,6 +51,11 @@ export function presentQuestion(q: Question, rng: Rng): Question {
   return { ...q, options: rng.shuffle(q.options) };
 }
 
+/** For a typed question, `optionId` is what the child typed. */
 export function isCorrect(q: Question, optionId: string): boolean {
+  if (q.inputType === 'typed' && q.typed) return typedCorrect(q.typed, optionId);
   return q.acceptedId === optionId;
 }
+
+/** Whether an answer could belong to this question: one of its options, or anything typed. */
+export const isAnswerFor = (q: Question, optionId: string) => (q.inputType === 'typed' ? optionId.trim().length > 0 && optionId.length <= 40 : q.options.some((o) => o.id === optionId));

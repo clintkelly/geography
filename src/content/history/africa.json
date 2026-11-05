@@ -1,0 +1,304 @@
+{
+  "egypt": [
+    {
+      "fact": "In 1922 Howard Carter found the golden treasures of the young pharaoh Tutankhamun in his tomb in Egypt's Valley of the Kings.",
+      "ask": "In which country did Howard Carter find young King Tutankhamun's treasure-filled tomb in 1922?",
+      "source": "https://en.wikipedia.org/wiki/Tutankhamun"
+    },
+    {
+      "fact": "Cleopatra, famous for her friendships with Julius Caesar and Mark Antony, was the last active ruler of the Ptolemaic Kingdom of Egypt, more than 2,000 years ago.",
+      "ask": "Which country did Queen Cleopatra rule more than 2,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Cleopatra"
+    },
+    {
+      "fact": "The Rosetta Stone, found in Egypt in 1799, has the same message in three scripts, which helped experts finally read Egyptian hieroglyphs.",
+      "ask": "In which country was the Rosetta Stone found, the key to reading ancient hieroglyphs?",
+      "source": "https://en.wikipedia.org/wiki/Rosetta_Stone"
+    }
+  ],
+  "sudan": [
+    {
+      "fact": "About 2,700 years ago, kings of Kush from what is now Sudan conquered Egypt and ruled it as pharaohs.",
+      "ask": "Which country's ancient Kushite kings once conquered Egypt and ruled it as pharaohs?",
+      "source": "https://en.wikipedia.org/wiki/Twenty-fifth_Dynasty_of_Egypt"
+    }
+  ],
+  "tunisia": [
+    {
+      "fact": "The Roman amphitheater of El Jem in Tunisia, built about 1,800 years ago, could seat about 35,000 people.",
+      "ask": "Which country's El Jem has a huge Roman amphitheater that seated about 35,000 people?",
+      "source": "https://en.wikipedia.org/wiki/Amphitheatre_of_El_Jem"
+    }
+  ],
+  "algeria": [
+    {
+      "fact": "Timgad in Algeria is a Roman town founded around the year 100 by Emperor Trajan, with streets laid out in a neat grid.",
+      "ask": "Which country's Timgad is a Roman town founded by Emperor Trajan, with streets in a neat grid?",
+      "source": "https://en.wikipedia.org/wiki/Timgad"
+    }
+  ],
+  "morocco": [
+    {
+      "fact": "The University of al-Qarawiyyin in Fez, Morocco, was founded in 859 by a woman named Fatima al-Fihri and is often called the world's oldest university still running.",
+      "ask": "Which country's al-Qarawiyyin, founded by Fatima al-Fihri in 859, may be the oldest university?",
+      "source": "https://en.wikipedia.org/wiki/University_of_al-Qarawiyyin"
+    },
+    {
+      "fact": "Ibn Battuta, born in Tangier, Morocco, in 1304, traveled across Africa, Asia and Europe for about 30 years and wrote about his journeys.",
+      "ask": "Which country was Ibn Battuta from, the explorer who traveled for about 30 years in the 1300s?",
+      "source": "https://en.wikipedia.org/wiki/Ibn_Battuta"
+    }
+  ],
+  "mauritania": [
+    {
+      "fact": "Chinguetti, an old desert trading town in Mauritania, keeps family libraries full of handwritten books hundreds of years old.",
+      "ask": "Which country's desert town of Chinguetti keeps family libraries of old handwritten books?",
+      "source": "https://en.wikipedia.org/wiki/Chinguetti"
+    }
+  ],
+  "mali": [
+    {
+      "fact": "Mansa Musa, emperor of the Mali Empire in the 1300s, was famous for his gold and is often called one of the richest people who ever lived.",
+      "ask": "Which country shares its name with the empire of Mansa Musa, famous for its gold?",
+      "source": "https://en.wikipedia.org/wiki/Mansa_Musa"
+    },
+    {
+      "fact": "Sundiata Keita founded the Mali Empire in the 1230s, and his life story, the Epic of Sundiata, is still told by griots, West African storytellers.",
+      "ask": "Which country's name comes from the empire Sundiata Keita founded in the 1230s?",
+      "source": "https://en.wikipedia.org/wiki/Sundiata_Keita"
+    }
+  ],
+  "niger": [
+    {
+      "fact": "Agadez, in Niger, was a stop for camel caravans crossing the Sahara. Its mud-brick Grand Mosque was first built in 1515 and rebuilt in the same style in 1844.",
+      "ask": "Which country's desert city of Agadez has a mud-brick Grand Mosque first built in 1515?",
+      "source": "https://en.wikipedia.org/wiki/Agadez"
+    }
+  ],
+  "chad": [
+    {
+      "fact": "The Ennedi Plateau in Chad has thousands of ancient rock paintings and carvings, including pictures of camels and cattle.",
+      "ask": "Which country's Ennedi Plateau has thousands of ancient rock paintings of people and animals?",
+      "source": "https://en.wikipedia.org/wiki/Ennedi_Plateau"
+    }
+  ],
+  "nigeria": [
+    {
+      "fact": "The Nok people of Nigeria made clay sculptures of human heads more than 2,000 years ago.",
+      "ask": "Which country's ancient Nok people made clay sculptures of heads more than 2,000 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Nok_culture"
+    },
+    {
+      "fact": "Artists in the ancient city of Ife, in Nigeria, made lifelike heads of bronze-like metal and clay about 700 years ago.",
+      "ask": "Which country's ancient city of Ife is famous for lifelike metal heads made about 700 years ago?",
+      "source": "https://en.wikipedia.org/wiki/Ife_Head"
+    }
+  ],
+  "ghana": [
+    {
+      "fact": "In 1957, led by Kwame Nkrumah, Ghana became one of the first African countries south of the Sahara to win independence from European rule.",
+      "ask": "Which country, led by Kwame Nkrumah, won independence in 1957?",
+      "source": "https://en.wikipedia.org/wiki/Kwame_Nkrumah"
+    }
+  ],
+  "liberia": [
+    {
+      "fact": "Liberia declared its independence in 1847, making it Africa's first republic to do so.",
+      "ask": "Which country, in 1847, became the first African republic to declare its independence?",
+      "source": "https://en.wikipedia.org/wiki/Liberia"
+    },
+    {
+      "fact": "In 2005 Liberia elected Ellen Johnson Sirleaf, the first woman elected to lead an African country.",
+      "ask": "Which country elected Ellen Johnson Sirleaf, Africa's first elected woman president, in 2005?",
+      "source": "https://en.wikipedia.org/wiki/Ellen_Johnson_Sirleaf"
+    }
+  ],
+  "guinea": [
+    {
+      "fact": "In 1958 Guinea became the first French colony in Africa to vote for full independence.",
+      "ask": "Which country, in 1958, was the first French colony in Africa to vote for full independence?",
+      "source": "https://en.wikipedia.org/wiki/History_of_Guinea"
+    }
+  ],
+  "senegal": [
+    {
+      "fact": "The African Renaissance Monument in Dakar, Senegal, finished in 2010, is the tallest statue in Africa at 49 meters.",
+      "ask": "Which country's African Renaissance Monument, finished in 2010, is the tallest statue in Africa?",
+      "source": "https://en.wikipedia.org/wiki/African_Renaissance_Monument"
+    }
+  ],
+  "cabo-verde": [
+    {
+      "fact": "Cidade Velha in Cabo Verde, founded by the Portuguese in 1462, was the first European colonial town in the tropics.",
+      "ask": "Which island country's Cidade Velha was the first European colonial town in the tropics?",
+      "source": "https://en.wikipedia.org/wiki/Cidade_Velha"
+    }
+  ],
+  "dr-congo": [
+    {
+      "fact": "The Ishango bone, a tally stick carved more than 20,000 years ago and possibly an early counting tool, was found in what is now the DR Congo.",
+      "ask": "In which country was the Ishango bone found, a tally stick more than 20,000 years old?",
+      "source": "https://en.wikipedia.org/wiki/Ishango_bone"
+    }
+  ],
+  "gabon": [
+    {
+      "fact": "In 1913 Dr. Albert Schweitzer opened a jungle hospital at Lambaréné in Gabon. He later won the Nobel Peace Prize.",
+      "ask": "In which country did Dr. Albert Schweitzer open his famous jungle hospital at Lambaréné in 1913?",
+      "source": "https://en.wikipedia.org/wiki/Albert_Schweitzer"
+    }
+  ],
+  "sao-tome-and-principe": [
+    {
+      "fact": "The islands of São Tomé and Príncipe had no people living on them until Portuguese sailors arrived around 1470.",
+      "ask": "Which island country had no people at all until Portuguese sailors arrived around 1470?",
+      "source": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe"
+    }
+  ],
+  "angola": [
+    {
+      "fact": "Queen Nzinga ruled the kingdoms of Ndongo and Matamba, in what is now Angola, in the 1600s and is remembered as a clever leader.",
+      "ask": "Which country remembers Queen Nzinga, who ruled the kingdoms of Ndongo and Matamba in the 1600s?",
+      "source": "https://en.wikipedia.org/wiki/Nzinga_of_Ndongo_and_Matamba"
+    }
+  ],
+  "ethiopia": [
+    {
+      "fact": "The ancient city of Aksum in Ethiopia is famous for its giant carved stone towers called stelae, made by the Kingdom of Aksum.",
+      "ask": "Which country's ancient city of Aksum is famous for its giant carved stone towers, called stelae?",
+      "source": "https://en.wikipedia.org/wiki/Axum"
+    },
+    {
+      "fact": "Legend says a goat herder in Ethiopia named Kaldi discovered coffee after seeing his goats get lively from eating the berries.",
+      "ask": "In which country does legend say a goat herder discovered coffee after his goats ate the berries?",
+      "source": "https://en.wikipedia.org/wiki/History_of_coffee"
+    }
+  ],
+  "somalia": [
+    {
+      "fact": "The Laas Geel caves in northern Somalia have colorful rock paintings of cattle and people that are thousands of years old.",
+      "ask": "Which country's Laas Geel caves have colorful ancient paintings of cattle and people?",
+      "source": "https://en.wikipedia.org/wiki/Laas_Geel"
+    }
+  ],
+  "kenya": [
+    {
+      "fact": "Fort Jesus in Mombasa, Kenya, was built by the Portuguese in the 1590s to guard the harbor.",
+      "ask": "Which country's Fort Jesus in Mombasa was built by the Portuguese in the 1590s?",
+      "source": "https://en.wikipedia.org/wiki/Fort_Jesus"
+    },
+    {
+      "fact": "In 2004 Wangari Maathai of Kenya became the first African woman to win the Nobel Peace Prize, partly for her movement that planted millions of trees.",
+      "ask": "Which country's Wangari Maathai won a Nobel Peace Prize in 2004 for her tree-planting movement?",
+      "source": "https://en.wikipedia.org/wiki/Wangari_Maathai"
+    }
+  ],
+  "tanzania": [
+    {
+      "fact": "Olduvai Gorge in Tanzania holds some of the oldest stone tools ever found, along with fossils of early humans.",
+      "ask": "Which country's Olduvai Gorge holds some of the oldest stone tools and early human fossils?",
+      "source": "https://en.wikipedia.org/wiki/Olduvai_Gorge"
+    }
+  ],
+  "uganda": [
+    {
+      "fact": "In 1862 explorer John Hanning Speke found where the Nile River flows out of Lake Victoria, in what is now Uganda.",
+      "ask": "In which country did explorer John Speke find where the Nile flows out of Lake Victoria in 1862?",
+      "source": "https://en.wikipedia.org/wiki/John_Hanning_Speke"
+    }
+  ],
+  "madagascar": [
+    {
+      "fact": "Madagascar was first settled by sailors who came across the Indian Ocean from Borneo in Southeast Asia, more than 1,000 years ago.",
+      "ask": "Which island country was first settled by sailors who came all the way from Borneo?",
+      "source": "https://en.wikipedia.org/wiki/Madagascar"
+    }
+  ],
+  "seychelles": [
+    {
+      "fact": "The islands of Seychelles had no people living on them until French settlers arrived in 1770.",
+      "ask": "Which island country had no people living there until French settlers arrived in 1770?",
+      "source": "https://en.wikipedia.org/wiki/Seychelles"
+    }
+  ],
+  "malawi": [
+    {
+      "fact": "The Chongoni Rock Art Area in Malawi has one of the richest collections of rock paintings in Central Africa.",
+      "ask": "Which country's Chongoni Rock Art Area has one of Central Africa's richest sets of rock paintings?",
+      "source": "https://en.wikipedia.org/wiki/Chongoni_Rock_Art_Area"
+    }
+  ],
+  "zambia": [
+    {
+      "fact": "Zambia, once called Northern Rhodesia, became independent in 1964 with Kenneth Kaunda as its first president.",
+      "ask": "Which country, once called Northern Rhodesia, became independent in 1964 under Kenneth Kaunda?",
+      "source": "https://en.wikipedia.org/wiki/Kenneth_Kaunda"
+    }
+  ],
+  "botswana": [
+    {
+      "fact": "The Tsodilo Hills in Botswana are full of ancient rock art and became a UNESCO World Heritage Site in 2001.",
+      "ask": "Which country's Tsodilo Hills, full of ancient rock paintings, became a World Heritage Site in 2001?",
+      "source": "https://en.wikipedia.org/wiki/Tsodilo"
+    }
+  ],
+  "namibia": [
+    {
+      "fact": "Twyfelfontein in Namibia has more than 2,000 rock carvings of animals such as rhinos, elephants and giraffes, made over thousands of years.",
+      "ask": "Which country's Twyfelfontein has more than 2,000 ancient rock carvings of animals?",
+      "source": "https://en.wikipedia.org/wiki/Twyfelfontein"
+    }
+  ],
+  "south-africa": [
+    {
+      "fact": "Nelson Mandela became South Africa's first Black president in 1994, after the country's first elections open to all races.",
+      "ask": "Which country elected Nelson Mandela as its president in 1994?",
+      "source": "https://en.wikipedia.org/wiki/Nelson_Mandela"
+    },
+    {
+      "fact": "In 1967 Dr. Christiaan Barnard performed the world's first human heart transplant in Cape Town, South Africa.",
+      "ask": "In which country did Dr. Christiaan Barnard perform the first human heart transplant, in 1967?",
+      "source": "https://en.wikipedia.org/wiki/Christiaan_Barnard"
+    },
+    {
+      "fact": "Mapungubwe, in South Africa, was the center of a gold-trading kingdom about 800 years ago, where a famous small golden rhino was found.",
+      "ask": "Which country's Mapungubwe was a gold-trading kingdom where a little golden rhino was found?",
+      "source": "https://en.wikipedia.org/wiki/Golden_Rhinoceros_of_Mapungubwe"
+    }
+  ],
+  "lesotho": [
+    {
+      "fact": "King Moshoeshoe I founded the Basotho nation, now Lesotho, in the 1820s, using the flat-topped mountain of Thaba Bosiu as his stronghold.",
+      "ask": "Which mountain kingdom was founded by King Moshoeshoe I, with Thaba Bosiu as his stronghold?",
+      "source": "https://en.wikipedia.org/wiki/Moshoeshoe_I"
+    }
+  ],
+  "zimbabwe": [
+    {
+      "fact": "The huge stone walls of the Great Enclosure at Great Zimbabwe, in Zimbabwe, were built without any mortar holding the stones together.",
+      "ask": "Which country's ancient Great Enclosure has huge stone walls built without any mortar?",
+      "source": "https://en.wikipedia.org/wiki/Great_Zimbabwe"
+    }
+  ],
+  "benin": [
+    {
+      "fact": "The Royal Palaces of Abomey in Benin were built by the kings of Dahomey, a powerful West African kingdom, from the 1600s to the 1800s.",
+      "ask": "Which country's Royal Palaces of Abomey were built by the kings of Dahomey?",
+      "source": "https://en.wikipedia.org/wiki/Royal_Palaces_of_Abomey"
+    }
+  ],
+  "burkina-faso": [
+    {
+      "fact": "The Ruins of Loropéni in Burkina Faso are tall stone walls of an old settlement linked to the gold trade, and became the country's first World Heritage Site in 2009.",
+      "ask": "Which country's Ruins of Loropéni, tall old stone walls, became its first World Heritage Site in 2009?",
+      "source": "https://en.wikipedia.org/wiki/Ruins_of_Lorop%C3%A9ni"
+    }
+  ],
+  "mauritius": [
+    {
+      "fact": "The 1847 \"Post Office\" stamps of Mauritius are among the rarest and most valuable stamps in the world.",
+      "ask": "Which island country's 1847 \"Post Office\" stamps are among the rarest stamps in the world?",
+      "source": "https://en.wikipedia.org/wiki/Mauritius_%22Post_Office%22_stamps"
+    }
+  ]
+}
