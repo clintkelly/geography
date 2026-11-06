@@ -6,7 +6,7 @@ import { cardProgress } from '../engine/cards';
 import { allowedDifficulties, FOCUSES, studySubject, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { artUrl, CardArt, Fx, Sprite } from './art';
-import { mapFor, place, region, rewardLabel, souvenir, species } from './content';
+import { companionView, mapFor, place, region, rewardLabel, souvenir, species } from './content';
 import { Key, useKeys } from './keys';
 import { Passport } from './Passport';
 import { Lodges, PatchIcon } from './Lodges';
@@ -17,6 +17,9 @@ import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
 import { playCry, playSound } from './sound';
 import { isNight, NIGHT_FROM } from '../engine/night';
+import { chainBoost, dayKey, regionProgress, VISITOR_SHINY_BOOST, visitorFor } from '../engine/juice';
+import { MAX_LEVEL, STAGE_2_LEVEL, STAGE_3_LEVEL, STAGES } from '../engine/progression';
+import { Confetti } from './NewCreature';
 import { Stable, Wild } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
 import { shinyLook, shinyName } from './shiny';
@@ -84,9 +87,55 @@ function LodgeTeaser({ save, onOpen }: { save: SaveData; onOpen: () => void }) {
 }
 
 /** How many of the creatures that live in a region (day and night, not bosses or rares) a child has found. */
-function regionFound(regionId: string, known: Set<string>): { found: number; total: number } {
-  const here = PACK.species.filter((o) => o.homes.includes(regionId) && o.homes.length <= 5 && !o.boss && !o.rare);
-  return { found: here.filter((o) => known.has(o.id)).length, total: here.length };
+const regionFound = (regionId: string, known: Set<string>) => regionProgress(PACK, known, regionId);
+
+/** Something new to find in a region right now: a new creature, a night creature after dark, or today's visitor. */
+function regionHasNew(save: SaveData, regionId: string, known: Set<string>): boolean {
+  const v = save.visitorDay ? visitorFor(PACK, save.visitorDay) : undefined;
+  if (v?.homes[0] === regionId) return true;
+  return PACK.species.some((o) => o.homes.includes(regionId) && o.homes.length <= 5 && !known.has(o.id) && (o.fresh || (o.night && save.offersNight)));
+}
+
+/** A creature that leveled up on the trail: its new level, and how close it is to evolving. */
+function LevelCard({ save, instanceId, from, to }: { save: SaveData; instanceId: string; from: number; to: number }) {
+  const c = save.companions.find((o) => o.instanceId === instanceId);
+  if (!c) return null;
+  const v = companionView(c);
+  const next = to < STAGE_2_LEVEL ? STAGE_2_LEVEL : to < STAGE_3_LEVEL && v.species.evolutions ? STAGE_3_LEVEL : undefined;
+  const stats = STAGES[v.stage];
+  return (
+    <div className="level-card">
+      <Sprite id={v.artId} size={64} shiny={v.shiny} className="hop-once" />
+      <div>
+        <strong>{v.name}</strong>
+        <span className="level-jump">Lv {from} → <b>{to}</b> ⬆</span>
+        <small>{next ? `${next - to} more ${next - to === 1 ? 'level' : 'levels'} until it evolves!` : to >= MAX_LEVEL ? 'Max level!' : 'Fully evolved!'} · {stats.maxHp} HP, {stats.attack} Attack</small>
+      </div>
+    </div>
+  );
+}
+
+/** Today's visitor and the shiny chain: two reasons to play today. */
+function DailyStrip({ save, known, onGo }: { save: SaveData; known: Set<string>; onGo: (regionId: string) => void }) {
+  const v = save.visitorDay ? visitorFor(PACK, save.visitorDay) : undefined;
+  const chain = save.shinyChain && save.shinyChain.count >= 1 ? save.shinyChain : undefined;
+  if (!v && !chain) return null;
+  return (
+    <div className="daily-strip">
+      {v && (
+        <button type="button" className="visitor" onClick={() => onGo(v.homes[0]!)}>
+          <Sprite id={v.artId} size={48} className="idle-sprite" />
+          <span><strong>🎁 Today's visitor: {v.displayName}</strong><small>in {region(v.homes[0]!).label} · {VISITOR_SHINY_BOOST}× shiny chance today{known.has(v.id) ? ' · befriend another!' : ''}</small></span>
+        </button>
+      )}
+      {chain && (
+        <span className="chain-chip" title="Befriend the same kind again to keep the chain going">
+          <Sprite id={species(chain.speciesId).artId} size={36} />
+          <span><strong>🔗 Shiny chain ×{chain.count}</strong><small>Next {species(chain.speciesId).displayName}: {chainBoost(chain, chain.speciesId)}× shiny chance</small></span>
+        </span>
+      )}
+    </div>
+  );
 }
 
 /** Creatures just added to the game that this child hasn't met, and where to find them. */
@@ -161,11 +210,17 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
   const s = save.lastSummary;
   // Night creatures come and go with the player's clock.
   useEffect(() => {
-    const check = () => { const night = isNight(Date.now()); if (night !== !!save.offersNight) dispatch({ type: 'setNight', night }); };
+    const check = () => {
+      const now = Date.now();
+      const night = isNight(now);
+      if (night !== !!save.offersNight) dispatch({ type: 'setNight', night });
+      const day = dayKey(now);
+      if (day !== save.visitorDay) dispatch({ type: 'newDay', day });
+    };
     check();
     const t = setInterval(check, 60_000);
     return () => clearInterval(t);
-  }, [save.offersNight, dispatch]);
+  }, [save.offersNight, save.visitorDay, dispatch]);
   // Only the newest of that kind is the one that just joined; an older shiny copy doesn't count.
   const newest = s?.reward.kind === 'creature' ? save.companions.filter((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId).at(-1) : undefined;
   const shinyJoined = !!newest?.shiny && newest.bondXp === 0;
@@ -229,7 +284,16 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
           <div className="summary-head">
             <div>
               <h2>Welcome back to camp!</h2>
-              {s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
+              {(s.regionsMastered ?? []).map((r) => (
+                <div key={r} className="region-master">
+                  <Confetti count={24} />
+                  <span className="region-master-trophy" aria-hidden="true">🏆</span>
+                  <span><strong>Region Master: {region(r).label}!</strong> You found every creature that lives there. A <strong>Rare Egg</strong> is in your nest!</span>
+                </div>
+              ))}
+              {s.levelUps?.length
+                ? <div className="level-cards">{s.levelUps.map((u) => <LevelCard key={u.instanceId} save={save} instanceId={u.instanceId} from={u.from} to={u.to} />)}</div>
+                : s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
               {s.newStamp && <div className="stamp-slam"><img src={artUrl(`stamp-${s.newStamp}`)} alt="" width={96} height={96} /><span>New Passport stamp: <strong>{region(s.newStamp).label}</strong></span></div>}
               {(s.newMedals ?? []).map((m) => <p key={`${m.regionId}-${m.track}-${m.level}`} className="medal-new"><MedalIcon level={m.level} />New {LEVEL_NAME[m.level]} medal: <strong>{MEDAL_TRACKS.find((t) => t.id === m.track)?.label} of {region(m.regionId).label}</strong> <small>+{MEDAL_POINTS[m.level]} Trail Points next trail</small></p>)}
               {s.lodgeId && lodgeById(PACK, s.lodgeId) && <div className="stamp-slam"><PatchIcon lodge={lodgeById(PACK, s.lodgeId)!} earned tier={s.newPatch ?? patchOf(save, s.lodgeId)} size={64} /><span>{s.newPatch ? <>New {s.newPatch === 'bronze' ? '' : `${s.newPatch === 'gold' ? 'Gold' : 'Silver'} `}patch: <strong>{lodgeById(PACK, s.lodgeId)!.name.replace(' Lodge', '')} Patch</strong>{s.newPatch === 'gold' && <> · the legendary <strong>{species(lodgeById(PACK, s.lodgeId)!.legendaryId).displayName}</strong> joined you!</>}</> : <>You beat <strong>{lodgeById(PACK, s.lodgeId)!.name}</strong> again!</>}</span></div>}
@@ -256,6 +320,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <div className="row spread"><span><h1>Base Camp</h1><span className="collected">Creatures found: <strong>{known.size}</strong> of {PACK.species.length}</span><StudyRanks save={save} /></span><span className="row"><button type="button" onClick={() => setShowLodges(true)}>Ranger Lodges <Key k="G" /></button><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
         <LodgeTeaser save={save} onOpen={() => setShowLodges(true)} />
         <NewInTheWild known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
+        <DailyStrip save={save} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <NightCreatures night={!!save.offersNight} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
@@ -268,7 +333,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
             <div key={continent} className="continent-row">
               <span className="continent-name">{continent}</span>
               {regions.filter((r) => r.continent === continent).map((r) => (
-                <button key={r.id} type="button" aria-pressed={r.id === regionId} aria-label={r.label} title={`${regionFound(r.id, known).found} of ${regionFound(r.id, known).total} creatures found here`} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label} <small className={`region-count${regionFound(r.id, known).found === regionFound(r.id, known).total ? ' region-done' : ''}`}>{regionFound(r.id, known).found === regionFound(r.id, known).total ? '★' : `${regionFound(r.id, known).found}/${regionFound(r.id, known).total}`}</small></button>
+                <button key={r.id} type="button" aria-pressed={r.id === regionId} aria-label={r.label} title={`${regionFound(r.id, known).found} of ${regionFound(r.id, known).total} creatures found here`} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label}{regionHasNew(save, r.id, known) && <span className="region-sparkle" aria-hidden="true">✨</span>} <small className={`region-count${regionFound(r.id, known).found === regionFound(r.id, known).total ? ' region-done' : ''}`}>{regionFound(r.id, known).found === regionFound(r.id, known).total ? '★' : `${regionFound(r.id, known).found}/${regionFound(r.id, known).total}`}</small></button>
               ))}
             </div>
           ))}

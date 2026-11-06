@@ -238,6 +238,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     if (ev.shieldHit) pop(380, 'opponent', (battle.combat.shield ?? 0) > 0 ? 'Shield cracked!' : 'Shield broken!', 'shield');
     if (battle.result.brainBlast) pop(200, 'player', 'Brain Blast! +1 charge', 'brainblast');
     if (battle.result.eggLaid) timers.push(setTimeout(() => playSound('hatch'), 450));
+    if (battle.result.levelUps) timers.push(setTimeout(() => playSound('levelup'), (frames.at(-1)?.at ?? 0) + 200));
     const star = battle.result.prize;
     if (star) timers.push(setTimeout(() => { playSound('levelup'); setTimeout(() => playCry(star), 700); }, (frames.at(-1)?.at ?? 0) + 400));
     if (correct && (e.streak ?? 0) >= 3) timers.push(setTimeout(() => playSound('combo'), 120));
@@ -386,6 +387,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             <strong>⭐ {species(result.prize).displayName} joined you! ⭐</strong>
           </div>
         )}
+        {result?.levelUps && (
+          <div className="levelup-pop" key={`lvl-${e.answered}`}>
+            {result.levelUps.map((u) => { const c = save.companions.find((o) => o.instanceId === u.instanceId); return c ? <span key={u.instanceId}>⬆ {companionView(c).name} reached <b>Lv {u.level}</b>!</span> : null; })}
+          </div>
+        )}
         {result?.pathPoints && (
           <div className="path-pop" key={`path-${e.answered}`}>
             {result.pathPoints.map((p) => <span key={p} className={`path-chip path-${p}`}>+1 {p === 'scholar' ? '📚 Scholar' : p === 'ranger' ? '🥋 Ranger' : '🚩 Banner'} path</span>)}
@@ -403,6 +409,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id={newShiny ? 'spark' : 'heart'} className={`rise rise-${i}`} />)}
             <strong>{newShiny ? (firstOfKind ? '✦ SHINY NEW CREATURE! ✦' : '✦ SHINY new friend! ✦') : firstOfKind ? '✨ NEW CREATURE! ✨' : 'New friend!'}</strong>
             {firstOfKind && <em className="first-kind-count">#{knownSpecies(save).size} of {PACK.species.length} found</em>}
+            {!firstOfKind && (result?.chain ?? 0) >= 2 && <em className="first-kind-count chain-count">🔗 Shiny chain ×{result!.chain}!</em>}
+            {result?.visitor && <em className="first-kind-count visitor-count">🎁 Today's visitor!</em>}
           </div>
         )}
         <div className="scene-hud">

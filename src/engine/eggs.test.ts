@@ -152,3 +152,22 @@ describe('study eggs', () => {
     expect(studyRank(5000)).toEqual({ name: 'Archmage' });
   });
 });
+
+describe('switching after a faint', () => {
+  it('works even in the middle of a Bold Befriend attempt', () => {
+    const base = newSave(PACK, 7, 'p1');
+    const lead = base.activeCompanionId;
+    let s: SaveData = { ...base, companions: [...base.companions, { instanceId: 'p1-b', speciesId: 'lobsnap', bondXp: 0 }], lastTeamIds: [lead, 'p1-b'] };
+    const offer = s.offers.find((o) => o.regionId === 'us-west')!;
+    s = step(step(s, { type: 'start', offerId: offer.id, regionId: 'us-west', difficulty: 'scout', trail: 'short', focus: 'all' }), { type: 'depart' });
+    for (let i = 0; i < 50 && !s.expedition!.battle; i++) s = s.expedition!.discovery === 'searching' ? step(s, { type: 'guess', locationId: s.expedition!.targetId }) : s.expedition!.event ? step(step(s, { type: 'answer', optionId: s.expedition!.event.question.acceptedId }), { type: 'continue' }) : step(s, { type: 'enterEncounter' });
+    const e = s.expedition!;
+    const b = e.battle!;
+    // The lead faints one right answer into a Bold Befriend.
+    s = { ...s, expedition: { ...e, battle: { ...b, phase: 'choose', tameHits: 1, mustSwitch: true, combat: { ...b.combat, playerHp: 0 } } } };
+    const after = step(s, { type: 'switchTo', instanceId: 'p1-b' });
+    expect(after.expedition!.companionId).toBe('p1-b');
+    expect(after.expedition!.battle!.mustSwitch).toBeUndefined();
+    expect(after.expedition!.battle!.tameHits).toBe(1);
+  });
+});

@@ -865,3 +865,23 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .never-seen-tag { margin-left: 6px; padding: 1px 8px; border-radius: 8px; background: #ff7a3d; color: #fff; font-weight: 800; font-size: 0.8rem; animation: never-seen-pulse 1.2s ease-in-out infinite; }
 @keyframes never-seen-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 @media (prefers-reduced-motion: reduce) { .confetti, .new-creature-rays { display: none; } .new-creature-ribbon, .new-creature-sprite, .new-creature-name, .new-creature-meta, .never-seen-tag, .first-kind-count { animation: none !important; } }
+
+/* Juice: Region Master, level cards, daily visitor, shiny chain, sparkles */
+.region-master { position: relative; overflow: hidden; display: flex; gap: 12px; align-items: center; padding: 12px 16px; margin: 8px 0; border-radius: 12px; background: linear-gradient(135deg, #fff4c8, #ffe08a); border: 2px solid #e8b830; }
+.region-master-trophy { font-size: 2.4rem; animation: ribbon-pop 700ms cubic-bezier(.2,1.6,.4,1) both; }
+.level-cards { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0; }
+.level-card { display: flex; gap: 10px; align-items: center; padding: 8px 12px; border-radius: 12px; background: #eef7ff; border: 2px solid #7ab0e0; animation: ribbon-pop 500ms ease-out both; }
+.level-card div { display: grid; gap: 2px; }
+.level-jump { font-size: 1.1rem; }
+.level-jump b { color: #2a70c0; font-size: 1.3rem; }
+.daily-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
+.visitor, .chain-chip { display: flex; gap: 8px; align-items: center; text-align: left; padding: 6px 12px; border-radius: 12px; font: inherit; }
+.visitor { border: 2px solid #f0a040; background: #fff6e6; cursor: pointer; }
+.visitor span, .chain-chip span { display: grid; }
+.chain-chip { border: 2px solid #b090e0; background: #f6f0ff; }
+.region-sparkle { display: inline-block; margin-left: 2px; animation: never-seen-pulse 1.4s ease-in-out infinite; }
+.levelup-pop { position: absolute; left: 50%; top: 20%; transform: translateX(-50%); display: grid; gap: 4px; z-index: 6; animation: combo-pop 0.5s ease-out; }
+.levelup-pop span { padding: 4px 14px; border-radius: 10px; background: #eef7ff; border: 2px solid #2a70c0; color: #1a4a80; font-weight: 700; }
+.chain-count { top: calc(34% + 100px); border-color: #b090e0; }
+.visitor-count { top: calc(34% + 136px); border-color: #f0a040; }
+@media (prefers-reduced-motion: reduce) { .region-sparkle, .region-master-trophy, .level-card, .levelup-pop { animation: none !important; } }

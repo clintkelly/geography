@@ -19,6 +19,7 @@ import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail
 import { BRAIN_SHIELD, LODGE_QUIZ, lodgeById, lodgeDifficulty, lodgeFoeStats, lodgeOpen, lodgePower, patchOf, TIER_STAGE, type LodgeRole, type LodgeTier } from './lodges';
 import { EGG_POINTS, eggReady, feedEggs, fillMeter, hatchling, layEgg, type Egg, type EggKind, type EggMeter } from './eggs';
 import type { LodgeSubject, Stage } from '../content/lodges';
+import { chainBoost, extendChain, masteredRegions, VISITOR_SHINY_BOOST, visitorFor, type ShinyChain } from './juice';
 
 export const SCHEMA_VERSION = 7;
 /** What questions a trail asks. */
@@ -88,6 +89,12 @@ export interface TurnResult {
   eggLaid?: EggKind;
   /** Wild Paths points the fighting creature just earned. */
   pathPoints?: PathId[];
+  /** Creatures on the team that just reached a new level. */
+  levelUps?: { instanceId: string; level: number }[];
+  /** A befriended creature's shiny chain: how many of this kind in a row. */
+  chain?: number;
+  /** The befriended creature was today's visitor. */
+  visitor?: boolean;
   /** A League star creature that just joined, won from an Elite Ranger. */
   prize?: string;
 }
@@ -211,6 +218,10 @@ export interface Summary {
   /** Summaries saved by older versions don't have these. */
   xpGained?: number;
   levelUp?: number;
+  /** Each team creature that leveled up on this trail, from and to. */
+  levelUps?: { instanceId: string; from: number; to: number }[];
+  /** Regions where the child has now found every creature. Each lays a Rare Egg. */
+  regionsMastered?: string[];
   /** Badges earned by this trip. */
   newBadges?: string[];
   /** The region stamped for the first time by this trip. */
@@ -355,6 +366,12 @@ export interface SaveData {
   eggMeter?: EggMeter;
   /** Every Starfall League win: when, and the team that did it. */
   hallOfFame?: { at: number; team: Companion[] }[];
+  /** Regions where every creature that lives there has been found. */
+  regionsMastered?: string[];
+  /** Befriending the same kind in a row raises its shiny chance. */
+  shinyChain?: ShinyChain;
+  /** The day today's visitor was put in the sightings. */
+  visitorDay?: string;
   /** Whether the current sightings were made at night, when night creatures are out. */
   offersNight?: boolean;
   completedExpeditions: number;
@@ -381,6 +398,8 @@ export type Command =
   | { type: 'dismissHatch' }
   /** The player's clock passed dusk or dawn: night creatures come and go from the sightings. */
   | { type: 'setNight'; night: boolean }
+  /** A new day on the player's clock: a new visitor comes. */
+  | { type: 'newDay'; day: string }
   | { type: 'masteryAnswer'; optionId: string }
   | { type: 'masteryNext' }
   | { type: 'closeMastery' }
@@ -456,6 +475,8 @@ export function rollShiny(instanceId: string, difficulty: Difficulty, boost = 1)
 }
 const joining = (instanceId: string, speciesId: string, difficulty: Difficulty, boost = 1): Companion => ({ instanceId, speciesId, bondXp: 0, ...(rollShiny(instanceId, difficulty, boost) ? { shiny: true } : {}) });
 const trailBoost = (e: Pick<Expedition, 'focus'>) => (studySubject(e.focus) ? STUDY_SHINY_BOOST : 1);
+/** Today's visitor, if the sightings have been made today and this is it. */
+const isVisitorToday = (save: Pick<SaveData, 'visitorDay'>, pack: Pack, speciesId: string) => !!save.visitorDay && visitorFor(pack, save.visitorDay)?.id === speciesId;
 
 /** A right math or vocabulary answer warms an egg, fills the Egg Meter and earns rank points. */
 function studied(save: SaveData, q: Question, correct: boolean, difficulty: Difficulty): { patch: Partial<SaveData>; laid?: EggKind } {
@@ -591,7 +612,9 @@ export function isRegionComplete(found: readonly string[], pack: Pack, regionId:
 }
 
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild' | 'offersNight'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild' | 'offersNight' | 'visitorDay'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+  // Today's visitor is sighted first in its home region, even when the child already has one.
+  const visitor = save.visitorDay ? visitorFor(pack, save.visitorDay) : undefined;
   const owned = knownSpecies(save);
   let nextId = save.nextId;
   const offers = pack.regions.flatMap((region) => {
@@ -609,7 +632,8 @@ export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Parti
     // One sighting is for any trail; the other shows a locked creature when there is one, as a hint of what harder trails hold.
     const open = ordered.filter((id) => !locked(id));
     const picks = [...open.slice(0, 1), ...ordered.filter(locked).slice(0, 1)];
-    const chosen = [...picks, ...ordered.filter((id) => !picks.includes(id))].slice(0, 2);
+    const visiting = visitor && visitor.homes[0] === region.id ? [visitor.id] : [];
+    const chosen = [...visiting, ...[...picks, ...ordered.filter((id) => !picks.includes(id))].filter((id) => !visiting.includes(id))].slice(0, 2);
     const rewards: Reward[] = chosen.map((speciesId) => ({ kind: 'creature', speciesId }));
     if (rewards.length === 0) rewards.push({ kind: 'bond', xp: BOND_BONUS_XP });
     return rewards.map((reward): Offer => ({ id: `offer-${nextId++}`, regionId: region.id, reward }));
@@ -855,7 +879,9 @@ function afterFaint(combat: CombatState, b: Battle, activeId: string): { combat:
 function switchTo(save: SaveData, e: Expedition, b: Battle, instanceId: string, pack: Pack): SaveData {
   const incoming = b.bench?.[instanceId];
   const slot = e.slots[b.slotIndex] as Slot;
-  if (!incoming || incoming.hp === 0 || b.phase !== 'choose' || b.befriending || instanceId === e.companionId || (b.tameHits ?? 0) > 0) return save;
+  // A creature that fainted must be replaced, even in the middle of a Bold Befriend; the attempt carries on with the next one.
+  const midBefriend = b.befriending || (b.tameHits ?? 0) > 0;
+  if (!incoming || incoming.hp === 0 || b.phase !== 'choose' || instanceId === e.companionId || (midBefriend && !b.mustSwitch)) return save;
   const m = memberStats(save, e, instanceId, slot, pack);
   const bench = { ...b.bench, [e.companionId]: { hp: b.combat.playerHp, charge: b.combat.charge } };
   const swapped: CombatState = { ...b.combat, ...m.config, playerHp: incoming.hp, charge: incoming.charge };
@@ -1085,8 +1111,13 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   const pathPoints = PATH_ORDER.filter((p) => (fighterAfter?.raised?.[p] ?? 0) > (fighterBefore?.raised?.[p] ?? 0));
   // Beating an Elite Ranger's last creature the first time wins their star creature.
   const starPrize = huntWon && slot.prize && !knownSpecies(save).has(slot.prize) ? slot.prize : undefined;
-  const result: TurnResult = { ...(starPrize ? { prize: starPrize } : {}), optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}), ...(brainBlast ? { brainBlast } : {}), ...(study.laid ? { eggLaid: study.laid } : {}), ...(pathPoints.length > 0 ? { pathPoints } : {}) };
-  const withJoined = joined ? [...raisedXp, joining(`${save.profile.id}-companion-${save.nextId}`, slot.opponentId, e.difficulty, trailBoost(e))] : raisedXp;
+  const visiting = isVisitorToday(save, pack, slot.opponentId);
+  const boost = trailBoost(e) * chainBoost(save.shinyChain, slot.opponentId) * (visiting ? VISITOR_SHINY_BOOST : 1);
+  const withJoined = joined ? [...raisedXp, joining(`${save.profile.id}-companion-${save.nextId}`, slot.opponentId, e.difficulty, boost)] : raisedXp;
+  const shinyChain = joined ? extendChain(save.shinyChain, slot.opponentId) : save.shinyChain;
+  // A level reached mid-trail gets its own moment in battle.
+  const levelUps = paidXp.filter((c) => teamOf(e).includes(c.instanceId) && levelOf(c.bondXp) > levelOf(save.companions.find((o) => o.instanceId === c.instanceId)?.bondXp ?? c.bondXp)).map((c) => ({ instanceId: c.instanceId, level: levelOf(c.bondXp) }));
+  const result: TurnResult = { ...(starPrize ? { prize: starPrize } : {}), ...(levelUps.length ? { levelUps } : {}), ...(joined && shinyChain ? { chain: shinyChain.count } : {}), ...(joined && visiting ? { visitor: true } : {}), optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}), ...(brainBlast ? { brainBlast } : {}), ...(study.laid ? { eggLaid: study.laid } : {}), ...(pathPoints.length > 0 ? { pathPoints } : {}) };
   const companions = starPrize ? [...withJoined, joining(`${save.profile.id}-companion-${save.nextId + (joined ? 1 : 0)}`, starPrize, e.difficulty)] : withJoined;
   return {
     ...save,
@@ -1094,6 +1125,7 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
     attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
     companions,
     nextId: save.nextId + (joined ? 1 : 0) + (starPrize ? 1 : 0),
+    ...(shinyChain ? { shinyChain } : {}),
     ...(joined && slot.rare ? { rareFound: true } : {}),
     bestStreak: Math.max(save.bestStreak ?? 0, streak),
     tamedAny: save.tamedAny || tamed,
@@ -1241,7 +1273,9 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
 
   const { reward } = e;
   const applied = save.appliedRewardIds.includes(e.id);
-  const owned = reward.kind === 'creature' && knownSpecies(save).has(reward.speciesId);
+  // Today's visitor can join again even when the child already has one.
+  const visiting = reward.kind === 'creature' && isVisitorToday(save, pack, reward.speciesId);
+  const owned = reward.kind === 'creature' && knownSpecies(save).has(reward.speciesId) && !visiting;
   const leftoverXp = applied ? 0 : e.points * ECONOMY.xpPerLeftoverPoint;
   const bonus = !applied && reward.kind === 'bond' ? reward.xp : 0;
   const finishXp = applied ? 0 : xpFor(XP.expeditionDone, e.difficulty);
@@ -1252,19 +1286,28 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
   });
   const gained = companions.filter((c) => team.includes(c.instanceId) && levelOf(c.bondXp) > levelOf(e.xpAtStart?.[c.instanceId] ?? c.bondXp));
   const levelAfter = Math.max(0, ...gained.map((c) => levelOf(c.bondXp)));
-  if (!applied && reward.kind === 'creature' && !owned) {
-    companions.push(joining(`${save.profile.id}-companion-${save.nextId}`, reward.speciesId, e.difficulty, trailBoost(e)));
+  const joins = !applied && reward.kind === 'creature' && !owned;
+  if (joins) {
+    const boost = trailBoost(e) * chainBoost(save.shinyChain, reward.speciesId) * (visiting ? VISITOR_SHINY_BOOST : 1);
+    companions.push(joining(`${save.profile.id}-companion-${save.nextId}`, reward.speciesId, e.difficulty, boost));
   }
+  const shinyChain = joins ? extendChain(save.shinyChain, reward.speciesId) : save.shinyChain;
+  // Finding every creature that lives in a region: Region Master, and a Rare Egg for each one.
+  const had = save.regionsMastered ?? masteredRegions(pack, knownSpecies(save));
+  const nowMastered = masteredRegions(pack, knownSpecies({ companions, wild: save.wild }));
+  const newlyMastered = applied ? [] : nowMastered.filter((r) => !had.includes(r));
+  const levelUps = gained.map((c) => ({ instanceId: c.instanceId, from: levelOf(e.xpAtStart?.[c.instanceId] ?? c.bondXp), to: levelOf(c.bondXp) }));
   // A Math or Words trail lays an egg of its subject, or a rare one for an Expert trail with nearly every answer right.
   const subject = studySubject(e.focus);
   const eggKind: EggKind | undefined = !applied && subject ? (e.difficulty === 'expert' && e.answered > 0 && e.correct / e.answered >= 0.9 ? 'rare' : subject) : undefined;
-  const nest = eggKind ? layEgg(save.eggs ?? [], eggKind, `egg-${save.nextId}`) : save.eggs;
-  const laid = !!eggKind && (nest?.length ?? 0) > (save.eggs?.length ?? 0);
+  const trailNest = eggKind ? layEgg(save.eggs ?? [], eggKind, `egg-${save.nextId}`) : save.eggs;
+  const laid = !!eggKind && (trailNest?.length ?? 0) > (save.eggs?.length ?? 0);
+  const nest = newlyMastered.reduce((n, r) => layEgg(n ?? [], 'rare', `egg-master-${r}-${save.nextId}`), trailNest);
 
   const stamped = save.stampedRegions ?? [];
   const newStamp = !applied && !stamped.includes(e.regionId) ? e.regionId : undefined;
   const won = applied ? { medals: save.medals ?? {}, earned: [] } : awardMedals(save.medals ?? {}, save.learning, pack, now);
-  const claimed: SaveData = { ...save, ...(nest ? { eggs: nest } : {}), medals: won.medals, bankedPoints: (save.bankedPoints ?? 0) + medalPoints(won.earned), stampedRegions: newStamp ? [...stamped, newStamp] : stamped, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
+  const claimed: SaveData = { ...save, ...(nest ? { eggs: nest } : {}), regionsMastered: [...new Set([...had, ...nowMastered])], ...(shinyChain ? { shinyChain } : {}), medals: won.medals, bankedPoints: (save.bankedPoints ?? 0) + medalPoints(won.earned), stampedRegions: newStamp ? [...stamped, newStamp] : stamped, companions, completedExpeditions: save.completedExpeditions + (applied ? 0 : 1), expertTrails: save.expertTrails + (!applied && e.difficulty === 'expert' ? 1 : 0) };
   const badges = earnedBadges(claimed, pack);
   const newBadges = badges.filter((id) => !save.badges.includes(id));
 
@@ -1288,6 +1331,8 @@ function claimReward(save: SaveData, pack: Pack, now: number): SaveData {
         cardsEarned: save.stateCards.length,
         xpGained: leftoverXp + bonus + finishXp,
         ...(levelAfter > 0 ? { levelUp: levelAfter } : {}),
+        ...(levelUps.length ? { levelUps } : {}),
+        ...(newlyMastered.length ? { regionsMastered: newlyMastered } : {}),
         newBadges,
         ...(e.tamedIds ? { tamedIds: e.tamedIds } : {}),
         ...(won.earned.length ? { newMedals: won.earned } : {}),
@@ -1642,6 +1687,8 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
   switch (cmd.type) {
     case 'start':
       return e || save.masteryTest || save.lodgeQuiz ? save : startExpedition(save, pack, cmd);
+    case 'newDay':
+      return e || save.visitorDay === cmd.day ? save : refreshOffers({ ...save, visitorDay: cmd.day }, pack);
     case 'setNight':
       return e || !!save.offersNight === cmd.night ? save : refreshOffers({ ...save, offersNight: cmd.night }, pack);
     case 'startLodge':

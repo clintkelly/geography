@@ -772,3 +772,12 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
   - **At the end of a trail:** a new creature joining gets a full reveal: ribbon, spin-in over light rays, confetti, types, home, a ticking "Creature N of total found" count and its cry.
   - **Duplicates** keep the smaller "New friend!" banner, so the big moment stays special.
 - **Camp:** picking a sighting plays that creature's cry, and each region button shows found/total, with a gold ★ when complete.
+
+## More juice: Region Master, daily visitor, shiny chains, level-ups
+
+- **Region Master** (`engine/juice.ts`): finding every creature that lives in a region (day and night, not bosses or rares) celebrates at camp with confetti and lays a Rare Egg. Region buttons show found/total and a gold ★.
+- **Today's visitor:** one regular creature per day (the same for the whole household, by the player's clock) is sighted first in its home region, can be befriended again even when owned, and is 3× as likely to be shiny. Camp sends `newDay` when the date changes.
+- **Shiny chain:** each creature of the same kind befriended in a row raises the next one's shiny chance by half, up to 4×. A different kind starts a new chain. Camp and the befriend banner show the chain.
+- **Level-ups:** a creature that levels up mid-trail gets a popup and sound in battle; camp shows a card per creature with its new level and how many levels until it evolves.
+- **Sparkles:** region buttons with something new to find right now (a new creature, a night creature after dark, or today's visitor) get a ✨.
+- **Fix:** a creature that faints during a Bold Befriend can now be switched out; the attempt carries on with the next creature.
