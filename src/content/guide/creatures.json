@@ -5148,5 +5148,2147 @@
     "source": "https://en.wikipedia.org/wiki/Shrek_(sheep)"
    }
   ]
+ },
+ "possumoon": {
+  "kind": "real",
+  "basedOn": "Virginia Opossum",
+  "scientific": "Didelphis virginiana",
+  "when": null,
+  "where": "Most of the United States, Mexico and Central America",
+  "size": "About the size of a house cat",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the only marsupial in the United States and Canada. Its babies grow in their mother's pouch.",
+    "source": "https://en.wikipedia.org/wiki/Virginia_opossum"
+   },
+   {
+    "text": "When it's in danger it may 'play possum': it flops over and lies still as if it were dead.",
+    "source": "https://en.wikipedia.org/wiki/Virginia_opossum"
+   },
+   {
+    "text": "It can hang from branches by its tail for a short time.",
+    "source": "https://en.wikipedia.org/wiki/Virginia_opossum"
+   }
+  ]
+ },
+ "lunaflit": {
+  "kind": "real",
+  "basedOn": "Luna Moth",
+  "scientific": "Actias luna",
+  "when": null,
+  "where": "Forests of eastern North America",
+  "size": "Wings up to about 11 cm (4.5 inches) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "Grown-up luna moths have no working mouth and don't eat. They live only about a week.",
+    "source": "https://en.wikipedia.org/wiki/Luna_moth"
+   },
+   {
+    "text": "The long tails on its back wings twist as it flies, which confuses bats hunting it.",
+    "source": "https://en.wikipedia.org/wiki/Luna_moth"
+   },
+   {
+    "text": "It flies at night and is drawn to lights.",
+    "source": "https://en.wikipedia.org/wiki/Luna_moth"
+   }
+  ]
+ },
+ "aardshade": {
+  "kind": "real",
+  "basedOn": "Aardwolf",
+  "scientific": "Proteles cristata",
+  "when": null,
+  "where": "Dry grasslands and scrub of eastern and southern Africa",
+  "size": "About 55 to 80 cm (2 to 2.5 feet) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is related to hyenas but eats almost only termites, licking them up with its long sticky tongue.",
+    "source": "https://en.wikipedia.org/wiki/Aardwolf"
+   },
+   {
+    "text": "One aardwolf can lap up hundreds of thousands of termites in a single night.",
+    "source": "https://en.wikipedia.org/wiki/Aardwolf"
+   },
+   {
+    "text": "When scared, it raises the long mane on its back to look bigger.",
+    "source": "https://en.wikipedia.org/wiki/Aardwolf"
+   }
+  ]
+ },
+ "galagleam": {
+  "kind": "real",
+  "basedOn": "Galago (Bushbaby)",
+  "scientific": "Galago",
+  "when": null,
+  "where": "Forests and woodlands across Africa south of the Sahara",
+  "size": "About the size of a squirrel",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its huge eyes help it see at night, when it hunts insects.",
+    "source": "https://en.wikipedia.org/wiki/Galago"
+   },
+   {
+    "text": "Galagos are amazing jumpers and leap from branch to branch with their strong back legs.",
+    "source": "https://en.wikipedia.org/wiki/Galago"
+   },
+   {
+    "text": "It is called a bushbaby partly because its calls can sound like a crying baby.",
+    "source": "https://en.wikipedia.org/wiki/Galago"
+   }
+  ]
+ },
+ "honkabat": {
+  "kind": "real",
+  "basedOn": "Hammer-headed Bat",
+  "scientific": "Hypsignathus monstrosus",
+  "when": null,
+  "where": "Forests and rivers of west and central Africa",
+  "size": "Wings nearly 1 m (3 feet) across, the biggest bat in mainland Africa",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest bat in mainland Africa.",
+    "source": "https://en.wikipedia.org/wiki/Hammer-headed_bat"
+   },
+   {
+    "text": "Males gather along rivers at night and honk loudly to attract females.",
+    "source": "https://en.wikipedia.org/wiki/Hammer-headed_bat"
+   },
+   {
+    "text": "The male's big head and lips help make its loud honking call.",
+    "source": "https://en.wikipedia.org/wiki/Hammer-headed_bat"
+   }
+  ]
+ },
+ "quillnight": {
+  "kind": "real",
+  "basedOn": "Northern White-breasted Hedgehog",
+  "scientific": "Erinaceus roumanicus",
+  "when": null,
+  "where": "Eastern Europe and western Asia",
+  "size": "About 25 cm (10 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Hedgehogs come out at night to hunt beetles, worms and other small animals.",
+    "source": "https://en.wikipedia.org/wiki/Northern_white-breasted_hedgehog"
+   },
+   {
+    "text": "A hedgehog has thousands of spines and rolls into a prickly ball to protect itself.",
+    "source": "https://en.wikipedia.org/wiki/Hedgehog"
+   },
+   {
+    "text": "In cold winters, hedgehogs hibernate.",
+    "source": "https://en.wikipedia.org/wiki/Hedgehog"
+   }
+  ]
+ },
+ "solenox": {
+  "kind": "real",
+  "basedOn": "Solenodon",
+  "scientific": "Solenodon",
+  "when": null,
+  "where": "The Caribbean islands of Cuba and Hispaniola",
+  "size": "About 30 cm (1 foot) long, plus a long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the very few mammals with a venomous bite.",
+    "source": "https://en.wikipedia.org/wiki/Solenodon"
+   },
+   {
+    "text": "It uses its long, bendy snout to sniff out insects at night.",
+    "source": "https://en.wikipedia.org/wiki/Solenodon"
+   },
+   {
+    "text": "Solenodons are endangered and found only on Cuba and Hispaniola.",
+    "source": "https://en.wikipedia.org/wiki/Solenodon"
+   }
+  ]
+ },
+ "lorishade": {
+  "kind": "real",
+  "basedOn": "Slow Loris",
+  "scientific": "Nycticebus",
+  "when": null,
+  "where": "Forests of South and Southeast Asia",
+  "size": "About 25 to 38 cm (10 to 15 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Slow lorises are the only known venomous primates.",
+    "source": "https://en.wikipedia.org/wiki/Slow_loris"
+   },
+   {
+    "text": "They move slowly and quietly through the branches at night.",
+    "source": "https://en.wikipedia.org/wiki/Slow_loris"
+   },
+   {
+    "text": "Their big round eyes help them see in the dark.",
+    "source": "https://en.wikipedia.org/wiki/Slow_loris"
+   }
+  ]
+ },
+ "hootmonk": {
+  "kind": "real",
+  "basedOn": "Night Monkey (Owl Monkey)",
+  "scientific": "Aotus",
+  "when": null,
+  "where": "Forests of Central and South America",
+  "size": "About 30 cm (1 foot) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Night monkeys are the only truly nighttime monkeys.",
+    "source": "https://en.wikipedia.org/wiki/Night_monkey"
+   },
+   {
+    "text": "Their big eyes help them find fruit and insects by moonlight.",
+    "source": "https://en.wikipedia.org/wiki/Night_monkey"
+   },
+   {
+    "text": "Night monkey fathers do most of the carrying of the babies.",
+    "source": "https://en.wikipedia.org/wiki/Night_monkey"
+   }
+  ]
+ },
+ "glidewisp": {
+  "kind": "real",
+  "basedOn": "Sugar Glider",
+  "scientific": "Petaurus breviceps",
+  "when": null,
+  "where": "Forests of Australia and New Guinea",
+  "size": "About 16 to 21 cm (6 to 8 inches) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It glides between trees on furry flaps of skin stretched between its front and back legs.",
+    "source": "https://en.wikipedia.org/wiki/Sugar_glider"
+   },
+   {
+    "text": "It is a marsupial: its babies grow in their mother's pouch.",
+    "source": "https://en.wikipedia.org/wiki/Sugar_glider"
+   },
+   {
+    "text": "It is named for its love of sweet sap and nectar.",
+    "source": "https://en.wikipedia.org/wiki/Sugar_glider"
+   }
+  ]
+ },
+ "solarion": {
+  "kind": "myth",
+  "basedOn": "Leo, the Lion constellation",
+  "scientific": null,
+  "when": null,
+  "where": "The night sky",
+  "size": null,
+  "story": "In Greek myth, Leo is the Nemean lion that the hero Heracles defeated. Its stars were placed in the sky as a lion.",
+  "facts": [
+   {
+    "text": "Leo is easiest to see in spring evenings in the Northern Hemisphere.",
+    "source": "https://en.wikipedia.org/wiki/Leo_(constellation)"
+   },
+   {
+    "text": "Its brightest star is Regulus, the lion's heart.",
+    "source": "https://en.wikipedia.org/wiki/Regulus"
+   }
+  ]
+ },
+ "delphinova": {
+  "kind": "myth",
+  "basedOn": "Delphinus, the Dolphin constellation",
+  "scientific": null,
+  "when": null,
+  "where": "The night sky",
+  "size": null,
+  "story": "In Greek myth, a dolphin helped the sea god Poseidon, and was placed among the stars as a thank-you.",
+  "facts": [
+   {
+    "text": "Delphinus is a small constellation shaped like a leaping dolphin.",
+    "source": "https://en.wikipedia.org/wiki/Delphinus"
+   },
+   {
+    "text": "It is best seen on late summer evenings in the Northern Hemisphere.",
+    "source": "https://en.wikipedia.org/wiki/Delphinus"
+   }
+  ]
+ },
+ "ursastar": {
+  "kind": "myth",
+  "basedOn": "Ursa Major, the Great Bear constellation",
+  "scientific": null,
+  "when": null,
+  "where": "The night sky",
+  "size": null,
+  "story": "Many peoples saw a bear in these stars. In Greek myth, the bear is Callisto, placed in the sky by Zeus.",
+  "facts": [
+   {
+    "text": "The seven brightest stars of Ursa Major make the shape called the Big Dipper.",
+    "source": "https://en.wikipedia.org/wiki/Big_Dipper"
+   },
+   {
+    "text": "Two stars at the end of the Big Dipper's bowl point to the North Star.",
+    "source": "https://en.wikipedia.org/wiki/Big_Dipper"
+   }
+  ]
+ },
+ "dracostar": {
+  "kind": "myth",
+  "basedOn": "Draco, the Dragon constellation",
+  "scientific": null,
+  "when": null,
+  "where": "The night sky",
+  "size": null,
+  "story": "In Greek myth, Draco is the dragon that guarded the golden apples of the Hesperides.",
+  "facts": [
+   {
+    "text": "Draco winds through the far northern sky and never sets for viewers in much of the Northern Hemisphere.",
+    "source": "https://en.wikipedia.org/wiki/Draco_(constellation)"
+   },
+   {
+    "text": "About 5,000 years ago, a star in Draco named Thuban was the North Star.",
+    "source": "https://en.wikipedia.org/wiki/Thuban"
+   }
+  ]
+ },
+ "cosmobill": {
+  "kind": "real",
+  "basedOn": "Platypus",
+  "scientific": "Ornithorhynchus anatinus",
+  "when": null,
+  "where": "Rivers and lakes of eastern Australia, and in this game, the stars",
+  "size": "About 40 to 50 cm (16 to 20 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The platypus is one of the only mammals that lays eggs.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "It finds food underwater with its bill, which senses the tiny electric signals of its prey.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "cobrafu": {
+  "kind": "real",
+  "basedOn": "King Cobra",
+  "scientific": "Ophiophagus hannah",
+  "when": null,
+  "where": "Forests of India and Southeast Asia",
+  "size": "Up to about 4 to 5 m (13 to 18 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The king cobra is the longest venomous snake in the world.",
+    "source": "https://en.wikipedia.org/wiki/King_cobra"
+   },
+   {
+    "text": "It mostly eats other snakes.",
+    "source": "https://en.wikipedia.org/wiki/King_cobra"
+   },
+   {
+    "text": "Snake is one of the Five Animals of Southern Chinese kung fu.",
+    "source": "https://en.wikipedia.org/wiki/Five_Animals"
+   }
+  ]
+ },
+ "pardojo": {
+  "kind": "real",
+  "basedOn": "Indian Leopard",
+  "scientific": "Panthera pardus fusca",
+  "when": null,
+  "where": "Forests and grasslands of India and nearby countries",
+  "size": "About 1.2 to 1.9 m (4 to 6 feet) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Leopards are strong climbers and often drag their food up into trees.",
+    "source": "https://en.wikipedia.org/wiki/Leopard"
+   },
+   {
+    "text": "The dark spots on a leopard are called rosettes because they look like roses.",
+    "source": "https://en.wikipedia.org/wiki/Leopard"
+   },
+   {
+    "text": "Leopard is one of the Five Animals of Southern Chinese kung fu.",
+    "source": "https://en.wikipedia.org/wiki/Five_Animals"
+   }
+  ]
+ },
+ "talonfu": {
+  "kind": "real",
+  "basedOn": "Steppe Eagle",
+  "scientific": "Aquila nipalensis",
+  "when": null,
+  "where": "Grasslands (steppes) from eastern Europe across Central Asia to Mongolia",
+  "size": "Wings about 1.7 to 2.2 m (5.5 to 7 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It nests on the ground or on low bushes, since its open grasslands have few tall trees.",
+    "source": "https://en.wikipedia.org/wiki/Steppe_eagle"
+   },
+   {
+    "text": "Steppe eagles fly long distances in winter, to Africa, the Middle East and India.",
+    "source": "https://en.wikipedia.org/wiki/Steppe_eagle"
+   },
+   {
+    "text": "Eagle Claw is a style of Chinese kung fu known for its gripping hand techniques.",
+    "source": "https://en.wikipedia.org/wiki/Eagle_Claw"
+   }
+  ]
+ },
+ "roadzoom": {
+  "kind": "real",
+  "basedOn": "Greater Roadrunner",
+  "scientific": "Geococcyx californianus",
+  "when": null,
+  "where": "Deserts and dry scrub of the southwestern United States and Mexico",
+  "size": "About 52 to 62 cm (20 to 24 inches) long, including its long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It can run at about 32 km/h (20 mph).",
+    "source": "https://en.wikipedia.org/wiki/Greater_roadrunner"
+   },
+   {
+    "text": "It can fly, but it would rather run.",
+    "source": "https://en.wikipedia.org/wiki/Greater_roadrunner"
+   },
+   {
+    "text": "It is quick enough to catch lizards and even small rattlesnakes.",
+    "source": "https://en.wikipedia.org/wiki/Greater_roadrunner"
+   }
+  ]
+ },
+ "snapjaw": {
+  "kind": "real",
+  "basedOn": "Alligator Snapping Turtle",
+  "scientific": "Macrochelys temminckii",
+  "when": null,
+  "where": "Rivers, lakes and swamps of the southeastern United States",
+  "size": "Up to about 80 cm (31 inches) shell length",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the heaviest freshwater turtles in the world.",
+    "source": "https://en.wikipedia.org/wiki/Alligator_snapping_turtle"
+   },
+   {
+    "text": "It lies still with its mouth open and wiggles a worm-shaped bit on its tongue to lure fish.",
+    "source": "https://en.wikipedia.org/wiki/Alligator_snapping_turtle"
+   },
+   {
+    "text": "Its shell has three tall ridges, like a dinosaur's back.",
+    "source": "https://en.wikipedia.org/wiki/Alligator_snapping_turtle"
+   }
+  ]
+ },
+ "springbolt": {
+  "kind": "real",
+  "basedOn": "Springbok",
+  "scientific": "Antidorcas marsupialis",
+  "when": null,
+  "where": "Dry grasslands and deserts of southern Africa",
+  "size": "About 70 to 90 cm (28 to 35 inches) tall at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "Springboks pronk: they bounce straight up into the air on stiff legs.",
+    "source": "https://en.wikipedia.org/wiki/Springbok"
+   },
+   {
+    "text": "It is the national animal of South Africa.",
+    "source": "https://en.wikipedia.org/wiki/Springbok"
+   },
+   {
+    "text": "Springboks can go a long time without drinking, getting water from the plants they eat.",
+    "source": "https://en.wikipedia.org/wiki/Springbok"
+   }
+  ]
+ },
+ "braypen": {
+  "kind": "real",
+  "basedOn": "African Penguin",
+  "scientific": "Spheniscus demersus",
+  "when": null,
+  "where": "Coasts and islands of South Africa and Namibia",
+  "size": "About 60 to 70 cm (2 feet) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its loud call sounds like a donkey braying, so it was once called the jackass penguin.",
+    "source": "https://en.wikipedia.org/wiki/African_penguin"
+   },
+   {
+    "text": "The pink patches above its eyes help it cool down in the warm sun.",
+    "source": "https://en.wikipedia.org/wiki/African_penguin"
+   },
+   {
+    "text": "It is endangered, and people are working to protect its colonies.",
+    "source": "https://en.wikipedia.org/wiki/African_penguin"
+   }
+  ]
+ },
+ "storkwing": {
+  "kind": "real",
+  "basedOn": "White Stork",
+  "scientific": "Ciconia ciconia",
+  "when": null,
+  "where": "Europe in summer, Africa in winter",
+  "size": "Wings about 1.6 to 2.2 m (5 to 7 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "White storks build big stick nests on rooftops, chimneys and poles.",
+    "source": "https://en.wikipedia.org/wiki/White_stork"
+   },
+   {
+    "text": "Every autumn they fly thousands of kilometers to Africa for the winter.",
+    "source": "https://en.wikipedia.org/wiki/White_stork"
+   },
+   {
+    "text": "It is the national bird of Lithuania.",
+    "source": "https://en.wikipedia.org/wiki/White_stork"
+   }
+  ]
+ },
+ "carpabear": {
+  "kind": "real",
+  "basedOn": "Eurasian Brown Bear",
+  "scientific": "Ursus arctos arctos",
+  "when": null,
+  "where": "Forests of the Carpathian Mountains in Romania and nearby countries",
+  "size": "Adults stand about 1 m (3 feet) tall at the shoulder on all fours",
+  "story": null,
+  "facts": [
+   {
+    "text": "The Carpathian Mountains have one of the biggest brown bear populations in Europe.",
+    "source": "https://en.wikipedia.org/wiki/Eurasian_brown_bear"
+   },
+   {
+    "text": "Brown bears eat mostly plants, berries and roots, plus some meat.",
+    "source": "https://en.wikipedia.org/wiki/Brown_bear"
+   },
+   {
+    "text": "They sleep through much of the winter in dens.",
+    "source": "https://en.wikipedia.org/wiki/Brown_bear"
+   }
+  ]
+ },
+ "tuskhog": {
+  "kind": "real",
+  "basedOn": "Red River Hog",
+  "scientific": "Potamochoerus porcus",
+  "when": null,
+  "where": "Rainforests of West and Central Africa",
+  "size": "About 1 to 1.5 m (3 to 5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has bright reddish-orange fur and long tufts on its ears.",
+    "source": "https://en.wikipedia.org/wiki/Red_river_hog"
+   },
+   {
+    "text": "Red river hogs live in family groups called sounders.",
+    "source": "https://en.wikipedia.org/wiki/Red_river_hog"
+   },
+   {
+    "text": "They dig up roots and bugs with their tough snouts.",
+    "source": "https://en.wikipedia.org/wiki/Red_river_hog"
+   }
+  ]
+ },
+ "leafviper": {
+  "kind": "real",
+  "basedOn": "Gaboon Viper",
+  "scientific": "Bitis gabonica",
+  "when": null,
+  "where": "Rainforests of West and Central Africa",
+  "size": "Usually about 1.2 to 1.5 m (4 to 5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The Gaboon viper has the longest fangs of any snake.",
+    "source": "https://en.wikipedia.org/wiki/Gaboon_viper"
+   },
+   {
+    "text": "Its pattern looks just like dead leaves on the forest floor.",
+    "source": "https://en.wikipedia.org/wiki/Gaboon_viper"
+   },
+   {
+    "text": "It is calm and slow and usually stays perfectly still to hide.",
+    "source": "https://en.wikipedia.org/wiki/Gaboon_viper"
+   }
+  ]
+ },
+ "mandrilux": {
+  "kind": "real",
+  "basedOn": "Mandrill",
+  "scientific": "Mandrillus sphinx",
+  "when": null,
+  "where": "Rainforests of Central Africa, including Gabon, Cameroon and the Republic of the Congo",
+  "size": "About 55 to 95 cm (2 to 3 feet) long, the largest monkey",
+  "story": null,
+  "facts": [
+   {
+    "text": "The mandrill is the largest monkey in the world.",
+    "source": "https://en.wikipedia.org/wiki/Mandrill"
+   },
+   {
+    "text": "The leader males have the brightest red and blue faces.",
+    "source": "https://en.wikipedia.org/wiki/Mandrill"
+   },
+   {
+    "text": "Mandrills live in huge groups called hordes, sometimes hundreds strong.",
+    "source": "https://en.wikipedia.org/wiki/Mandrill"
+   }
+  ]
+ },
+ "congopeak": {
+  "kind": "real",
+  "basedOn": "Congo Peafowl",
+  "scientific": "Afropavo congensis",
+  "when": null,
+  "where": "Rainforests of the Democratic Republic of the Congo",
+  "size": "About 60 to 70 cm (2 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives only in the Democratic Republic of the Congo.",
+    "source": "https://en.wikipedia.org/wiki/Congo_peafowl"
+   },
+   {
+    "text": "Scientists first described it in 1936, after finding feathers in a hat.",
+    "source": "https://en.wikipedia.org/wiki/Congo_peafowl"
+   },
+   {
+    "text": "It is the national bird of the Democratic Republic of the Congo.",
+    "source": "https://en.wikipedia.org/wiki/Congo_peafowl"
+   }
+  ]
+ },
+ "leoseal": {
+  "kind": "real",
+  "basedOn": "Leopard Seal",
+  "scientific": "Hydrurga leptonyx",
+  "when": null,
+  "where": "The pack ice around Antarctica",
+  "size": "About 2.4 to 3.5 m (8 to 11 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its spotted coat gives it its name.",
+    "source": "https://en.wikipedia.org/wiki/Leopard_seal"
+   },
+   {
+    "text": "It is a top hunter of the Antarctic and eats penguins, fish and krill.",
+    "source": "https://en.wikipedia.org/wiki/Leopard_seal"
+   },
+   {
+    "text": "It can strain krill from the water through its special back teeth.",
+    "source": "https://en.wikipedia.org/wiki/Leopard_seal"
+   }
+  ]
+ },
+ "snowflit": {
+  "kind": "real",
+  "basedOn": "Snow Petrel",
+  "scientific": "Pagodroma nivea",
+  "when": null,
+  "where": "Antarctica and the icy Southern Ocean",
+  "size": "About 30 to 40 cm (12 to 16 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of only three birds that breed only in Antarctica.",
+    "source": "https://en.wikipedia.org/wiki/Snow_petrel"
+   },
+   {
+    "text": "It nests in cracks on rocky peaks sticking up through the ice.",
+    "source": "https://en.wikipedia.org/wiki/Snow_petrel"
+   },
+   {
+    "text": "When threatened, it can spit a smelly oil.",
+    "source": "https://en.wikipedia.org/wiki/Snow_petrel"
+   }
+  ]
+ },
+ "loonsong": {
+  "kind": "real",
+  "basedOn": "Common Loon",
+  "scientific": "Gavia immer",
+  "when": null,
+  "where": "Northern lakes of Canada and the northern United States, and coasts in winter",
+  "size": "About 66 to 91 cm (2 to 3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its haunting calls echo across lakes, especially at night.",
+    "source": "https://en.wikipedia.org/wiki/Common_loon"
+   },
+   {
+    "text": "Its legs are far back on its body, great for diving but clumsy for walking on land.",
+    "source": "https://en.wikipedia.org/wiki/Common_loon"
+   },
+   {
+    "text": "It is the state bird of Minnesota.",
+    "source": "https://en.wikipedia.org/wiki/Common_loon"
+   }
+  ]
+ },
+ "hutiboo": {
+  "kind": "real",
+  "basedOn": "Desmarest's Hutia",
+  "scientific": "Capromys pilorides",
+  "when": null,
+  "where": "Forests and mangroves of Cuba",
+  "size": "About 30 to 60 cm (1 to 2 feet) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest hutia and lives only in Cuba.",
+    "source": "https://en.wikipedia.org/wiki/Desmarest%27s_hutia"
+   },
+   {
+    "text": "It climbs trees and eats leaves, fruit and bark.",
+    "source": "https://en.wikipedia.org/wiki/Desmarest%27s_hutia"
+   },
+   {
+    "text": "Hutias are rodents found only on Caribbean islands.",
+    "source": "https://en.wikipedia.org/wiki/Hutia"
+   }
+  ]
+ },
+ "todyzip": {
+  "kind": "real",
+  "basedOn": "Cuban Tody",
+  "scientific": "Todus multicolor",
+  "when": null,
+  "where": "Forests of Cuba",
+  "size": "About 11 cm (4 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives only in Cuba.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_tody"
+   },
+   {
+    "text": "It digs a nest tunnel into a dirt bank.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_tody"
+   },
+   {
+    "text": "It catches insects from the undersides of leaves.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_tody"
+   }
+  ]
+ },
+ "hornsquirt": {
+  "kind": "real",
+  "basedOn": "Texas Horned Lizard",
+  "scientific": "Phrynosoma cornutum",
+  "when": null,
+  "where": "Dry plains and deserts of the south-central United States and northern Mexico",
+  "size": "About 7 to 11 cm (3 to 4.5 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "When in danger, it can squirt blood from the corners of its eyes to scare off predators.",
+    "source": "https://en.wikipedia.org/wiki/Texas_horned_lizard"
+   },
+   {
+    "text": "It eats mostly harvester ants.",
+    "source": "https://en.wikipedia.org/wiki/Texas_horned_lizard"
+   },
+   {
+    "text": "It is the state reptile of Texas.",
+    "source": "https://en.wikipedia.org/wiki/Texas_horned_lizard"
+   }
+  ]
+ },
+ "rackit": {
+  "kind": "real",
+  "basedOn": "Raccoon",
+  "scientific": "Procyon lotor",
+  "when": null,
+  "where": "Forests, wetlands and towns across most of North America",
+  "size": "About 40 to 70 cm (16 to 28 inches) long, plus its ringed tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Raccoons have very sensitive front paws and are famous for opening latches and lids.",
+    "source": "https://en.wikipedia.org/wiki/Raccoon"
+   },
+   {
+    "text": "Scientists have found raccoons can remember how to solve a task for up to three years.",
+    "source": "https://en.wikipedia.org/wiki/Raccoon"
+   },
+   {
+    "text": "The black fur around its eyes looks like a bandit's mask.",
+    "source": "https://en.wikipedia.org/wiki/Raccoon"
+   }
+  ]
+ },
+ "chipdig": {
+  "kind": "real",
+  "basedOn": "Eastern Chipmunk",
+  "scientific": "Tamias striatus",
+  "when": null,
+  "where": "Forests of eastern North America",
+  "size": "About 25 cm (10 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Chipmunks carry food in stretchy cheek pouches.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_chipmunk"
+   },
+   {
+    "text": "It stores seeds and nuts in its burrow to eat through the winter.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_chipmunk"
+   },
+   {
+    "text": "Its burrows can be more than 3 m (10 feet) long.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_chipmunk"
+   }
+  ]
+ },
+ "quillsteel": {
+  "kind": "real",
+  "basedOn": "North American Porcupine",
+  "scientific": "Erethizon dorsatum",
+  "when": null,
+  "where": "Forests of Canada and the northern and western United States",
+  "size": "About 60 to 90 cm (2 to 3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has about 30,000 quills.",
+    "source": "https://en.wikipedia.org/wiki/North_American_porcupine"
+   },
+   {
+    "text": "Porcupines can't throw their quills, but the quills come off easily when touched.",
+    "source": "https://en.wikipedia.org/wiki/North_American_porcupine"
+   },
+   {
+    "text": "It is a good climber and eats bark, leaves and twigs.",
+    "source": "https://en.wikipedia.org/wiki/North_American_porcupine"
+   }
+  ]
+ },
+ "crestalon": {
+  "kind": "real",
+  "basedOn": "Bald Eagle",
+  "scientific": "Haliaeetus leucocephalus",
+  "when": null,
+  "where": "Near lakes, rivers and coasts across North America",
+  "size": "Wings about 1.8 to 2.3 m (6 to 7.5 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the national bird of the United States.",
+    "source": "https://en.wikipedia.org/wiki/Bald_eagle"
+   },
+   {
+    "text": "It builds the biggest nest of any North American bird.",
+    "source": "https://en.wikipedia.org/wiki/Bald_eagle"
+   },
+   {
+    "text": "Bald eagles almost disappeared from the lower 48 states but made a big comeback.",
+    "source": "https://en.wikipedia.org/wiki/Bald_eagle"
+   }
+  ]
+ },
+ "leapcroc": {
+  "kind": "real",
+  "basedOn": "Cuban Crocodile",
+  "scientific": "Crocodylus rhombifer",
+  "when": null,
+  "where": "Swamps of Cuba",
+  "size": "Usually about 2 to 2.5 m (6.5 to 8 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives only in Cuba, mostly in the Zapata Swamp.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_crocodile"
+   },
+   {
+    "text": "It is known for leaping up out of the water.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_crocodile"
+   },
+   {
+    "text": "Its scales have bright yellow-and-black speckles.",
+    "source": "https://en.wikipedia.org/wiki/Cuban_crocodile"
+   }
+  ]
+ },
+ "digdillo": {
+  "kind": "real",
+  "basedOn": "Giant Armadillo",
+  "scientific": "Priodontes maximus",
+  "when": null,
+  "where": "Forests and grasslands of South America",
+  "size": "About 75 to 100 cm (2.5 to 3.3 feet) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest living armadillo.",
+    "source": "https://en.wikipedia.org/wiki/Giant_armadillo"
+   },
+   {
+    "text": "The third claw on each front foot is the longest claw of any living mammal, compared to body size.",
+    "source": "https://en.wikipedia.org/wiki/Giant_armadillo"
+   },
+   {
+    "text": "It digs big burrows that many other animals use too.",
+    "source": "https://en.wikipedia.org/wiki/Giant_armadillo"
+   }
+  ]
+ },
+ "macawsong": {
+  "kind": "real",
+  "basedOn": "Hyacinth Macaw",
+  "scientific": "Anodorhynchus hyacinthinus",
+  "when": null,
+  "where": "Woodlands and wetlands of central South America, including Brazil's Pantanal",
+  "size": "About 1 m (3.3 feet) long, the longest parrot",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the longest parrot in the world, and the largest flying parrot.",
+    "source": "https://en.wikipedia.org/wiki/Hyacinth_macaw"
+   },
+   {
+    "text": "Its powerful beak can crack hard palm nuts.",
+    "source": "https://en.wikipedia.org/wiki/Hyacinth_macaw"
+   },
+   {
+    "text": "It has bright yellow skin around its eyes and at the base of its beak.",
+    "source": "https://en.wikipedia.org/wiki/Hyacinth_macaw"
+   }
+  ]
+ },
+ "dartblaze": {
+  "kind": "real",
+  "basedOn": "Poison Dart Frog",
+  "scientific": "Dendrobatidae",
+  "when": null,
+  "where": "Rainforests of Central and South America",
+  "size": "Most are about 1.5 to 6 cm (under 2.5 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Their bright colors warn predators that they are poisonous.",
+    "source": "https://en.wikipedia.org/wiki/Poison_dart_frog"
+   },
+   {
+    "text": "Many kinds are less than 2.5 cm (1 inch) long.",
+    "source": "https://en.wikipedia.org/wiki/Poison_dart_frog"
+   },
+   {
+    "text": "In zoos, they usually lose their poison, because it comes from the bugs they eat in the wild.",
+    "source": "https://en.wikipedia.org/wiki/Poison_dart_frog"
+   }
+  ]
+ },
+ "stiltwolf": {
+  "kind": "real",
+  "basedOn": "Maned Wolf",
+  "scientific": "Chrysocyon brachyurus",
+  "when": null,
+  "where": "Grasslands of central South America",
+  "size": "About 90 cm (3 feet) tall at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the tallest wild dog, but it isn't a true wolf or fox.",
+    "source": "https://en.wikipedia.org/wiki/Maned_wolf"
+   },
+   {
+    "text": "Its long legs help it see over tall grass.",
+    "source": "https://en.wikipedia.org/wiki/Maned_wolf"
+   },
+   {
+    "text": "It eats a lot of fruit, especially one called the wolf apple.",
+    "source": "https://en.wikipedia.org/wiki/Maned_wolf"
+   }
+  ]
+ },
+ "strapguin": {
+  "kind": "real",
+  "basedOn": "Chinstrap Penguin",
+  "scientific": "Pygoscelis antarcticus",
+  "when": null,
+  "where": "Antarctic Peninsula and nearby islands",
+  "size": "About 70 cm (2.3 feet) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The thin black line under its chin looks like the strap of a helmet.",
+    "source": "https://en.wikipedia.org/wiki/Chinstrap_penguin"
+   },
+   {
+    "text": "It is one of the most common penguins, with millions of breeding pairs.",
+    "source": "https://en.wikipedia.org/wiki/Chinstrap_penguin"
+   },
+   {
+    "text": "Chinstrap penguins take thousands of very short naps a day.",
+    "source": "https://en.wikipedia.org/wiki/Chinstrap_penguin"
+   }
+  ]
+ },
+ "trunkseal": {
+  "kind": "real",
+  "basedOn": "Southern Elephant Seal",
+  "scientific": "Mirounga leonina",
+  "when": null,
+  "where": "Antarctic and sub-Antarctic islands and seas",
+  "size": "Males up to about 5 to 6 m (16 to 20 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest seal in the world.",
+    "source": "https://en.wikipedia.org/wiki/Southern_elephant_seal"
+   },
+   {
+    "text": "Males use their big trunk-like noses to make loud roaring sounds.",
+    "source": "https://en.wikipedia.org/wiki/Southern_elephant_seal"
+   },
+   {
+    "text": "It can dive more than 1,500 m (5,000 feet) deep.",
+    "source": "https://en.wikipedia.org/wiki/Southern_elephant_seal"
+   }
+  ]
+ },
+ "barraclad": {
+  "kind": "real",
+  "basedOn": "Great Barracuda",
+  "scientific": "Sphyraena barracuda",
+  "when": null,
+  "where": "Warm oceans around the world, including the Caribbean",
+  "size": "Commonly up to about 1.5 m (5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Barracudas are fast hunters that dash forward in short bursts.",
+    "source": "https://en.wikipedia.org/wiki/Great_barracuda"
+   },
+   {
+    "text": "They have long fang-like teeth and a big underbite.",
+    "source": "https://en.wikipedia.org/wiki/Great_barracuda"
+   },
+   {
+    "text": "Young barracudas often hide among seagrass and mangroves.",
+    "source": "https://en.wikipedia.org/wiki/Great_barracuda"
+   }
+  ]
+ },
+ "toothfrost": {
+  "kind": "real",
+  "basedOn": "Antarctic Toothfish",
+  "scientific": "Dissostichus mawsoni",
+  "when": null,
+  "where": "Cold waters of the Southern Ocean around Antarctica",
+  "size": "Up to about 1.7 m (5.5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has antifreeze proteins in its blood so it doesn't freeze.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_toothfish"
+   },
+   {
+    "text": "It is one of the largest fish in the Southern Ocean.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_toothfish"
+   },
+   {
+    "text": "It can live for about 50 years.",
+    "source": "https://en.wikipedia.org/wiki/Antarctic_toothfish"
+   }
+  ]
+ },
+ "gobblaze": {
+  "kind": "real",
+  "basedOn": "Wild Turkey",
+  "scientific": "Meleagris gallopavo",
+  "when": null,
+  "where": "Forests and fields across much of North America",
+  "size": "About 1 to 1.2 m (3.3 to 4 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Male wild turkeys gobble loudly and fan their tails to show off.",
+    "source": "https://en.wikipedia.org/wiki/Wild_turkey"
+   },
+   {
+    "text": "Unlike farm turkeys, wild turkeys can fly short distances.",
+    "source": "https://en.wikipedia.org/wiki/Wild_turkey"
+   },
+   {
+    "text": "Wild turkeys almost disappeared in the 1900s, then made a big comeback.",
+    "source": "https://en.wikipedia.org/wiki/Wild_turkey"
+   }
+  ]
+ },
+ "bluepinch": {
+  "kind": "real",
+  "basedOn": "Atlantic Blue Crab",
+  "scientific": "Callinectes sapidus",
+  "when": null,
+  "where": "Coasts and bays of the western Atlantic and the Gulf of Mexico",
+  "size": "Shell about 23 cm (9 inches) wide",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its back legs are shaped like paddles, so it is a strong swimmer.",
+    "source": "https://en.wikipedia.org/wiki/Callinectes_sapidus"
+   },
+   {
+    "text": "Its scientific name means 'beautiful savory swimmer'.",
+    "source": "https://en.wikipedia.org/wiki/Callinectes_sapidus"
+   },
+   {
+    "text": "It is famous in the Chesapeake Bay.",
+    "source": "https://en.wikipedia.org/wiki/Callinectes_sapidus"
+   }
+  ]
+ },
+ "snowshoe": {
+  "kind": "real",
+  "basedOn": "Snowshoe Hare",
+  "scientific": "Lepus americanus",
+  "when": null,
+  "where": "Northern forests of North America",
+  "size": "About 40 to 50 cm (16 to 20 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its fur turns white in winter and brown in summer.",
+    "source": "https://en.wikipedia.org/wiki/Snowshoe_hare"
+   },
+   {
+    "text": "Its big furry hind feet keep it from sinking into snow.",
+    "source": "https://en.wikipedia.org/wiki/Snowshoe_hare"
+   },
+   {
+    "text": "Its numbers rise and fall in a roughly 10-year cycle, along with the lynx that hunt it.",
+    "source": "https://en.wikipedia.org/wiki/Snowshoe_hare"
+   }
+  ]
+ },
+ "badgerock": {
+  "kind": "real",
+  "basedOn": "European Badger",
+  "scientific": "Meles meles",
+  "when": null,
+  "where": "Woodlands and fields across Europe",
+  "size": "About 60 to 90 cm (2 to 3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Badgers live in big underground homes called setts.",
+    "source": "https://en.wikipedia.org/wiki/European_badger"
+   },
+   {
+    "text": "Some setts are used by badger families for many generations.",
+    "source": "https://en.wikipedia.org/wiki/European_badger"
+   },
+   {
+    "text": "It has a bold black-and-white striped face.",
+    "source": "https://en.wikipedia.org/wiki/European_badger"
+   }
+  ]
+ },
+ "squirrust": {
+  "kind": "real",
+  "basedOn": "Red Squirrel",
+  "scientific": "Sciurus vulgaris",
+  "when": null,
+  "where": "Forests across Europe and northern Asia",
+  "size": "About 19 to 23 cm (7.5 to 9 inches) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It grows long ear tufts in winter.",
+    "source": "https://en.wikipedia.org/wiki/Red_squirrel"
+   },
+   {
+    "text": "It buries food to eat later and doesn't find all of it, which helps new trees grow.",
+    "source": "https://en.wikipedia.org/wiki/Red_squirrel"
+   },
+   {
+    "text": "In Britain it has become rare where gray squirrels from North America moved in.",
+    "source": "https://en.wikipedia.org/wiki/Red_squirrel"
+   }
+  ]
+ },
+ "leapsalmon": {
+  "kind": "real",
+  "basedOn": "Atlantic Salmon",
+  "scientific": "Salmo salar",
+  "when": null,
+  "where": "Rivers and the North Atlantic Ocean",
+  "size": "Usually about 70 to 75 cm (28 to 30 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Salmon hatch in rivers, grow up at sea, then return to rivers to lay eggs.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_salmon"
+   },
+   {
+    "text": "They can leap up waterfalls on their way upstream.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_salmon"
+   },
+   {
+    "text": "Unlike Pacific salmon, an Atlantic salmon can make the trip more than once.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_salmon"
+   }
+  ]
+ },
+ "sturgeonplate": {
+  "kind": "real",
+  "basedOn": "Beluga Sturgeon",
+  "scientific": "Huso huso",
+  "when": null,
+  "where": "The Caspian and Black Seas and rivers like the Danube and Volga",
+  "size": "Can grow longer than 6 m (20 feet)",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the biggest freshwater fish in the world.",
+    "source": "https://en.wikipedia.org/wiki/Beluga_(sturgeon)"
+   },
+   {
+    "text": "Sturgeons have rows of bony plates called scutes instead of scales.",
+    "source": "https://en.wikipedia.org/wiki/Sturgeon"
+   },
+   {
+    "text": "Beluga sturgeons can live for more than 100 years.",
+    "source": "https://en.wikipedia.org/wiki/Beluga_(sturgeon)"
+   }
+  ]
+ },
+ "bustarboom": {
+  "kind": "real",
+  "basedOn": "Great Bustard",
+  "scientific": "Otis tarda",
+  "when": null,
+  "where": "Open grasslands and farmland of Europe and Asia, with many in Hungary and Spain",
+  "size": "Males up to about 1 m (3.3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Males are among the heaviest flying birds in the world.",
+    "source": "https://en.wikipedia.org/wiki/Great_bustard"
+   },
+   {
+    "text": "In spring, males puff up into a big white ball of feathers to impress females.",
+    "source": "https://en.wikipedia.org/wiki/Great_bustard"
+   },
+   {
+    "text": "Males grow long whisker-like feathers on their chins.",
+    "source": "https://en.wikipedia.org/wiki/Great_bustard"
+   }
+  ]
+ },
+ "molediggs": {
+  "kind": "real",
+  "basedOn": "European Mole",
+  "scientific": "Talpa europaea",
+  "when": null,
+  "where": "Fields and woods across much of Europe",
+  "size": "About 15 cm (6 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It digs tunnels with its wide, shovel-like front paws.",
+    "source": "https://en.wikipedia.org/wiki/European_mole"
+   },
+   {
+    "text": "Its velvety fur can lie in any direction, so it can move backward in tunnels easily.",
+    "source": "https://en.wikipedia.org/wiki/European_mole"
+   },
+   {
+    "text": "Moles store worms in underground larders.",
+    "source": "https://en.wikipedia.org/wiki/European_mole"
+   }
+  ]
+ },
+ "lynxshade": {
+  "kind": "real",
+  "basedOn": "Iberian Lynx",
+  "scientific": "Lynx pardinus",
+  "when": null,
+  "where": "Scrublands of Spain and Portugal",
+  "size": "About 85 to 110 cm (2.8 to 3.6 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It was once the most endangered cat in the world, and conservation work has helped it recover.",
+    "source": "https://en.wikipedia.org/wiki/Iberian_lynx"
+   },
+   {
+    "text": "It eats mostly European rabbits.",
+    "source": "https://en.wikipedia.org/wiki/Iberian_lynx"
+   },
+   {
+    "text": "It has black ear tufts and a beard-like ruff of fur on its face.",
+    "source": "https://en.wikipedia.org/wiki/Iberian_lynx"
+   }
+  ]
+ },
+ "sealmonk": {
+  "kind": "real",
+  "basedOn": "Mediterranean Monk Seal",
+  "scientific": "Monachus monachus",
+  "when": null,
+  "where": "Coasts and sea caves of the eastern Mediterranean and northwest Africa",
+  "size": "About 2.4 m (8 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the rarest seals in the world.",
+    "source": "https://en.wikipedia.org/wiki/Mediterranean_monk_seal"
+   },
+   {
+    "text": "It often rests and raises its pups in sea caves.",
+    "source": "https://en.wikipedia.org/wiki/Mediterranean_monk_seal"
+   },
+   {
+    "text": "Its numbers have been slowly growing thanks to protection.",
+    "source": "https://en.wikipedia.org/wiki/Mediterranean_monk_seal"
+   }
+  ]
+ },
+ "coilball": {
+  "kind": "real",
+  "basedOn": "Ball Python",
+  "scientific": "Python regius",
+  "when": null,
+  "where": "Grasslands and open forests of West and Central Africa",
+  "size": "Usually about 1 to 1.5 m (3 to 5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It curls into a tight ball with its head in the middle when it feels threatened.",
+    "source": "https://en.wikipedia.org/wiki/Ball_python"
+   },
+   {
+    "text": "It is a constrictor, not a venomous snake.",
+    "source": "https://en.wikipedia.org/wiki/Ball_python"
+   },
+   {
+    "text": "It is also called the royal python.",
+    "source": "https://en.wikipedia.org/wiki/Ball_python"
+   }
+  ]
+ },
+ "hammerkop": {
+  "kind": "real",
+  "basedOn": "Hammerkop",
+  "scientific": "Scopus umbretta",
+  "when": null,
+  "where": "Wetlands across Africa south of the Sahara",
+  "size": "About 56 cm (22 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its crest and beak together make its head look like a hammer.",
+    "source": "https://en.wikipedia.org/wiki/Hammerkop"
+   },
+   {
+    "text": "It builds huge dome nests that can be more than 1.5 m (5 feet) across.",
+    "source": "https://en.wikipedia.org/wiki/Hammerkop"
+   },
+   {
+    "text": "In many African stories, the hammerkop is a magical or unlucky bird.",
+    "source": "https://en.wikipedia.org/wiki/Hammerkop"
+   }
+  ]
+ },
+ "goldcatshade": {
+  "kind": "real",
+  "basedOn": "African Golden Cat",
+  "scientific": "Caracal aurata",
+  "when": null,
+  "where": "Rainforests of Central and West Africa",
+  "size": "About 60 to 100 cm (2 to 3.3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the least-known wild cats, rarely seen by people.",
+    "source": "https://en.wikipedia.org/wiki/African_golden_cat"
+   },
+   {
+    "text": "Its fur can be golden-red, brown or gray.",
+    "source": "https://en.wikipedia.org/wiki/African_golden_cat"
+   },
+   {
+    "text": "Its closest relative is the caracal.",
+    "source": "https://en.wikipedia.org/wiki/African_golden_cat"
+   }
+  ]
+ },
+ "goliathorn": {
+  "kind": "real",
+  "basedOn": "Goliath Beetle",
+  "scientific": "Goliathus",
+  "when": null,
+  "where": "Rainforests of Central and West Africa",
+  "size": "Males up to about 11 cm (4.3 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Goliath beetles are among the heaviest insects in the world.",
+    "source": "https://en.wikipedia.org/wiki/Goliathus"
+   },
+   {
+    "text": "Males have a Y-shaped horn on their head.",
+    "source": "https://en.wikipedia.org/wiki/Goliathus"
+   },
+   {
+    "text": "Their grubs can weigh up to about 100 grams.",
+    "source": "https://en.wikipedia.org/wiki/Goliathus"
+   }
+  ]
+ },
+ "honeyfu": {
+  "kind": "real",
+  "basedOn": "Honey Badger",
+  "scientific": "Mellivora capensis",
+  "when": null,
+  "where": "Africa, the Middle East and India",
+  "size": "About 55 to 77 cm (22 to 30 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is famous for being fearless and will stand up to lions.",
+    "source": "https://en.wikipedia.org/wiki/Honey_badger"
+   },
+   {
+    "text": "Its thick, loose skin lets it twist around to bite back if grabbed.",
+    "source": "https://en.wikipedia.org/wiki/Honey_badger"
+   },
+   {
+    "text": "It loves honey and bee grubs and digs into beehives.",
+    "source": "https://en.wikipedia.org/wiki/Honey_badger"
+   }
+  ]
+ },
+ "kickretary": {
+  "kind": "real",
+  "basedOn": "Secretary Bird",
+  "scientific": "Sagittarius serpentarius",
+  "when": null,
+  "where": "Open grasslands of Africa south of the Sahara",
+  "size": "About 1.3 m (4.3 feet) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hunts on foot, stomping on snakes and lizards with very fast kicks.",
+    "source": "https://en.wikipedia.org/wiki/Secretarybird"
+   },
+   {
+    "text": "Its crest of long black feathers may have reminded people of quill pens tucked behind a clerk's ear.",
+    "source": "https://en.wikipedia.org/wiki/Secretarybird"
+   },
+   {
+    "text": "It is on the coat of arms of South Africa.",
+    "source": "https://en.wikipedia.org/wiki/Secretarybird"
+   }
+  ]
+ },
+ "paintpup": {
+  "kind": "real",
+  "basedOn": "African Wild Dog",
+  "scientific": "Lycaon pictus",
+  "when": null,
+  "where": "Savannas and woodlands of southern and eastern Africa",
+  "size": "About 75 cm (2.5 feet) tall at the shoulder",
+  "story": null,
+  "facts": [
+   {
+    "text": "No two wild dogs have the same coat pattern.",
+    "source": "https://en.wikipedia.org/wiki/African_wild_dog"
+   },
+   {
+    "text": "Packs care for injured members and share food with them.",
+    "source": "https://en.wikipedia.org/wiki/African_wild_dog"
+   },
+   {
+    "text": "Packs sometimes vote on when to go hunting by sneezing.",
+    "source": "https://en.wikipedia.org/wiki/African_wild_dog"
+   }
+  ]
+ },
+ "barbamonk": {
+  "kind": "real",
+  "basedOn": "Barbary Macaque",
+  "scientific": "Macaca sylvanus",
+  "when": null,
+  "where": "Atlas Mountains of Morocco and Algeria, and Gibraltar",
+  "size": "About 55 to 60 cm (2 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The Barbary macaques of Gibraltar are the only wild monkeys in Europe.",
+    "source": "https://en.wikipedia.org/wiki/Barbary_macaque"
+   },
+   {
+    "text": "It has almost no tail.",
+    "source": "https://en.wikipedia.org/wiki/Barbary_macaque"
+   },
+   {
+    "text": "Males help a lot with caring for the babies.",
+    "source": "https://en.wikipedia.org/wiki/Barbary_macaque"
+   }
+  ]
+ },
+ "caracalfu": {
+  "kind": "real",
+  "basedOn": "Caracal",
+  "scientific": "Caracal caracal",
+  "when": null,
+  "where": "Dry lands of Africa, the Middle East, Central Asia and India",
+  "size": "About 60 to 105 cm (2 to 3.5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It can leap high to catch birds in flight.",
+    "source": "https://en.wikipedia.org/wiki/Caracal"
+   },
+   {
+    "text": "Its name comes from Turkish words meaning 'black ear'.",
+    "source": "https://en.wikipedia.org/wiki/Caracal"
+   },
+   {
+    "text": "It has long black tufts on its ears.",
+    "source": "https://en.wikipedia.org/wiki/Caracal"
+   }
+  ]
+ },
+ "sandshade": {
+  "kind": "real",
+  "basedOn": "Sand Cat",
+  "scientific": "Felis margarita",
+  "when": null,
+  "where": "Deserts of North Africa, the Middle East and Central Asia",
+  "size": "About 40 to 57 cm (16 to 22 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Thick fur on its paws protects them from hot sand.",
+    "source": "https://en.wikipedia.org/wiki/Sand_cat"
+   },
+   {
+    "text": "It can go a long time without drinking, getting water from its food.",
+    "source": "https://en.wikipedia.org/wiki/Sand_cat"
+   },
+   {
+    "text": "Its big ears help it hear prey moving under the sand.",
+    "source": "https://en.wikipedia.org/wiki/Sand_cat"
+   }
+  ]
+ },
+ "gharialance": {
+  "kind": "real",
+  "basedOn": "Gharial",
+  "scientific": "Gavialis gangeticus",
+  "when": null,
+  "where": "Rivers of northern India and Nepal",
+  "size": "Males up to about 5 to 6 m (16 to 20 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its long, thin snout is good for catching fish.",
+    "source": "https://en.wikipedia.org/wiki/Gharial"
+   },
+   {
+    "text": "Males have a round bump on the end of the snout called a ghara, named after a kind of pot.",
+    "source": "https://en.wikipedia.org/wiki/Gharial"
+   },
+   {
+    "text": "It is critically endangered.",
+    "source": "https://en.wikipedia.org/wiki/Gharial"
+   }
+  ]
+ },
+ "slothroar": {
+  "kind": "real",
+  "basedOn": "Sloth Bear",
+  "scientific": "Melursus ursinus",
+  "when": null,
+  "where": "Forests and grasslands of India, Sri Lanka and Nepal",
+  "size": "About 1.4 to 1.9 m (4.5 to 6 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It sucks up termites so noisily that it can be heard far away.",
+    "source": "https://en.wikipedia.org/wiki/Sloth_bear"
+   },
+   {
+    "text": "It can close its nostrils while slurping up insects.",
+    "source": "https://en.wikipedia.org/wiki/Sloth_bear"
+   },
+   {
+    "text": "Mother sloth bears carry their cubs on their backs.",
+    "source": "https://en.wikipedia.org/wiki/Sloth_bear"
+   }
+  ]
+ },
+ "manulmist": {
+  "kind": "real",
+  "basedOn": "Pallas's Cat (Manul)",
+  "scientific": "Otocolobus manul",
+  "when": null,
+  "where": "Cold grasslands and mountains of Central Asia, including Mongolia and Tibet",
+  "size": "About 45 to 65 cm (18 to 26 inches) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has the longest, thickest fur of any wild cat.",
+    "source": "https://en.wikipedia.org/wiki/Pallas%27s_cat"
+   },
+   {
+    "text": "Its pupils are round, not slit-shaped like a house cat's.",
+    "source": "https://en.wikipedia.org/wiki/Pallas%27s_cat"
+   },
+   {
+    "text": "Its short, round ears are set low, which helps it peek over rocks without being seen.",
+    "source": "https://en.wikipedia.org/wiki/Pallas%27s_cat"
+   }
+  ]
+ },
+ "otterkit": {
+  "kind": "real",
+  "basedOn": "Sea Otter",
+  "scientific": "Enhydra lutris",
+  "when": null,
+  "where": "Coasts of the northern Pacific Ocean, including California and Alaska",
+  "size": "About 1 to 1.5 m (3.3 to 5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sea otters use stones as tools to crack open shellfish.",
+    "source": "https://en.wikipedia.org/wiki/Sea_otter"
+   },
+   {
+    "text": "They have the thickest fur of any animal, up to about a million hairs per square inch.",
+    "source": "https://en.wikipedia.org/wiki/Sea_otter"
+   },
+   {
+    "text": "Sea otters sometimes hold hands or wrap in kelp so they don't drift apart while sleeping.",
+    "source": "https://en.wikipedia.org/wiki/Sea_otter"
+   }
+  ]
+ },
+ "quokkit": {
+  "kind": "real",
+  "basedOn": "Quokka",
+  "scientific": "Setonix brachyurus",
+  "when": null,
+  "where": "Rottnest Island and southwestern Western Australia",
+  "size": "About 40 to 54 cm (16 to 21 inches) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Quokkas are famous for their smiley faces.",
+    "source": "https://en.wikipedia.org/wiki/Quokka"
+   },
+   {
+    "text": "Most quokkas live on Rottnest Island, off the coast of Western Australia.",
+    "source": "https://en.wikipedia.org/wiki/Quokka"
+   },
+   {
+    "text": "A quokka is a marsupial, so its baby (a joey) grows in a pouch.",
+    "source": "https://en.wikipedia.org/wiki/Quokka"
+   }
+  ]
+ },
+ "fenneckit": {
+  "kind": "real",
+  "basedOn": "Fennec Fox",
+  "scientific": "Vulpes zerda",
+  "when": null,
+  "where": "Sahara Desert and other deserts of North Africa",
+  "size": "The smallest fox, about 24 to 41 cm (9 to 16 inches) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the smallest fox in the world, with the biggest ears for its size.",
+    "source": "https://en.wikipedia.org/wiki/Fennec_fox"
+   },
+   {
+    "text": "Its big ears help it hear prey and release heat.",
+    "source": "https://en.wikipedia.org/wiki/Fennec_fox"
+   },
+   {
+    "text": "Fur on the bottoms of its feet protects them from hot sand.",
+    "source": "https://en.wikipedia.org/wiki/Fennec_fox"
+   }
+  ]
+ },
+ "orcalash": {
+  "kind": "real",
+  "basedOn": "Orca",
+  "scientific": "Orcinus orca",
+  "when": null,
+  "where": "Oceans worldwide, including the Pacific Northwest coast",
+  "size": "Up to about 8 to 9 m (26 to 30 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "The orca, or killer whale, is the largest member of the dolphin family.",
+    "source": "https://en.wikipedia.org/wiki/Orca"
+   },
+   {
+    "text": "Orca pods have their own sets of calls, a bit like family dialects.",
+    "source": "https://en.wikipedia.org/wiki/Orca"
+   },
+   {
+    "text": "Orcas hunt as a team, and some even make waves to wash seals off ice.",
+    "source": "https://en.wikipedia.org/wiki/Orca"
+   }
+  ]
+ },
+ "jawstorm": {
+  "kind": "real",
+  "basedOn": "Great White Shark",
+  "scientific": "Carcharodon carcharias",
+  "when": null,
+  "where": "Cool coastal oceans worldwide, including South Africa",
+  "size": "Commonly 4 to 5 m (13 to 16 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest predatory fish in the world.",
+    "source": "https://en.wikipedia.org/wiki/Great_white_shark"
+   },
+   {
+    "text": "Near South Africa, great whites sometimes leap fully out of the water to catch seals.",
+    "source": "https://en.wikipedia.org/wiki/Great_white_shark"
+   },
+   {
+    "text": "Sharks keep growing new teeth to replace the ones they lose.",
+    "source": "https://en.wikipedia.org/wiki/Shark_tooth"
+   }
+  ]
+ },
+ "krakeneye": {
+  "kind": "real",
+  "basedOn": "Giant Squid",
+  "scientific": "Architeuthis dux",
+  "when": null,
+  "where": "Deep oceans worldwide",
+  "size": "Up to about 12 to 13 m (40 to 43 feet) long, including its tentacles",
+  "story": null,
+  "facts": [
+   {
+    "text": "Giant squid have some of the biggest eyes of any animal, about the size of a dinner plate.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   },
+   {
+    "text": "Scientists first photographed a live giant squid in its home in 2004.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   },
+   {
+    "text": "Sperm whales hunt giant squid in the deep sea.",
+    "source": "https://en.wikipedia.org/wiki/Giant_squid"
+   }
+  ]
+ },
+ "fossakick": {
+  "kind": "real",
+  "basedOn": "Fossa",
+  "scientific": "Cryptoprocta ferox",
+  "when": null,
+  "where": "Forests of Madagascar",
+  "size": "About 70 to 80 cm (2.3 to 2.6 feet) long, plus a tail almost as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest meat-eating mammal on Madagascar.",
+    "source": "https://en.wikipedia.org/wiki/Fossa"
+   },
+   {
+    "text": "Its flexible ankles let it climb down trees headfirst.",
+    "source": "https://en.wikipedia.org/wiki/Fossa"
+   },
+   {
+    "text": "It looks like a cat but is more closely related to mongooses.",
+    "source": "https://en.wikipedia.org/wiki/Fossa"
+   }
+  ]
+ },
+ "chamelume": {
+  "kind": "real",
+  "basedOn": "Parson's Chameleon",
+  "scientific": "Calumma parsonii",
+  "when": null,
+  "where": "Rainforests of eastern Madagascar",
+  "size": "Up to about 68 cm (27 inches) long, one of the biggest chameleons",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the largest chameleons in the world.",
+    "source": "https://en.wikipedia.org/wiki/Parson%27s_chameleon"
+   },
+   {
+    "text": "A chameleon's eyes can move separately, looking two ways at once.",
+    "source": "https://en.wikipedia.org/wiki/Chameleon"
+   },
+   {
+    "text": "Chameleons catch insects with a long, sticky, lightning-fast tongue.",
+    "source": "https://en.wikipedia.org/wiki/Chameleon"
+   }
+  ]
+ },
+ "tardiguard": {
+  "kind": "real",
+  "basedOn": "Tardigrade (Water Bear)",
+  "scientific": "Tardigrada",
+  "when": null,
+  "where": "Almost everywhere, from mountaintops to Antarctica to the deep sea",
+  "size": "Usually under 1 mm long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Tardigrades are tiny animals, usually less than 1 mm long.",
+    "source": "https://en.wikipedia.org/wiki/Tardigrade"
+   },
+   {
+    "text": "They can survive drying out by curling into a ball called a tun.",
+    "source": "https://en.wikipedia.org/wiki/Tardigrade"
+   },
+   {
+    "text": "In 2007, tardigrades survived a trip to outer space.",
+    "source": "https://en.wikipedia.org/wiki/Tardigrade"
+   }
+  ]
+ },
+ "ferretdash": {
+  "kind": "real",
+  "basedOn": "Black-footed Ferret",
+  "scientific": "Mustela nigripes",
+  "when": null,
+  "where": "Grasslands of the Great Plains in North America",
+  "size": "About 50 to 60 cm (20 to 24 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It was thought to be extinct until a small group was found in Wyoming in 1981.",
+    "source": "https://en.wikipedia.org/wiki/Black-footed_ferret"
+   },
+   {
+    "text": "It lives in prairie dog burrows and eats mostly prairie dogs.",
+    "source": "https://en.wikipedia.org/wiki/Black-footed_ferret"
+   },
+   {
+    "text": "In 2020, a black-footed ferret named Elizabeth Ann became the first cloned endangered animal in the United States.",
+    "source": "https://en.wikipedia.org/wiki/Black-footed_ferret"
+   }
+  ]
+ },
+ "damberly": {
+  "kind": "real",
+  "basedOn": "North American Beaver",
+  "scientific": "Castor canadensis",
+  "when": null,
+  "where": "Streams, ponds and lakes across North America",
+  "size": "About 74 to 90 cm (2.5 to 3 feet) long, plus its flat tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its front teeth are orange because they contain iron, which makes them strong.",
+    "source": "https://en.wikipedia.org/wiki/North_American_beaver"
+   },
+   {
+    "text": "Beavers build dams and lodges out of sticks and mud.",
+    "source": "https://en.wikipedia.org/wiki/North_American_beaver"
+   },
+   {
+    "text": "It slaps its flat tail on the water to warn other beavers of danger.",
+    "source": "https://en.wikipedia.org/wiki/North_American_beaver"
+   }
+  ]
+ },
+ "wolvfrost": {
+  "kind": "real",
+  "basedOn": "Wolverine",
+  "scientific": "Gulo gulo",
+  "when": null,
+  "where": "Northern forests and tundra of Scandinavia, Russia, Canada and Alaska",
+  "size": "About 65 to 107 cm (2 to 3.5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest land member of the weasel family.",
+    "source": "https://en.wikipedia.org/wiki/Wolverine"
+   },
+   {
+    "text": "Wolverines can travel very long distances through deep snow.",
+    "source": "https://en.wikipedia.org/wiki/Wolverine"
+   },
+   {
+    "text": "Its big wide paws work like snowshoes.",
+    "source": "https://en.wikipedia.org/wiki/Wolverine"
+   }
+  ]
+ },
+ "orangusage": {
+  "kind": "real",
+  "basedOn": "Bornean Orangutan",
+  "scientific": "Pongo pygmaeus",
+  "when": null,
+  "where": "Rainforests of Borneo",
+  "size": "Males stand up to about 1.4 m (4.6 feet) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The name orangutan comes from Malay words meaning 'person of the forest'.",
+    "source": "https://en.wikipedia.org/wiki/Orangutan"
+   },
+   {
+    "text": "Orangutans build a new sleeping nest in the trees almost every night.",
+    "source": "https://en.wikipedia.org/wiki/Orangutan"
+   },
+   {
+    "text": "Grown-up males can have big cheek pads called flanges.",
+    "source": "https://en.wikipedia.org/wiki/Bornean_orangutan"
+   }
+  ]
+ },
+ "pronghaste": {
+  "kind": "real",
+  "basedOn": "Pronghorn",
+  "scientific": "Antilocapra americana",
+  "when": null,
+  "where": "Grasslands and deserts of western North America",
+  "size": "About 1.3 to 1.5 m (4.3 to 5 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the fastest land animal in the Americas, reaching about 88 km/h (55 mph).",
+    "source": "https://en.wikipedia.org/wiki/Pronghorn"
+   },
+   {
+    "text": "It isn't a true antelope; it is the last of its own family.",
+    "source": "https://en.wikipedia.org/wiki/Pronghorn"
+   },
+   {
+    "text": "It sheds the outer covering of its horns every year.",
+    "source": "https://en.wikipedia.org/wiki/Pronghorn"
+   }
+  ]
+ },
+ "thylashade": {
+  "kind": "real",
+  "basedOn": "Thylacine (Tasmanian Tiger)",
+  "scientific": "Thylacinus cynocephalus",
+  "when": "Extinct since 1936",
+  "where": "Tasmania, and long ago mainland Australia and New Guinea",
+  "size": "About 1 to 1.3 m (3.3 to 4.3 feet) long, plus its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "The thylacine was a marsupial, not a real tiger or dog.",
+    "source": "https://en.wikipedia.org/wiki/Thylacine"
+   },
+   {
+    "text": "The last known thylacine died at Hobart Zoo in Tasmania in 1936.",
+    "source": "https://en.wikipedia.org/wiki/Thylacine"
+   },
+   {
+    "text": "It had dark stripes across its lower back and could open its jaws very wide.",
+    "source": "https://en.wikipedia.org/wiki/Thylacine"
+   }
+  ]
+ },
+ "dodobell": {
+  "kind": "real",
+  "basedOn": "Dodo",
+  "scientific": "Raphus cucullatus",
+  "when": "Extinct since the late 1600s",
+  "where": "The island of Mauritius in the Indian Ocean",
+  "size": "About 1 m (3.3 feet) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "The dodo lived only on the island of Mauritius.",
+    "source": "https://en.wikipedia.org/wiki/Dodo"
+   },
+   {
+    "text": "It was a flightless relative of pigeons and doves.",
+    "source": "https://en.wikipedia.org/wiki/Dodo"
+   },
+   {
+    "text": "It went extinct in the late 1600s, less than a century after sailors arrived.",
+    "source": "https://en.wikipedia.org/wiki/Dodo"
+   }
+  ]
+ },
+ "clickwhale": {
+  "kind": "real",
+  "basedOn": "Sperm Whale",
+  "scientific": "Physeter macrocephalus",
+  "when": null,
+  "where": "Deep oceans worldwide, including around the Azores",
+  "size": "Males up to about 16 to 20 m (52 to 66 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Sperm whales make clicks that are among the loudest sounds of any animal.",
+    "source": "https://en.wikipedia.org/wiki/Sperm_whale"
+   },
+   {
+    "text": "It has the largest brain of any animal.",
+    "source": "https://en.wikipedia.org/wiki/Sperm_whale"
+   },
+   {
+    "text": "It dives very deep to hunt squid, including giant squid.",
+    "source": "https://en.wikipedia.org/wiki/Sperm_whale"
+   }
+  ]
+ },
+ "botoglow": {
+  "kind": "real",
+  "basedOn": "Amazon River Dolphin",
+  "scientific": "Inia geoffrensis",
+  "when": null,
+  "where": "Rivers of the Amazon and Orinoco basins in South America",
+  "size": "Up to about 2.5 m (8 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest river dolphin.",
+    "source": "https://en.wikipedia.org/wiki/Amazon_river_dolphin"
+   },
+   {
+    "text": "Many grow pinker as they get older, especially males.",
+    "source": "https://en.wikipedia.org/wiki/Amazon_river_dolphin"
+   },
+   {
+    "text": "Unlike ocean dolphins, it can turn its head, which helps it swim through flooded forests.",
+    "source": "https://en.wikipedia.org/wiki/Amazon_river_dolphin"
+   }
+  ]
+ },
+ "birdeater": {
+  "kind": "real",
+  "basedOn": "Goliath Birdeater",
+  "scientific": "Theraphosa blondi",
+  "when": null,
+  "where": "Rainforests of northern South America",
+  "size": "Leg span up to about 30 cm (12 inches)",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the heaviest spider in the world.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_birdeater"
+   },
+   {
+    "text": "Despite its name, it rarely eats birds; it mostly eats insects and worms.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_birdeater"
+   },
+   {
+    "text": "When bothered, it flicks tiny itchy hairs from its belly and can make a hissing sound with its legs.",
+    "source": "https://en.wikipedia.org/wiki/Goliath_birdeater"
+   }
+  ]
+ },
+ "dholecall": {
+  "kind": "real",
+  "basedOn": "Dhole (Asian Wild Dog)",
+  "scientific": "Cuon alpinus",
+  "when": null,
+  "where": "Forests of South and Southeast Asia",
+  "size": "About 90 cm (3 feet) long, plus its bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Dholes whistle to each other, so they are sometimes called whistling dogs.",
+    "source": "https://en.wikipedia.org/wiki/Dhole"
+   },
+   {
+    "text": "They live and hunt in packs.",
+    "source": "https://en.wikipedia.org/wiki/Dhole"
+   },
+   {
+    "text": "Dholes are endangered.",
+    "source": "https://en.wikipedia.org/wiki/Dhole"
+   }
+  ]
+ },
+ "swordstrike": {
+  "kind": "real",
+  "basedOn": "Swordfish",
+  "scientific": "Xiphias gladius",
+  "when": null,
+  "where": "Warm and tropical oceans worldwide",
+  "size": "Commonly up to about 3 m (10 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It uses its long flat bill to slash and stun fish.",
+    "source": "https://en.wikipedia.org/wiki/Swordfish"
+   },
+   {
+    "text": "It can warm its eyes and brain, which helps it see in cold, deep water.",
+    "source": "https://en.wikipedia.org/wiki/Swordfish"
+   },
+   {
+    "text": "Grown-up swordfish have no scales and no teeth.",
+    "source": "https://en.wikipedia.org/wiki/Swordfish"
+   }
+  ]
+ },
+ "harpyclaw": {
+  "kind": "real",
+  "basedOn": "Harpy Eagle",
+  "scientific": "Harpia harpyja",
+  "when": null,
+  "where": "Rainforests of Central and South America",
+  "size": "Wings about 1.8 to 2 m (6 to 6.5 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its back talons can be about 13 cm (5 inches) long, as long as a grizzly bear's claws.",
+    "source": "https://en.wikipedia.org/wiki/Harpy_eagle"
+   },
+   {
+    "text": "It snatches sloths and monkeys from the treetops.",
+    "source": "https://en.wikipedia.org/wiki/Harpy_eagle"
+   },
+   {
+    "text": "It is the national bird of Panama.",
+    "source": "https://en.wikipedia.org/wiki/Harpy_eagle"
+   }
+  ]
+ },
+ "paradance": {
+  "kind": "real",
+  "basedOn": "Superb Bird-of-Paradise",
+  "scientific": "Lophorina superba",
+  "when": null,
+  "where": "Mountain forests of New Guinea",
+  "size": "About 25 cm (10 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "When it shows off, the male spreads a black cape that makes a big oval with a blue smile-shaped breast shield.",
+    "source": "https://en.wikipedia.org/wiki/Superb_bird-of-paradise"
+   },
+   {
+    "text": "Its black feathers are so dark they reflect almost no light.",
+    "source": "https://en.wikipedia.org/wiki/Superb_bird-of-paradise"
+   },
+   {
+    "text": "Birds-of-paradise live mostly in New Guinea.",
+    "source": "https://en.wikipedia.org/wiki/Bird-of-paradise"
+   }
+  ]
  }
 }

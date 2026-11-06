@@ -22,7 +22,10 @@ export function lodgeDifficulty(lodge: Lodge, settings: { minDifficulty: Difficu
   return DIFFICULTIES[Math.min(Math.max(want, low), high)] as Difficulty;
 }
 
-export const lodgesOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])].sort((a, b) => a.rank - b.rank);
+/** The Lodge ladder, in order. The League is not on it. */
+export const lodgesOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])].filter((l) => !l.gauntlet).sort((a, b) => a.rank - b.rank);
+/** The Ranger League, open once every Lodge is beaten. */
+export const leagueOf = (pack: Pack): Lodge | undefined => (pack.lodges ?? []).find((l) => !!l.gauntlet);
 export const lodgeById = (pack: Pack, id: string | undefined) => (pack.lodges ?? []).find((l) => l.id === id);
 
 /** A child's patches: Bronze for every Lodge beaten, and Silver or Gold for those won again. */
@@ -44,7 +47,7 @@ export function lodgeOpen(pack: Pack, beatenOrProgress: readonly string[] | Lodg
   const p: LodgeProgress = Array.isArray(beatenOrProgress) ? { lodgesBeaten: beatenOrProgress as readonly string[] } : (beatenOrProgress as LodgeProgress);
   const lodge = lodgeById(pack, lodgeId);
   if (!lodge) return false;
-  if (tier !== 'bronze') return atLeast(patchOf(p, lodgeId), tier === 'silver' ? 'bronze' : 'silver');
+  if (tier !== 'bronze') return !lodge.gauntlet && atLeast(patchOf(p, lodgeId), tier === 'silver' ? 'bronze' : 'silver');
   const before = lodgesOf(pack).filter((l) => l.rank < lodge.rank);
   return before.every((l) => (p.lodgesBeaten ?? []).includes(l.id)) && (!lodge.needsGold || atLeast(patchOf(p, lodge.needsGold), 'gold'));
 }

@@ -49,14 +49,16 @@ const beat = (s: SaveData, lodgeId: string, tier: 'bronze' | 'silver' | 'gold' =
 const strong = (s = fresh()): SaveData => ({ ...s, companions: s.companions.map((c) => ({ ...c, bondXp: xpForLevel(10), stageSeen: 3 })) });
 
 describe('Ranger Lodges content', () => {
-  it('has eight Lodges in rank order, each with its own type', () => {
-    expect(LODGES.map((l) => l.rank)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
-    expect(new Set(LODGES.map((l) => l.type)).size).toBe(LODGES.length);
+  it('has eight Lodges in rank order, each with its own type, then the League', () => {
+    expect(LODGES.map((l) => l.rank)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(LODGES.at(-1)!.gauntlet).toBeDefined();
+    const ladder = LODGES.filter((l) => !l.gauntlet);
+    expect(new Set(ladder.map((l) => l.type)).size).toBe(ladder.length);
     expect(new Set(LODGES.map((l) => l.prizeSpeciesId)).size).toBe(LODGES.length);
   });
 
   it('every ranger fields creatures of the Lodge type, and the prize is that type too', () => {
-    for (const l of LODGES) {
+    for (const l of LODGES.filter((o) => !o.gauntlet)) {
       for (const f of [...l.juniors, ...l.team]) {
         const sp = speciesOf(PACK, f.speciesId);
         expect(sp, f.speciesId).toBeDefined();
@@ -273,3 +275,49 @@ describe('Lodge gates, shields and tiers', () => {
   });
 });
 
+
+describe('Starfall League', () => {
+  const lodgesOnly = LODGES.filter((l) => !l.gauntlet).map((l) => l.id);
+  const champ = (): SaveData => ({ ...strong(), lodgesBeaten: lodgesOnly });
+
+  it('opens only once all eight Lodges are beaten, and has no Silver or Gold', () => {
+    expect(lodgeOpen(PACK, { lodgesBeaten: lodgesOnly.slice(0, 7) }, 'league')).toBe(false);
+    expect(lodgeOpen(PACK, { lodgesBeaten: lodgesOnly }, 'league')).toBe(true);
+    expect(lodgeOpen(PACK, { lodgesBeaten: [...lodgesOnly, 'league'] }, 'league', 'silver')).toBe(false);
+    expect(nextLodge(PACK, lodgesOnly)).toBeUndefined();
+  });
+
+  it('runs four Elite Rangers then the Champion; each Elite gives a star creature, the Champion a last one and a Hall of Fame entry', () => {
+    let s = step(champ(), { type: 'startLodge', lodgeId: 'league' });
+    const slots = s.expedition!.slots;
+    expect(slots).toHaveLength(11);
+    expect(slots.filter((o) => o.prize).map((o) => o.prize)).toEqual(['solarion', 'delphinova', 'ursastar', 'dracostar']);
+    expect(slots.at(-1)).toMatchObject({ trainer: 'Champion Celeste', role: 'ace', power: 11 });
+    s = step(s, { type: 'depart' });
+    const prizes: string[] = [];
+    while (!isExpeditionComplete(s.expedition!)) {
+      if (s.expedition!.retreated) throw new Error('lost in the League');
+      s = step(s, { type: 'enterEncounter' });
+      while (s.expedition!.battle) {
+        s = answer(step(s, { type: 'chooseAction', action: 'attack' }), true);
+        const won = s.expedition!.battle?.result?.prize;
+        if (won) prizes.push(won);
+        s = step(s, { type: 'continue' });
+      }
+    }
+    expect(prizes).toEqual(['solarion', 'delphinova', 'ursastar', 'dracostar']);
+    s = step(s, { type: 'claimReward' });
+    expect(s.companions.map((c) => c.speciesId)).toEqual(expect.arrayContaining(['solarion', 'delphinova', 'ursastar', 'dracostar', 'cosmobill']));
+    expect(s.lodgesBeaten).toContain('league');
+    expect(s.hallOfFame).toHaveLength(1);
+    expect(s.hallOfFame![0]!.team.length).toBeGreaterThan(0);
+  });
+
+  it('is beatable with a fully grown creature that knows most answers', () => {
+    const grown = STAGES[stageOf(xpForLevel(12))];
+    // The Elite Rangers are fair; the Champion is the hardest fight in the game, and can be retried.
+    for (const power of [9, 10]) expect(winRate(power, 'ace', grown, 0.8), `power ${power}`).toBeGreaterThan(0.5);
+    expect(winRate(11, 'ace', grown, 0.8)).toBeGreaterThan(0.3);
+    expect(winRate(11, 'ace', grown, 0.9)).toBeGreaterThan(0.55);
+  });
+});

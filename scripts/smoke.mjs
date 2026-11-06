@@ -217,6 +217,12 @@ async function step(options = {}) {
     }
     return press(String(e.candidateIds.indexOf(e.targetId) + 1));
   }
+  // A new kind of creature joining gets the big reveal.
+  if (await page.locator('.new-creature').count()) {
+    stats.newCreatureReveals = (stats.newCreatureReveals ?? 0) + 1;
+    await page.waitForTimeout(1600);
+    await shotOnce('new-creature');
+  }
   return press('Enter');
 }
 

@@ -39,6 +39,20 @@ export interface Lodge {
   needsGold?: string;
   /** The creature level that makes this Lodge a fair fight. */
   recommendedLevel: number;
+  /** The Ranger League: Elite Rangers battled one after another before the Champion (the leader). Not on the Lodge ladder. */
+  gauntlet?: readonly LeagueRanger[];
+}
+
+/** An Elite Ranger of the League. Beating their last creature the first time wins their star creature. */
+export interface LeagueRanger {
+  name: string;
+  artId: string;
+  type: CreatureType;
+  intro: string;
+  team: readonly LodgeFoe[];
+  prizeSpeciesId: string;
+  /** How strong their creatures are, on the Lodge scale. */
+  power: number;
 }
 
 const foe = (speciesId: string, stage: Stage): LodgeFoe => ({ speciesId, stage });
@@ -100,5 +114,18 @@ export const LODGES: readonly Lodge[] = [
     juniors: [junior('Junior Ranger Finn', 'snowmonk', 3), junior('Junior Ranger Nia', 'reinfrost', 3)],
     team: [foe('moosedrift', 3), foe('alpenhorn', 3), foe('glassfin', 3), foe('glaciarch', 3)],
     prizeSpeciesId: 'floecub', patchArtId: 'patch-summit', legendaryId: 'yetitan', needsGold: 'gearworks', recommendedLevel: 10,
+  },
+  {
+    id: 'league', name: 'Starfall League', rank: 9, type: 'light', subject: 'all', subjectName: 'A bit of everything', biome: 'mountain',
+    leader: { name: 'Champion Celeste', artId: 'leader-league-champion', intro: 'Four Elite Rangers, then me. Only the best explorers reach the stars!', win: 'You are the Starfall Champion! Your team joins the Hall of Fame!' },
+    juniors: [],
+    gauntlet: [
+      { name: 'Elite Ranger Ignacio', artId: 'leader-league-ember', type: 'flame', intro: 'My fire burns like the summer sun!', team: [foe('embertig', 3), foe('solarion', 3)], prizeSpeciesId: 'solarion', power: 9 },
+      { name: 'Elite Ranger Maile', artId: 'leader-league-tide', type: 'tide', intro: 'Ride the waves with me, if you can!', team: [foe('narspire', 3), foe('delphinova', 3)], prizeSpeciesId: 'delphinova', power: 9 },
+      { name: 'Elite Ranger Bjorn', artId: 'leader-league-frost', type: 'frost', intro: 'The north sky is cold and clear. So is my strategy.', team: [foe('tuskfrost', 3), foe('ursastar', 3)], prizeSpeciesId: 'ursastar', power: 10 },
+      { name: 'Elite Ranger Zhi', artId: 'leader-league-gale', type: 'gale', intro: 'Feel the wind? My dragon rides it!', team: [foe('strikewing', 3), foe('dracostar', 3)], prizeSpeciesId: 'dracostar', power: 10 },
+    ],
+    team: [foe('typhoondrake', 3), foe('glimmerhorn', 3), foe('cosmobill', 3)],
+    prizeSpeciesId: 'cosmobill', patchArtId: 'patch-league', legendaryId: 'cosmobill', recommendedLevel: 12,
   },
 ];

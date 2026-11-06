@@ -10,7 +10,7 @@ const paddlet = (extra: Partial<Companion> = {}): Companion => ({ instanceId: 'p
 describe('Wild Paths', () => {
   it('each branching creature has three paths: Scholar is Light, Ranger is Kung Fu, Banner is Gale', () => {
     const lines = PACK.species.filter((s) => s.paths);
-    expect(lines.map((s) => s.id).sort()).toEqual(['coatikit', 'kiwikin', 'paddlet']);
+    expect(lines.map((s) => s.id).sort()).toEqual(['coatikit', 'fenneckit', 'kiwikin', 'otterkit', 'paddlet', 'quokkit']);
     for (const s of lines) expect(Object.fromEntries(s.paths!.map((p) => [p.id, p.type]))).toEqual({ scholar: 'light', ranger: 'kungfu', banner: 'gale' });
   });
 
@@ -42,6 +42,33 @@ describe('Wild Paths', () => {
   });
 });
 
+describe('Wild Paths in battle', () => {
+  it('a right flag answer by the fighting creature shows +1 Banner', () => {
+    const base = newSave(PACK, 7, 'p1');
+    let s: SaveData = { ...base, companions: [paddlet({ instanceId: base.activeCompanionId })] };
+    const offer = s.offers.find((o) => o.regionId === 'europe-west')!;
+    s = step(step(s, { type: 'start', offerId: offer.id, regionId: 'europe-west', difficulty: 'scout', trail: 'short', focus: 'flags' }), { type: 'depart' });
+    for (let i = 0; i < 50 && !s.expedition!.battle; i++) {
+      const e = s.expedition!;
+      s = e.discovery === 'searching' ? step(s, { type: 'guess', locationId: e.targetId }) : e.event ? step(step(s, { type: 'answer', optionId: e.event.question.acceptedId }), { type: 'continue' }) : step(s, { type: 'enterEncounter' });
+    }
+    // Answer until a flag question comes up.
+    let seen = false;
+    for (let i = 0; i < 20 && !seen && s.expedition?.battle; i++) {
+      const b = s.expedition.battle;
+      if (b.phase !== 'choose') { s = step(s, { type: 'continue' }); continue; }
+      const flag = b.question.topic === 'flag';
+      s = step(step(s, { type: 'chooseAction', action: 'guard' }), { type: 'answer', optionId: b.question.acceptedId });
+      if (flag) {
+        expect(s.expedition!.battle!.result!.pathPoints).toEqual(['banner']);
+        expect(s.companions[0]!.raised?.banner).toBe(1);
+        seen = true;
+      }
+    }
+    expect(seen).toBe(true);
+  });
+});
+
 describe('new creatures', () => {
   it('are sighted first in their region until befriended', async () => {
     const { makeOffers } = await import('./game');
@@ -52,7 +79,45 @@ describe('new creatures', () => {
     for (let seed = 1; seed <= 5; seed++) {
       const { offers } = makeOffers(base, PACK, new Rng(seed));
       const east = offers.filter((o) => o.regionId === 'asia-east').map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
-      expect(PACK.species.find((s) => s.id === east[0])!.type).toBe('kungfu');
+      expect(PACK.species.find((s) => s.id === east[0])!.fresh).toBe(true);
     }
+  });
+});
+
+describe('night creatures', () => {
+  it('are sighted only at night, first in their region, and live on night trails', async () => {
+    const { makeOffers } = await import('./game');
+    const { Rng } = await import('./rng');
+    const start = newSave(PACK, 7, 'p1');
+    const base = { ...start, companions: [...start.companions, { instanceId: 'bk', speciesId: PACK.featuredSpeciesId!, bondXp: 0 }] };
+    const night = PACK.species.filter((s) => s.night);
+    expect(night.length).toBe(10);
+    const sighted = (offersNight: boolean) => makeOffers({ ...base, offersNight }, PACK, new Rng(3)).offers.map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
+    expect(sighted(false).some((id) => night.some((s) => s.id === id))).toBe(false);
+    const atNight = makeOffers({ ...base, offersNight: true }, PACK, new Rng(3)).offers;
+    for (const s of night) expect(atNight.find((o) => o.regionId === s.homes[0])!.reward, s.id).toEqual({ kind: 'creature', speciesId: s.id });
+  });
+
+  it('dusk and dawn refresh the sightings, but not in the middle of a trail', () => {
+    const s = newSave(PACK, 7, 'p1');
+    const dusk = step(s, { type: 'setNight', night: true });
+    expect(dusk.offersNight).toBe(true);
+    expect(dusk.offers).not.toEqual(s.offers);
+    expect(step(dusk, { type: 'setNight', night: true })).toBe(dusk);
+    const busy = { ...dusk, expedition: {} as SaveData['expedition'] };
+    expect(step(busy, { type: 'setNight', night: false })).toBe(busy);
+  });
+});
+
+describe('night creature duplicates', () => {
+  it('an owned night creature still comes out early on a night trail, and Bold Befriend can win another', () => {
+    const base = newSave(PACK, 7, 'p1');
+    const owned: SaveData = { ...base, companions: [...base.companions, { instanceId: 'pm', speciesId: 'possumoon', bondXp: 0 }] };
+    const dusk = step(owned, { type: 'setNight', night: true });
+    const offer = dusk.offers.find((o) => o.regionId === 'us-south')!;
+    const s = step(dusk, { type: 'start', offerId: offer.id, regionId: 'us-south', difficulty: 'scout', trail: 'short', focus: 'all' });
+    const battles = s.expedition!.slots.filter((o) => o.kind === 'regular').map((o) => o.opponentId);
+    expect(battles[0]).toBe('possumoon');
+    expect(s.expedition!.night).toBe(true);
   });
 });

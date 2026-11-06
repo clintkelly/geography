@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { PACK } from '../content/pack';
 import type { Lodge } from '../content/lodges';
 import { activeCompanion, currentSlotIndex, teamOf, type Command, type Expedition, type SaveData } from '../engine/game';
-import { lodgeById, lodgeOpen, lodgesOf, nextLodge, patchOf, type LodgeTier } from '../engine/lodges';
+import { leagueOf, lodgeById, lodgeOpen, lodgesOf, nextLodge, patchOf, type LodgeTier } from '../engine/lodges';
 import { levelOf } from '../engine/progression';
 import { artUrl, Fx, Sprite } from './art';
 import { companionView, foeForm, species } from './content';
@@ -90,7 +90,47 @@ export function Lodges({ save, dispatch, onClose }: { save: SaveData; dispatch: 
           );
         })}
       </ol>
+      <LeagueCard save={save} dispatch={dispatch} />
     </div>
+  );
+}
+
+/** The Starfall League: open once every Lodge is beaten. Each Elite Ranger guards a star creature. */
+function LeagueCard({ save, dispatch }: { save: SaveData; dispatch: (c: Command) => void }) {
+  const league = leagueOf(PACK);
+  if (!league?.gauntlet) return null;
+  const open = lodgeOpen(PACK, save, league.id);
+  const won = (save.lodgesBeaten ?? []).includes(league.id);
+  const known = new Set([...save.companions, ...(save.wild ?? [])].map((c) => c.speciesId));
+  const stars = [...league.gauntlet.map((r) => r.prizeSpeciesId), league.prizeSpeciesId];
+  const fame = save.hallOfFame ?? [];
+  const left = lodgesOf(PACK).filter((l) => !(save.lodgesBeaten ?? []).includes(l.id)).length;
+  return (
+    <section className={`panel league-card${open ? ' league-open' : ''}`}>
+      <div className="league-head">
+        <img src={artUrl(league.leader.artId)} alt="" width={96} height={96} className={`sprite${open ? '' : ' silhouette'}`} />
+        <div>
+          <h2>⭐ {league.name}</h2>
+          <p>Four Elite Rangers and the Champion, one after another. Each Elite Ranger guards a <strong>star creature</strong>: beat their last creature to win it. Beat the Champion to join the <strong>Hall of Fame</strong>.</p>
+          <p className="muted">Best with a team of level {league.recommendedLevel}+ creatures.{won ? ` Hall of Fame entries: ${fame.length}.` : ''}</p>
+          {open
+            ? <button type="button" className="primary" onClick={() => dispatch({ type: 'startLodge', lodgeId: league.id })}>{won ? 'Challenge the League again' : 'Enter the League'}</button>
+            : <p className="lodge-status">Locked: beat {left === 1 ? 'the last Lodge' : `all ${lodgesOf(PACK).length} Lodges (${left} to go)`} to open the League.</p>}
+        </div>
+      </div>
+      <div className="league-rangers">
+        {league.gauntlet.map((r) => <span key={r.name} className="league-ranger"><img src={artUrl(r.artId)} alt="" width={56} height={56} className={`sprite${open ? '' : ' silhouette'}`} /><small>{open ? r.name.replace('Elite Ranger ', '') : '???'}</small><TypeBadge type={r.type} /></span>)}
+      </div>
+      <div className="league-stars">
+        {stars.map((id) => <span key={id} className="league-star"><Sprite id={species(id).artId} size={56} className={known.has(id) ? 'legend-glow' : 'silhouette'} /><small>{known.has(id) ? species(id).displayName : '???'}</small></span>)}
+      </div>
+      {fame.length > 0 && (
+        <div className="fame-row">
+          <small>Last Hall of Fame team:</small>
+          {fame.at(-1)!.team.map((c) => { const v = companionView(c); return <Sprite key={c.instanceId} id={v.artId} size={48} shiny={v.shiny} />; })}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -108,7 +148,49 @@ export function LodgeHall({ e, save, dispatch }: { e: Expedition; save: SaveData
   const form = foeForm(foe, slot.opponentStage);
   const leaderUp = slot.role !== 'junior';
   const firstOfLeader = leaderUp && e.slots[index - 1]?.role === 'junior';
-  const left = e.slots.filter((s, i) => i >= index && s.role !== 'junior').length;
+  const left = e.slots.filter((s, i) => i >= index && s.role !== 'junior' && s.trainer === slot.trainer).length;
+  // In the League, each Elite Ranger steps up in turn, then the Champion.
+  const portrait = slot.trainerArt ?? lodge.leader.artId;
+  const ranger = lodge.gauntlet?.find((r) => r.name === slot.trainer);
+  const newTrainer = leaderUp && e.slots[index - 1]?.trainer !== slot.trainer;
+  const known = new Set([...save.companions, ...(save.wild ?? [])].map((c) => c.speciesId));
+  const star = slot.prize && !known.has(slot.prize) ? species(slot.prize) : undefined;
+  if (lodge.gauntlet) {
+    return (
+      <div className="stack">
+        <TrailBar e={e} save={save} />
+        <section className="panel lodge-hall league-hall">
+          <h1>⭐ {lodge.name}</h1>
+          {e.retreated
+            ? <p role="status">{form.name} held on this time. Rest up and try again: you keep your place in the League.</p>
+            : index === 0
+              ? <p>Four Elite Rangers, then the Champion. Questions about <strong>everything</strong>. Lose a battle and you can try it again.</p>
+              : newTrainer ? <p>{slot.trainer} steps up!</p> : <p>{slot.trainer} has {left} {left === 1 ? 'creature' : 'creatures'} left.</p>}
+          <ol className="lodge-path league-path" aria-label="League battles">
+            {e.slots.map((s, i) => (
+              <li key={i} className={s.status === 'won' ? 'done' : i === index ? 'now' : ''}>
+                <img src={artUrl(foeForm(species(s.opponentId), s.opponentStage).artId)} alt="" width={40} height={40} className={`sprite${s.status === 'won' || i === index ? '' : ' silhouette'}`} />
+                <small>{s.trainer?.replace(/^(Elite Ranger|Champion) /, '')}</small>
+              </li>
+            ))}
+          </ol>
+          <div className="encounter-card">
+            <img src={artUrl(portrait)} alt="" width={96} height={96} className="sprite" />
+            <Sprite id={form.artId} size={96} />
+            <div>
+              <h2>{slot.trainer} sends out {form.name}!</h2>
+              {newTrainer && !e.retreated && <p className="lodge-quote">"{ranger?.intro ?? lodge.leader.intro}"</p>}
+              {star && <p className="star-prize">⭐ Beat it to win <strong>{star.displayName}</strong>, a star creature!</p>}
+              {slot.role === 'ace' && <p className="boss-warning">This is {slot.trainer}'s ace. Watch for its BIG attack every third turn, and Guard against it!</p>}
+              <p className="muted">{foe.flavor}</p>
+            </div>
+          </div>
+          <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : 'Battle!'} <Key k="Enter" /></button>
+        </section>
+        <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Leave the League</button>
+      </div>
+    );
+  }
   return (
     <div className="stack">
       <TrailBar e={e} save={save} />
@@ -164,6 +246,27 @@ export function LodgeComplete({ e, save, dispatch }: { e: Expedition; save: Save
   const prize = species(lodge.prizeSpeciesId);
   const lead = companionView(activeCompanion(save)).name;
   const team = teamOf(e).length;
+  if (lodge.gauntlet) {
+    const fame = save.companions.filter((c) => teamOf(e).includes(c.instanceId));
+    return (
+      <section className="panel complete lodge-complete league-complete">
+        <h1>⭐ You are the Starfall Champion! ⭐</h1>
+        <div className="lodge-win">
+          <img src={artUrl(lodge.leader.artId)} alt="" width={128} height={128} className="sprite" />
+          <p className="lodge-quote">"{lodge.leader.win}"</p>
+        </div>
+        <div className="celebrate">
+          {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}
+          {first && <Sprite id={prize.artId} size={160} className="hop-loop legend-glow" />}
+        </div>
+        {first && <p className="learn"><strong>{prize.displayName}</strong>, the Champion's own star creature, wants to join you!</p>}
+        <h2>Hall of Fame</h2>
+        <div className="fame-row">{fame.map((c) => { const v = companionView(c); return <span key={c.instanceId} className="fame-member"><Sprite id={v.artId} size={72} shiny={v.shiny} /><small>{v.name} · Lv {levelOf(c.bondXp)}</small></span>; })}</div>
+        <p className="muted">{e.correct} of {e.answered} answers correct</p>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{first ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>
+      </section>
+    );
+  }
   return (
     <section className="panel complete lodge-complete">
       <h1>You beat {lodge.name}{tier !== 'bronze' ? ` on ${TIER_NAME[tier]}` : ''}!</h1>

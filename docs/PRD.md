@@ -737,3 +737,38 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
 - **Where they play:** in the stable, at camp and in battle while standing.
 - **How they run:** on one shared 220 ms clock. Reduced-motion users see the still.
 - **Cost:** a 4-frame 128x128 animation costs 1 PixelLab generation.
+
+## Night creatures, the Starfall League and creature cries
+
+**Night creatures** (`Species.night`, `engine/night.ts`).
+- **When:** from 5 PM until 6 AM by the player's own clock. Camp checks the clock every minute and sends `setNight`, which redraws the sightings (never mid-trail).
+- **Where:** ten real nocturnal animals, one each in a thin region. In Possumoon (opossum, US South), Lunaflit (luna moth, US Northeast), Aardshade (aardwolf, Southern Africa), Galagleam (galago, West Africa), Honkabat (hammer-headed bat, Central Africa), Quillnight (hedgehog, Eastern Europe), Solenox (solenodon, Caribbean), Lorishade (slow loris, South Asia), Hootmonk (night monkey, South America) and Glidewisp (sugar glider, Oceania).
+- **Finding them:** at night an unmet night creature takes the first sighting in its region. On a night trail, the region's night creature is always the first battle, even one already befriended, so Bold Befriend can win duplicates (more shiny chances). Trails started at night have a darker battle backdrop.
+- **On screen:** a Camp strip says when night creatures come out, and at night lists the unmet ones with buttons to their regions.
+
+**The Starfall League** (a `Lodge` with a `gauntlet`, rank 9).
+- **Opens** once all eight Lodges are beaten. It has no Silver or Gold tier and is not on the Lodge ladder.
+- **The run:** four Elite Rangers (Flame, Tide, Frost, Gale) with two creatures each, then Champion Celeste with three: 11 battles in a row, questions about everything. A lost battle can be retried.
+- **Strength:** Elite Rangers fight at Lodge power 9 and 10, the Champion at 11 (the balance test: Elite aces about 65% at 80% right; the Champion about 40% at 80% and 65% at 90%).
+- **Rewards:** each Elite Ranger's ace is a star creature that joins the first time it's beaten (Solarion, Delphinova, Ursastar, Dracostar: the Leo, Delphinus, Ursa Major and Draco constellations). The Champion gives Cosmobill, a galaxy platypus. Every win adds the team to the Hall of Fame (`SaveData.hallOfFame`).
+
+**Creature cries** (`content/cries.ts`, `playCry` in `ui/sound.ts`).
+- **Sounds:** 24 recorded animal calls (`public/sfx/cry-<family>.mp3`, made with ElevenLabs text-to-sound). Every creature maps to one family by what it's based on.
+- **Each creature sounds different:** the call plays at the creature's own pitch, from a hash of its id (0.86 to 1.22), and lower as it evolves (stage 2 ×0.9, stage 3 ×0.8).
+- **When:** a creature steps into battle, the wild creature answers, a creature is befriended or hatches, after an evolution, and when its picture is clicked in the stable.
+
+## Wave 3: more creatures
+
+- **38 regular creatures** for the thinnest regions and types: Americas and Antarctica (horned lizard, raccoon, chipmunk, porcupine, bald eagle, Cuban crocodile, giant armadillo, hyacinth macaw, poison dart frog, maned wolf, chinstrap penguin, elephant seal, barracuda, Antarctic toothfish, wild turkey, blue crab, snowshoe hare), Europe and Africa (badger, red squirrel, Atlantic salmon, beluga sturgeon, great bustard, mole, Iberian lynx, monk seal, ball python, hammerkop, African golden cat, Goliath beetle, honey badger, secretary bird, African wild dog, Barbary macaque) and Asia (caracal, sand cat, gharial, sloth bear, Pallas's cat). Kung Fu grows with the honey badger, secretary bird and caracal.
+- **Three more Wild Paths lines:** Otterkit (sea otter, American West), Quokkit (quokka, Oceania) and Fenneckit (fennec fox, North Africa), each with Scholar, Ranger and Banner forms.
+- **Idle animations** for the older creatures' base forms.
+- All new creatures are `fresh`: sighted first in their region until befriended. The Camp "New in the wild" strip shows the six regions with the most unmet new creatures.
+
+## Wave 4: animals from the kids' favorite nature shows, and new-creature juice
+
+- **20 more real animals** the game was missing: orca, great white shark, giant squid, fossa, Parson's chameleon, tardigrade, black-footed ferret, North American beaver, wolverine, Bornean orangutan, pronghorn, thylacine, dodo, sperm whale, Amazon river dolphin, Goliath birdeater, dhole, swordfish, harpy eagle and superb bird-of-paradise. The thylacine and dodo are extinct; their Field Guide "When" says so.
+- **The first time a child gets a kind of creature** (`ui/NewCreature.tsx`):
+  - **In battle:** a creature they've never seen gets a pulsing NEW! tag and a sparkle sound. Befriending a new kind turns "New friend!" into "NEW CREATURE!" with confetti, a fanfare and its number in the collection.
+  - **At the end of a trail:** a new creature joining gets a full reveal: ribbon, spin-in over light rays, confetti, types, home, a ticking "Creature N of total found" count and its cry.
+  - **Duplicates** keep the smaller "New friend!" banner, so the big moment stays special.
+- **Camp:** picking a sighting plays that creature's cry, and each region button shows found/total, with a gold ★ when complete.

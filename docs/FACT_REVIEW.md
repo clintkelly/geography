@@ -524,3 +524,127 @@ Four real animals with kung fu styles named after them. All sources are Wikipedi
 - Each hair usually under 24 micrometers: https://en.wikipedia.org/wiki/Merino
 - Shrek hid in caves for six years, 27 kg fleece: https://en.wikipedia.org/wiki/Shrek_(sheep) (the article says "apparently hid in caves").
 - Size: a Merino fleece "weighs around 4.4 kg", from the Shrek article.
+
+## Night creatures and Starfall League star creatures (2026-11-06)
+
+All facts below are from Wikipedia (the source on each fact in `src/content/guide/creatures.json`), written by me from memory and not yet checked against the pages. Please check each one.
+
+- **possumoon (Virginia opossum):** only marsupial in the US and Canada; plays dead ("playing possum"); can hang by its tail briefly (adults can't hang for long). Flavor: flops over and plays dead.
+- **lunaflit (luna moth):** adults have no working mouth and live about a week; twisting tail streamers confuse bats; drawn to lights. Wings up to about 11 cm.
+- **aardshade (aardwolf):** a hyena relative that eats mostly termites; can lap up hundreds of thousands in a night (Wikipedia gives about 300,000); raises its mane when scared. Range: eastern and southern Africa.
+- **galagleam (galago):** big eyes for night hunting; strong leapers; "bushbaby" partly from cries that sound like a baby. Size "about the size of a squirrel" is approximate.
+- **honkabat (hammer-headed bat):** largest bat in mainland Africa; males gather along rivers and honk to attract females; the male's enlarged head and lips help make the call. Wingspan "nearly 1 m" is approximate.
+- **quillnight (northern white-breasted hedgehog):** eastern Europe; hunts beetles and worms at night; rolls into a ball; hibernates. Size about 25 cm.
+- **solenox (solenodon):** one of the few venomous mammals; finds insects with its bendy snout; endangered, only on Cuba and Hispaniola.
+- **lorishade (slow loris):** the only known venomous primates; slow and quiet at night; big eyes.
+- **hootmonk (night monkey, Aotus):** the only truly nocturnal monkeys; fathers do most of the infant carrying.
+- **glidewisp (sugar glider):** glides on its patagium (skin flaps between front and back legs); a marsupial; named for liking sweet sap and nectar. Note: it lives in Australia and New Guinea.
+- **solarion (Leo):** Nemean lion myth; best seen in spring evenings (Northern Hemisphere); brightest star Regulus.
+- **delphinova (Delphinus):** a small dolphin-shaped constellation; myth of the dolphin that helped Poseidon; best seen late summer (Northern Hemisphere).
+- **ursastar (Ursa Major):** the Big Dipper is its seven brightest stars; the two "pointer" stars at the end of the bowl point to Polaris; Callisto myth.
+- **dracostar (Draco):** circumpolar for much of the Northern Hemisphere; Thuban was the pole star about 5,000 years ago (around 3000 BC); Ladon guarding the Hesperides' apples.
+- **cosmobill (platypus):** lays eggs; electroreception in its bill.
+
+## Daytime additions: Kung Fu and thin regions (2026-11-06)
+
+Written from memory with Wikipedia sources (on each fact in `src/content/guide/creatures.json`), not yet checked against the pages.
+
+- **cobrafu (king cobra):** longest venomous snake; eats mostly snakes; Snake is one of the Five Animals. Length "4 to 5 m" is the upper range.
+- **pardojo (Indian leopard):** climbs and drags prey into trees; spots are called rosettes; Leopard is one of the Five Animals.
+- **talonfu (steppe eagle):** ground or low-bush nests; winters in Africa, the Middle East and India; Eagle Claw is a Chinese kung fu style. Game region: Western Asia (it breeds across Central Asia; check that the region fits).
+- **roadzoom (greater roadrunner):** about 32 km/h; can fly but prefers running; catches lizards and small rattlesnakes.
+- **snapjaw (alligator snapping turtle):** one of the heaviest freshwater turtles; worm-like tongue lure; three shell ridges.
+- **springbolt (springbok):** pronking; national animal of South Africa; can get water from plants.
+- **braypen (African penguin):** donkey-like bray, old name "jackass penguin"; pink glands help cooling; endangered.
+- **storkwing (white stork):** rooftop nests; migrates to Africa; national bird of Lithuania.
+- **carpabear (Eurasian brown bear):** large Carpathian population (Romania); mostly plant diet; winter dens. Flavor says "more brown bears than almost anywhere else in Europe" (Russia aside).
+- **tuskhog (red river hog):** reddish-orange fur, ear tufts; groups called sounders; roots with snout.
+- **leafviper (Gaboon viper):** longest fangs of any snake; leaf-litter camouflage; calm and still.
+- **mandrilux (mandrill):** largest monkey; dominant males most colorful; hordes of hundreds.
+- **congopeak (Congo peafowl):** only in DR Congo; described in 1936 after feathers found on a hat (the story involves a hat feather seen by James Chapin); national bird of DR Congo.
+- **leoseal (leopard seal):** spotted coat; eats penguins, fish, krill; strains krill with its back teeth.
+- **snowflit (snow petrel):** one of three birds breeding only in Antarctica; nests on nunataks; spits stomach oil.
+- **loonsong (common loon):** haunting calls; legs set far back; state bird of Minnesota. Game region: US Northeast (it breeds in New England lakes).
+- **hutiboo (Desmarest's hutia):** largest hutia, only in Cuba; climbs and eats leaves/fruit/bark; hutias live only on Caribbean islands.
+- **todyzip (Cuban tody):** only in Cuba; burrow nests in banks; gleans insects from leaf undersides.
+
+## Wave 3: 38 creatures and three Wild Paths lines (2026-11-06)
+
+Written from memory with Wikipedia sources (on each fact in `src/content/guide/creatures.json`), not yet checked against the pages. Flavor lines are in `src/content/pack.ts`.
+
+- **hornsquirt (Texas Horned Lizard, us-south):** When in danger, it can squirt blood from the corners of its eyes to scare off predators. It eats mostly harvester ants. It is the state reptile of Texas. Size: About 7 to 11 cm (3 to 4.5 inches) long.
+- **rackit (Raccoon, us-south):** Raccoons have very sensitive front paws and are famous for opening latches and lids. Scientists have found raccoons can remember how to solve a task for up to three years. The black fur around its eyes looks like a bandit's mask. Size: About 40 to 70 cm (16 to 28 inches) long, plus its ringed tail.
+- **chipdig (Eastern Chipmunk, us-northeast):** Chipmunks carry food in stretchy cheek pouches. It stores seeds and nuts in its burrow to eat through the winter. Its burrows can be more than 3 m (10 feet) long. Size: About 25 cm (10 inches) long, including its tail.
+- **quillsteel (North American Porcupine, us-northeast):** It has about 30,000 quills. Porcupines can't throw their quills, but the quills come off easily when touched. It is a good climber and eats bark, leaves and twigs. Size: About 60 to 90 cm (2 to 3 feet) long.
+- **crestalon (Bald Eagle, us-northeast):** It is the national bird of the United States. It builds the biggest nest of any North American bird. Bald eagles almost disappeared from the lower 48 states but made a big comeback. Size: Wings about 1.8 to 2.3 m (6 to 7.5 feet) across.
+- **leapcroc (Cuban Crocodile, america-caribbean):** It lives only in Cuba, mostly in the Zapata Swamp. It is known for leaping up out of the water. Its scales have bright yellow-and-black speckles. Size: Usually about 2 to 2.5 m (6.5 to 8 feet) long.
+- **digdillo (Giant Armadillo, south-america):** It is the largest living armadillo. The third claw on each front foot is the longest claw of any living mammal, compared to body size. It digs big burrows that many other animals use too. Size: About 75 to 100 cm (2.5 to 3.3 feet) long, plus its tail.
+- **macawsong (Hyacinth Macaw, south-america):** It is the longest parrot in the world, and the largest flying parrot. Its powerful beak can crack hard palm nuts. It has bright yellow skin around its eyes and at the base of its beak. Size: About 1 m (3.3 feet) long, the longest parrot.
+- **dartblaze (Poison Dart Frog, south-america):** Their bright colors warn predators that they are poisonous. Many kinds are less than 2.5 cm (1 inch) long. In zoos, they usually lose their poison, because it comes from the bugs they eat in the wild. Size: Most are about 1.5 to 6 cm (under 2.5 inches) long.
+- **stiltwolf (Maned Wolf, south-america):** It is the tallest wild dog, but it isn't a true wolf or fox. Its long legs help it see over tall grass. It eats a lot of fruit, especially one called the wolf apple. Size: About 90 cm (3 feet) tall at the shoulder.
+- **strapguin (Chinstrap Penguin, antarctica):** The thin black line under its chin looks like the strap of a helmet. It is one of the most common penguins, with millions of breeding pairs. Chinstrap penguins take thousands of very short naps a day. Size: About 70 cm (2.3 feet) tall.
+- **trunkseal (Southern Elephant Seal, antarctica):** It is the largest seal in the world. Males use their big trunk-like noses to make loud roaring sounds. It can dive more than 1,500 m (5,000 feet) deep. Size: Males up to about 5 to 6 m (16 to 20 feet) long.
+- **barraclad (Great Barracuda, america-caribbean):** Barracudas are fast hunters that dash forward in short bursts. They have long fang-like teeth and a big underbite. Young barracudas often hide among seagrass and mangroves. Size: Commonly up to about 1.5 m (5 feet) long.
+- **toothfrost (Antarctic Toothfish, antarctica):** It has antifreeze proteins in its blood so it doesn't freeze. It is one of the largest fish in the Southern Ocean. It can live for about 50 years. Size: Up to about 1.7 m (5.5 feet) long.
+- **gobblaze (Wild Turkey, us-south):** Male wild turkeys gobble loudly and fan their tails to show off. Unlike farm turkeys, wild turkeys can fly short distances. Wild turkeys almost disappeared in the 1900s, then made a big comeback. Size: About 1 to 1.2 m (3.3 to 4 feet) long.
+- **bluepinch (Atlantic Blue Crab, us-south):** Its back legs are shaped like paddles, so it is a strong swimmer. Its scientific name means 'beautiful savory swimmer'. It is famous in the Chesapeake Bay. Size: Shell about 23 cm (9 inches) wide.
+- **snowshoe (Snowshoe Hare, us-northeast):** Its fur turns white in winter and brown in summer. Its big furry hind feet keep it from sinking into snow. Its numbers rise and fall in a roughly 10-year cycle, along with the lynx that hunt it. Size: About 40 to 50 cm (16 to 20 inches) long.
+- **badgerock (European Badger, europe-west):** Badgers live in big underground homes called setts. Some setts are used by badger families for many generations. It has a bold black-and-white striped face. Size: About 60 to 90 cm (2 to 3 feet) long.
+- **squirrust (Red Squirrel, europe-west):** It grows long ear tufts in winter. It buries food to eat later and doesn't find all of it, which helps new trees grow. In Britain it has become rare where gray squirrels from North America moved in. Size: About 19 to 23 cm (7.5 to 9 inches) long, plus its tail.
+- **leapsalmon (Atlantic Salmon, europe-west):** Salmon hatch in rivers, grow up at sea, then return to rivers to lay eggs. They can leap up waterfalls on their way upstream. Unlike Pacific salmon, an Atlantic salmon can make the trip more than once. Size: Usually about 70 to 75 cm (28 to 30 inches) long.
+- **sturgeonplate (Beluga Sturgeon, europe-east):** It is one of the biggest freshwater fish in the world. Sturgeons have rows of bony plates called scutes instead of scales. Beluga sturgeons can live for more than 100 years. Size: Can grow longer than 6 m (20 feet).
+- **bustarboom (Great Bustard, europe-east):** Males are among the heaviest flying birds in the world. In spring, males puff up into a big white ball of feathers to impress females. Males grow long whisker-like feathers on their chins. Size: Males up to about 1 m (3.3 feet) long.
+- **molediggs (European Mole, europe-east):** It digs tunnels with its wide, shovel-like front paws. Its velvety fur can lie in any direction, so it can move backward in tunnels easily. Moles store worms in underground larders. Size: About 15 cm (6 inches) long.
+- **lynxshade (Iberian Lynx, europe-south):** It was once the most endangered cat in the world, and conservation work has helped it recover. It eats mostly European rabbits. It has black ear tufts and a beard-like ruff of fur on its face. Size: About 85 to 110 cm (2.8 to 3.6 feet) long.
+- **sealmonk (Mediterranean Monk Seal, europe-south):** It is one of the rarest seals in the world. It often rests and raises its pups in sea caves. Its numbers have been slowly growing thanks to protection. Size: About 2.4 m (8 feet) long.
+- **coilball (Ball Python, africa-west):** It curls into a tight ball with its head in the middle when it feels threatened. It is a constrictor, not a venomous snake. It is also called the royal python. Size: Usually about 1 to 1.5 m (3 to 5 feet) long.
+- **hammerkop (Hammerkop, africa-west):** Its crest and beak together make its head look like a hammer. It builds huge dome nests that can be more than 1.5 m (5 feet) across. In many African stories, the hammerkop is a magical or unlucky bird. Size: About 56 cm (22 inches) long.
+- **goldcatshade (African Golden Cat, africa-central):** It is one of the least-known wild cats, rarely seen by people. Its fur can be golden-red, brown or gray. Its closest relative is the caracal. Size: About 60 to 100 cm (2 to 3.3 feet) long.
+- **goliathorn (Goliath Beetle, africa-central):** Goliath beetles are among the heaviest insects in the world. Males have a Y-shaped horn on their head. Their grubs can weigh up to about 100 grams. Size: Males up to about 11 cm (4.3 inches) long.
+- **honeyfu (Honey Badger, africa-south):** It is famous for being fearless and will stand up to lions. Its thick, loose skin lets it twist around to bite back if grabbed. It loves honey and bee grubs and digs into beehives. Size: About 55 to 77 cm (22 to 30 inches) long.
+- **kickretary (Secretary Bird, africa-south):** It hunts on foot, stomping on snakes and lizards with very fast kicks. Its crest of long black feathers may have reminded people of quill pens tucked behind a clerk's ear. It is on the coat of arms of South Africa. Size: About 1.3 m (4.3 feet) tall.
+- **paintpup (African Wild Dog, africa-south):** No two wild dogs have the same coat pattern. Packs care for injured members and share food with them. Packs sometimes vote on when to go hunting by sneezing. Size: About 75 cm (2.5 feet) tall at the shoulder.
+- **barbamonk (Barbary Macaque, europe-south):** The Barbary macaques of Gibraltar are the only wild monkeys in Europe. It has almost no tail. Males help a lot with caring for the babies. Size: About 55 to 60 cm (2 feet) long.
+- **caracalfu (Caracal, asia-west):** It can leap high to catch birds in flight. Its name comes from Turkish words meaning 'black ear'. It has long black tufts on its ears. Size: About 60 to 105 cm (2 to 3.5 feet) long.
+- **sandshade (Sand Cat, asia-west):** Thick fur on its paws protects them from hot sand. It can go a long time without drinking, getting water from its food. Its big ears help it hear prey moving under the sand. Size: About 40 to 57 cm (16 to 22 inches) long.
+- **gharialance (Gharial, asia-south):** Its long, thin snout is good for catching fish. Males have a round bump on the end of the snout called a ghara, named after a kind of pot. It is critically endangered. Size: Males up to about 5 to 6 m (16 to 20 feet) long.
+- **slothroar (Sloth Bear, asia-south):** It sucks up termites so noisily that it can be heard far away. It can close its nostrils while slurping up insects. Mother sloth bears carry their cubs on their backs. Size: About 1.4 to 1.9 m (4.5 to 6 feet) long.
+- **manulmist (Pallas's Cat (Manul), asia-east):** It has the longest, thickest fur of any wild cat. Its pupils are round, not slit-shaped like a house cat's. Its short, round ears are set low, which helps it peek over rocks without being seen. Size: About 45 to 65 cm (18 to 26 inches) long, plus its tail.
+- **otterkit (Sea Otter, us-west):** Sea otters use stones as tools to crack open shellfish. They have the thickest fur of any animal, up to about a million hairs per square inch. Sea otters sometimes hold hands or wrap in kelp so they don't drift apart while sleeping. Size: About 1 to 1.5 m (3.3 to 5 feet) long.
+- **quokkit (Quokka, oceania):** Quokkas are famous for their smiley faces. Most quokkas live on Rottnest Island, off the coast of Western Australia. A quokka is a marsupial, so its baby (a joey) grows in a pouch. Size: About 40 to 54 cm (16 to 21 inches) long, plus its tail.
+- **fenneckit (Fennec Fox, africa-north):** It is the smallest fox in the world, with the biggest ears for its size. Its big ears help it hear prey and release heat. Fur on the bottoms of its feet protects them from hot sand. Size: The smallest fox, about 24 to 41 cm (9 to 16 inches) long, plus its tail.
+
+Ones to check first:
+- Giant armadillo: 'longest claw of any living mammal' is relative to body size in some sources; check the wording.
+- Raccoon: the 'up to three years' memory figure.
+- Chinstrap penguin: the 'thousands of naps' study (about 10,000 microsleeps a day).
+- African wild dog: the 'sneeze vote' study (Botswana, 2017).
+- Secretary bird: the quill-pen name origin is one of two theories (another is Arabic 'saqr-et-tair', hunter bird).
+- Sea otter: 'a million hairs per square inch' (about 150,000 per square cm).
+- Goliath beetle: grub weight about 100 g.
+- Caracal: the name from Turkish 'karakulak', black ear.
+
+## Wave 4: animals from Wild Kratts the game was missing (2026-11-06)
+
+Written from memory with Wikipedia sources, not yet checked against the pages. Facts to check first: orca wave-washing seals; giant squid first photographed alive 2004; tardigrades in space 2007; Elizabeth Ann cloned 2020; pronghorn 88 km/h; sperm whale largest brain; swordfish no scales/teeth as adults; harpy talon 13 cm; thylacine last died 1936 at Hobart (Beaumaris) Zoo; dodo extinct late 1600s.
+
+- **orcalash (Orca, us-west):** The orca, or killer whale, is the largest member of the dolphin family. Orca pods have their own sets of calls, a bit like family dialects. Orcas hunt as a team, and some even make waves to wash seals off ice. Size: Up to about 8 to 9 m (26 to 30 feet) long.
+- **jawstorm (Great White Shark, africa-south):** It is the largest predatory fish in the world. Near South Africa, great whites sometimes leap fully out of the water to catch seals. Sharks keep growing new teeth to replace the ones they lose. Size: Commonly 4 to 5 m (13 to 16 feet) long.
+- **krakeneye (Giant Squid, europe-north):** Giant squid have some of the biggest eyes of any animal, about the size of a dinner plate. Scientists first photographed a live giant squid in its home in 2004. Sperm whales hunt giant squid in the deep sea. Size: Up to about 12 to 13 m (40 to 43 feet) long, including its tentacles.
+- **fossakick (Fossa, africa-east):** It is the largest meat-eating mammal on Madagascar. Its flexible ankles let it climb down trees headfirst. It looks like a cat but is more closely related to mongooses. Size: About 70 to 80 cm (2.3 to 2.6 feet) long, plus a tail almost as long.
+- **chamelume (Parson's Chameleon, africa-east):** It is one of the largest chameleons in the world. A chameleon's eyes can move separately, looking two ways at once. Chameleons catch insects with a long, sticky, lightning-fast tongue. Size: Up to about 68 cm (27 inches) long, one of the biggest chameleons.
+- **tardiguard (Tardigrade (Water Bear), antarctica):** Tardigrades are tiny animals, usually less than 1 mm long. They can survive drying out by curling into a ball called a tun. In 2007, tardigrades survived a trip to outer space. Size: Usually under 1 mm long.
+- **ferretdash (Black-footed Ferret, us-midwest):** It was thought to be extinct until a small group was found in Wyoming in 1981. It lives in prairie dog burrows and eats mostly prairie dogs. In 2020, a black-footed ferret named Elizabeth Ann became the first cloned endangered animal in the United States. Size: About 50 to 60 cm (20 to 24 inches) long, including its tail.
+- **damberly (North American Beaver, us-northeast):** Its front teeth are orange because they contain iron, which makes them strong. Beavers build dams and lodges out of sticks and mud. It slaps its flat tail on the water to warn other beavers of danger. Size: About 74 to 90 cm (2.5 to 3 feet) long, plus its flat tail.
+- **wolvfrost (Wolverine, europe-north):** It is the largest land member of the weasel family. Wolverines can travel very long distances through deep snow. Its big wide paws work like snowshoes. Size: About 65 to 107 cm (2 to 3.5 feet) long.
+- **orangusage (Bornean Orangutan, asia-east):** The name orangutan comes from Malay words meaning 'person of the forest'. Orangutans build a new sleeping nest in the trees almost every night. Grown-up males can have big cheek pads called flanges. Size: Males stand up to about 1.4 m (4.6 feet) tall.
+- **pronghaste (Pronghorn, us-west):** It is the fastest land animal in the Americas, reaching about 88 km/h (55 mph). It isn't a true antelope; it is the last of its own family. It sheds the outer covering of its horns every year. Size: About 1.3 to 1.5 m (4.3 to 5 feet) long.
+- **thylashade (Thylacine (Tasmanian Tiger), oceania):** The thylacine was a marsupial, not a real tiger or dog. The last known thylacine died at Hobart Zoo in Tasmania in 1936. It had dark stripes across its lower back and could open its jaws very wide. Size: About 1 to 1.3 m (3.3 to 4.3 feet) long, plus its tail.
+- **dodobell (Dodo, africa-east):** The dodo lived only on the island of Mauritius. It was a flightless relative of pigeons and doves. It went extinct in the late 1600s, less than a century after sailors arrived. Size: About 1 m (3.3 feet) tall.
+- **clickwhale (Sperm Whale, europe-south):** Sperm whales make clicks that are among the loudest sounds of any animal. It has the largest brain of any animal. It dives very deep to hunt squid, including giant squid. Size: Males up to about 16 to 20 m (52 to 66 feet) long.
+- **botoglow (Amazon River Dolphin, south-america):** It is the largest river dolphin. Many grow pinker as they get older, especially males. Unlike ocean dolphins, it can turn its head, which helps it swim through flooded forests. Size: Up to about 2.5 m (8 feet) long.
+- **birdeater (Goliath Birdeater, south-america):** It is the heaviest spider in the world. Despite its name, it rarely eats birds; it mostly eats insects and worms. When bothered, it flicks tiny itchy hairs from its belly and can make a hissing sound with its legs. Size: Leg span up to about 30 cm (12 inches).
+- **dholecall (Dhole (Asian Wild Dog), asia-south):** Dholes whistle to each other, so they are sometimes called whistling dogs. They live and hunt in packs. Dholes are endangered. Size: About 90 cm (3 feet) long, plus its bushy tail.
+- **swordstrike (Swordfish, america-caribbean):** It uses its long flat bill to slash and stun fish. It can warm its eyes and brain, which helps it see in cold, deep water. Grown-up swordfish have no scales and no teeth. Size: Commonly up to about 3 m (10 feet) long.
+- **harpyclaw (Harpy Eagle, america-mainland):** Its back talons can be about 13 cm (5 inches) long, as long as a grizzly bear's claws. It snatches sloths and monkeys from the treetops. It is the national bird of Panama. Size: Wings about 1.8 to 2 m (6 to 6.5 feet) across.
+- **paradance (Superb Bird-of-Paradise, oceania):** When it shows off, the male spreads a black cape that makes a big oval with a blue smile-shaped breast shield. Its black feathers are so dark they reflect almost no light. Birds-of-paradise live mostly in New Guinea. Size: About 25 cm (10 inches) long.

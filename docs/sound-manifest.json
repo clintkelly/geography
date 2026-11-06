@@ -252,6 +252,126 @@
       "generationId": "ICaiD7Zfu6dAjnyeskkc",
       "prompt": "Martial arts special move: two quick whooshing kung fu strikes and a crisp punchy impact with a bright gong shimmer, energetic and friendly, children's game, no voice, about one second",
       "note": "take 1 of 2 came back 14 s long; cut to its first 1.33 s with a 150 ms fade-out, audible to 1210 ms; peak 0 dBFS, played at 0.7; take 2 was only 140 ms of sound; measured only, not listened to"
+    },
+    "cry-bark": {
+      "generationId": "Y38rinAMW6m31kQcTMPC",
+      "prompt": "Cute cartoon creature cry for a kids' game (bark), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 800 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-bleat": {
+      "generationId": "YOj5YZpXEdHXFpmeknbU",
+      "prompt": "Cute cartoon creature cry for a kids' game (bleat), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1010 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-bubble": {
+      "generationId": "gcwGAOz8XfVWlziN13Hc",
+      "prompt": "Cute cartoon creature cry for a kids' game (bubble), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1280 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-buzz": {
+      "generationId": "yZjZ3ZWbhlJqAu1KBbRh",
+      "prompt": "Cute cartoon creature cry for a kids' game (buzz), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 610 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-chatter": {
+      "generationId": "XzlIaiXwQtQJK73XuhHw",
+      "prompt": "Cute cartoon creature cry for a kids' game (chatter), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1640 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-chirp": {
+      "generationId": "ewe46FGyJgncDEYwbC5p",
+      "prompt": "Cute cartoon creature cry for a kids' game (chirp), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 840 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-click": {
+      "generationId": "YZjW1tbae7XEiozWsckI",
+      "prompt": "Cute cartoon creature cry for a kids' game (click), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 910 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-croak": {
+      "generationId": "a6tZnpCq9YCF2OKkTrEt",
+      "prompt": "Cute cartoon creature cry for a kids' game (croak), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1750 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-dolphin": {
+      "generationId": "zB16qUufPBonMM3c6l9X",
+      "prompt": "Cute cartoon creature cry for a kids' game (dolphin), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 890 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-ghost": {
+      "generationId": "QikaspXKeVvqMmIhcg9W",
+      "prompt": "Cute cartoon creature cry for a kids' game (ghost), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1730 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-growl": {
+      "generationId": "1X7Erkadyu2rIPrIPL9N",
+      "prompt": "Cute cartoon creature cry for a kids' game (growl), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 800 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-grunt": {
+      "generationId": "vWL9L1HSPFyoWN9HAHFp",
+      "prompt": "Cute cartoon creature cry for a kids' game (grunt), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1760 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-hiss": {
+      "generationId": "Fzjh0jezmkDIO8TAacJd",
+      "prompt": "Cute cartoon creature cry for a kids' game (hiss), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 880 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-honk": {
+      "generationId": "M2SWO7Qr0lqzpfvVneeN",
+      "prompt": "Cute cartoon creature cry for a kids' game (honk), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 1740 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-hoot": {
+      "generationId": "M5OZ0MUhMc3nEeW1kXhC",
+      "prompt": "Cute cartoon creature cry for a kids' game (hoot), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 750 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-howl": {
+      "generationId": "EFa6Ws2yJ8zn2FO1xzjZ",
+      "prompt": "Cute cartoon creature cry for a kids' game (howl), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 910 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-neigh": {
+      "generationId": "q4jnOtDd1YiI8ZJuoQej",
+      "prompt": "Cute cartoon creature cry for a kids' game (neigh), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1720 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-roar": {
+      "generationId": "TrEcMQCrLSCLTSWBcXTE",
+      "prompt": "Cute cartoon creature cry for a kids' game (roar), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1770 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-robot": {
+      "generationId": "uQhsp6eqp70YeNqIoBmD",
+      "prompt": "Cute cartoon creature cry for a kids' game (robot), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 1400 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-rumble": {
+      "generationId": "Vb1jrkuvSznFy2GS4jSb",
+      "prompt": "Cute cartoon creature cry for a kids' game (rumble), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 830 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-screech": {
+      "generationId": "6ZE5fExWwJdP34zlcYwP",
+      "prompt": "Cute cartoon creature cry for a kids' game (screech), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 780 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-squeak": {
+      "generationId": "2BCbv5OpMYOYQpTXlZEI",
+      "prompt": "Cute cartoon creature cry for a kids' game (squeak), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 2; trimmed to 1600 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-trumpet": {
+      "generationId": "ltiNliliepQOUxe29P8y",
+      "prompt": "Cute cartoon creature cry for a kids' game (trumpet), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 910 ms with a short fade; loudness matched to befriend; measured only, not listened to"
+    },
+    "cry-whale": {
+      "generationId": "thKE1Zrtjj8QKxKf329B",
+      "prompt": "Cute cartoon creature cry for a kids' game (whale), short, about one second, single clean sound, no music, no background noise",
+      "note": "eleven_text_to_sound_v2, take 1; trimmed to 1740 ms with a short fade; loudness matched to befriend; measured only, not listened to"
     }
   },
   "music": {

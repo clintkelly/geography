@@ -1,4 +1,5 @@
 import type { Settings } from '../engine/game';
+import { CRY_FAMILIES, CRY_OF, type CryFamily } from '../content/cries';
 
 /** Where each file's audible part ends, measured from its waveform. The files run longer. */
 const LENGTH_MS = {
@@ -59,7 +60,7 @@ const TAKE: Record<string, [ms: number, gain: number]> = {
 
 export type SoundId = keyof typeof LENGTH_MS;
 /** Every file the game can play, takes included. */
-export const SOUND_FILES = (Object.keys(LENGTH_MS) as SoundId[]).flatMap((id) => Array.from({ length: TAKES[id] ?? 1 }, (_, i) => (i === 0 ? id : `${id}-${i + 1}`)));
+export const SOUND_FILES = [...(Object.keys(LENGTH_MS) as SoundId[]).flatMap((id) => Array.from({ length: TAKES[id] ?? 1 }, (_, i) => (i === 0 ? id : `${id}-${i + 1}`))), ...CRY_FAMILIES.map((f) => `cry-${f}`)];
 export const SOUND_IDS = Object.keys(LENGTH_MS) as SoundId[];
 
 let settings: Pick<Settings, 'muted' | 'volume'> = { muted: false, volume: 0.7 };
@@ -88,5 +89,41 @@ export function playSound(id: SoundId, force = false, rate = 1) {
     }, Math.max(length - FADE_MS, 50));
   } catch {
     // Nothing to do; the game carries on silently.
+  }
+}
+
+/** Where each cry's audible part ends, and how loud to play it. Measured from the files. */
+const CRY: Partial<Record<CryFamily, [ms: number, gain: number]>> = {
+  bark: [800, 0.65], bleat: [1010, 0.76], bubble: [1280, 0.81], buzz: [610, 0.66], chatter: [1640, 0.85], chirp: [840, 0.76], click: [910, 0.76], croak: [1750, 0.77], dolphin: [890, 0.73], ghost: [1730, 0.82], growl: [800, 0.75], grunt: [1760, 0.81], hiss: [880, 0.76], honk: [1740, 0.98], hoot: [750, 0.83], howl: [910, 0.77], neigh: [1720, 0.86], roar: [1770, 0.84], robot: [1400, 0.72], rumble: [830, 0.79], screech: [780, 0.73], squeak: [1600, 0.68], trumpet: [910, 0.77], whale: [1740, 0.84],
+};
+
+/** A creature's own pitch, from its id: the same every time, different from its neighbors. */
+export function cryPitch(speciesId: string, stage = 1): number {
+  let h = 0;
+  for (const ch of speciesId) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const own = 0.86 + ((h % 1000) / 1000) * 0.36;
+  // Bigger, older forms sound deeper.
+  return own * (stage >= 3 ? 0.8 : stage === 2 ? 0.9 : 1);
+}
+
+/** The creature calls out. Silent for a creature with no cry yet. */
+export function playCry(speciesId: string, stage = 1) {
+  const family = CRY_OF[speciesId];
+  if (!family || settings.muted) return;
+  try {
+    const [length, gain] = CRY[family] ?? [1500, 0.8];
+    const audio = new Audio(`${import.meta.env.BASE_URL}sfx/cry-${family}.mp3`);
+    const volume = settings.volume * gain;
+    const rate = cryPitch(speciesId, stage);
+    audio.volume = volume;
+    audio.playbackRate = rate;
+    audio.preservesPitch = false;
+    void audio.play().catch(() => undefined);
+    setTimeout(() => {
+      audio.volume = volume / 2;
+      setTimeout(() => audio.pause(), FADE_MS);
+    }, Math.max(length / rate - FADE_MS, 50));
+  } catch {
+    // A missing cry never interrupts play.
   }
 }

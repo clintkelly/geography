@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
-import { activeCompanion, currentSlotIndex, type Command, type Expedition, type SaveData } from '../engine/game';
+import { activeCompanion, currentSlotIndex, knownSpecies, type Command, type Expedition, type SaveData } from '../engine/game';
+import { NewCreatureReveal } from './NewCreature';
 import { TRAIL_EVENTS } from '../engine/events';
 import { artUrl, Fx, Sprite } from './art';
 import { companionView, mapFor, place, rewardLabel, species } from './content';
@@ -95,10 +96,12 @@ export function Route({ e, save, dispatch }: { e: Expedition; save: SaveData; di
 export function ExpeditionComplete({ e, save, dispatch }: { e: Expedition; save: SaveData; dispatch: (c: Command) => void }) {
   useKeys({ enter: () => dispatch({ type: 'claimReward' }) });
   const { reward } = e;
+  const firstOfKind = reward.kind === 'creature' && !knownSpecies(save).has(reward.speciesId);
   return (
-    <section className="panel complete">
+    <section className={`panel complete${firstOfKind ? ' complete-new' : ''}`}>
       <h1>Expedition complete!</h1>
-      {reward.kind === 'creature' && (
+      {reward.kind === 'creature' && firstOfKind && <NewCreatureReveal speciesId={reward.speciesId} found={knownSpecies(save).size + 1} />}
+      {reward.kind === 'creature' && !firstOfKind && (
         <div className="celebrate">
           {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="heart" className={`rise rise-${i}`} />)}
           <Sprite id={species(reward.speciesId).artId} size={192} className="hop-loop" />

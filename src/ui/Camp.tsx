@@ -15,7 +15,8 @@ import { eggName } from '../engine/eggs';
 import { lodgeById, lodgesOf, nextLodge, patchOf } from '../engine/lodges';
 import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
-import { playSound } from './sound';
+import { playCry, playSound } from './sound';
+import { isNight, NIGHT_FROM } from '../engine/night';
 import { Stable, Wild } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
 import { shinyLook, shinyName } from './shiny';
@@ -77,29 +78,54 @@ function LodgeTeaser({ save, onOpen }: { save: SaveData; onOpen: () => void }) {
   return (
     <button type="button" className="lodge-teaser" onClick={onOpen}>
       <span className="patch-row">{lodgesOf(PACK).map((l) => <PatchIcon key={l.id} lodge={l} earned={beaten.includes(l.id)} size={24} />)}</span>
-      <span>{next ? <>Next Ranger Lodge: <strong>{next.name}</strong> · {next.subjectName}</> : <>You beat every Ranger Lodge. Grand Ranger!</>}</span>
+      <span>{next ? <>Next Ranger Lodge: <strong>{next.name}</strong> · {next.subjectName}</> : <>You beat every Ranger Lodge! <strong>⭐ The Starfall League is open.</strong></>}</span>
     </button>
   );
 }
 
+/** How many of the creatures that live in a region (day and night, not bosses or rares) a child has found. */
+function regionFound(regionId: string, known: Set<string>): { found: number; total: number } {
+  const here = PACK.species.filter((o) => o.homes.includes(regionId) && o.homes.length <= 5 && !o.boss && !o.rare);
+  return { found: here.filter((o) => known.has(o.id)).length, total: here.length };
+}
+
 /** Creatures just added to the game that this child hasn't met, and where to find them. */
 function NewInTheWild({ known, onGo }: { known: Set<string>; onGo: (regionId: string) => void }) {
-  const fresh = PACK.species.filter((o) => o.fresh && !known.has(o.id));
+  const fresh = PACK.species.filter((o) => o.fresh && !o.night && !known.has(o.id));
   if (fresh.length === 0) return null;
-  const homes = [...new Set(fresh.map((o) => o.homes[0]!))];
+  // The regions with the most new creatures first, so the strip stays short.
+  const all = [...new Set(fresh.map((o) => o.homes[0]!))].sort((x, y) => fresh.filter((o) => o.homes[0] === y).length - fresh.filter((o) => o.homes[0] === x).length);
+  const homes = all.slice(0, 6);
   return (
     <div className="new-wild">
-      <strong>✨ New creatures in the wild!</strong>
+      <strong>✨ {fresh.length} new creatures in the wild!</strong>
       {homes.map((h) => {
         const here = fresh.filter((o) => o.homes[0] === h);
         const kungfu = here.some((o) => o.type === 'kungfu');
         return (
           <button key={h} type="button" className="new-wild-region" onClick={() => onGo(h)}>
-            <span className="new-wild-row">{here.map((o) => <Sprite key={o.id} id={o.artId} size={40} />)}</span>
+            <span className="new-wild-row">{here.slice(0, 4).map((o) => <Sprite key={o.id} id={o.artId} size={40} />)}{here.length > 4 && <small>+{here.length - 4}</small>}</span>
             <span>{kungfu ? <><strong>Kung Fu type</strong> in </> : ''}{region(h).label} →</span>
           </button>
         );
       })}
+      {all.length > homes.length && <small className="muted">…and in {all.length - homes.length} more regions</small>}
+    </div>
+  );
+}
+
+/** Night creatures: out now, or a hint of when they come out. */
+function NightCreatures({ night, known, onGo }: { night: boolean; known: Set<string>; onGo: (regionId: string) => void }) {
+  const all = PACK.species.filter((o) => o.night);
+  if (all.length === 0) return null;
+  const unmet = all.filter((o) => !known.has(o.id));
+  return (
+    <div className={`night-strip${night ? ' is-night' : ''}`}>
+      <strong>{night ? '🌙 Night has fallen! Night creatures are out.' : `🌙 Night creatures come out after ${NIGHT_FROM - 12} PM.`}</strong>
+      <span className="muted">{all.length - unmet.length} of {all.length} found</span>
+      {night
+        ? <span className="night-row">{unmet.map((o) => <button key={o.id} type="button" className="night-pick" aria-label={`Go find the night creature in ${region(o.homes[0]!).label}`} onClick={() => onGo(o.homes[0]!)}><Sprite id={o.artId} size={36} className="silhouette" /><small>{region(o.homes[0]!).label}</small></button>)}</span>
+        : <span className="night-row">{all.map((o) => <Sprite key={o.id} id={o.artId} size={32} className={known.has(o.id) ? '' : 'silhouette'} />)}</span>}
     </div>
   );
 }
@@ -133,6 +159,13 @@ export function newcomers(save: SaveData, speciesIds: readonly string[]): Compan
 
 export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData; dispatch: (c: Command) => void; onSwitch: () => void; onSettings: () => void }) {
   const s = save.lastSummary;
+  // Night creatures come and go with the player's clock.
+  useEffect(() => {
+    const check = () => { const night = isNight(Date.now()); if (night !== !!save.offersNight) dispatch({ type: 'setNight', night }); };
+    check();
+    const t = setInterval(check, 60_000);
+    return () => clearInterval(t);
+  }, [save.offersNight, dispatch]);
   // Only the newest of that kind is the one that just joined; an older shiny copy doesn't count.
   const newest = s?.reward.kind === 'creature' ? save.companions.filter((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId).at(-1) : undefined;
   const shinyJoined = !!newest?.shiny && newest.bondXp === 0;
@@ -223,10 +256,11 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <div className="row spread"><span><h1>Base Camp</h1><span className="collected">Creatures found: <strong>{known.size}</strong> of {PACK.species.length}</span><StudyRanks save={save} /></span><span className="row"><button type="button" onClick={() => setShowLodges(true)}>Ranger Lodges <Key k="G" /></button><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
         <LodgeTeaser save={save} onOpen={() => setShowLodges(true)} />
         <NewInTheWild known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
+        <NightCreatures night={!!save.offersNight} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">
-          {sightings.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => { if (o.reward.kind === 'creature' && species(o.reward.speciesId).minDifficulty) playSound('locked'); setOfferId(o.id); }} />)}
+          {sightings.map((o) => <Sighting key={o.id} offer={o} selected={o.id === offer.id} onPick={() => { if (o.reward.kind === 'creature' && species(o.reward.speciesId).minDifficulty) playSound('locked'); else if (o.reward.kind === 'creature') playCry(o.reward.speciesId); setOfferId(o.id); }} />)}
         </div>
         <div className="picker" role="group" aria-label="Region">
           <span className="muted">Where <Key k="R" /></span>
@@ -234,7 +268,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
             <div key={continent} className="continent-row">
               <span className="continent-name">{continent}</span>
               {regions.filter((r) => r.continent === continent).map((r) => (
-                <button key={r.id} type="button" aria-pressed={r.id === regionId} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label}</button>
+                <button key={r.id} type="button" aria-pressed={r.id === regionId} aria-label={r.label} title={`${regionFound(r.id, known).found} of ${regionFound(r.id, known).total} creatures found here`} onClick={(e) => { setRegionId(r.id); e.currentTarget.blur(); }}>{r.label} <small className={`region-count${regionFound(r.id, known).found === regionFound(r.id, known).total ? ' region-done' : ''}`}>{regionFound(r.id, known).found === regionFound(r.id, known).total ? '★' : `${regionFound(r.id, known).found}/${regionFound(r.id, known).total}`}</small></button>
               ))}
             </div>
           ))}

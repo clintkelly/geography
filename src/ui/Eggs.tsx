@@ -6,7 +6,7 @@ import { artUrl, Fx, Sprite } from './art';
 import { companionView, species } from './content';
 import { Key, useKeys } from './keys';
 import { shinyName } from './shiny';
-import { playSound } from './sound';
+import { playCry, playSound } from './sound';
 
 const HOW: Record<EggKind, string> = {
   math: 'Answer math questions to warm it',
@@ -91,7 +91,7 @@ export function HatchReveal({ save, dispatch }: { save: SaveData; dispatch: (c: 
   useEffect(() => {
     playSound('egg');
     const a = setTimeout(() => playSound('egg'), 600);
-    const b = setTimeout(() => { setOpen(true); playSound('hatch'); }, 1400);
+    const b = setTimeout(() => { setOpen(true); playSound('hatch'); if (c) setTimeout(() => playCry(c.speciesId), 800); }, 1400);
     return () => { clearTimeout(a); clearTimeout(b); };
   }, []);
   useEffect(() => {

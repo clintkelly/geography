@@ -128,6 +128,8 @@ export interface Species {
   legendary?: boolean;
   /** Just added to the game: shown first in sightings and on trails until befriended. */
   fresh?: boolean;
+  /** Comes out only at night, by the player's clock. */
+  night?: boolean;
   /** Branching evolution: at stage 2 it follows one of these, and takes its type, look and Special. */
   paths?: readonly WildPath[];
   /** A continent boss, offered once every region on its continent is stamped. */

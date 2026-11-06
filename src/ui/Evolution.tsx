@@ -5,7 +5,7 @@ import { TypeBadges } from './TypeGuide';
 import { Fx, Sprite } from './art';
 import { companionView } from './content';
 import { Key, useKeys } from './keys';
-import { playSound } from './sound';
+import { playCry, playSound } from './sound';
 
 /** Shown once per evolution, the next time the child is back at camp. */
 export function Evolution({ companion, dispatch }: { companion: Companion; dispatch: (c: Command) => void }) {
@@ -15,7 +15,7 @@ export function Evolution({ companion, dispatch }: { companion: Companion; dispa
   useEffect(() => {
     playSound('evolve');
     // The old form glows white, then a flash, then the new form.
-    const t = setTimeout(() => { setDone(true); playSound('levelup'); }, 2200);
+    const t = setTimeout(() => { setDone(true); playSound('levelup'); setTimeout(() => playCry(view.species.id, view.stage), 700); }, 2200);
     return () => clearTimeout(t);
   }, []);
   const stats = STAGES[view.stage];

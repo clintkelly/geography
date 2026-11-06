@@ -2,20 +2,22 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CreatureType, Species } from '../content/types';
 import { attackCharge, attackDamage, canUse, guardOf, enemyIntent, isBossTurn, MAX_CHARGE, strongSpecialDamage, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
-import { activeCompanion, canTame, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
+import { activeCompanion, canTame, knownSpecies, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
 import { artUrl, Fx, poseUrl, ShinyImg, useIdleUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
 import { companionView, foeForm, place, souvenir, species } from './content';
 import { lodgeOf } from './Lodges';
 import { Key, useKeys } from './keys';
 import { QuestionPanel } from './QuestionPanel';
-import { playSound } from './sound';
+import { playCry, playSound } from './sound';
 import { TrailBar } from './TrailBar';
 import { TypeBadges, TypeGuide } from './TypeGuide';
 import { TypeHit, TypeSpecial } from './TypeFx';
 import { beatsAll, losesToAll, matchup, TYPE_INFO, why } from '../engine/types';
 import type { ShinyLook } from './shiny';
 import { GuideCard } from './FieldGuide';
+import { Confetti } from './NewCreature';
+import { PACK } from '../content/pack';
 import { guideFor } from '../content/guide';
 
 /** How long a win stays on screen after the last hit, before the trail can carry on. */
@@ -92,6 +94,20 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   const joined = save.companions.at(-1);
   const newShiny = !!battle.befriended && joined?.speciesId === opponent.id && !!joined.shiny;
   const theirs = matchup(opponent, companion);
+  // Never seen this kind before? Remembered from the start of the battle, before it might join.
+  const [neverSeen] = useState(() => !knownSpecies(save).has(opponent.id));
+  const ownedNow = [...save.companions, ...(save.wild ?? [])].filter((c) => c.speciesId === opponent.id).length;
+  const firstOfKind = !!battle.befriended && neverSeen && ownedNow === 1;
+  useEffect(() => {
+    if (!neverSeen) return;
+    const t = setTimeout(() => playSound('card'), 400);
+    return () => clearTimeout(t);
+  }, [battle.id]); // eslint-disable-line
+  useEffect(() => {
+    if (!firstOfKind) return;
+    const t = setTimeout(() => playSound('levelup'), 300);
+    return () => clearTimeout(t);
+  }, [firstOfKind]);
   const [frame, setFrame] = useState<Frame | null>(null);
   const [reading, setReading] = useState(false);
   const answered = battle.result ? `${e.answered}` : '';
@@ -137,9 +153,17 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    // A shiny lead twinkles as it steps out.
+    // A shiny lead twinkles as it steps out, and every creature calls out as it steps in.
     if (view.shiny) playSound('card');
+    const t = setTimeout(() => playCry(companion.id, view.stage), 250);
+    return () => clearTimeout(t);
   }, [e.companionId]); // eslint-disable-line
+
+  useEffect(() => {
+    // The wild creature answers.
+    const t = setTimeout(() => playCry(opponent.id, slot?.opponentStage ?? 1), finalIntro ? 1300 : 700);
+    return () => clearTimeout(t);
+  }, [battle.id]); // eslint-disable-line
 
   useEffect(() => {
     for (const pose of POSES) {
@@ -214,6 +238,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     if (ev.shieldHit) pop(380, 'opponent', (battle.combat.shield ?? 0) > 0 ? 'Shield cracked!' : 'Shield broken!', 'shield');
     if (battle.result.brainBlast) pop(200, 'player', 'Brain Blast! +1 charge', 'brainblast');
     if (battle.result.eggLaid) timers.push(setTimeout(() => playSound('hatch'), 450));
+    const star = battle.result.prize;
+    if (star) timers.push(setTimeout(() => { playSound('levelup'); setTimeout(() => playCry(star), 700); }, (frames.at(-1)?.at ?? 0) + 400));
     if (correct && (e.streak ?? 0) >= 3) timers.push(setTimeout(() => playSound('combo'), 120));
     const end = frames.at(-1)?.at ?? 0;
     if (won) {
@@ -223,6 +249,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
     timers.push(setTimeout(() => {
       if (outcome === 'victory' && action !== 'befriend' && action !== 'tame') playSound('win');
       if (battle.befriended && action === 'tame') playSound('befriend');
+      if (battle.befriended) setTimeout(() => playCry(opponent.id), 900);
       if (newShiny) setTimeout(() => playSound('card'), 500);
       if (outcome === 'retreat') playSound('retreat');
     }, end));
@@ -332,13 +359,13 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       {firstMeet && <GuideCard speciesId={opponent.id} artId={foe.artId} first onClose={() => dispatch({ type: 'seeGuide', speciesId: opponent.id })} />}
       {reading && <GuideCard speciesId={opponent.id} artId={foe.artId} onClose={() => setReading(false)} />}
       <TrailBar e={e} save={save} />
-      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}`} style={{ backgroundImage: `url(${backdrop})` }}>
-        {storm && <TypeSpecial key={storm.id} type={storm.type} />}
+      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}${e.night ? ' night-scene' : ''}`} style={{ backgroundImage: e.night ? `linear-gradient(#0b1240b0, #1a1450a0), url(${backdrop})` : `url(${backdrop})` }}>
+        {storm && <TypeSpecial key={`storm-${storm.id}`} type={storm.type} />}
         {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (
           <div className={`vs-intro${rareFoe || bossFoe ? ' rare-intro' : ''}`} aria-hidden="true">
             {bossFoe && <em>Continent Boss!</em>}
-            {lodge && slot?.role !== 'junior' && <em>{slot?.role === 'ace' ? `${lodge.leader.name}'s ace!` : `Lodge Leader ${lodge.leader.name}!`}</em>}
+            {lodge && slot?.role !== 'junior' && <em>{slot?.role === 'ace' ? `${slot?.trainer ?? lodge.leader.name}'s ace!` : lodge.gauntlet ? `${slot?.trainer}!` : `Lodge Leader ${lodge.leader.name}!`}</em>}
             {rareFoe && <>{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}<em>Rare encounter!</em></>}
             {view.shiny
               ? <ShinyImg src={poseUrl(companion, 'idle', view.artId)} base={artUrl(view.artId)} look={view.shiny} className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
@@ -353,6 +380,17 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             <strong>Victory!</strong>
           </div>
         )}
+        {result?.prize && (
+          <div className="friend-banner star-banner" key={`star-${e.answered}`}>
+            {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}
+            <strong>⭐ {species(result.prize).displayName} joined you! ⭐</strong>
+          </div>
+        )}
+        {result?.pathPoints && (
+          <div className="path-pop" key={`path-${e.answered}`}>
+            {result.pathPoints.map((p) => <span key={p} className={`path-chip path-${p}`}>+1 {p === 'scholar' ? '📚 Scholar' : p === 'ranger' ? '🥋 Ranger' : '🚩 Banner'} path</span>)}
+          </div>
+        )}
         {result?.eggLaid && (
           <div className="egg-banner" key={`egg-${e.answered}`}>
             <img src={artUrl(`egg-${result.eggLaid}`)} alt="" width={72} height={72} className="sprite egg-wobble" />
@@ -360,9 +398,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           </div>
         )}
         {battle.befriended && (
-          <div className={`friend-banner${newShiny ? ' shiny-banner' : ''}`}>
+          <div className={`friend-banner${newShiny ? ' shiny-banner' : ''}${firstOfKind ? ' first-kind-banner' : ''}`}>
+            {firstOfKind && <Confetti />}
             {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id={newShiny ? 'spark' : 'heart'} className={`rise rise-${i}`} />)}
-            <strong>{newShiny ? '✦ SHINY new friend! ✦' : 'New friend!'}</strong>
+            <strong>{newShiny ? (firstOfKind ? '✦ SHINY NEW CREATURE! ✦' : '✦ SHINY new friend! ✦') : firstOfKind ? '✨ NEW CREATURE! ✨' : 'New friend!'}</strong>
+            {firstOfKind && <em className="first-kind-count">#{knownSpecies(save).size} of {PACK.species.length} found</em>}
           </div>
         )}
         <div className="scene-hud">
@@ -377,11 +417,11 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
           <div>
             <Hp label={lodge && slot?.trainer ? `${slot.trainer.replace('Junior Ranger ', '')}'s ${foeName}` : bossFoe ? `Boss: ${foeName}` : rareFoe ? `Rare: ${foeName}` : foeName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
-            <div className="scene-types"><TypeBadges species={opponent} /></div>
+            <div className="scene-types"><TypeBadges species={opponent} />{neverSeen && !battle.befriended && <span className="never-seen-tag">NEW!</span>}</div>
             {(combat.shield ?? 0) > 0 && <div className="brain-shield" title="Brain Shield: right answers crack it">🛡️ Brain Shield {Array.from({ length: combat.shield ?? 0 }, (_, i) => <span key={i} className="shield-pip" />)}</div>}
           </div>
         </div>
-        {(e.streak ?? 0) >= 3 && combat.outcome === 'active' && <div key={e.streak} className={`combo-counter${(e.streak ?? 0) >= 10 ? ' combo-huge' : (e.streak ?? 0) >= 5 ? ' combo-big' : ''}`} aria-live="polite">×{e.streak} COMBO!</div>}
+        {(e.streak ?? 0) >= 3 && combat.outcome === 'active' && <div key={`combo-${e.streak}`} className={`combo-counter${(e.streak ?? 0) >= 10 ? ' combo-huge' : (e.streak ?? 0) >= 5 ? ' combo-big' : ''}`} aria-live="polite">×{e.streak} COMBO!</div>}
         <div className="scene-floor">
           <Actor key={e.companionId} creature={companion} artId={view.artId} shiny={view.shiny} side="player" pose={frame?.player ?? 'idle'} motion={frame?.playerMotion} floats={floats} hits={hits} flash={flash} powered={isPowered(e.streak)} />
           {battle.phase !== 'feedback' && !battle.befriending && <div className="intent">{bossTurn ? 'BIG attack' : 'Next attack'}: {enemyIntent(combat)} damage</div>}
@@ -428,7 +468,8 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
             {bossTurn && <p className="boss-warning">{opponent.boss?.move}! {opponent.boss?.warning}</p>}
             {edge > 0 && <p className="matchup matchup-strong">Strong matchup! {TYPE_INFO[mine.mine].name} beats {TYPE_INFO[mine.theirs].name}: you hit 1 harder. {why(mine.mine, mine.theirs)}</p>}
             {edge < 0 && <p className="matchup matchup-weak">Weak matchup. {TYPE_INFO[mine.theirs].name} beats {TYPE_INFO[mine.mine].name}: you hit 1 softer.{helper ? ` Try switching to ${helper}!` : ` A ${names(losesToAll(opponent.type))} creature would be strong here.`}</p>}
-            {edge === 0 && <p className="muted">{companion.secondType || opponent.secondType ? 'Even matchup. With two types in the mix, the strong and weak sides cancel out.' : companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${names(beatsAll(companion.type))}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${names(beatsAll(companion.type))}, and ${TYPE_INFO[opponent.type].name} beats ${names(beatsAll(opponent.type))}.`}</p>}
+            {edge === 0 && matchup(companion, opponent).edge < 0 && <p className="muted">{TYPE_INFO[matchup(companion, opponent).theirs].name} beats {TYPE_INFO[matchup(companion, opponent).mine].name}, but a creature traveling alone never has a weak matchup, so this one is even. With a team, switching to a {names(losesToAll(opponent.type))} creature would make it strong!</p>}
+            {edge === 0 && matchup(companion, opponent).edge >= 0 && <p className="muted">{companion.secondType || opponent.secondType ? 'Even matchup. With two types in the mix, the strong and weak sides cancel out.' : companion.type === opponent.type ? `Even matchup: both are ${TYPE_INFO[companion.type].name}, which beats ${names(beatsAll(companion.type))}.` : `Even matchup. ${TYPE_INFO[companion.type].name} beats ${names(beatsAll(companion.type))}, and ${TYPE_INFO[opponent.type].name} beats ${names(beatsAll(opponent.type))}.`}</p>}
             {battle.befriending ? (
               <>
                 <p className="learn">{foeName} is worn out. Answer a question to befriend it!</p>

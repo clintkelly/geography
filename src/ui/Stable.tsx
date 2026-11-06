@@ -6,9 +6,10 @@ import { ALL_TYPES, TYPE_INFO, typesOf } from '../engine/types';
 import { artUrl, ShinyImg, Sprite } from './art';
 import { companionView } from './content';
 import { Key } from './keys';
-import { playSound } from './sound';
+import { playCry, playSound } from './sound';
 import { TypeBadge, TypeLine } from './TypeGuide';
 import { GuideCard, KindTag } from './FieldGuide';
+import { PathGuide } from './PathGuide';
 import { guideFor } from '../content/guide';
 import { NAMES, SHINY_COLORS, SWATCH, shinyLook, shinyName, type ShinyColor, type ShinyLook } from './shiny';
 
@@ -93,10 +94,12 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
   const [search, setSearch] = useState('');
   const [freeing, setFreeing] = useState<string | null>(null);
   const [guide, setGuide] = useState<Companion | null>(null);
+  const [pathGuide, setPathGuide] = useState<Companion | null>(null);
   const list = arrange(companions, sort, type, search);
   const present = new Set(companions.flatMap((c) => typesOf(companionView(c).species)));
   return (
     <div className="stable-wrap">
+      {pathGuide && <PathGuide c={pathGuide} onClose={() => setPathGuide(null)} />}
       {guide && <GuideCard speciesId={guide.speciesId} artId={companionView(guide).artId} onClose={() => setGuide(null)} />}
       {companions.length > 4 && (
         <div className="stable-tools" role="group" aria-label="Sort and filter">
@@ -118,7 +121,7 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
           const level = levelOf(c.bondXp);
           const body = (
             <>
-              <Sprite id={v.artId} size={96} className="idle-sprite" shiny={v.shiny} />
+              <span onClick={() => playCry(c.speciesId, v.stage)} title="Click to hear its call"><Sprite id={v.artId} size={96} className="idle-sprite" shiny={v.shiny} /></span>
               <strong>{v.name}</strong>{c.bondXp === 0 && !c.freedOnce && <span className="new-tag">NEW!</span>}{v.species.legendary && <span className="legend-tag">★ Legendary</span>}{v.species.egg && <span className="egg-tag">🥚 Egg-only</span>}{v.shiny && <span className="shiny-tag">Shiny: {shinyName(v.shiny)}</span>}
               {c.nickname && <span className="muted">{v.formName}</span>}
               <KindTag speciesId={c.speciesId} />
@@ -137,6 +140,7 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
                 : (
                   <div className={`stable-card${active ? ' active' : ''}`}>
                     {body}
+                    {v.species.paths && <button type="button" className="path-how" onClick={() => setPathGuide(c)}>🧭 {c.path || level >= STAGE_2_LEVEL ? 'Its path' : 'How to choose its evolution'}</button>}
                     {guideFor(c.speciesId) && <button type="button" className="link guide-link" onClick={() => setGuide(c)}>📖 Field Guide</button>}
                     {dispatch && v.shiny && <ShinyPicker c={c} look={v.shiny} artId={v.artId} dispatch={dispatch} />}
                     {dispatch && <input aria-label={`Nickname for ${v.formName}`} placeholder="Add a nickname" maxLength={20} value={c.nickname ?? ''} onChange={(e) => dispatch({ type: 'renameCompanion', instanceId: c.instanceId, nickname: e.target.value })} />}

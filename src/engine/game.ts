@@ -4,7 +4,7 @@ import { canUse, enemyStrikes, heal, MAX_CHARGE, resolveTurn, startCombat, type 
 import { ECONOMY, PREP_ITEMS, SNACK_HEAL, STURDY_HP, type PrepItem } from './economy';
 import { TRAIL_EVENTS, type TrailEvent } from './events';
 import { isDue, recordAnswer, type Learning } from './learning';
-import { companionSpecies, levelOf, MAX_TEAM, pathOf, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS, XP, xpFor, type Raised } from './progression';
+import { companionSpecies, levelOf, MAX_TEAM, PATH_ORDER, pathOf, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS, XP, xpFor, type Raised } from './progression';
 import { isAnswerFor, isCorrect, pickQuestion, presentQuestion } from './questions';
 import { DEFAULT_STUDY, isStudy, studyMatches, type StudySettings, type Subject } from './study';
 import { earnedBadges } from './badges';
@@ -62,6 +62,12 @@ export interface Slot {
   status: 'pending' | 'won';
   /** In a Lodge: who sent this creature out, how evolved it is, and whether it's the leader's or a junior ranger's. */
   trainer?: string;
+  /** The ranger's portrait, when it isn't the Lodge leader's. */
+  trainerArt?: string;
+  /** A League battle's strength on the Lodge scale. */
+  power?: number;
+  /** A star creature that joins the first time this battle is won. */
+  prize?: string;
   opponentStage?: Stage;
   role?: LodgeRole;
 }
@@ -80,6 +86,10 @@ export interface TurnResult {
   brainBlast?: boolean;
   /** This answer filled the Egg Meter and laid an egg. */
   eggLaid?: EggKind;
+  /** Wild Paths points the fighting creature just earned. */
+  pathPoints?: PathId[];
+  /** A League star creature that just joined, won from an Elite Ranger. */
+  prize?: string;
 }
 
 export interface Battle {
@@ -127,6 +137,8 @@ export interface Expedition {
   lodgeId?: string;
   /** Bronze the first time, then Silver and Gold rematches. Older Lodge trips are Bronze. */
   lodgeTier?: LodgeTier;
+  /** A night trail: night creatures are out. */
+  night?: boolean;
   /** The gate quiz this Lodge visit passed. */
   gateScore?: { right: number; of: number };
   rngState: number;
@@ -341,6 +353,10 @@ export interface SaveData {
   studyPoints?: { math: number; words: number };
   /** Right study answers toward the next egg. */
   eggMeter?: EggMeter;
+  /** Every Starfall League win: when, and the team that did it. */
+  hallOfFame?: { at: number; team: Companion[] }[];
+  /** Whether the current sightings were made at night, when night creatures are out. */
+  offersNight?: boolean;
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -363,6 +379,8 @@ export type Command =
   | { type: 'closeLodgeQuiz' }
   | { type: 'hatchEgg'; eggId: string }
   | { type: 'dismissHatch' }
+  /** The player's clock passed dusk or dawn: night creatures come and go from the sightings. */
+  | { type: 'setNight'; night: boolean }
   | { type: 'masteryAnswer'; optionId: string }
   | { type: 'masteryNext' }
   | { type: 'closeMastery' }
@@ -573,19 +591,21 @@ export function isRegionComplete(found: readonly string[], pack: Pack, regionId:
 }
 
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild' | 'offersNight'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
   const owned = knownSpecies(save);
   let nextId = save.nextId;
   const offers = pack.regions.flatMap((region) => {
     const mapDone = !!save.foundPlaces && isRegionComplete(save.foundPlaces, pack, region.id);
     const bossReady = bossUnlocked(save, pack, region.id);
-    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady)).map((s) => s.id));
+    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady) && (!s.night || !!save.offersNight)).map((s) => s.id));
     const isBoss = (id: string) => !!pack.species.find((s) => s.id === id)?.boss;
     const locked = (id: string) => !!pack.species.find((s) => s.id === id)?.minDifficulty;
     const isFresh = (id: string) => !!pack.species.find((s) => s.id === id)?.fresh;
     const rest = unowned.filter((id) => id !== pack.featuredSpeciesId && !isBoss(id));
+    // At night, the creatures that only come out after dark are sighted first.
+    const isNightOnly = (id: string) => !!pack.species.find((s) => s.id === id)?.night;
     // Brand-new creatures are sighted first, so a child meets them instead of missing them among the regulars.
-    const ordered = [...unowned.filter(isBoss), ...unowned.filter((id) => id === pack.featuredSpeciesId), ...rest.filter(isFresh), ...rest.filter((id) => !isFresh(id))];
+    const ordered = [...unowned.filter(isBoss), ...unowned.filter((id) => id === pack.featuredSpeciesId), ...rest.filter(isNightOnly), ...rest.filter((id) => isFresh(id) && !isNightOnly(id)), ...rest.filter((id) => !isFresh(id) && !isNightOnly(id))];
     // One sighting is for any trail; the other shows a locked creature when there is one, as a hint of what harder trails hold.
     const open = ordered.filter((id) => !locked(id));
     const picks = [...open.slice(0, 1), ...ordered.filter(locked).slice(0, 1)];
@@ -688,14 +708,17 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   // Math and Words trails are home to the study creatures instead of the region's own.
   const subject = studySubject(focus);
   const scholars = subject ? pack.species.filter((s) => s.subject === subject && metOn(s, difficulty)).map((s) => s.id) : [];
-  const regionals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss && !s.subject && metOn(s, difficulty)).map((s) => s.id);
+  const regionals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss && !s.subject && (!s.night || !!save.offersNight) && metOn(s, difficulty)).map((s) => s.id);
   const locals = scholars.length > 0 ? scholars : regionals;
   const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
   // A brand-new creature the child hasn't met is the first one they battle.
   const known = knownSpecies(save);
   const shuffled = rng.shuffle(locals.filter((id) => id !== target));
-  const isNewHere = (id: string) => !!pack.species.find((s) => s.id === id)?.fresh && !known.has(id);
-  const opponents = [...shuffled.filter(isNewHere), ...shuffled.filter((id) => !isNewHere(id))];
+  const isNewHere = (id: string) => { const s = pack.species.find((o) => o.id === id); return !!(s?.fresh || s?.night) && !known.has(id); };
+  // On a night trail, the region's night creatures always come out early, even ones already befriended,
+  // so a child can win another with Bold Befriend (another shot at a shiny).
+  const nightHere = (id: string) => !!save.offersNight && !!pack.species.find((o) => o.id === id)?.night;
+  const opponents = [...shuffled.filter(nightHere), ...shuffled.filter((id) => isNewHere(id) && !nightHere(id)), ...shuffled.filter((id) => !isNewHere(id) && !nightHere(id))];
   const events = rng.shuffle(TRAIL_EVENTS);
   let battles = 0;
   let eventCount = 0;
@@ -745,6 +768,7 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
     retreated: false,
     answered: 0,
     correct: 0,
+    ...(save.offersNight ? { night: true } : {}),
   };
   const expedition = setupSearch(blank, pack, rng, (slots[0] as Slot).locationId);
   return {
@@ -1036,7 +1060,6 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
   const learning = learn(save, e, b.question, correct, now);
   const cardUp = cardRaised(save, learning, b.question);
   const study = studied(save, b.question, correct, e.difficulty);
-  const result: TurnResult = { optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}), ...(brainBlast ? { brainBlast } : {}), ...(study.laid ? { eggLaid: study.laid } : {}) };
   // Winning a stop earns XP once, because a stop can only be won once.
   // The finisher earns full XP and the rest of the team half, so everyone grows.
   const winXp = xpFor(XP.battleWon, e.difficulty);
@@ -1057,13 +1080,20 @@ function answer(save: SaveData, pack: Pack, optionId: string, now: number): Save
     for (const p of bumps) raised[p] = (raised[p] ?? 0) + 1;
     return { ...c, raised };
   });
-  const companions = joined ? [...raisedXp, joining(`${save.profile.id}-companion-${save.nextId}`, slot.opponentId, e.difficulty, trailBoost(e))] : raisedXp;
+  const fighterBefore = paidXp.find((c) => c.instanceId === e.companionId);
+  const fighterAfter = raisedXp.find((c) => c.instanceId === e.companionId);
+  const pathPoints = PATH_ORDER.filter((p) => (fighterAfter?.raised?.[p] ?? 0) > (fighterBefore?.raised?.[p] ?? 0));
+  // Beating an Elite Ranger's last creature the first time wins their star creature.
+  const starPrize = huntWon && slot.prize && !knownSpecies(save).has(slot.prize) ? slot.prize : undefined;
+  const result: TurnResult = { ...(starPrize ? { prize: starPrize } : {}), optionId, correct, events, ...(cardId ? { cardId } : {}), ...(critical ? { critical } : {}), ...(cardUp ? { cardUp } : {}), ...(brainBlast ? { brainBlast } : {}), ...(study.laid ? { eggLaid: study.laid } : {}), ...(pathPoints.length > 0 ? { pathPoints } : {}) };
+  const withJoined = joined ? [...raisedXp, joining(`${save.profile.id}-companion-${save.nextId}`, slot.opponentId, e.difficulty, trailBoost(e))] : raisedXp;
+  const companions = starPrize ? [...withJoined, joining(`${save.profile.id}-companion-${save.nextId + (joined ? 1 : 0)}`, starPrize, e.difficulty)] : withJoined;
   return {
     ...save,
     ...study.patch,
     attempts: [...save.attempts, attempt].slice(-ATTEMPT_LIMIT),
     companions,
-    nextId: save.nextId + (joined ? 1 : 0),
+    nextId: save.nextId + (joined ? 1 : 0) + (starPrize ? 1 : 0),
     ...(joined && slot.rare ? { rareFound: true } : {}),
     bestStreak: Math.max(save.bestStreak ?? 0, streak),
     tamedAny: save.tamedAny || tamed,
@@ -1283,7 +1313,13 @@ function startLodge(save: SaveData, pack: Pack, lodgeId: string, tier: LodgeTier
   // Rematches bring more evolved creatures.
   const grown = (stage: number) => Math.min(3, stage + TIER_STAGE[tier]) as 1 | 2 | 3;
   const juniors: Slot[] = lodge.juniors.map((j) => ({ kind: 'regular', locationId: at.id, opponentId: j.speciesId, opponentStage: grown(j.stage), trainer: j.name, role: 'junior', status: 'pending' }));
-  const leader: Slot[] = lodge.team.map((f, i) => ({ kind: 'guardian', locationId: at.id, opponentId: f.speciesId, opponentStage: grown(f.stage), trainer: lodge.leader.name, role: i === lodge.team.length - 1 ? 'ace' : 'leader', status: 'pending' }));
+  // The League: each Elite Ranger's team in turn, then the Champion.
+  const elites: Slot[] = (lodge.gauntlet ?? []).flatMap((r) => r.team.map((f, i): Slot => {
+    const last = i === r.team.length - 1;
+    return { kind: 'guardian', locationId: at.id, opponentId: f.speciesId, opponentStage: f.stage, trainer: r.name, trainerArt: r.artId, power: r.power, role: last ? 'ace' : 'leader', status: 'pending', ...(last ? { prize: r.prizeSpeciesId } : {}) };
+  }));
+  const championPower = lodge.gauntlet ? Math.max(...lodge.gauntlet.map((r) => r.power)) + 1 : undefined;
+  const leader: Slot[] = [...elites, ...lodge.team.map((f, i): Slot => ({ kind: 'guardian', locationId: at.id, opponentId: f.speciesId, opponentStage: grown(f.stage), trainer: lodge.leader.name, ...(championPower ? { power: championPower, trainerArt: lodge.leader.artId } : {}), role: i === lodge.team.length - 1 ? 'ace' : 'leader', status: 'pending' }))];
   const owned = save.companions.map((c) => c.instanceId);
   const remembered = (save.lastTeamIds ?? []).filter((id) => owned.includes(id));
   const team = remembered.length > 0 ? remembered : [save.activeCompanionId];
@@ -1335,7 +1371,7 @@ export function lodgeBattleStats(pack: Pack, e: Expedition, slot: Slot, teamSize
   const lodge = lodgeById(pack, e.lodgeId);
   if (!lodge) return undefined;
   const role = slot.role ?? (slot.kind === 'guardian' ? 'leader' : 'junior');
-  return lodgeFoeStats(lodgePower(lodge.rank, e.lodgeTier), role, teamSize, lodge.shield && role !== 'junior' ? BRAIN_SHIELD : 0);
+  return lodgeFoeStats(slot.power ?? lodgePower(lodge.rank, e.lodgeTier), role, teamSize, lodge.shield && role !== 'junior' ? BRAIN_SHIELD : 0);
 }
 
 /** XP like a trail, and a new patch. Bronze brings the Lodge's prize creature, Silver a rare egg, and Gold battles lead to the Mastery Test. */
@@ -1374,6 +1410,7 @@ function claimLodge(save: SaveData, pack: Pack, e: Expedition, now: number): Sav
     medals: won.medals,
     bankedPoints: (save.bankedPoints ?? 0) + medalPoints(won.earned),
     lodgesBeaten: firstWin ? [...beaten, lodge.id] : beaten,
+    ...(lodge.gauntlet && !applied ? { hallOfFame: [...(save.hallOfFame ?? []), { at: now, team: companions.filter((c) => team.includes(c.instanceId)) }] } : {}),
     ...(newPatch === 'silver' ? { lodgeTiers: { ...save.lodgeTiers, [lodge.id]: 'silver' as const } } : {}),
     ...(testReady ? { lodgeTestReady: [...new Set([...(save.lodgeTestReady ?? []), lodge.id])] } : {}),
   };
@@ -1605,6 +1642,8 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
   switch (cmd.type) {
     case 'start':
       return e || save.masteryTest || save.lodgeQuiz ? save : startExpedition(save, pack, cmd);
+    case 'setNight':
+      return e || !!save.offersNight === cmd.night ? save : refreshOffers({ ...save, offersNight: cmd.night }, pack);
     case 'startLodge':
       return startLodge(save, pack, cmd.lodgeId, cmd.tier ?? 'bronze', now);
     case 'startLodgeTest':
