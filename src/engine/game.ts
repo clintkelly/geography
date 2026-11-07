@@ -6,7 +6,7 @@ import { TRAIL_EVENTS, type TrailEvent } from './events';
 import { isDue, recordAnswer, type Learning } from './learning';
 import { companionSpecies, levelOf, MAX_TEAM, PATH_ORDER, pathOf, speciesOf, STAGES, stageOf, teamScaling, TURF_BONUS, XP, xpFor, type Raised } from './progression';
 import { isAnswerFor, isCorrect, pickQuestion, presentQuestion } from './questions';
-import { DEFAULT_STUDY, isStudy, studyMatches, type StudySettings, type Subject } from './study';
+import { DEFAULT_STUDY, isStudy, studyMatches, subjectOf, type StudySettings, type Subject } from './study';
 import { earnedBadges } from './badges';
 import { cardLevelOf, type CardLevel } from './cards';
 import { matchup } from './types';
@@ -23,10 +23,10 @@ import { chainBoost, extendChain, masteredRegions, VISITOR_SHINY_BOOST, visitorF
 
 export const SCHEMA_VERSION = 7;
 /** What questions a trail asks. */
-export type Focus = 'all' | 'basics' | 'flags' | 'animals' | 'history' | 'math' | 'words';
-export const FOCUSES: readonly Focus[] = ['all', 'basics', 'flags', 'animals', 'history', 'math', 'words'];
+export type Focus = 'all' | 'basics' | 'flags' | 'animals' | 'history' | 'math' | 'words' | 'science';
+export const FOCUSES: readonly Focus[] = ['all', 'basics', 'flags', 'animals', 'history', 'math', 'words', 'science'];
 /** Math and Words trails swap geography questions for study ones, anywhere in the world. */
-export const studySubject = (focus: Focus | undefined): Subject | undefined => (focus === 'math' || focus === 'words' ? focus : undefined);
+export const studySubject = (focus: Focus | undefined): Subject | undefined => (focus === 'math' || focus === 'words' || focus === 'science' ? focus : undefined);
 const RECALL_CHANCE = 0.4;
 const REVIEW_CHANCE = 0.5;
 const ATTEMPT_LIMIT = 500;
@@ -361,7 +361,7 @@ export interface SaveData {
   /** The creature that just hatched, for its reveal. */
   hatched?: { instanceId: string; kind: EggKind } | null;
   /** Points from right math and vocabulary answers, for ranks. */
-  studyPoints?: { math: number; words: number };
+  studyPoints?: { math: number; words: number; science?: number };
   /** Right study answers toward the next egg. */
   eggMeter?: EggMeter;
   /** Every Starfall League win: when, and the team that did it. */
@@ -480,13 +480,13 @@ const isVisitorToday = (save: Pick<SaveData, 'visitorDay'>, pack: Pack, speciesI
 
 /** A right math or vocabulary answer warms an egg, fills the Egg Meter and earns rank points. */
 function studied(save: SaveData, q: Question, correct: boolean, difficulty: Difficulty): { patch: Partial<SaveData>; laid?: EggKind } {
-  const subject = correct ? (q.topic === 'math' ? 'math' : q.topic === 'word' ? 'words' : undefined) : undefined;
+  const subject = correct ? subjectOf(q) : undefined;
   if (!subject) return { patch: {} };
   const points = save.studyPoints ?? { math: 0, words: 0 };
   const warmed = feedEggs(save.eggs, q, correct, difficulty) ?? [];
   const filled = fillMeter(save.eggMeter, warmed, subject, `egg-${save.nextId}-${save.attempts.length}`);
   return {
-    patch: { eggs: filled.eggs, eggMeter: filled.meter, studyPoints: { ...points, [subject]: points[subject] + EGG_POINTS[q.difficulty ?? difficulty] } },
+    patch: { eggs: filled.eggs, eggMeter: filled.meter, studyPoints: { ...points, [subject]: (points[subject] ?? 0) + EGG_POINTS[q.difficulty ?? difficulty] } },
     ...(filled.laid ? { laid: filled.laid } : {}),
   };
 }
@@ -574,6 +574,11 @@ export function lodgePool(pack: Pack, subject: Exclude<LodgeSubject, 'all'>, dif
 
 function lodgeQuestions(pack: Pack, e: Expedition, settings: Settings, rng: Rng): Question[] {
   const lodge = lodgeById(pack, e.lodgeId);
+  // A kaiju battle asks about the region of the city it threatens.
+  if (lodge?.kaiju) {
+    const local = questionPool(pack, { ...e, focus: 'all' }, false, settings.study);
+    if (local.length > 0) return local;
+  }
   const subjects = lodge?.subject && lodge.subject !== 'all' ? [lodge.subject] : rng.shuffle(SUMMIT_SUBJECTS);
   for (const subject of subjects) {
     const pool = lodgePool(pack, subject, e.difficulty, settings);
@@ -821,7 +826,7 @@ function dealQuestion(save: SaveData, e: Expedition, slot: Slot, pack: Pack, now
   const regular = e.lodgeId ? lodgeQuestions(pack, e, save.settings, rng) : questionPool(pack, e, isBossSlot(slot, pack), save.settings.study);
   // On an ordinary trail, a parent can mix in some math or vocabulary. A Lodge sticks to its subject.
   const study = save.settings.study ?? DEFAULT_STUDY;
-  const mixable = studySubject(e.focus) || e.lodgeId ? [] : (['math', 'words'] as const).filter((sub) => study[sub]).map((sub) => studyPool(pack, sub, e.difficulty, study)).filter((p) => p.length > 0);
+  const mixable = studySubject(e.focus) || e.lodgeId ? [] : (['math', 'words', 'science'] as const).filter((sub) => study[sub]).map((sub) => studyPool(pack, sub, e.difficulty, study)).filter((p) => p.length > 0);
   const mixIn = mixable.length > 0 && rng.next() < study.mix;
   // A math or vocabulary skill the child keeps missing comes one difficulty easier for a while.
   const pool = easeStudy(mixIn ? (mixable[Math.floor(rng.next() * mixable.length)] as Question[]) : regular, pack, save.attempts);
@@ -1353,7 +1358,8 @@ function startLodge(save: SaveData, pack: Pack, lodgeId: string, tier: LodgeTier
   const rng = new Rng(save.rngState);
   // Any place with the Lodge's landscape gives the battle its backdrop and home-turf bonus.
   const open = pack.places.filter((p) => !save.settings.disabledRegions.includes(p.regionId));
-  const scenic = open.filter((p) => p.biome === lodge.biome);
+  // A kaiju heads for its city; a Lodge picks any place with its landscape.
+  const scenic = lodge.kaiju ? pack.places.filter((p) => p.id === lodge.kaiju!.placeId) : open.filter((p) => p.biome === lodge.biome);
   const at = (rng.shuffle(scenic.length > 0 ? scenic : open)[0] ?? pack.places[0]) as Place;
   // Rematches bring more evolved creatures.
   const grown = (stage: number) => Math.min(3, stage + TIER_STAGE[tier]) as 1 | 2 | 3;
@@ -1363,7 +1369,7 @@ function startLodge(save: SaveData, pack: Pack, lodgeId: string, tier: LodgeTier
     const last = i === r.team.length - 1;
     return { kind: 'guardian', locationId: at.id, opponentId: f.speciesId, opponentStage: f.stage, trainer: r.name, trainerArt: r.artId, power: r.power, role: last ? 'ace' : 'leader', status: 'pending', ...(last ? { prize: r.prizeSpeciesId } : {}) };
   }));
-  const championPower = lodge.gauntlet ? Math.max(...lodge.gauntlet.map((r) => r.power)) + 1 : undefined;
+  const championPower = lodge.gauntlet ? Math.max(...lodge.gauntlet.map((r) => r.power)) + 1 : lodge.kaiju?.power;
   const leader: Slot[] = [...elites, ...lodge.team.map((f, i): Slot => ({ kind: 'guardian', locationId: at.id, opponentId: f.speciesId, opponentStage: grown(f.stage), trainer: lodge.leader.name, ...(championPower ? { power: championPower, trainerArt: lodge.leader.artId } : {}), role: i === lodge.team.length - 1 ? 'ace' : 'leader', status: 'pending' }))];
   const owned = save.companions.map((c) => c.instanceId);
   const remembered = (save.lastTeamIds ?? []).filter((id) => owned.includes(id));

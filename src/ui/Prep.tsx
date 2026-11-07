@@ -35,7 +35,8 @@ export function Prep({ e, save, dispatch }: { e: Expedition; save: SaveData; dis
         <h1>{lodge ? `Get ready for ${lodge.name}` : 'Prepare for the trail'}</h1>
         {e.gateScore && <p className="gate-pass">✓ You passed the gate quiz: {e.gateScore.right} of {e.gateScore.of} right!</p>}
         {lodge?.gauntlet && <p>The Starfall League: four Elite Rangers (<TypeBadge type="flame" /> <TypeBadge type="tide" /> <TypeBadge type="frost" /> <TypeBadge type="gale" />) and then {lodge.leader.name}. Questions about <strong>everything</strong>. Bring a strong, mixed team of level {lodge.recommendedLevel}+ creatures!</p>}
-        {lodge && !lodge.gauntlet && <p>{lodge.leader.name} uses <TypeBadge type={lodge.type} /> creatures, and every question is about <strong>{lodge.subjectName.toLowerCase()}</strong>. Bring creatures that are strong against {TYPE_INFO[lodge.type].name}! Best with a level {lodge.recommendedLevel}+ creature.</p>}
+        {lodge?.kaiju && <p className="boss-warning">⚠ Kaiju Alert! {lodge.leader.name} is heading for {lodge.kaiju.city}. You'll fight it three times with your whole team, and every question is about places in that part of the world. It is <TypeBadge type={lodge.type} />, so bring creatures that are strong against {TYPE_INFO[lodge.type].name}!</p>}
+        {lodge && !lodge.gauntlet && !lodge.kaiju && <p>{lodge.leader.name} uses <TypeBadge type={lodge.type} /> creatures, and every question is about <strong>{lodge.subjectName.toLowerCase()}</strong>. Bring creatures that are strong against {TYPE_INFO[lodge.type].name}! Best with a level {lodge.recommendedLevel}+ creature.</p>}
         <p>You have <strong className="points" title="Your money for this trip: spend it on the Prep Shop and on clues, or keep it. Leftover points become XP.">{e.points} Trail Points</strong> to spend. {lodge ? 'Buy something in the Prep Shop below, or keep them: every point left at the end becomes XP for your lead creature.' : 'Buy something in the Prep Shop below, save some for clues while you search, or keep them: every point left at the end becomes XP for your lead creature.'}</p>
         <PointsGuide open={save.completedExpeditions < 3} />
       </section>
@@ -63,7 +64,7 @@ export function Prep({ e, save, dispatch }: { e: Expedition; save: SaveData; dis
         {!lodge && <p className="muted">On the trail: extra clue {ECONOMY.extraClue} points, narrow the search {ECONOMY.narrowSearch} points. A wrong guess costs {ECONOMY.wrongGuessCost} point. The atlas is always free.</p>}
       </section>
       <div className="row">
-        <button type="button" className="primary" onClick={() => dispatch({ type: 'depart' })}>{lodge ? (lodge.gauntlet ? 'Enter the League' : 'Enter the Lodge') : 'Set off'} <Key k="Enter" /></button>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'depart' })}>{lodge ? (lodge.kaiju ? 'Defend the city!' : lodge.gauntlet ? 'Enter the League' : 'Enter the Lodge') : 'Set off'} <Key k="Enter" /></button>
         <button type="button" className="link" onClick={() => dispatch({ type: 'abandon' })}>Back to camp</button>
       </div>
     </div>

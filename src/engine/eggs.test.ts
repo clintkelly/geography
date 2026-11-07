@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
 import type { Question } from '../content/types';
 import { EGG_METER, eggPool, eggReady, feedEggs, fillMeter, hatchling, layEgg, MAX_EGGS, studyRank } from './eggs';
-import { blankMapSearch, easeStudy, isExpeditionComplete, newSave, reduce, rollShiny, strugglingObjectives, STUDY_SHINY_BOOST, type Command, type SaveData } from './game';
+import { blankMapSearch, easeStudy, isExpeditionComplete, newSave, reduce, rollShiny, strugglingObjectives, STUDY_SHINY_BOOST, studyPool, type Command, type SaveData } from './game';
 import { Rng } from './rng';
 
 const NOW = 1_800_000_000_000;
@@ -169,5 +169,34 @@ describe('switching after a faint', () => {
     expect(after.expedition!.companionId).toBe('p1-b');
     expect(after.expedition!.battle!.mustSwitch).toBeUndefined();
     expect(after.expedition!.battle!.tameHits).toBe(1);
+  });
+});
+
+describe('science', () => {
+  it('a Science trail asks science questions, fills the Science meter and earns science points', () => {
+    let s = newSave(PACK, 7, 'p1');
+    const offer = s.offers.find((o) => o.regionId === 'us-west')!;
+    s = step(step(s, { type: 'start', offerId: offer.id, regionId: 'us-west', difficulty: 'scout', trail: 'short', focus: 'science' }), { type: 'depart' });
+    const topics = new Set<string>();
+    for (let i = 0; i < 400 && !isExpeditionComplete(s.expedition!); i++) {
+      const e = s.expedition!;
+      if (e.discovery === 'searching') s = step(s, { type: 'guess', locationId: e.targetId });
+      else if (e.event) s = e.event.result ? step(s, { type: 'continue' }) : step(s, { type: 'answer', optionId: e.event.question.acceptedId });
+      else if (e.battle) {
+        const b = e.battle;
+        if (b.phase === 'choose') s = step(s, { type: 'chooseAction', action: b.befriending ? 'befriend' : 'attack' });
+        else if (b.phase === 'question') { topics.add(b.question.topic ?? ''); s = step(s, { type: 'answer', optionId: b.question.acceptedId }); }
+        else s = step(s, { type: 'continue' });
+      } else s = step(s, { type: 'enterEncounter' });
+    }
+    expect([...topics]).toEqual(['science']);
+    expect(s.studyPoints!.science).toBeGreaterThan(0);
+    expect((s.eggMeter!.science ?? 0) > 0 || (s.eggs ?? []).some((e) => e.kind === 'science' || e.kind === 'rare')).toBe(true);
+  });
+
+  it('parents can pick which chapters to practice', () => {
+    const ch1 = studyPool(PACK, 'science', 'scout', { mix: 0, math: false, words: false, science: true, scienceUnits: ['ch-01'] });
+    expect(ch1.length).toBeGreaterThan(3);
+    expect(ch1.every((q) => q.objectiveId.startsWith('science-ch-01-'))).toBe(true);
   });
 });

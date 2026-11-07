@@ -27,7 +27,7 @@ expect_(TRAIL_EVENTS.map((e) => `event-${e.id}`), 128, 128, true);
 expect_((PACK.lodges ?? []).map((l) => l.leader.artId), 128, 128, true);
 expect_((PACK.lodges ?? []).flatMap((l) => (l.gauntlet ?? []).map((r) => r.artId)), 128, 128, true);
 expect_((PACK.lodges ?? []).map((l) => l.patchArtId), 32, 32, true);
-expect_(['math', 'words', 'rare'].map((k) => `egg-${k}`), 64, 64, true);
+expect_(['math', 'words', 'science', 'rare'].map((k) => `egg-${k}`), 64, 64, true);
 expect_(ANIMATED_ART.flatMap(idleFrames), 128, 128, true);
 expect_(PACK.species.flatMap((s) => (s.paths ?? []).flatMap((p) => p.evolutions.map((e) => e.artId))), 128, 128, true);
 

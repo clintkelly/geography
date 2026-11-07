@@ -1,0 +1,223 @@
+{
+  "id": "ch-07",
+  "title": "Periodic Table, Atomic Structure, and Compounds",
+  "order": 7,
+  "questions": [
+    {
+      "id": "element-definition",
+      "concept": "elements",
+      "difficulty": "scout",
+      "prompt": "What is an element?",
+      "answer": "A substance made of only one kind of atom",
+      "wrong": ["A mix of many kinds of atoms", "A type of chemical bond", "A particle with no charge"],
+      "explain": "Each element, like gold or oxygen, is made of just one type of atom."
+    },
+    {
+      "id": "periodic-table-definition",
+      "concept": "periodic-table",
+      "difficulty": "scout",
+      "prompt": "What is the periodic table?",
+      "answer": "A chart that organizes all the elements",
+      "wrong": ["A list of every living thing", "A schedule for lab periods", "A map of the solar system"],
+      "explain": "The periodic table puts every known element in a box, arranged so patterns are easy to see."
+    },
+    {
+      "id": "symbol-format",
+      "concept": "chemical-symbols",
+      "difficulty": "scout",
+      "prompt": "Which of these is written the correct way for a chemical symbol?",
+      "answer": "Zn",
+      "wrong": ["ZN", "zn", "zN"],
+      "explain": "A chemical symbol has one or two letters. The first is a capital and the second is lowercase."
+    },
+    {
+      "id": "oxygen-symbol",
+      "concept": "chemical-symbols",
+      "difficulty": "scout",
+      "prompt": "What is the chemical symbol for oxygen?",
+      "answer": "O",
+      "wrong": ["Ox", "Om", "Oe"],
+      "explain": "Oxygen's symbol is just the capital letter O."
+    },
+    {
+      "id": "period-row",
+      "concept": "periodic-table",
+      "difficulty": "scout",
+      "prompt": "What is a horizontal row on the periodic table called?",
+      "answer": "A period",
+      "wrong": ["A group", "A family", "An isotope"],
+      "explain": "Rows going across are periods. Columns going down are groups, also called families."
+    },
+    {
+      "id": "group-column",
+      "concept": "periodic-table",
+      "difficulty": "scout",
+      "prompt": "What is a vertical column on the periodic table called?",
+      "answer": "A group (or family)",
+      "wrong": ["A period", "A molecule", "An energy level"],
+      "explain": "Columns going down are groups or families, and their elements act in similar ways."
+    },
+    {
+      "id": "element-count",
+      "concept": "elements",
+      "difficulty": "scout",
+      "prompt": "About how many elements are known today?",
+      "answer": "About 118",
+      "wrong": ["About 12", "About 50", "About 1,000"],
+      "explain": "Scientists know of about 118 elements. Everything around us is built from them."
+    },
+    {
+      "id": "atomic-number-meaning",
+      "concept": "atomic-number",
+      "difficulty": "ranger",
+      "prompt": "What does an element's atomic number tell you?",
+      "answer": "How many protons its atoms have",
+      "wrong": ["How many neutrons its atoms have", "How many grams it weighs", "The year it was discovered"],
+      "explain": "Every element has its own number of protons. That number is its atomic number."
+    },
+    {
+      "id": "group-similar",
+      "concept": "periodic-table",
+      "difficulty": "ranger",
+      "prompt": "What do elements in the same group (column) usually have in common?",
+      "answer": "Similar chemical and physical properties",
+      "wrong": ["The same atomic mass", "The same number of protons", "They are all gases"],
+      "explain": "Elements in a group behave alike, which is why the table is so useful for predicting properties."
+    },
+    {
+      "id": "table-order",
+      "concept": "periodic-table",
+      "difficulty": "ranger",
+      "prompt": "In what order are the elements arranged on the periodic table?",
+      "answer": "By increasing atomic number",
+      "wrong": ["Alphabetically by name", "By the year they were found", "By their color"],
+      "explain": "Hydrogen is 1, helium is 2, and so on. Each step adds one proton."
+    },
+    {
+      "id": "isotope-definition",
+      "concept": "isotopes",
+      "difficulty": "ranger",
+      "prompt": "What are isotopes?",
+      "answer": "Atoms of one element with different numbers of neutrons",
+      "wrong": ["Atoms of one element with different numbers of protons", "Atoms of different elements stuck together", "Atoms that have lost all their electrons"],
+      "explain": "Isotopes have the same number of protons, so they're the same element, but their neutrons differ."
+    },
+    {
+      "id": "ion-definition",
+      "concept": "ions",
+      "difficulty": "ranger",
+      "prompt": "What is an ion?",
+      "answer": "An atom that has an electric charge",
+      "wrong": ["An atom with no neutrons", "A row in the periodic table", "A molecule made of two atoms"],
+      "explain": "An ion has gained or lost electrons, so its protons and electrons no longer balance."
+    },
+    {
+      "id": "molecule-definition",
+      "concept": "molecules-compounds",
+      "difficulty": "ranger",
+      "prompt": "What forms when two or more atoms join together?",
+      "answer": "A molecule",
+      "wrong": ["An ion", "An isotope", "A proton"],
+      "explain": "A molecule is a group of atoms bonded together, like water or oxygen gas."
+    },
+    {
+      "id": "valence-electrons",
+      "concept": "chemical-bonds",
+      "difficulty": "ranger",
+      "prompt": "Which electrons take part in forming chemical bonds?",
+      "answer": "Valence electrons in the outermost shell",
+      "wrong": ["Electrons closest to the nucleus", "Electrons inside the nucleus", "Electrons that have stopped moving"],
+      "explain": "The outer electrons are the ones that meet other atoms, so they form the bonds."
+    },
+    {
+      "id": "why-bond",
+      "concept": "chemical-bonds",
+      "difficulty": "ranger",
+      "prompt": "Why do atoms form chemical bonds?",
+      "answer": "To become more stable",
+      "wrong": ["To gain more protons", "To become a new element", "To stop their electrons moving"],
+      "explain": "By sharing, giving or taking electrons, atoms reach a more stable arrangement."
+    },
+    {
+      "id": "neutral-electrons",
+      "concept": "atomic-number",
+      "difficulty": "expert",
+      "prompt": "A neutral atom has 11 protons. How many electrons does it have?",
+      "answer": "11",
+      "wrong": ["0", "22", "12"],
+      "explain": "In a neutral atom, the positive protons and negative electrons balance, so they are equal."
+    },
+    {
+      "id": "neutrons-carbon",
+      "concept": "neutrons",
+      "difficulty": "expert",
+      "prompt": "An atom has an atomic number of 6 and an atomic mass of 14. How many neutrons does it have?",
+      "answer": "8",
+      "wrong": ["6", "14", "20"],
+      "explain": "Neutrons = atomic mass - atomic number, so 14 - 6 = 8."
+    },
+    {
+      "id": "neutrons-fluorine",
+      "concept": "neutrons",
+      "difficulty": "expert",
+      "prompt": "Fluorine has atomic number 9 and an atomic mass of about 19. How many neutrons does it have?",
+      "answer": "10",
+      "wrong": ["9", "19", "28"],
+      "explain": "Subtract the atomic number from the rounded atomic mass: 19 - 9 = 10 neutrons."
+    },
+    {
+      "id": "gain-electron",
+      "concept": "ions",
+      "difficulty": "expert",
+      "prompt": "A neutral atom gains one extra electron. What is its charge now?",
+      "answer": "Negative",
+      "wrong": ["Positive", "Still neutral", "It becomes a new element"],
+      "explain": "Electrons are negative, so having more electrons than protons gives the atom a negative charge."
+    },
+    {
+      "id": "formula-glucose",
+      "concept": "chemical-formulas",
+      "difficulty": "expert",
+      "prompt": "The formula for a sugar is C6H12O6. How many oxygen atoms are in one molecule?",
+      "answer": "6",
+      "wrong": ["12", "24", "1"],
+      "explain": "The small number after each symbol tells how many of that atom there are. O6 means 6 oxygen atoms."
+    },
+    {
+      "id": "formula-co2",
+      "concept": "chemical-formulas",
+      "difficulty": "expert",
+      "prompt": "How many atoms in total are in one molecule of carbon dioxide, CO2?",
+      "answer": "3",
+      "wrong": ["2", "1", "4"],
+      "explain": "CO2 has 1 carbon atom and 2 oxygen atoms, so 3 atoms in all."
+    },
+    {
+      "id": "oxygen-shells",
+      "concept": "energy-levels",
+      "difficulty": "expert",
+      "prompt": "Oxygen has 8 electrons, and the first energy level holds only 2. How many are in its second level?",
+      "answer": "6",
+      "wrong": ["8", "2", "4"],
+      "explain": "2 electrons fill the first level, leaving 8 - 2 = 6 in the second level."
+    },
+    {
+      "id": "compound-properties",
+      "concept": "molecules-compounds",
+      "difficulty": "expert",
+      "prompt": "Water is made of hydrogen and oxygen, which are both gases. How do a compound's properties compare to its elements'?",
+      "answer": "They are often very different",
+      "wrong": ["They are exactly the same", "They are always an average of the two", "Compounds have no properties"],
+      "explain": "When elements bond into a compound, they make a new substance with its own properties."
+    },
+    {
+      "id": "same-protons",
+      "concept": "isotopes",
+      "difficulty": "expert",
+      "prompt": "Two atoms both have 6 protons, but one has 6 neutrons and the other has 8. What are they?",
+      "answer": "Isotopes of the same element",
+      "wrong": ["Two different elements", "Ions of two elements", "A two-atom molecule"],
+      "explain": "Same number of protons means same element. A different number of neutrons makes them isotopes."
+    }
+  ]
+}

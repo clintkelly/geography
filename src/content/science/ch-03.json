@@ -1,0 +1,267 @@
+{
+  "id": "ch-03",
+  "title": "Lab Reports and Evaluating Results",
+  "order": 3,
+  "questions": [
+    {
+      "id": "lab-report-sharing",
+      "concept": "lab-report",
+      "difficulty": "scout",
+      "prompt": "What is the most common way scientists share the results of an experiment?",
+      "answer": "Writing a lab report",
+      "wrong": [
+        "Keeping the results secret",
+        "Drawing a comic strip",
+        "Telling only one friend"
+      ],
+      "explain": "A lab report explains what was done and found, so others can read it and learn from it."
+    },
+    {
+      "id": "title-section",
+      "concept": "lab-report",
+      "difficulty": "scout",
+      "prompt": "What does the title of a lab report tell the reader?",
+      "answer": "What the investigation was about",
+      "wrong": [
+        "Every measurement that was taken",
+        "The full list of materials",
+        "Every mistake that was made"
+      ],
+      "explain": "The title is a short label that tells readers the topic right away."
+    },
+    {
+      "id": "materials-section",
+      "concept": "lab-report",
+      "difficulty": "scout",
+      "prompt": "Which part of a lab report lists the equipment needed?",
+      "answer": "Materials and equipment",
+      "wrong": [
+        "Conclusion and questions",
+        "Hypothesis",
+        "Purpose"
+      ],
+      "explain": "The materials section lists everything you need, and can include a sketch of the setup."
+    },
+    {
+      "id": "accuracy-definition",
+      "concept": "accuracy-precision",
+      "difficulty": "scout",
+      "prompt": "What does accuracy mean for a measurement?",
+      "answer": "How close it is to the true value",
+      "wrong": [
+        "How many times you measured",
+        "How quickly you measured",
+        "How neat your handwriting is"
+      ],
+      "explain": "An accurate measurement is close to the real, correct value."
+    },
+    {
+      "id": "precision-definition",
+      "concept": "accuracy-precision",
+      "difficulty": "scout",
+      "prompt": "What does precision mean for measurements?",
+      "answer": "How consistent and exact they are",
+      "wrong": [
+        "How large the numbers are",
+        "How quickly you finished",
+        "How colorful the graph is"
+      ],
+      "explain": "Precise measurements are exact and come out nearly the same each time you repeat them."
+    },
+    {
+      "id": "estimation-definition",
+      "concept": "estimation-rounding",
+      "difficulty": "scout",
+      "prompt": "What is an estimation?",
+      "answer": "A rough guess based on reasoning and observing",
+      "wrong": [
+        "An exact measurement",
+        "An answer copied from a friend",
+        "A number picked at random"
+      ],
+      "explain": "When an exact measurement isn't possible, scientists use reasoning to make a close guess."
+    },
+    {
+      "id": "unbiased-definition",
+      "concept": "bias",
+      "difficulty": "scout",
+      "prompt": "What does it mean for a scientist to be unbiased?",
+      "answer": "Having no special interest in the outcome",
+      "wrong": [
+        "Wanting one result to win",
+        "Being paid to get a certain answer",
+        "Only testing ideas they like"
+      ],
+      "explain": "An unbiased scientist doesn't gain anything from one result over another, so the test stays fair."
+    },
+    {
+      "id": "why-share",
+      "concept": "lab-report",
+      "difficulty": "ranger",
+      "prompt": "Why is it important for scientists to share their results?",
+      "answer": "So others can check and build on the work",
+      "wrong": [
+        "So nobody else needs to do science",
+        "So they can keep their methods secret",
+        "So their results can never change"
+      ],
+      "explain": "Sharing lets other scientists review, repeat and add to the work. That's how science grows."
+    },
+    {
+      "id": "purpose-section",
+      "concept": "lab-report",
+      "difficulty": "ranger",
+      "prompt": "Which part of a lab report states the question you are trying to answer?",
+      "answer": "Purpose",
+      "wrong": [
+        "Data",
+        "Materials",
+        "Procedure"
+      ],
+      "explain": "The purpose explains why you did the experiment and what question it tries to answer."
+    },
+    {
+      "id": "conclusion-contents",
+      "concept": "lab-report",
+      "difficulty": "ranger",
+      "prompt": "Which of these belongs in the conclusion of a lab report?",
+      "answer": "Whether the results supported the hypothesis",
+      "wrong": [
+        "A list of the beakers used",
+        "The step-by-step directions",
+        "Definitions of key words"
+      ],
+      "explain": "A conclusion sums up what you learned, any errors, and new questions to explore."
+    },
+    {
+      "id": "data-section",
+      "concept": "lab-report",
+      "difficulty": "ranger",
+      "prompt": "How should data be shown in a lab report?",
+      "answer": "Organized in tables, graphs or drawings",
+      "wrong": [
+        "Scattered in random notes",
+        "Written later from memory",
+        "Left out to save space"
+      ],
+      "explain": "Organized data with labels and titles is much easier for readers to understand."
+    },
+    {
+      "id": "record-during",
+      "concept": "evaluating-results",
+      "difficulty": "ranger",
+      "prompt": "When should you write down your observations?",
+      "answer": "During the experiment",
+      "wrong": [
+        "A week after it ends",
+        "Only if they match your hypothesis",
+        "Before the experiment begins"
+      ],
+      "explain": "It's easy to forget details, so recording right away keeps your data accurate."
+    },
+    {
+      "id": "round-tenth",
+      "concept": "estimation-rounding",
+      "difficulty": "ranger",
+      "prompt": "Round 4.37 to the nearest tenth.",
+      "answer": "4.4",
+      "wrong": [
+        "4.3",
+        "4.0",
+        "5.0"
+      ],
+      "explain": "Look at the hundredths digit. It is 7, which is 5 or more, so the tenths digit rounds up to 4.4."
+    },
+    {
+      "id": "precise-not-accurate",
+      "concept": "accuracy-precision",
+      "difficulty": "expert",
+      "prompt": "A rock's true mass is 50 g. You measure it three times and get 42 g, 42 g and 42 g. These measurements are...",
+      "answer": "Precise but not accurate",
+      "wrong": [
+        "Accurate but not precise",
+        "Both accurate and precise",
+        "Neither accurate nor precise"
+      ],
+      "explain": "They all match each other (precise), but they are far from the true 50 g (not accurate)."
+    },
+    {
+      "id": "accurate-and-precise",
+      "concept": "accuracy-precision",
+      "difficulty": "expert",
+      "prompt": "A pencil is truly 10.0 cm long. Which set of measurements is both accurate and precise?",
+      "answer": "10.0 cm, 10.1 cm, 9.9 cm",
+      "wrong": [
+        "8.0 cm, 8.1 cm, 7.9 cm",
+        "6.0 cm, 10.0 cm, 14.0 cm",
+        "12.0 cm, 15.0 cm, 9.0 cm"
+      ],
+      "explain": "These are close to each other and close to the true length. The 8 cm set is precise but not accurate."
+    },
+    {
+      "id": "round-five",
+      "concept": "estimation-rounding",
+      "difficulty": "expert",
+      "prompt": "Round 6.25 to the nearest tenth.",
+      "answer": "6.3",
+      "wrong": [
+        "6.2",
+        "6.0",
+        "7.0"
+      ],
+      "explain": "The hundredths digit is 5. When it is 5 or more, you round up, so 6.25 becomes 6.3."
+    },
+    {
+      "id": "bias-company",
+      "concept": "bias",
+      "difficulty": "expert",
+      "prompt": "A candy company pays for a study that finds its candy is healthy. Why should you be careful about the result?",
+      "answer": "The company may be biased toward a good result",
+      "wrong": [
+        "Candy can't be studied by science",
+        "The study used too many people",
+        "Companies never make mistakes"
+      ],
+      "explain": "The company gains money if the result looks good, so it has a special interest in the outcome."
+    },
+    {
+      "id": "evaluate-repeatable",
+      "concept": "evaluating-results",
+      "difficulty": "expert",
+      "prompt": "Which question best helps you judge another scientist's results?",
+      "answer": "Can other people repeat the results?",
+      "wrong": [
+        "Is the scientist famous?",
+        "Is the report very long?",
+        "Does the graph use many colors?"
+      ],
+      "explain": "Results that others can repeat are much more trustworthy than results that only happened once."
+    },
+    {
+      "id": "estimation-when",
+      "concept": "estimation-rounding",
+      "difficulty": "expert",
+      "prompt": "When would a scientist most likely estimate instead of measuring exactly?",
+      "answer": "When the right tool isn't available",
+      "wrong": [
+        "When they have a perfect ruler",
+        "When the object is easy to measure",
+        "When they want a random answer"
+      ],
+      "explain": "Estimation is useful when an exact measurement isn't possible or practical."
+    },
+    {
+      "id": "other-explanations",
+      "concept": "evaluating-results",
+      "difficulty": "expert",
+      "prompt": "Kids who eat breakfast get better grades in a study. What is a good scientific question to ask about this?",
+      "answer": "Could something else explain the better grades?",
+      "wrong": [
+        "How can we hide this result?",
+        "Should we stop asking questions?",
+        "Which kid is the tallest?"
+      ],
+      "explain": "Good scientists check whether the data could be explained another way before trusting a conclusion."
+    }
+  ]
+}

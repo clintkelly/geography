@@ -1,0 +1,205 @@
+{
+  "id": "ch-09",
+  "title": "Motion",
+  "order": 9,
+  "questions": [
+    {
+      "id": "motion-definition",
+      "concept": "motion",
+      "difficulty": "scout",
+      "prompt": "What is motion?",
+      "answer": "A change in position",
+      "wrong": ["A change in color", "Staying in one place", "A change in temperature"],
+      "explain": "Any time something's position changes, from a turning page to Earth circling the Sun, that is motion."
+    },
+    {
+      "id": "speed-formula",
+      "concept": "speed",
+      "difficulty": "scout",
+      "prompt": "What is the formula for speed?",
+      "answer": "Distance ÷ time",
+      "wrong": ["Time ÷ distance", "Distance × time", "Distance + time"],
+      "explain": "Speed tells how far something goes in a certain amount of time."
+    },
+    {
+      "id": "speed-units",
+      "concept": "speed",
+      "difficulty": "scout",
+      "prompt": "What are the SI units for speed?",
+      "answer": "Meters per second (m/s)",
+      "wrong": ["Meters (m)", "Seconds (s)", "Kilograms (kg)"],
+      "explain": "Distance in meters divided by time in seconds gives meters per second."
+    },
+    {
+      "id": "reference-point",
+      "concept": "relative-motion",
+      "difficulty": "scout",
+      "prompt": "Motion is always described compared to a...",
+      "answer": "Reference point",
+      "wrong": ["Hypothesis", "Control group", "Lab report"],
+      "explain": "Whether something seems to move depends on what you compare it to, called a reference point."
+    },
+    {
+      "id": "velocity-definition",
+      "concept": "velocity",
+      "difficulty": "scout",
+      "prompt": "What is velocity?",
+      "answer": "Speed in a certain direction",
+      "wrong": ["Speed with no direction", "The distance an object travels", "How heavy a moving object is"],
+      "explain": "Velocity is like speed, but it also tells which way something is going."
+    },
+    {
+      "id": "acceleration-definition",
+      "concept": "acceleration",
+      "difficulty": "scout",
+      "prompt": "What is acceleration?",
+      "answer": "The rate at which velocity changes",
+      "wrong": ["The total distance traveled", "A speed that never changes", "The direction you are facing"],
+      "explain": "Any time velocity changes, the object is accelerating."
+    },
+    {
+      "id": "deceleration",
+      "concept": "acceleration",
+      "difficulty": "scout",
+      "prompt": "What is another word for slowing down?",
+      "answer": "Deceleration",
+      "wrong": ["Inertia", "Velocity", "Reference point"],
+      "explain": "Deceleration is negative acceleration, which means the object is slowing down."
+    },
+    {
+      "id": "relative-train",
+      "concept": "relative-motion",
+      "difficulty": "ranger",
+      "prompt": "You sit on a smoothly moving train. Compared to you, how does the empty seat next to you seem to move?",
+      "answer": "It doesn't seem to move",
+      "wrong": ["It seems to move very fast", "It seems to move backward", "It seems to spin around"],
+      "explain": "You and the seat move together, so from your reference point the seat stays still."
+    },
+    {
+      "id": "earth-spin",
+      "concept": "relative-motion",
+      "difficulty": "ranger",
+      "prompt": "Earth spins very fast. Why don't we feel or see it spinning?",
+      "answer": "Everything around us moves along with us",
+      "wrong": ["Earth isn't really spinning", "Earth only spins at night", "Gravity cancels out all motion"],
+      "explain": "We, the air and the buildings all spin together, so nothing seems to move compared to us."
+    },
+    {
+      "id": "average-speed",
+      "concept": "speed",
+      "difficulty": "ranger",
+      "prompt": "What is average speed?",
+      "answer": "Total distance ÷ total time",
+      "wrong": ["The fastest speed reached", "The speed at one exact moment", "The starting speed only"],
+      "explain": "Average speed looks at the whole trip, even if the speed changed along the way."
+    },
+    {
+      "id": "instantaneous-speed",
+      "concept": "speed",
+      "difficulty": "ranger",
+      "prompt": "A car's speedometer shows how fast it is going right now. What kind of speed is that?",
+      "answer": "Instantaneous speed",
+      "wrong": ["Average speed", "Total distance", "Deceleration"],
+      "explain": "Instantaneous speed is the speed at one particular moment."
+    },
+    {
+      "id": "ways-to-accelerate",
+      "concept": "acceleration",
+      "difficulty": "ranger",
+      "prompt": "Which of these counts as accelerating?",
+      "answer": "Speeding up, slowing down or turning",
+      "wrong": ["Only speeding up", "Only moving in a straight line", "Only coming to a full stop"],
+      "explain": "Acceleration is any change in velocity, so changing speed or direction both count."
+    },
+    {
+      "id": "corner-velocity",
+      "concept": "velocity",
+      "difficulty": "ranger",
+      "prompt": "A car turns a corner at a steady 20 km/h. What changes?",
+      "answer": "Its velocity, but not its speed",
+      "wrong": ["Its speed, but not its velocity", "Neither its speed nor velocity", "Only its mass"],
+      "explain": "The speed stays the same, but the direction changes, so the velocity changes."
+    },
+    {
+      "id": "acceleration-units",
+      "concept": "acceleration",
+      "difficulty": "ranger",
+      "prompt": "What are the units of acceleration?",
+      "answer": "Meters per second squared (m/s²)",
+      "wrong": ["Meters per second (m/s)", "Meters (m)", "Kilograms (kg)"],
+      "explain": "Acceleration is a change in m/s every second, which is written m/s²."
+    },
+    {
+      "id": "speed-dog",
+      "concept": "speed",
+      "difficulty": "expert",
+      "prompt": "A dog runs 40 m in 8 s. What is its average speed?",
+      "answer": "5 m/s",
+      "wrong": ["320 m/s", "0.2 m/s", "48 m/s"],
+      "explain": "Speed = distance ÷ time, so 40 m ÷ 8 s = 5 m/s."
+    },
+    {
+      "id": "speed-bike",
+      "concept": "speed",
+      "difficulty": "expert",
+      "prompt": "A bike travels 150 m in 10 s. What is its average speed?",
+      "answer": "15 m/s",
+      "wrong": ["1,500 m/s", "160 m/s", "1.5 m/s"],
+      "explain": "150 m ÷ 10 s = 15 m/s."
+    },
+    {
+      "id": "compare-speeds",
+      "concept": "speed",
+      "difficulty": "expert",
+      "prompt": "A cat runs 30 m in 5 s. A rabbit runs 36 m in 4 s. Which is faster?",
+      "answer": "The rabbit, at 9 m/s",
+      "wrong": ["The cat, at 6 m/s", "They are equally fast", "The cat, at 150 m/s"],
+      "explain": "Cat: 30 ÷ 5 = 6 m/s. Rabbit: 36 ÷ 4 = 9 m/s. The rabbit is faster."
+    },
+    {
+      "id": "distance-calc",
+      "concept": "speed",
+      "difficulty": "expert",
+      "prompt": "A car moves at 20 m/s for 5 s. How far does it go?",
+      "answer": "100 m",
+      "wrong": ["4 m", "25 m", "15 m"],
+      "explain": "Distance = speed × time, so 20 m/s × 5 s = 100 m."
+    },
+    {
+      "id": "time-calc",
+      "concept": "speed",
+      "difficulty": "expert",
+      "prompt": "How long does it take to walk 60 m at a speed of 2 m/s?",
+      "answer": "30 s",
+      "wrong": ["120 s", "62 s", "58 s"],
+      "explain": "Time = distance ÷ speed, so 60 m ÷ 2 m/s = 30 s."
+    },
+    {
+      "id": "acceleration-calc",
+      "concept": "acceleration",
+      "difficulty": "expert",
+      "prompt": "A skateboard speeds up from 2 m/s to 8 m/s in 3 s. What is its acceleration?",
+      "answer": "2 m/s²",
+      "wrong": ["6 m/s²", "18 m/s²", "10 m/s²"],
+      "explain": "Acceleration = (final velocity - starting velocity) ÷ time = (8 - 2) ÷ 3 = 2 m/s²."
+    },
+    {
+      "id": "circle-acceleration",
+      "concept": "acceleration",
+      "difficulty": "expert",
+      "prompt": "A bee flies in a circle at a constant speed. Is it accelerating?",
+      "answer": "Yes, because its direction keeps changing",
+      "wrong": ["No, because its speed stays the same", "No, because bees can't accelerate", "Yes, because its speed keeps rising"],
+      "explain": "Changing direction changes velocity, and any change in velocity is acceleration."
+    },
+    {
+      "id": "negative-acceleration",
+      "concept": "acceleration",
+      "difficulty": "expert",
+      "prompt": "A runner's acceleration points opposite to the direction she is running. What is she doing?",
+      "answer": "Slowing down",
+      "wrong": ["Speeding up", "Standing still", "Running at a steady speed"],
+      "explain": "Acceleration opposite to the motion is negative acceleration, or deceleration."
+    }
+  ]
+}

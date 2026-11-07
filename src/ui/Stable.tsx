@@ -122,7 +122,7 @@ export function Stable({ companions, activeId, teamIds, onPick, dispatch }: {
           const body = (
             <>
               <span onClick={() => playCry(c.speciesId, v.stage)} title="Click to hear its call"><Sprite id={v.artId} size={96} className="idle-sprite" shiny={v.shiny} /></span>
-              <strong>{v.name}</strong>{c.bondXp === 0 && !c.freedOnce && <span className="new-tag">NEW!</span>}{v.species.legendary && <span className="legend-tag">★ Legendary</span>}{v.species.egg && <span className="egg-tag">🥚 Egg-only</span>}{v.shiny && <span className="shiny-tag">Shiny: {shinyName(v.shiny)}</span>}
+              <strong>{v.name}</strong>{c.bondXp === 0 && !c.freedOnce && <span className="new-tag">NEW!</span>}{v.species.legendary && <span className="legend-tag">★ Legendary</span>}{v.species.egg && <span className="egg-tag">🥚 Egg-only</span>}{v.species.kaiju && <span className="kaiju-tag">⚠ Kaiju</span>}{v.shiny && <span className="shiny-tag">Shiny: {shinyName(v.shiny)}</span>}
               {c.nickname && <span className="muted">{v.formName}</span>}
               <KindTag speciesId={c.speciesId} />
               <TypeLine species={v.species} />

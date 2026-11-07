@@ -1,0 +1,214 @@
+{
+  "id": "ch-04",
+  "title": "SI Units and Measurements",
+  "order": 4,
+  "questions": [
+    {
+      "id": "si-meaning",
+      "concept": "si-system",
+      "difficulty": "scout",
+      "prompt": "What does SI stand for in \"SI units\"?",
+      "answer": "International System of Units",
+      "wrong": ["Science Information", "Standard Inches", "Simple Index"],
+      "explain": "SI comes from the French name for the International System, the metric system scientists use worldwide."
+    },
+    {
+      "id": "unit-length",
+      "concept": "si-units",
+      "difficulty": "scout",
+      "prompt": "What is the basic metric unit of length?",
+      "answer": "Meter",
+      "wrong": ["Liter", "Gram", "Newton"],
+      "explain": "Length and distance are measured in meters, or in kilometers and centimeters for big and small things."
+    },
+    {
+      "id": "unit-mass",
+      "concept": "si-units",
+      "difficulty": "scout",
+      "prompt": "Which metric unit is used to measure mass?",
+      "answer": "Gram",
+      "wrong": ["Meter", "Liter", "Newton"],
+      "explain": "Mass is measured in grams and kilograms. A kilogram is 1,000 grams."
+    },
+    {
+      "id": "unit-volume",
+      "concept": "si-units",
+      "difficulty": "scout",
+      "prompt": "Which metric unit is used for the volume of a liquid?",
+      "answer": "Liter",
+      "wrong": ["Gram", "Meter", "Second"],
+      "explain": "Liquid volume is measured in liters and milliliters."
+    },
+    {
+      "id": "unit-force",
+      "concept": "si-units",
+      "difficulty": "scout",
+      "prompt": "Which unit is used to measure weight, which is a force?",
+      "answer": "Newton",
+      "wrong": ["Gram", "Liter", "Kelvin"],
+      "explain": "Weight is a force, and forces are measured in newtons (N)."
+    },
+    {
+      "id": "prefix-kilo",
+      "concept": "si-prefixes",
+      "difficulty": "scout",
+      "prompt": "What does the prefix kilo- mean?",
+      "answer": "1,000 times the base unit",
+      "wrong": ["One-thousandth of the base unit", "100 times the base unit", "10 times the base unit"],
+      "explain": "A kilometer is 1,000 meters and a kilogram is 1,000 grams."
+    },
+    {
+      "id": "meniscus",
+      "concept": "measuring-volume",
+      "difficulty": "scout",
+      "prompt": "Where do you read the volume in a graduated cylinder?",
+      "answer": "At the bottom of the curved surface, at eye level",
+      "wrong": ["At the very top of the cylinder", "At the highest drop on the glass", "Looking down from far above"],
+      "explain": "Water curves in a tube. This curve is the meniscus, and you read its bottom with your eyes level to it."
+    },
+    {
+      "id": "centimeters-in-meter",
+      "concept": "si-prefixes",
+      "difficulty": "ranger",
+      "prompt": "How many centimeters are in 1 meter?",
+      "answer": "100",
+      "wrong": ["10", "1,000", "60"],
+      "explain": "Centi- means one-hundredth, so 100 centimeters make 1 meter."
+    },
+    {
+      "id": "prefix-milli",
+      "concept": "si-prefixes",
+      "difficulty": "ranger",
+      "prompt": "What does the prefix milli- mean?",
+      "answer": "One-thousandth of the base unit",
+      "wrong": ["1,000 times the base unit", "One-hundredth of the base unit", "1 million times the base unit"],
+      "explain": "A millimeter is 0.001 meter, so 1,000 millimeters make 1 meter."
+    },
+    {
+      "id": "mass-definition",
+      "concept": "mass-weight",
+      "difficulty": "ranger",
+      "prompt": "What is mass?",
+      "answer": "The amount of matter in an object",
+      "wrong": ["The pull of gravity on an object", "The space an object takes up", "How hot an object is"],
+      "explain": "Mass is how much matter, or stuff, is in something. The pull of gravity on it is weight."
+    },
+    {
+      "id": "volume-definition",
+      "concept": "measuring-volume",
+      "difficulty": "ranger",
+      "prompt": "What is volume?",
+      "answer": "The amount of space something takes up",
+      "wrong": ["The amount of matter in something", "How heavy something feels", "How loud something is"],
+      "explain": "Volume measures space, like how much a backpack or a bottle can hold."
+    },
+    {
+      "id": "tool-length",
+      "concept": "measuring-tools",
+      "difficulty": "ranger",
+      "prompt": "Which tool would you use to measure how tall your dog is?",
+      "answer": "A meterstick",
+      "wrong": ["A graduated cylinder", "A thermometer", "A triple beam balance"],
+      "explain": "A meterstick is a ruler that is 1 meter (100 cm) long, good for measuring length."
+    },
+    {
+      "id": "tool-mass",
+      "concept": "measuring-tools",
+      "difficulty": "ranger",
+      "prompt": "Which tool measures mass?",
+      "answer": "An electronic balance",
+      "wrong": ["A meterstick", "A graduated cylinder", "A stopwatch"],
+      "explain": "Balances measure mass. An electronic balance is the easiest: set the object on it and read the number."
+    },
+    {
+      "id": "tool-liquid",
+      "concept": "measuring-tools",
+      "difficulty": "ranger",
+      "prompt": "Which tool is best for measuring exactly 30 mL of water?",
+      "answer": "A graduated cylinder",
+      "wrong": ["A trundle wheel", "A thermometer", "A tape measure"],
+      "explain": "A graduated cylinder has marks along its side to measure liquid volume."
+    },
+    {
+      "id": "oil-floats",
+      "concept": "density",
+      "difficulty": "ranger",
+      "prompt": "Oil floats on top of water. What does this tell you?",
+      "answer": "Oil is less dense than water",
+      "wrong": ["Oil is denser than water", "Oil has no mass", "Oil and water have the same density"],
+      "explain": "Something less dense floats on something denser. Water's density is about 1 g/cm³, so oil's is less."
+    },
+    {
+      "id": "density-calc-block",
+      "concept": "density",
+      "difficulty": "expert",
+      "prompt": "A block has a mass of 20 g and a volume of 10 cm³. What is its density?",
+      "answer": "2 g/cm³",
+      "wrong": ["200 g/cm³", "0.5 g/cm³", "30 g/cm³"],
+      "explain": "Density = mass ÷ volume, so 20 g ÷ 10 cm³ = 2 g/cm³."
+    },
+    {
+      "id": "density-calc-rock",
+      "concept": "density",
+      "difficulty": "expert",
+      "prompt": "A rock has a mass of 30 g and a volume of 6 cm³. What is its density?",
+      "answer": "5 g/cm³",
+      "wrong": ["180 g/cm³", "24 g/cm³", "0.2 g/cm³"],
+      "explain": "Density = mass ÷ volume, so 30 g ÷ 6 cm³ = 5 g/cm³."
+    },
+    {
+      "id": "density-sink",
+      "concept": "density",
+      "difficulty": "expert",
+      "prompt": "Water has a density of about 1 g/cm³. What happens to an object with a density of 2.5 g/cm³ in water?",
+      "answer": "It sinks",
+      "wrong": ["It floats on top", "It floats halfway up", "It turns into a gas"],
+      "explain": "Objects denser than water sink. 2.5 is greater than 1, so it sinks."
+    },
+    {
+      "id": "mass-weight-moon",
+      "concept": "mass-weight",
+      "difficulty": "expert",
+      "prompt": "An astronaut travels from Earth to the Moon, which has weaker gravity. What happens?",
+      "answer": "Mass stays the same; weight gets smaller",
+      "wrong": ["Mass and weight both get smaller", "Mass gets smaller; weight stays the same", "Mass and weight both stay the same"],
+      "explain": "Mass is the matter in you, which doesn't change. Weight depends on gravity, which is weaker on the Moon."
+    },
+    {
+      "id": "convert-cm-m",
+      "concept": "unit-conversion",
+      "difficulty": "expert",
+      "prompt": "Convert 250 centimeters to meters.",
+      "answer": "2.5 m",
+      "wrong": ["25 m", "0.25 m", "2,500 m"],
+      "explain": "There are 100 cm in a meter, so move the decimal two places left: 250 cm = 2.5 m."
+    },
+    {
+      "id": "celsius-to-kelvin",
+      "concept": "temperature",
+      "difficulty": "expert",
+      "prompt": "Water boils at 100°C. About what is that temperature in kelvin?",
+      "answer": "373 K",
+      "wrong": ["173 K", "212 K", "100 K"],
+      "explain": "To go from Celsius to kelvin, add about 273. So 100 + 273 = 373 K."
+    },
+    {
+      "id": "volume-box",
+      "concept": "measuring-volume",
+      "difficulty": "expert",
+      "prompt": "A box is 2 cm long, 3 cm wide and 4 cm tall. What is its volume?",
+      "answer": "24 cm³",
+      "wrong": ["9 cm³", "12 cm³", "20 cm³"],
+      "explain": "Volume = length × width × height, so 2 × 3 × 4 = 24 cm³."
+    },
+    {
+      "id": "displacement",
+      "concept": "measuring-volume",
+      "difficulty": "expert",
+      "prompt": "Water in a graduated cylinder rises from 50 mL to 65 mL when you drop in a stone. What is the stone's volume?",
+      "answer": "15 mL",
+      "wrong": ["65 mL", "115 mL", "50 mL"],
+      "explain": "The stone pushes aside water equal to its own volume: 65 mL - 50 mL = 15 mL."
+    }
+  ]
+}

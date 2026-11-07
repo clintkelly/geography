@@ -781,3 +781,15 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
 - **Level-ups:** a creature that levels up mid-trail gets a popup and sound in battle; camp shows a card per creature with its new level and how many levels until it evolves.
 - **Sparkles:** region buttons with something new to find right now (a new creature, a night creature after dark, or today's visitor) get a ✨.
 - **Fix:** a creature that faints during a Bold Befriend can now be switched out; the attempt carries on with the next creature.
+
+## Kaiju Alerts
+
+- **What:** six ORIGINAL kaiju (giant monsters based on real animals and dinosaurs, not any existing film monster) each threaten a real city: Quakeback (triceratops-armadillo) → San Francisco, Tidalorn (marine iguana) → Tokyo, Stormcrab (steel crab) → Rio de Janeiro, Magmantis (lava mantis) → Naples, Krakenmaw (lightning squid) → Sydney, Glacierhorn (ice woolly rhino) → Reykjavík.
+- **The alert:** after two trails, camp shows a flashing KAIJU ALERT for the easiest kaiju not yet beaten; once all are beaten, a different one each day. A Kaiju Lab row shows all six, silhouetted until beaten.
+- **The battle:** a `Lodge` with `kaiju` (not on the ladder, no Silver or Gold): three phases against the giant stage-3 form with the whole team, at Lodge power 4 to 9 (recommended level 5 to 10). Questions come from the city's region. The giant is drawn 1.6× with a red glow and screen quakes on big hits; its own music plays (`kaiju`, 2 takes).
+- **Reward:** the first win gives the baby kaiju (`Species.kaiju`, lives nowhere in the wild), which grows into the giant by stage 3, plus the Kaiju patch. Rematches give XP.
+
+## Science
+
+- **Questions:** 223 multiple-choice questions in `src/content/science/ch-01.json` … `ch-10.json`, written in our own words from the ideas of the middle-school science study guide the kids use (chapters 1–10: scientific inquiry, experiments, lab reports, SI units, lab safety, matter, the periodic table, solutions, motion, and forces and Newton's first law). The book itself is never committed (`.gitignore`). Scout asks facts and vocabulary, Ranger understanding, Expert application and easy calculations. Each has a short explanation shown after answering.
+- **In the game:** Science is a third study subject beside Math and Words: a Science trail under "Ask about", a Science Egg meter (8 right answers lay a Science Egg), a Science rank, Scholar-path points, and a parent setting to mix science into ordinary trails and pick chapters. Science Eggs hatch the existing egg creatures until science creatures are drawn.

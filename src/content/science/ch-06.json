@@ -1,0 +1,214 @@
+{
+  "id": "ch-06",
+  "title": "Matter, Properties, and Phases",
+  "order": 6,
+  "questions": [
+    {
+      "id": "matter-definition",
+      "concept": "matter",
+      "difficulty": "scout",
+      "prompt": "What is matter?",
+      "answer": "Anything that has mass and takes up space",
+      "wrong": ["Only things you can see", "Only solid objects", "Anything that gives off light"],
+      "explain": "Rocks, water and even air are matter, because they all have mass and take up space."
+    },
+    {
+      "id": "atom-definition",
+      "concept": "atoms",
+      "difficulty": "scout",
+      "prompt": "What is an atom?",
+      "answer": "A tiny particle that matter is made of",
+      "wrong": ["A type of living cell", "A kind of light wave", "A large clump of rocks"],
+      "explain": "Atoms are the tiny building blocks of all matter. They are far too small to see."
+    },
+    {
+      "id": "proton-charge",
+      "concept": "atomic-particles",
+      "difficulty": "scout",
+      "prompt": "What electric charge does a proton have?",
+      "answer": "Positive",
+      "wrong": ["Negative", "No charge", "It changes all the time"],
+      "explain": "Protons are positive, electrons are negative, and neutrons have no charge."
+    },
+    {
+      "id": "nucleus-contents",
+      "concept": "atomic-particles",
+      "difficulty": "scout",
+      "prompt": "What is found in the nucleus at the center of an atom?",
+      "answer": "Protons and neutrons",
+      "wrong": ["Only electrons", "Electrons and neutrons", "Nothing but empty space"],
+      "explain": "Protons and neutrons form the nucleus. Electrons move around outside it."
+    },
+    {
+      "id": "three-states",
+      "concept": "states-of-matter",
+      "difficulty": "scout",
+      "prompt": "What are the three common states of matter?",
+      "answer": "Solid, liquid and gas",
+      "wrong": ["Hot, warm and cold", "Atoms, molecules and cells", "Mass, volume and density"],
+      "explain": "Matter is usually a solid, a liquid or a gas (also called vapor)."
+    },
+    {
+      "id": "melting",
+      "concept": "phase-changes",
+      "difficulty": "scout",
+      "prompt": "What is it called when a solid turns into a liquid?",
+      "answer": "Melting",
+      "wrong": ["Freezing", "Condensation", "Evaporation"],
+      "explain": "Heat makes the particles move more until they break free of their fixed spots, and the solid melts."
+    },
+    {
+      "id": "condensation",
+      "concept": "phase-changes",
+      "difficulty": "scout",
+      "prompt": "Water drops form on the outside of a glass of ice water. What is this called?",
+      "answer": "Condensation",
+      "wrong": ["Melting", "Evaporation", "Sublimation"],
+      "explain": "Water vapor in the air cools against the cold glass and turns into liquid drops."
+    },
+    {
+      "id": "liquid-properties",
+      "concept": "states-of-matter",
+      "difficulty": "ranger",
+      "prompt": "Which describes a liquid?",
+      "answer": "Fixed volume, but takes its container's shape",
+      "wrong": ["Fixed shape and fixed volume", "No fixed volume and no fixed shape", "Fixed shape, but no fixed volume"],
+      "explain": "Pour juice into any cup and it changes shape, but the amount of juice stays the same."
+    },
+    {
+      "id": "particles-solid",
+      "concept": "states-of-matter",
+      "difficulty": "ranger",
+      "prompt": "How do the particles in a solid move?",
+      "answer": "They vibrate in fixed places",
+      "wrong": ["They zoom around far apart", "They slide freely past each other", "They never move at all"],
+      "explain": "Solid particles are packed tightly and only jiggle in place, so a solid keeps its shape."
+    },
+    {
+      "id": "viscosity-definition",
+      "concept": "viscosity",
+      "difficulty": "ranger",
+      "prompt": "What is viscosity?",
+      "answer": "A liquid's resistance to flowing",
+      "wrong": ["How heavy a liquid is", "How hot a liquid gets", "The color of a liquid"],
+      "explain": "A liquid with high viscosity, like honey, flows slowly. Water has low viscosity."
+    },
+    {
+      "id": "physical-property",
+      "concept": "properties",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a physical property?",
+      "answer": "Color",
+      "wrong": ["Flammability", "Ability to rust", "Reactivity with water"],
+      "explain": "Physical properties can be observed without changing what the matter is, like color or melting point."
+    },
+    {
+      "id": "chemical-property",
+      "concept": "properties",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a chemical property?",
+      "answer": "Flammability",
+      "wrong": ["Color", "Melting point", "Magnetism"],
+      "explain": "Chemical properties describe how matter can change into new substances, like how easily it burns."
+    },
+    {
+      "id": "sign-chemical-change",
+      "concept": "chemical-change",
+      "difficulty": "ranger",
+      "prompt": "Which is a sign that a chemical change has happened?",
+      "answer": "Bubbles of a new gas form",
+      "wrong": ["A piece of paper is cut in half", "An ice cube melts into water", "Sugar is poured into a bowl"],
+      "explain": "A new gas, a color change, a new smell, or light and heat are clues that new substances formed."
+    },
+    {
+      "id": "sublimation",
+      "concept": "phase-changes",
+      "difficulty": "ranger",
+      "prompt": "Dry ice turns straight from a solid into a gas without melting. What is this called?",
+      "answer": "Sublimation",
+      "wrong": ["Condensation", "Melting", "Freezing"],
+      "explain": "Sublimation skips the liquid state and goes directly from solid to gas."
+    },
+    {
+      "id": "rutherford",
+      "concept": "atomic-models",
+      "difficulty": "ranger",
+      "prompt": "Which scientist found that atoms have a small, heavy, positive center called a nucleus?",
+      "answer": "Ernest Rutherford",
+      "wrong": ["John Dalton", "Isaac Newton", "Dmitri Mendeleev"],
+      "explain": "Rutherford showed that an atom is mostly empty space with a tiny nucleus, and electrons move around it."
+    },
+    {
+      "id": "chemical-change-burning",
+      "concept": "physical-vs-chemical",
+      "difficulty": "expert",
+      "prompt": "Which of these is a chemical change?",
+      "answer": "Wood burning into ash",
+      "wrong": ["Ice cream melting", "Paper being torn", "Water boiling"],
+      "explain": "Burning makes new substances like ash and smoke. The others only change shape or state."
+    },
+    {
+      "id": "smoothie-change",
+      "concept": "physical-vs-chemical",
+      "difficulty": "expert",
+      "prompt": "Blending bananas and strawberries into a smoothie is what kind of change?",
+      "answer": "A physical change",
+      "wrong": ["A chemical change", "A change from liquid to gas", "No change at all"],
+      "explain": "The fruit is chopped into tiny bits and mixed, but it is still the same fruit."
+    },
+    {
+      "id": "pancakes-change",
+      "concept": "physical-vs-chemical",
+      "difficulty": "expert",
+      "prompt": "Cooking runny batter into fluffy pancakes is what kind of change?",
+      "answer": "A chemical change",
+      "wrong": ["A physical change", "Only a change of shape", "No change at all"],
+      "explain": "Heat turns the ingredients into new substances with new properties, and you can't change them back."
+    },
+    {
+      "id": "conservation-of-mass",
+      "concept": "conservation-of-mass",
+      "difficulty": "expert",
+      "prompt": "You burn 10 g of paper inside a sealed jar so nothing escapes. What is the total mass inside afterward?",
+      "answer": "10 g",
+      "wrong": ["0 g", "5 g", "20 g"],
+      "explain": "Mass is conserved. The atoms rearrange into ash and gases, but the total mass stays the same."
+    },
+    {
+      "id": "deposition",
+      "concept": "phase-changes",
+      "difficulty": "expert",
+      "prompt": "On a cold night, water vapor turns straight into frost on the grass. What is this called?",
+      "answer": "Deposition",
+      "wrong": ["Sublimation", "Melting", "Evaporation"],
+      "explain": "Deposition is gas turning directly into a solid. It is the opposite of sublimation."
+    },
+    {
+      "id": "viscosity-compare",
+      "concept": "viscosity",
+      "difficulty": "expert",
+      "prompt": "Which of these liquids has the highest viscosity?",
+      "answer": "Honey",
+      "wrong": ["Water", "Apple juice", "Milk"],
+      "explain": "Honey pours slowly because it strongly resists flowing, so its viscosity is highest."
+    },
+    {
+      "id": "evaporation-vs-boiling",
+      "concept": "phase-changes",
+      "difficulty": "expert",
+      "prompt": "How is evaporation different from boiling?",
+      "answer": "Evaporation happens slowly at the surface",
+      "wrong": ["Evaporation only happens at 100°C", "Evaporation turns gas into liquid", "Evaporation only happens to solids"],
+      "explain": "Evaporation can happen at any temperature as surface particles escape. Boiling happens all through the liquid."
+    },
+    {
+      "id": "gas-vs-liquid",
+      "concept": "states-of-matter",
+      "difficulty": "expert",
+      "prompt": "You let the air out of a balloon into a room. Why does it spread out instead of staying in a clump?",
+      "answer": "Gas particles move fast enough to spread apart",
+      "wrong": ["Gas particles are glued tightly together", "Gas has a fixed shape", "Gas particles stop moving in air"],
+      "explain": "Gas particles move so quickly that they overcome their attraction and fill whatever space they have."
+    }
+  ]
+}

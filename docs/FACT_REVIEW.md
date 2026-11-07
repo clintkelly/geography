@@ -648,3 +648,12 @@ Written from memory with Wikipedia sources, not yet checked against the pages. F
 - **swordstrike (Swordfish, america-caribbean):** It uses its long flat bill to slash and stun fish. It can warm its eyes and brain, which helps it see in cold, deep water. Grown-up swordfish have no scales and no teeth. Size: Commonly up to about 3 m (10 feet) long.
 - **harpyclaw (Harpy Eagle, america-mainland):** Its back talons can be about 13 cm (5 inches) long, as long as a grizzly bear's claws. It snatches sloths and monkeys from the treetops. It is the national bird of Panama. Size: Wings about 1.8 to 2 m (6 to 6.5 feet) across.
 - **paradance (Superb Bird-of-Paradise, oceania):** When it shows off, the male spreads a black cape that makes a big oval with a blue smile-shaped breast shield. Its black feathers are so dark they reflect almost no light. Birds-of-paradise live mostly in New Guinea. Size: About 25 cm (10 inches) long.
+
+## Science questions (2026-11-06)
+
+223 questions in `src/content/science/`, written from the kids' science study guide (chapters 1–10). Please skim each chapter file. Ones to check first:
+- ch-04 `unit-mass` (Gram) and `unit-volume` (Liter): worded as "metric unit"; the strict SI base units are kilogram and cubic meter.
+- ch-03 `round-five`: 6.25 to the nearest tenth is 6.3, by the school rule that 5 rounds up.
+- ch-10 `one-newton-apple`: about 1 N to hold up a small (~100 g) apple.
+- ch-07 `oxygen-shells` and energy-level questions: the simple 2-then-8 shell model.
+- ch-10 `constant-velocity-net-zero`: a puck gliding at steady speed has about zero net force (correct, but kids may expect a forward force).

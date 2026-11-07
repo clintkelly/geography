@@ -12,13 +12,13 @@ import { Passport } from './Passport';
 import { Lodges, PatchIcon } from './Lodges';
 import { EggNest, StudyRanks } from './Eggs';
 import { eggName } from '../engine/eggs';
-import { lodgeById, lodgesOf, nextLodge, patchOf } from '../engine/lodges';
+import { kaijuAlert, kaijuOf, lodgeById, lodgesOf, nextLodge, patchOf } from '../engine/lodges';
 import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
 import { playCry, playSound } from './sound';
 import { isNight, NIGHT_FROM } from '../engine/night';
 import { chainBoost, dayKey, regionProgress, VISITOR_SHINY_BOOST, visitorFor } from '../engine/juice';
-import { MAX_LEVEL, STAGE_2_LEVEL, STAGE_3_LEVEL, STAGES } from '../engine/progression';
+import { levelOf, MAX_LEVEL, STAGE_2_LEVEL, STAGE_3_LEVEL, STAGES } from '../engine/progression';
 import { Confetti } from './NewCreature';
 import { Stable, Wild } from './Stable';
 import { Dot, WorldMap, type Highlight } from './WorldMap';
@@ -32,6 +32,7 @@ const FOCUS_LABELS: Record<Focus, { name: string; text: string }> = {
   history: { name: 'History', text: 'Ancient peoples, famous firsts and how places got their stories' },
   math: { name: 'Math', text: 'Factors, fractions and integers. Harder trails mean typing answers.' },
   words: { name: 'Words', text: 'Vocabulary: meanings, sentences, roots, and spelling on Expert' },
+  science: { name: 'Science', text: 'Experiments, matter, atoms, forces and motion. Harder trails ask you to use the ideas.' },
 };
 
 const DESCRIPTIONS: Record<Difficulty, string> = {
@@ -112,6 +113,40 @@ function LevelCard({ save, instanceId, from, to }: { save: SaveData; instanceId:
         <small>{next ? `${next - to} more ${next - to === 1 ? 'level' : 'levels'} until it evolves!` : to >= MAX_LEVEL ? 'Max level!' : 'Fully evolved!'} · {stats.maxHp} HP, {stats.attack} Attack</small>
       </div>
     </div>
+  );
+}
+
+/** A giant monster is heading for a real city: defend it! Plus the Kaiju Lab: every kaiju, beaten or not. */
+function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command) => void }) {
+  const beaten = save.lodgesBeaten ?? [];
+  const alert = kaijuAlert(PACK, beaten, save.visitorDay ?? dayKey(Date.now()));
+  if (!alert?.kaiju || save.completedExpeditions < 2) return null;
+  const k = alert.kaiju;
+  const giant = species(alert.prizeSpeciesId);
+  const place = PACK.places.find((p) => p.id === k.placeId);
+  const best = Math.max(...save.companions.map((c) => levelOf(c.bondXp)));
+  const again = beaten.includes(alert.id);
+  return (
+    <section className="kaiju-banner">
+      <div className="kaiju-stripes" aria-hidden="true" />
+      <div className="kaiju-body">
+        <Sprite id={alert.leader.artId} size={112} className="kaiju-giant" />
+        <div>
+          <p className="kaiju-alert-title">⚠ KAIJU ALERT ⚠</p>
+          <h2>{giant.displayName} is heading for {k.city}{place ? `, ${place.name}` : ''}!</h2>
+          <p>{alert.leader.intro}</p>
+          <p className="muted">Threat {'★'.repeat(k.threat)}{'☆'.repeat(6 - k.threat)} · three battles with your whole team · questions about {region(place?.regionId ?? '').label} · best with level {alert.recommendedLevel}+{best < alert.recommendedLevel ? ` (your best is ${best})` : ''}</p>
+          <button type="button" className="primary kaiju-go" onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: alert.id }); }}>{again ? `Defend ${k.city} again!` : `Defend ${k.city}!`}</button>
+        </div>
+      </div>
+      <div className="kaiju-lab" aria-label="Kaiju Lab">
+        <small>Kaiju Lab:</small>
+        {kaijuOf(PACK).map((l) => {
+          const won = beaten.includes(l.id);
+          return <span key={l.id} className="kaiju-lab-slot" title={won ? `${species(l.prizeSpeciesId).displayName}: you saved ${l.kaiju!.city}` : `???: threat ${l.kaiju!.threat}`}><Sprite id={l.prizeSpeciesId} size={36} className={won ? '' : 'silhouette'} /></span>;
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -296,8 +331,9 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
                 : s.levelUp && <p className="level-up">Level up! Your companion reached level {s.levelUp}.</p>}
               {s.newStamp && <div className="stamp-slam"><img src={artUrl(`stamp-${s.newStamp}`)} alt="" width={96} height={96} /><span>New Passport stamp: <strong>{region(s.newStamp).label}</strong></span></div>}
               {(s.newMedals ?? []).map((m) => <p key={`${m.regionId}-${m.track}-${m.level}`} className="medal-new"><MedalIcon level={m.level} />New {LEVEL_NAME[m.level]} medal: <strong>{MEDAL_TRACKS.find((t) => t.id === m.track)?.label} of {region(m.regionId).label}</strong> <small>+{MEDAL_POINTS[m.level]} Trail Points next trail</small></p>)}
-              {s.lodgeId && lodgeById(PACK, s.lodgeId) && <div className="stamp-slam"><PatchIcon lodge={lodgeById(PACK, s.lodgeId)!} earned tier={s.newPatch ?? patchOf(save, s.lodgeId)} size={64} /><span>{s.newPatch ? <>New {s.newPatch === 'bronze' ? '' : `${s.newPatch === 'gold' ? 'Gold' : 'Silver'} `}patch: <strong>{lodgeById(PACK, s.lodgeId)!.name.replace(' Lodge', '')} Patch</strong>{s.newPatch === 'gold' && <> · the legendary <strong>{species(lodgeById(PACK, s.lodgeId)!.legendaryId).displayName}</strong> joined you!</>}</> : <>You beat <strong>{lodgeById(PACK, s.lodgeId)!.name}</strong> again!</>}</span></div>}
-              {s.eggLaid && <div className="stamp-slam"><img src={artUrl(`egg-${s.eggLaid}`)} alt="" width={64} height={64} className="sprite egg-wobble" /><span>You got a <strong>{eggName[s.eggLaid]}</strong>! Answer {s.eggLaid === 'words' ? 'vocabulary' : s.eggLaid === 'math' ? 'math' : 'math or vocabulary'} questions to hatch it.</span></div>}
+              {s.lodgeId && lodgeById(PACK, s.lodgeId)?.kaiju && <div className="stamp-slam"><PatchIcon lodge={lodgeById(PACK, s.lodgeId)!} earned size={64} /><span>You saved <strong>{lodgeById(PACK, s.lodgeId)!.kaiju!.city}</strong> from {species(lodgeById(PACK, s.lodgeId)!.prizeSpeciesId).displayName}!{s.prizeId && <> A baby <strong>{species(s.prizeId).displayName}</strong> joined you!</>}</span></div>}
+              {s.lodgeId && lodgeById(PACK, s.lodgeId) && !lodgeById(PACK, s.lodgeId)!.kaiju && <div className="stamp-slam"><PatchIcon lodge={lodgeById(PACK, s.lodgeId)!} earned tier={s.newPatch ?? patchOf(save, s.lodgeId)} size={64} /><span>{s.newPatch ? <>New {s.newPatch === 'bronze' ? '' : `${s.newPatch === 'gold' ? 'Gold' : 'Silver'} `}patch: <strong>{lodgeById(PACK, s.lodgeId)!.name.replace(' Lodge', '')} Patch</strong>{s.newPatch === 'gold' && <> · the legendary <strong>{species(lodgeById(PACK, s.lodgeId)!.legendaryId).displayName}</strong> joined you!</>}</> : <>You beat <strong>{lodgeById(PACK, s.lodgeId)!.name}</strong> again!</>}</span></div>}
+              {s.eggLaid && <div className="stamp-slam"><img src={artUrl(`egg-${s.eggLaid}`)} alt="" width={64} height={64} className="sprite egg-wobble" /><span>You got a <strong>{eggName[s.eggLaid]}</strong>! Answer {s.eggLaid === 'words' ? 'vocabulary' : s.eggLaid === 'math' ? 'math' : s.eggLaid === 'science' ? 'science' : 'math, vocabulary or science'} questions to hatch it.</span></div>}
               {s.collected && <p className="collect-milestone"><Fx id="badge" /> <strong>{s.collected} creatures found!</strong> Keep collecting!</p>}
               {(s.newBadges ?? []).map((id) => <p key={id} className="badge-new"><Fx id="badge" />New badge: <strong>{BADGES.find((b) => b.id === id)?.name}</strong></p>)}
               <p>{s.reward.kind === 'creature' ? <><strong>{rewardLabel(s.reward)}</strong> joined your stable!</> : <>You earned <strong>{rewardLabel(s.reward)}</strong>.</>}</p>
@@ -319,6 +355,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
       <section className="panel">
         <div className="row spread"><span><h1>Base Camp</h1><span className="collected">Creatures found: <strong>{known.size}</strong> of {PACK.species.length}</span><StudyRanks save={save} /></span><span className="row"><button type="button" onClick={() => setShowLodges(true)}>Ranger Lodges <Key k="G" /></button><button type="button" onClick={() => setShowMedals(true)}>Medals <Key k="M" /></button><button type="button" onClick={() => setShowPassport(true)}>Passport <Key k="V" /></button></span></div>
         <LodgeTeaser save={save} onOpen={() => setShowLodges(true)} />
+        <KaijuBanner save={save} dispatch={dispatch} />
         <NewInTheWild known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <DailyStrip save={save} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <NightCreatures night={!!save.offersNight} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />

@@ -1,0 +1,196 @@
+{
+  "id": "ch-01",
+  "title": "Thinking Like a Scientist",
+  "order": 1,
+  "questions": [
+    {
+      "id": "branch-life",
+      "concept": "branches-of-science",
+      "difficulty": "scout",
+      "prompt": "Which branch of science studies living things like plants, animals and tiny one-celled creatures?",
+      "answer": "Life science (biology)",
+      "wrong": ["Earth science", "Physical science", "Chemistry"],
+      "explain": "Life science, also called biology, is the study of everything that is alive."
+    },
+    {
+      "id": "branch-earth",
+      "concept": "branches-of-science",
+      "difficulty": "scout",
+      "prompt": "Which branch of science studies rocks, planets and stars?",
+      "answer": "Earth science",
+      "wrong": ["Life science", "Biology", "Chemistry"],
+      "explain": "Earth science covers our planet and space, including nonliving things like rocks and stars."
+    },
+    {
+      "id": "hypothesis-definition",
+      "concept": "hypothesis",
+      "difficulty": "scout",
+      "prompt": "What is a hypothesis?",
+      "answer": "A prediction that can be tested",
+      "wrong": ["A fact that has been proven forever", "A list of materials for an experiment", "The final result of an experiment"],
+      "explain": "A hypothesis is an educated guess about what will happen, and you must be able to test it."
+    },
+    {
+      "id": "observation-tools",
+      "concept": "observation",
+      "difficulty": "scout",
+      "prompt": "What do scientists use to make observations?",
+      "answer": "Their senses and scientific tools",
+      "wrong": ["Only their imagination", "Guesses about the future", "Opinions from their friends"],
+      "explain": "Observing means using your senses, often helped by tools like rulers and thermometers, to describe what happens."
+    },
+    {
+      "id": "measurement-unit",
+      "concept": "measurement",
+      "difficulty": "scout",
+      "prompt": "Every measurement needs a number and what else?",
+      "answer": "A unit",
+      "wrong": ["A hypothesis", "A graph", "A conclusion"],
+      "explain": "\"5\" alone means nothing. \"5 meters\" or \"5 minutes\" tells you what was measured."
+    },
+    {
+      "id": "conclusion-definition",
+      "concept": "conclusion",
+      "difficulty": "scout",
+      "prompt": "What is the conclusion of a scientific investigation?",
+      "answer": "What you found out from the investigation",
+      "wrong": ["The question you started with", "The tools you used", "Your first guess before testing"],
+      "explain": "The conclusion sums up your findings and says whether they matched your hypothesis."
+    },
+    {
+      "id": "model-definition",
+      "concept": "models",
+      "difficulty": "scout",
+      "prompt": "What is a scientific model?",
+      "answer": "A simpler representation of something real",
+      "wrong": ["A perfect copy that is never wrong", "A rule that can never change", "A famous scientist's notebook"],
+      "explain": "Models help us study things that are too big, too small or too costly to look at directly."
+    },
+    {
+      "id": "quantitative-example",
+      "concept": "quantitative-qualitative",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a quantitative observation?",
+      "answer": "The plant is 12 cm tall",
+      "wrong": ["The leaves are bright green", "The flower smells sweet", "The stem feels fuzzy"],
+      "explain": "Quantitative observations use numbers and measurements. Color, smell and feel are qualities."
+    },
+    {
+      "id": "qualitative-example",
+      "concept": "quantitative-qualitative",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a qualitative observation?",
+      "answer": "The rock feels rough",
+      "wrong": ["The rock has a mass of 40 g", "The rock is 5 cm long", "There are 3 rocks in the jar"],
+      "explain": "Qualitative observations describe qualities like texture, color or smell instead of numbers."
+    },
+    {
+      "id": "inquiry-first-step",
+      "concept": "scientific-inquiry",
+      "difficulty": "ranger",
+      "prompt": "What usually comes first in a scientific investigation?",
+      "answer": "Asking a question",
+      "wrong": ["Sharing the results", "Drawing a conclusion", "Analyzing the data"],
+      "explain": "Science starts with a question about how the world works. Research, testing and conclusions come after."
+    },
+    {
+      "id": "inquiry-after-hypothesis",
+      "concept": "scientific-inquiry",
+      "difficulty": "ranger",
+      "prompt": "After you make a hypothesis, what is the next step?",
+      "answer": "Test it with experiments and observations",
+      "wrong": ["Announce it as a proven fact", "Write the final conclusion", "Throw away your question"],
+      "explain": "A hypothesis is only useful once you test it and compare the results with your prediction."
+    },
+    {
+      "id": "hypothesis-not-supported",
+      "concept": "hypothesis",
+      "difficulty": "ranger",
+      "prompt": "Your results do not support your hypothesis. What should you do?",
+      "answer": "Make a new hypothesis and test again",
+      "wrong": ["Change the data so it matches", "Give up on the question", "Say the hypothesis was right anyway"],
+      "explain": "Scientists use what they learned to form a better hypothesis and start the process again."
+    },
+    {
+      "id": "model-physical",
+      "concept": "models",
+      "difficulty": "ranger",
+      "prompt": "A globe is an example of which kind of model?",
+      "answer": "A physical model",
+      "wrong": ["A computer model", "A mathematical model", "A chemical model"],
+      "explain": "A globe is a real object you can hold that represents Earth, so it is a physical model."
+    },
+    {
+      "id": "evidence-role",
+      "concept": "evidence",
+      "difficulty": "ranger",
+      "prompt": "What can evidence from experiments do to a hypothesis?",
+      "answer": "Support it or go against it",
+      "wrong": ["Only ever prove it right", "Nothing at all", "Turn it into a law right away"],
+      "explain": "Evidence, like observations and data, can back up a hypothesis or show it is wrong."
+    },
+    {
+      "id": "theory-vs-law",
+      "concept": "theory-and-law",
+      "difficulty": "expert",
+      "prompt": "What is the main difference between a scientific law and a scientific theory?",
+      "answer": "A law describes what happens; a theory explains why",
+      "wrong": ["A law is a guess; a theory is a fact", "A theory is untested; a law is tested", "A law is about living things only"],
+      "explain": "Both are based on many observations. A law tells what nature does, and a theory explains the reason."
+    },
+    {
+      "id": "theory-definition",
+      "concept": "theory-and-law",
+      "difficulty": "expert",
+      "prompt": "Which best describes a scientific theory?",
+      "answer": "A well-tested explanation backed by many observations",
+      "wrong": ["A wild guess with no evidence", "The result of one single experiment", "A prediction nobody has tested yet"],
+      "explain": "In science, a theory is not just a hunch. It has been tested again and again for a long time."
+    },
+    {
+      "id": "law-gravity",
+      "concept": "theory-and-law",
+      "difficulty": "expert",
+      "prompt": "Newton's law of universal gravitation predicts how objects fall. Why is it called a law?",
+      "answer": "It describes how objects behave under gravity",
+      "wrong": ["It explains exactly why gravity exists", "It was never tested by anyone", "It only works on falling apples"],
+      "explain": "A law describes a pattern in nature very reliably, even if it doesn't explain why the pattern happens."
+    },
+    {
+      "id": "model-math",
+      "concept": "models",
+      "difficulty": "expert",
+      "prompt": "A shop owner uses an equation of last year's costs to predict next year's costs. What kind of model is this?",
+      "answer": "A mathematical model",
+      "wrong": ["A physical model", "A computer game", "A scale model"],
+      "explain": "Equations and number patterns that predict things are mathematical models."
+    },
+    {
+      "id": "model-computer",
+      "concept": "models",
+      "difficulty": "expert",
+      "prompt": "A program that shows how a storm might move across a map over the next week is what kind of model?",
+      "answer": "A computer model",
+      "wrong": ["A physical model", "A scientific law", "A hypothesis"],
+      "explain": "Simulations that run on a computer, like weather forecasts, are computer models."
+    },
+    {
+      "id": "failed-experiment",
+      "concept": "evidence",
+      "difficulty": "expert",
+      "prompt": "An experiment's results don't match the prediction. Was the experiment a waste?",
+      "answer": "No, learning what is false helps find what is true",
+      "wrong": ["Yes, it must be thrown away", "Yes, it means the scientist failed", "No, because the data can be changed"],
+      "explain": "A wrong prediction still teaches you something and points you toward a better idea."
+    },
+    {
+      "id": "branch-chemistry",
+      "concept": "branches-of-science",
+      "difficulty": "expert",
+      "prompt": "A scientist studies how iron and oxygen join to form rust. Which field of science is this?",
+      "answer": "Chemistry",
+      "wrong": ["Biology", "Earth science", "Astronomy"],
+      "explain": "Chemistry is the part of physical science that studies matter and how it changes into new substances."
+    }
+  ]
+}

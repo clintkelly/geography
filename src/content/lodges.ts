@@ -41,6 +41,18 @@ export interface Lodge {
   recommendedLevel: number;
   /** The Ranger League: Elite Rangers battled one after another before the Champion (the leader). Not on the Lodge ladder. */
   gauntlet?: readonly LeagueRanger[];
+  /** A Kaiju Alert: a giant monster heading for a real city, fought in three phases. Not on the Lodge ladder. */
+  kaiju?: KaijuAlert;
+}
+
+export interface KaijuAlert {
+  city: string;
+  /** The country or state the city is in: the battle's place, and its region's questions. */
+  placeId: string;
+  /** How dangerous, 1 to 6: shown as stars, and sets its strength. */
+  threat: number;
+  /** Battle strength on the Lodge scale. */
+  power: number;
 }
 
 /** An Elite Ranger of the League. Beating their last creature the first time wins their star creature. */
@@ -127,5 +139,53 @@ export const LODGES: readonly Lodge[] = [
     ],
     team: [foe('typhoondrake', 3), foe('glimmerhorn', 3), foe('cosmobill', 3)],
     prizeSpeciesId: 'cosmobill', patchArtId: 'patch-league', legendaryId: 'cosmobill', recommendedLevel: 12,
+  },
+  {
+    id: 'kaiju-quakeback', name: 'Kaiju Alert: San Francisco', rank: 4, type: 'stone', subject: 'all', subjectName: 'Places near San Francisco', biome: 'coast',
+    leader: { name: 'Quakeback', artId: 'quakeback-3', intro: "The ground is shaking! Quakeback is stomping toward San Francisco!", win: "Quakeback lumbers back under the hills. San Francisco is safe!" },
+    juniors: [],
+    team: [foe('quakeback', 3), foe('quakeback', 3), foe('quakeback', 3)],
+    prizeSpeciesId: 'quakeback', patchArtId: 'patch-kaiju', legendaryId: 'quakeback', recommendedLevel: 5,
+    kaiju: { city: 'San Francisco', placeId: 'california', threat: 1, power: 4 },
+  },
+  {
+    id: 'kaiju-tidalorn', name: 'Kaiju Alert: Tokyo', rank: 5, type: 'tide', subject: 'all', subjectName: 'Places near Tokyo', biome: 'coast',
+    leader: { name: 'Tidalorn', artId: 'tidalorn-3', intro: "A huge wave is rising in Tokyo Bay. Tidalorn is coming ashore!", win: "Tidalorn swims back out to sea. Tokyo is safe!" },
+    juniors: [],
+    team: [foe('tidalorn', 3), foe('tidalorn', 3), foe('tidalorn', 3)],
+    prizeSpeciesId: 'tidalorn', patchArtId: 'patch-kaiju', legendaryId: 'tidalorn', recommendedLevel: 6,
+    kaiju: { city: 'Tokyo', placeId: 'japan', threat: 2, power: 5 },
+  },
+  {
+    id: 'kaiju-stormcrab', name: 'Kaiju Alert: Rio de Janeiro', rank: 6, type: 'metal', subject: 'all', subjectName: 'Places near Rio de Janeiro', biome: 'coast',
+    leader: { name: 'Stormcrab', artId: 'stormcrab-3', intro: "Giant steel claws are rising out of Guanabara Bay. Stormcrab is heading for Rio!", win: "Stormcrab scuttles back into the deep. Rio is safe!" },
+    juniors: [],
+    team: [foe('stormcrab', 3), foe('stormcrab', 3), foe('stormcrab', 3)],
+    prizeSpeciesId: 'stormcrab', patchArtId: 'patch-kaiju', legendaryId: 'stormcrab', recommendedLevel: 7,
+    kaiju: { city: 'Rio de Janeiro', placeId: 'brazil', threat: 3, power: 6 },
+  },
+  {
+    id: 'kaiju-magmantis', name: 'Kaiju Alert: Naples', rank: 7, type: 'flame', subject: 'all', subjectName: 'Places near Naples', biome: 'coast',
+    leader: { name: 'Magmantis', artId: 'magmantis-3', intro: "Mount Vesuvius is glowing! Magmantis is leaping toward Naples!", win: "Magmantis bows and returns to the volcano. Naples is safe!" },
+    juniors: [],
+    team: [foe('magmantis', 3), foe('magmantis', 3), foe('magmantis', 3)],
+    prizeSpeciesId: 'magmantis', patchArtId: 'patch-kaiju', legendaryId: 'magmantis', recommendedLevel: 8,
+    kaiju: { city: 'Naples', placeId: 'italy', threat: 4, power: 7 },
+  },
+  {
+    id: 'kaiju-krakenmaw', name: 'Kaiju Alert: Sydney', rank: 8, type: 'tide', subject: 'all', subjectName: 'Places near Sydney', biome: 'coast',
+    leader: { name: 'Krakenmaw', artId: 'krakenmaw-3', intro: "Lightning is flashing under Sydney Harbour. Krakenmaw is rising!", win: "Krakenmaw sinks back into the storm deep. Sydney is safe!" },
+    juniors: [],
+    team: [foe('krakenmaw', 3), foe('krakenmaw', 3), foe('krakenmaw', 3)],
+    prizeSpeciesId: 'krakenmaw', patchArtId: 'patch-kaiju', legendaryId: 'krakenmaw', recommendedLevel: 10,
+    kaiju: { city: 'Sydney', placeId: 'australia', threat: 5, power: 8 },
+  },
+  {
+    id: 'kaiju-glacierhorn', name: 'Kaiju Alert: Reykjavík', rank: 9, type: 'frost', subject: 'all', subjectName: 'Places near Reykjavík', biome: 'coast',
+    leader: { name: 'Glacierhorn', artId: 'glacierhorn-3', intro: "A blizzard is rolling off the glacier. Glacierhorn is charging at Reykjavík!", win: "Glacierhorn turns back toward the ice cap. Reykjavík is safe!" },
+    juniors: [],
+    team: [foe('glacierhorn', 3), foe('glacierhorn', 3), foe('glacierhorn', 3)],
+    prizeSpeciesId: 'glacierhorn', patchArtId: 'patch-kaiju', legendaryId: 'glacierhorn', recommendedLevel: 10,
+    kaiju: { city: 'Reykjavík', placeId: 'iceland', threat: 6, power: 9 },
   },
 ];

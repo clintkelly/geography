@@ -1,0 +1,223 @@
+{
+  "id": "ch-02",
+  "title": "Scientific Experiments",
+  "order": 2,
+  "questions": [
+    {
+      "id": "procedure-definition",
+      "concept": "procedure",
+      "difficulty": "scout",
+      "prompt": "What is the procedure of an experiment?",
+      "answer": "A step-by-step list of how to do it",
+      "wrong": ["The final answer of the experiment", "A guess about what will happen", "A graph of the results"],
+      "explain": "A procedure lists every step so that someone else could repeat the experiment exactly."
+    },
+    {
+      "id": "independent-variable-definition",
+      "concept": "variables",
+      "difficulty": "scout",
+      "prompt": "What is the independent variable in an experiment?",
+      "answer": "The factor you change on purpose",
+      "wrong": ["The result you measure", "A factor that stays the same", "The trial where nothing changes"],
+      "explain": "The independent variable is the one thing the scientist chooses to change to see what happens."
+    },
+    {
+      "id": "dependent-variable-definition",
+      "concept": "variables",
+      "difficulty": "scout",
+      "prompt": "What is the dependent variable in an experiment?",
+      "answer": "The result you measure",
+      "wrong": ["The factor you change on purpose", "A factor kept the same", "The list of materials"],
+      "explain": "The dependent variable \"depends\" on what you changed. It is the outcome you observe or measure."
+    },
+    {
+      "id": "constants-definition",
+      "concept": "constants",
+      "difficulty": "scout",
+      "prompt": "What are the constants in an experiment?",
+      "answer": "Factors kept the same in every trial",
+      "wrong": ["Factors you change on purpose", "The results you measure", "Mistakes made during the test"],
+      "explain": "Keeping everything else the same makes it a fair test of the one thing you changed."
+    },
+    {
+      "id": "control-definition",
+      "concept": "control",
+      "difficulty": "scout",
+      "prompt": "What is the control in an experiment?",
+      "answer": "The trial used as a standard for comparison",
+      "wrong": ["The scientist in charge of the lab", "The variable that changes the most", "The graph of the final results"],
+      "explain": "The control is left unchanged so you can compare it with the trials where you did change something."
+    },
+    {
+      "id": "data-table",
+      "concept": "data",
+      "difficulty": "scout",
+      "prompt": "What is the best way to record data while an experiment is happening?",
+      "answer": "In a data table",
+      "wrong": ["In a pie chart", "From memory afterward", "In a scatter plot"],
+      "explain": "Tables in rows and columns are quick to fill in and easy to compare. Graphs can be made later."
+    },
+    {
+      "id": "engineering-definition",
+      "concept": "engineering",
+      "difficulty": "scout",
+      "prompt": "What do engineers mainly do?",
+      "answer": "Design and build things that solve problems",
+      "wrong": ["Only study living things", "Only name new stars", "Write the laws of nature"],
+      "explain": "Engineers invent and improve machines, structures and products to meet real-world needs."
+    },
+    {
+      "id": "prototype-definition",
+      "concept": "engineering",
+      "difficulty": "scout",
+      "prompt": "What is a prototype?",
+      "answer": "An early model of a design that can be tested",
+      "wrong": ["The finished product sold in stores", "A list of the design's limits", "A drawing of a scientist"],
+      "explain": "A prototype is like a first draft. Engineers test it, then adjust it to make it better."
+    },
+    {
+      "id": "independent-variable-music",
+      "concept": "variables",
+      "difficulty": "ranger",
+      "prompt": "You play music to some plants and not to others, then measure how tall they grow. What is the independent variable?",
+      "answer": "Whether the plant hears music",
+      "wrong": ["How tall the plants grow", "The type of soil", "The amount of water"],
+      "explain": "Music is what you chose to change on purpose, so it is the independent variable."
+    },
+    {
+      "id": "dependent-variable-music",
+      "concept": "variables",
+      "difficulty": "ranger",
+      "prompt": "You play music to some plants and not to others, then measure how tall they grow. What is the dependent variable?",
+      "answer": "How tall the plants grow",
+      "wrong": ["Whether the plant hears music", "The size of the pots", "The kind of plant"],
+      "explain": "Plant height is the result you measure, and it may depend on the music."
+    },
+    {
+      "id": "line-graph-axes",
+      "concept": "graphs",
+      "difficulty": "ranger",
+      "prompt": "On a line graph, where does the independent variable usually go?",
+      "answer": "On the x-axis (horizontal)",
+      "wrong": ["On the y-axis (vertical)", "In the title only", "In the key only"],
+      "explain": "The independent variable goes along the bottom (x-axis), and the dependent variable goes up the side (y-axis)."
+    },
+    {
+      "id": "bar-graph-use",
+      "concept": "graphs",
+      "difficulty": "ranger",
+      "prompt": "Which graph is best for comparing how many students have each kind of pet?",
+      "answer": "A bar graph",
+      "wrong": ["A line graph", "A scatter plot", "A weather map"],
+      "explain": "Bar graphs compare amounts in separate categories, like dogs, cats and birds."
+    },
+    {
+      "id": "line-graph-use",
+      "concept": "graphs",
+      "difficulty": "ranger",
+      "prompt": "Which graph best shows a plant growing taller week by week?",
+      "answer": "A line graph",
+      "wrong": ["A circle graph", "A Venn diagram", "A flow chart"],
+      "explain": "Line graphs are great for showing steady change over time."
+    },
+    {
+      "id": "circle-graph-use",
+      "concept": "graphs",
+      "difficulty": "ranger",
+      "prompt": "What is a circle graph (pie chart) best for showing?",
+      "answer": "How parts make up a whole",
+      "wrong": ["Change over a long time", "The exact path of a moving car", "The steps of a procedure"],
+      "explain": "Each slice of a circle graph is a share of the total, like how a class splits its votes."
+    },
+    {
+      "id": "infer-definition",
+      "concept": "inference",
+      "difficulty": "ranger",
+      "prompt": "What does it mean to infer?",
+      "answer": "Use evidence to reach a conclusion you didn't see",
+      "wrong": ["Copy another scientist's answer", "Guess with no evidence at all", "Repeat an experiment exactly"],
+      "explain": "When you can't watch something happen, you can use clues and facts to figure out what likely happened."
+    },
+    {
+      "id": "multiple-trials",
+      "concept": "reliable-data",
+      "difficulty": "ranger",
+      "prompt": "Why should you run several trials of an experiment?",
+      "answer": "To make sure the results are reliable",
+      "wrong": ["To use up extra materials", "To change the hypothesis each time", "So the results come out different"],
+      "explain": "Small errors happen. If many trials give similar results, you can trust them more."
+    },
+    {
+      "id": "constants-egg",
+      "concept": "constants",
+      "difficulty": "expert",
+      "prompt": "You test whether adding more salt to water makes an egg float. What should you keep constant?",
+      "answer": "The size of the egg and the amount of water",
+      "wrong": ["The amount of salt", "Whether the egg floats", "Nothing, change everything"],
+      "explain": "Salt is what you change, and floating is what you measure. Everything else should stay the same."
+    },
+    {
+      "id": "one-variable",
+      "concept": "variables",
+      "difficulty": "expert",
+      "prompt": "Why should you change only one variable at a time in an experiment?",
+      "answer": "So you know what caused the result",
+      "wrong": ["So the experiment ends faster", "So you need fewer notes", "So the graph has more colors"],
+      "explain": "If you change two things at once, you can't tell which one made the difference."
+    },
+    {
+      "id": "scatter-plot",
+      "concept": "graphs",
+      "difficulty": "expert",
+      "prompt": "What does a scatter plot help you see?",
+      "answer": "Whether two sets of data are related",
+      "wrong": ["The parts of a whole", "The steps of a procedure", "Only one single measurement"],
+      "explain": "Each dot is a pair of numbers. The pattern of dots shows whether one goes up or down with the other."
+    },
+    {
+      "id": "outlier",
+      "concept": "graphs",
+      "difficulty": "expert",
+      "prompt": "On a scatter plot, what do you call a point that is far away from the general pattern?",
+      "answer": "An outlier",
+      "wrong": ["The line of best fit", "The control", "The y-axis"],
+      "explain": "An outlier doesn't follow the trend of the other points."
+    },
+    {
+      "id": "line-of-best-fit",
+      "concept": "graphs",
+      "difficulty": "expert",
+      "prompt": "What does a line of best fit show on a scatter plot?",
+      "answer": "The overall trend of the data points",
+      "wrong": ["The exact value of every point", "Only the highest point", "Where the title should go"],
+      "explain": "The line of best fit sums up how the points are related, even if few points sit right on it."
+    },
+    {
+      "id": "graph-scale",
+      "concept": "graphs",
+      "difficulty": "expert",
+      "prompt": "Which numbers make a good scale for a graph axis?",
+      "answer": "0, 5, 10, 15, 20",
+      "wrong": ["0, 2, 5, 7, 15", "0, 3, 4, 10, 11", "1, 10, 12, 50, 51"],
+      "explain": "A scale should go up in even steps so the graph isn't stretched or squished in places."
+    },
+    {
+      "id": "constraints",
+      "concept": "engineering",
+      "difficulty": "expert",
+      "prompt": "In engineering, what are constraints?",
+      "answer": "Limits such as cost, time or materials",
+      "wrong": ["The finished product", "A test of the prototype", "The final drawing of the design"],
+      "explain": "Constraints are restrictions that a design must work within, like a small budget."
+    },
+    {
+      "id": "prototype-fails",
+      "concept": "engineering",
+      "difficulty": "expert",
+      "prompt": "An engineer's prototype fails its test. What usually happens next?",
+      "answer": "Improve the design and test it again",
+      "wrong": ["Sell it to the public anyway", "Stop working on the problem forever", "Hide the test results"],
+      "explain": "Engineers learn from what didn't work, redesign, and test again until it solves the problem."
+    }
+  ]
+}

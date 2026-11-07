@@ -1,0 +1,293 @@
+{
+  "id": "ch-08",
+  "title": "Solutions and Fluids",
+  "order": 8,
+  "questions": [
+    {
+      "id": "mixture-definition",
+      "concept": "mixtures",
+      "difficulty": "scout",
+      "prompt": "What is a mixture?",
+      "answer": "Substances mixed together but not chemically bonded",
+      "wrong": [
+        "A single pure element",
+        "Atoms joined by chemical bonds",
+        "One substance that can't be separated"
+      ],
+      "explain": "In a mixture, like salad dressing, the parts are combined but each keeps being itself."
+    },
+    {
+      "id": "solution-definition",
+      "concept": "solutions",
+      "difficulty": "scout",
+      "prompt": "A solution is another name for what?",
+      "answer": "A homogeneous mixture",
+      "wrong": [
+        "A heterogeneous mixture",
+        "A pure element",
+        "A chemical bond"
+      ],
+      "explain": "A solution is mixed evenly all the way through, so you can't see its separate parts."
+    },
+    {
+      "id": "solute-salt",
+      "concept": "solute-solvent",
+      "difficulty": "scout",
+      "prompt": "In salt water, what is the salt called?",
+      "answer": "The solute",
+      "wrong": [
+        "The solvent",
+        "The fluid",
+        "The pressure"
+      ],
+      "explain": "The solute is the substance that gets dissolved."
+    },
+    {
+      "id": "solvent-water",
+      "concept": "solute-solvent",
+      "difficulty": "scout",
+      "prompt": "In sugar water, what is the water called?",
+      "answer": "The solvent",
+      "wrong": [
+        "The solute",
+        "The element",
+        "The pressure"
+      ],
+      "explain": "The solvent is the substance that does the dissolving. Water is the most common solvent."
+    },
+    {
+      "id": "fluid-definition",
+      "concept": "fluids",
+      "difficulty": "scout",
+      "prompt": "What is a fluid?",
+      "answer": "Anything that can flow, like a liquid or a gas",
+      "wrong": [
+        "Only water and nothing else",
+        "Any hard, solid object",
+        "Only things that are very hot"
+      ],
+      "explain": "Water, air and oil are all fluids because they can flow."
+    },
+    {
+      "id": "solubility-definition",
+      "concept": "solubility",
+      "difficulty": "scout",
+      "prompt": "What is solubility?",
+      "answer": "How well a substance dissolves in another",
+      "wrong": [
+        "How heavy a substance is",
+        "How fast a liquid flows",
+        "How hot a substance can get"
+      ],
+      "explain": "Something with high solubility dissolves easily, like sugar in water."
+    },
+    {
+      "id": "concentration-definition",
+      "concept": "concentration",
+      "difficulty": "scout",
+      "prompt": "What does the concentration of a solution tell you?",
+      "answer": "How much solute is in it",
+      "wrong": [
+        "How hot it is",
+        "What color it is",
+        "How big its container is"
+      ],
+      "explain": "A concentrated solution has a lot of solute. A diluted one has only a little."
+    },
+    {
+      "id": "heterogeneous-example",
+      "concept": "mixtures",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a heterogeneous mixture?",
+      "answer": "A bowl of vegetable soup",
+      "wrong": [
+        "Sugar dissolved in water",
+        "Salt water",
+        "Clear vinegar"
+      ],
+      "explain": "In a heterogeneous mixture you can see different parts, and each spoonful is a little different."
+    },
+    {
+      "id": "homogeneous-example",
+      "concept": "mixtures",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a homogeneous mixture?",
+      "answer": "Salt fully dissolved in water",
+      "wrong": [
+        "A garden salad",
+        "Trail mix",
+        "Sand mixed with pebbles"
+      ],
+      "explain": "Dissolved salt spreads evenly through the water, so every drop is the same."
+    },
+    {
+      "id": "pure-substance",
+      "concept": "substances",
+      "difficulty": "ranger",
+      "prompt": "Water stays H2O whether it is ice, liquid water or steam. This makes water a...",
+      "answer": "Pure substance",
+      "wrong": [
+        "Mixture",
+        "Solution",
+        "Heterogeneous mixture"
+      ],
+      "explain": "A pure substance has the same makeup no matter what physical changes it goes through."
+    },
+    {
+      "id": "solid-solubility-temperature",
+      "concept": "solubility",
+      "difficulty": "ranger",
+      "prompt": "Most solid solutes, like sugar, dissolve more easily in water that is...",
+      "answer": "Hotter",
+      "wrong": [
+        "Colder",
+        "Frozen",
+        "Saltier"
+      ],
+      "explain": "That's why sugar dissolves faster in hot tea than in iced tea."
+    },
+    {
+      "id": "pressure-definition",
+      "concept": "pressure",
+      "difficulty": "ranger",
+      "prompt": "What is pressure?",
+      "answer": "How much force pushes on an area",
+      "wrong": [
+        "How much matter is in an object",
+        "How fast a fluid flows",
+        "How hot a gas is"
+      ],
+      "explain": "Pressure = force ÷ area. Air inside a balloon pushes outward with pressure."
+    },
+    {
+      "id": "pressure-unit",
+      "concept": "pressure",
+      "difficulty": "ranger",
+      "prompt": "Which of these is a unit of pressure?",
+      "answer": "Pascal",
+      "wrong": [
+        "Liter",
+        "Kelvin",
+        "Gram"
+      ],
+      "explain": "Pressure is measured in pascals (Pa) or atmospheres (atm)."
+    },
+    {
+      "id": "diluted",
+      "concept": "concentration",
+      "difficulty": "ranger",
+      "prompt": "A juice drink tastes watery because it has very little juice in it. It is...",
+      "answer": "A diluted solution",
+      "wrong": [
+        "A concentrated solution",
+        "A pure substance",
+        "A heterogeneous mixture"
+      ],
+      "explain": "Diluted means there is only a small amount of solute compared to the solvent."
+    },
+    {
+      "id": "depth-pressure",
+      "concept": "pressure",
+      "difficulty": "ranger",
+      "prompt": "How does water pressure change as a diver swims deeper?",
+      "answer": "It increases",
+      "wrong": [
+        "It decreases",
+        "It stays the same",
+        "It drops to zero"
+      ],
+      "explain": "The deeper you go, the more water is above you pushing down."
+    },
+    {
+      "id": "gas-solubility",
+      "concept": "solubility",
+      "difficulty": "expert",
+      "prompt": "Why does soda stay fizzy longer when it is kept cold?",
+      "answer": "Gases dissolve better in cold liquids",
+      "wrong": [
+        "Gases dissolve better in hot liquids",
+        "Cold makes more sugar dissolve",
+        "The fridge adds extra bubbles"
+      ],
+      "explain": "Gas solutes are the opposite of solid ones. They stay dissolved better at colder temperatures."
+    },
+    {
+      "id": "pressure-calc",
+      "concept": "pressure",
+      "difficulty": "expert",
+      "prompt": "A force of 20 N pushes on an area of 4 m². What is the pressure?",
+      "answer": "5 Pa",
+      "wrong": [
+        "80 Pa",
+        "16 Pa",
+        "24 Pa"
+      ],
+      "explain": "Pressure = force ÷ area, so 20 N ÷ 4 m² = 5 Pa."
+    },
+    {
+      "id": "pressure-area",
+      "concept": "pressure",
+      "difficulty": "expert",
+      "prompt": "If you push with the same force over a bigger area, what happens to the pressure?",
+      "answer": "It decreases",
+      "wrong": [
+        "It increases",
+        "It stays the same",
+        "It doubles"
+      ],
+      "explain": "The force is spread over more space, so each part gets less push."
+    },
+    {
+      "id": "snowshoes",
+      "concept": "pressure",
+      "difficulty": "expert",
+      "prompt": "Why do wide snowshoes keep you from sinking into deep snow?",
+      "answer": "They spread your weight over a larger area",
+      "wrong": [
+        "They make you weigh less",
+        "They melt the snow under you",
+        "They push harder on the snow"
+      ],
+      "explain": "A larger area means less pressure on the snow, so you stay on top."
+    },
+    {
+      "id": "altitude-pressure",
+      "concept": "pressure",
+      "difficulty": "expert",
+      "prompt": "Why is air pressure lower on top of a tall mountain?",
+      "answer": "There is less air above pushing down",
+      "wrong": [
+        "The mountain is closer to the Sun",
+        "Gravity is much stronger up high",
+        "Mountain air is heavier"
+      ],
+      "explain": "Air pressure comes from the weight of air above you. Up high, there's less air above."
+    },
+    {
+      "id": "boiling-mountain",
+      "concept": "pressure",
+      "difficulty": "expert",
+      "prompt": "Why does water boil at a lower temperature high in the mountains?",
+      "answer": "Lower air pressure lets molecules escape easily",
+      "wrong": [
+        "Mountain water is saltier",
+        "The air is warmer up high",
+        "Gravity is stronger on mountains"
+      ],
+      "explain": "With less air pressing down, water molecules can break free into gas at a lower temperature."
+    },
+    {
+      "id": "concentration-percent",
+      "concept": "concentration",
+      "difficulty": "expert",
+      "prompt": "A drink is 10% juice. How much juice is in 100 mL of the drink?",
+      "answer": "10 mL",
+      "wrong": [
+        "90 mL",
+        "1 mL",
+        "100 mL"
+      ],
+      "explain": "10% means 10 out of every 100 parts, so 100 mL of drink has 10 mL of juice."
+    }
+  ]
+}

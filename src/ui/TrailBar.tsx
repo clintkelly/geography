@@ -1,3 +1,4 @@
+import type { Subject } from '../engine/study';
 import { useEffect, useRef, useState } from 'react';
 import type { Difficulty } from '../content/types';
 import { currentSlotIndex, type Expedition, type SaveData, knownSpecies } from '../engine/game';
@@ -130,16 +131,16 @@ function StreakBanner({ streak }: { streak: number }) {
 }
 
 /** How many more right answers lay the next egg. */
-function EggCell({ save, subject }: { save: SaveData; subject: 'math' | 'words' }) {
+function EggCell({ save, subject }: { save: SaveData; subject: Subject }) {
   const m = save.eggMeter ?? { math: 0, words: 0, laid: 0 };
-  const left = EGG_METER - m[subject];
+  const left = EGG_METER - (m[subject] ?? 0);
   const rare = (m.laid + 1) % RARE_EVERY === 0;
   const full = (save.eggs?.length ?? 0) >= 3;
   return (
-    <span className="hud-cell egg-cell" title={`Every ${EGG_METER} right ${subject === 'math' ? 'math' : 'vocabulary'} answers lay an egg.`}>
+    <span className="hud-cell egg-cell" title={`Every ${EGG_METER} right ${subject === 'math' ? 'math' : subject === 'science' ? 'science' : 'vocabulary'} answers lay an egg.`}>
       <span className="hud-label">Egg Meter</span>
-      <span className="score-row"><span className="score-track"><span className="score-fill egg-fill" style={{ width: `${(m[subject] / EGG_METER) * 100}%` }} /></span></span>
-      <small>{full ? 'Nest full: hatch one at camp' : `${left} more right for a${rare ? ' Rare' : subject === 'math' ? ' Math' : ' Word'} Egg`}</small>
+      <span className="score-row"><span className="score-track"><span className="score-fill egg-fill" style={{ width: `${((m[subject] ?? 0) / EGG_METER) * 100}%` }} /></span></span>
+      <small>{full ? 'Nest full: hatch one at camp' : `${left} more right for a${rare ? ' Rare' : subject === 'math' ? ' Math' : subject === 'science' ? ' Science' : ' Word'} Egg`}</small>
     </span>
   );
 }
@@ -177,9 +178,11 @@ export function TrailBar({ e, save }: { e: Expedition; save: SaveData }) {
       <Streak streak={streak} />
       {lodge ? (
         <span className="hud-cell">
-          <span className="hud-label">Lodge prize</span>
-          <strong>{(save.lodgesBeaten ?? []).includes(lodge.id) ? 'XP rematch' : `${lodge.name.replace(' Lodge', '')} Patch`}</strong>
-          {!(save.lodgesBeaten ?? []).includes(lodge.id) && <small>and {species(lodge.prizeSpeciesId).displayName}</small>}
+          <span className="hud-label">{lodge.kaiju ? 'Defending' : 'Lodge prize'}</span>
+          {lodge.kaiju
+            ? <><strong>{lodge.kaiju.city}</strong><small>{(save.lodgesBeaten ?? []).includes(lodge.id) ? 'XP rematch' : `Prize: baby ${species(lodge.prizeSpeciesId).displayName}`}</small></>
+            : <><strong>{(save.lodgesBeaten ?? []).includes(lodge.id) ? 'XP rematch' : `${lodge.name.replace(' Lodge', '')} Patch`}</strong>
+              {!(save.lodgesBeaten ?? []).includes(lodge.id) && <small>and {species(lodge.prizeSpeciesId).displayName}</small>}</>}
         </span>
       ) : (
         <>

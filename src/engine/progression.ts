@@ -71,7 +71,7 @@ export const speciesOf = (pack: Pack, id: string) => pack.species.find((s) => s.
 export type Raised = Partial<Record<PathId, number>>;
 export const PATH_ORDER: readonly PathId[] = ['scholar', 'ranger', 'banner'];
 export const PATH_INFO: Record<PathId, { name: string; how: string }> = {
-  scholar: { name: 'Scholar', how: 'right math and vocabulary answers' },
+  scholar: { name: 'Scholar', how: 'right math, vocabulary and science answers' },
   ranger: { name: 'Ranger', how: 'battles won on Ranger and Expert trails' },
   banner: { name: 'Banner', how: 'right flag answers' },
 };

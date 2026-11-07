@@ -1,0 +1,293 @@
+{
+  "id": "ch-10",
+  "title": "Force and Newton's Laws of Motion",
+  "order": 10,
+  "questions": [
+    {
+      "id": "force-definition",
+      "concept": "force",
+      "difficulty": "scout",
+      "prompt": "What is a force?",
+      "answer": "A push or a pull",
+      "wrong": [
+        "A type of matter",
+        "A unit of time",
+        "The speed of an object"
+      ],
+      "explain": "Forces are pushes and pulls. They are needed to change how something moves."
+    },
+    {
+      "id": "force-unit",
+      "concept": "force",
+      "difficulty": "scout",
+      "prompt": "What is the SI unit of force?",
+      "answer": "Newton (N)",
+      "wrong": [
+        "Meter (m)",
+        "Kilogram (kg)",
+        "Second (s)"
+      ],
+      "explain": "Force is measured in newtons, named after Isaac Newton."
+    },
+    {
+      "id": "force-direction",
+      "concept": "force",
+      "difficulty": "scout",
+      "prompt": "Every force has a size and a...",
+      "answer": "Direction",
+      "wrong": [
+        "Color",
+        "Temperature",
+        "Smell"
+      ],
+      "explain": "To describe a force, you need to know how strong it is and which way it pushes or pulls."
+    },
+    {
+      "id": "net-force-definition",
+      "concept": "net-force",
+      "difficulty": "scout",
+      "prompt": "What is net force?",
+      "answer": "The combination of all forces on an object",
+      "wrong": [
+        "The strongest single force",
+        "The force of gravity only",
+        "The force of friction only"
+      ],
+      "explain": "Net force is what you get when you add up all the forces, taking their directions into account."
+    },
+    {
+      "id": "inertia-definition",
+      "concept": "inertia",
+      "difficulty": "scout",
+      "prompt": "What is inertia?",
+      "answer": "An object's resistance to a change in motion",
+      "wrong": [
+        "The pull of gravity on an object",
+        "A kind of friction on rough ground",
+        "How fast an object is moving"
+      ],
+      "explain": "Objects tend to keep doing what they are doing, whether staying still or moving."
+    },
+    {
+      "id": "newton-name",
+      "concept": "newtons-laws",
+      "difficulty": "scout",
+      "prompt": "Which scientist described the laws of motion, and has the unit of force named after him?",
+      "answer": "Isaac Newton",
+      "wrong": [
+        "Albert Einstein",
+        "John Dalton",
+        "Ernest Rutherford"
+      ],
+      "explain": "Isaac Newton described how forces change motion, so the unit of force is the newton."
+    },
+    {
+      "id": "law-of-inertia",
+      "concept": "newtons-laws",
+      "difficulty": "scout",
+      "prompt": "Newton's first law of motion is also called the law of...",
+      "answer": "Inertia",
+      "wrong": [
+        "Gravity",
+        "Density",
+        "Pressure"
+      ],
+      "explain": "The first law says objects resist changes in motion, which is what inertia means."
+    },
+    {
+      "id": "first-law-rest",
+      "concept": "newtons-laws",
+      "difficulty": "ranger",
+      "prompt": "A soccer ball sits still on the grass. According to Newton's first law, what will it do?",
+      "answer": "Stay still unless a force acts on it",
+      "wrong": [
+        "Start rolling on its own",
+        "Slowly sink into the ground",
+        "Speed up over time"
+      ],
+      "explain": "An object at rest stays at rest until a net force, like a kick, acts on it."
+    },
+    {
+      "id": "ball-stops",
+      "concept": "newtons-laws",
+      "difficulty": "ranger",
+      "prompt": "A ball rolling across grass slowly comes to a stop. Why?",
+      "answer": "Friction from the grass acts on it",
+      "wrong": [
+        "It runs out of inertia",
+        "All objects want to stop",
+        "Gravity pushes it backward"
+      ],
+      "explain": "A moving object keeps moving unless a force acts on it. Here, friction slows the ball down."
+    },
+    {
+      "id": "force-shape",
+      "concept": "force",
+      "difficulty": "ranger",
+      "prompt": "Squeezing an empty can until it crumples shows that a force can...",
+      "answer": "Change an object's shape",
+      "wrong": [
+        "Make an object disappear",
+        "Change the object's mass",
+        "Turn metal into liquid"
+      ],
+      "explain": "Forces can start motion, change speed or direction, or change an object's shape."
+    },
+    {
+      "id": "net-force-same-direction",
+      "concept": "net-force",
+      "difficulty": "ranger",
+      "prompt": "Two kids push a box the same way, one with 10 N and one with 15 N. What is the net force?",
+      "answer": "25 N",
+      "wrong": [
+        "5 N",
+        "150 N",
+        "10 N"
+      ],
+      "explain": "Forces in the same direction add up: 10 N + 15 N = 25 N."
+    },
+    {
+      "id": "change-motion",
+      "concept": "force",
+      "difficulty": "ranger",
+      "prompt": "What is needed to change an object's speed or direction?",
+      "answer": "A net force",
+      "wrong": [
+        "More time",
+        "A reference point",
+        "A lower temperature"
+      ],
+      "explain": "Without a net force, an object keeps the same speed and direction."
+    },
+    {
+      "id": "tug-of-war",
+      "concept": "net-force",
+      "difficulty": "ranger",
+      "prompt": "Two teams pull a rope with equal force in opposite directions. What happens?",
+      "answer": "The rope doesn't move; the net force is zero",
+      "wrong": [
+        "The rope moves toward the left team",
+        "The rope moves toward the right team",
+        "The rope speeds up in both directions"
+      ],
+      "explain": "Equal forces in opposite directions cancel out, so they are balanced."
+    },
+    {
+      "id": "one-newton-apple",
+      "concept": "force",
+      "difficulty": "ranger",
+      "prompt": "About how much force does it take to hold up a small apple?",
+      "answer": "About 1 N",
+      "wrong": [
+        "About 100 N",
+        "About 1,000 N",
+        "About 0.001 N"
+      ],
+      "explain": "A newton is a small amount of force, about what a small apple weighs."
+    },
+    {
+      "id": "space-kick",
+      "concept": "newtons-laws",
+      "difficulty": "expert",
+      "prompt": "You kick a ball in deep space, far from any planet or star. What happens to it?",
+      "answer": "It keeps moving at the same speed and direction",
+      "wrong": [
+        "It slowly drifts to a stop",
+        "It floats back toward you",
+        "It falls straight down below"
+      ],
+      "explain": "With no friction, air or nearby gravity, there is no force to change its motion."
+    },
+    {
+      "id": "net-force-opposite",
+      "concept": "net-force",
+      "difficulty": "expert",
+      "prompt": "A box is pushed 30 N to the right and 12 N to the left. What is the net force?",
+      "answer": "18 N to the right",
+      "wrong": [
+        "42 N to the right",
+        "18 N to the left",
+        "42 N to the left"
+      ],
+      "explain": "Opposite forces subtract: 30 N - 12 N = 18 N, in the direction of the bigger force."
+    },
+    {
+      "id": "fma-cart",
+      "concept": "force-mass-acceleration",
+      "difficulty": "expert",
+      "prompt": "Force = mass × acceleration. What force is needed to make a 5 kg cart accelerate at 2 m/s²?",
+      "answer": "10 N",
+      "wrong": [
+        "2.5 N",
+        "7 N",
+        "3 N"
+      ],
+      "explain": "F = m × a = 5 kg × 2 m/s² = 10 N."
+    },
+    {
+      "id": "fma-ball",
+      "concept": "force-mass-acceleration",
+      "difficulty": "expert",
+      "prompt": "A 3 kg ball accelerates at 4 m/s² when pushed. How big was the force? (Force = mass × acceleration)",
+      "answer": "12 N",
+      "wrong": [
+        "7 N",
+        "0.75 N",
+        "1 N"
+      ],
+      "explain": "F = m × a = 3 kg × 4 m/s² = 12 N."
+    },
+    {
+      "id": "fma-acceleration",
+      "concept": "force-mass-acceleration",
+      "difficulty": "expert",
+      "prompt": "A net force of 10 N pushes a 2 kg box. What is its acceleration? (Acceleration = force ÷ mass)",
+      "answer": "5 m/s²",
+      "wrong": [
+        "20 m/s²",
+        "12 m/s²",
+        "8 m/s²"
+      ],
+      "explain": "a = F ÷ m = 10 N ÷ 2 kg = 5 m/s²."
+    },
+    {
+      "id": "bus-stop",
+      "concept": "inertia",
+      "difficulty": "expert",
+      "prompt": "A bus stops suddenly and the passengers lurch forward. Why?",
+      "answer": "Their bodies tend to keep moving forward",
+      "wrong": [
+        "The bus pushes them forward",
+        "Gravity suddenly gets stronger",
+        "The brakes pull them forward"
+      ],
+      "explain": "Because of inertia, the passengers keep moving even though the bus has stopped."
+    },
+    {
+      "id": "mass-inertia",
+      "concept": "inertia",
+      "difficulty": "expert",
+      "prompt": "Which is harder to start moving: an empty shopping cart or a full one?",
+      "answer": "The full cart, because it has more mass",
+      "wrong": [
+        "The empty cart, because it has less mass",
+        "They are always equally hard",
+        "Neither one needs a force"
+      ],
+      "explain": "More mass means more inertia, so it takes more force to change its motion."
+    },
+    {
+      "id": "constant-velocity-net-zero",
+      "concept": "net-force",
+      "difficulty": "expert",
+      "prompt": "A hockey puck glides across smooth ice in a straight line at a steady speed. What is the net force on it?",
+      "answer": "About zero",
+      "wrong": [
+        "A large force forward",
+        "A large force backward",
+        "Exactly equal to its mass"
+      ],
+      "explain": "If speed and direction aren't changing, the forces are balanced, so the net force is about zero."
+    }
+  ]
+}

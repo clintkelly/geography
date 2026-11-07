@@ -40,7 +40,7 @@ export interface Question {
   /** This question tests a Field Note, and appears only after the child has seen it. */
   recallOf?: string;
   /** What it asks about, for the Camp focus setting. */
-  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics' | 'animal' | 'history' | 'math' | 'word';
+  topic?: 'location' | 'capital' | 'nickname' | 'fact' | 'flag' | 'basics' | 'animal' | 'history' | 'math' | 'word' | 'science';
   /** For a typed question: the value that counts as right. */
   typed?: TypedAnswer;
   /** A tip shown after a miss on a study question, like the trick to adding fractions. */
@@ -121,13 +121,15 @@ export interface Species {
   /** Met only on trails at this difficulty or harder. */
   minDifficulty?: Exclude<Difficulty, 'scout'>;
   /** A study creature: it lives on Math or Words trails instead of in a region. */
-  subject?: 'math' | 'words';
+  subject?: 'math' | 'words' | 'science';
   /** Hatches from this kind of study egg. Egg creatures live nowhere else. */
-  egg?: 'math' | 'words';
+  egg?: 'math' | 'words' | 'science';
   /** A Lodge legendary, given for a Gold patch. */
   legendary?: boolean;
   /** Just added to the game: shown first in sightings and on trails until befriended. */
   fresh?: boolean;
+  /** A baby kaiju: won by defending its city in a Kaiju Alert. Lives nowhere in the wild. */
+  kaiju?: boolean;
   /** Comes out only at night, by the player's clock. */
   night?: boolean;
   /** Branching evolution: at stage 2 it follows one of these, and takes its type, look and Special. */
@@ -173,6 +175,8 @@ export interface Pack {
   featuredSpeciesId: string;
   /** Vocabulary units, for the Words settings. */
   wordUnits?: readonly { id: string; title: string; words: number }[];
+  /** Science chapters, for the parent's study settings. */
+  scienceUnits?: readonly { id: string; title: string; questions: number }[];
   /** Ranger Lodges, taken in order. */
   lodges?: readonly Lodge[];
 }

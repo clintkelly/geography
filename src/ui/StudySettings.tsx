@@ -5,6 +5,7 @@ import { DEFAULT_STUDY, MIX_CHOICES, type StudySettings as Study } from '../engi
 
 const TOPICS = Object.keys(MATH_TOPICS) as MathTopic[];
 const UNITS = PACK.wordUnits ?? [];
+const CHAPTERS = PACK.scienceUnits ?? [];
 
 const mixLabel = (m: number) => (m === 0 ? 'Off' : `${Math.round(m * 100)}%`);
 
@@ -36,14 +37,15 @@ export function StudySettings({ save, dispatch }: { save: SaveData; dispatch: (c
   const set = (patch: Partial<Study>) => dispatch({ type: 'updateSettings', patch: { study: { ...study, ...patch } } });
   const topics = study.mathTopics?.length ? study.mathTopics : TOPICS;
   const units = study.wordUnits?.length ? study.wordUnits : UNITS.map((u) => u.id);
+  const chapters = study.scienceUnits?.length ? study.scienceUnits : CHAPTERS.map((c) => c.id);
   const toggle = <T,>(list: readonly T[], item: T, on: boolean) => (on ? [...list, item] : list.filter((x) => x !== item));
   const rows = progress(save);
   const missed = missedWords(save);
 
   return (
     <section className="panel study-settings">
-      <h2>Math and vocabulary (parent)</h2>
-      <p className="muted">Math and Words trails can always be picked at camp. You can also mix some into ordinary geography trails.</p>
+      <h2>Math, vocabulary and science (parent)</h2>
+      <p className="muted">Math, Words and Science trails can always be picked at camp. You can also mix some into ordinary geography trails.</p>
 
       <div className="field">Mix into geography trails
         <span className="row">
@@ -52,6 +54,7 @@ export function StudySettings({ save, dispatch }: { save: SaveData; dispatch: (c
       </div>
       <label className="field"><input type="checkbox" checked={study.math} onChange={(e) => set({ math: e.target.checked })} /> Mix in math</label>
       <label className="field"><input type="checkbox" checked={study.words} onChange={(e) => set({ words: e.target.checked })} /> Mix in vocabulary</label>
+      <label className="field"><input type="checkbox" checked={!!study.science} onChange={(e) => set({ science: e.target.checked })} /> Mix in science</label>
 
       <h3>Math topics</h3>
       {TOPICS.map((t) => (
@@ -66,6 +69,14 @@ export function StudySettings({ save, dispatch }: { save: SaveData; dispatch: (c
       {UNITS.map((u) => (
         <label key={u.id} className="field">
           <input type="checkbox" checked={units.includes(u.id)} disabled={units.length === 1 && units.includes(u.id)} onChange={(e) => set({ wordUnits: toggle(units, u.id, e.target.checked) })} /> {u.title} <span className="muted">({u.words} words)</span>
+        </label>
+      ))}
+
+      <h3>Science chapters</h3>
+      {CHAPTERS.length === 0 && <p className="muted">No science chapters yet.</p>}
+      {CHAPTERS.map((c) => (
+        <label key={c.id} className="field">
+          <input type="checkbox" checked={chapters.includes(c.id)} disabled={chapters.length === 1 && chapters.includes(c.id)} onChange={(e) => set({ scienceUnits: toggle(chapters, c.id, e.target.checked) })} /> {c.title} <span className="muted">({c.questions} questions)</span>
         </label>
       ))}
 

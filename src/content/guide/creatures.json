@@ -7290,5 +7290,119 @@
     "source": "https://en.wikipedia.org/wiki/Bird-of-paradise"
    }
   ]
+ },
+ "quakeback": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the triceratops and armadillo",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "Triceratops had three horns and a big bony frill.",
+    "source": "https://en.wikipedia.org/wiki/Triceratops"
+   },
+   {
+    "text": "Armadillos are covered in bands of bony armor.",
+    "source": "https://en.wikipedia.org/wiki/Armadillo"
+   }
+  ]
+ },
+ "tidalorn": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the marine iguana",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "Marine iguanas from the Galápagos are the only lizards that swim and feed in the sea.",
+    "source": "https://en.wikipedia.org/wiki/Marine_iguana"
+   },
+   {
+    "text": "They sneeze out extra salt from glands near their noses.",
+    "source": "https://en.wikipedia.org/wiki/Marine_iguana"
+   }
+  ]
+ },
+ "stormcrab": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the crab",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "Crabs walk sideways because of how their legs bend.",
+    "source": "https://en.wikipedia.org/wiki/Crab"
+   },
+   {
+    "text": "Some crabs, like the Japanese spider crab, have legs that span over 3 m (10 feet).",
+    "source": "https://en.wikipedia.org/wiki/Japanese_spider_crab"
+   }
+  ]
+ },
+ "magmantis": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the praying mantis",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "A praying mantis can turn its head about 180 degrees.",
+    "source": "https://en.wikipedia.org/wiki/Mantis"
+   },
+   {
+    "text": "Mount Vesuvius, near Naples, erupted in the year 79 and buried the town of Pompeii.",
+    "source": "https://en.wikipedia.org/wiki/Mount_Vesuvius"
+   }
+  ]
+ },
+ "krakenmaw": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the colossal squid",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "The colossal squid is the heaviest squid ever found.",
+    "source": "https://en.wikipedia.org/wiki/Colossal_squid"
+   },
+   {
+    "text": "It lives in the icy deep waters of the Southern Ocean.",
+    "source": "https://en.wikipedia.org/wiki/Colossal_squid"
+   }
+  ]
+ },
+ "glacierhorn": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the woolly rhinoceros",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "The woolly rhinoceros lived during the last Ice Age and died out about 14,000 years ago.",
+    "source": "https://en.wikipedia.org/wiki/Woolly_rhinoceros"
+   },
+   {
+    "text": "Iceland has huge glaciers and active volcanoes on the same island.",
+    "source": "https://en.wikipedia.org/wiki/Iceland"
+   }
+  ]
  }
 }

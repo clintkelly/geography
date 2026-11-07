@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { PACK } from '../content/pack';
 import type { Lodge } from '../content/lodges';
-import { activeCompanion, currentSlotIndex, teamOf, type Command, type Expedition, type SaveData } from '../engine/game';
+import { activeCompanion, currentSlotIndex, knownSpecies, teamOf, type Command, type Expedition, type SaveData } from '../engine/game';
+import { NewCreatureReveal } from './NewCreature';
 import { leagueOf, lodgeById, lodgeOpen, lodgesOf, nextLodge, patchOf, type LodgeTier } from '../engine/lodges';
 import { levelOf } from '../engine/progression';
 import { artUrl, Fx, Sprite } from './art';
@@ -155,6 +156,34 @@ export function LodgeHall({ e, save, dispatch }: { e: Expedition; save: SaveData
   const newTrainer = leaderUp && e.slots[index - 1]?.trainer !== slot.trainer;
   const known = new Set([...save.companions, ...(save.wild ?? [])].map((c) => c.speciesId));
   const star = slot.prize && !known.has(slot.prize) ? species(slot.prize) : undefined;
+  if (lodge.kaiju) {
+    const k = lodge.kaiju;
+    const phase = index + 1;
+    const PHASES = [`${lodge.leader.name} is wading toward ${k.city}!`, `${lodge.leader.name} is angry now! Hold the line!`, `Final stand! ${lodge.leader.name} is almost at the city!`];
+    return (
+      <div className="stack">
+        <TrailBar e={e} save={save} />
+        <section className="panel lodge-hall kaiju-hall">
+          <div className="kaiju-stripes" aria-hidden="true" />
+          <h1>⚠ Defend {k.city}! ⚠</h1>
+          {e.retreated
+            ? <p role="status">{lodge.leader.name} pushed your team back! Rest up and try again: the city is still standing.</p>
+            : <p className="kaiju-phase">Phase {phase} of {e.slots.length}: {PHASES[Math.min(index, PHASES.length - 1)]}</p>}
+          <div className="kaiju-phases" aria-label="Battle phases">{e.slots.map((s, i) => <span key={i} className={s.status === 'won' ? 'done' : i === index ? 'now' : ''}>{s.status === 'won' ? '✔' : i + 1}</span>)}</div>
+          <div className="encounter-card">
+            <Sprite id={lodge.leader.artId} size={160} className="kaiju-giant" />
+            <div>
+              {index === 0 && !e.retreated && <p className="lodge-quote">{lodge.leader.intro}</p>}
+              <p>Answer questions about places near {k.city} to power up your team. {slot.role === 'ace' ? 'Watch for its BIG attack every third turn, and Guard against it!' : 'Switch creatures with W if one gets tired.'}</p>
+              <p className="muted">{foe.flavor}</p>
+            </div>
+          </div>
+          <button type="button" className="primary" onClick={() => dispatch({ type: 'enterEncounter' })}>{e.retreated ? 'Try again' : 'Battle!'} <Key k="Enter" /></button>
+        </section>
+        <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>Retreat to camp</button>
+      </div>
+    );
+  }
   if (lodge.gauntlet) {
     return (
       <div className="stack">
@@ -246,6 +275,19 @@ export function LodgeComplete({ e, save, dispatch }: { e: Expedition; save: Save
   const prize = species(lodge.prizeSpeciesId);
   const lead = companionView(activeCompanion(save)).name;
   const team = teamOf(e).length;
+  if (lodge.kaiju) {
+    return (
+      <section className="panel complete lodge-complete kaiju-complete">
+        <h1>You saved {lodge.kaiju.city}!</h1>
+        <p className="lodge-quote">{lodge.leader.win}</p>
+        {first
+          ? <><NewCreatureReveal speciesId={prize.id} found={knownSpecies(save).size + 1} /><p className="learn">A baby <strong>{prize.displayName}</strong> was left behind, and it wants to come with you! Raise it and it will grow into a giant kaiju.</p></>
+          : <div className="celebrate">{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}<Sprite id={lodge.leader.artId} size={160} /></div>}
+        <p className="muted">{e.correct} of {e.answered} answers correct</p>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{first ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>
+      </section>
+    );
+  }
   if (lodge.gauntlet) {
     const fame = save.companions.filter((c) => teamOf(e).includes(c.instanceId));
     return (
@@ -281,7 +323,7 @@ export function LodgeComplete({ e, save, dispatch }: { e: Expedition; save: Save
         {newSilver && <img src={artUrl('egg-rare')} alt="Rare Egg" width={96} height={96} className="sprite egg-wobble" />}
       </div>
       {first && <p className="learn">You earned the <strong>{lodge.name.replace(' Lodge', '')} Patch</strong>, and <strong>{prize.displayName}</strong> wants to join you! You can't find it anywhere else.</p>}
-      {newSilver && <p className="learn">The <strong>Silver patch</strong> is yours, and a <strong>Rare Egg</strong> for your nest! Answer math or vocabulary questions to hatch it.</p>}
+      {newSilver && <p className="learn">The <strong>Silver patch</strong> is yours, and a <strong>Rare Egg</strong> for your nest! Answer math, vocabulary or science questions to hatch it.</p>}
       {goldTest && <p className="learn">Now the <strong>Mastery Test</strong>: get 9 of 10 right for the <strong>Gold patch</strong>, the legendary <strong>{species(lodge.legendaryId).displayName}</strong> and a shiny {prize.displayName}.</p>}
       {!first && !newSilver && !goldTest && <p className="learn">You already have this patch. Great practice!</p>}
       <p className="muted">{e.correct} of {e.answered} answers correct</p>

@@ -12,12 +12,12 @@ export interface Egg {
 }
 
 /** Points to hatch an egg. */
-export const EGG_NEED: Record<EggKind, number> = { math: 15, words: 15, rare: 24 };
+export const EGG_NEED: Record<EggKind, number> = { math: 15, words: 15, science: 15, rare: 24 };
 /** Right answers that fill the Egg Meter and lay an egg on the spot, wherever they're answered. */
 export const EGG_METER = 8;
 /** Every few eggs from the meter is a Rare Egg. */
 export const RARE_EVERY = 4;
-export interface EggMeter { math: number; words: number; laid: number }
+export interface EggMeter { math: number; words: number; science?: number; laid: number }
 
 /**
  * A right study answer fills its subject's Egg Meter. A full meter lays an egg, a Rare one every few eggs,
@@ -25,7 +25,7 @@ export interface EggMeter { math: number; words: number; laid: number }
  */
 export function fillMeter(meter: EggMeter | undefined, eggs: readonly Egg[], subject: Subject, id: string): { meter: EggMeter; eggs: Egg[]; laid?: EggKind } {
   const m = meter ?? { math: 0, words: 0, laid: 0 };
-  const filled = Math.min(EGG_METER, m[subject] + 1);
+  const filled = Math.min(EGG_METER, (m[subject] ?? 0) + 1);
   if (filled < EGG_METER || eggs.length >= MAX_EGGS) return { meter: { ...m, [subject]: filled }, eggs: [...eggs] };
   const kind: EggKind = (m.laid + 1) % RARE_EVERY === 0 ? 'rare' : subject;
   return { meter: { ...m, [subject]: 0, laid: m.laid + 1 }, eggs: layEgg(eggs, kind, id), laid: kind };
@@ -36,10 +36,10 @@ export const EGG_POINTS: Record<Difficulty, number> = { scout: 1, ranger: 2, exp
 /** Eggs waiting to hatch. A full nest lays no more until one hatches. */
 export const MAX_EGGS = 3;
 /** The chance a hatchling is shiny. Rare eggs are where shinies come from. */
-export const EGG_SHINY: Record<EggKind, number> = { math: 0.15, words: 0.15, rare: 0.5 };
+export const EGG_SHINY: Record<EggKind, number> = { math: 0.15, words: 0.15, science: 0.15, rare: 0.5 };
 
 export const eggReady = (egg: Egg) => egg.progress >= EGG_NEED[egg.kind];
-export const eggName: Record<EggKind, string> = { math: 'Math Egg', words: 'Word Egg', rare: 'Rare Egg' };
+export const eggName: Record<EggKind, string> = { math: 'Math Egg', words: 'Word Egg', science: 'Science Egg', rare: 'Rare Egg' };
 
 /** Adds an egg if the nest has room. */
 export function layEgg(eggs: readonly Egg[], kind: EggKind, id: string): Egg[] {
@@ -61,7 +61,9 @@ export function feedEggs(eggs: readonly Egg[] | undefined, q: Pick<Question, 'to
 
 /** What can hatch from an egg: creatures found only in eggs. A Rare Egg can hold any of them. */
 export function eggPool(pack: Pack, kind: EggKind): string[] {
-  return pack.species.filter((s) => (kind === 'rare' ? !!s.egg : s.egg === kind)).map((s) => s.id);
+  const own = pack.species.filter((s) => (kind === 'rare' ? !!s.egg : s.egg === kind)).map((s) => s.id);
+  // A subject without its own egg creatures yet hatches any of them.
+  return own.length > 0 ? own : pack.species.filter((s) => !!s.egg).map((s) => s.id);
 }
 
 /** Picks the hatchling, favoring creatures the child hasn't met yet. */

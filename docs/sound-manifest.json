@@ -560,6 +560,16 @@
       "generationId": "9VfCPCnH6mmbjoiXyuZ1",
       "prompt": "Instrumental, no vocals. Focused 16-bit retro game challenge-exam theme, a new melody: a steady confident pulse of soft synth bass and gentle drums, a thoughtful glassy bell lead, a quiet ticking rhythm and hopeful rising chords at a medium tempo. Concentrated and determined but calm and encouraging, not stressful, kid-friendly, even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
       "note": "eleven_music_v2_5, instrumental; 48.36s; 1.7s fading tail cut; RMS 0.147; 48 ms fades at the loop point; measured only, not listened to"
+    },
+    "kaiju": {
+      "generationId": "1PzFHQMTJ5ICFkAnLX9H",
+      "prompt": "Instrumental, no vocals. Epic 16-bit retro game giant-monster battle theme: big heavy drums and booming low brass, a warning-siren synth motif, driving bass, heroic rising melody that says 'we can save the city!'. Exciting and dramatic but kid-friendly, not scary or horror. Even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5; 50.0s; 48 ms fades at the loop point; RMS 0.173; measured only, not listened to; check for stray vocals"
+    },
+    "kaiju-2": {
+      "generationId": "c71YW6052og5J8SAn0pp",
+      "prompt": "Instrumental, no vocals. Epic 16-bit retro game giant-monster battle theme: big heavy drums and booming low brass, a warning-siren synth motif, driving bass, heroic rising melody that says 'we can save the city!'. Exciting and dramatic but kid-friendly, not scary or horror. Even dynamics, seamlessly loopable with no intro build and no big ending, no fade-out. Original composition, about 50 seconds.",
+      "note": "eleven_music_v2_5; 50.0s; +1.5 dB; 48 ms fades; RMS 0.159; 92 clipped samples; measured only, not listened to; check for stray vocals"
     }
   }
 }

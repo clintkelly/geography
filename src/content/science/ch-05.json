@@ -1,0 +1,293 @@
+{
+  "id": "ch-05",
+  "title": "Lab Safety and Scientific Tools",
+  "order": 5,
+  "questions": [
+    {
+      "id": "think-first",
+      "concept": "lab-safety-rules",
+      "difficulty": "scout",
+      "prompt": "What is the most important lab safety habit?",
+      "answer": "Think carefully before you act",
+      "wrong": [
+        "Work as fast as you can",
+        "Skip reading the directions",
+        "Work alone so no one bothers you"
+      ],
+      "explain": "Being careful and thoughtful prevents most lab accidents."
+    },
+    {
+      "id": "goggles",
+      "concept": "protective-gear",
+      "difficulty": "scout",
+      "prompt": "What should you wear to protect your eyes during a lab?",
+      "answer": "Safety goggles",
+      "wrong": [
+        "Sunglasses",
+        "A lab notebook",
+        "Rubber gloves"
+      ],
+      "explain": "Goggles protect your eyes from splashes, spills and flying bits."
+    },
+    {
+      "id": "no-food",
+      "concept": "lab-safety-rules",
+      "difficulty": "scout",
+      "prompt": "Why shouldn't you eat or drink in a science lab?",
+      "answer": "Food could get mixed with harmful chemicals",
+      "wrong": [
+        "Food makes the lab too warm",
+        "Crumbs break the microscopes",
+        "Drinks make graphs harder to read"
+      ],
+      "explain": "Lab chemicals can be poisonous, so keep food and drinks out of the lab."
+    },
+    {
+      "id": "closed-toe-shoes",
+      "concept": "protective-gear",
+      "difficulty": "scout",
+      "prompt": "Why should you wear closed-toe shoes in a lab?",
+      "answer": "To protect your feet from spills and drops",
+      "wrong": [
+        "To help you run faster in the lab",
+        "To keep the lab floor clean",
+        "To make your steps quieter"
+      ],
+      "explain": "If something falls or spills, closed shoes keep it off your skin."
+    },
+    {
+      "id": "tie-hair",
+      "concept": "lab-safety-rules",
+      "difficulty": "scout",
+      "prompt": "Why should you tie back long hair in a lab?",
+      "answer": "It could get caught or catch on fire",
+      "wrong": [
+        "It makes the lab look neater",
+        "Hair can change your measurements",
+        "Long hair blocks the microscope light"
+      ],
+      "explain": "Loose hair can tangle in equipment or touch a flame."
+    },
+    {
+      "id": "beaker",
+      "concept": "lab-tools",
+      "difficulty": "scout",
+      "prompt": "Which piece of lab glassware looks like a cup with a pouring spout?",
+      "answer": "A beaker",
+      "wrong": [
+        "A test tube",
+        "A funnel",
+        "A stirring rod"
+      ],
+      "explain": "A beaker is a wide glass container with a spout. Its markings give only rough measurements."
+    },
+    {
+      "id": "microscope-slide",
+      "concept": "lab-tools",
+      "difficulty": "scout",
+      "prompt": "What holds a specimen when you look at it under a microscope?",
+      "answer": "A slide",
+      "wrong": [
+        "A stopper",
+        "A funnel",
+        "A ring stand"
+      ],
+      "explain": "A slide is a thin, flat piece of glass that holds what you want to look at."
+    },
+    {
+      "id": "wafting",
+      "concept": "chemical-safety",
+      "difficulty": "ranger",
+      "prompt": "What is the safe way to smell a chemical?",
+      "answer": "Wave the air toward your nose with your hand",
+      "wrong": [
+        "Put your nose right over it",
+        "Take a tiny taste first",
+        "Pour a little on your hand and sniff"
+      ],
+      "explain": "This is called wafting. It lets you smell just a little without breathing in a strong dose."
+    },
+    {
+      "id": "eyewash",
+      "concept": "safety-equipment",
+      "difficulty": "ranger",
+      "prompt": "A chemical splashes into your eye. What should you do?",
+      "answer": "Rinse it at the eyewash for about 15 minutes",
+      "wrong": [
+        "Rub your eye hard",
+        "Wait to see if it starts to hurt",
+        "Cover it with a bandage"
+      ],
+      "explain": "Flushing with lots of water right away washes the chemical out. Tell an adult too."
+    },
+    {
+      "id": "minor-burn",
+      "concept": "accidents",
+      "difficulty": "ranger",
+      "prompt": "How should you treat a small burn from a hot beaker?",
+      "answer": "Hold it under cold running water",
+      "wrong": [
+        "Rub butter on it",
+        "Rub it with a dry towel",
+        "Blow on it hard"
+      ],
+      "explain": "Cool running water for several minutes helps a minor burn. Always tell your teacher."
+    },
+    {
+      "id": "fire-blanket",
+      "concept": "safety-equipment",
+      "difficulty": "ranger",
+      "prompt": "What is used to smother a small fire on a person's clothes?",
+      "answer": "A fire blanket",
+      "wrong": [
+        "A fan",
+        "A paper towel",
+        "A plastic bag"
+      ],
+      "explain": "A fire blanket cuts off air to the flames. The person should also stop, drop and roll."
+    },
+    {
+      "id": "flask",
+      "concept": "lab-tools",
+      "difficulty": "ranger",
+      "prompt": "Which glassware is like a beaker but has a narrow mouth that can be closed with a stopper?",
+      "answer": "A flask",
+      "wrong": [
+        "A test tube brush",
+        "A funnel",
+        "A slide"
+      ],
+      "explain": "A flask's narrow neck makes it easy to close and harder to spill."
+    },
+    {
+      "id": "bunsen-burner",
+      "concept": "lab-tools",
+      "difficulty": "ranger",
+      "prompt": "Which lab tool heats things with an open gas flame?",
+      "answer": "A Bunsen burner",
+      "wrong": [
+        "A hot plate",
+        "A ring stand",
+        "A thermometer"
+      ],
+      "explain": "A Bunsen burner makes a flame from gas. A hot plate heats without a flame."
+    },
+    {
+      "id": "heat-unattended",
+      "concept": "heat-safety",
+      "difficulty": "ranger",
+      "prompt": "What is a key rule for using a heat source in the lab?",
+      "answer": "Never leave it unattended",
+      "wrong": [
+        "Heat liquids in sealed containers",
+        "Grab hot glass with bare hands",
+        "Keep loose paper next to it"
+      ],
+      "explain": "Someone should always watch a heat source so a fire or spill can be stopped quickly."
+    },
+    {
+      "id": "biological-waste",
+      "concept": "hazardous-waste",
+      "difficulty": "ranger",
+      "prompt": "Mold, blood and dead animals belong in which kind of lab waste?",
+      "answer": "Biological waste",
+      "wrong": [
+        "Flammable waste",
+        "Radioactive waste",
+        "Corrosive waste"
+      ],
+      "explain": "Biological waste is anything living or once living, which can spread germs."
+    },
+    {
+      "id": "closed-container",
+      "concept": "heat-safety",
+      "difficulty": "expert",
+      "prompt": "Why should you never heat a tightly closed container?",
+      "answer": "Pressure can build up until it bursts",
+      "wrong": [
+        "It will heat too slowly",
+        "The glass will turn into liquid",
+        "It makes the chemicals disappear"
+      ],
+      "explain": "Heated gases expand. In a sealed container they have nowhere to go, so the container can explode."
+    },
+    {
+      "id": "electrical-fire",
+      "concept": "accidents",
+      "difficulty": "expert",
+      "prompt": "Why shouldn't you throw water on an electrical fire?",
+      "answer": "Water conducts electricity and can cause shocks",
+      "wrong": [
+        "Water makes electricity stronger forever",
+        "Water turns the fire into ice",
+        "Electrical fires are not hot"
+      ],
+      "explain": "Water won't safely put out an electrical fire. Use the right fire extinguisher and get an adult."
+    },
+    {
+      "id": "unlabeled-bottle",
+      "concept": "chemical-safety",
+      "difficulty": "expert",
+      "prompt": "You find a bottle of clear liquid with no label. What should you do?",
+      "answer": "Don't use it and tell the teacher",
+      "wrong": [
+        "Smell it to figure out what it is",
+        "Assume it is just water",
+        "Pour it down the sink"
+      ],
+      "explain": "Clear liquids can be dangerous chemicals. Never use anything from an unlabeled container."
+    },
+    {
+      "id": "flammable-waste",
+      "concept": "hazardous-waste",
+      "difficulty": "expert",
+      "prompt": "Leftover rubbing alcohol from an experiment goes in which kind of waste?",
+      "answer": "Flammable waste",
+      "wrong": [
+        "Biological waste",
+        "Sharp objects",
+        "Radioactive waste"
+      ],
+      "explain": "Alcohol catches fire easily, so it is flammable waste."
+    },
+    {
+      "id": "corrosive-waste",
+      "concept": "hazardous-waste",
+      "difficulty": "expert",
+      "prompt": "Strong acids and old batteries belong in which kind of waste?",
+      "answer": "Corrosive waste",
+      "wrong": [
+        "Biological waste",
+        "Flammable waste",
+        "Sharp objects"
+      ],
+      "explain": "Corrosive chemicals can eat away at skin and materials, so they need their own container."
+    },
+    {
+      "id": "broken-glass",
+      "concept": "accidents",
+      "difficulty": "expert",
+      "prompt": "A beaker breaks on the floor. What should you do first?",
+      "answer": "Keep people away and get an adult",
+      "wrong": [
+        "Pick it up with your bare hands",
+        "Kick the pieces under a table",
+        "Toss it in the regular trash"
+      ],
+      "explain": "Broken glass needs special cleanup and its own sharps or glass waste container."
+    },
+    {
+      "id": "wash-after-gloves",
+      "concept": "lab-safety-rules",
+      "difficulty": "expert",
+      "prompt": "You wore gloves while handling a frog in class. Should you still wash your hands?",
+      "answer": "Yes, always wash your hands afterward",
+      "wrong": [
+        "No, gloves make washing unnecessary",
+        "Only if your hands look dirty",
+        "Only if the frog was alive"
+      ],
+      "explain": "Germs can still reach your hands, so wash after handling living or once-living things."
+    }
+  ]
+}

@@ -9,7 +9,7 @@ export function validatePack(pack: Pack): string[] {
     if (seen.has(q.id)) problems.push(`duplicate question ${q.id}`);
     seen.add(q.id);
     const optionIds = q.options.map((o) => o.id);
-    const study = q.topic === 'math' || q.topic === 'word';
+    const study = q.topic === 'math' || q.topic === 'word' || q.topic === 'science';
     if (q.inputType === 'typed') {
       if (!q.typed || q.options.length !== 1) problems.push(`${q.id}: a typed question needs its answer and one option to show`);
     } else if (q.inputType !== 'map-click' && q.options.length !== 4) problems.push(`${q.id}: needs 4 options`);

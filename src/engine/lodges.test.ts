@@ -3,7 +3,7 @@ import { PACK } from '../content/pack';
 import { LODGES } from '../content/lodges';
 import { canUse, enemyIntent, isBossTurn, resolveTurn, startCombat, type CombatAction } from './combat';
 import { canTame, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
-import { BRAIN_SHIELD, lodgeDifficulty, lodgeFoeStats, lodgeOpen, nextLodge } from './lodges';
+import { BRAIN_SHIELD, kaijuAlert, kaijuOf, lodgeDifficulty, lodgeFoeStats, lodgeOpen, nextLodge } from './lodges';
 import { speciesOf, STAGES, stageOf, xpForLevel, type StageStats } from './progression';
 import { Rng } from './rng';
 import { trackFor } from '../ui/music';
@@ -50,15 +50,16 @@ const strong = (s = fresh()): SaveData => ({ ...s, companions: s.companions.map(
 
 describe('Ranger Lodges content', () => {
   it('has eight Lodges in rank order, each with its own type, then the League', () => {
-    expect(LODGES.map((l) => l.rank)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    expect(LODGES.at(-1)!.gauntlet).toBeDefined();
-    const ladder = LODGES.filter((l) => !l.gauntlet);
+    const notKaiju = LODGES.filter((l) => !l.kaiju);
+    expect(notKaiju.map((l) => l.rank)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(notKaiju.at(-1)!.gauntlet).toBeDefined();
+    const ladder = LODGES.filter((l) => !l.gauntlet && !l.kaiju);
     expect(new Set(ladder.map((l) => l.type)).size).toBe(ladder.length);
     expect(new Set(LODGES.map((l) => l.prizeSpeciesId)).size).toBe(LODGES.length);
   });
 
   it('every ranger fields creatures of the Lodge type, and the prize is that type too', () => {
-    for (const l of LODGES.filter((o) => !o.gauntlet)) {
+    for (const l of LODGES.filter((o) => !o.gauntlet && !o.kaiju)) {
       for (const f of [...l.juniors, ...l.team]) {
         const sp = speciesOf(PACK, f.speciesId);
         expect(sp, f.speciesId).toBeDefined();
@@ -81,10 +82,11 @@ describe('Ranger Lodges content', () => {
 
   it('gets harder up the ladder', () => {
     for (const role of ['junior', 'leader', 'ace'] as const) {
-      const hp = LODGES.map((l) => lodgeFoeStats(l.rank, role, 1).opponentMaxHp);
+      const hp = LODGES.filter((l) => !l.kaiju).map((l) => lodgeFoeStats(l.rank, role, 1).opponentMaxHp);
       expect(hp).toEqual([...hp].sort((a, b) => a - b));
     }
-    expect(LODGES.map((l) => l.recommendedLevel)).toEqual([...LODGES.map((l) => l.recommendedLevel)].sort((a, b) => a - b));
+    const ladder = LODGES.filter((l) => !l.kaiju);
+    expect(ladder.map((l) => l.recommendedLevel)).toEqual([...ladder.map((l) => l.recommendedLevel)].sort((a, b) => a - b));
     expect(lodgeDifficulty(LODGES[0]!, { minDifficulty: 'scout', maxDifficulty: 'expert' })).toBe('scout');
     expect(lodgeDifficulty(LODGES[7]!, { minDifficulty: 'scout', maxDifficulty: 'expert' })).toBe('expert');
     // A parent's limits still apply.
@@ -155,13 +157,13 @@ describe('Ranger Lodges play', () => {
   it('the whole ladder can be climbed', () => {
     // The Summit needs a Gold math patch, which has its own test below.
     let s: SaveData = { ...strong(), lodgeTiers: { gearworks: 'gold' } };
-    for (const l of LODGES) {
+    for (const l of LODGES.filter((o) => !o.kaiju)) {
       s = beat(s, l.id);
       expect(s.lodgesBeaten, l.id).toContain(l.id);
     }
     expect(nextLodge(PACK, s.lodgesBeaten!)).toBeUndefined();
     expect(s.badges).toContain('grand-ranger');
-    for (const l of LODGES) expect(s.companions.some((c) => c.speciesId === l.prizeSpeciesId), l.id).toBe(true);
+    for (const l of LODGES.filter((o) => !o.kaiju)) expect(s.companions.some((c) => c.speciesId === l.prizeSpeciesId), l.id).toBe(true);
   });
 
   it('a loss keeps your place, so you can try that battle again', () => {
@@ -277,7 +279,7 @@ describe('Lodge gates, shields and tiers', () => {
 
 
 describe('Starfall League', () => {
-  const lodgesOnly = LODGES.filter((l) => !l.gauntlet).map((l) => l.id);
+  const lodgesOnly = LODGES.filter((l) => !l.gauntlet && !l.kaiju).map((l) => l.id);
   const champ = (): SaveData => ({ ...strong(), lodgesBeaten: lodgesOnly });
 
   it('opens only once all eight Lodges are beaten, and has no Silver or Gold', () => {
@@ -319,5 +321,41 @@ describe('Starfall League', () => {
     for (const power of [9, 10]) expect(winRate(power, 'ace', grown, 0.8), `power ${power}`).toBeGreaterThan(0.5);
     expect(winRate(11, 'ace', grown, 0.8)).toBeGreaterThan(0.3);
     expect(winRate(11, 'ace', grown, 0.9)).toBeGreaterThan(0.55);
+  });
+});
+
+describe('Kaiju Alerts', () => {
+  it('six original kaiju threaten real cities, easiest first, and none are on the Lodge ladder', () => {
+    const all = kaijuOf(PACK);
+    expect(all.map((l) => l.kaiju!.threat)).toEqual([1, 2, 3, 4, 5, 6]);
+    for (const l of all) expect(PACK.places.some((p) => p.id === l.kaiju!.placeId), l.id).toBe(true);
+    expect(kaijuAlert(PACK, [], '2026-11-06')!.id).toBe('kaiju-quakeback');
+    expect(kaijuAlert(PACK, ['kaiju-quakeback'], '2026-11-06')!.id).toBe('kaiju-tidalorn');
+    const everyone = all.map((l) => l.id);
+    expect(everyone).toContain(kaijuAlert(PACK, everyone, '2026-11-07')!.id);
+    expect(nextLodge(PACK, [])!.id).toBe('wildwood');
+  });
+
+  it("three phases against the giant, questions from its city's region, and a baby kaiju joins the first time", () => {
+    let s = step(strong(), { type: 'startLodge', lodgeId: 'kaiju-tidalorn' });
+    const e = s.expedition!;
+    expect(e.regionId).toBe('asia-east');
+    expect(e.slots.map((o) => [o.opponentId, o.opponentStage, o.role])).toEqual([['tidalorn', 3, 'leader'], ['tidalorn', 3, 'leader'], ['tidalorn', 3, 'ace']]);
+    expect(step(s, { type: 'startLodge', lodgeId: 'kaiju-tidalorn', tier: 'silver' })).toBe(s);
+    s = step(s, { type: 'depart' });
+    const regions = new Set<string>();
+    while (!isExpeditionComplete(s.expedition!)) {
+      if (s.expedition!.retreated) throw new Error('lost to the kaiju');
+      s = step(s, { type: 'enterEncounter' });
+      while (s.expedition!.battle) {
+        const q = s.expedition!.battle.question;
+        if (q.regionId) regions.add(q.regionId);
+        s = step(answer(step(s, { type: 'chooseAction', action: 'attack' }), true), { type: 'continue' });
+      }
+    }
+    expect([...regions]).toEqual(['asia-east']);
+    s = step(s, { type: 'claimReward' });
+    expect(s.companions.some((c) => c.speciesId === 'tidalorn')).toBe(true);
+    expect(s.lodgesBeaten).toContain('kaiju-tidalorn');
   });
 });

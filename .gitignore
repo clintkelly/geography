@@ -3,3 +3,7 @@ dist
 *.log
 .DS_Store
 .env*
+
+# Copyrighted source books for question writing: never commit
+/big_fat_*.txt
+/books/

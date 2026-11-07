@@ -23,7 +23,20 @@ export function lodgeDifficulty(lodge: Lodge, settings: { minDifficulty: Difficu
 }
 
 /** The Lodge ladder, in order. The League is not on it. */
-export const lodgesOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])].filter((l) => !l.gauntlet).sort((a, b) => a.rank - b.rank);
+export const lodgesOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])].filter((l) => !l.gauntlet && !l.kaiju).sort((a, b) => a.rank - b.rank);
+/** Every Kaiju Alert, easiest first. */
+export const kaijuOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])].filter((l) => !!l.kaiju).sort((a, b) => a.kaiju!.threat - b.kaiju!.threat);
+/**
+ * The kaiju on the move today: the easiest one not yet beaten, and once all are beaten, a different one each day.
+ */
+export function kaijuAlert(pack: Pack, beaten: readonly string[], day: string): Lodge | undefined {
+  const all = kaijuOf(pack);
+  const next = all.find((l) => !beaten.includes(l.id));
+  if (next || all.length === 0) return next;
+  let h = 2166136261;
+  for (const ch of `kaiju:${day}`) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  return all[h % all.length];
+}
 /** The Ranger League, open once every Lodge is beaten. */
 export const leagueOf = (pack: Pack): Lodge | undefined => (pack.lodges ?? []).find((l) => !!l.gauntlet);
 export const lodgeById = (pack: Pack, id: string | undefined) => (pack.lodges ?? []).find((l) => l.id === id);
@@ -47,6 +60,7 @@ export function lodgeOpen(pack: Pack, beatenOrProgress: readonly string[] | Lodg
   const p: LodgeProgress = Array.isArray(beatenOrProgress) ? { lodgesBeaten: beatenOrProgress as readonly string[] } : (beatenOrProgress as LodgeProgress);
   const lodge = lodgeById(pack, lodgeId);
   if (!lodge) return false;
+  if (lodge.kaiju) return tier === 'bronze';
   if (tier !== 'bronze') return !lodge.gauntlet && atLeast(patchOf(p, lodgeId), tier === 'silver' ? 'bronze' : 'silver');
   const before = lodgesOf(pack).filter((l) => l.rank < lodge.rank);
   return before.every((l) => (p.lodgesBeaten ?? []).includes(l.id)) && (!lodge.needsGold || atLeast(patchOf(p, lodge.needsGold), 'gold'));

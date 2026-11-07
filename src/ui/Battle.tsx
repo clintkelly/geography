@@ -360,13 +360,13 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       {firstMeet && <GuideCard speciesId={opponent.id} artId={foe.artId} first onClose={() => dispatch({ type: 'seeGuide', speciesId: opponent.id })} />}
       {reading && <GuideCard speciesId={opponent.id} artId={foe.artId} onClose={() => setReading(false)} />}
       <TrailBar e={e} save={save} />
-      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}${e.night ? ' night-scene' : ''}`} style={{ backgroundImage: e.night ? `linear-gradient(#0b1240b0, #1a1450a0), url(${backdrop})` : `url(${backdrop})` }}>
+      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}${e.night ? ' night-scene' : ''}${lodge?.kaiju ? ' kaiju-scene' : ''}`} style={{ backgroundImage: e.night ? `linear-gradient(#0b1240b0, #1a1450a0), url(${backdrop})` : `url(${backdrop})` }}>
         {storm && <TypeSpecial key={`storm-${storm.id}`} type={storm.type} />}
         {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (
           <div className={`vs-intro${rareFoe || bossFoe ? ' rare-intro' : ''}`} aria-hidden="true">
             {bossFoe && <em>Continent Boss!</em>}
-            {lodge && slot?.role !== 'junior' && <em>{slot?.role === 'ace' ? `${slot?.trainer ?? lodge.leader.name}'s ace!` : lodge.gauntlet ? `${slot?.trainer}!` : `Lodge Leader ${lodge.leader.name}!`}</em>}
+            {lodge && slot?.role !== 'junior' && <em>{lodge.kaiju ? `KAIJU: ${lodge.leader.name}! Defend ${lodge.kaiju.city}!` : slot?.role === 'ace' ? `${slot?.trainer ?? lodge.leader.name}'s ace!` : lodge.gauntlet ? `${slot?.trainer}!` : `Lodge Leader ${lodge.leader.name}!`}</em>}
             {rareFoe && <>{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`burst burst-${i}`} />)}<em>Rare encounter!</em></>}
             {view.shiny
               ? <ShinyImg src={poseUrl(companion, 'idle', view.artId)} base={artUrl(view.artId)} look={view.shiny} className={`sprite vs-left ${companion.facing === 'right' ? '' : 'flip'}`} />
@@ -424,7 +424,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           </div>
           <div className="turn">Turn {combat.turn} of {combat.maxTurns}</div>
           <div>
-            <Hp label={lodge && slot?.trainer ? `${slot.trainer.replace('Junior Ranger ', '')}'s ${foeName}` : bossFoe ? `Boss: ${foeName}` : rareFoe ? `Rare: ${foeName}` : foeName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
+            <Hp label={lodge?.kaiju ? `⚠ KAIJU ${foeName}` : lodge && slot?.trainer ? `${slot.trainer.replace('Junior Ranger ', '')}'s ${foeName}` : bossFoe ? `Boss: ${foeName}` : rareFoe ? `Rare: ${foeName}` : foeName} hp={shownHp?.opponent ?? combat.opponentHp} max={combat.opponentMaxHp} />
             <div className="scene-types"><TypeBadges species={opponent} />{neverSeen && !battle.befriended && <span className="never-seen-tag">NEW!</span>}</div>
             {(combat.shield ?? 0) > 0 && <div className="brain-shield" title="Brain Shield: right answers crack it">🛡️ Brain Shield {Array.from({ length: combat.shield ?? 0 }, (_, i) => <span key={i} className="shield-pip" />)}</div>}
           </div>
@@ -508,7 +508,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
           {battle.befriended && guideFor(opponent.id) && <button type="button" className="link guide-link" onClick={() => setReading(true)}>📖 Read about the real {guideFor(opponent.id)!.basedOn}</button>}
         </>
       )}
-      <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>{lodge ? 'Leave the Lodge' : 'Leave expedition'}</button>
+      <button type="button" className="link leave" onClick={() => dispatch({ type: 'abandon' })}>{lodge?.kaiju ? 'Retreat to camp' : lodge?.gauntlet ? 'Leave the League' : lodge ? 'Leave the Lodge' : 'Leave expedition'}</button>
     </div>
   );
 }

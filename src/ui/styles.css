@@ -885,3 +885,33 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .chain-count { top: calc(34% + 100px); border-color: #b090e0; }
 .visitor-count { top: calc(34% + 136px); border-color: #f0a040; }
 @media (prefers-reduced-motion: reduce) { .region-sparkle, .region-master-trophy, .level-card, .levelup-pop { animation: none !important; } }
+
+/* Kaiju Alerts */
+.kaiju-banner { position: relative; overflow: hidden; margin: 0 0 12px; border-radius: 12px; border: 3px solid #d03020; background: #2a1414; color: #fff3e8; }
+.kaiju-stripes { height: 12px; background: repeating-linear-gradient(45deg, #f0c020 0 14px, #1a1a1a 14px 28px); animation: kaiju-stripes 1s linear infinite; }
+@keyframes kaiju-stripes { to { background-position: 40px 0; } }
+.kaiju-body { display: flex; gap: 14px; align-items: center; padding: 10px 14px; }
+.kaiju-body h2 { margin: 2px 0; }
+.kaiju-body .muted { color: #f0c8b0; }
+.kaiju-alert-title { margin: 0; font-weight: 900; letter-spacing: 0.08em; color: #ff5040; animation: kaiju-flash 0.9s steps(2) infinite; }
+@keyframes kaiju-flash { 50% { color: #ffd040; } }
+.kaiju-giant { filter: drop-shadow(0 0 10px #ff604080); animation: kaiju-stomp 1.6s ease-in-out infinite; }
+@keyframes kaiju-stomp { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-4px); } 50% { transform: translateY(2px) rotate(-1deg); } }
+.kaiju-go { background: #d03020; border-color: #a01810; }
+.kaiju-lab { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px 14px 10px; border-top: 1px solid #ffffff22; }
+.kaiju-lab-slot { display: inline-grid; padding: 2px; border-radius: 8px; background: #ffffff14; }
+.kaiju-banner .silhouette { filter: brightness(0) invert(0.35); }
+.kaiju-hall { border: 3px solid #d03020; overflow: hidden; }
+.kaiju-hall .kaiju-stripes { margin: -16px -16px 10px; }
+.kaiju-phase { font-size: 1.15rem; font-weight: 700; color: #b02010; }
+.kaiju-phases { display: flex; gap: 8px; margin: 6px 0 10px; }
+.kaiju-phases span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 2px solid #d03020; font-weight: 800; }
+.kaiju-phases span.now { background: #d03020; color: #fff; }
+.kaiju-phases span.done { background: #3f8a55; border-color: #3f8a55; color: #fff; }
+.scene.kaiju-scene { box-shadow: inset 0 0 40px #ff302066; }
+.scene.kaiju-scene .actor.opponent img { transform: scale(1.6); transform-origin: bottom center; }
+.scene.kaiju-scene.impact-big, .scene.kaiju-scene.boss-turn { animation: kaiju-quake 0.4s linear 2; }
+@keyframes kaiju-quake { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-4px, 2px); } 50% { transform: translate(4px, -2px); } 75% { transform: translate(-2px, -3px); } }
+.kaiju-tag { margin-left: 4px; padding: 0 6px; border-radius: 6px; background: #2a1414; color: #ffd040; font-size: 0.75rem; font-weight: 800; }
+.kaiju-complete h1 { color: #b02010; }
+@media (prefers-reduced-motion: reduce) { .kaiju-stripes, .kaiju-alert-title, .kaiju-giant, .scene.kaiju-scene { animation: none !important; } }

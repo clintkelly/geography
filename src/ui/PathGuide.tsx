@@ -14,8 +14,8 @@ const HOW: Record<PathId, { icon: string; steps: string[] }> = {
     icon: '📚',
     steps: [
       'Have it be the one fighting: put it first on your team, or switch to it.',
-      'Pick Math or Words under "Ask about".',
-      '+1 for every math or vocabulary question you get right in a battle.',
+      'Pick Math, Words or Science under "Ask about".',
+      '+1 for every math, vocabulary or science question you get right in a battle.',
     ],
   },
   ranger: {
