@@ -282,9 +282,9 @@ export function LodgeComplete({ e, save, dispatch }: { e: Expedition; save: Save
         <p className="lodge-quote">{lodge.leader.win}</p>
         {first
           ? <><NewCreatureReveal speciesId={prize.id} found={knownSpecies(save).size + 1} /><p className="learn">A baby <strong>{prize.displayName}</strong> was left behind, and it wants to come with you! Raise it and it will grow into a giant kaiju.</p></>
-          : <div className="celebrate">{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}<Sprite id={lodge.leader.artId} size={160} /></div>}
+          : <><div className="celebrate">{[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}<Sprite id={prize.artId} size={160} className="hop-loop" /></div><p className="learn">Another baby <strong>{prize.displayName}</strong> wants to come with you! Rematch babies are <strong>twice as likely to be shiny</strong>.</p></>}
         <p className="muted">{e.correct} of {e.answered} answers correct</p>
-        <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>{first ? 'Welcome it home' : 'Return to camp'} <Key k="Enter" /></button>
+        <button type="button" className="primary" onClick={() => dispatch({ type: 'claimReward' })}>Welcome it home <Key k="Enter" /></button>
       </section>
     );
   }

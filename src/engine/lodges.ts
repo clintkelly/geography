@@ -29,8 +29,13 @@ export const kaijuOf = (pack: Pack): readonly Lodge[] => [...(pack.lodges ?? [])
 /**
  * The kaiju on the move today: the easiest one not yet beaten, and once all are beaten, a different one each day.
  */
-export function kaijuAlert(pack: Pack, beaten: readonly string[], day: string): Lodge | undefined {
+export function kaijuAlert(pack: Pack, beaten: readonly string[], day: string, reroll?: { day: string; lodgeId: string }): Lodge | undefined {
   const all = kaijuOf(pack);
+  // A child who rerolled today's alert gets the kaiju they rolled until the day ends.
+  if (reroll?.day === day) {
+    const picked = all.find((l) => l.id === reroll.lodgeId);
+    if (picked) return picked;
+  }
   const next = all.find((l) => !beaten.includes(l.id));
   if (next || all.length === 0) return next;
   let h = 2166136261;

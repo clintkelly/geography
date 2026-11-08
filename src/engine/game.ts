@@ -16,9 +16,9 @@ import { Rng } from './rng';
 import { awardMedals, MASTERY_MISSES_ALLOWED, masteryQuestions, medalKey, medalPoints, medalView, type MedalEarned, type Medals, type MedalTrack } from './medals';
 import { localDay } from './learning';
 import { TRAIL_STOPS, walkTrail, type StopKind, type TrailLength } from './trail';
-import { BRAIN_SHIELD, LODGE_QUIZ, lodgeById, lodgeDifficulty, lodgeFoeStats, lodgeOpen, lodgePower, patchOf, TIER_STAGE, type LodgeRole, type LodgeTier } from './lodges';
+import { BRAIN_SHIELD, LODGE_QUIZ, kaijuAlert, kaijuOf, lodgeById, lodgeDifficulty, lodgeFoeStats, lodgeOpen, lodgePower, patchOf, TIER_STAGE, type LodgeRole, type LodgeTier } from './lodges';
 import { EGG_POINTS, eggReady, feedEggs, fillMeter, hatchling, layEgg, type Egg, type EggKind, type EggMeter } from './eggs';
-import type { LodgeSubject, Stage } from '../content/lodges';
+import type { Lodge, LodgeSubject, Stage } from '../content/lodges';
 import { chainBoost, extendChain, masteredRegions, VISITOR_SHINY_BOOST, visitorFor, type ShinyChain } from './juice';
 
 export const SCHEMA_VERSION = 7;
@@ -370,6 +370,10 @@ export interface SaveData {
   regionsMastered?: string[];
   /** Befriending the same kind in a row raises its shiny chance. */
   shinyChain?: ShinyChain;
+  /** A Kaiju Alert rerolled today: this kaiju attacks instead, until the day ends. */
+  kaijuReroll?: { day: string; lodgeId: string };
+  /** Today's Kaiju Radar: rolls paid for and left, and every kaiju revealed so far, to pick from. */
+  kaijuRadar?: { day: string; rollsLeft: number; seen: string[] };
   /** The day today's visitor was put in the sightings. */
   visitorDay?: string;
   /** Whether the current sightings were made at night, when night creatures are out. */
@@ -400,6 +404,10 @@ export type Command =
   | { type: 'setNight'; night: boolean }
   /** A new day on the player's clock: a new visitor comes. */
   | { type: 'newDay'; day: string }
+  /** Roll the Kaiju Radar for a different kaiju. With no rolls left today, pay for more: banked Trail Points, or a trade from the Wild. */
+  | { type: 'rerollKaiju'; day: string; pay: 'points' | 'wild' }
+  /** Pick any kaiju the radar revealed today to be today's alert. */
+  | { type: 'pickKaiju'; day: string; lodgeId: string }
   | { type: 'masteryAnswer'; optionId: string }
   | { type: 'masteryNext' }
   | { type: 'closeMastery' }
@@ -1425,6 +1433,53 @@ export function lodgeBattleStats(pack: Pack, e: Expedition, slot: Slot, teamSize
   return lodgeFoeStats(slot.power ?? lodgePower(lodge.rank, e.lodgeTier), role, teamSize, lodge.shield && role !== 'junior' ? BRAIN_SHIELD : 0);
 }
 
+/** What a Kaiju Alert reroll costs: banked Trail Points, or creatures traded from the Wild. */
+export const KAIJU_REROLL_POINTS = 3;
+export const KAIJU_REROLL_WILD = 2;
+
+/** Wild creatures that can be traded away without losing a species: not shiny, and another of the same kind is kept. */
+export function tradeableWild(save: Pick<SaveData, 'companions' | 'wild'>): Companion[] {
+  const wild = save.wild ?? [];
+  const out: Companion[] = [];
+  for (const c of wild) {
+    if (c.shiny) continue;
+    const others = [...save.companions, ...wild].filter((o) => o.speciesId === c.speciesId && o.instanceId !== c.instanceId && !out.includes(o));
+    if (others.length > 0) out.push(c);
+  }
+  return out;
+}
+
+/** Rolls bought with one payment. */
+export const KAIJU_RADAR_ROLLS = 5;
+
+/** Rolls the Kaiju Radar: a free roll if today's are paid for, otherwise pay for a fresh set first. */
+function rerollKaiju(save: SaveData, pack: Pack, day: string, pay: 'points' | 'wild'): SaveData {
+  const current = kaijuAlert(pack, save.lodgesBeaten ?? [], day, save.kaijuReroll);
+  const radar = save.kaijuRadar?.day === day ? save.kaijuRadar : { day, rollsLeft: 0, seen: current ? [current.id] : [] };
+  const all = kaijuOf(pack);
+  if (all.length < 2) return save;
+  let paid: Partial<SaveData> = {};
+  if (radar.rollsLeft > 0) {
+    // Already paid for today.
+  } else if (pay === 'points') {
+    if ((save.bankedPoints ?? 0) < KAIJU_REROLL_POINTS) return save;
+    paid = { bankedPoints: (save.bankedPoints ?? 0) - KAIJU_REROLL_POINTS };
+  } else {
+    const trade = tradeableWild(save).slice(0, KAIJU_REROLL_WILD);
+    if (trade.length < KAIJU_REROLL_WILD) return save;
+    paid = { wild: (save.wild ?? []).filter((c) => !trade.includes(c)) };
+  }
+  const rollsLeft = (radar.rollsLeft > 0 ? radar.rollsLeft : KAIJU_RADAR_ROLLS) - 1;
+  // A kaiju not revealed yet today if there is one, never the one already attacking.
+  const rng = new Rng(save.rngState);
+  const fresh = all.filter((l) => !radar.seen.includes(l.id));
+  const picked = rng.shuffle(fresh.length > 0 ? fresh : all.filter((l) => l.id !== current?.id))[0] as Lodge;
+  return { ...save, ...paid, kaijuReroll: { day, lodgeId: picked.id }, kaijuRadar: { day, rollsLeft, seen: [...new Set([...radar.seen, picked.id])] }, rngState: rng.state };
+}
+
+/** A kaiju rematch's baby is twice as likely to be shiny. */
+export const KAIJU_REMATCH_SHINY = 2;
+
 /** XP like a trail, and a new patch. Bronze brings the Lodge's prize creature, Silver a rare egg, and Gold battles lead to the Mastery Test. */
 function claimLodge(save: SaveData, pack: Pack, e: Expedition, now: number): SaveData {
   const lodge = lodgeById(pack, e.lodgeId);
@@ -1446,8 +1501,9 @@ function claimLodge(save: SaveData, pack: Pack, e: Expedition, now: number): Sav
   });
   const gained = companions.filter((c) => team.includes(c.instanceId) && levelOf(c.bondXp) > levelOf(e.xpAtStart?.[c.instanceId] ?? c.bondXp));
   const levelAfter = Math.max(0, ...gained.map((c) => levelOf(c.bondXp)));
-  const prize = firstWin && !knownSpecies(save).has(lodge.prizeSpeciesId);
-  if (prize) companions.push(joining(`${save.profile.id}-companion-${save.nextId}`, lodge.prizeSpeciesId, e.difficulty));
+  // Every kaiju win leaves a baby behind, with a better shiny chance on rematches, so kaiju can be collected and shiny-hunted.
+  const prize = !applied && (lodge.kaiju ? true : firstWin && !knownSpecies(save).has(lodge.prizeSpeciesId));
+  if (prize) companions.push(joining(`${save.profile.id}-companion-${save.nextId}`, lodge.prizeSpeciesId, e.difficulty, lodge.kaiju && !firstWin ? KAIJU_REMATCH_SHINY : 1));
   // The math and vocabulary Lodges always lay an egg of their subject. A new Silver patch lays a rare one.
   const eggKind: EggKind | undefined = applied ? undefined : newPatch === 'silver' ? 'rare' : lodge.subject === 'math' ? 'math' : lodge.subject === 'words' ? 'words' : undefined;
   const nest = eggKind ? layEgg(save.eggs ?? [], eggKind, `egg-${save.nextId}`) : save.eggs;
@@ -1693,6 +1749,10 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
   switch (cmd.type) {
     case 'start':
       return e || save.masteryTest || save.lodgeQuiz ? save : startExpedition(save, pack, cmd);
+    case 'rerollKaiju':
+      return e ? save : rerollKaiju(save, pack, cmd.day, cmd.pay);
+    case 'pickKaiju':
+      return !e && save.kaijuRadar?.day === cmd.day && save.kaijuRadar.seen.includes(cmd.lodgeId) ? { ...save, kaijuReroll: { day: cmd.day, lodgeId: cmd.lodgeId } } : save;
     case 'newDay':
       return e || save.visitorDay === cmd.day ? save : refreshOffers({ ...save, visitorDay: cmd.day }, pack);
     case 'setNight':

@@ -3,7 +3,7 @@ import { PACK } from '../content/pack';
 import type { Difficulty } from '../content/types';
 import { BADGES } from '../engine/badges';
 import { cardProgress } from '../engine/cards';
-import { allowedDifficulties, FOCUSES, studySubject, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
+import { allowedDifficulties, FOCUSES, KAIJU_RADAR_ROLLS, KAIJU_REROLL_POINTS, KAIJU_REROLL_WILD, studySubject, tradeableWild, FREE_POINTS, isRegionComplete, knownSpecies, lowestFor, regionHasFocus, type Command, type Companion, type Focus, type Offer, type SaveData } from '../engine/game';
 import { TRAIL_LENGTHS, TRAIL_STOPS, type TrailLength } from '../engine/trail';
 import { artUrl, CardArt, Fx, Sprite } from './art';
 import { companionView, mapFor, place, region, rewardLabel, souvenir, species } from './content';
@@ -119,7 +119,14 @@ function LevelCard({ save, instanceId, from, to }: { save: SaveData; instanceId:
 /** A giant monster is heading for a real city: defend it! Plus the Kaiju Lab: every kaiju, beaten or not. */
 function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command) => void }) {
   const beaten = save.lodgesBeaten ?? [];
-  const alert = kaijuAlert(PACK, beaten, save.visitorDay ?? dayKey(Date.now()));
+  const day = save.visitorDay ?? dayKey(Date.now());
+  const alert = kaijuAlert(PACK, beaten, day, save.kaijuReroll);
+  const points = save.bankedPoints ?? 0;
+  const trades = tradeableWild(save).length;
+  const reroll = (pay: 'points' | 'wild') => { playSound('zoom'); dispatch({ type: 'rerollKaiju', day, pay }); };
+  const radar = save.kaijuRadar?.day === day ? save.kaijuRadar : undefined;
+  const rollsLeft = radar?.rollsLeft ?? 0;
+  const seen = radar?.seen ?? [];
   if (!alert?.kaiju || save.completedExpeditions < 2) return null;
   const k = alert.kaiju;
   const giant = species(alert.prizeSpeciesId);
@@ -136,14 +143,31 @@ function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command
           <h2>{giant.displayName} is heading for {k.city}{place ? `, ${place.name}` : ''}!</h2>
           <p>{alert.leader.intro}</p>
           <p className="muted">Threat {'★'.repeat(k.threat)}{'☆'.repeat(6 - k.threat)} · three battles with your whole team · questions about {region(place?.regionId ?? '').label} · best with level {alert.recommendedLevel}+{best < alert.recommendedLevel ? ` (your best is ${best})` : ''}</p>
-          <button type="button" className="primary kaiju-go" onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: alert.id }); }}>{again ? `Defend ${k.city} again!` : `Defend ${k.city}!`}</button>
+          <span className="row kaiju-actions">
+            <button type="button" className="primary kaiju-go" onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: alert.id }); }}>{again ? `Defend ${k.city} again!` : `Defend ${k.city}!`}</button>
+            {rollsLeft > 0
+              ? <span className="kaiju-reroll"><button type="button" onClick={() => reroll('points')}>📡 Roll the Kaiju Radar</button><small>{rollsLeft} {rollsLeft === 1 ? 'roll' : 'rolls'} left today</small></span>
+              : <span className="kaiju-reroll">
+                  <small>Kaiju Radar ({KAIJU_RADAR_ROLLS} rolls today):</small>
+                  <button type="button" disabled={points < KAIJU_REROLL_POINTS} title={`You have ${points} banked Trail Points`} onClick={() => reroll('points')}>📡 {KAIJU_REROLL_POINTS} Trail Points</button>
+                  <button type="button" disabled={trades < KAIJU_REROLL_WILD} title={`Trades ${KAIJU_REROLL_WILD} non-shiny creatures from the Wild that you have another of, so you never lose a kind`} onClick={() => reroll('wild')}>📡 Trade {KAIJU_REROLL_WILD} from the Wild</button>
+                </span>}
+          </span>
+          {seen.length > 1 && (
+            <span className="kaiju-radar-pick">
+              <small>Radar found today: pick one to attack!</small>
+              {seen.map((id) => { const l = lodgeById(PACK, id)!; return <button key={id} type="button" aria-pressed={id === alert.id} title={`${species(l.prizeSpeciesId).displayName} heading for ${l.kaiju!.city}`} onClick={() => { playSound('card'); dispatch({ type: 'pickKaiju', day, lodgeId: id }); }}><Sprite id={l.prizeSpeciesId} size={32} /><small>{l.kaiju!.city}</small></button>; })}
+            </span>
+          )}
         </div>
       </div>
       <div className="kaiju-lab" aria-label="Kaiju Lab">
-        <small>Kaiju Lab:</small>
+        <small>Kaiju Lab{beaten.some((id) => id.startsWith('kaiju-')) ? ' (click one you beat to fight it again for another baby, 2× shiny!)' : ''}:</small>
         {kaijuOf(PACK).map((l) => {
           const won = beaten.includes(l.id);
-          return <span key={l.id} className="kaiju-lab-slot" title={won ? `${species(l.prizeSpeciesId).displayName}: you saved ${l.kaiju!.city}` : `???: threat ${l.kaiju!.threat}`}><Sprite id={l.prizeSpeciesId} size={36} className={won ? '' : 'silhouette'} /></span>;
+          return won
+            ? <button key={l.id} type="button" className="kaiju-lab-slot kaiju-lab-won" title={`Rematch ${species(l.prizeSpeciesId).displayName} at ${l.kaiju!.city}: win another baby, 2× shiny chance!`} aria-label={`Rematch ${species(l.prizeSpeciesId).displayName}`} onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: l.id }); }}><Sprite id={l.prizeSpeciesId} size={36} /></button>
+            : <span key={l.id} className="kaiju-lab-slot" title={`???: threat ${l.kaiju!.threat}`}><Sprite id={l.prizeSpeciesId} size={36} className="silhouette" /></span>;
         })}
       </div>
     </section>

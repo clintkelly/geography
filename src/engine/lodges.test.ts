@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { PACK } from '../content/pack';
 import { LODGES } from '../content/lodges';
 import { canUse, enemyIntent, isBossTurn, resolveTurn, startCombat, type CombatAction } from './combat';
-import { canTame, isExpeditionComplete, newSave, reduce, type Command, type SaveData } from './game';
+import { canTame, isExpeditionComplete, knownSpecies, newSave, reduce, type Command, type SaveData } from './game';
 import { BRAIN_SHIELD, kaijuAlert, kaijuOf, lodgeDifficulty, lodgeFoeStats, lodgeOpen, nextLodge } from './lodges';
 import { speciesOf, STAGES, stageOf, xpForLevel, type StageStats } from './progression';
 import { Rng } from './rng';
@@ -358,4 +358,59 @@ describe('Kaiju Alerts', () => {
     expect(s.companions.some((c) => c.speciesId === 'tidalorn')).toBe(true);
     expect(s.lodgesBeaten).toContain('kaiju-tidalorn');
   });
+
+  it('every kaiju win, rematches too, leaves another baby', () => {
+    const win = (s: SaveData) => {
+      let n = step(step(s, { type: 'startLodge', lodgeId: 'kaiju-quakeback' }), { type: 'depart' });
+      while (!isExpeditionComplete(n.expedition!)) {
+        n = step(n, { type: 'enterEncounter' });
+        while (n.expedition!.battle) n = step(answer(step(n, { type: 'chooseAction', action: 'attack' }), true), { type: 'continue' });
+      }
+      return step(n, { type: 'claimReward' });
+    };
+    const twice = win(win(strong()));
+    expect(twice.companions.filter((c) => c.speciesId === 'quakeback')).toHaveLength(2);
+    expect(twice.lastSummary!.prizeId).toBe('quakeback');
+  });
+
+  it('one payment buys five Kaiju Radar rolls for the day, and any kaiju the radar found can be picked', () => {
+    const day = '2026-11-06';
+    const base = strong();
+    // No points and nothing to trade: no radar.
+    expect(step(base, { type: 'rerollKaiju', day, pay: 'points' })).toBe(base);
+    let s: SaveData = { ...base, bankedPoints: 5 };
+    s = step(s, { type: 'rerollKaiju', day, pay: 'points' });
+    expect(s.bankedPoints).toBe(2);
+    expect(s.kaijuRadar).toMatchObject({ day, rollsLeft: 4 });
+    expect(kaijuAlert(PACK, [], day, s.kaijuReroll)!.id).not.toBe('kaiju-quakeback');
+    // The other four rolls are free, and each finds a new kaiju.
+    for (let i = 0; i < 4; i++) s = step(s, { type: 'rerollKaiju', day, pay: 'points' });
+    expect(s.bankedPoints).toBe(2);
+    expect(s.kaijuRadar!.rollsLeft).toBe(0);
+    expect(new Set(s.kaijuRadar!.seen).size).toBe(6);
+    // Pick any of them; one it never found can't be picked.
+    const picked = step(s, { type: 'pickKaiju', day, lodgeId: 'kaiju-magmantis' });
+    expect(kaijuAlert(PACK, [], day, picked.kaijuReroll)!.id).toBe('kaiju-magmantis');
+    expect(step({ ...s, kaijuRadar: { day, rollsLeft: 0, seen: ['kaiju-quakeback'] } }, { type: 'pickKaiju', day, lodgeId: 'kaiju-magmantis' }).kaijuReroll).toEqual(s.kaijuReroll);
+    // Tomorrow the radar and the reroll are gone.
+    expect(kaijuAlert(PACK, [], '2026-11-07', picked.kaijuReroll)!.id).toBe('kaiju-quakeback');
+  });
+
+  it('the radar can be paid for with a trade from the Wild, never losing a kind or a shiny', () => {
+    const day = '2026-11-06';
+    const base = strong();
+    const wild = [
+      { instanceId: 'w1', speciesId: 'slatepaw', bondXp: 0 },
+      { instanceId: 'w2', speciesId: 'slatepaw', bondXp: 0 },
+      { instanceId: 'w3', speciesId: 'lobsnap', bondXp: 0 },
+      { instanceId: 'w4', speciesId: 'slatepaw', bondXp: 0, shiny: true },
+    ];
+    const traded = step({ ...base, wild }, { type: 'rerollKaiju', day, pay: 'wild' });
+    expect(traded.wild!.map((c) => c.instanceId).sort()).toEqual(['w3', 'w4']);
+    expect(knownSpecies(traded).has('slatepaw')).toBe(true);
+    expect(traded.kaijuRadar!.rollsLeft).toBe(4);
+    expect(step({ ...base, wild: wild.slice(2) }, { type: 'rerollKaiju', day, pay: 'wild' }).kaijuRadar).toBeUndefined();
+  });
+
 });
+
