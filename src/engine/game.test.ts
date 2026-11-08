@@ -1506,7 +1506,8 @@ describe('types', () => {
     for (let seed = 1; seed < 30; seed++) {
       const s = step(find(ready(fresh(seed))), { type: 'enterEncounter' });
       const { typeEdge: edge } = s.expedition!.battle!.combat;
-      expect(edge).toBe(Math.max(0, typeEdge(speciesOf(PACK, 'slatepaw').type, speciesOf(PACK, s.expedition!.slots[0]!.opponentId).type)));
+      expect(edge).toBe(Math.max(0, matchup(speciesOf(PACK, 'slatepaw'), speciesOf(PACK, s.expedition!.slots[0]!.opponentId)).edge));
+      expect(edge).toBeGreaterThanOrEqual(0);
     }
   });
 });

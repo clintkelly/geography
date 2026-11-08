@@ -773,6 +773,12 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
   - **Duplicates** keep the smaller "New friend!" banner, so the big moment stays special.
 - **Camp:** picking a sighting plays that creature's cry, and each region button shows found/total, with a gold ★ when complete.
 
+## Wave 5: the rest of the nature-show animals, and Science Egg creatures
+
+- **59 more real animals**, finishing the list of show animals the game was missing (a few close repeats merged): from the earthworm, blue jay and rock pigeon to the yeti crab, hellbender, Philippine eagle, muskox, sailfish and leafcutter ant. Each has 3 stages, 4 battle poses, an idle animation, a cry and Field Guide facts checked against Wikipedia (`docs/FACT_REVIEW.md`).
+- **12 Science Egg creatures**: real animals with a science twist (an axolotl with test-tube gills, a magnet-horned beetle, a puppy that is ice, water and steam at once, a ruler-banded armadillo, a bombardier beetle…). They live nowhere else, so Science Eggs now hatch their own creatures instead of borrowing math and word ones.
+- All are marked new, so they are sighted and battled first.
+
 ## More juice: Region Master, daily visitor, shiny chains, level-ups
 
 - **Region Master** (`engine/juice.ts`): finding every creature that lives in a region (day and night, not bosses or rares) celebrates at camp with confetti and lays a Rare Egg. Region buttons show found/total and a gold ★.

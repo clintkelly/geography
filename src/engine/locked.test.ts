@@ -8,7 +8,8 @@ import { Rng } from './rng';
 import { matchup } from './types';
 
 const NOW = 1_800_000_000_000;
-const PLAIN = { ...PACK, species: PACK.species.filter((o) => !o.rare) };
+// Without the "just added" flag, so brand-new creatures don't crowd every battle on a new save.
+const PLAIN = { ...PACK, species: PACK.species.filter((o) => !o.rare).map((o) => ({ ...o, fresh: undefined })) };
 const step = (s: SaveData, cmd: Command) => reduce(s, cmd, PLAIN, NOW);
 const fresh = (seed = 7) => newSave(PLAIN, seed, 'p1');
 const offerIn = (s: SaveData, regionId: string, locked?: boolean) => s.offers.find((o) => o.regionId === regionId && o.reward.kind === 'creature' && (locked === undefined || !!PACK.species.find((x) => x.id === (o.reward as { speciesId: string }).speciesId)?.minDifficulty === locked));

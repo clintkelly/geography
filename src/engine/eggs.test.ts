@@ -54,7 +54,8 @@ describe('study eggs', () => {
     // Egg creatures live nowhere else: no region, no study trail.
     for (const id of eggPool(PACK, 'rare')) expect(PACK.species.find((o) => o.id === id), id).toMatchObject({ homes: [] });
     for (const id of eggPool(PACK, 'rare')) expect(PACK.species.find((o) => o.id === id)!.subject, id).toBeUndefined();
-    expect(eggPool(PACK, 'rare').length).toBe(mathPool.length + eggPool(PACK, 'words').length);
+    expect(eggPool(PACK, 'science').sort()).toEqual(['atomoth', 'boomardier', 'crystalisk', 'fizzalotl', 'gravitail', 'gyrosnail', 'lensowl', 'magnetle', 'metrodillo', 'phasepup', 'querifox', 'solubee']);
+    expect(eggPool(PACK, 'rare').length).toBe(mathPool.length + eggPool(PACK, 'words').length + eggPool(PACK, 'science').length);
     const known = new Set(mathPool.slice(1));
     const rng = new Rng(3);
     const picks = Array.from({ length: 200 }, () => hatchling(PACK, 'math', known, rng));

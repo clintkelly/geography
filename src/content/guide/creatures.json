@@ -7404,5 +7404,1638 @@
     "source": "https://en.wikipedia.org/wiki/Iceland"
    }
   ]
+ },
+ "dracoglide": {
+  "kind": "real",
+  "basedOn": "Flying dragon lizard",
+  "scientific": "Draco",
+  "when": null,
+  "where": "Rainforests of Southeast Asia and southern India",
+  "size": "About 15 to 40 cm (6 to 16 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its wings are flaps of skin held out by extra-long ribs.",
+    "source": "https://en.wikipedia.org/wiki/Draco_(lizard)"
+   },
+   {
+    "text": "One glide can carry it about 60 m (200 feet) while it drops only about 10 m (33 feet).",
+    "source": "https://en.wikipedia.org/wiki/Draco_(lizard)"
+   },
+   {
+    "text": "Males flash a brightly colored throat flap to show off to rivals and mates.",
+    "source": "https://en.wikipedia.org/wiki/Draco_(lizard)"
+   }
+  ]
+ },
+ "wormwell": {
+  "kind": "real",
+  "basedOn": "Common earthworm",
+  "scientific": "Lumbricus terrestris",
+  "when": null,
+  "where": "Gardens, fields and forests, first from Europe and now around the world",
+  "size": "Usually 20 to 25 cm (8 to 10 inches) long when stretched out",
+  "story": null,
+  "facts": [
+   {
+    "text": "Earthworms have no lungs. They breathe through their moist skin.",
+    "source": "https://en.wikipedia.org/wiki/Earthworm"
+   },
+   {
+    "text": "Each earthworm has both male and female parts.",
+    "source": "https://en.wikipedia.org/wiki/Earthworm"
+   },
+   {
+    "text": "Tiny bristles on its body segments help it grip the soil as it moves.",
+    "source": "https://en.wikipedia.org/wiki/Earthworm"
+   }
+  ]
+ },
+ "bassbrawl": {
+  "kind": "real",
+  "basedOn": "Largemouth bass",
+  "scientific": "Micropterus nigricans",
+  "when": null,
+  "where": "Lakes, ponds and rivers of the eastern and central United States, southeastern Canada and northern Mexico",
+  "size": "Up to about 75 cm (29.5 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the biggest kind of black bass.",
+    "source": "https://en.wikipedia.org/wiki/Largemouth_bass"
+   },
+   {
+    "text": "It is olive green with a jagged dark stripe along each side.",
+    "source": "https://en.wikipedia.org/wiki/Largemouth_bass"
+   },
+   {
+    "text": "It is the state fish of Georgia and Mississippi.",
+    "source": "https://en.wikipedia.org/wiki/Largemouth_bass"
+   }
+  ]
+ },
+ "honeyguide": {
+  "kind": "real",
+  "basedOn": "Greater honeyguide",
+  "scientific": "Indicator indicator",
+  "when": null,
+  "where": "Woodlands and savannas of Africa south of the Sahara",
+  "size": "About 20 cm (8 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It guides people to bee nests by calling and flying ahead of them.",
+    "source": "https://en.wikipedia.org/wiki/Greater_honeyguide"
+   },
+   {
+    "text": "Honey hunters in Mozambique use a special \"brrrr-hmm\" call, and the birds answer it.",
+    "source": "https://en.wikipedia.org/wiki/Greater_honeyguide"
+   },
+   {
+    "text": "After people take the honey, it eats the leftover beeswax.",
+    "source": "https://en.wikipedia.org/wiki/Greater_honeyguide"
+   }
+  ]
+ },
+ "basilisprint": {
+  "kind": "real",
+  "basedOn": "Plumed basilisk",
+  "scientific": "Basiliscus plumifrons",
+  "when": null,
+  "where": "Rainforests near rivers and streams in Central America",
+  "size": "Up to about 91 cm (3 feet) long, including its long tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It can run across water to escape predators, moving fast so it does not sink.",
+    "source": "https://en.wikipedia.org/wiki/Plumed_basilisk"
+   },
+   {
+    "text": "Males have tall crests on their head, back and tail.",
+    "source": "https://en.wikipedia.org/wiki/Plumed_basilisk"
+   },
+   {
+    "text": "It is a great swimmer and can stay underwater for up to an hour.",
+    "source": "https://en.wikipedia.org/wiki/Plumed_basilisk"
+   }
+  ]
+ },
+ "jaycall": {
+  "kind": "real",
+  "basedOn": "Blue jay",
+  "scientific": "Cyanocitta cristata",
+  "when": null,
+  "where": "Forests and neighborhoods of eastern and central North America",
+  "size": "About 22 to 30 cm (9 to 12 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hides acorns and nuts to eat later.",
+    "source": "https://en.wikipedia.org/wiki/Blue_jay"
+   },
+   {
+    "text": "Like crows, its relatives, it can learn to copy sounds, even human speech.",
+    "source": "https://en.wikipedia.org/wiki/Blue_jay"
+   },
+   {
+    "text": "Its feathers have no blue color in them. They look blue because of the way their tiny structure bounces light.",
+    "source": "https://en.wikipedia.org/wiki/Blue_jay"
+   }
+  ]
+ },
+ "coocity": {
+  "kind": "real",
+  "basedOn": "Rock dove (pigeon)",
+  "scientific": "Columba livia",
+  "when": null,
+  "where": "Wild on cliffs in southern Europe, North Africa and western Asia; in cities all over the world",
+  "size": "About 30 to 35 cm (12 to 14 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Wild rock doves nest on cliffs and rock ledges.",
+    "source": "https://en.wikipedia.org/wiki/Rock_dove"
+   },
+   {
+    "text": "People have bred about 1,000 different kinds of tame pigeons from this one wild bird.",
+    "source": "https://en.wikipedia.org/wiki/Rock_dove"
+   },
+   {
+    "text": "Escaped tame pigeons are where all the city pigeons around the world came from.",
+    "source": "https://en.wikipedia.org/wiki/Rock_dove"
+   }
+  ]
+ },
+ "remoraclip": {
+  "kind": "real",
+  "basedOn": "Remora",
+  "scientific": "Echeneidae",
+  "when": null,
+  "where": "Warm oceans around the world",
+  "size": "About 30 to 110 cm (1 to 3.6 feet) long, depending on the kind",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its sucker disc is a fin on its back that changed shape over time.",
+    "source": "https://en.wikipedia.org/wiki/Remora"
+   },
+   {
+    "text": "It spends most of its life holding on to a shark, whale, turtle or ray.",
+    "source": "https://en.wikipedia.org/wiki/Remora"
+   },
+   {
+    "text": "Remoras sometimes stick to boats and even to divers.",
+    "source": "https://en.wikipedia.org/wiki/Remora"
+   }
+  ]
+ },
+ "earfox": {
+  "kind": "real",
+  "basedOn": "Bat-eared fox",
+  "scientific": "Otocyon megalotis",
+  "when": null,
+  "where": "Dry grasslands of eastern and southern Africa",
+  "size": "Body about 46 to 66 cm (18 to 26 inches) long, with ears 11 to 13 cm (4 to 5 inches) tall",
+  "story": null,
+  "facts": [
+   {
+    "text": "It finds insects by listening, walking slowly with its ears tipped forward.",
+    "source": "https://en.wikipedia.org/wiki/Bat-eared_fox"
+   },
+   {
+    "text": "It eats mostly termites, and they give it so much water that it does not need to drink.",
+    "source": "https://en.wikipedia.org/wiki/Bat-eared_fox"
+   },
+   {
+    "text": "It can have up to 50 teeth, more than almost any other land mammal.",
+    "source": "https://en.wikipedia.org/wiki/Bat-eared_fox"
+   }
+  ]
+ },
+ "moundmite": {
+  "kind": "real",
+  "basedOn": "Mound-building termite",
+  "scientific": "Macrotermes",
+  "when": null,
+  "where": "Grasslands and savannas of Africa and Southeast Asia",
+  "size": "Most termites are only about 4 to 15 mm (under 1 inch) long, but their mounds can be huge",
+  "story": null,
+  "facts": [
+   {
+    "text": "These termites grow a special fungus inside their mounds and eat it.",
+    "source": "https://en.wikipedia.org/wiki/Macrotermes"
+   },
+   {
+    "text": "Workers open or block tunnels in the mound to control the temperature inside.",
+    "source": "https://en.wikipedia.org/wiki/Macrotermes"
+   },
+   {
+    "text": "In some kinds of termites, the queen can lay 40,000 eggs a day.",
+    "source": "https://en.wikipedia.org/wiki/Termite"
+   }
+  ]
+ },
+ "yetipinch": {
+  "kind": "real",
+  "basedOn": "Yeti crab",
+  "scientific": "Kiwa hirsuta",
+  "when": 2005,
+  "where": "Hot vents on the deep sea floor of the South Pacific, south of Easter Island",
+  "size": "About 15 cm (6 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It was discovered in 2005 on the deep sea floor of the South Pacific Ocean.",
+    "source": "https://en.wikipedia.org/wiki/Kiwa_hirsuta"
+   },
+   {
+    "text": "Its arms are covered in long, silky hairs that hold bacteria.",
+    "source": "https://en.wikipedia.org/wiki/Kiwa_hirsuta"
+   },
+   {
+    "text": "Its eyes are tiny and have no color, and scientists think it is blind.",
+    "source": "https://en.wikipedia.org/wiki/Kiwa_hirsuta"
+   }
+  ]
+ },
+ "tokaygrip": {
+  "kind": "real",
+  "basedOn": "Tokay gecko",
+  "scientific": "Gekko gecko",
+  "when": null,
+  "where": "Rainforests and villages of South and Southeast Asia",
+  "size": "About 25 to 30 cm (10 to 12 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its name comes from the loud call of the males, which sounds like \"to-kay.\"",
+    "source": "https://en.wikipedia.org/wiki/Tokay_gecko"
+   },
+   {
+    "text": "It often lives in or near houses and roams walls and ceilings at night looking for insects.",
+    "source": "https://en.wikipedia.org/wiki/Tokay_gecko"
+   },
+   {
+    "text": "It is the third-largest kind of gecko in the world.",
+    "source": "https://en.wikipedia.org/wiki/Tokay_gecko"
+   }
+  ]
+ },
+ "puffspike": {
+  "kind": "real",
+  "basedOn": "Long-spine porcupinefish",
+  "scientific": "Diodon holocanthus",
+  "when": null,
+  "where": "Warm, shallow reefs around the world",
+  "size": "Up to about 50 cm (20 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It swallows water to blow itself up into a ball, and its spines stand straight out.",
+    "source": "https://en.wikipedia.org/wiki/Porcupinefish"
+   },
+   {
+    "text": "Its teeth are joined into a beak like a parrot's, which it uses to eat snails, clams and sea urchins.",
+    "source": "https://en.wikipedia.org/wiki/Porcupinefish"
+   },
+   {
+    "text": "Some porcupinefish are poisonous to eat because of a strong toxin in their insides.",
+    "source": "https://en.wikipedia.org/wiki/Porcupinefish"
+   }
+  ]
+ },
+ "drumpeck": {
+  "kind": "real",
+  "basedOn": "Pileated woodpecker",
+  "scientific": "Dryocopus pileatus",
+  "when": null,
+  "where": "Forests of North America",
+  "size": "About 40 to 49 cm (16 to 19 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest woodpecker in North America that we know for sure still lives.",
+    "source": "https://en.wikipedia.org/wiki/Pileated_woodpecker"
+   },
+   {
+    "text": "It carves big, almost rectangular holes in trees to find carpenter ants and beetle grubs.",
+    "source": "https://en.wikipedia.org/wiki/Pileated_woodpecker"
+   },
+   {
+    "text": "Its old holes become nests for many other animals.",
+    "source": "https://en.wikipedia.org/wiki/Pileated_woodpecker"
+   }
+  ]
+ },
+ "longhornet": {
+  "kind": "real",
+  "basedOn": "Asian long-horned beetle",
+  "scientific": "Anoplophora glabripennis",
+  "when": null,
+  "where": "Forests of China and Korea, and some places it has spread to",
+  "size": "Body about 1.7 to 3.9 cm (0.7 to 1.5 inches) long, with antennae up to twice as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is shiny black with about 20 white spots on each wing cover.",
+    "source": "https://en.wikipedia.org/wiki/Asian_long-horned_beetle"
+   },
+   {
+    "text": "Its young chew tunnels deep into the wood of living trees.",
+    "source": "https://en.wikipedia.org/wiki/Asian_long-horned_beetle"
+   },
+   {
+    "text": "It has spread from China and Korea to other countries in wooden packing crates.",
+    "source": "https://en.wikipedia.org/wiki/Asian_long-horned_beetle"
+   }
+  ]
+ },
+ "skunkstand": {
+  "kind": "real",
+  "basedOn": "Western spotted skunk",
+  "scientific": "Spilogale gracilis",
+  "when": null,
+  "where": "Western North America, from Canada to Mexico",
+  "size": "About 35 to 45 cm (14 to 18 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Spotted skunks may warn an enemy by doing a handstand with the tail waving before they spray.",
+    "source": "https://en.wikipedia.org/wiki/Spotted_skunk"
+   },
+   {
+    "text": "It is smaller than the common striped skunk.",
+    "source": "https://en.wikipedia.org/wiki/Western_spotted_skunk"
+   },
+   {
+    "text": "It is boldly striped black and creamy white, with its stripes broken up into spots and patches.",
+    "source": "https://en.wikipedia.org/wiki/Western_spotted_skunk"
+   }
+  ]
+ },
+ "elfowl": {
+  "kind": "real",
+  "basedOn": "Elf owl",
+  "scientific": "Micrathene whitneyi",
+  "when": null,
+  "where": "Deserts of the southwestern United States and Mexico",
+  "size": "About 12.5 to 14.5 cm (5 to 5.7 inches) long and only about 40 g (1.4 oz)",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the smallest and lightest owl in the world.",
+    "source": "https://en.wikipedia.org/wiki/Elf_owl"
+   },
+   {
+    "text": "It often nests in old woodpecker holes in saguaro cactuses.",
+    "source": "https://en.wikipedia.org/wiki/Elf_owl"
+   },
+   {
+    "text": "It eats mostly insects, like moths, beetles and crickets.",
+    "source": "https://en.wikipedia.org/wiki/Elf_owl"
+   }
+  ]
+ },
+ "burrowl": {
+  "kind": "real",
+  "basedOn": "Burrowing owl",
+  "scientific": "Athene cunicularia",
+  "when": null,
+  "where": "Open grasslands and deserts of North and South America",
+  "size": "About 19 to 28 cm (7.5 to 11 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It nests in burrows in the ground, often ones dug by prairie dogs.",
+    "source": "https://en.wikipedia.org/wiki/Burrowing_owl"
+   },
+   {
+    "text": "Unlike most owls, it is often awake during the day.",
+    "source": "https://en.wikipedia.org/wiki/Burrowing_owl"
+   },
+   {
+    "text": "When threatened, it hides in its burrow and makes a rattling hiss that sounds like a rattlesnake.",
+    "source": "https://en.wikipedia.org/wiki/Burrowing_owl"
+   }
+  ]
+ },
+ "voledash": {
+  "kind": "real",
+  "basedOn": "Eastern meadow vole",
+  "scientific": "Microtus pennsylvanicus",
+  "when": null,
+  "where": "Grassy fields and meadows of eastern Canada and the eastern United States",
+  "size": "About 13 to 19 cm (5 to 7.5 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It makes little paths, called runways, through the grass.",
+    "source": "https://en.wikipedia.org/wiki/Meadow_vole"
+   },
+   {
+    "text": "A mother usually has four to six babies at a time.",
+    "source": "https://en.wikipedia.org/wiki/Meadow_vole"
+   },
+   {
+    "text": "It is important food for many hawks, owls, foxes and snakes.",
+    "source": "https://en.wikipedia.org/wiki/Meadow_vole"
+   }
+  ]
+ },
+ "ermiwhite": {
+  "kind": "real",
+  "basedOn": "Stoat (ermine)",
+  "scientific": "Mustela erminea",
+  "when": null,
+  "where": "Cold forests and fields across North America, Europe and Asia",
+  "size": "Body about 17 to 33 cm (7 to 13 inches) long, plus a tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "In the far north its coat turns all white in winter, except for the black tip of its tail.",
+    "source": "https://en.wikipedia.org/wiki/Stoat"
+   },
+   {
+    "text": "Its white winter fur is called ermine.",
+    "source": "https://en.wikipedia.org/wiki/Stoat"
+   },
+   {
+    "text": "It often hunts animals much bigger than itself, like rabbits.",
+    "source": "https://en.wikipedia.org/wiki/Stoat"
+   }
+  ]
+ },
+ "finglider": {
+  "kind": "real",
+  "basedOn": "Flying fish",
+  "scientific": "Exocoetidae",
+  "when": null,
+  "where": "Warm oceans around the world",
+  "size": "Most are about 30 cm (1 foot) long or smaller",
+  "story": null,
+  "facts": [
+   {
+    "text": "Most glides are about 50 m (160 feet), but riding the wind off waves it can go up to 400 m (1,300 feet).",
+    "source": "https://en.wikipedia.org/wiki/Flying_fish"
+   },
+   {
+    "text": "It glides to escape hungry fish like tuna, swordfish and marlin.",
+    "source": "https://en.wikipedia.org/wiki/Flying_fish"
+   },
+   {
+    "text": "Barbados is called \"the land of the flying fish.\"",
+    "source": "https://en.wikipedia.org/wiki/Flying_fish"
+   }
+  ]
+ },
+ "ospreydive": {
+  "kind": "real",
+  "basedOn": "Osprey",
+  "scientific": "Pandion haliaetus",
+  "when": null,
+  "where": "Near water on every continent except Antarctica",
+  "size": "More than 60 cm (2 feet) long, with wings about 1.8 m (6 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is a bird of prey that eats almost nothing but fish.",
+    "source": "https://en.wikipedia.org/wiki/Osprey"
+   },
+   {
+    "text": "It can turn its outer toe backward to hold a slippery fish with two toes in front and two behind.",
+    "source": "https://en.wikipedia.org/wiki/Osprey"
+   },
+   {
+    "text": "It lives on every continent except Antarctica.",
+    "source": "https://en.wikipedia.org/wiki/Osprey"
+   }
+  ]
+ },
+ "monkeagle": {
+  "kind": "real",
+  "basedOn": "Philippine eagle",
+  "scientific": "Pithecophaga jefferyi",
+  "when": null,
+  "where": "Rainforests of the Philippines",
+  "size": "About 86 to 102 cm (2.8 to 3.3 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the national bird of the Philippines.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_eagle"
+   },
+   {
+    "text": "It is also called the monkey-eating eagle.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_eagle"
+   },
+   {
+    "text": "By length and wing size it may be the largest eagle in the world, and it is critically endangered.",
+    "source": "https://en.wikipedia.org/wiki/Philippine_eagle"
+   }
+  ]
+ },
+ "boomstrut": {
+  "kind": "real",
+  "basedOn": "Lesser prairie-chicken",
+  "scientific": "Tympanuchus pallidicinctus",
+  "when": null,
+  "where": "Sandy grasslands of the southern Great Plains",
+  "size": "About 38 to 41 cm (15 to 16 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "In spring, males gather in groups called leks to dance and call.",
+    "source": "https://en.wikipedia.org/wiki/Lesser_prairie_chicken"
+   },
+   {
+    "text": "Males puff up pinkish-red air sacs on their necks when they display.",
+    "source": "https://en.wikipedia.org/wiki/Lesser_prairie_chicken"
+   },
+   {
+    "text": "About half of all lesser prairie-chickens live in western Kansas.",
+    "source": "https://en.wikipedia.org/wiki/Lesser_prairie_chicken"
+   }
+  ]
+ },
+ "thornshrike": {
+  "kind": "real",
+  "basedOn": "Loggerhead shrike",
+  "scientific": "Lanius ludovicianus",
+  "when": null,
+  "where": "Open country across North America",
+  "size": "About 20 to 23 cm (8 to 9 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It sticks its prey on thorns or barbed wire to hold it, which is why it is called a butcherbird.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_shrike"
+   },
+   {
+    "text": "It is a songbird, but it hunts insects, frogs, lizards, mice and small birds.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_shrike"
+   },
+   {
+    "text": "Its short black beak is hooked like a hawk's.",
+    "source": "https://en.wikipedia.org/wiki/Loggerhead_shrike"
+   }
+  ]
+ },
+ "buzzquito": {
+  "kind": "real",
+  "basedOn": "Mosquito",
+  "scientific": "Culicidae",
+  "when": null,
+  "where": "Almost everywhere in the world except Antarctica",
+  "size": "Usually 3 to 6 mm long",
+  "story": null,
+  "facts": [
+   {
+    "text": "All mosquitoes drink flower nectar, but the females of many kinds also drink blood.",
+    "source": "https://en.wikipedia.org/wiki/Mosquito"
+   },
+   {
+    "text": "Mosquitoes lay their eggs on water, and the babies hatch and grow up swimming.",
+    "source": "https://en.wikipedia.org/wiki/Mosquito"
+   },
+   {
+    "text": "Males beat their wings 450 to 600 times every second.",
+    "source": "https://en.wikipedia.org/wiki/Mosquito"
+   }
+  ]
+ },
+ "dragondart": {
+  "kind": "real",
+  "basedOn": "Blue dasher dragonfly",
+  "scientific": "Pachydiplax longipennis",
+  "when": null,
+  "where": "Ponds and marshes across North America",
+  "size": "About 2.5 to 4.5 cm (1 to 1.8 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Males are bright blue with metallic green eyes.",
+    "source": "https://en.wikipedia.org/wiki/Blue_dasher"
+   },
+   {
+    "text": "Its young, called nymphs, live underwater and eat other water bugs, small fish and tadpoles.",
+    "source": "https://en.wikipedia.org/wiki/Blue_dasher"
+   },
+   {
+    "text": "Dragonflies are fast, nimble fliers that ambush other insects in the air.",
+    "source": "https://en.wikipedia.org/wiki/Dragonfly"
+   }
+  ]
+ },
+ "glidepanther": {
+  "kind": "real",
+  "basedOn": "Florida panther",
+  "scientific": "Puma concolor couguar",
+  "when": null,
+  "where": "Swamps and forests of southern Florida",
+  "size": "About 1.8 to 2.2 m (6 to 7 feet) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the only cougar group known to still live in the eastern United States.",
+    "source": "https://en.wikipedia.org/wiki/Florida_panther"
+   },
+   {
+    "text": "It is endangered, and only about 120 to 230 are left in the wild.",
+    "source": "https://en.wikipedia.org/wiki/Florida_panther"
+   },
+   {
+    "text": "Students all over Florida voted for it to be the state animal in 1982.",
+    "source": "https://en.wikipedia.org/wiki/Florida_panther"
+   }
+  ]
+ },
+ "mintchame": {
+  "kind": "real",
+  "basedOn": "Nosy Hara leaf chameleon",
+  "scientific": "Brookesia micra",
+  "when": null,
+  "where": "Leaf litter on a small island off northern Madagascar",
+  "size": "Adults grow up to about 29 mm (1.1 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the smallest reptiles in the world.",
+    "source": "https://en.wikipedia.org/wiki/Brookesia_micra"
+   },
+   {
+    "text": "It was the smallest known chameleon until an even tinier one, Brookesia nana, was found in 2021.",
+    "source": "https://en.wikipedia.org/wiki/Brookesia_micra"
+   },
+   {
+    "text": "It lives only on Nosy Hara, a tiny island next to Madagascar.",
+    "source": "https://en.wikipedia.org/wiki/Brookesia_micra"
+   }
+  ]
+ },
+ "pouchdive": {
+  "kind": "real",
+  "basedOn": "Brown pelican",
+  "scientific": "Pelecanus occidentalis",
+  "when": null,
+  "where": "Ocean coasts of the Americas",
+  "size": "About 1 to 1.5 m (3.3 to 5 feet) long, with wings over 2 m (6.6 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of only two kinds of pelicans that catch food by diving into the water.",
+    "source": "https://en.wikipedia.org/wiki/Brown_pelican"
+   },
+   {
+    "text": "It is the state bird of Louisiana and is on the state flag.",
+    "source": "https://en.wikipedia.org/wiki/Brown_pelican"
+   },
+   {
+    "text": "It was once endangered because of pesticides like DDT, but it came back.",
+    "source": "https://en.wikipedia.org/wiki/Brown_pelican"
+   }
+  ]
+ },
+ "tenrecquill": {
+  "kind": "real",
+  "basedOn": "Lowland streaked tenrec",
+  "scientific": "Hemicentetes semispinosus",
+  "when": null,
+  "where": "Rainforests of Madagascar",
+  "size": "About 14 to 17 cm (5.5 to 7 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It rubs special quills on its back together to make sound, the same way crickets do.",
+    "source": "https://en.wikipedia.org/wiki/Lowland_streaked_tenrec"
+   },
+   {
+    "text": "It eats mostly earthworms.",
+    "source": "https://en.wikipedia.org/wiki/Lowland_streaked_tenrec"
+   },
+   {
+    "text": "It has black, spiky fur with yellow or brown stripes running down its body.",
+    "source": "https://en.wikipedia.org/wiki/Lowland_streaked_tenrec"
+   }
+  ]
+ },
+ "hissroach": {
+  "kind": "real",
+  "basedOn": "Madagascar hissing cockroach",
+  "scientific": "Gromphadorhina portentosa",
+  "when": null,
+  "where": "Rotting logs on the forest floor of Madagascar",
+  "size": "About 5 to 7.5 cm (2 to 3 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hisses by pushing air out of breathing holes on its body called spiracles.",
+    "source": "https://en.wikipedia.org/wiki/Madagascar_hissing_cockroach"
+   },
+   {
+    "text": "Unlike most cockroaches, it has no wings.",
+    "source": "https://en.wikipedia.org/wiki/Madagascar_hissing_cockroach"
+   },
+   {
+    "text": "It is one of the largest cockroaches in the world.",
+    "source": "https://en.wikipedia.org/wiki/Madagascar_hissing_cockroach"
+   }
+  ]
+ },
+ "barnaclump": {
+  "kind": "real",
+  "basedOn": "Acorn barnacle",
+  "scientific": "Semibalanus balanoides",
+  "when": null,
+  "where": "Rocky seashores of the North Atlantic",
+  "size": "Up to about 15 mm (0.6 inches) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "Barnacles are related to crabs and lobsters.",
+    "source": "https://en.wikipedia.org/wiki/Barnacle"
+   },
+   {
+    "text": "Baby barnacles swim free in the sea before gluing themselves to a rock for good.",
+    "source": "https://en.wikipedia.org/wiki/Barnacle"
+   },
+   {
+    "text": "It sweeps food out of the water with long, feathery legs called cirri.",
+    "source": "https://en.wikipedia.org/wiki/Barnacle"
+   }
+  ]
+ },
+ "limpshell": {
+  "kind": "real",
+  "basedOn": "Tortoiseshell limpet",
+  "scientific": "Testudinalia testudinalis",
+  "when": null,
+  "where": "Rocky shores of the northern Atlantic and Pacific Oceans",
+  "size": "Usually about 1.5 cm (half an inch) long, up to 3 cm (1.2 inches)",
+  "story": null,
+  "facts": [
+   {
+    "text": "A limpet is a sea snail with a cone-shaped shell and a strong, muscular foot.",
+    "source": "https://en.wikipedia.org/wiki/Limpet"
+   },
+   {
+    "text": "When waves crash, it clings very hard to the rock using suction and sticky slime.",
+    "source": "https://en.wikipedia.org/wiki/Limpet"
+   },
+   {
+    "text": "It wanders around grazing at high tide, then follows its own slime trail back to its favorite spot.",
+    "source": "https://en.wikipedia.org/wiki/Limpet"
+   }
+  ]
+ },
+ "musselock": {
+  "kind": "real",
+  "basedOn": "Blue mussel",
+  "scientific": "Mytilus edulis",
+  "when": null,
+  "where": "Rocky shores of the North Atlantic",
+  "size": "Usually about 5 to 10 cm (2 to 4 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It holds on to rocks with strong threads called byssus threads.",
+    "source": "https://en.wikipedia.org/wiki/Byssus"
+   },
+   {
+    "text": "It is a filter feeder that helps clean the water by removing bacteria.",
+    "source": "https://en.wikipedia.org/wiki/Blue_mussel"
+   },
+   {
+    "text": "Big groups of mussels form beds that give shelter and food to other small animals.",
+    "source": "https://en.wikipedia.org/wiki/Blue_mussel"
+   }
+  ]
+ },
+ "martinswift": {
+  "kind": "real",
+  "basedOn": "Purple martin",
+  "scientific": "Progne subis",
+  "when": null,
+  "where": "Summers in North America, winters in South America",
+  "size": "About 20 cm (8 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest swallow in North America.",
+    "source": "https://en.wikipedia.org/wiki/Purple_martin"
+   },
+   {
+    "text": "In the east, it depends almost completely on birdhouses and gourds that people put up.",
+    "source": "https://en.wikipedia.org/wiki/Purple_martin"
+   },
+   {
+    "text": "It spends the winter in South America.",
+    "source": "https://en.wikipedia.org/wiki/Purple_martin"
+   }
+  ]
+ },
+ "martenleap": {
+  "kind": "real",
+  "basedOn": "American marten",
+  "scientific": "Martes americana",
+  "when": null,
+  "where": "Forests of Alaska, Canada and the northern United States",
+  "size": "About the size of a mink, with a long, slender body and a bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives in many kinds of northern forests, from Alaska and Canada to the northern United States.",
+    "source": "https://en.wikipedia.org/wiki/American_marten"
+   },
+   {
+    "text": "It eats mostly voles and other small mammals, and it often travels under the snow.",
+    "source": "https://en.wikipedia.org/wiki/American_marten"
+   },
+   {
+    "text": "It is a long, slender member of the weasel family.",
+    "source": "https://en.wikipedia.org/wiki/American_marten"
+   }
+  ]
+ },
+ "bowfrost": {
+  "kind": "real",
+  "basedOn": "Bowhead whale",
+  "scientific": "Balaena mysticetus",
+  "when": null,
+  "where": "Icy Arctic and sub-Arctic seas",
+  "size": "About 14 to 18 m (46 to 59 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Bowhead whales may live more than 200 years, maybe longer than any other mammal.",
+    "source": "https://en.wikipedia.org/wiki/Bowhead_whale"
+   },
+   {
+    "text": "It uses its huge triangle-shaped skull to break through Arctic ice.",
+    "source": "https://en.wikipedia.org/wiki/Bowhead_whale"
+   },
+   {
+    "text": "It has the biggest mouth of any animal, almost one-third of its body length.",
+    "source": "https://en.wikipedia.org/wiki/Bowhead_whale"
+   }
+  ]
+ },
+ "goldplume": {
+  "kind": "real",
+  "basedOn": "Golden pheasant",
+  "scientific": "Chrysolophus pictus",
+  "when": null,
+  "where": "Mountain forests of western China",
+  "size": "Males about 100 cm (3.3 feet) long, two-thirds of it tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It comes from forests in the mountains of western China.",
+    "source": "https://en.wikipedia.org/wiki/Golden_pheasant"
+   },
+   {
+    "text": "The male can spread his orange-and-black striped cape like a fan when he shows off.",
+    "source": "https://en.wikipedia.org/wiki/Golden_pheasant"
+   },
+   {
+    "text": "The female is a plain mottled brown, much less showy than the male.",
+    "source": "https://en.wikipedia.org/wiki/Golden_pheasant"
+   }
+  ]
+ },
+ "dragonlure": {
+  "kind": "real",
+  "basedOn": "Barbeled dragonfish",
+  "scientific": "Stomiidae",
+  "when": null,
+  "where": "The deep, dark ocean around the world",
+  "size": "Most are small, often less than 30 cm (1 foot) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It uses its own glowing light to lure prey, signal and hide.",
+    "source": "https://en.wikipedia.org/wiki/Barbeled_dragonfish"
+   },
+   {
+    "text": "Its sharp teeth are see-through when wet, so they are almost invisible in the dark deep sea.",
+    "source": "https://en.wikipedia.org/wiki/Barbeled_dragonfish"
+   },
+   {
+    "text": "Some dragonfish make far-red light and use it to spot prey, like a secret flashlight.",
+    "source": "https://en.wikipedia.org/wiki/Barbeled_dragonfish"
+   }
+  ]
+ },
+ "archerspit": {
+  "kind": "real",
+  "basedOn": "Banded archerfish",
+  "scientific": "Toxotes jaculatrix",
+  "when": null,
+  "where": "Mangrove swamps and river mouths from India to Southeast Asia and northern Australia",
+  "size": "Up to about 30 cm (1 foot) long, usually about 20 cm (8 inches)",
+  "story": null,
+  "facts": [
+   {
+    "text": "It shoots down insects by spitting a jet of water at them.",
+    "source": "https://en.wikipedia.org/wiki/Archerfish"
+   },
+   {
+    "text": "It can aim correctly even though light bends where air meets water.",
+    "source": "https://en.wikipedia.org/wiki/Archerfish"
+   },
+   {
+    "text": "It lives in mangrove swamps and river mouths from India to Australia.",
+    "source": "https://en.wikipedia.org/wiki/Toxotes_jaculatrix"
+   }
+  ]
+ },
+ "muskguard": {
+  "kind": "real",
+  "basedOn": "Muskox",
+  "scientific": "Ovibos moschatus",
+  "when": null,
+  "where": "Arctic tundra of Greenland, Canada and Alaska, with smaller herds in Norway, Sweden and Siberia",
+  "size": "About 1.35 to 2.5 m (4.4 to 8.2 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "When the herd is threatened, the adults face outward in a ring around the calves.",
+    "source": "https://en.wikipedia.org/wiki/Muskox"
+   },
+   {
+    "text": "Its soft under-wool, called qiviut, is prized for being very warm.",
+    "source": "https://en.wikipedia.org/wiki/Muskox"
+   },
+   {
+    "text": "Its ancestors lived in the Ice Age alongside animals like woolly mammoths.",
+    "source": "https://en.wikipedia.org/wiki/Muskox"
+   }
+  ]
+ },
+ "cheekstash": {
+  "kind": "real",
+  "basedOn": "European hamster",
+  "scientific": "Cricetus cricetus",
+  "when": null,
+  "where": "Farm fields and grasslands from central Europe to Russia",
+  "size": "About 20 to 30 cm (8 to 12 inches) long, the biggest hamster in the world",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has stretchy cheek pouches, and its burrow has side tunnels for storing food.",
+    "source": "https://en.wikipedia.org/wiki/European_hamster"
+   },
+   {
+    "text": "Its belly is black and its back is brown, with white patches on its face and paws.",
+    "source": "https://en.wikipedia.org/wiki/European_hamster"
+   },
+   {
+    "text": "It is now critically endangered.",
+    "source": "https://en.wikipedia.org/wiki/European_hamster"
+   }
+  ]
+ },
+ "hopleg": {
+  "kind": "real",
+  "basedOn": "Red-legged grasshopper",
+  "scientific": "Melanoplus femurrubrum",
+  "when": null,
+  "where": "Fields and meadows across North America",
+  "size": "About 1.7 to 3 cm (0.7 to 1.2 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is one of the most common grasshoppers in the United States, Canada and Mexico.",
+    "source": "https://en.wikipedia.org/wiki/Melanoplus_femurrubrum"
+   },
+   {
+    "text": "The lower parts of its back legs are red, which is how it got its name.",
+    "source": "https://en.wikipedia.org/wiki/Melanoplus_femurrubrum"
+   },
+   {
+    "text": "Grasshoppers hear with ear-like parts on the sides of their bodies.",
+    "source": "https://en.wikipedia.org/wiki/Grasshopper"
+   }
+  ]
+ },
+ "herostride": {
+  "kind": "real",
+  "basedOn": "Great blue heron",
+  "scientific": "Ardea herodias",
+  "when": null,
+  "where": "Marshes, lakes and coasts of North America",
+  "size": "About 91 to 137 cm (3 to 4.5 feet) long, with wings up to about 2 m (6.6 feet) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest heron in North America.",
+    "source": "https://en.wikipedia.org/wiki/Great_blue_heron"
+   },
+   {
+    "text": "It wades slowly through shallow water or stands still, then grabs fish with its sharp bill.",
+    "source": "https://en.wikipedia.org/wiki/Great_blue_heron"
+   },
+   {
+    "text": "It usually nests in groups, high in trees near lakes and wetlands.",
+    "source": "https://en.wikipedia.org/wiki/Great_blue_heron"
+   }
+  ]
+ },
+ "marlinspear": {
+  "kind": "real",
+  "basedOn": "Atlantic blue marlin",
+  "scientific": "Makaira nigricans",
+  "when": null,
+  "where": "Warm waters of the Atlantic Ocean",
+  "size": "Up to about 5 m (16 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Females can weigh up to four times as much as males.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_blue_marlin"
+   },
+   {
+    "text": "It uses its long bill to stun or hurt fish, then comes back to eat them.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_blue_marlin"
+   },
+   {
+    "text": "One tagged blue marlin swam from near Delaware all the way to the Indian Ocean.",
+    "source": "https://en.wikipedia.org/wiki/Atlantic_blue_marlin"
+   }
+  ]
+ },
+ "sailsprint": {
+  "kind": "real",
+  "basedOn": "Sailfish",
+  "scientific": "Istiophorus",
+  "when": null,
+  "where": "Warm and tropical oceans around the world",
+  "size": "It can grow to about 1.2 to 1.5 m (4 to 5 feet) long in just one year",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its huge back fin, the sail, stays folded down until it attacks prey.",
+    "source": "https://en.wikipedia.org/wiki/Sailfish"
+   },
+   {
+    "text": "It taps and slashes at schools of fish with its long bill.",
+    "source": "https://en.wikipedia.org/wiki/Sailfish"
+   },
+   {
+    "text": "Many scientists think it is the fastest fish in the ocean.",
+    "source": "https://en.wikipedia.org/wiki/Sailfish"
+   }
+  ]
+ },
+ "deedee": {
+  "kind": "real",
+  "basedOn": "Black-capped chickadee",
+  "scientific": "Poecile atricapillus",
+  "when": null,
+  "where": "Forests and backyards of northern North America",
+  "size": "Weighs only about 10 to 14 g (about half an ounce)",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its call sounds like its name: chick-a-dee-dee-dee.",
+    "source": "https://en.wikipedia.org/wiki/Black-capped_chickadee"
+   },
+   {
+    "text": "Part of its brain grows in autumn, which helps it remember where it hid its food.",
+    "source": "https://en.wikipedia.org/wiki/Black-capped_chickadee"
+   },
+   {
+    "text": "It is the state bird of Maine and Massachusetts.",
+    "source": "https://en.wikipedia.org/wiki/Black-capped_chickadee"
+   }
+  ]
+ },
+ "brinelet": {
+  "kind": "real",
+  "basedOn": "Brine shrimp",
+  "scientific": "Artemia",
+  "when": null,
+  "where": "Very salty lakes, like the Great Salt Lake in Utah",
+  "size": "About 8 to 12 mm (about half an inch) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Brine shrimp mostly live in salty lakes far from the ocean.",
+    "source": "https://en.wikipedia.org/wiki/Artemia"
+   },
+   {
+    "text": "They can make tough, sleeping eggs called cysts that wait until conditions are right to hatch.",
+    "source": "https://en.wikipedia.org/wiki/Artemia"
+   },
+   {
+    "text": "Some kinds are sold as pets called Sea-Monkeys.",
+    "source": "https://en.wikipedia.org/wiki/Artemia"
+   }
+  ]
+ },
+ "ocelotus": {
+  "kind": "real",
+  "basedOn": "Ocelot",
+  "scientific": "Leopardus pardalis",
+  "when": null,
+  "where": "Forests from southern Texas through Mexico to South America",
+  "size": "Body about 55 to 100 cm (22 to 39 inches) long, plus a 30 to 45 cm (12 to 18 inch) tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hunts mostly at dusk and at night.",
+    "source": "https://en.wikipedia.org/wiki/Ocelot"
+   },
+   {
+    "text": "A few ocelots still live near the Texas-Mexico border.",
+    "source": "https://en.wikipedia.org/wiki/Ocelot"
+   },
+   {
+    "text": "Each ocelot has its own fur pattern, which scientists use to tell them apart.",
+    "source": "https://en.wikipedia.org/wiki/Ocelot"
+   }
+  ]
+ },
+ "raysting": {
+  "kind": "real",
+  "basedOn": "Southern stingray",
+  "scientific": "Hypanus americanus",
+  "when": null,
+  "where": "Warm, shallow waters of the western Atlantic and Caribbean",
+  "size": "Females up to about 1.5 m (5 feet) across; males only up to about 67 cm (2.2 feet)",
+  "story": null,
+  "facts": [
+   {
+    "text": "It often lies partly buried in the sand on the sea floor.",
+    "source": "https://en.wikipedia.org/wiki/Southern_stingray"
+   },
+   {
+    "text": "Females grow more than twice as wide as males.",
+    "source": "https://en.wikipedia.org/wiki/Southern_stingray"
+   },
+   {
+    "text": "It has a sharp, venomous barb on its tail that it uses to defend itself.",
+    "source": "https://en.wikipedia.org/wiki/Southern_stingray"
+   }
+  ]
+ },
+ "flatflop": {
+  "kind": "real",
+  "basedOn": "Peacock flounder (plate fish)",
+  "scientific": "Bothus lunatus",
+  "when": null,
+  "where": "Warm, shallow waters of the western Atlantic and Caribbean",
+  "size": "Usually about 35 cm (14 inches) long, up to 46 cm (18 inches)",
+  "story": null,
+  "facts": [
+   {
+    "text": "Both of its eyes are on the top side of its body, sitting on short stalks.",
+    "source": "https://en.wikipedia.org/wiki/Plate_fish"
+   },
+   {
+    "text": "It can change its colors to blend in with the sandy sea floor.",
+    "source": "https://en.wikipedia.org/wiki/Plate_fish"
+   },
+   {
+    "text": "It is covered in little blue spots and blue rings.",
+    "source": "https://en.wikipedia.org/wiki/Plate_fish"
+   }
+  ]
+ },
+ "leafcutter": {
+  "kind": "real",
+  "basedOn": "Leafcutter ant",
+  "scientific": "Atta",
+  "when": null,
+  "where": "Rainforests and fields from the southern United States to South America",
+  "size": "Workers come in four sizes, from tiny gardeners to big soldiers",
+  "story": null,
+  "facts": [
+   {
+    "text": "Leafcutter ants use the leaves they cut to grow a fungus, which they eat.",
+    "source": "https://en.wikipedia.org/wiki/Leafcutter_ant"
+   },
+   {
+    "text": "A big nest can be more than 30 m (98 feet) across and hold millions of ants.",
+    "source": "https://en.wikipedia.org/wiki/Leafcutter_ant"
+   },
+   {
+    "text": "Ants of different sizes do different jobs, and the smallest ones take care of the fungus garden.",
+    "source": "https://en.wikipedia.org/wiki/Leafcutter_ant"
+   }
+  ]
+ },
+ "cloudprowl": {
+  "kind": "real",
+  "basedOn": "Clouded leopard",
+  "scientific": "Neofelis nebulosa",
+  "when": null,
+  "where": "Forests from the Himalayas to Southeast Asia",
+  "size": "Body about 68 to 108 cm (27 to 43 inches) long, with a tail almost as long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has cloud-shaped spots on its fur.",
+    "source": "https://en.wikipedia.org/wiki/Clouded_leopard"
+   },
+   {
+    "text": "It can climb down tree trunks headfirst and uses its long tail for balance.",
+    "source": "https://en.wikipedia.org/wiki/Clouded_leopard"
+   },
+   {
+    "text": "For its size, it has very long canine teeth.",
+    "source": "https://en.wikipedia.org/wiki/Clouded_leopard"
+   }
+  ]
+ },
+ "greyhush": {
+  "kind": "real",
+  "basedOn": "Great grey owl",
+  "scientific": "Strix nebulosa",
+  "when": null,
+  "where": "Northern forests of North America, Europe and Asia",
+  "size": "About 61 to 84 cm (24 to 33 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest owl in the world by length.",
+    "source": "https://en.wikipedia.org/wiki/Great_grey_owl"
+   },
+   {
+    "text": "Most of its size is fluffy feathers, so its body is lighter than most other big owls.",
+    "source": "https://en.wikipedia.org/wiki/Great_grey_owl"
+   },
+   {
+    "text": "It can hear prey moving under 60 cm (2 feet) of snow, then plunge down to catch it.",
+    "source": "https://en.wikipedia.org/wiki/Great_grey_owl"
+   }
+  ]
+ },
+ "fishowl": {
+  "kind": "real",
+  "basedOn": "Pel's fishing owl",
+  "scientific": "Scotopelia peli",
+  "when": null,
+  "where": "Rivers and swamps with big trees in Africa south of the Sahara",
+  "size": "About 51 to 63 cm (20 to 25 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hunts at night, snatching fish and frogs from the surface of rivers and lakes.",
+    "source": "https://en.wikipedia.org/wiki/Pel%27s_fishing_owl"
+   },
+   {
+    "text": "Its legs and toes have no feathers, so less of it gets wet while fishing.",
+    "source": "https://en.wikipedia.org/wiki/Pel%27s_fishing_owl"
+   },
+   {
+    "text": "It is one of the largest owls in the world.",
+    "source": "https://en.wikipedia.org/wiki/Pel%27s_fishing_owl"
+   }
+  ]
+ },
+ "powerowl": {
+  "kind": "real",
+  "basedOn": "Powerful owl",
+  "scientific": "Ninox strenua",
+  "when": null,
+  "where": "Forests of eastern and southeastern Australia",
+  "size": "About 45 to 65 cm (18 to 26 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest owl in Australia.",
+    "source": "https://en.wikipedia.org/wiki/Powerful_owl"
+   },
+   {
+    "text": "It mostly eats possums and other tree-living mammals.",
+    "source": "https://en.wikipedia.org/wiki/Powerful_owl"
+   },
+   {
+    "text": "It lives in forests of eastern and southeastern Australia.",
+    "source": "https://en.wikipedia.org/wiki/Powerful_owl"
+   }
+  ]
+ },
+ "gullaugh": {
+  "kind": "real",
+  "basedOn": "Laughing gull",
+  "scientific": "Leucophaeus atricilla",
+  "when": null,
+  "where": "Coasts of North and South America",
+  "size": "About 36 to 41 cm (14 to 16 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It got its name because its call sounds like laughing.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_gull"
+   },
+   {
+    "text": "In summer adults have a black head, but they lose most of that black hood in winter.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_gull"
+   },
+   {
+    "text": "It eats almost anything it can find, including scraps.",
+    "source": "https://en.wikipedia.org/wiki/Laughing_gull"
+   }
+  ]
+ },
+ "hellbend": {
+  "kind": "real",
+  "basedOn": "Hellbender",
+  "scientific": "Cryptobranchus alleganiensis",
+  "when": null,
+  "where": "Rocky, fast-moving streams of the eastern United States",
+  "size": "About 30 to 74 cm (1 to 2.4 feet) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the largest salamander in North America.",
+    "source": "https://en.wikipedia.org/wiki/Hellbender"
+   },
+   {
+    "text": "It breathes mostly through the wrinkly folds of skin along its sides.",
+    "source": "https://en.wikipedia.org/wiki/Hellbender"
+   },
+   {
+    "text": "It needs clean streams, and cutting down forests along streams harms it.",
+    "source": "https://en.wikipedia.org/wiki/Hellbender"
+   }
+  ]
+ },
+ "fizzalotl": {
+  "kind": "real",
+  "basedOn": "Axolotl",
+  "scientific": "Ambystoma mexicanum",
+  "when": null,
+  "where": "Lakes of Xochimilco and Chalco in the Valley of Mexico, near Mexico City",
+  "size": "Usually about 23 cm (9 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Scientists study axolotls because they can regrow lost body parts, like legs, gills, and even parts of their eyes and brains.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   },
+   {
+    "text": "It grows up without changing shape, keeping its frilly gills and living in water its whole life.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   },
+   {
+    "text": "Wild axolotls are critically endangered.",
+    "source": "https://en.wikipedia.org/wiki/Axolotl"
+   }
+  ]
+ },
+ "atomoth": {
+  "kind": "real",
+  "basedOn": "Polyphemus moth",
+  "scientific": "Antheraea polyphemus",
+  "when": null,
+  "where": "Forests across North America",
+  "size": "Wings about 15 cm (6 inches) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "It has a large purple eyespot on each back wing, which is why it is named after the one-eyed giant Polyphemus.",
+    "source": "https://en.wikipedia.org/wiki/Polyphemus_moth"
+   },
+   {
+    "text": "Grown-up moths do not eat, and they live for less than a week.",
+    "source": "https://en.wikipedia.org/wiki/Polyphemus_moth"
+   },
+   {
+    "text": "Females give off a scent chemical called a pheromone, and males pick it up with special sensors on their antennae.",
+    "source": "https://en.wikipedia.org/wiki/Polyphemus_moth"
+   }
+  ]
+ },
+ "magnetle": {
+  "kind": "real",
+  "basedOn": "Hercules beetle",
+  "scientific": "Dynastes hercules",
+  "when": null,
+  "where": "Rainforests of Central and South America and the Caribbean",
+  "size": "Males up to about 17 cm (almost 7 inches) long, including the horn",
+  "story": null,
+  "facts": [
+   {
+    "text": "It is the longest kind of beetle alive today.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   },
+   {
+    "text": "Males fight by grabbing a rival between their horns, then lifting and throwing it.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   },
+   {
+    "text": "Scientists think the color of its wing covers can be affected by how humid the place it grows up is.",
+    "source": "https://en.wikipedia.org/wiki/Hercules_beetle"
+   }
+  ]
+ },
+ "crystalisk": {
+  "kind": "real",
+  "basedOn": "Thorny devil",
+  "scientific": "Moloch horridus",
+  "when": null,
+  "where": "Deserts of Australia",
+  "size": "Up to about 21 cm (8 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Ridges on its scales collect water, and capillary action carries the water through channels in its skin to its mouth.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   },
+   {
+    "text": "It has a spiny bump on its neck called a false head, which it shows to predators by tucking its real head down.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   },
+   {
+    "text": "It often eats thousands of ants in one day.",
+    "source": "https://en.wikipedia.org/wiki/Thorny_devil"
+   }
+  ]
+ },
+ "phasepup": {
+  "kind": "real",
+  "basedOn": "Arctic fox",
+  "scientific": "Vulpes lagopus",
+  "when": null,
+  "where": "Arctic tundra all around the North Pole",
+  "size": "About 46 to 68 cm (18 to 27 inches) long, plus a bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its fur keeps heat in better than the fur of any other mammal.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   },
+   {
+    "text": "It sheds twice a year, from a light winter coat to a darker summer coat.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   },
+   {
+    "text": "Its round body shape helps it lose less heat.",
+    "source": "https://en.wikipedia.org/wiki/Arctic_fox"
+   }
+  ]
+ },
+ "gravitail": {
+  "kind": "real",
+  "basedOn": "Eastern gray squirrel",
+  "scientific": "Sciurus carolinensis",
+  "when": null,
+  "where": "Forests and parks of eastern North America",
+  "size": "Body about 23 to 30 cm (9 to 12 inches) long, plus a 19 to 25 cm (7.5 to 10 inch) tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It hides food in lots of small hiding spots to dig up later.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel"
+   },
+   {
+    "text": "It is one of the most important animals for helping forests grow back in eastern North America.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel"
+   },
+   {
+    "text": "If it thinks it is being watched, it may pretend to bury a nut to trick the watcher.",
+    "source": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel"
+   }
+  ]
+ },
+ "gyrosnail": {
+  "kind": "real",
+  "basedOn": "Garden snail",
+  "scientific": "Cornu aspersum",
+  "when": null,
+  "where": "Gardens and fields, first from Europe and now all over the world",
+  "size": "Shell about 2.5 to 4 cm (1 to 1.6 inches) across",
+  "story": null,
+  "facts": [
+   {
+    "text": "In dry or cold weather, it seals its shell shut with a thin layer of dried slime.",
+    "source": "https://en.wikipedia.org/wiki/Cornu_aspersum"
+   },
+   {
+    "text": "Each snail has both male and female parts.",
+    "source": "https://en.wikipedia.org/wiki/Cornu_aspersum"
+   },
+   {
+    "text": "A popular estimate says its top speed is about 1.3 cm (half an inch) per second.",
+    "source": "https://en.wikipedia.org/wiki/Cornu_aspersum"
+   }
+  ]
+ },
+ "lensowl": {
+  "kind": "real",
+  "basedOn": "Northern saw-whet owl",
+  "scientific": "Aegolius acadicus",
+  "when": null,
+  "where": "Forests of North America",
+  "size": "About 17 to 22 cm (7 to 8.5 inches) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its name comes from its call, which some people say sounds like a saw being sharpened.",
+    "source": "https://en.wikipedia.org/wiki/Northern_saw-whet_owl"
+   },
+   {
+    "text": "An owl's eyes are shaped like tubes and are fixed in place, so it turns its whole head to look around.",
+    "source": "https://en.wikipedia.org/wiki/Owl"
+   },
+   {
+    "text": "Owls can turn their heads as much as 270 degrees.",
+    "source": "https://en.wikipedia.org/wiki/Owl"
+   }
+  ]
+ },
+ "metrodillo": {
+  "kind": "real",
+  "basedOn": "Nine-banded armadillo",
+  "scientific": "Dasypus novemcinctus",
+  "when": null,
+  "where": "From South America north into the southern United States",
+  "size": "About 64 to 107 cm (25 to 42 inches) long, including its tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It almost always has four identical babies, because one early embryo splits into four.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   },
+   {
+    "text": "When frightened, it can jump 91 to 120 cm (3 to 4 feet) straight up in the air.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   },
+   {
+    "text": "It can hold its breath for up to six minutes and walk across the bottom of a river.",
+    "source": "https://en.wikipedia.org/wiki/Nine-banded_armadillo"
+   }
+  ]
+ },
+ "querifox": {
+  "kind": "real",
+  "basedOn": "Red fox",
+  "scientific": "Vulpes vulpes",
+  "when": null,
+  "where": "Across North America, Europe, Asia and North Africa",
+  "size": "Body about 45 to 90 cm (18 to 35 inches) long, plus a bushy tail",
+  "story": null,
+  "facts": [
+   {
+    "text": "It lives in more places around the world than any other meat-eating mammal.",
+    "source": "https://en.wikipedia.org/wiki/Red_fox"
+   },
+   {
+    "text": "It hunts small animals hidden under snow or in tall grass.",
+    "source": "https://en.wikipedia.org/wiki/Red_fox"
+   },
+   {
+    "text": "Scientists think it lines up with Earth's magnetic field to help it hunt under snow.",
+    "source": "https://en.wikipedia.org/wiki/Red_fox"
+   }
+  ]
+ },
+ "solubee": {
+  "kind": "real",
+  "basedOn": "Western honey bee",
+  "scientific": "Apis mellifera",
+  "when": null,
+  "where": "Hives all over the world, first from Europe, Africa and western Asia",
+  "size": "Workers are a little over 1 cm (about half an inch) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Worker bees turn nectar into honey by drying out its extra water.",
+    "source": "https://en.wikipedia.org/wiki/Western_honey_bee"
+   },
+   {
+    "text": "Bees share news with each other using scent chemicals and the waggle dance.",
+    "source": "https://en.wikipedia.org/wiki/Western_honey_bee"
+   },
+   {
+    "text": "A colony has one queen, many female workers and a few male drones.",
+    "source": "https://en.wikipedia.org/wiki/Western_honey_bee"
+   }
+  ]
+ },
+ "boomardier": {
+  "kind": "real",
+  "basedOn": "Bombardier beetle",
+  "scientific": "Brachininae and Paussinae",
+  "when": null,
+  "where": "Every continent except Antarctica",
+  "size": "Most are small, about 1 to 2 cm (under 1 inch) long",
+  "story": null,
+  "facts": [
+   {
+    "text": "Its spray comes from a chemical reaction between two chemicals, hydroquinone and hydrogen peroxide.",
+    "source": "https://en.wikipedia.org/wiki/Bombardier_beetle"
+   },
+   {
+    "text": "The reaction heats the spray to near the boiling point of water.",
+    "source": "https://en.wikipedia.org/wiki/Bombardier_beetle"
+   },
+   {
+    "text": "Some bombardier beetles can point their spray in many different directions.",
+    "source": "https://en.wikipedia.org/wiki/Bombardier_beetle"
+   }
+  ]
  }
 }
