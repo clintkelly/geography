@@ -779,6 +779,15 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
 - **12 Science Egg creatures**: real animals with a science twist (an axolotl with test-tube gills, a magnet-horned beetle, a puppy that is ice, water and steam at once, a ruler-banded armadillo, a bombardier beetle…). They live nowhere else, so Science Eggs now hatch their own creatures instead of borrowing math and word ones.
 - All are marked new, so they are sighted and battled first.
 
+## Wave 6: thin regions, Winter Festival, more kaiju, scenery and effects
+
+- **45 more real animals** for the nine regions that had the fewest (5 each in Africa North, West, Central and South, Europe East, South and West, West Asia, Antarctica).
+- **Winter Festival** (`engine/night.ts` `isWinter`): 10 winter creatures (`winter: true`) are out only from December 1 to January 6 by the player's clock, sighted first in their regions. Camp shows a snowy festival strip. They never count toward Region Master, so a mastered region stays mastered.
+- **Six more kaiju** (New York, Cairo, Mumbai, Cape Town, Mexico City, Anchorage), interleaved with the first six by threat; threat stars come from strength. Each kaiju has its own city patch, earned on the first win and shown in the Kaiju Lab. Tidalorn was redesigned as a sea-turtle dragon.
+- **Backdrops** (`backdropId` in `ui/art.tsx`): each biome has a second day view (each place always uses the same one), a night version for night trails, and kaiju fight in front of their city's skyline.
+- **Effects:** an animated burst for each type on every type hit, and an evolution flash (hidden for reduced motion).
+- **Redraws:** about 30 of the weakest sprites (wrong animal, cut off, or wearing clothes).
+
 ## More juice: Region Master, daily visitor, shiny chains, level-ups
 
 - **Region Master** (`engine/juice.ts`): finding every creature that lives in a region (day and night, not bosses or rares) celebrates at camp with confetti and lays a Rare Egg. Region buttons show found/total and a gold ★.

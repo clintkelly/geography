@@ -129,3 +129,18 @@ export const Fx = ({ id, className }: { id: string; className?: string }) => <im
 export function CardArt({ id, width }: { id: string; width: number }) {
   return <img src={artUrl(id)} alt="" width={width} height={(width * 96) / 128} className="sprite card-art" />;
 }
+
+/** Biomes with a second day backdrop; each place always uses the same one of the two. */
+export const BACKDROP_VARIANTS = 2;
+
+/**
+ * The battle backdrop for a place: one of its biome's views (picked by the place, so it never flickers),
+ * its night version on a night trail, or the city's skyline when a kaiju attacks it.
+ */
+export function backdropId(placeId: string, biome: string, opts: { night?: boolean; cityPlaceId?: string } = {}): string {
+  if (opts.cityPlaceId) return `backdrop-city-${opts.cityPlaceId}`;
+  if (opts.night) return `backdrop-${biome}-night`;
+  let h = 0;
+  for (const ch of placeId) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return h % BACKDROP_VARIANTS === 0 ? `backdrop-${biome}` : `backdrop-${biome}-2`;
+}

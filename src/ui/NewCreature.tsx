@@ -61,7 +61,7 @@ export function NewCreatureReveal({ speciesId, found, shiny }: { speciesId: stri
       <h2 className="new-creature-name">{s.displayName}</h2>
       <div className="new-creature-meta">
         <TypeBadges species={s} />
-        {home && <span className="muted">Lives in {home}{s.night ? ' (at night)' : ''}</span>}
+        {home && <span className="muted">Lives in {home}{s.night ? ' (at night)' : s.winter ? ' (in December)' : ''}</span>}
       </div>
       <p className="new-creature-count">Creature <TickUp to={found} /> of {PACK.species.length} found!</p>
     </div>

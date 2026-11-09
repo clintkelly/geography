@@ -16,7 +16,7 @@ import { kaijuAlert, kaijuOf, lodgeById, lodgesOf, nextLodge, patchOf } from '..
 import { LEVEL_NAME, MedalIcon, Medals } from './Medals';
 import { MEDAL_TRACKS, MEDAL_POINTS } from '../engine/medals';
 import { playCry, playSound } from './sound';
-import { isNight, NIGHT_FROM } from '../engine/night';
+import { isNight, isWinter, NIGHT_FROM } from '../engine/night';
 import { chainBoost, dayKey, regionProgress, VISITOR_SHINY_BOOST, visitorFor } from '../engine/juice';
 import { levelOf, MAX_LEVEL, STAGE_2_LEVEL, STAGE_3_LEVEL, STAGES } from '../engine/progression';
 import { Confetti } from './NewCreature';
@@ -94,7 +94,7 @@ const regionFound = (regionId: string, known: Set<string>) => regionProgress(PAC
 function regionHasNew(save: SaveData, regionId: string, known: Set<string>): boolean {
   const v = save.visitorDay ? visitorFor(PACK, save.visitorDay) : undefined;
   if (v?.homes[0] === regionId) return true;
-  return PACK.species.some((o) => o.homes.includes(regionId) && o.homes.length <= 5 && !known.has(o.id) && (o.fresh || (o.night && save.offersNight)));
+  return PACK.species.some((o) => o.homes.includes(regionId) && o.homes.length <= 5 && !known.has(o.id) && (o.fresh || (o.night && save.offersNight) || (o.winter && save.offersWinter)));
 }
 
 /** A creature that leveled up on the trail: its new level, and how close it is to evolving. */
@@ -115,6 +115,9 @@ function LevelCard({ save, instanceId, from, to }: { save: SaveData; instanceId:
     </div>
   );
 }
+
+/** Threat in stars, 1 to 6, from how strong the kaiju is. */
+const kaijuStars = (k: { power: number }) => Math.max(1, Math.min(6, k.power - 3));
 
 /** A giant monster is heading for a real city: defend it! Plus the Kaiju Lab: every kaiju, beaten or not. */
 function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command) => void }) {
@@ -142,7 +145,7 @@ function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command
           <p className="kaiju-alert-title">⚠ KAIJU ALERT ⚠</p>
           <h2>{giant.displayName} is heading for {k.city}{place ? `, ${place.name}` : ''}!</h2>
           <p>{alert.leader.intro}</p>
-          <p className="muted">Threat {'★'.repeat(k.threat)}{'☆'.repeat(6 - k.threat)} · three battles with your whole team · questions about {region(place?.regionId ?? '').label} · best with level {alert.recommendedLevel}+{best < alert.recommendedLevel ? ` (your best is ${best})` : ''}</p>
+          <p className="muted">Threat {'★'.repeat(kaijuStars(k))}{'☆'.repeat(6 - kaijuStars(k))} · three battles with your whole team · questions about {region(place?.regionId ?? '').label} · best with level {alert.recommendedLevel}+{best < alert.recommendedLevel ? ` (your best is ${best})` : ''}</p>
           <span className="row kaiju-actions">
             <button type="button" className="primary kaiju-go" onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: alert.id }); }}>{again ? `Defend ${k.city} again!` : `Defend ${k.city}!`}</button>
             {rollsLeft > 0
@@ -166,8 +169,8 @@ function KaijuBanner({ save, dispatch }: { save: SaveData; dispatch: (c: Command
         {kaijuOf(PACK).map((l) => {
           const won = beaten.includes(l.id);
           return won
-            ? <button key={l.id} type="button" className="kaiju-lab-slot kaiju-lab-won" title={`Rematch ${species(l.prizeSpeciesId).displayName} at ${l.kaiju!.city}: win another baby, 2× shiny chance!`} aria-label={`Rematch ${species(l.prizeSpeciesId).displayName}`} onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: l.id }); }}><Sprite id={l.prizeSpeciesId} size={36} /></button>
-            : <span key={l.id} className="kaiju-lab-slot" title={`???: threat ${l.kaiju!.threat}`}><Sprite id={l.prizeSpeciesId} size={36} className="silhouette" /></span>;
+            ? <button key={l.id} type="button" className="kaiju-lab-slot kaiju-lab-won" title={`Rematch ${species(l.prizeSpeciesId).displayName} at ${l.kaiju!.city}: win another baby, 2× shiny chance!`} aria-label={`Rematch ${species(l.prizeSpeciesId).displayName}`} onClick={() => { playSound('evolve'); dispatch({ type: 'startLodge', lodgeId: l.id }); }}><Sprite id={l.prizeSpeciesId} size={36} /><img className="kaiju-lab-patch" src={artUrl(l.patchArtId)} alt="" width={16} height={16} /></button>
+            : <span key={l.id} className="kaiju-lab-slot" title={`???: threat ${kaijuStars(l.kaiju!)} of 6`}><Sprite id={l.prizeSpeciesId} size={36} className="silhouette" /></span>;
         })}
       </div>
     </section>
@@ -199,7 +202,7 @@ function DailyStrip({ save, known, onGo }: { save: SaveData; known: Set<string>;
 
 /** Creatures just added to the game that this child hasn't met, and where to find them. */
 function NewInTheWild({ known, onGo }: { known: Set<string>; onGo: (regionId: string) => void }) {
-  const fresh = PACK.species.filter((o) => o.fresh && !o.night && !known.has(o.id));
+  const fresh = PACK.species.filter((o) => o.fresh && !o.night && !o.winter && !known.has(o.id));
   if (fresh.length === 0) return null;
   // The regions with the most new creatures first, so the strip stays short.
   const all = [...new Set(fresh.map((o) => o.homes[0]!))].sort((x, y) => fresh.filter((o) => o.homes[0] === y).length - fresh.filter((o) => o.homes[0] === x).length);
@@ -233,6 +236,22 @@ function NightCreatures({ night, known, onGo }: { night: boolean; known: Set<str
       <span className="muted">{all.length - unmet.length} of {all.length} found</span>
       {night
         ? <span className="night-row">{unmet.map((o) => <button key={o.id} type="button" className="night-pick" aria-label={`Go find the night creature in ${region(o.homes[0]!).label}`} onClick={() => onGo(o.homes[0]!)}><Sprite id={o.artId} size={36} className="silhouette" /><small>{region(o.homes[0]!).label}</small></button>)}</span>
+        : <span className="night-row">{all.map((o) => <Sprite key={o.id} id={o.artId} size={32} className={known.has(o.id) ? '' : 'silhouette'} />)}</span>}
+    </div>
+  );
+}
+
+/** The Winter Festival: its creatures are out in December, or a hint of when they come. */
+function WinterFestival({ on, known, onGo }: { on: boolean; known: Set<string>; onGo: (regionId: string) => void }) {
+  const all = PACK.species.filter((o) => o.winter);
+  if (all.length === 0) return null;
+  const unmet = all.filter((o) => !known.has(o.id));
+  return (
+    <div className={`winter-strip${on ? ' is-winter' : ''}`} style={on ? { backgroundImage: `linear-gradient(#ffffffb0, #e8f4ffd0), url(${artUrl('camp-winter')})` } : undefined}>
+      <strong>{on ? '❄️ The Winter Festival is here! Winter creatures are out until January 6.' : '❄️ Winter Festival creatures come out in December.'}</strong>
+      <span className="muted">{all.length - unmet.length} of {all.length} found</span>
+      {on
+        ? <span className="night-row">{unmet.map((o) => <button key={o.id} type="button" className="night-pick winter-pick" aria-label={`Go find the winter creature in ${region(o.homes[0]!).label}`} onClick={() => onGo(o.homes[0]!)}><Sprite id={o.artId} size={36} /><small>{region(o.homes[0]!).label}</small></button>)}</span>
         : <span className="night-row">{all.map((o) => <Sprite key={o.id} id={o.artId} size={32} className={known.has(o.id) ? '' : 'silhouette'} />)}</span>}
     </div>
   );
@@ -273,13 +292,15 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
       const now = Date.now();
       const night = isNight(now);
       if (night !== !!save.offersNight) dispatch({ type: 'setNight', night });
+      const winter = isWinter(now);
+      if (winter !== !!save.offersWinter) dispatch({ type: 'setWinter', winter });
       const day = dayKey(now);
       if (day !== save.visitorDay) dispatch({ type: 'newDay', day });
     };
     check();
     const t = setInterval(check, 60_000);
     return () => clearInterval(t);
-  }, [save.offersNight, save.visitorDay, dispatch]);
+  }, [save.offersNight, save.offersWinter, save.visitorDay, dispatch]);
   // Only the newest of that kind is the one that just joined; an older shiny copy doesn't count.
   const newest = s?.reward.kind === 'creature' ? save.companions.filter((c) => s.reward.kind === 'creature' && c.speciesId === s.reward.speciesId).at(-1) : undefined;
   const shinyJoined = !!newest?.shiny && newest.bondXp === 0;
@@ -383,6 +404,7 @@ export function Camp({ save, dispatch, onSwitch, onSettings }: { save: SaveData;
         <NewInTheWild known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <DailyStrip save={save} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <NightCreatures night={!!save.offersNight} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
+        <WinterFestival on={!!save.offersWinter} known={known} onGo={(id) => { setRegionId(id); playSound('zoom'); }} />
         <h2>New sightings</h2>
         <p>Track a creature across the map, then befriend it. <Key k="T" /> switches sighting.</p>
         <div className="sightings">

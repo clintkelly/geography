@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
 import type { CreatureType } from '../content/types';
 import { artUrl } from './art';
 
@@ -38,11 +38,27 @@ const at = (i: number) => SCATTER[i % SCATTER.length] ?? 0.5;
 
 type Vars = CSSProperties & Record<`--${string}`, string>;
 
+/** Frames in a hit effect (`vfx-<type>-f1..`), and in the evolution flash (`vfx-evolve-f1..`). */
+export const VFX_FRAMES = 6;
+export const EVOLVE_FRAMES = 8;
+
+/** A hand-drawn animated burst, stepped frame by frame and then gone. */
+export function VfxBurst({ id, frames, ms = 60, size, className }: { id: string; frames: number; ms?: number; size: number; className?: string }) {
+  const [f, setF] = useState(1);
+  useEffect(() => {
+    const t = setInterval(() => setF((n) => n + 1), ms);
+    return () => clearInterval(t);
+  }, [ms]);
+  if (f > frames) return null;
+  return <img className={`vfx-burst${className ? ` ${className}` : ''}`} src={artUrl(`${id}-f${f}`)} alt="" width={size} height={size} aria-hidden="true" />;
+}
+
 /** A spray of a type's particles where a hit lands. `toward` is the direction the hit came from. */
 export function TypeHit({ type, toward }: { type: CreatureType; toward: 1 | -1 }) {
   const m = MOTION[type];
   return (
     <div className={`type-fx type-hit fx-${type}`} aria-hidden="true">
+      <VfxBurst id={`vfx-${type}`} frames={VFX_FRAMES} size={96} />
       {Array.from({ length: 7 }, (_, i) => {
         const angle = (i / 7) * Math.PI * 2 + at(i);
         // Gale blows away from the attacker; the rest burst all around.

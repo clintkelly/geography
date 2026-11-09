@@ -3,7 +3,7 @@ import type { CreatureType, Species } from '../content/types';
 import { attackCharge, attackDamage, canUse, guardOf, enemyIntent, isBossTurn, MAX_CHARGE, strongSpecialDamage, type CombatAction, type CombatState } from '../engine/combat';
 import { SNACK_HEAL } from '../engine/economy';
 import { activeCompanion, canTame, knownSpecies, TAME_HITS, teamOf, type Battle as BattleState, type Command, type Expedition, type SaveData } from '../engine/game';
-import { artUrl, Fx, poseUrl, ShinyImg, useIdleUrl } from './art';
+import { artUrl, backdropId, Fx, poseUrl, ShinyImg, useIdleUrl } from './art';
 import { isPowered, streakRate, turnFrames, type Ending, type Float, type Frame, type Motion, type Pose, type Side } from './battleAnimation';
 import { companionView, foeForm, place, souvenir, species } from './content';
 import { lodgeOf } from './Lodges';
@@ -332,7 +332,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, [lowHp]);
 
   if (!slot) return null;
-  const backdrop = artUrl(`backdrop-${place(slot.locationId).biome}`);
+  const backdrop = artUrl(backdropId(slot.locationId, place(slot.locationId).biome, { night: e.night, cityPlaceId: lodge?.kaiju?.placeId }));
   const events = result?.events;
   const playedTurn = combat.outcome === 'active' ? combat.turn - 1 : combat.turn;
   const opponentMove = opponent.boss && playedTurn % 3 === 0 ? opponent.boss.move : opponent.moves.attack;
@@ -360,7 +360,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
       {firstMeet && <GuideCard speciesId={opponent.id} artId={foe.artId} first onClose={() => dispatch({ type: 'seeGuide', speciesId: opponent.id })} />}
       {reading && <GuideCard speciesId={opponent.id} artId={foe.artId} onClose={() => setReading(false)} />}
       <TrailBar e={e} save={save} />
-      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}${e.night ? ' night-scene' : ''}${lodge?.kaiju ? ' kaiju-scene' : ''}`} style={{ backgroundImage: e.night ? `linear-gradient(#0b1240b0, #1a1450a0), url(${backdrop})` : `url(${backdrop})` }}>
+      <section className={`scene streak-${(e.streak ?? 0) >= 10 ? 'high' : (e.streak ?? 0) >= 5 ? 'mid' : (e.streak ?? 0) >= 3 ? 'low' : 'none'}${impact ? ` impact-${impact}` : ''}${flash ? ' hit-stop' : ''}${lowHp ? ' low-hp' : ''}${rareFoe ? ' rare-scene' : ''}${bossTurn ? ' boss-turn' : ''}${e.night ? ' night-scene' : ''}${lodge?.kaiju ? ' kaiju-scene' : ''}`} style={{ backgroundImage: e.night ? `linear-gradient(#0b124040, #1a145030), url(${backdrop})` : `url(${backdrop})` }}>
         {storm && <TypeSpecial key={`storm-${storm.id}`} type={storm.type} />}
         {burst && <div className="special-burst" style={{ background: `radial-gradient(circle, ${companion.special.color}dd, ${companion.special.color}00 72%)` }} />}
         {intro && (

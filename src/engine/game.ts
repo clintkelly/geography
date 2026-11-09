@@ -378,6 +378,8 @@ export interface SaveData {
   visitorDay?: string;
   /** Whether the current sightings were made at night, when night creatures are out. */
   offersNight?: boolean;
+  /** Whether the current sightings were made during the Winter Festival, when winter creatures are out. */
+  offersWinter?: boolean;
   completedExpeditions: number;
   nextId: number;
   rngState: number;
@@ -402,6 +404,8 @@ export type Command =
   | { type: 'dismissHatch' }
   /** The player's clock passed dusk or dawn: night creatures come and go from the sightings. */
   | { type: 'setNight'; night: boolean }
+  /** The Winter Festival began or ended on the player's clock. */
+  | { type: 'setWinter'; winter: boolean }
   /** A new day on the player's clock: a new visitor comes. */
   | { type: 'newDay'; day: string }
   /** Roll the Kaiju Radar for a different kaiju. With no rolls left today, pay for more: banked Trail Points, or a trade from the Wild. */
@@ -625,7 +629,7 @@ export function isRegionComplete(found: readonly string[], pack: Pack, regionId:
 }
 
 /** Two sightings per region of creatures that live there. The featured creature comes first until it is befriended. */
-export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild' | 'offersNight' | 'visitorDay'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
+export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Partial<Pick<SaveData, 'foundPlaces' | 'stampedRegions' | 'wild' | 'offersNight' | 'offersWinter' | 'visitorDay'>>, pack: Pack, rng: Rng): { offers: Offer[]; nextId: number } {
   // Today's visitor is sighted first in its home region, even when the child already has one.
   const visitor = save.visitorDay ? visitorFor(pack, save.visitorDay) : undefined;
   const owned = knownSpecies(save);
@@ -633,13 +637,14 @@ export function makeOffers(save: Pick<SaveData, 'nextId' | 'companions'> & Parti
   const offers = pack.regions.flatMap((region) => {
     const mapDone = !!save.foundPlaces && isRegionComplete(save.foundPlaces, pack, region.id);
     const bossReady = bossUnlocked(save, pack, region.id);
-    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady) && (!s.night || !!save.offersNight)).map((s) => s.id));
+    const unowned = rng.shuffle(pack.species.filter((s) => s.homes.includes(region.id) && !owned.has(s.id) && (!s.rare || mapDone) && (!s.boss || bossReady) && (!s.night || !!save.offersNight) && (!s.winter || !!save.offersWinter)).map((s) => s.id));
     const isBoss = (id: string) => !!pack.species.find((s) => s.id === id)?.boss;
     const locked = (id: string) => !!pack.species.find((s) => s.id === id)?.minDifficulty;
     const isFresh = (id: string) => !!pack.species.find((s) => s.id === id)?.fresh;
     const rest = unowned.filter((id) => id !== pack.featuredSpeciesId && !isBoss(id));
     // At night, the creatures that only come out after dark are sighted first.
-    const isNightOnly = (id: string) => !!pack.species.find((s) => s.id === id)?.night;
+    // So are the Winter Festival's creatures while it lasts.
+    const isNightOnly = (id: string) => { const s = pack.species.find((o) => o.id === id); return !!(s?.night || s?.winter); };
     // Brand-new creatures are sighted first, so a child meets them instead of missing them among the regulars.
     const ordered = [...unowned.filter(isBoss), ...unowned.filter((id) => id === pack.featuredSpeciesId), ...rest.filter(isNightOnly), ...rest.filter((id) => isFresh(id) && !isNightOnly(id)), ...rest.filter((id) => !isFresh(id) && !isNightOnly(id))];
     // One sighting is for any trail; the other shows a locked creature when there is one, as a hint of what harder trails hold.
@@ -745,13 +750,13 @@ function startExpedition(save: SaveData, pack: Pack, cmd: Extract<Command, { typ
   // Math and Words trails are home to the study creatures instead of the region's own.
   const subject = studySubject(focus);
   const scholars = subject ? pack.species.filter((s) => s.subject === subject && metOn(s, difficulty)).map((s) => s.id) : [];
-  const regionals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss && !s.subject && (!s.night || !!save.offersNight) && metOn(s, difficulty)).map((s) => s.id);
+  const regionals = pack.species.filter((s) => s.homes.includes(cmd.regionId) && s.id !== pack.featuredSpeciesId && !s.rare && !s.boss && !s.subject && (!s.night || !!save.offersNight) && (!s.winter || !!save.offersWinter) && metOn(s, difficulty)).map((s) => s.id);
   const locals = scholars.length > 0 ? scholars : regionals;
   const target = offer.reward.kind === 'creature' ? offer.reward.speciesId : (rng.shuffle(locals)[0] as string);
   // A brand-new creature the child hasn't met is the first one they battle.
   const known = knownSpecies(save);
   const shuffled = rng.shuffle(locals.filter((id) => id !== target));
-  const isNewHere = (id: string) => { const s = pack.species.find((o) => o.id === id); return !!(s?.fresh || s?.night) && !known.has(id); };
+  const isNewHere = (id: string) => { const s = pack.species.find((o) => o.id === id); return !!(s?.fresh || s?.night || s?.winter) && !known.has(id); };
   // On a night trail, the region's night creatures always come out early, even ones already befriended,
   // so a child can win another with Bold Befriend (another shot at a shiny).
   const nightHere = (id: string) => !!save.offersNight && !!pack.species.find((o) => o.id === id)?.night;
@@ -1755,6 +1760,8 @@ export function reduce(save: SaveData, cmd: Command, pack: Pack, now: number): S
       return !e && save.kaijuRadar?.day === cmd.day && save.kaijuRadar.seen.includes(cmd.lodgeId) ? { ...save, kaijuReroll: { day: cmd.day, lodgeId: cmd.lodgeId } } : save;
     case 'newDay':
       return e || save.visitorDay === cmd.day ? save : refreshOffers({ ...save, visitorDay: cmd.day }, pack);
+    case 'setWinter':
+      return e || !!save.offersWinter === cmd.winter ? save : refreshOffers({ ...save, offersWinter: cmd.winter }, pack);
     case 'setNight':
       return e || !!save.offersNight === cmd.night ? save : refreshOffers({ ...save, offersNight: cmd.night }, pack);
     case 'startLodge':

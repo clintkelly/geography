@@ -451,6 +451,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .type-hit { left: 50%; top: 50%; width: 0; height: 0; }
 .type-hit img { left: calc(var(--size) / -2); top: calc(var(--size) / -2); animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1); animation-fill-mode: forwards; }
 .type-hit .fx-fly { animation-name: fx-fly; }
+.type-hit .vfx-burst { position: absolute; left: -48px; top: -48px; width: 96px; height: 96px; opacity: 1; animation: none; }
+.vfx-burst { image-rendering: pixelated; pointer-events: none; }
+.evolve-vfx { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; }
 .type-hit .fx-arc { animation-name: fx-arc; }
 @keyframes fx-fly { 0% { opacity: 1; transform: translate(0, 0) scale(0.4) rotate(0); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--spin)); } }
 @keyframes fx-arc { 0% { opacity: 1; transform: translate(0, 0) scale(0.5) rotate(0); } 45% { opacity: 1; transform: translate(calc(var(--dx) * 0.7), calc(var(--dy) - 30px)) scale(1) rotate(calc(var(--spin) / 2)); } 100% { opacity: 0; transform: translate(var(--dx), calc(var(--dy) + 70px)) scale(0.8) rotate(var(--spin)); } }
@@ -519,7 +522,7 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 @keyframes storm-rise { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-300px) scale(1.1) rotate(var(--spin)); } }
 @keyframes storm-diag { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translate(260px, 320px) rotate(var(--spin)); } }
 @keyframes storm-fall { 0% { opacity: 1; transform: translateY(0) rotate(0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(320px) rotate(var(--spin)); } }
-@media (prefers-reduced-motion: reduce) { .type-fx { display: none; } }
+@media (prefers-reduced-motion: reduce) { .type-fx, .vfx-burst { display: none; } }
 
 /* Mastery medals */
 .medal-icon { image-rendering: pixelated; flex: none; }
@@ -820,6 +823,9 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .night-pick { display: inline-grid; justify-items: center; padding: 2px 6px; background: #ffffff18; border: 1px solid #ffffff40; color: inherit; border-radius: 8px; cursor: pointer; font: inherit; }
 .night-pick small { font-size: 0.7rem; }
 .night-strip.is-night .silhouette { filter: brightness(0) invert(0.85) drop-shadow(0 0 4px #b8a8ff); }
+.winter-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: #eef5fb; border: 1px solid #b8d4ec; }
+.winter-strip.is-winter { background-size: cover; background-position: center; border: 2px solid #80b8e8; color: #10304e; box-shadow: 0 0 12px #a8d8ff80; }
+.winter-pick { background: #ffffffc0; border-color: #80b8e8; }
 .scene.night-scene .scene-hud { color: inherit; }
 
 /* Starfall League */
@@ -900,6 +906,8 @@ button:active:not(:disabled) { transform: translateY(2px) scale(0.98); }
 .kaiju-go { background: #d03020; border-color: #a01810; }
 .kaiju-lab { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px 14px 10px; border-top: 1px solid #ffffff22; }
 .kaiju-lab-slot { display: inline-grid; padding: 2px; border-radius: 8px; background: #ffffff14; }
+.kaiju-lab-won { position: relative; }
+.kaiju-lab-patch { position: absolute; right: -4px; bottom: -4px; image-rendering: pixelated; filter: drop-shadow(0 1px 1px #0008); }
 .kaiju-banner .silhouette { filter: brightness(0) invert(0.35); }
 .kaiju-hall { border: 3px solid #d03020; overflow: hidden; }
 .kaiju-hall .kaiju-stripes { margin: -16px -16px 10px; }

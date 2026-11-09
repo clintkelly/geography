@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import type { Command, EventState, Expedition, SaveData } from '../engine/game';
 import { TRAIL_EVENTS } from '../engine/events';
-import { artUrl, Sprite } from './art';
+import { artUrl, backdropId, Sprite } from './art';
 import { streakRate } from './battleAnimation';
 import { place } from './content';
 import { QuestionPanel } from './QuestionPanel';
@@ -21,7 +21,7 @@ export function Event({ e, event, save, dispatch }: { e: Expedition; event: Even
   return (
     <div className="stack">
       <TrailBar e={e} save={save} />
-      <section className="event-banner" style={{ backgroundImage: `url(${artUrl(`backdrop-${place(e.slots[event.slotIndex]?.locationId ?? '').biome}`)})` }}>
+      <section className="event-banner" style={{ backgroundImage: `url(${artUrl(backdropId(e.slots[event.slotIndex]?.locationId ?? '', place(e.slots[event.slotIndex]?.locationId ?? '').biome, { night: e.night }))})` }}>
         <Sprite id={`event-${event.eventId}`} size={160} />
         <div>
           <h1>{def?.title}</h1>

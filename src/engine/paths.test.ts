@@ -121,3 +121,35 @@ describe('night creature duplicates', () => {
     expect(s.expedition!.night).toBe(true);
   });
 });
+
+describe('Winter Festival creatures', () => {
+  it('are out only in December to January 6, sighted first in their region, and never block Region Master', async () => {
+    const { makeOffers } = await import('./game');
+    const { Rng } = await import('./rng');
+    const { isWinter } = await import('./night');
+    const { regionCreatures, visitorFor } = await import('./juice');
+    expect([isWinter(new Date(2026, 11, 1).getTime()), isWinter(new Date(2027, 0, 6).getTime()), isWinter(new Date(2027, 0, 7).getTime()), isWinter(new Date(2026, 10, 30).getTime())]).toEqual([true, true, false, false]);
+    const start = newSave(PACK, 7, 'p1');
+    const base = { ...start, companions: [...start.companions, { instanceId: 'bk', speciesId: PACK.featuredSpeciesId!, bondXp: 0 }] };
+    const winter = PACK.species.filter((s) => s.winter);
+    expect(winter.length).toBe(10);
+    const sighted = (offersWinter: boolean) => makeOffers({ ...base, offersWinter }, PACK, new Rng(3)).offers.map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
+    expect(sighted(false).some((id) => winter.some((s) => s.id === id))).toBe(false);
+    const inWinter = makeOffers({ ...base, offersWinter: true }, PACK, new Rng(3)).offers;
+    for (const r of new Set(winter.flatMap((s) => s.homes))) {
+      const here = inWinter.filter((o) => o.regionId === r).map((o) => (o.reward.kind === 'creature' ? o.reward.speciesId : ''));
+      expect(here.some((id) => winter.some((w) => w.id === id)), r).toBe(true);
+    }
+    for (const r of PACK.regions) expect(regionCreatures(PACK, r.id).some((s) => s.winter), r.id).toBe(false);
+    for (let d = 1; d <= 60; d++) expect(visitorFor(PACK, `2026-12-${d}`)?.winter).toBeFalsy();
+  });
+
+  it('the festival starting refreshes the sightings, but not in the middle of a trail', () => {
+    const s = newSave(PACK, 7, 'p1');
+    const dec = step(s, { type: 'setWinter', winter: true });
+    expect(dec.offersWinter).toBe(true);
+    expect(step(dec, { type: 'setWinter', winter: true })).toBe(dec);
+    const busy = { ...dec, expedition: {} as SaveData['expedition'] };
+    expect(step(busy, { type: 'setWinter', winter: false })).toBe(busy);
+  });
+});

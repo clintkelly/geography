@@ -2,10 +2,10 @@ import type { Pack, Species } from '../content/types';
 
 /**
  * The creatures that call a region home: its own animals, by day and by night.
- * Creatures found almost everywhere, bosses and rares don't count.
+ * Creatures found almost everywhere, bosses, rares and Winter Festival guests don't count.
  */
 export function regionCreatures(pack: Pack, regionId: string): Species[] {
-  return pack.species.filter((s) => s.homes.includes(regionId) && s.homes.length <= 5 && !s.boss && !s.rare);
+  return pack.species.filter((s) => s.homes.includes(regionId) && s.homes.length <= 5 && !s.boss && !s.rare && !s.winter);
 }
 
 export function regionProgress(pack: Pack, known: ReadonlySet<string>, regionId: string): { found: number; total: number } {
@@ -29,7 +29,7 @@ export function dayKey(now: number): string {
 
 /** Today's visitor: one regular creature a day, the same for everyone in the household. */
 export function visitorFor(pack: Pack, day: string): Species | undefined {
-  const pool = pack.species.filter((s) => s.homes.length > 0 && s.homes.length <= 5 && !s.boss && !s.rare && !s.night && !s.minDifficulty && !s.paths);
+  const pool = pack.species.filter((s) => s.homes.length > 0 && s.homes.length <= 5 && !s.boss && !s.rare && !s.night && !s.winter && !s.minDifficulty && !s.paths);
   if (pool.length === 0) return undefined;
   let h = 2166136261;
   for (const ch of `visitor:${day}`) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;

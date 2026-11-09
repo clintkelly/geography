@@ -325,9 +325,9 @@ describe('Starfall League', () => {
 });
 
 describe('Kaiju Alerts', () => {
-  it('six original kaiju threaten real cities, easiest first, and none are on the Lodge ladder', () => {
+  it('twelve original kaiju threaten real cities, easiest first, and none are on the Lodge ladder', () => {
     const all = kaijuOf(PACK);
-    expect(all.map((l) => l.kaiju!.threat)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(all.map((l) => l.kaiju!.threat)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     for (const l of all) expect(PACK.places.some((p) => p.id === l.kaiju!.placeId), l.id).toBe(true);
     expect(kaijuAlert(PACK, [], '2026-11-06')!.id).toBe('kaiju-quakeback');
     expect(kaijuAlert(PACK, ['kaiju-quakeback'], '2026-11-06')!.id).toBe('kaiju-tidalorn');
@@ -389,9 +389,11 @@ describe('Kaiju Alerts', () => {
     expect(s.kaijuRadar!.rollsLeft).toBe(0);
     expect(new Set(s.kaijuRadar!.seen).size).toBe(6);
     // Pick any of them; one it never found can't be picked.
-    const picked = step(s, { type: 'pickKaiju', day, lodgeId: 'kaiju-magmantis' });
-    expect(kaijuAlert(PACK, [], day, picked.kaijuReroll)!.id).toBe('kaiju-magmantis');
-    expect(step({ ...s, kaijuRadar: { day, rollsLeft: 0, seen: ['kaiju-quakeback'] } }, { type: 'pickKaiju', day, lodgeId: 'kaiju-magmantis' }).kaijuReroll).toEqual(s.kaijuReroll);
+    const found = s.kaijuRadar!.seen.find((id) => id !== s.kaijuReroll!.lodgeId)!;
+    const unseen = kaijuOf(PACK).find((l) => !s.kaijuRadar!.seen.includes(l.id))!.id;
+    const picked = step(s, { type: 'pickKaiju', day, lodgeId: found });
+    expect(kaijuAlert(PACK, [], day, picked.kaijuReroll)!.id).toBe(found);
+    expect(step(s, { type: 'pickKaiju', day, lodgeId: unseen }).kaijuReroll).toEqual(s.kaijuReroll);
     // Tomorrow the radar and the reroll are gone.
     expect(kaijuAlert(PACK, [], '2026-11-07', picked.kaijuReroll)!.id).toBe('kaiju-quakeback');
   });

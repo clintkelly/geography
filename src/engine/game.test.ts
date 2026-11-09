@@ -324,7 +324,7 @@ describe('befriending and the stable', () => {
 
   it('runs out of species honestly, with XP and no befriending', () => {
     let s = fresh();
-    const west = PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare && !o.boss);
+    const west = PACK.species.filter((o) => o.homes.includes('us-west') && !o.rare && !o.boss && !o.night && !o.winter);
     for (let i = 0; i < west.length; i++) s = fullExpedition(s);
     expect(s.companions).toHaveLength(west.length + 1);
     expect(s.offers.find((o) => o.regionId === 'us-west')!.reward).toEqual({ kind: 'bond', xp: 10 });

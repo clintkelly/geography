@@ -6,11 +6,13 @@ import { ALL_TYPES } from '../engine/types';
 import { MUSIC_FILES, takeFile, TRACKS } from '../ui/music';
 import { SOUND_FILES } from '../ui/sound';
 import { PACK } from './pack';
+import { EVOLVE_FRAMES, VFX_FRAMES } from '../ui/TypeFx';
 
 const ART = 'public/art';
 const POSES = ['', '-attack', '-guard', '-special', '-hit'];
 const FX = ['fx-spark', 'fx-heart', 'fx-coin', 'fx-flame', 'fx-badge'];
-const BUILT_IN_BACKDROPS = PACK.places.map((p) => `backdrop-${p.biome}`);
+const BUILT_IN_BACKDROPS = [...new Set(PACK.places.flatMap((p) => [`backdrop-${p.biome}`, `backdrop-${p.biome}-2`, `backdrop-${p.biome}-night`]))];
+const CITY_BACKDROPS = (PACK.lodges ?? []).flatMap((l) => (l.kaiju ? [`backdrop-city-${l.kaiju.placeId}`] : []));
 
 const spriteIds = PACK.species.flatMap((s) => [...POSES.map((p) => `${s.artId}${p}`), ...(s.evolutions ?? []).map((e) => e.artId)]);
 const expected: Record<string, { w: number; h: number; transparent: boolean }> = {};
@@ -18,10 +20,13 @@ const expect_ = (ids: string[], w: number, h: number, transparent: boolean) => i
 expect_(spriteIds, 128, 128, true);
 expect_(PACK.cards.map((c) => c.artId), 128, 96, false);
 expect_(BUILT_IN_BACKDROPS, 480, 192, false);
+expect_([...CITY_BACKDROPS, 'camp-winter'], 480, 192, false);
 expect_(PACK.souvenirs.map((s) => s.artId), 64, 64, true);
 expect_(PACK.regions.map((r) => `stamp-${r.id}`), 64, 64, true);
 expect_(ALL_TYPES.map((t) => `type-${t}`), 32, 32, true);
 expect_(ALL_TYPES.map((t) => `fxtype-${t}`), 32, 32, true);
+expect_(ALL_TYPES.flatMap((t) => Array.from({ length: VFX_FRAMES }, (_, i) => `vfx-${t}-f${i + 1}`)), 96, 96, true);
+expect_(Array.from({ length: EVOLVE_FRAMES }, (_, i) => `vfx-evolve-f${i + 1}`), 192, 192, true);
 expect_(['bronze', 'silver', 'gold', 'platinum'].map((l) => `medal-${l}`), 32, 32, true);
 expect_(TRAIL_EVENTS.map((e) => `event-${e.id}`), 128, 128, true);
 expect_((PACK.lodges ?? []).map((l) => l.leader.artId), 128, 128, true);
@@ -56,11 +61,12 @@ describe('art', () => {
     const all = [...Object.keys(expected), ...FX];
     expect(all.filter((id) => !existsSync(`${ART}/${id}.png`))).toEqual([]);
   });
+      // Effects fade out to nearly empty frames on purpose, so they can be tiny files.
 
   it('every file is a real image of the right size', () => {
     const wrong = Object.entries(expected).flatMap(([id, e]) => {
       const p = png(id);
-      return p.signature === 'PNG' && p.w === e.w && p.h === e.h && p.size > 500 ? [] : [`${id}: ${p.w}x${p.h}, ${p.size} bytes`];
+      return p.signature === 'PNG' && p.w === e.w && p.h === e.h && p.size > (id.startsWith('vfx-') ? 100 : 500) ? [] : [`${id}: ${p.w}x${p.h}, ${p.size} bytes`];
     });
     expect(wrong).toEqual([]);
   });

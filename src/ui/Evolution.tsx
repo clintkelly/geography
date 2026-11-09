@@ -1,3 +1,4 @@
+import { EVOLVE_FRAMES, VfxBurst } from './TypeFx';
 import { useEffect, useState } from 'react';
 import type { Command, Companion } from '../engine/game';
 import { PATH_INFO, pathOf, STAGES } from '../engine/progression';
@@ -27,6 +28,7 @@ export function Evolution({ companion, dispatch }: { companion: Companion; dispa
       <div className={`celebrate evolve-stage${done ? ' evolve-done' : ''}`}>
         <div className="evolve-rays" aria-hidden="true" />
         {done && <div className="evolve-flash" aria-hidden="true" />}
+        {done && <VfxBurst id="vfx-evolve" frames={EVOLVE_FRAMES} ms={80} size={192} className="evolve-vfx" />}
         {[0, 1, 2, 3, 4, 5].map((i) => <Fx key={i} id="spark" className={`rise rise-${i}`} />)}
         <Sprite id={done ? view.artId : (previous ?? view.artId)} size={192} className={done ? 'evolve-reveal' : 'evolve-glow'} shiny={done ? view.shiny : undefined} />
       </div>
