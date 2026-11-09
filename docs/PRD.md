@@ -787,6 +787,7 @@ So math and vocabulary now pay out in the things he already chases: shinies, new
 - **Backdrops** (`backdropId` in `ui/art.tsx`): each biome has a second day view (each place always uses the same one), a night version for night trails, and kaiju fight in front of their city's skyline.
 - **Effects:** an animated burst for each type on every type hit, and an evolution flash (hidden for reduced motion).
 - **Redraws:** about 30 of the weakest sprites (wrong animal, cut off, or wearing clothes).
+- **Four more kaiju** (16 in all): Voltypus the platypus (Melbourne), Rottrumble the big black dog with a white chest spot (Berlin), Halopus the blue-ringed octopus (Jakarta) and Howlgale the wolf (Ulaanbaatar), interleaved by threat. A kaiju in a country that already has one names its own skyline with `KaijuAlert.backdrop`.
 
 ## More juice: Region Master, daily visitor, shiny chains, level-ups
 

@@ -10416,5 +10416,97 @@
     "source": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel"
    }
   ]
+ },
+ "voltypus": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the platypus",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "The platypus is one of the only mammals that lays eggs.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "A platypus finds food by sensing the tiny electric signals that animals make, using its bill.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   },
+   {
+    "text": "Male platypuses have a venomous spur on each back ankle.",
+    "source": "https://en.wikipedia.org/wiki/Platypus"
+   }
+  ]
+ },
+ "halopus": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the blue-ringed octopus",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "The blue-ringed octopus is only about as big as a golf ball, but it is one of the most venomous animals in the sea.",
+    "source": "https://en.wikipedia.org/wiki/Blue-ringed_octopus"
+   },
+   {
+    "text": "Its blue rings flash brightly as a warning when it is upset.",
+    "source": "https://en.wikipedia.org/wiki/Blue-ringed_octopus"
+   },
+   {
+    "text": "Blue-ringed octopuses live in tide pools and reefs in the Pacific and Indian Oceans.",
+    "source": "https://en.wikipedia.org/wiki/Blue-ringed_octopus"
+   }
+  ]
+ },
+ "howlgale": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by the grey wolf",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "Wolves live and hunt in family groups called packs.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "Wolves howl to find each other and to tell other packs to stay away.",
+    "source": "https://en.wikipedia.org/wiki/Wolf"
+   },
+   {
+    "text": "All pet dogs are descended from wolves.",
+    "source": "https://en.wikipedia.org/wiki/Dog"
+   }
+  ]
+ },
+ "rottrumble": {
+  "kind": "myth",
+  "basedOn": "An original kaiju, inspired by a big black dog (a rottweiler and pit bull mix)",
+  "scientific": null,
+  "when": null,
+  "where": "Made up for this game. Kaiju is a Japanese word for 'strange beast', used for giant movie monsters.",
+  "size": "As tall as a skyscraper when fully grown",
+  "story": "Kaiju are giant monsters from Japanese movies and stories. This one is made up for Atlaswild, but the animal that inspired it is real.",
+  "facts": [
+   {
+    "text": "Rottweilers come from the town of Rottweil in Germany, where they once helped herd cattle.",
+    "source": "https://en.wikipedia.org/wiki/Rottweiler"
+   },
+   {
+    "text": "Dogs were the first animals that people tamed, thousands of years ago.",
+    "source": "https://en.wikipedia.org/wiki/Dog"
+   },
+   {
+    "text": "A dog's sense of smell is many thousands of times better than a person's.",
+    "source": "https://en.wikipedia.org/wiki/Dog"
+   }
+  ]
  }
 }

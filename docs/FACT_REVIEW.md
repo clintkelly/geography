@@ -793,3 +793,12 @@ Each fact was checked against the cited Wikipedia page by the writing agent; a p
 - **snowbeard (Mountain goat, Winter Festival):** Despite its name, it is not a true goat. Both males and females have beards and short black horns. A woolly greyish-white double coat protects it from the weather. Size: Males stand about 1 m (3.3 feet) tall at the shoulder.
 - **yakmuffle (Wild yak, Winter Festival):** Its shaggy coat can form a long skirt that reaches the ground. It lives high on the cold Tibetan Plateau. It is the ancestor of the farm yak. Size: About 1.6 to 2 m (5.2 to 6.7 feet) tall at the shoulder.
 - **flurryglide (Siberian flying squirrel, Winter Festival):** It glides from tree to tree using flaps of skin between its legs. Its eyes are large and strikingly black. It is the only flying squirrel in Europe. Size: Body about 13 to 20 cm (5 to 8 inches) long, plus a flat tail.
+
+## Four more kaiju (2026-11-09)
+
+Original kaiju; the facts are about the real animals that inspired them.
+
+- **voltypus (An original kaiju, inspired by the platypus, threatens Melbourne):** The platypus is one of the only mammals that lays eggs. A platypus finds food by sensing the tiny electric signals that animals make, using its bill. Male platypuses have a venomous spur on each back ankle.
+- **halopus (An original kaiju, inspired by the blue-ringed octopus, threatens Jakarta):** The blue-ringed octopus is only about as big as a golf ball, but it is one of the most venomous animals in the sea. Its blue rings flash brightly as a warning when it is upset. Blue-ringed octopuses live in tide pools and reefs in the Pacific and Indian Oceans.
+- **howlgale (An original kaiju, inspired by the grey wolf, threatens Ulaanbaatar):** Wolves live and hunt in family groups called packs. Wolves howl to find each other and to tell other packs to stay away. All pet dogs are descended from wolves.
+- **rottrumble (An original kaiju, inspired by a big black dog (a rottweiler and pit bull mix), threatens Berlin):** Rottweilers come from the town of Rottweil in Germany, where they once helped herd cattle. Dogs were the first animals that people tamed, thousands of years ago. A dog's sense of smell is many thousands of times better than a person's.

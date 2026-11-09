@@ -332,7 +332,7 @@ export function Battle({ e, battle, save, dispatch }: { e: Expedition; battle: B
   }, [lowHp]);
 
   if (!slot) return null;
-  const backdrop = artUrl(backdropId(slot.locationId, place(slot.locationId).biome, { night: e.night, cityPlaceId: lodge?.kaiju?.placeId }));
+  const backdrop = artUrl(backdropId(slot.locationId, place(slot.locationId).biome, { night: e.night, cityPlaceId: lodge?.kaiju ? lodge.kaiju.backdrop ?? lodge.kaiju.placeId : undefined }));
   const events = result?.events;
   const playedTurn = combat.outcome === 'active' ? combat.turn - 1 : combat.turn;
   const opponentMove = opponent.boss && playedTurn % 3 === 0 ? opponent.boss.move : opponent.moves.attack;

@@ -325,9 +325,9 @@ describe('Starfall League', () => {
 });
 
 describe('Kaiju Alerts', () => {
-  it('twelve original kaiju threaten real cities, easiest first, and none are on the Lodge ladder', () => {
+  it('sixteen original kaiju threaten real cities, easiest first, and none are on the Lodge ladder', () => {
     const all = kaijuOf(PACK);
-    expect(all.map((l) => l.kaiju!.threat)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    expect(all.map((l) => l.kaiju!.threat)).toEqual(Array.from({ length: 16 }, (_, i) => i + 1));
     for (const l of all) expect(PACK.places.some((p) => p.id === l.kaiju!.placeId), l.id).toBe(true);
     expect(kaijuAlert(PACK, [], '2026-11-06')!.id).toBe('kaiju-quakeback');
     expect(kaijuAlert(PACK, ['kaiju-quakeback'], '2026-11-06')!.id).toBe('kaiju-tidalorn');

@@ -12,7 +12,7 @@ const ART = 'public/art';
 const POSES = ['', '-attack', '-guard', '-special', '-hit'];
 const FX = ['fx-spark', 'fx-heart', 'fx-coin', 'fx-flame', 'fx-badge'];
 const BUILT_IN_BACKDROPS = [...new Set(PACK.places.flatMap((p) => [`backdrop-${p.biome}`, `backdrop-${p.biome}-2`, `backdrop-${p.biome}-night`]))];
-const CITY_BACKDROPS = (PACK.lodges ?? []).flatMap((l) => (l.kaiju ? [`backdrop-city-${l.kaiju.placeId}`] : []));
+const CITY_BACKDROPS = (PACK.lodges ?? []).flatMap((l) => (l.kaiju ? [`backdrop-city-${l.kaiju.backdrop ?? l.kaiju.placeId}`] : []));
 
 const spriteIds = PACK.species.flatMap((s) => [...POSES.map((p) => `${s.artId}${p}`), ...(s.evolutions ?? []).map((e) => e.artId)]);
 const expected: Record<string, { w: number; h: number; transparent: boolean }> = {};
